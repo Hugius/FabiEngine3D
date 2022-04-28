@@ -86,7 +86,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("preview", "Entity Type?", "Quad3D", "Quad2D", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("preview", "Quad Type?", "Quad3D", "Quad2D", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{

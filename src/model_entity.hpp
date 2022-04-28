@@ -22,7 +22,7 @@ public:
 	void setReflected(bool value);
 	void setFrozen(bool value);
 	void setLevelOfDetailed(bool value);
-	void setLevelOfDetailEntityId(const string & value);
+	void setLevelOfDetailId(const string & value);
 	void setPreviousCaptorEntityId(const string & value);
 	void setCurrentCaptorEntityId(const string & value);
 	void setCubeReflectionMixValue(float value);
@@ -89,7 +89,7 @@ public:
 	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string & partId) const;
 
 	const string & getMeshPath() const;
-	const string & getLevelOfDetailEntityId() const;
+	const string & getLevelOfDetailId() const;
 	const string & getPreviousCaptorEntityId() const;
 	const string & getCurrentCaptorEntityId() const;
 	const string & getDiffuseMapPath(const string & partId) const;
@@ -146,7 +146,7 @@ private:
 	unordered_map<string, unique_ptr<ModelEntityPart>> _parts = {};
 
 	string _meshPath = "";
-	string _levelOfDetailEntityId = "";
+	string _levelOfDetailId = "";
 	string _previousCaptorEntityId = "";
 	string _currentCaptorEntityId = "";
 

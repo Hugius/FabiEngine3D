@@ -9,7 +9,7 @@ using std::dynamic_pointer_cast;
 using std::function;
 using std::map;
 
-void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> entity, const ivec2 & size)
+void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> quad, const ivec2 & size)
 {
 	glViewport(0, 0, size.x, size.y);
 
@@ -17,7 +17,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> entity, const ivec2 & s
 
 	_quad2dEntityColorRenderer->bind();
 
-	_quad2dEntityColorRenderer->render(entity);
+	_quad2dEntityColorRenderer->render(quad);
 
 	_quad2dEntityColorRenderer->unbind();
 
@@ -131,25 +131,25 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
-				const auto originalPosition = levelOfDetailEntity->getBasePosition();
-				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-				const auto originalSize = levelOfDetailEntity->getBaseSize();
-				const auto originalVisibility = levelOfDetailEntity->isVisible();
+				const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+				const auto originalPosition = levelOfDetailModel->getBasePosition();
+				const auto originalRotation = levelOfDetailModel->getBaseRotation();
+				const auto originalSize = levelOfDetailModel->getBaseSize();
+				const auto originalVisibility = levelOfDetailModel->isVisible();
 
-				levelOfDetailEntity->setBasePosition(model->getBasePosition());
-				levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
-				levelOfDetailEntity->setBaseSize(model->getBaseSize());
-				levelOfDetailEntity->setVisible(model->isVisible());
-				levelOfDetailEntity->updateTransformation();
+				levelOfDetailModel->setBasePosition(model->getBasePosition());
+				levelOfDetailModel->setBaseRotation(model->getBaseRotation());
+				levelOfDetailModel->setBaseSize(model->getBaseSize());
+				levelOfDetailModel->setVisible(model->isVisible());
+				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailModel, _captorEntityManager->getEntities());
 
-				levelOfDetailEntity->setBasePosition(originalPosition);
-				levelOfDetailEntity->setBaseRotation(originalRotation);
-				levelOfDetailEntity->setBaseSize(originalSize);
-				levelOfDetailEntity->setVisible(originalVisibility);
-				levelOfDetailEntity->updateTransformation();
+				levelOfDetailModel->setBasePosition(originalPosition);
+				levelOfDetailModel->setBaseRotation(originalRotation);
+				levelOfDetailModel->setBaseSize(originalSize);
+				levelOfDetailModel->setVisible(originalVisibility);
+				levelOfDetailModel->updateTransformation();
 			}
 			else
 			{
@@ -192,25 +192,25 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
-				const auto originalPosition = levelOfDetailEntity->getBasePosition();
-				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-				const auto originalSize = levelOfDetailEntity->getBaseSize();
-				const auto originalVisibility = levelOfDetailEntity->isVisible();
+				const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+				const auto originalPosition = levelOfDetailModel->getBasePosition();
+				const auto originalRotation = levelOfDetailModel->getBaseRotation();
+				const auto originalSize = levelOfDetailModel->getBaseSize();
+				const auto originalVisibility = levelOfDetailModel->isVisible();
 
-				levelOfDetailEntity->setBasePosition(model->getBasePosition());
-				levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
-				levelOfDetailEntity->setBaseSize(model->getBaseSize());
-				levelOfDetailEntity->setVisible(model->isVisible());
-				levelOfDetailEntity->updateTransformation();
+				levelOfDetailModel->setBasePosition(model->getBasePosition());
+				levelOfDetailModel->setBaseRotation(model->getBaseRotation());
+				levelOfDetailModel->setBaseSize(model->getBaseSize());
+				levelOfDetailModel->setVisible(model->isVisible());
+				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailModel, _captorEntityManager->getEntities());
 
-				levelOfDetailEntity->setBasePosition(originalPosition);
-				levelOfDetailEntity->setBaseRotation(originalRotation);
-				levelOfDetailEntity->setBaseSize(originalSize);
-				levelOfDetailEntity->setVisible(originalVisibility);
-				levelOfDetailEntity->updateTransformation();
+				levelOfDetailModel->setBasePosition(originalPosition);
+				levelOfDetailModel->setBaseRotation(originalRotation);
+				levelOfDetailModel->setBaseSize(originalSize);
+				levelOfDetailModel->setVisible(originalVisibility);
+				levelOfDetailModel->updateTransformation();
 			}
 			else
 			{

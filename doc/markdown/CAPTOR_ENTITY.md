@@ -8,7 +8,7 @@
 
 ## 2. Properties
 
-- **Exeption Entity ID**: the ID of a model entity that cannot be captured in the reflection
+- **Exception ID**: the ID of a model entity that cannot be captured in the reflection
   - Type: `string`
   - Constraints: none
 - **Position**: the XYZ position of the captor

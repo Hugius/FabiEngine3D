@@ -60,10 +60,10 @@ void MasterRenderer::captureCubeReflections()
 	{
 		if(captor->mustCapture())
 		{
-			const auto wasExceptionEntityVisible = (captor->getExceptionEntityId().empty() ? false : _modelEntityManager->getEntity(captor->getExceptionEntityId())->isVisible());
-			if(!captor->getExceptionEntityId().empty())
+			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelEntityManager->getEntity(captor->getExceptionId())->isVisible());
+			if(!captor->getExceptionId().empty())
 			{
-				_modelEntityManager->getEntity(captor->getExceptionEntityId())->setVisible(false);
+				_modelEntityManager->getEntity(captor->getExceptionId())->setVisible(false);
 			}
 
 			_camera->setPosition(captor->getPosition());
@@ -164,26 +164,26 @@ void MasterRenderer::captureCubeReflections()
 			captor->setCubeMap(make_shared<TextureBuffer>(textureId));
 			captor->setCaptured();
 
-			if(!captor->getExceptionEntityId().empty())
+			if(!captor->getExceptionId().empty())
 			{
-				_modelEntityManager->getEntity(captor->getExceptionEntityId())->setVisible(wasExceptionEntityVisible);
+				_modelEntityManager->getEntity(captor->getExceptionId())->setVisible(wasExceptionModelVisible);
 			}
 		}
 	}
 
-	for(const auto & entity : savedModelEntities)
+	for(const auto & model : savedModelEntities)
 	{
-		entity->setVisible(true);
+		model->setVisible(true);
 	}
 
-	for(const auto & entity : savedQuad3dEntities)
+	for(const auto & quad3d : savedQuad3dEntities)
 	{
-		entity->setVisible(true);
+		quad3d->setVisible(true);
 	}
 
-	for(const auto & entity : savedText3dEntities)
+	for(const auto & text3d : savedText3dEntities)
 	{
-		entity->setVisible(true);
+		text3d->setVisible(true);
 	}
 
 	_camera->invertUp();

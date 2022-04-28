@@ -106,7 +106,7 @@ void WorldEditor::_updateCaptorEditing()
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
-					_fe3d->captor_setExceptionEntityId(_activeCaptorId, selectedOptionId);
+					_fe3d->captor_setExceptionId(_activeCaptorId, selectedOptionId);
 				}
 			}
 

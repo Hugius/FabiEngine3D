@@ -222,7 +222,7 @@ public:
 	void model_setSpecularMap(const string & modelId, const string & partId, const string & value);
 	void model_setReflectionMap(const string & modelId, const string & partId, const string & value);
 	void model_setNormalMap(const string & modelId, const string & partId, const string & value);
-	void model_setLevelOfDetailEntityId(const string & modelId, const string & value);
+	void model_setLevelOfDetailId(const string & modelId, const string & value);
 	void model_setFaceCulled(const string & modelId, const string & partId, bool value);
 	void model_setReflectionType(const string & modelId, const string & partId, ReflectionType value);
 	void model_setSpecular(const string & modelId, const string & partId, bool value);
@@ -284,7 +284,7 @@ public:
 	const string & model_getSpecularMapPath(const string & modelId, const string & partId) const;
 	const string & model_getReflectionMapPath(const string & modelId, const string & partId) const;
 	const string & model_getNormalMapPath(const string & modelId, const string & partId) const;
-	const string & model_getLevelOfDetailEntityId(const string & modelId) const;
+	const string & model_getLevelOfDetailId(const string & modelId) const;
 	const fvec3 & model_getBasePosition(const string & modelId) const;
 	const fvec3 & model_getBaseRotation(const string & modelId) const;
 	const fvec3 & model_getBaseRotationOrigin(const string & modelId) const;
@@ -674,10 +674,10 @@ public:
 	void captor_move(const string & captorId, const fvec3 & change);
 	void captor_moveTo(const string & captorId, const fvec3 & target, float speed);
 	void captor_capture(const string & captorId);
-	void captor_setExceptionEntityId(const string & captorId, const string & value);
+	void captor_setExceptionId(const string & captorId, const string & value);
 
 	const vector<string> captor_getIds() const;
-	const string & captor_getExceptionEntityId(const string & captorId) const;
+	const string & captor_getExceptionId(const string & captorId) const;
 	const fvec3 & captor_getPosition(const string & captorId) const;
 	const bool captor_isExisting(const string & captorId) const;
 	const bool captor_isVisible(const string & captorId) const;

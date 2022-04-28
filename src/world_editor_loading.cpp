@@ -426,7 +426,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "CAPTOR")
 		{
-			string captorId, exceptionEntityId;
+			string captorId, exceptionId;
 			fvec3 position;
 
 			iss
@@ -434,7 +434,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> position.x
 				>> position.y
 				>> position.z
-				>> exceptionEntityId;
+				>> exceptionId;
 
 			if(isLoaded())
 			{
@@ -454,7 +454,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_fe3d->captor_create(captorId);
 			_fe3d->captor_setPosition(captorId, position);
-			_fe3d->captor_setExceptionEntityId(captorId, (_fe3d->model_isExisting(exceptionEntityId) ? exceptionEntityId : ""));
+			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
 			_fe3d->captor_capture(captorId);
 
 			_loadedCaptorIds.push_back(captorId);

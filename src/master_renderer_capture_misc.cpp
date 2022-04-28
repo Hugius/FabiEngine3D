@@ -40,29 +40,29 @@ void MasterRenderer::captureWorldDepth()
 		{
 			if(model->isLevelOfDetailed())
 			{
-				auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId());
+				auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailId());
 
 				if(foundPair != _modelEntityManager->getEntities().end())
 				{
-					const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
-					const auto originalPosition = levelOfDetailEntity->getBasePosition();
-					const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-					const auto originalSize = levelOfDetailEntity->getBaseSize();
-					const auto originalVisibility = levelOfDetailEntity->isVisible();
+					const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+					const auto originalPosition = levelOfDetailModel->getBasePosition();
+					const auto originalRotation = levelOfDetailModel->getBaseRotation();
+					const auto originalSize = levelOfDetailModel->getBaseSize();
+					const auto originalVisibility = levelOfDetailModel->isVisible();
 
-					levelOfDetailEntity->setBasePosition(model->getBasePosition());
-					levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
-					levelOfDetailEntity->setBaseSize(model->getBaseSize());
-					levelOfDetailEntity->setVisible(model->isVisible());
-					levelOfDetailEntity->updateTransformation();
+					levelOfDetailModel->setBasePosition(model->getBasePosition());
+					levelOfDetailModel->setBaseRotation(model->getBaseRotation());
+					levelOfDetailModel->setBaseSize(model->getBaseSize());
+					levelOfDetailModel->setVisible(model->isVisible());
+					levelOfDetailModel->updateTransformation();
 
-					_modelEntityDepthRenderer->render(levelOfDetailEntity);
+					_modelEntityDepthRenderer->render(levelOfDetailModel);
 
-					levelOfDetailEntity->setBasePosition(originalPosition);
-					levelOfDetailEntity->setBaseRotation(originalRotation);
-					levelOfDetailEntity->setBaseSize(originalSize);
-					levelOfDetailEntity->setVisible(originalVisibility);
-					levelOfDetailEntity->updateTransformation();
+					levelOfDetailModel->setBasePosition(originalPosition);
+					levelOfDetailModel->setBaseRotation(originalRotation);
+					levelOfDetailModel->setBaseSize(originalSize);
+					levelOfDetailModel->setVisible(originalVisibility);
+					levelOfDetailModel->updateTransformation();
 				}
 				else
 				{
@@ -274,29 +274,29 @@ void MasterRenderer::captureShadows()
 			{
 				if(model->isLevelOfDetailed())
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId());
+					auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailId());
 
 					if(foundPair != _modelEntityManager->getEntities().end())
 					{
-						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
-						const auto originalPosition = levelOfDetailEntity->getBasePosition();
-						const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-						const auto originalSize = levelOfDetailEntity->getBaseSize();
-						const auto originalVisibility = levelOfDetailEntity->isVisible();
+						const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+						const auto originalPosition = levelOfDetailModel->getBasePosition();
+						const auto originalRotation = levelOfDetailModel->getBaseRotation();
+						const auto originalSize = levelOfDetailModel->getBaseSize();
+						const auto originalVisibility = levelOfDetailModel->isVisible();
 
-						levelOfDetailEntity->setBasePosition(model->getBasePosition());
-						levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
-						levelOfDetailEntity->setBaseSize(model->getBaseSize());
-						levelOfDetailEntity->setVisible(model->isVisible());
-						levelOfDetailEntity->updateTransformation();
+						levelOfDetailModel->setBasePosition(model->getBasePosition());
+						levelOfDetailModel->setBaseRotation(model->getBaseRotation());
+						levelOfDetailModel->setBaseSize(model->getBaseSize());
+						levelOfDetailModel->setVisible(model->isVisible());
+						levelOfDetailModel->updateTransformation();
 
-						_modelEntityShadowRenderer->render(levelOfDetailEntity);
+						_modelEntityShadowRenderer->render(levelOfDetailModel);
 
-						levelOfDetailEntity->setBasePosition(originalPosition);
-						levelOfDetailEntity->setBaseRotation(originalRotation);
-						levelOfDetailEntity->setBaseSize(originalSize);
-						levelOfDetailEntity->setVisible(originalVisibility);
-						levelOfDetailEntity->updateTransformation();
+						levelOfDetailModel->setBasePosition(originalPosition);
+						levelOfDetailModel->setBaseRotation(originalRotation);
+						levelOfDetailModel->setBaseSize(originalSize);
+						levelOfDetailModel->setVisible(originalVisibility);
+						levelOfDetailModel->updateTransformation();
 					}
 					else
 					{

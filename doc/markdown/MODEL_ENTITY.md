@@ -23,7 +23,7 @@
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed
-- **LOD Entity ID**: the ID of another model entity representing the LOD version of the main model entity
+- **LOD ID**: the ID of another model entity representing the LOD version of the main model entity
   - Type: `string`
   - Constraints: entity must exist
 - **Position**: the XYZ position of the mesh

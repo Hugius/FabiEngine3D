@@ -36,9 +36,9 @@ void EngineInterface::captor_capture(const string & captorId)
 	_core->getCaptorEntityManager()->getEntity(captorId)->capture();
 }
 
-void EngineInterface::captor_setExceptionEntityId(const string & captorId, const string & value)
+void EngineInterface::captor_setExceptionId(const string & captorId, const string & value)
 {
-	_core->getCaptorEntityManager()->getEntity(captorId)->setExceptionEntityId(value);
+	_core->getCaptorEntityManager()->getEntity(captorId)->setExceptionId(value);
 }
 
 const vector<string> EngineInterface::captor_getIds() const
@@ -53,9 +53,9 @@ const vector<string> EngineInterface::captor_getIds() const
 	return result;
 }
 
-const string & EngineInterface::captor_getExceptionEntityId(const string & captorId) const
+const string & EngineInterface::captor_getExceptionId(const string & captorId) const
 {
-	return _core->getCaptorEntityManager()->getEntity(captorId)->getExceptionEntityId();
+	return _core->getCaptorEntityManager()->getEntity(captorId)->getExceptionId();
 }
 
 const fvec3 & EngineInterface::captor_getPosition(const string & captorId) const

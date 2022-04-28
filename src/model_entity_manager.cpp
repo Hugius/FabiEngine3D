@@ -146,13 +146,13 @@ void ModelEntityManager::update()
 			continue;
 		}
 
-		if(entity->getLevelOfDetailEntityId().empty())
+		if(entity->getLevelOfDetailId().empty())
 		{
 			entity->setLevelOfDetailed(false);
 		}
 		else
 		{
-			if(getEntities().find(entity->getLevelOfDetailEntityId()) == getEntities().end())
+			if(getEntities().find(entity->getLevelOfDetailId()) == getEntities().end())
 			{
 				abort();
 			}

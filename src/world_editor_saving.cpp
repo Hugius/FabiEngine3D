@@ -347,7 +347,7 @@ const bool WorldEditor::saveWorldToFile() const
 	for(const auto & captorId : _loadedCaptorIds)
 	{
 		auto position = _fe3d->captor_getPosition(captorId);
-		auto exceptionEntityId = _fe3d->captor_getExceptionEntityId(captorId);
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
 
 		file
 			<< "CAPTOR "
@@ -359,7 +359,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< position.z
 			<< " "
-			<< exceptionEntityId
+			<< exceptionId
 			<< endl;
 	}
 

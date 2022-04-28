@@ -44,7 +44,7 @@
 - `fe3d:model_set_normal_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_wireframe_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_lod_entity_id` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_set_lod_id` (`STR` id, `STR` value) -----> `NONE`
 - `fe3d:model_set_lightness` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular_shininess` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
@@ -131,7 +131,7 @@
 - `fe3d:model_get_specular_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_reflectivity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_lod_distance` (`STR` id) -----> `DEC`
-- `fe3d:model_get_lod_entity_id` (`STR` id) -----> `STR`
+- `fe3d:model_get_lod_id` (`STR` id) -----> `STR`
 - `fe3d:model_get_mesh_path` (`STR` id) -----> `STR`
 - `fe3d:model_get_diffuse_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_emission_map_path` (`STR` model_id, `STR` part_id) -----> `STR`

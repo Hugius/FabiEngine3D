@@ -14,7 +14,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		const auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelId, _currentPartId) : 0.0f);
 		const auto minTextureAlpha = (isPartSelected ? _fe3d->model_getMinTextureAlpha(_currentModelId, _currentPartId) : 0.0f);
 		const auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelId, _currentPartId) : false);
-		const auto levelOfDetailEntityId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityId(_currentModelId) : "");
+		const auto levelOfDetailId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailId(_currentModelId) : "");
 		const auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
 		const auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelId) : DirectionOrderType::XYZ);
 
@@ -49,15 +49,15 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			_fe3d->model_setFaceCulled(_currentModelId, _currentPartId, !isFaceCulled);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailId")->isHovered())
 		{
-			if(levelOfDetailEntityId.empty())
+			if(levelOfDetailId.empty())
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailEntityId", "LOD Entity ID", "", fvec2(0.0f, 0.1f), 5, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", "", fvec2(0.0f, 0.1f), 5, true, true, false);
 			}
 			else
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailEntityId", "LOD Entity ID", levelOfDetailEntityId.substr(1, levelOfDetailEntityId.size() - 1), fvec2(0.0f, 0.1f), 5, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", levelOfDetailId.substr(1, levelOfDetailId.size() - 1), fvec2(0.0f, 0.1f), 5, true, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
@@ -144,21 +144,21 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (content / 100.0f));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailEntityId") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailId") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 
 			if(content.empty())
 			{
-				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, "");
+				_fe3d->model_setLevelOfDetailId(_currentModelId, "");
 			}
 			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + content)) == _loadedModelIds.end())
 			{
-				Logger::throwWarning("LOD entity does not exist");
+				Logger::throwWarning("LOD model does not exist");
 			}
 			else
 			{
-				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, ("@" + content));
+				_fe3d->model_setLevelOfDetailId(_currentModelId, ("@" + content));
 			}
 		}
 		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailDistance") && _gui->getOverlay()->isValueFormConfirmed())
@@ -214,7 +214,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		screen->getButton("opacity")->setHoverable(isPartSelected);
 		screen->getButton("minTextureAlpha")->setHoverable(isPartSelected);
 		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
-		screen->getButton("levelOfDetailEntityId")->setHoverable(isNoPartSelected);
+		screen->getButton("levelOfDetailId")->setHoverable(isNoPartSelected);
 		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);
 		screen->getButton("rotationOrder")->setHoverable(isNoPartSelected);
 	}

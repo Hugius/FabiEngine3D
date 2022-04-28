@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:captor_set_exception_entity_id")
+	else if(functionName == "fe3d:captor_set_exception_id")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 		{
 			if(_validateFe3dCaptor(args[0]->getString()))
 			{
-				_fe3d->captor_setExceptionEntityId(args[0]->getString(), args[1]->getString());
+				_fe3d->captor_setExceptionId(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

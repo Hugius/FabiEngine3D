@@ -55,14 +55,14 @@ void CaptorEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 	_cubeTextureBuffer = value;
 }
 
-void CaptorEntity::setExceptionEntityId(const string & id)
+void CaptorEntity::setExceptionId(const string & id)
 {
-	_exceptionEntityId = id;
+	_exceptionId = id;
 }
 
-const string & CaptorEntity::getExceptionEntityId() const
+const string & CaptorEntity::getExceptionId() const
 {
-	return _exceptionEntityId;
+	return _exceptionId;
 }
 
 const fvec3 & CaptorEntity::getPosition() const

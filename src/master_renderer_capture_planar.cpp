@@ -90,19 +90,19 @@ void MasterRenderer::capturePlanarReflections()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 
-	for(const auto & entity : savedModelEntities)
+	for(const auto & model : savedModelEntities)
 	{
-		entity->setVisible(true);
+		model->setVisible(true);
 	}
 
-	for(const auto & entity : savedQuad3dEntities)
+	for(const auto & quad3d : savedQuad3dEntities)
 	{
-		entity->setVisible(true);
+		quad3d->setVisible(true);
 	}
 
-	for(const auto & entity : savedText3dEntities)
+	for(const auto & text3d : savedText3dEntities)
 	{
-		entity->setVisible(true);
+		text3d->setVisible(true);
 	}
 
 	_camera->updateMatrices();

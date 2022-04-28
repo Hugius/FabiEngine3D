@@ -32,9 +32,9 @@ void EngineInterface::model_delete(const string & modelId)
 
 	for(const auto & captorId : captor_getIds())
 	{
-		if(modelId == captor_getExceptionEntityId(captorId))
+		if(modelId == captor_getExceptionId(captorId))
 		{
-			captor_setExceptionEntityId(captorId, "");
+			captor_setExceptionId(captorId, "");
 		}
 	}
 
@@ -196,9 +196,9 @@ void EngineInterface::model_setReflectionMap(const string & modelId, const strin
 	}
 }
 
-void EngineInterface::model_setLevelOfDetailEntityId(const string & modelId, const string & value)
+void EngineInterface::model_setLevelOfDetailId(const string & modelId, const string & value)
 {
-	_core->getModelEntityManager()->getEntity(modelId)->setLevelOfDetailEntityId(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setLevelOfDetailId(value);
 }
 
 void EngineInterface::model_setFaceCulled(const string & modelId, const string & partId, bool value)
@@ -719,9 +719,9 @@ const string & EngineInterface::model_getNormalMapPath(const string & modelId, c
 	return _core->getModelEntityManager()->getEntity(modelId)->getNormalMapPath(partId);
 }
 
-const string & EngineInterface::model_getLevelOfDetailEntityId(const string & modelId) const
+const string & EngineInterface::model_getLevelOfDetailId(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(modelId)->getLevelOfDetailEntityId();
+	return _core->getModelEntityManager()->getEntity(modelId)->getLevelOfDetailId();
 }
 
 const vector<string> EngineInterface::model_getPartIds(const string & modelId) const

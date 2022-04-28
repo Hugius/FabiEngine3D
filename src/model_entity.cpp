@@ -329,9 +329,9 @@ void ModelEntity::setNormalMapPath(const string & partId, const string & value)
 	_parts.at(partId)->normalMapPath = value;
 }
 
-void ModelEntity::setLevelOfDetailEntityId(const string & value)
+void ModelEntity::setLevelOfDetailId(const string & value)
 {
-	_levelOfDetailEntityId = value;
+	_levelOfDetailId = value;
 }
 
 void ModelEntity::setPreviousCaptorEntityId(const string & value)
@@ -652,9 +652,9 @@ const string & ModelEntity::getNormalMapPath(const string & partId) const
 	return _parts.at(partId)->normalMapPath;
 }
 
-const string & ModelEntity::getLevelOfDetailEntityId() const
+const string & ModelEntity::getLevelOfDetailId() const
 {
-	return _levelOfDetailEntityId;
+	return _levelOfDetailId;
 }
 
 const string & ModelEntity::getPreviousCaptorEntityId() const

@@ -31,7 +31,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 		auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto modelSize = _fe3d->model_getBaseSize(modelId);
-		auto levelOfDetailEntityId = _fe3d->model_getLevelOfDetailEntityId(modelId);
+		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
 		auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
@@ -40,10 +40,10 @@ const bool ModelEditor::saveEntitiesToFile() const
 		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
-		levelOfDetailEntityId = (levelOfDetailEntityId.empty()) ? "?" : levelOfDetailEntityId;
+		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
 
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
-		replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), ' ', '?');
+		replace(levelOfDetailId.begin(), levelOfDetailId.end(), ' ', '?');
 
 		file
 			<< "MODEL "
@@ -57,7 +57,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 			<< " "
 			<< modelSize.z
 			<< " "
-			<< levelOfDetailEntityId
+			<< levelOfDetailId
 			<< " "
 			<< levelOfDetailDistance
 			<< " "

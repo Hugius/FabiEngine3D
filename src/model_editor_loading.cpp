@@ -215,7 +215,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 		{
 			string modelId;
 			string meshPath;
-			string levelOfDetailEntityId;
+			string levelOfDetailId;
 			fvec3 size;
 			float levelOfDetailDistance;
 			int rotationOrder;
@@ -228,17 +228,17 @@ const bool ModelEditor::loadEntitiesFromFile()
 				>> size.x
 				>> size.y
 				>> size.z
-				>> levelOfDetailEntityId
+				>> levelOfDetailId
 				>> levelOfDetailDistance
 				>> rotationOrder
 				>> isShadowed
 				>> isReflected;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
-			levelOfDetailEntityId = (levelOfDetailEntityId == "?") ? "" : levelOfDetailEntityId;
+			levelOfDetailId = (levelOfDetailId == "?") ? "" : levelOfDetailId;
 
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
-			replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), '?', ' ');
+			replace(levelOfDetailId.begin(), levelOfDetailId.end(), '?', ' ');
 
 			if(!Configuration::getInst().isApplicationExported())
 			{
@@ -254,7 +254,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 				_fe3d->model_setVisible(modelId, false);
 				_fe3d->model_setBaseSize(modelId, size);
-				_fe3d->model_setLevelOfDetailEntityId(modelId, levelOfDetailEntityId);
+				_fe3d->model_setLevelOfDetailId(modelId, levelOfDetailId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
 			}

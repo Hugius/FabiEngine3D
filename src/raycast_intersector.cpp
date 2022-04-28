@@ -256,30 +256,30 @@ const float RaycastIntersector::_calculateDistanceToTerrain() const
 	return Mathematics::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 
-const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> entity) const
+const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> aabb) const
 {
-	if(entity->isCentered())
+	if(aabb->isCentered())
 	{
-		const auto position = entity->getBasePosition();
-		const auto left = (entity->getBaseSize().x * 0.5f);
-		const auto right = (entity->getBaseSize().x * 0.5f);
-		const auto bottom = (entity->getBaseSize().y * 0.5f);
-		const auto top = (entity->getBaseSize().y * 0.5f);
-		const auto back = (entity->getBaseSize().z * 0.5f);
-		const auto front = (entity->getBaseSize().z * 0.5f);
+		const auto position = aabb->getBasePosition();
+		const auto left = (aabb->getBaseSize().x * 0.5f);
+		const auto right = (aabb->getBaseSize().x * 0.5f);
+		const auto bottom = (aabb->getBaseSize().y * 0.5f);
+		const auto top = (aabb->getBaseSize().y * 0.5f);
+		const auto back = (aabb->getBaseSize().z * 0.5f);
+		const auto front = (aabb->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);
 	}
 	else
 	{
-		const auto position = entity->getBasePosition();
-		const auto left = (entity->getBaseSize().x * 0.5f);
-		const auto right = (entity->getBaseSize().x * 0.5f);
+		const auto position = aabb->getBasePosition();
+		const auto left = (aabb->getBaseSize().x * 0.5f);
+		const auto right = (aabb->getBaseSize().x * 0.5f);
 		const auto bottom = 0.0f;
-		const auto top = entity->getBaseSize().y;
-		const auto back = (entity->getBaseSize().z * 0.5f);
-		const auto front = (entity->getBaseSize().z * 0.5f);
+		const auto top = aabb->getBaseSize().y;
+		const auto back = (aabb->getBaseSize().z * 0.5f);
+		const auto front = (aabb->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);

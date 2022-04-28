@@ -133,12 +133,12 @@ void EngineInterface::water_setNormalMap(const string & waterId, const string & 
 	}
 }
 
-void EngineInterface::water_setDisplacementMap(const string & waterId, const string & value)
+void EngineInterface::water_setHeightMap(const string & waterId, const string & value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMap(nullptr);
-		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMapPath("");
+		_core->getWaterEntityManager()->getEntity(waterId)->setHeightMap(nullptr);
+		_core->getWaterEntityManager()->getEntity(waterId)->setHeightMapPath("");
 	}
 	else
 	{
@@ -158,8 +158,8 @@ void EngineInterface::water_setDisplacementMap(const string & waterId, const str
 			}
 		}
 
-		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMap(texture);
-		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMapPath(value);
+		_core->getWaterEntityManager()->getEntity(waterId)->setHeightMap(texture);
+		_core->getWaterEntityManager()->getEntity(waterId)->setHeightMapPath(value);
 	}
 }
 
@@ -243,9 +243,9 @@ const bool EngineInterface::water_hasNormalMap(const string & waterId) const
 	return (_core->getWaterEntityManager()->getEntity(waterId)->getNormalTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::water_hasDisplacementMap(const string & waterId) const
+const bool EngineInterface::water_hasHeightMap(const string & waterId) const
 {
-	return (_core->getWaterEntityManager()->getEntity(waterId)->getDisplacementTextureBuffer() != nullptr);
+	return (_core->getWaterEntityManager()->getEntity(waterId)->getHeightTextureBuffer() != nullptr);
 }
 
 const string EngineInterface::water_getSelectedId() const
@@ -325,9 +325,9 @@ const string & EngineInterface::water_getNormalMapPath(const string & waterId) c
 	return _core->getWaterEntityManager()->getEntity(waterId)->getNormalMapPath();
 }
 
-const string & EngineInterface::water_getDisplacementMapPath(const string & waterId) const
+const string & EngineInterface::water_getHeightMapPath(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(waterId)->getDisplacementMapPath();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getHeightMapPath();
 }
 
 const float EngineInterface::water_getHeight(const string & waterId) const

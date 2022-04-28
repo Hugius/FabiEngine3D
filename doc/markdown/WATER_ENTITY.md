@@ -8,7 +8,7 @@
 ## 1.2 Assets
 
 - DUDV Map
-- Displacement Map
+- Height Map
 - Normal Map
 
 ## 1.3 Properties
@@ -19,7 +19,7 @@
 - **Normal Map Path**: the path of the normal map file
   - Type: `string`
   - Constraints: none
-- **Displacement Map Path**: the path of the displacement map file
+- **Height Map Path**: the path of the height map file
   - Type: `string`
   - Constraints: none
 - **Color**: the RGB color multiplier

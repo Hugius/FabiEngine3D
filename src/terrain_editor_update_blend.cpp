@@ -22,7 +22,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\blend_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\blend_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

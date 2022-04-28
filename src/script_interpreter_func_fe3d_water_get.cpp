@@ -147,7 +147,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_displacement_map_path")
+	else if(functionName == "fe3d:water_get_height_map_path")
 	{
 		auto types = {SVT::STRING};
 
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_getDisplacementMapPath(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_getHeightMapPath(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
@@ -189,7 +189,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_has_displacement_map")
+	else if(functionName == "fe3d:water_has_height_map")
 	{
 		auto types = {SVT::STRING};
 
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_hasDisplacementMap(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_hasHeightMap(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}

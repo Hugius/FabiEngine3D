@@ -30,7 +30,7 @@ void WaterEntityColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_edgeMap", 2);
 	_shaderBuffer->uploadUniform("u_dudvMap", 3);
 	_shaderBuffer->uploadUniform("u_normalMap", 4);
-	_shaderBuffer->uploadUniform("u_displacementMap", 5);
+	_shaderBuffer->uploadUniform("u_heightMap", 5);
 	_shaderBuffer->uploadUniform("u_hasReflectionMap", (_renderStorage->getWaterReflectionTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasRefractionMap", (_renderStorage->getWaterRefractionTextureBuffer() != nullptr));
 
@@ -169,7 +169,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
 	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
-	_shaderBuffer->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasHeightMap", (entity->getHeightTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasDudvMap", (entity->getDudvTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
@@ -184,13 +184,13 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getTboId());
 	}
-	if(entity->getDisplacementTextureBuffer() != nullptr)
+	if(entity->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, entity->getHeightTextureBuffer()->getTboId());
 	}
 
-	if(entity->getDisplacementTextureBuffer() != nullptr)
+	if(entity->getHeightTextureBuffer() != nullptr)
 	{
 		glBindVertexArray(entity->getHighQualityVertexBuffer()->getVaoId());
 	}
@@ -199,7 +199,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		glBindVertexArray(entity->getLowQualityVertexBuffer()->getVaoId());
 	}
 
-	if(entity->getDisplacementTextureBuffer() != nullptr)
+	if(entity->getHeightTextureBuffer() != nullptr)
 	{
 		glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityVertexBuffer()->getVertexCount());
 		_renderStorage->increaseTriangleCount(entity->getHighQualityVertexBuffer()->getVertexCount() / 3);
@@ -222,7 +222,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getDisplacementTextureBuffer() != nullptr)
+	if(entity->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, 0);

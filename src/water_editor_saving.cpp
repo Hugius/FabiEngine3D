@@ -26,7 +26,7 @@ const bool WaterEditor::saveEntitiesToFile() const
 	{
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
-		auto displacementMapPath = _fe3d->water_getDisplacementMapPath(waterId);
+		auto heightMapPath = _fe3d->water_getHeightMapPath(waterId);
 		auto color = _fe3d->water_getColor(waterId);
 		auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
 		auto waveSpeed = _fe3d->water_getWaveSpeed(waterId);
@@ -43,15 +43,15 @@ const bool WaterEditor::saveEntitiesToFile() const
 
 		dudvMapPath = (dudvMapPath.empty() ? "" : dudvMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		displacementMapPath = (displacementMapPath.empty() ? "" : displacementMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		heightMapPath = (heightMapPath.empty() ? "" : heightMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);
-		displacementMapPath = (displacementMapPath.empty() ? "?" : displacementMapPath);
+		heightMapPath = (heightMapPath.empty() ? "?" : heightMapPath);
 
 		replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
+		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 
 		file
 			<< waterId
@@ -60,7 +60,7 @@ const bool WaterEditor::saveEntitiesToFile() const
 			<< " "
 			<< normalMapPath
 			<< " "
-			<< displacementMapPath
+			<< heightMapPath
 			<< " "
 			<< isSpecular
 			<< " "

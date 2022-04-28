@@ -12,7 +12,7 @@
 - `fe3d:water_set_size` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_dudv_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:water_set_normal_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_displacement_map` (`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:water_set_height_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:water_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:water_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:water_set_height` (`STR` id, `DEC` value) -----> `NONE`
@@ -37,11 +37,11 @@
 - `fe3d:water_is_edged` (`STR` id) -----> `BOL`
 - `fe3d:water_is_wireframed` (`STR` id) -----> `BOL`
 - `fe3d:water_has_dudv_map` (`STR` id) -----> `BOL`
-- `fe3d:water_has_displacement_map` (`STR` id) -----> `BOL`
+- `fe3d:water_has_height_map` (`STR` id) -----> `BOL`
 - `fe3d:water_has_normal_map` (`STR` id) -----> `BOL`
 - `fe3d:water_get_selected_id` (`STR` id) -----> `STR`
 - `fe3d:water_get_dudv_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_displacement_map_path` (`STR` id) -----> `STR`
+- `fe3d:water_get_height_map_path` (`STR` id) -----> `STR`
 - `fe3d:water_get_normal_map_path` (`STR` id) -----> `STR`
 - `fe3d:water_get_min_clip_position_x` (`STR` id) -----> `DEC`
 - `fe3d:water_get_min_clip_position_y` (`STR` id) -----> `DEC`

@@ -24,7 +24,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\water\\dudv_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\water\\dudv_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -58,7 +58,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\water\\normal_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\water\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -84,7 +84,7 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setNormalMap(_currentWaterId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("heightMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -92,7 +92,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\water\\displacement_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\water\\height_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -116,13 +116,13 @@ void WaterEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->water_setDisplacementMap(_currentWaterId, finalFilePath);
+			_fe3d->water_setHeightMap(_currentWaterId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->water_setDudvMap(_currentWaterId, "");
 			_fe3d->water_setNormalMap(_currentWaterId, "");
-			_fe3d->water_setDisplacementMap(_currentWaterId, "");
+			_fe3d->water_setHeightMap(_currentWaterId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{

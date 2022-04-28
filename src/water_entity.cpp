@@ -25,9 +25,9 @@ void WaterEntity::setNormalMap(shared_ptr<TextureBuffer> value)
 	_normalTextureBuffer = value;
 }
 
-void WaterEntity::setDisplacementMap(shared_ptr<TextureBuffer> value)
+void WaterEntity::setHeightMap(shared_ptr<TextureBuffer> value)
 {
-	_displacementTextureBuffer = value;
+	_heightTextureBuffer = value;
 }
 
 void WaterEntity::setDudvMapPath(const string & value)
@@ -40,9 +40,9 @@ void WaterEntity::setNormalMapPath(const string & value)
 	_normalMapPath = value;
 }
 
-void WaterEntity::setDisplacementMapPath(const string & value)
+void WaterEntity::setHeightMapPath(const string & value)
 {
-	_displacementMapPath = value;
+	_heightMapPath = value;
 }
 
 void WaterEntity::setRippleOffset(const fvec2 & value)
@@ -165,9 +165,9 @@ const shared_ptr<TextureBuffer> WaterEntity::getNormalTextureBuffer() const
 	return _normalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getDisplacementTextureBuffer() const
+const shared_ptr<TextureBuffer> WaterEntity::getHeightTextureBuffer() const
 {
-	return _displacementTextureBuffer;
+	return _heightTextureBuffer;
 }
 
 const string & WaterEntity::getDudvMapPath() const
@@ -180,9 +180,9 @@ const string & WaterEntity::getNormalMapPath() const
 	return _normalMapPath;
 }
 
-const string & WaterEntity::getDisplacementMapPath() const
+const string & WaterEntity::getHeightMapPath() const
 {
-	return _displacementMapPath;
+	return _heightMapPath;
 }
 
 const fvec2 & WaterEntity::getRippleOffset() const

@@ -90,7 +90,7 @@ void TerrainEditor::_updateTerrainCreating()
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\height_map\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{

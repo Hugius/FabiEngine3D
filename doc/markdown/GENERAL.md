@@ -13,7 +13,7 @@
 
 - **3D Entities**: sky, terrain, water, model, quad3D, text3D, AABB
 - **2D Entities**: quad2D, text2D
-- **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, font, height, normal, reflection, specular
+- **Textures**: blend, cube, diffuse, dudv, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
 - **Post-Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare, gamma correction
 - **Miscellaneous**: shadows, cube reflections, planar reflections, fog, sky exposure, anisotropic filtering
@@ -73,18 +73,34 @@
       └── assets
         └── audio
         └── image
-        └── mesh
-          └── entity
-            └── model
-            └── quad2d
-            └── quad3d
-            └── sky
-            └── terrain
-            └── text2d
-            └── text3d
-            └── water
           └── misc
             └── flare_map
+          └── model
+            └── diffuse_map
+            └── emission_map
+            └── normal_map
+            └── reflection_map
+            └── specular_map
+          └── quad2d
+            └── diffuse_map
+          └── quad3d
+            └── diffuse_map
+            └── emission_map
+          └── sky
+            └── cube_map
+          └── terrain
+            └── blend_map
+            └── diffuse_map
+            └── height_map
+            └── normal_map
+          └── text2d
+            └── font_map
+          └── text3d
+            └── font_map
+          └── water
+            └── dudv_map
+            └── height_map
+            └── normal_map
         └── mesh
       └── data (do NOT change)
       └── saves (do NOT change)

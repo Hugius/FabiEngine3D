@@ -58,7 +58,7 @@ void Text2dEditor::_updateText2dCreating()
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text2d\\font_map\\");
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\text2d\\font_map\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{

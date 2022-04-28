@@ -22,10 +22,10 @@ public:
 	void setColor(const fvec3 & value);
 	void setDudvMap(shared_ptr<TextureBuffer> value);
 	void setNormalMap(shared_ptr<TextureBuffer> value);
-	void setDisplacementMap(shared_ptr<TextureBuffer> value);
+	void setHeightMap(shared_ptr<TextureBuffer> value);
 	void setDudvMapPath(const string & value);
 	void setNormalMapPath(const string & value);
-	void setDisplacementMapPath(const string & value);
+	void setHeightMapPath(const string & value);
 	void setTextureRepeat(int value);
 	void setWaveHeight(float value);
 	void setSpecularShininess(float value);
@@ -46,11 +46,11 @@ public:
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDudvTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getDisplacementTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getHeightTextureBuffer() const;
 
 	const string & getDudvMapPath() const;
 	const string & getNormalMapPath() const;
-	const string & getDisplacementMapPath() const;
+	const string & getHeightMapPath() const;
 
 	const fvec3 & getColor() const;
 	const fvec3 & getWireframeColor() const;
@@ -84,11 +84,11 @@ private:
 	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _dudvTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _displacementTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _heightTextureBuffer = nullptr;
 
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
-	string _displacementMapPath = "";
+	string _heightMapPath = "";
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);

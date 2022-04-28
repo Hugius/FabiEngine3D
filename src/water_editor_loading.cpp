@@ -34,7 +34,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		string waterId;
 		string dudvMapPath;
 		string normalMapPath;
-		string displacementMapPath;
+		string heightMapPath;
 
 		istringstream iss(line);
 
@@ -42,15 +42,15 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 			>> waterId
 			>> dudvMapPath
 			>> normalMapPath
-			>> displacementMapPath;
+			>> heightMapPath;
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
-		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+		heightMapPath = (heightMapPath == "?" ? "" : heightMapPath);
 
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
 		if(!dudvMapPath.empty())
 		{
@@ -72,14 +72,14 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 			imagePaths.push_back(normalMapPath);
 		}
 
-		if(!displacementMapPath.empty())
+		if(!heightMapPath.empty())
 		{
 			if(!Configuration::getInst().isApplicationExported())
 			{
-				displacementMapPath = ("projects\\" + getCurrentProjectId() + "\\" + displacementMapPath);
+				heightMapPath = ("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
 			}
 
-			imagePaths.push_back(displacementMapPath);
+			imagePaths.push_back(heightMapPath);
 		}
 	}
 
@@ -113,7 +113,7 @@ const bool WaterEditor::loadEntitiesFromFile()
 		string waterId;
 		string dudvMapPath;
 		string normalMapPath;
-		string displacementMapPath;
+		string heightMapPath;
 		fvec3 color;
 		fvec2 rippleSpeed;
 		fvec2 waveSpeed;
@@ -134,7 +134,7 @@ const bool WaterEditor::loadEntitiesFromFile()
 			>> waterId
 			>> dudvMapPath
 			>> normalMapPath
-			>> displacementMapPath
+			>> heightMapPath
 			>> isSpecular
 			>> isReflective
 			>> isRefractive
@@ -155,11 +155,11 @@ const bool WaterEditor::loadEntitiesFromFile()
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
-		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+		heightMapPath = (heightMapPath == "?" ? "" : heightMapPath);
 
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
 		_loadedWaterIds.push_back(waterId);
 		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
@@ -199,14 +199,14 @@ const bool WaterEditor::loadEntitiesFromFile()
 			_fe3d->water_setNormalMap(waterId, normalMapPath);
 		}
 
-		if(!displacementMapPath.empty())
+		if(!heightMapPath.empty())
 		{
 			if(!Configuration::getInst().isApplicationExported())
 			{
-				displacementMapPath = ("projects\\" + getCurrentProjectId() + "\\" + displacementMapPath);
+				heightMapPath = ("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
 			}
 
-			_fe3d->water_setDisplacementMap(waterId, displacementMapPath);
+			_fe3d->water_setHeightMap(waterId, heightMapPath);
 		}
 	}
 

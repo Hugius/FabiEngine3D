@@ -93,7 +93,7 @@ void Text3dEditor::_updateText3dCreating()
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text3d\\font_map\\");
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\text3d\\font_map\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{

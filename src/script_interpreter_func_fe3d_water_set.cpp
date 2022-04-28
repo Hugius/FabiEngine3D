@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_set_displacement_map")
+	else if(functionName == "fe3d:water_set_height_map")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setDisplacementMap(_fe3d->water_getSelectedId(), args[1]->getString());
+				_fe3d->water_setHeightMap(_fe3d->water_getSelectedId(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

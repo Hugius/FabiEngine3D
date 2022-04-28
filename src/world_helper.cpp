@@ -120,9 +120,9 @@ void WorldHelper::copyTemplateWater(const string & newId, const string & templat
 		_fe3d->water_setNormalMap(newId, _fe3d->water_getNormalMapPath(templateId));
 	}
 
-	if(_fe3d->water_hasDisplacementMap(templateId))
+	if(_fe3d->water_hasHeightMap(templateId))
 	{
-		_fe3d->water_setDisplacementMap(newId, _fe3d->water_getDisplacementMapPath(templateId));
+		_fe3d->water_setHeightMap(newId, _fe3d->water_getHeightMapPath(templateId));
 	}
 }
 

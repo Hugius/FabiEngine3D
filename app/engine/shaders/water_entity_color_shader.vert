@@ -3,7 +3,7 @@
 layout (location = 0) in vec3 v_position;
 layout (location = 1) in vec2 v_uv;
 
-layout (location = 5) uniform sampler2D u_displacementMap;
+layout (location = 5) uniform sampler2D u_heightMap;
 
 uniform mat4 u_cameraView;
 uniform mat4 u_cameraProjection;
@@ -21,7 +21,7 @@ uniform float u_waveHeight;
 
 uniform int u_textureRepeat;
 
-uniform bool u_hasDisplacementMap;
+uniform bool u_hasHeightMap;
 
 out vec4 f_clipSpacePos;
 out vec3 f_worldSpacePos;
@@ -32,9 +32,9 @@ void main()
 	vec3 newPosition = v_position;
 	newPosition.y = u_height;
 
-	if(u_hasDisplacementMap)
+	if(u_hasHeightMap)
 	{
-		float heightPercentage = texture(u_displacementMap, ((v_uv * float(u_textureRepeat)) + (u_waveOffset))).r;
+		float heightPercentage = texture(u_heightMap, ((v_uv * float(u_textureRepeat)) + (u_waveOffset))).r;
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 

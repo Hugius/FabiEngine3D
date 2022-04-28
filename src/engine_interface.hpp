@@ -174,7 +174,7 @@ public:
 	void water_setWireframeColor(const string & waterId, const fvec3 & value);
 	void water_setDudvMap(const string & waterId, const string & value);
 	void water_setNormalMap(const string & waterId, const string & value);
-	void water_setDisplacementMap(const string & waterId, const string & value);
+	void water_setHeightMap(const string & waterId, const string & value);
 	void water_setWaveHeight(const string & waterId, float value);
 	void water_setSpecularShininess(const string & waterId, float value);
 	void water_setSpecularIntensity(const string & waterId, float value);
@@ -188,7 +188,7 @@ public:
 	const vector<string> water_getIds() const;
 	const string & water_getDudvMapPath(const string & waterId) const;
 	const string & water_getNormalMapPath(const string & waterId) const;
-	const string & water_getDisplacementMapPath(const string & waterId) const;
+	const string & water_getHeightMapPath(const string & waterId) const;
 	const string water_getSelectedId() const;
 	const fvec3 & water_getWireframeColor(const string & waterId) const;
 	const fvec3 & water_getColor(const string & waterId) const;
@@ -212,7 +212,7 @@ public:
 	const bool water_isWireframed(const string & waterId) const;
 	const bool water_hasDudvMap(const string & waterId) const;
 	const bool water_hasNormalMap(const string & waterId) const;
-	const bool water_hasDisplacementMap(const string & waterId) const;
+	const bool water_hasHeightMap(const string & waterId) const;
 
 	void model_create(const string & modelId, const string & meshPath);
 	void model_delete(const string & modelId);

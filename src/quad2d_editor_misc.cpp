@@ -9,9 +9,9 @@ const vector<string> & Quad2dEditor::getLoadedEntityIds() const
 
 void Quad2dEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedQuad2dIds)
+	for(const auto & quad2dId : _loadedQuad2dIds)
 	{
-		_fe3d->quad2d_delete(id);
+		_fe3d->quad2d_delete(quad2dId);
 	}
 
 	_loadedQuad2dIds.clear();

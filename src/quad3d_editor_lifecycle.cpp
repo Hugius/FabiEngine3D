@@ -49,9 +49,9 @@ void Quad3dEditor::_load()
 
 void Quad3dEditor::_unload()
 {
-	for(const auto & id : _loadedQuad3dIds)
+	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		_fe3d->quad3d_delete(id);
+		_fe3d->quad3d_delete(quad3dId);
 	}
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);

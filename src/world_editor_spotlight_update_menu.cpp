@@ -52,9 +52,9 @@ void WorldEditor::_updateSpotlightMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteOptions();
 
-			for(auto & id : _loadedSpotlightIds)
+			for(auto & spotlightId : _loadedSpotlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createOption(id, id);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createOption(spotlightId, spotlightId);
 			}
 		}
 

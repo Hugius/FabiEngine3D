@@ -56,11 +56,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->pointlight_getIds())
+			for(const auto & pointlightId : _fe3d->pointlight_getIds())
 			{
-				if(id[0] != '@')
+				if(pointlightId[0] != '@')
 				{
-					_fe3d->pointlight_delete(id);
+					_fe3d->pointlight_delete(pointlightId);
 				}
 			}
 

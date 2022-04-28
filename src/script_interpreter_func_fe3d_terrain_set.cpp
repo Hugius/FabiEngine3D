@@ -62,11 +62,11 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->terrain_getIds())
+			for(const auto & terrainId : _fe3d->terrain_getIds())
 			{
-				if(id[0] != '@')
+				if(terrainId[0] != '@')
 				{
-					_fe3d->terrain_delete(id);
+					_fe3d->terrain_delete(terrainId);
 				}
 			}
 

@@ -64,11 +64,11 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->text3d_getIds())
+			for(const auto & text3dId : _fe3d->text3d_getIds())
 			{
-				if(id[0] != '@')
+				if(text3dId[0] != '@')
 				{
-					_fe3d->text3d_delete(id);
+					_fe3d->text3d_delete(text3dId);
 				}
 			}
 
@@ -344,9 +344,9 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 					return true;
 				}
 
-				for(const auto & id : aabbIds)
+				for(const auto & aabbId : aabbIds)
 				{
-					_fe3d->aabb_setRaycastResponsive(id, args[1]->getBoolean());
+					_fe3d->aabb_setRaycastResponsive(aabbId, args[1]->getBoolean());
 				}
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -370,9 +370,9 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 					return true;
 				}
 
-				for(const auto & id : aabbIds)
+				for(const auto & aabbId : aabbIds)
 				{
-					_fe3d->aabb_setCollisionResponsive(id, args[1]->getBoolean());
+					_fe3d->aabb_setCollisionResponsive(aabbId, args[1]->getBoolean());
 				}
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

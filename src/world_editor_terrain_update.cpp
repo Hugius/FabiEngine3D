@@ -16,11 +16,11 @@ void WorldEditor::_updateTerrainMenu()
 		{
 			vector<string> terrainIds;
 
-			for(const auto & id : _terrainEditor->getLoadedEntityIds())
+			for(const auto & terrainId : _terrainEditor->getLoadedEntityIds())
 			{
-				if(id[0] == '@')
+				if(terrainId[0] == '@')
 				{
-					terrainIds.push_back(id.substr(1));
+					terrainIds.push_back(terrainId.substr(1));
 				}
 			}
 

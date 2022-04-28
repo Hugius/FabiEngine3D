@@ -14,9 +14,9 @@ void Text2dEditor::_load()
 
 void Text2dEditor::_unload()
 {
-	for(const auto & id : _loadedText2dIds)
+	for(const auto & text2dId : _loadedText2dIds)
 	{
-		_fe3d->text2d_delete(id);
+		_fe3d->text2d_delete(text2dId);
 	}
 
 	_fe3d->camera_reset();

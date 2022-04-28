@@ -56,11 +56,11 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->text2d_getIds())
+			for(const auto & text2dId : _fe3d->text2d_getIds())
 			{
-				if(id[0] != '@')
+				if(text2dId[0] != '@')
 				{
-					_fe3d->text2d_delete(id);
+					_fe3d->text2d_delete(text2dId);
 				}
 			}
 

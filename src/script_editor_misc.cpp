@@ -90,19 +90,19 @@ void ScriptEditor::_createScriptDisplayEntities()
 
 void ScriptEditor::_deleteScriptDisplayEntities()
 {
-	for(const auto & id : _loadedQuad3dIds)
+	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		_fe3d->quad3d_delete(id);
+		_fe3d->quad3d_delete(quad3dId);
 	}
 
-	for(const auto & id : _loadedText3dIds)
+	for(const auto & text3dId : _loadedText3dIds)
 	{
-		_fe3d->text3d_delete(id);
+		_fe3d->text3d_delete(text3dId);
 	}
 
-	for(const auto & id : _loadedAabbIds)
+	for(const auto & aabbId : _loadedAabbIds)
 	{
-		_fe3d->aabb_delete(id);
+		_fe3d->aabb_delete(aabbId);
 	}
 
 	_loadedQuad3dIds.clear();

@@ -18,25 +18,25 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedWaterIds;
+			auto waterIds = _loadedWaterIds;
 
-			for(auto & id : ids)
+			for(auto & waterId : waterIds)
 			{
-				id = id.substr(1);
+				waterId = waterId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editWater", "Edit Water", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editWater", "Edit Water", fvec2(-0.5f, 0.1f), waterIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedWaterIds;
+			auto waterIds = _loadedWaterIds;
 
-			for(auto & id : ids)
+			for(auto & waterId : waterIds)
 			{
-				id = id.substr(1);
+				waterId = waterId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteWater", "Delete Water", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteWater", "Delete Water", fvec2(-0.5f, 0.1f), waterIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

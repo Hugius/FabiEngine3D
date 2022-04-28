@@ -20,9 +20,9 @@ void Animation2dEditor::_load()
 
 void Animation2dEditor::_unload()
 {
-	for(const auto & id : _loadedAnimation2dIds)
+	for(const auto & aabb2dId : _loadedAnimation2dIds)
 	{
-		_fe3d->animation2d_delete(id);
+		_fe3d->animation2d_delete(aabb2dId);
 	}
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);

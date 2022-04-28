@@ -13,8 +13,8 @@ class ModelEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void createPart(const string & id);
-	void deletePart(const string & id);
+	void createPart(const string & partId);
+	void deletePart(const string & partId);
 	void deleteParts();
 	void updateTarget();
 	void updateTransformation();

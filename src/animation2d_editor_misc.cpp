@@ -7,9 +7,9 @@ const vector<string> & Animation2dEditor::getLoadedAnimationIds() const
 
 void Animation2dEditor::deleteLoadedAnimations()
 {
-	for(const auto & id : _loadedAnimation2dIds)
+	for(const auto & animation2dId : _loadedAnimation2dIds)
 	{
-		_fe3d->animation2d_delete(id);
+		_fe3d->animation2d_delete(animation2dId);
 	}
 
 	_loadedAnimation2dIds.clear();

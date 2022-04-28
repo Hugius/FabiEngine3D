@@ -17,25 +17,25 @@ void TerrainEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedTerrainIds;
+			auto terrainIds = _loadedTerrainIds;
 
-			for(auto & id : ids)
+			for(auto & terrainId : terrainIds)
 			{
-				id = id.substr(1);
+				terrainId = terrainId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editTerrain", "Edit Terrain", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editTerrain", "Edit Terrain", fvec2(-0.5f, 0.1f), terrainIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedTerrainIds;
+			auto terrainIds = _loadedTerrainIds;
 
-			for(auto & id : ids)
+			for(auto & terrainId : terrainIds)
 			{
-				id = id.substr(1);
+				terrainId = terrainId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteTerrain", "Delete Terrain", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteTerrain", "Delete Terrain", fvec2(-0.5f, 0.1f), terrainIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

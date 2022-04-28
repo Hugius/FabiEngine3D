@@ -16,25 +16,25 @@ void Text3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedText3dIds;
+			auto text3dIds = _loadedText3dIds;
 
-			for(auto & id : ids)
+			for(auto & text3dId : text3dIds)
 			{
-				id = id.substr(1);
+				text3dId = text3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editText3d", "Edit Text3D", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editText3d", "Edit Text3D", fvec2(-0.5f, 0.1f), text3dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedText3dIds;
+			auto text3dIds = _loadedText3dIds;
 
-			for(auto & id : ids)
+			for(auto & text3dId : text3dIds)
 			{
-				id = id.substr(1);
+				text3dId = text3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteText3d", "Delete Text3D", fvec2(-0.5f, 0.1f), ids);;
+			_gui->getOverlay()->openChoiceForm("deleteText3d", "Delete Text3D", fvec2(-0.5f, 0.1f), text3dIds);;
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

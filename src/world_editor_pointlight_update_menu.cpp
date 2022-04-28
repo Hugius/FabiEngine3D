@@ -52,9 +52,9 @@ void WorldEditor::_updatePointlightMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteOptions();
 
-			for(auto & id : _loadedPointlightIds)
+			for(auto & pointlightId : _loadedPointlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(id, id);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(pointlightId, pointlightId);
 			}
 		}
 

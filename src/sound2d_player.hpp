@@ -21,29 +21,29 @@ class Sound2dPlayer final
 public:
 	void inject(shared_ptr<Sound2dManager> sound2dManager);
 	void update();
-	void startSound(const string & id, int playCount);
-	void pauseSound(const string & id, int index);
-	void resumeSound(const string & id, int index);
-	void stopSound(const string & id, int index);
-	void setSoundVolume(const string & id, int index, float value);
-	void setSoundLeftIntensity(const string & id, int index, float value);
-	void setSoundRightIntensity(const string & id, int index, float value);
+	void startSound(const string & sound2dId, int playCount);
+	void pauseSound(const string & sound2dId, int index);
+	void resumeSound(const string & sound2dId, int index);
+	void stopSound(const string & sound2dId, int index);
+	void setSoundVolume(const string & sound2dId, int index, float value);
+	void setSoundLeftIntensity(const string & sound2dId, int index, float value);
+	void setSoundRightIntensity(const string & sound2dId, int index, float value);
 
-	const float getSoundVolume(const string & id, int index) const;
-	const float getSoundLeftIntensity(const string & id, int index) const;
-	const float getSoundRightIntensity(const string & id, int index) const;
+	const float getSoundVolume(const string & sound2dId, int index) const;
+	const float getSoundLeftIntensity(const string & sound2dId, int index) const;
+	const float getSoundRightIntensity(const string & sound2dId, int index) const;
 
-	const int getStartedSoundCount(const string & id) const;
-	const int getSoundTime(const string & id, int index) const;
+	const int getStartedSoundCount(const string & sound2dId) const;
+	const int getSoundTime(const string & sound2dId, int index) const;
 
-	const int getPlayCount(const string & id, int index) const;
+	const int getPlayCount(const string & sound2dId, int index) const;
 
-	const bool isSoundStarted(const string & id, int index) const;
-	const bool isSoundPaused(const string & id, int index) const;
+	const bool isSoundStarted(const string & sound2dId, int index) const;
+	const bool isSoundPaused(const string & sound2dId, int index) const;
 	const bool isDeviceConnected() const;
 
 private:
-	void _terminateSound(const string & id, int index);
+	void _terminateSound(const string & sound2dId, int index);
 	void _terminateSounds();
 	void _updateSamplesVolume(int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity);
 

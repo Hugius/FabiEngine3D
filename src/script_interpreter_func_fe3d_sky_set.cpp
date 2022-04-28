@@ -62,11 +62,11 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->sky_getIds())
+			for(const auto & skyId : _fe3d->sky_getIds())
 			{
-				if(id[0] != '@')
+				if(skyId[0] != '@')
 				{
-					_fe3d->sky_delete(id);
+					_fe3d->sky_delete(skyId);
 				}
 			}
 

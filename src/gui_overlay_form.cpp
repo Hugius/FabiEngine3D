@@ -152,11 +152,11 @@ const bool GuiOverlay::isAnswerFormConfirmed() const
 	return false;
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & valueFormId, const string & title, const string & valueString, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
 	if(!_valueFormId.empty())
 	{
-		_valueFormQueue.push_back(make_tuple(id, title, valueString, position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed));
+		_valueFormQueue.push_back(make_tuple(valueFormId, title, valueString, position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed));
 
 		return;
 	}
@@ -171,22 +171,22 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 	createButton("value_form_enter", (position + VF_ENTER_OFFSET), VF_ENTER_SIZE, "", VF_DEFAULT_ENTER_QUAD_COLOR, VF_HOVERED_ENTER_QUAD_COLOR, "Enter", VF_DEFAULT_ENTER_TEXT_COLOR, VF_HOVERED_ENTER_TEXT_COLOR, true);
 	createButton("value_form_cancel", (position + VF_CANCEL_OFFSET), VF_CANCEL_SIZE, "", VF_DEFAULT_CANCEL_QUAD_COLOR, VF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", VF_DEFAULT_CANCEL_TEXT_COLOR, VF_HOVERED_CANCEL_TEXT_COLOR, true);
 
-	_valueFormId = id;
+	_valueFormId = valueFormId;
 
 	_isFocused = true;
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, float value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & valueFormId, const string & title, float value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
-	openValueForm(id, title, to_string(static_cast<int>(value)), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
+	openValueForm(valueFormId, title, to_string(static_cast<int>(value)), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, int value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & valueFormId, const string & title, int value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
-	openValueForm(id, title, to_string(value), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
+	openValueForm(valueFormId, title, to_string(value), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
 }
 
-void GuiOverlay::openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles)
+void GuiOverlay::openChoiceForm(const string & choiceFormId, const string & title, const fvec2 & position, const vector<string> & buttonTitles)
 {
 	if(!_choiceFormId.empty())
 	{
@@ -210,7 +210,7 @@ void GuiOverlay::openChoiceForm(const string & id, const string & title, const f
 
 	createButton("choice_form_cancel", (position + CF_CANCEL_OFFSET), CF_CANCEL_SIZE, "", CF_DEFAULT_CANCEL_QUAD_COLOR, CF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", CF_DEFAULT_CANCEL_TEXT_COLOR, CF_HOVERED_CANCEL_TEXT_COLOR, true);
 
-	_choiceFormId = id;
+	_choiceFormId = choiceFormId;
 
 	_isFocused = true;
 }
@@ -323,7 +323,7 @@ void GuiOverlay::_closeAnswerForm()
 	_isFocused = false;
 }
 
-void GuiOverlay::openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position)
+void GuiOverlay::openAnswerForm(const string & answerFormId, const string & title, const string & left, const string & right, const fvec2 & position)
 {
 	if(!_answerFormId.empty())
 	{
@@ -341,7 +341,7 @@ void GuiOverlay::openAnswerForm(const string & id, const string & title, const s
 	createButton("answer_form_cancel", (position + AF_CANCEL_OFFSET), AF_CANCEL_SIZE, "", AF_DEFAULT_CANCEL_QUAD_COLOR, AF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", AF_DEFAULT_CANCEL_TEXT_COLOR, AF_HOVERED_CANCEL_TEXT_COLOR, true);
 	createButton("answer_form_right", (position + fvec2(maxWidth, 0.0f)), fvec2(rightWidth, AF_RIGHT_CHAR_SIZE.y), "", AF_DEFAULT_RIGHT_QUAD_COLOR, AF_HOVERED_RIGHT_QUAD_COLOR, right, AF_DEFAULT_RIGHT_TEXT_COLOR, AF_HOVERED_RIGHT_TEXT_COLOR, true);
 
-	_answerFormId = id;
+	_answerFormId = answerFormId;
 
 	_isFocused = true;
 }

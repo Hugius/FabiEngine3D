@@ -51,11 +51,11 @@ void WorldEditor::_load()
 	_fe3d->captor_create(TEMPLATE_CAPTOR_ID);
 	_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 
-	for(const auto & id : _soundEditor->getLoadedSoundIds())
+	for(const auto & soundId : _soundEditor->getLoadedSoundIds())
 	{
-		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
-		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(id, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d->sound3d_create(soundId, _fe3d->sound2d_getAudioPath(soundId));
+		_fe3d->sound3d_setMaxVolume(soundId, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(soundId, DEFAULT_SOUND_MAX_DISTANCE);
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
@@ -70,24 +70,24 @@ void WorldEditor::_load()
 	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
-	for(const auto & id : _modelEditor->getLoadedEntityIds())
+	for(const auto & modelId : _modelEditor->getLoadedEntityIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
 	}
 
-	for(const auto & id : _quad3dEditor->getLoadedEntityIds())
+	for(const auto & quad3dId : _quad3dEditor->getLoadedEntityIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
 	}
 
-	for(const auto & id : _text3dEditor->getLoadedEntityIds())
+	for(const auto & text3dId : _text3dEditor->getLoadedEntityIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
 	}
 
-	for(const auto & id : _soundEditor->getLoadedSoundIds())
+	for(const auto & soundId : _soundEditor->getLoadedSoundIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("soundList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("soundList")->createOption(soundId, soundId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -121,9 +121,9 @@ void WorldEditor::_unload()
 
 	_fe3d->captor_delete(TEMPLATE_CAPTOR_ID);
 
-	for(const auto & id : soundIds)
+	for(const auto & soundId : soundIds)
 	{
-		_fe3d->sound3d_delete(id);
+		_fe3d->sound3d_delete(soundId);
 	}
 
 	_fe3d->model_delete("@@grid");

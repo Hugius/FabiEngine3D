@@ -27,7 +27,7 @@ public:
 	const float getTerrainIntersectionDistance() const;
 	const float getTerrainIntersectionPrecision() const;
 	const float getDistanceToTerrain() const;
-	const float getDistanceToAabb(const string & id) const;
+	const float getDistanceToAabb(const string & aabbId) const;
 
 	const bool isTerrainIntersectionEnabled() const;
 	const bool isAabbIntersectionEnabled() const;

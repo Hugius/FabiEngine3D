@@ -16,25 +16,25 @@ void SoundEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedSoundIds;
+			auto soundIds = _loadedSoundIds;
 
-			for(auto & id : ids)
+			for(auto & soundId : soundIds)
 			{
-				id = id.substr(1);
+				soundId = soundId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editSound", "Edit Sound", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editSound", "Edit Sound", fvec2(0.0f, 0.1f), soundIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedSoundIds;
+			auto soundIds = _loadedSoundIds;
 
-			for(auto & id : ids)
+			for(auto & soundId : soundIds)
 			{
-				id = id.substr(1);
+				soundId = soundId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteSound", "Delete Sound", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteSound", "Delete Sound", fvec2(0.0f, 0.1f), soundIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -16,11 +16,11 @@ void WorldEditor::_updateWaterMenu()
 		{
 			vector<string> waterIds;
 
-			for(const auto & id : _waterEditor->getLoadedEntityIds())
+			for(const auto & waterId : _waterEditor->getLoadedEntityIds())
 			{
-				if(id[0] == '@')
+				if(waterId[0] == '@')
 				{
-					waterIds.push_back(id.substr(1));
+					waterIds.push_back(waterId.substr(1));
 				}
 			}
 

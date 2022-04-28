@@ -14,9 +14,9 @@ void Quad2dEditor::_load()
 
 void Quad2dEditor::_unload()
 {
-	for(const auto & id : _loadedQuad2dIds)
+	for(const auto & quad2dId : _loadedQuad2dIds)
 	{
-		_fe3d->quad2d_delete(id);
+		_fe3d->quad2d_delete(quad2dId);
 	}
 
 	_fe3d->camera_reset();

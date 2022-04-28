@@ -9,9 +9,9 @@ const vector<string> & SkyEditor::getLoadedEntityIds() const
 
 void SkyEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedSkyIds)
+	for(const auto & skyId : _loadedSkyIds)
 	{
-		_fe3d->sky_delete(id);
+		_fe3d->sky_delete(skyId);
 	}
 
 	_loadedSkyIds.clear();

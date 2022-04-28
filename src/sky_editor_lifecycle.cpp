@@ -18,9 +18,9 @@ void SkyEditor::_load()
 
 void SkyEditor::_unload()
 {
-	for(const auto & id : _loadedSkyIds)
+	for(const auto & skyId : _loadedSkyIds)
 	{
-		_fe3d->sky_delete(id);
+		_fe3d->sky_delete(skyId);
 	}
 
 	_fe3d->graphics_setMotionBlurEnabled(false);

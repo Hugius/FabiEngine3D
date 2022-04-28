@@ -40,16 +40,16 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 		if(lineType == "FE3D_PART")
 		{
-			string id;
+			string partId;
 
-			iss >> id;
+			iss >> partId;
 
-			if(id.empty() || (id == "?"))
+			if(partId.empty() || (partId == "?"))
 			{
 				return nullptr;
 			}
 
-			selectedPartId = id;
+			selectedPartId = partId;
 
 			continue;
 		}

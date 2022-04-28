@@ -87,33 +87,33 @@ void WorldEditor::clearLoadedWorld()
 		_fe3d->text3d_delete(placedId);
 	}
 
-	for(const auto & id : _loadedPointlightIds)
+	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		_fe3d->pointlight_delete(id);
+		_fe3d->pointlight_delete(pointlightId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@lamp_" + id);
+			_fe3d->model_delete("@@lamp_" + pointlightId);
 		}
 	}
 
-	for(const auto & id : _loadedSpotlightIds)
+	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		_fe3d->spotlight_delete(id);
+		_fe3d->spotlight_delete(spotlightId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@torch_" + id);
+			_fe3d->model_delete("@@torch_" + spotlightId);
 		}
 	}
 
-	for(const auto & id : _loadedCaptorIds)
+	for(const auto & captorId : _loadedCaptorIds)
 	{
-		_fe3d->captor_delete(id);
+		_fe3d->captor_delete(captorId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@camera_" + id);
+			_fe3d->model_delete("@@camera_" + captorId);
 		}
 	}
 
@@ -167,11 +167,11 @@ const vector<string> WorldEditor::_getWorldIds() const
 	return worldIds;
 }
 
-void WorldEditor::_deleteWorldFile(const string & id)
+void WorldEditor::_deleteWorldFile(const string & worldId)
 {
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + id + ".fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + worldId + ".fe3d");
 
 	Tools::deleteFile(filePath);
 }

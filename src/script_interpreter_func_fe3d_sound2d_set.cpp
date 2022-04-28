@@ -48,11 +48,11 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string & functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->sound2d_getIds())
+			for(const auto & sound2dId : _fe3d->sound2d_getIds())
 			{
-				if(id[0] != '@')
+				if(sound2dId[0] != '@')
 				{
-					_fe3d->sound2d_delete(id);
+					_fe3d->sound2d_delete(sound2dId);
 				}
 			}
 

@@ -16,25 +16,25 @@ void SkyEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedSkyIds;
+			auto skyIds = _loadedSkyIds;
 
-			for(auto & id : ids)
+			for(auto & skyId : skyIds)
 			{
-				id = id.substr(1);
+				skyId = skyId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editSky", "Edit Sky", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editSky", "Edit Sky", fvec2(-0.5f, 0.1f), skyIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedSkyIds;
+			auto skyIds = _loadedSkyIds;
 
-			for(auto & id : ids)
+			for(auto & skyId : skyIds)
 			{
-				id = id.substr(1);
+				skyId = skyId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteSky", "Delete Sky", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteSky", "Delete Sky", fvec2(-0.5f, 0.1f), skyIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

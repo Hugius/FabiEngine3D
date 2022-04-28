@@ -59,11 +59,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->spotlight_getIds())
+			for(const auto & spotlightId : _fe3d->spotlight_getIds())
 			{
-				if(id[0] != '@')
+				if(spotlightId[0] != '@')
 				{
-					_fe3d->spotlight_delete(id);
+					_fe3d->spotlight_delete(spotlightId);
 				}
 			}
 

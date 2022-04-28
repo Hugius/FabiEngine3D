@@ -6,14 +6,14 @@ using std::max;
 using std::clamp;
 using std::make_unique;
 
-void ModelEntity::createPart(const string & id)
+void ModelEntity::createPart(const string & partId)
 {
-	_parts.insert({id, make_unique<ModelEntityPart>()});
+	_parts.insert({partId, make_unique<ModelEntityPart>()});
 }
 
-void ModelEntity::deletePart(const string & id)
+void ModelEntity::deletePart(const string & partId)
 {
-	_parts.erase(id);
+	_parts.erase(partId);
 }
 
 void ModelEntity::deleteParts()

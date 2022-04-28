@@ -18,25 +18,25 @@ void Animation3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedAnimation3dIds;
+			auto animation3dIds = _loadedAnimation3dIds;
 
-			for(auto & id : ids)
+			for(auto & animation3dId : animation3dIds)
 			{
-				id = id.substr(1);
+				animation3dId = animation3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedAnimation3dIds;
+			auto animation3dIds = _loadedAnimation3dIds;
 
-			for(auto & id : ids)
+			for(auto & animation3dId : animation3dIds)
 			{
-				id = id.substr(1);
+				animation3dId = animation3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -111,9 +111,9 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			auto modelIds = _modelEditor->getLoadedEntityIds();
 
-			for(auto & id : modelIds)
+			for(auto & modelId : modelIds)
 			{
-				id = id.substr(1);
+				modelId = modelId.substr(1);
 			}
 
 			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(-0.5f, 0.1f), modelIds);

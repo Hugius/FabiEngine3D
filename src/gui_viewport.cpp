@@ -34,9 +34,9 @@ void GuiViewport::update(bool isInteractable)
 	}
 }
 
-const bool GuiViewport::hasWindow(const string & id) const
+const bool GuiViewport::hasWindow(const string & windowId) const
 {
-	return (_windows.find(id) != _windows.end());
+	return (_windows.find(windowId) != _windows.end());
 }
 
 const bool GuiViewport::isHovered() const
@@ -90,9 +90,9 @@ const fvec2 & GuiViewport::getSize() const
 	return _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiViewport::createWindow(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color)
+void GuiViewport::createWindow(const string & windowId, const fvec2 & position, const fvec2 & size, const fvec3 & color)
 {
-	if(hasWindow(id))
+	if(hasWindow(windowId))
 	{
 		abort();
 	}
@@ -102,17 +102,17 @@ void GuiViewport::createWindow(const string & id, const fvec2 & position, const 
 	const auto windowPosition = (viewportPosition + (position * viewportSize));
 	const auto windowSize = ((size * 0.5f) * viewportSize);
 
-	_windows.insert({id, make_shared<GuiWindow>(_fe3d, id, _id, windowPosition, windowSize, color)});
+	_windows.insert({windowId, make_shared<GuiWindow>(_fe3d, windowId, _id, windowPosition, windowSize, color)});
 }
 
-void GuiViewport::deleteWindow(const string & id)
+void GuiViewport::deleteWindow(const string & windowId)
 {
-	if(!hasWindow(id))
+	if(!hasWindow(windowId))
 	{
 		abort();
 	}
 
-	_windows.erase(id);
+	_windows.erase(windowId);
 }
 
 void GuiViewport::deleteWindows()
@@ -125,9 +125,9 @@ const unordered_map<string, shared_ptr<GuiWindow>> & GuiViewport::getWindows() c
 	return _windows;
 }
 
-const shared_ptr<GuiWindow> GuiViewport::getWindow(const string & id) const
+const shared_ptr<GuiWindow> GuiViewport::getWindow(const string & windowId) const
 {
-	auto iterator = _windows.find(id);
+	auto iterator = _windows.find(windowId);
 
 	if(iterator == _windows.end())
 	{

@@ -99,9 +99,9 @@ void WorldEditor::_updateModelEditing()
 				{
 					auto animation3dIds = _animation3dEditor->getLoadedAnimationIds();
 
-					for(auto & id : animation3dIds)
+					for(auto & animation3dId : animation3dIds)
 					{
-						id = id.substr(1);
+						animation3dId = animation3dId.substr(1);
 					}
 
 					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation", fvec2(0.0f, 0.1f), animation3dIds);

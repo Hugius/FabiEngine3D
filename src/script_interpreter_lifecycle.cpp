@@ -209,90 +209,90 @@ void ScriptInterpreter::unload()
 	_animation3dEditor->deleteLoadedAnimations();
 	_soundEditor->deleteLoadedSounds();
 
-	for(const auto & id : _fe3d->sky_getIds())
+	for(const auto & skyId : _fe3d->sky_getIds())
 	{
-		_fe3d->sky_delete(id);
+		_fe3d->sky_delete(skyId);
 	}
 
-	for(const auto & id : _fe3d->terrain_getIds())
+	for(const auto & terrainId : _fe3d->terrain_getIds())
 	{
-		_fe3d->terrain_delete(id);
+		_fe3d->terrain_delete(terrainId);
 	}
 
-	for(const auto & id : _fe3d->water_getIds())
+	for(const auto & waterId : _fe3d->water_getIds())
 	{
-		_fe3d->water_delete(id);
+		_fe3d->water_delete(waterId);
 	}
 
-	for(const auto & id : _fe3d->model_getIds())
+	for(const auto & modelId : _fe3d->model_getIds())
 	{
-		_fe3d->model_delete(id);
+		_fe3d->model_delete(modelId);
 	}
 
-	for(const auto & id : _fe3d->quad3d_getIds())
+	for(const auto & quad3dId : _fe3d->quad3d_getIds())
 	{
-		_fe3d->quad3d_delete(id);
+		_fe3d->quad3d_delete(quad3dId);
 	}
 
-	for(const auto & id : _fe3d->quad2d_getIds())
+	for(const auto & quad2dId : _fe3d->quad2d_getIds())
 	{
-		if(id[0] != '@')
+		if(quad2dId[0] != '@')
 		{
-			_fe3d->quad2d_delete(id);
+			_fe3d->quad2d_delete(quad2dId);
 		}
 	}
 
-	for(const auto & id : _fe3d->text3d_getIds())
+	for(const auto & text3dId : _fe3d->text3d_getIds())
 	{
-		_fe3d->text3d_delete(id);
+		_fe3d->text3d_delete(text3dId);
 	}
 
-	for(const auto & id : _fe3d->text2d_getIds())
+	for(const auto & text2dId : _fe3d->text2d_getIds())
 	{
-		if(id[0] != '@')
+		if(text2dId[0] != '@')
 		{
-			_fe3d->text2d_delete(id);
+			_fe3d->text2d_delete(text2dId);
 		}
 	}
 
-	for(const auto & id : _fe3d->aabb_getIds())
+	for(const auto & aabbId : _fe3d->aabb_getIds())
 	{
-		_fe3d->aabb_delete(id);
+		_fe3d->aabb_delete(aabbId);
 	}
 
-	for(const auto & id : _fe3d->pointlight_getIds())
+	for(const auto & pointlightId : _fe3d->pointlight_getIds())
 	{
-		_fe3d->pointlight_delete(id);
+		_fe3d->pointlight_delete(pointlightId);
 	}
 
-	for(const auto & id : _fe3d->spotlight_getIds())
+	for(const auto & spotlightId : _fe3d->spotlight_getIds())
 	{
-		_fe3d->spotlight_delete(id);
+		_fe3d->spotlight_delete(spotlightId);
 	}
 
-	for(const auto & id : _fe3d->captor_getIds())
+	for(const auto & captorId : _fe3d->captor_getIds())
 	{
-		_fe3d->captor_delete(id);
+		_fe3d->captor_delete(captorId);
 	}
 
-	for(const auto & id : _fe3d->animation3d_getIds())
+	for(const auto & animation3dId : _fe3d->animation3d_getIds())
 	{
-		_fe3d->animation3d_delete(id);
+		_fe3d->animation3d_delete(animation3dId);
 	}
 
-	for(const auto & id : _fe3d->animation2d_getIds())
+	for(const auto & animation2dId : _fe3d->animation2d_getIds())
 	{
-		_fe3d->animation2d_delete(id);
+		_fe3d->animation2d_delete(animation2dId);
 	}
 
-	for(const auto & id : _fe3d->sound3d_getIds())
+	for(const auto & sound3dId : _fe3d->sound3d_getIds())
 	{
-		_fe3d->sound3d_delete(id);
+		_fe3d->sound3d_delete(sound3dId);
 	}
 
-	for(const auto & id : _fe3d->sound2d_getIds())
+	for(const auto & sound2dId : _fe3d->sound2d_getIds())
 	{
-		_fe3d->sound2d_delete(id);
+		_fe3d->sound2d_delete(sound2dId);
 	}
 
 	for(const auto & clockId : _fe3d->clock_getIds())

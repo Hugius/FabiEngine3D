@@ -9,8 +9,8 @@ const vector<string> & SoundEditor::getLoadedSoundIds() const
 
 void SoundEditor::deleteLoadedSounds()
 {
-	for(const auto & id : _loadedSoundIds)
+	for(const auto & soundId : _loadedSoundIds)
 	{
-		_fe3d->sound2d_delete(id);
+		_fe3d->sound2d_delete(soundId);
 	}
 }

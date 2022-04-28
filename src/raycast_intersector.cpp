@@ -149,9 +149,9 @@ const float RaycastIntersector::getDistanceToTerrain() const
 	return _distanceToTerrain;
 }
 
-const float RaycastIntersector::getDistanceToAabb(const string & id) const
+const float RaycastIntersector::getDistanceToAabb(const string & aabbId) const
 {
-	return _aabbIntersections.at(id);
+	return _aabbIntersections.at(aabbId);
 }
 
 const fvec3 & RaycastIntersector::getPointOnTerrain() const

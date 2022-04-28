@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-void Sound2dPlayer::startSound(const string & id, int playCount)
+void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
@@ -16,7 +16,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 
 	const auto newSound = make_shared<StartedSound2D>();
 
-	const auto waveBuffer = _sound2dManager->getSound(id)->getWaveBuffer();
+	const auto waveBuffer = _sound2dManager->getSound(sound2dId)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
 
@@ -123,32 +123,32 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 	newSound->setHandle(handle);
 	newSound->setPlayCount(playCount);
 
-	if(_startedSounds.find(id) == _startedSounds.end())
+	if(_startedSounds.find(sound2dId) == _startedSounds.end())
 	{
-		_startedSounds.insert({id, {}});
+		_startedSounds.insert({sound2dId, {}});
 	}
 
-	_startedSounds.at(id).push_back(newSound);
+	_startedSounds.at(sound2dId).push_back(newSound);
 }
 
-void Sound2dPlayer::pauseSound(const string & id, int index)
+void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
-	if(isSoundPaused(id, index))
+	if(isSoundPaused(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setPaused(true);
+	_startedSounds.at(sound2dId)[index]->setPaused(true);
 
-	const auto pauseResult = waveOutPause(_startedSounds.at(id)[index]->getHandle());
+	const auto pauseResult = waveOutPause(_startedSounds.at(sound2dId)[index]->getHandle());
 
 	if(pauseResult != MMSYSERR_NOERROR)
 	{
@@ -167,24 +167,24 @@ void Sound2dPlayer::pauseSound(const string & id, int index)
 	}
 }
 
-void Sound2dPlayer::resumeSound(const string & id, int index)
+void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
-	if(!isSoundPaused(id, index))
+	if(!isSoundPaused(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setPaused(false);
+	_startedSounds.at(sound2dId)[index]->setPaused(false);
 
-	const auto restartResult = waveOutRestart(_startedSounds.at(id)[index]->getHandle());
+	const auto restartResult = waveOutRestart(_startedSounds.at(sound2dId)[index]->getHandle());
 
 	if(restartResult != MMSYSERR_NOERROR)
 	{
@@ -203,18 +203,18 @@ void Sound2dPlayer::resumeSound(const string & id, int index)
 	}
 }
 
-void Sound2dPlayer::stopSound(const string & id, int index)
+void Sound2dPlayer::stopSound(const string & sound2dId, int index)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	const auto resetResult = waveOutReset(_startedSounds.at(id)[index]->getHandle());
+	const auto resetResult = waveOutReset(_startedSounds.at(sound2dId)[index]->getHandle());
 	if(resetResult != MMSYSERR_NOERROR)
 	{
 		if(resetResult == MMSYSERR_NODRIVER)
@@ -231,7 +231,7 @@ void Sound2dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound2dId)[index]->getHandle(), _startedSounds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		if(unprepareResult == MMSYSERR_NODRIVER)
@@ -248,7 +248,7 @@ void Sound2dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+	const auto closeResult = waveOutClose(_startedSounds.at(sound2dId)[index]->getHandle());
 	if(closeResult != MMSYSERR_NOERROR)
 	{
 		if(closeResult == MMSYSERR_NODRIVER)
@@ -265,47 +265,47 @@ void Sound2dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	_terminateSound(id, index);
+	_terminateSound(sound2dId, index);
 }
 
-void Sound2dPlayer::setSoundVolume(const string & id, int index, float value)
+void Sound2dPlayer::setSoundVolume(const string & sound2dId, int index, float value)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setVolume(value);
+	_startedSounds.at(sound2dId)[index]->setVolume(value);
 }
 
-void Sound2dPlayer::setSoundLeftIntensity(const string & id, int index, float value)
+void Sound2dPlayer::setSoundLeftIntensity(const string & sound2dId, int index, float value)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setLeftIntensity(value);
+	_startedSounds.at(sound2dId)[index]->setLeftIntensity(value);
 }
 
-void Sound2dPlayer::setSoundRightIntensity(const string & id, int index, float value)
+void Sound2dPlayer::setSoundRightIntensity(const string & sound2dId, int index, float value)
 {
-	if(!_sound2dManager->isSoundExisting(id))
+	if(!_sound2dManager->isSoundExisting(sound2dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setRightIntensity(value);
+	_startedSounds.at(sound2dId)[index]->setRightIntensity(value);
 }

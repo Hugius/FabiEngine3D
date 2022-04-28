@@ -1,32 +1,32 @@
 #include "script.hpp"
 
-void Script::createScriptFile(const string & id)
+void Script::createScriptFile(const string & scriptId)
 {
-	if(isScriptFileExisting(id))
+	if(isScriptFileExisting(scriptId))
 	{
 		abort();
 	}
 
-	_scriptFiles.insert({id, make_shared<ScriptFile>(id)});
+	_scriptFiles.insert({scriptId, make_shared<ScriptFile>(scriptId)});
 }
 
-void Script::renameScriptFile(const string & id, const string & newId)
+void Script::renameScriptFile(const string & scriptId, const string & newScriptId)
 {
-	if(!isScriptFileExisting(id))
+	if(!isScriptFileExisting(scriptId))
 	{
 		abort();
 	}
 
-	const auto cursorLineIndex = getScriptFile(id)->getCursorLineIndex();
-	const auto cursorCharacterIndex = getScriptFile(id)->getCursorCharacterIndex();
-	const auto lines = getScriptFile(id)->getLines();
+	const auto cursorLineIndex = getScriptFile(scriptId)->getCursorLineIndex();
+	const auto cursorCharacterIndex = getScriptFile(scriptId)->getCursorCharacterIndex();
+	const auto lines = getScriptFile(scriptId)->getLines();
 
-	deleteScriptFile(id);
-	createScriptFile(newId);
+	deleteScriptFile(scriptId);
+	createScriptFile(newScriptId);
 
-	getScriptFile(newId)->setCursorLineIndex(cursorLineIndex);
-	getScriptFile(newId)->setCursorCharacterIndex(cursorCharacterIndex);
-	getScriptFile(newId)->setLines(lines);
+	getScriptFile(newScriptId)->setCursorLineIndex(cursorLineIndex);
+	getScriptFile(newScriptId)->setCursorCharacterIndex(cursorCharacterIndex);
+	getScriptFile(newScriptId)->setLines(lines);
 }
 
 void Script::deleteScriptFile(const string & id)
@@ -61,9 +61,9 @@ const int Script::getTotalLineCount() const
 	return total;
 }
 
-const bool Script::isScriptFileExisting(const string & id) const
+const bool Script::isScriptFileExisting(const string & scriptId) const
 {
-	return (_scriptFiles.find(id) != _scriptFiles.end());
+	return (_scriptFiles.find(scriptId) != _scriptFiles.end());
 }
 
 const bool Script::isEmpty()
@@ -71,14 +71,14 @@ const bool Script::isEmpty()
 	return (getScriptFileCount() == 0);
 }
 
-const shared_ptr<ScriptFile> Script::getScriptFile(const string & id) const
+const shared_ptr<ScriptFile> Script::getScriptFile(const string & scriptId) const
 {
-	if(!isScriptFileExisting(id))
+	if(!isScriptFileExisting(scriptId))
 	{
 		abort();
 	}
 
-	return _scriptFiles.at(id);
+	return _scriptFiles.at(scriptId);
 }
 
 const vector<string> Script::getScriptFileIds() const

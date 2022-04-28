@@ -16,11 +16,11 @@ void WorldEditor::_updateSkyMenu()
 		{
 			vector<string> skyIds;
 
-			for(const auto & id : _skyEditor->getLoadedEntityIds())
+			for(const auto & skyId : _skyEditor->getLoadedEntityIds())
 			{
-				if(id[0] == '@')
+				if(skyId[0] == '@')
 				{
-					skyIds.push_back(id.substr(1));
+					skyIds.push_back(skyId.substr(1));
 				}
 			}
 

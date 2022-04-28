@@ -18,25 +18,25 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedAnimation2dIds;
+			auto animation2dIds = _loadedAnimation2dIds;
 
-			for(auto & id : ids)
+			for(auto & animation2dId : animation2dIds)
 			{
-				id = id.substr(1);
+				animation2dId = animation2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editAnimation2d", "Edit Animation2D", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editAnimation2d", "Edit Animation2D", fvec2(0.0f, 0.1f), animation2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedAnimation2dIds;
+			auto animation2dIds = _loadedAnimation2dIds;
 
-			for(auto & id : ids)
+			for(auto & animation2dId : animation2dIds)
 			{
-				id = id.substr(1);
+				animation2dId = animation2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteAnimation2d", "Delete Animation2D", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation2d", "Delete Animation2D", fvec2(0.0f, 0.1f), animation2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -42,9 +42,9 @@ void TerrainEditor::_load()
 
 void TerrainEditor::_unload()
 {
-	for(const auto & id : _loadedTerrainIds)
+	for(const auto & terrainId : _loadedTerrainIds)
 	{
-		_fe3d->terrain_delete(id);
+		_fe3d->terrain_delete(terrainId);
 	}
 
 	_fe3d->model_delete("@@box");

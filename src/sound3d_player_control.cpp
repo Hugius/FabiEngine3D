@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-void Sound3dPlayer::startSound(const string & id, int playCount)
+void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 {
-	if(!_sound3dManager->isSoundExisting(id))
+	if(!_sound3dManager->isSoundExisting(sound3dId))
 	{
 		abort();
 	}
@@ -16,7 +16,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 
 	const auto newSound = make_shared<StartedSound3D>();
 
-	const auto waveBuffer = _sound3dManager->getSound(id)->getWaveBuffer();
+	const auto waveBuffer = _sound3dManager->getSound(sound3dId)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
 
@@ -123,32 +123,32 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 	newSound->setHandle(handle);
 	newSound->setPlayCount(playCount);
 
-	if(_startedSounds.find(id) == _startedSounds.end())
+	if(_startedSounds.find(sound3dId) == _startedSounds.end())
 	{
-		_startedSounds.insert({id, {}});
+		_startedSounds.insert({sound3dId, {}});
 	}
 
-	_startedSounds.at(id).push_back(newSound);
+	_startedSounds.at(sound3dId).push_back(newSound);
 }
 
-void Sound3dPlayer::pauseSound(const string & id, int index)
+void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(id))
+	if(!_sound3dManager->isSoundExisting(sound3dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound3dId, index))
 	{
 		abort();
 	}
-	if(isSoundPaused(id, index))
+	if(isSoundPaused(sound3dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setPaused(true);
+	_startedSounds.at(sound3dId)[index]->setPaused(true);
 
-	const auto pauseResult = waveOutPause(_startedSounds.at(id)[index]->getHandle());
+	const auto pauseResult = waveOutPause(_startedSounds.at(sound3dId)[index]->getHandle());
 
 	if(pauseResult != MMSYSERR_NOERROR)
 	{
@@ -167,24 +167,24 @@ void Sound3dPlayer::pauseSound(const string & id, int index)
 	}
 }
 
-void Sound3dPlayer::resumeSound(const string & id, int index)
+void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(id))
+	if(!_sound3dManager->isSoundExisting(sound3dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound3dId, index))
 	{
 		abort();
 	}
-	if(!isSoundPaused(id, index))
+	if(!isSoundPaused(sound3dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(id)[index]->setPaused(false);
+	_startedSounds.at(sound3dId)[index]->setPaused(false);
 
-	const auto restartResult = waveOutRestart(_startedSounds.at(id)[index]->getHandle());
+	const auto restartResult = waveOutRestart(_startedSounds.at(sound3dId)[index]->getHandle());
 
 	if(restartResult != MMSYSERR_NOERROR)
 	{
@@ -203,18 +203,18 @@ void Sound3dPlayer::resumeSound(const string & id, int index)
 	}
 }
 
-void Sound3dPlayer::stopSound(const string & id, int index)
+void Sound3dPlayer::stopSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(id))
+	if(!_sound3dManager->isSoundExisting(sound3dId))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id, index))
+	if(!isSoundStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	const auto resetResult = waveOutReset(_startedSounds.at(id)[index]->getHandle());
+	const auto resetResult = waveOutReset(_startedSounds.at(sound3dId)[index]->getHandle());
 	if(resetResult != MMSYSERR_NOERROR)
 	{
 		if(resetResult == MMSYSERR_NODRIVER)
@@ -231,7 +231,7 @@ void Sound3dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound3dId)[index]->getHandle(), _startedSounds.at(sound3dId)[index]->getHeader(), sizeof(WAVEHDR));
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		if(unprepareResult == MMSYSERR_NODRIVER)
@@ -248,7 +248,7 @@ void Sound3dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+	const auto closeResult = waveOutClose(_startedSounds.at(sound3dId)[index]->getHandle());
 	if(closeResult != MMSYSERR_NOERROR)
 	{
 		if(closeResult == MMSYSERR_NODRIVER)
@@ -265,5 +265,5 @@ void Sound3dPlayer::stopSound(const string & id, int index)
 		}
 	}
 
-	_terminateSound(id, index);
+	_terminateSound(sound3dId, index);
 }

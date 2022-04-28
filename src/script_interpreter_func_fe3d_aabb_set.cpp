@@ -54,13 +54,13 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->aabb_getIds())
+			for(const auto & aabbId : _fe3d->aabb_getIds())
 			{
-				if(id[0] != '@')
+				if(aabbId[0] != '@')
 				{
 					if(_fe3d->aabb_getParentId(args[0]->getString()).empty())
 					{
-						_fe3d->aabb_delete(id);
+						_fe3d->aabb_delete(aabbId);
 					}
 				}
 			}

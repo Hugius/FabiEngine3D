@@ -27,9 +27,9 @@ void SoundEditor::_load()
 
 void SoundEditor::_unload()
 {
-	for(const auto & id : _loadedSoundIds)
+	for(const auto & soundId : _loadedSoundIds)
 	{
-		_fe3d->sound2d_delete(id);
+		_fe3d->sound2d_delete(soundId);
 	}
 
 	_fe3d->quad3d_delete("@@status");

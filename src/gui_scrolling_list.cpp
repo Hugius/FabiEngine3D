@@ -37,23 +37,23 @@ void GuiScrollingList::update(bool isInteractable)
 	}
 }
 
-void GuiScrollingList::createOption(const string & id, const string & textContent)
+void GuiScrollingList::createOption(const string & optionId, const string & textContent)
 {
-	if(hasOption(id))
+	if(hasOption(optionId))
 	{
 		abort();
 	}
 
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, (_parentId + "_" + _id), fvec2(0.0f), fvec2(0.0f), "", _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, optionId, (_parentId + "_" + _id), fvec2(0.0f), fvec2(0.0f), "", _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
 
 	_buttons.back()->setVisible(isVisible());
 }
 
-void GuiScrollingList::deleteOption(const string & id)
+void GuiScrollingList::deleteOption(const string & optionId)
 {
 	for(int index = 0; index < static_cast<int>(_buttons.size()); index++)
 	{
-		if(id == _buttons[index]->getId())
+		if(optionId == _buttons[index]->getId())
 		{
 			_buttons.erase(_buttons.begin() + index);
 
@@ -284,11 +284,11 @@ const fvec2 GuiScrollingList::_convertSize(const fvec2 & size) const
 	return buttonSize;
 }
 
-const bool GuiScrollingList::hasOption(const string & id) const
+const bool GuiScrollingList::hasOption(const string & optionId) const
 {
 	for(const auto & button : _buttons)
 	{
-		if(id == button->getId())
+		if(optionId == button->getId())
 		{
 			return true;
 		}

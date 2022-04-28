@@ -15,24 +15,24 @@ using std::vector;
 class Timer final
 {
 public:
-	void createClock(const string & id);
-	void startClock(const string & id);
-	void pauseClock(const string & id);
-	void resumeClock(const string & id);
-	void stopClock(const string & id);
-	void deleteClock(const string & id);
+	void createClock(const string & clockId);
+	void startClock(const string & clockId);
+	void pauseClock(const string & clockId);
+	void resumeClock(const string & clockId);
+	void stopClock(const string & clockId);
+	void deleteClock(const string & clockId);
 	void increasePassedUpdateCount();
 
 	const vector<string> getClockIds() const;
 
-	const float getClockDeltaTime(const string & id) const;
+	const float getClockDeltaTime(const string & clockId) const;
 
 	const int getUpdateCountPerSecond() const;
 	const int getPassedUpdateCount() const;
 
-	const bool isClockExisting(const string & id) const;
-	const bool isClockStarted(const string & id) const;
-	const bool isClockPaused(const string & id) const;
+	const bool isClockExisting(const string & clockId) const;
+	const bool isClockStarted(const string & clockId) const;
+	const bool isClockPaused(const string & clockId) const;
 
 private:
 	static inline constexpr int UPDATES_PER_SECOND = 144;

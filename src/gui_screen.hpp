@@ -14,16 +14,16 @@ public:
 
 	void update(bool isInteractable);
 	void setVisible(bool value);
-	void createScrollingList(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
-	void createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
-	void createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
-	void createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered);
-	void createTextField(const string & id, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered);
-	void deleteScrollingList(const string & id);
-	void deleteInputBox(const string & id);
-	void deleteButton(const string & id);
-	void deleteQuadField(const string & id);
-	void deleteTextField(const string & id);
+	void createScrollingList(const string & scrollingListId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
+	void createInputBox(const string & inputBoxId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
+	void createButton(const string & buttonId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
+	void createQuadField(const string & quadFieldId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered);
+	void createTextField(const string & textFieldId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered);
+	void deleteScrollingList(const string & scrollingListId);
+	void deleteInputBox(const string & inputBoxId);
+	void deleteButton(const string & buttonId);
+	void deleteQuadField(const string & quadFieldId);
+	void deleteTextField(const string & textFieldId);
 	void deleteScrollingLists();
 	void deleteInputBoxes();
 	void deleteButtons();
@@ -36,20 +36,20 @@ public:
 	const unordered_map<string, shared_ptr<GuiQuadField>> & getQuadFields() const;
 	const unordered_map<string, shared_ptr<GuiTextField>> & getTextFields() const;
 
-	const shared_ptr<GuiScrollingList> getScrollingList(const string & id) const;
-	const shared_ptr<GuiInputBox> getInputBox(const string & id) const;
-	const shared_ptr<GuiButton> getButton(const string & id) const;
-	const shared_ptr<GuiQuadField> getQuadField(const string & id) const;
-	const shared_ptr<GuiTextField> getTextField(const string & id) const;
+	const shared_ptr<GuiScrollingList> getScrollingList(const string & scrollingListId) const;
+	const shared_ptr<GuiInputBox> getInputBox(const string & inputBoxId) const;
+	const shared_ptr<GuiButton> getButton(const string & buttonId) const;
+	const shared_ptr<GuiQuadField> getQuadField(const string & quadFieldId) const;
+	const shared_ptr<GuiTextField> getTextField(const string & textFieldId) const;
 
 	const string & getId() const;
 	const string & getParentId() const;
 
-	const bool hasScrollingList(const string & id) const;
-	const bool hasInputBox(const string & id) const;
-	const bool hasButton(const string & id) const;
-	const bool hasQuadField(const string & id) const;
-	const bool hasTextField(const string & id) const;
+	const bool hasScrollingList(const string & scrollingListId) const;
+	const bool hasInputBox(const string & inputBoxId) const;
+	const bool hasButton(const string & buttonId) const;
+	const bool hasQuadField(const string & quadFieldId) const;
+	const bool hasTextField(const string & textFieldId) const;
 
 private:
 	const fvec2 _convertPosition(const fvec2 & position) const;

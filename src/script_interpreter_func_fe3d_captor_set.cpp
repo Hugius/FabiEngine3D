@@ -46,11 +46,11 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->captor_getIds())
+			for(const auto & captorId : _fe3d->captor_getIds())
 			{
-				if(id[0] != '@')
+				if(captorId[0] != '@')
 				{
-					_fe3d->captor_delete(id);
+					_fe3d->captor_delete(captorId);
 				}
 			}
 

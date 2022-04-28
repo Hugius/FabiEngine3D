@@ -21,29 +21,29 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _fe3d->model_getChildAabbIds(_currentModelId);
+			auto modelIds = _fe3d->model_getChildAabbIds(_currentModelId);
 
-			for(auto & id : ids)
+			for(auto & modelId : modelIds)
 			{
-				id = id.substr((_currentModelId + "@").size());
+				modelId = modelId.substr((_currentModelId + "@").size());
 			}
 
-			sort(ids.begin(), ids.end());
+			sort(modelIds.begin(), modelIds.end());
 
-			_gui->getOverlay()->openChoiceForm("editAabb", "Edit AABB", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editAabb", "Edit AABB", fvec2(-0.5f, 0.1f), modelIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _fe3d->model_getChildAabbIds(_currentModelId);
+			auto modelIds = _fe3d->model_getChildAabbIds(_currentModelId);
 
-			for(auto & id : ids)
+			for(auto & modelId : modelIds)
 			{
-				id = id.substr((_currentModelId + "@").size());
+				modelId = modelId.substr((_currentModelId + "@").size());
 			}
 
-			sort(ids.begin(), ids.end());
+			sort(modelIds.begin(), modelIds.end());
 
-			_gui->getOverlay()->openChoiceForm("deleteAabb", "Delete AABB", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteAabb", "Delete AABB", fvec2(-0.5f, 0.1f), modelIds);
 		}
 	}
 }

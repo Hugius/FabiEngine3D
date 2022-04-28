@@ -10,13 +10,13 @@ public:
 	~GuiViewport();
 
 	void update(bool isInteractable);
-	void createWindow(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color);
-	void deleteWindow(const string & id);
+	void createWindow(const string & windowId, const fvec2 & position, const fvec2 & size, const fvec3 & color);
+	void deleteWindow(const string & windowId);
 	void deleteWindows();
 
 	const unordered_map<string, shared_ptr<GuiWindow>> & getWindows() const;
 
-	const shared_ptr<GuiWindow> getWindow(const string & id) const;
+	const shared_ptr<GuiWindow> getWindow(const string & windowId) const;
 
 	const string & getId();
 
@@ -25,7 +25,7 @@ public:
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
 
-	const bool hasWindow(const string & id) const;
+	const bool hasWindow(const string & windowId) const;
 	const bool isHovered() const;
 
 private:

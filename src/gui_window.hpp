@@ -10,14 +10,14 @@ public:
 	~GuiWindow();
 
 	void update(bool isInteractable);
-	void createScreen(const string & id);
-	void deleteScreen(const string & id);
+	void createScreen(const string & screenId);
+	void deleteScreen(const string & screenId);
 	void deleteScreens();
-	void setActiveScreen(const string & id);
+	void setActiveScreen(const string & screenId);
 
 	const unordered_map<string, shared_ptr<GuiScreen>> & getScreens() const;
 
-	const shared_ptr<GuiScreen> getScreen(const string & id) const;
+	const shared_ptr<GuiScreen> getScreen(const string & screenId) const;
 	const shared_ptr<GuiScreen> getActiveScreen() const;
 
 	const string & getId() const;
@@ -28,7 +28,7 @@ public:
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
 
-	const bool hasScreen(const string & id) const;
+	const bool hasScreen(const string & screenId) const;
 	const bool isHovered() const;
 
 private:

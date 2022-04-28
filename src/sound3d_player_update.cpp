@@ -67,9 +67,9 @@ void Sound3dPlayer::update()
 		}
 	}
 
-	for(const auto & [id, index] : soundsToStop)
+	for(const auto & [sound3dId, index] : soundsToStop)
 	{
-		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
+		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound3dId)[index]->getHandle(), _startedSounds.at(sound3dId)[index]->getHeader(), sizeof(WAVEHDR));
 		if(unprepareResult != MMSYSERR_NOERROR)
 		{
 			if(unprepareResult == MMSYSERR_NODRIVER)
@@ -86,7 +86,7 @@ void Sound3dPlayer::update()
 			}
 		}
 
-		const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+		const auto closeResult = waveOutClose(_startedSounds.at(sound3dId)[index]->getHandle());
 		if(closeResult != MMSYSERR_NOERROR)
 		{
 			if(closeResult == MMSYSERR_NODRIVER)
@@ -103,7 +103,7 @@ void Sound3dPlayer::update()
 			}
 		}
 
-		_terminateSound(id, index);
+		_terminateSound(sound3dId, index);
 	}
 
 	if(_volumeThreadQueue.empty())

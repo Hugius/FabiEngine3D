@@ -23,26 +23,26 @@ public:
 	void inject(shared_ptr<Sound3dManager> sound3dManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void startSound(const string & id, int playCount);
-	void pauseSound(const string & id, int index);
-	void resumeSound(const string & id, int index);
-	void stopSound(const string & id, int index);
+	void startSound(const string & sound3dId, int playCount);
+	void pauseSound(const string & sound3dId, int index);
+	void resumeSound(const string & sound3dId, int index);
+	void stopSound(const string & sound3dId, int index);
 
-	const float getSoundVolume(const string & id, int index) const;
-	const float getSoundLeftIntensity(const string & id, int index) const;
-	const float getSoundRightIntensity(const string & id, int index) const;
+	const float getSoundVolume(const string & sound3dId, int index) const;
+	const float getSoundLeftIntensity(const string & sound3dId, int index) const;
+	const float getSoundRightIntensity(const string & sound3dId, int index) const;
 
-	const int getStartedSoundCount(const string & id) const;
-	const int getSoundTime(const string & id, int index) const;
+	const int getStartedSoundCount(const string & sound3dId) const;
+	const int getSoundTime(const string & sound3dId, int index) const;
 
-	const int getPlayCount(const string & id, int index) const;
+	const int getPlayCount(const string & sound3dId, int index) const;
 
-	const bool isSoundStarted(const string & id, int index) const;
-	const bool isSoundPaused(const string & id, int index) const;
+	const bool isSoundStarted(const string & sound3dId, int index) const;
+	const bool isSoundPaused(const string & sound3dId, int index) const;
 	const bool isDeviceConnected() const;
 
 private:
-	void _terminateSound(const string & id, int index);
+	void _terminateSound(const string & sound3dId, int index);
 	void _terminateSounds();
 	void _updateSamplesVolume(int sampleCount, short * originalSamples, short * currentSamples, float volume, float leftIntensity, float rightIntensity);
 

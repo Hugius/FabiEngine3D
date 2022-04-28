@@ -16,25 +16,25 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedModelIds;
+			auto modelIds = _loadedModelIds;
 
-			for(auto & id : ids)
+			for(auto & modelId : modelIds)
 			{
-				id = id.substr(1);
+				modelId = modelId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editModel", "Edit Model", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editModel", "Edit Model", fvec2(-0.5f, 0.1f), modelIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedModelIds;
+			auto modelIds = _loadedModelIds;
 
-			for(auto & id : ids)
+			for(auto & modelId : modelIds)
 			{
-				id = id.substr(1);
+				modelId = modelId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteModel", "Delete Model", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteModel", "Delete Model", fvec2(-0.5f, 0.1f), modelIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

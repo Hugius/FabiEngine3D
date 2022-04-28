@@ -62,11 +62,11 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto & id : _fe3d->water_getIds())
+			for(const auto & waterId : _fe3d->water_getIds())
 			{
-				if(id[0] != '@')
+				if(waterId[0] != '@')
 				{
-					_fe3d->water_delete(id);
+					_fe3d->water_delete(waterId);
 				}
 			}
 

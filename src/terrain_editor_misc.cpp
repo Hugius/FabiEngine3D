@@ -9,9 +9,9 @@ const vector<string> & TerrainEditor::getLoadedEntityIds() const
 
 void TerrainEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedTerrainIds)
+	for(const auto & terrainId : _loadedTerrainIds)
 	{
-		_fe3d->terrain_delete(id);
+		_fe3d->terrain_delete(terrainId);
 	}
 
 	_loadedTerrainIds.clear();

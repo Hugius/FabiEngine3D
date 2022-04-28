@@ -9,9 +9,9 @@ const vector<string> & ModelEditor::getLoadedEntityIds() const
 
 void ModelEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedModelIds)
+	for(const auto & modelId : _loadedModelIds)
 	{
-		_fe3d->model_delete(id);
+		_fe3d->model_delete(modelId);
 	}
 
 	_loadedModelIds.clear();

@@ -49,9 +49,9 @@ void Text3dEditor::_load()
 
 void Text3dEditor::_unload()
 {
-	for(const auto & id : _loadedText3dIds)
+	for(const auto & text3dId : _loadedText3dIds)
 	{
-		_fe3d->text3d_delete(id);
+		_fe3d->text3d_delete(text3dId);
 	}
 
 	_fe3d->model_delete("@@box");

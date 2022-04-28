@@ -57,9 +57,9 @@ void Animation3dEditor::_unload()
 {
 	_modelEditor->deleteLoadedEntities();
 
-	for(const auto & id : _loadedAnimation3dIds)
+	for(const auto & animation3dId : _loadedAnimation3dIds)
 	{
-		_fe3d->animation3d_delete(id);
+		_fe3d->animation3d_delete(animation3dId);
 	}
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);

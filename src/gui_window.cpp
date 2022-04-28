@@ -37,9 +37,9 @@ void GuiWindow::update(bool isInteractable)
 	}
 }
 
-const bool GuiWindow::hasScreen(const string & id) const
+const bool GuiWindow::hasScreen(const string & screenId) const
 {
-	return (_screens.find(id) != _screens.end());
+	return (_screens.find(screenId) != _screens.end());
 }
 
 const bool GuiWindow::isHovered() const
@@ -98,26 +98,26 @@ const fvec2 & GuiWindow::getSize() const
 	return _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiWindow::createScreen(const string & id)
+void GuiWindow::createScreen(const string & screenId)
 {
-	if(hasScreen(id))
+	if(hasScreen(screenId))
 	{
 		abort();
 	}
 
-	_screens.insert({id, make_shared<GuiScreen>(_fe3d, id, (_parentId + "_" + _id), getPosition(), getSize())});
+	_screens.insert({screenId, make_shared<GuiScreen>(_fe3d, screenId, (_parentId + "_" + _id), getPosition(), getSize())});
 }
 
-void GuiWindow::deleteScreen(const string & id)
+void GuiWindow::deleteScreen(const string & screenId)
 {
-	if(!hasScreen(id))
+	if(!hasScreen(screenId))
 	{
 		abort();
 	}
 
-	_screens.erase(id);
+	_screens.erase(screenId);
 
-	if(id == _activeScreenId)
+	if(screenId == _activeScreenId)
 	{
 		_activeScreenId = "";
 	}
@@ -128,14 +128,14 @@ void GuiWindow::deleteScreens()
 	_screens.clear();
 }
 
-void GuiWindow::setActiveScreen(const string & id)
+void GuiWindow::setActiveScreen(const string & screenId)
 {
-	if(!hasScreen(id))
+	if(!hasScreen(screenId))
 	{
 		abort();
 	}
 
-	_activeScreenId = id;
+	_activeScreenId = screenId;
 }
 
 const unordered_map<string, shared_ptr<GuiScreen>> & GuiWindow::getScreens() const
@@ -148,9 +148,9 @@ const shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 	return getScreen(_activeScreenId);
 }
 
-const shared_ptr<GuiScreen> GuiWindow::getScreen(const string & id) const
+const shared_ptr<GuiScreen> GuiWindow::getScreen(const string & screenId) const
 {
-	auto iterator = _screens.find(id);
+	auto iterator = _screens.find(screenId);
 
 	if(iterator == _screens.end())
 	{

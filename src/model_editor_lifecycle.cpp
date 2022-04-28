@@ -60,9 +60,9 @@ void ModelEditor::_load()
 
 void ModelEditor::_unload()
 {
-	for(const auto & id : _loadedModelIds)
+	for(const auto & modelId : _loadedModelIds)
 	{
-		_fe3d->model_delete(id);
+		_fe3d->model_delete(modelId);
 	}
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);

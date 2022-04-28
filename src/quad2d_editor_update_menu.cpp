@@ -18,25 +18,25 @@ void Quad2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedQuad2dIds;
+			auto quad2dIds = _loadedQuad2dIds;
 
-			for(auto & id : ids)
+			for(auto & quad2dId : quad2dIds)
 			{
-				id = id.substr(1);
+				quad2dId = quad2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editQuad2d", "Edit Quad2D", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editQuad2d", "Edit Quad2D", fvec2(-0.5f, 0.1f), quad2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedQuad2dIds;
+			auto quad2dIds = _loadedQuad2dIds;
 
-			for(auto & id : ids)
+			for(auto & quad2dId : quad2dIds)
 			{
-				id = id.substr(1);
+				quad2dId = quad2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteQuad2d", "Delete Quad2D", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteQuad2d", "Delete Quad2D", fvec2(-0.5f, 0.1f), quad2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

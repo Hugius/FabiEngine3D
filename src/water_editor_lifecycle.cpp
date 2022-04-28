@@ -42,9 +42,9 @@ void WaterEditor::_load()
 
 void WaterEditor::_unload()
 {
-	for(const auto & id : _loadedWaterIds)
+	for(const auto & waterId : _loadedWaterIds)
 	{
-		_fe3d->water_delete(id);
+		_fe3d->water_delete(waterId);
 	}
 
 	_fe3d->model_delete("@@box");

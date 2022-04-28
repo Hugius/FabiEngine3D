@@ -9,8 +9,8 @@ public:
 	GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
 
 	void update(bool isInteractable);
-	void createOption(const string & id, const string & textContent);
-	void deleteOption(const string & id);
+	void createOption(const string & optionId, const string & textContent);
+	void deleteOption(const string & optionId);
 	void deleteOptions();
 	void setColor(const fvec3 & value);
 	void setPosition(const fvec2 & value);
@@ -42,7 +42,7 @@ public:
 
 	const float getScrollingSpeed() const;
 
-	const bool hasOption(const string & id) const;
+	const bool hasOption(const string & optionId) const;
 	const bool isHovered() const;
 	const bool isHoverable() const;
 	const bool isVisible() const;

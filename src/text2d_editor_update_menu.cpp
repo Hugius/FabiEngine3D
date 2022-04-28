@@ -17,25 +17,25 @@ void Text2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedText2dIds;
+			auto text2dIds = _loadedText2dIds;
 
-			for(auto & id : ids)
+			for(auto & text2dId : text2dIds)
 			{
-				id = id.substr(1);
+				text2dId = text2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editText2d", "Edit Text2D", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editText2d", "Edit Text2D", fvec2(-0.5f, 0.1f), text2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedText2dIds;
+			auto text2dIds = _loadedText2dIds;
 
-			for(auto & id : ids)
+			for(auto & text2dId : text2dIds)
 			{
-				id = id.substr(1);
+				text2dId = text2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteText2d", "Delete Text2D", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteText2d", "Delete Text2D", fvec2(-0.5f, 0.1f), text2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -49,9 +49,9 @@ void Sound2dPlayer::update()
 		}
 	}
 
-	for(const auto & [id, index] : soundsToStop)
+	for(const auto & [sound2dId, index] : soundsToStop)
 	{
-		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
+		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound2dId)[index]->getHandle(), _startedSounds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
 		if(unprepareResult != MMSYSERR_NOERROR)
 		{
 			if(unprepareResult == MMSYSERR_NODRIVER)
@@ -68,7 +68,7 @@ void Sound2dPlayer::update()
 			}
 		}
 
-		const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+		const auto closeResult = waveOutClose(_startedSounds.at(sound2dId)[index]->getHandle());
 		if(closeResult != MMSYSERR_NOERROR)
 		{
 			if(closeResult == MMSYSERR_NODRIVER)
@@ -85,7 +85,7 @@ void Sound2dPlayer::update()
 			}
 		}
 
-		_terminateSound(id, index);
+		_terminateSound(sound2dId, index);
 	}
 
 	if(_volumeThreadQueue.empty())

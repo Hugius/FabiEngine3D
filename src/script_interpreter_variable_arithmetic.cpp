@@ -86,7 +86,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(!isAccessingLeftList && (leftVariable->getType() == ScriptVariableType::MULTIPLE))
 	{
-		_throwRuntimeError("arithmetic not allowed on LIST values");
+		_throwRuntimeError("arithmetic not allowed on LST values");
 
 		return;
 	}
@@ -98,7 +98,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN)
 	{
-		_throwRuntimeError("arithmetic not allowed on BOOL values");
+		_throwRuntimeError("arithmetic not allowed on BOL values");
 
 		return;
 	}
@@ -135,7 +135,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(_isListValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on LIST values");
+		_throwRuntimeError("arithmetic not allowed on LST values");
 
 		return;
 	}
@@ -157,7 +157,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on BOOL values");
+		_throwRuntimeError("arithmetic not allowed on BOL values");
 
 		return;
 	}
@@ -200,7 +200,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		if(!isAccessingRightList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
-			_throwRuntimeError("arithmetic not allowed on LIST values");
+			_throwRuntimeError("arithmetic not allowed on LST values");
 
 			return;
 		}
@@ -212,7 +212,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::BOOLEAN)
 		{
-			_throwRuntimeError("arithmetic not allowed on BOOL values");
+			_throwRuntimeError("arithmetic not allowed on BOL values");
 
 			return;
 		}

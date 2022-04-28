@@ -140,7 +140,13 @@
 - **Enabled**: shadows are enabled
   - Type: `boolean`
   - Constraints: none
-- **Following Camera**: shadows are following the camera position
+- **Following Camera X**: shadows are following the camera X position
+  - Type: `boolean`
+  - Constraints: none
+- **Following Camera Y**: shadows are following the camera Y position
+  - Type: `boolean`
+  - Constraints: none
+- **Following Camera Z**: shadows are following the camera Z position
   - Type: `boolean`
   - Constraints: none
 

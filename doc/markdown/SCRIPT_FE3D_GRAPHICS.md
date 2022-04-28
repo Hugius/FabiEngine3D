@@ -19,7 +19,9 @@
 - `fe3d:graphics_set_shadow_lightness` (`DEC` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_interval` (`INT` value) -----> `NONE`
-- `fe3d:graphics_set_shadow_following_camera` (`BOL` value) -----> `NONE`
+- `fe3d:graphics_set_shadow_following_camera_x` (`BOL` value) -----> `NONE`
+- `fe3d:graphics_set_shadow_following_camera_y` (`BOL` value) -----> `NONE`
+- `fe3d:graphics_set_shadow_following_camera_z` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_fog_enabled` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_fog_color` (`DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:graphics_set_fog_thickness` (`BOL` value) -----> `NONE`
@@ -51,7 +53,9 @@
 ## Getters
 
 - `fe3d:graphics_is_ambient_lighting_enabled` () -----> `BOL`
-- `fe3d:graphics_is_shadow_following_camera` () -----> `BOL`
+- `fe3d:graphics_is_shadow_following_camera_x` () -----> `BOL`
+- `fe3d:graphics_is_shadow_following_camera_y` () -----> `BOL`
+- `fe3d:graphics_is_shadow_following_camera_z` () -----> `BOL`
 - `fe3d:graphics_is_fog_enabled` () -----> `BOL`
 - `fe3d:graphics_is_directional_lighting_enabled` () -----> `BOL`
 - `fe3d:graphics_is_dof_enabled` () -----> `BOL`

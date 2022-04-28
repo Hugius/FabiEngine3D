@@ -502,7 +502,9 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			float lightness;
 			fvec3 position;
 			fvec3 center;
-			bool isFollowingCamera;
+			bool isFollowingCameraX;
+			bool isFollowingCameraY;
+			bool isFollowingCameraZ;
 			int interval;
 			int quality;
 
@@ -515,7 +517,9 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> center.x
 				>> center.y
 				>> center.z
-				>> isFollowingCamera
+				>> isFollowingCameraX
+				>> isFollowingCameraY
+				>> isFollowingCameraZ
 				>> interval
 				>> quality;
 
@@ -524,7 +528,9 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setShadowLookatOffset(center);
 			_fe3d->graphics_setShadowSize(size);
 			_fe3d->graphics_setShadowLightness(lightness);
-			_fe3d->graphics_setShadowFollowingCamera(isFollowingCamera);
+			_fe3d->graphics_setShadowFollowingCameraX(isFollowingCameraX);
+			_fe3d->graphics_setShadowFollowingCameraY(isFollowingCameraY);
+			_fe3d->graphics_setShadowFollowingCameraZ(isFollowingCameraZ);
 			_fe3d->graphics_setShadowInterval(interval);
 			_fe3d->graphics_setShadowQuality(quality);
 		}

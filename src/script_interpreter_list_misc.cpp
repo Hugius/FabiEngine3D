@@ -4,21 +4,21 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 {
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{
-		_throwRuntimeError("variable \"" + list->getId() + "\" not of type LIST");
+		_throwRuntimeError("variable \"" + list->getId() + "\" not of type LST");
 
 		return false;
 	}
 
 	if(index < 0)
 	{
-		_throwRuntimeError("LIST index negative");
+		_throwRuntimeError("LST index negative");
 
 		return false;
 	}
 
 	if(index >= list->getValueCount())
 	{
-		_throwRuntimeError("LIST index out of range");
+		_throwRuntimeError("LST index out of range");
 
 		return false;
 	}
@@ -78,7 +78,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("LIST name missing");
+		_throwRuntimeError("LST name missing");
 
 		return;
 	}
@@ -95,7 +95,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("LIST does not exist");
+		_throwRuntimeError("LST does not exist");
 
 		return;
 	}
@@ -104,14 +104,14 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(listVariable->isConstant())
 	{
-		_throwRuntimeError("cannot push to constant LIST");
+		_throwRuntimeError("cannot push to constant LST");
 
 		return;
 	}
 
 	if(_isListValue(valueString))
 	{
-		_throwRuntimeError("cannot push LIST to LIST");
+		_throwRuntimeError("cannot push LST to LST");
 
 		return;
 	}
@@ -147,7 +147,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 		if(rightVariable->getType() == ScriptVariableType::MULTIPLE)
 		{
-			_throwRuntimeError("cannot push LIST to LIST");
+			_throwRuntimeError("cannot push LST to LST");
 
 			return;
 		}
@@ -173,14 +173,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("LIST name missing");
+		_throwRuntimeError("LST name missing");
 
 		return;
 	}
 
 	if(scriptLine.size() < (PULLING_KEYWORD.size() + nameString.size() + 3))
 	{
-		_throwRuntimeError("LIST index missing");
+		_throwRuntimeError("LST index missing");
 
 		return;
 	}
@@ -189,14 +189,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
-		_throwRuntimeError("invalid LIST index");
+		_throwRuntimeError("invalid LST index");
 
 		return;
 	}
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("LIST does not exist");
+		_throwRuntimeError("LST does not exist");
 
 		return;
 	}
@@ -205,7 +205,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(listVariable->isConstant())
 	{
-		_throwRuntimeError("cannot push to constant LIST");
+		_throwRuntimeError("cannot push to constant LST");
 
 		return;
 	}
@@ -221,7 +221,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 		if(indexVariable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
-			_throwRuntimeError("LIST index not of type INT");
+			_throwRuntimeError("LST index not of type INT");
 
 			return;
 		}

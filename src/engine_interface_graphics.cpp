@@ -210,9 +210,19 @@ void EngineInterface::graphics_setShadowInterval(int value)
 	_core->getRenderStorage()->setShadowInterval(value);
 }
 
-void EngineInterface::graphics_setShadowFollowingCamera(bool value)
+void EngineInterface::graphics_setShadowFollowingCameraX(bool value)
 {
-	_core->getRenderStorage()->setShadowsFollowingCamera(value);
+	_core->getRenderStorage()->setShadowsFollowingCameraX(value);
+}
+
+void EngineInterface::graphics_setShadowFollowingCameraY(bool value)
+{
+	_core->getRenderStorage()->setShadowsFollowingCameraY(value);
+}
+
+void EngineInterface::graphics_setShadowFollowingCameraZ(bool value)
+{
+	_core->getRenderStorage()->setShadowsFollowingCameraZ(value);
 }
 
 void EngineInterface::graphics_setBloomIntensity(float value)
@@ -453,9 +463,19 @@ const float EngineInterface::graphics_getShadowLightness() const
 	return _core->getRenderStorage()->getShadowLightness();
 }
 
-const bool EngineInterface::graphics_isShadowFollowingCamera() const
+const bool EngineInterface::graphics_isShadowFollowingCameraX() const
 {
-	return _core->getRenderStorage()->isShadowsFollowingCamera();
+	return _core->getRenderStorage()->isShadowsFollowingCameraX();
+}
+
+const bool EngineInterface::graphics_isShadowFollowingCameraY() const
+{
+	return _core->getRenderStorage()->isShadowsFollowingCameraY();
+}
+
+const bool EngineInterface::graphics_isShadowFollowingCameraZ() const
+{
+	return _core->getRenderStorage()->isShadowsFollowingCameraZ();
 }
 
 const bool EngineInterface::graphics_hasLensFlareMap() const

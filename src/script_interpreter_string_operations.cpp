@@ -121,7 +121,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 
 		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
-			_throwRuntimeError("LIST index must be of type INT");
+			_throwRuntimeError("LST index must be of type INT");
 			return -1;
 		}
 

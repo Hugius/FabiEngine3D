@@ -410,7 +410,9 @@ const bool WorldEditor::saveWorldToFile() const
 		auto lightness = _fe3d->graphics_getShadowLightness();
 		auto position = _fe3d->graphics_getShadowPositionOffset();
 		auto lookat = _fe3d->graphics_getShadowLookatOffset();
-		auto isFollowingCamera = _fe3d->graphics_isShadowFollowingCamera();
+		auto isFollowingCameraX = _fe3d->graphics_isShadowFollowingCameraX();
+		auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
+		auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
 		auto interval = _fe3d->graphics_getShadowInterval();
 		auto quality = _fe3d->graphics_getShadowQuality();
 
@@ -432,7 +434,11 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< lookat.z
 			<< " "
-			<< isFollowingCamera
+			<< isFollowingCameraX
+			<< " "
+			<< isFollowingCameraY
+			<< " "
+			<< isFollowingCameraZ
 			<< " "
 			<< interval
 			<< " "

@@ -194,13 +194,35 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_set_shadow_following_camera")
+	else if(functionName == "fe3d:graphics_set_shadow_following_camera_x")
 	{
 		auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->graphics_setShadowFollowingCamera(args[0]->getBoolean());
+			_fe3d->graphics_setShadowFollowingCameraX(args[0]->getBoolean());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:graphics_set_shadow_following_camera_y")
+	{
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setShadowFollowingCameraY(args[0]->getBoolean());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:graphics_set_shadow_following_camera_z")
+	{
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setShadowFollowingCameraZ(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

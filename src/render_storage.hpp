@@ -91,7 +91,9 @@ public:
 	void setSkyExposureLightness(float value);
 	void setSkyExposureEnabled(bool value);
 	void setShadowInterval(int value);
-	void setShadowsFollowingCamera(bool value);
+	void setShadowsFollowingCameraX(bool value);
+	void setShadowsFollowingCameraY(bool value);
+	void setShadowsFollowingCameraZ(bool value);
 	void setCubeReflectionInterval(int value);
 
 	const shared_ptr<TextureBuffer> getPrimarySceneTextureBuffer() const;
@@ -192,7 +194,9 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 	const bool isSkyExposureEnabled() const;
-	const bool isShadowsFollowingCamera() const;
+	const bool isShadowsFollowingCameraX() const;
+	const bool isShadowsFollowingCameraY() const;
+	const bool isShadowsFollowingCameraZ() const;
 
 	const BloomType getBloomType() const;
 
@@ -296,7 +300,9 @@ private:
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
 	bool _isSkyExposureEnabled = false;
-	bool _isShadowsFollowingCamera = false;
+	bool _isShadowsFollowingCameraX = false;
+	bool _isShadowsFollowingCameraY = false;
+	bool _isShadowsFollowingCameraZ = false;
 
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

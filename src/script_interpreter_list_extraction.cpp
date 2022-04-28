@@ -218,7 +218,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 					{
-						_throwRuntimeError("LIST cannot be used inside LIST");
+						_throwRuntimeError("LST cannot be used inside LST");
 						return {};
 					}
 

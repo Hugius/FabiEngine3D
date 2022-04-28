@@ -9,7 +9,9 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsShadows")
 	{
 		const auto isEnabled = _fe3d->graphics_isShadowsEnabled();
-		const auto isFollowingCamera = _fe3d->graphics_isShadowFollowingCamera();
+		const auto isFollowingCameraX = _fe3d->graphics_isShadowFollowingCameraX();
+		const auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
+		const auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
 		const auto size = _fe3d->graphics_getShadowSize();
 		const auto lightness = _fe3d->graphics_getShadowLightness();
 		const auto position = _fe3d->graphics_getShadowPositionOffset();
@@ -44,9 +46,17 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("lookatY", "Y", lookat.y, fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCamera")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraX")->isHovered())
 		{
-			_fe3d->graphics_setShadowFollowingCamera(!isFollowingCamera);
+			_fe3d->graphics_setShadowFollowingCameraX(!isFollowingCameraX);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraY")->isHovered())
+		{
+			_fe3d->graphics_setShadowFollowingCameraY(!isFollowingCameraY);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraZ")->isHovered())
+		{
+			_fe3d->graphics_setShadowFollowingCameraZ(!isFollowingCameraZ);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
@@ -123,7 +133,9 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("isFollowingCamera")->setTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
+		screen->getButton("isFollowingCameraX")->setTextContent(isFollowingCameraX ? "Follow Cam X: ON" : "Follow Cam X: OFF");
+		screen->getButton("isFollowingCameraY")->setTextContent(isFollowingCameraY ? "Follow Cam Y: ON" : "Follow Cam Y: OFF");
+		screen->getButton("isFollowingCameraZ")->setTextContent(isFollowingCameraZ ? "Follow Cam Z: ON" : "Follow Cam Z: OFF");
 	}
 }
 

@@ -800,7 +800,9 @@ public:
 	void graphics_setShadowLightness(float value);
 	void graphics_setShadowQuality(int value);
 	void graphics_setShadowInterval(int value);
-	void graphics_setShadowFollowingCamera(bool value);
+	void graphics_setShadowFollowingCameraX(bool value);
+	void graphics_setShadowFollowingCameraY(bool value);
+	void graphics_setShadowFollowingCameraZ(bool value);
 	void graphics_setBloomIntensity(float value);
 	void graphics_setBloomBlurCount(int value);
 	void graphics_setBloomType(BloomType value);
@@ -863,7 +865,9 @@ public:
 	const bool graphics_isMotionBlurEnabled() const;
 	const bool graphics_isLensFlareEnabled() const;
 	const bool graphics_isShadowCircleEnabled() const;
-	const bool graphics_isShadowFollowingCamera() const;
+	const bool graphics_isShadowFollowingCameraX() const;
+	const bool graphics_isShadowFollowingCameraY() const;
+	const bool graphics_isShadowFollowingCameraZ() const;
 	const bool graphics_hasLensFlareMap() const;
 	const BloomType graphics_getBloomType() const;
 

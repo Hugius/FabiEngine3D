@@ -398,9 +398,19 @@ void RenderStorage::setShadowInterval(int value)
 	_shadowInterval = max(0, value);
 }
 
-void RenderStorage::setShadowsFollowingCamera(bool value)
+void RenderStorage::setShadowsFollowingCameraX(bool value)
 {
-	_isShadowsFollowingCamera = value;
+	_isShadowsFollowingCameraX = value;
+}
+
+void RenderStorage::setShadowsFollowingCameraY(bool value)
+{
+	_isShadowsFollowingCameraY = value;
+}
+
+void RenderStorage::setShadowsFollowingCameraZ(bool value)
+{
+	_isShadowsFollowingCameraZ = value;
 }
 
 void RenderStorage::setCubeReflectionInterval(int value)
@@ -868,7 +878,17 @@ const bool RenderStorage::isSkyExposureEnabled() const
 	return _isSkyExposureEnabled;
 }
 
-const bool RenderStorage::isShadowsFollowingCamera() const
+const bool RenderStorage::isShadowsFollowingCameraX() const
 {
-	return _isShadowsFollowingCamera;
+	return _isShadowsFollowingCameraX;
+}
+
+const bool RenderStorage::isShadowsFollowingCameraY() const
+{
+	return _isShadowsFollowingCameraY;
+}
+
+const bool RenderStorage::isShadowsFollowingCameraZ() const
+{
+	return _isShadowsFollowingCameraZ;
 }

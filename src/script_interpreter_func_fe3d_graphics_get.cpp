@@ -247,13 +247,31 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_is_shadow_following_camera")
+	else if(functionName == "fe3d:graphics_is_shadow_following_camera_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->graphics_isShadowFollowingCamera();
+			const auto result = _fe3d->graphics_isShadowFollowingCameraX();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_shadow_following_camera_y")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->graphics_isShadowFollowingCameraY();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_shadow_following_camera_z")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->graphics_isShadowFollowingCameraZ();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_is_fog_enabled")

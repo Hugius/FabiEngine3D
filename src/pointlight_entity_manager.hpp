@@ -12,17 +12,17 @@ class PointlightEntityManager final
 {
 public:
 	void update();
-	void createEntity(const string & id);
-	void deleteEntity(const string & id);
+	void createEntity(const string & pointlightId);
+	void deleteEntity(const string & pointlightId);
 	void deleteEntities();
 
 	const unordered_map<string, shared_ptr<PointlightEntity>> & getEntities() const;
 
-	const shared_ptr<PointlightEntity> getEntity(const string & id) const;
+	const shared_ptr<PointlightEntity> getEntity(const string & pointlightId) const;
 
 	const int getMaxEntityCount() const;
 
-	const bool isEntityExisting(const string & id) const;
+	const bool isEntityExisting(const string & pointlightId) const;
 	const bool isEntitiesExisting() const;
 
 private:

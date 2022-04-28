@@ -3,9 +3,9 @@
 using std::make_shared;
 using std::min;
 
-const shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string & id) const
+const shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string & terrainId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(terrainId);
 
 	if(iterator == _entities.end())
 	{
@@ -30,9 +30,9 @@ const unordered_map<string, shared_ptr<TerrainEntity>> & TerrainEntityManager::g
 	return _entities;
 }
 
-void TerrainEntityManager::createEntity(const string & id, const string & heightMapPath)
+void TerrainEntityManager::createEntity(const string & terrainId, const string & heightMapPath)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(terrainId))
 	{
 		abort();
 	}
@@ -44,7 +44,7 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 		return;
 	}
 
-	auto entity = make_shared<TerrainEntity>(id);
+	auto entity = make_shared<TerrainEntity>(terrainId);
 
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
@@ -65,19 +65,19 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(size));
 
-	_entities.insert({id, entity});
+	_entities.insert({terrainId, entity});
 
-	loadVertexBuffer(id);
+	loadVertexBuffer(terrainId);
 }
 
-void TerrainEntityManager::selectEntity(const string & id)
+void TerrainEntityManager::selectEntity(const string & terrainId)
 {
-	if(!isEntityExisting(id) && !id.empty())
+	if(!isEntityExisting(terrainId) && !terrainId.empty())
 	{
 		abort();
 	}
 
-	_selectedEntityId = id;
+	_selectedEntityId = terrainId;
 }
 
 void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
@@ -85,16 +85,16 @@ void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
 	_imageLoader = imageLoader;
 }
 
-void TerrainEntityManager::deleteEntity(const string & id)
+void TerrainEntityManager::deleteEntity(const string & terrainId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(terrainId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(terrainId);
 
-	if(id == _selectedEntityId)
+	if(terrainId == _selectedEntityId)
 	{
 		selectEntity("");
 	}
@@ -107,9 +107,9 @@ void TerrainEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-const bool TerrainEntityManager::isEntityExisting(const string & id) const
+const bool TerrainEntityManager::isEntityExisting(const string & terrainId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(terrainId) != _entities.end());
 }
 
 const bool TerrainEntityManager::isEntitiesExisting() const
@@ -117,9 +117,9 @@ const bool TerrainEntityManager::isEntitiesExisting() const
 	return !_entities.empty();
 }
 
-void TerrainEntityManager::loadVertexBuffer(const string & id)
+void TerrainEntityManager::loadVertexBuffer(const string & terrainId)
 {
-	_loadVertexBuffer(getEntity(id), getEntity(id)->getSize(), getEntity(id)->getMaxHeight(), getEntity(id)->getPixels());
+	_loadVertexBuffer(getEntity(terrainId), getEntity(terrainId)->getSize(), getEntity(terrainId)->getMaxHeight(), getEntity(terrainId)->getPixels());
 }
 
 void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float> & pixels)
@@ -239,16 +239,16 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
 
-const float TerrainEntityManager::getPixelHeight(const string & id, float x, float z)
+const float TerrainEntityManager::getPixelHeight(const string & terrainId, float x, float z)
 {
-	const auto flippedZ = (getEntity(id)->getSize() - z);
+	const auto flippedZ = (getEntity(terrainId)->getSize() - z);
 
-	return _getPixelHeight(x, flippedZ, getEntity(id)->getSize(), getEntity(id)->getMaxHeight(), getEntity(id)->getPixels());
+	return _getPixelHeight(x, flippedZ, getEntity(terrainId)->getSize(), getEntity(terrainId)->getMaxHeight(), getEntity(terrainId)->getPixels());
 }
 
-const bool TerrainEntityManager::isInside(const string & id, float x, float z)
+const bool TerrainEntityManager::isInside(const string & terrainId, float x, float z)
 {
-	if((x > 0) && (z > 0) && (x < getEntity(id)->getSize()) && (z < getEntity(id)->getSize()))
+	if((x > 0) && (z > 0) && (x < getEntity(terrainId)->getSize()) && (z < getEntity(terrainId)->getSize()))
 	{
 		return true;
 	}

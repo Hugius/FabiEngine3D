@@ -54,9 +54,9 @@ void Text3dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCac
 	_textureBufferCache = textureBufferCache;
 }
 
-const shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string & id) const
+const shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string & text3dId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(text3dId);
 
 	if(iterator == _entities.end())
 	{
@@ -71,9 +71,9 @@ const unordered_map<string, shared_ptr<Text3dEntity>> & Text3dEntityManager::get
 	return _entities;
 }
 
-void Text3dEntityManager::createEntity(const string & id, const string & fontMapPath, bool isCentered)
+void Text3dEntityManager::createEntity(const string & text3dId, const string & fontMapPath, bool isCentered)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(text3dId))
 	{
 		abort();
 	}
@@ -95,7 +95,7 @@ void Text3dEntityManager::createEntity(const string & id, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text3dEntity>(id);
+	auto entity = make_shared<Text3dEntity>(text3dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);
@@ -103,7 +103,7 @@ void Text3dEntityManager::createEntity(const string & id, const string & fontMap
 	entity->setFontMapPath(fontMapPath);
 	entity->setContent("text");
 
-	_entities.insert({id, entity});
+	_entities.insert({text3dId, entity});
 }
 
 void Text3dEntityManager::update()
@@ -134,14 +134,14 @@ void Text3dEntityManager::update()
 	}
 }
 
-void Text3dEntityManager::deleteEntity(const string & id)
+void Text3dEntityManager::deleteEntity(const string & text3dId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(text3dId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(text3dId);
 }
 
 void Text3dEntityManager::deleteEntities()
@@ -149,9 +149,9 @@ void Text3dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Text3dEntityManager::isEntityExisting(const string & id) const
+const bool Text3dEntityManager::isEntityExisting(const string & text3dId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(text3dId) != _entities.end());
 }
 
 const bool Text3dEntityManager::isEntitiesExisting() const

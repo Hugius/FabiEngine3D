@@ -11,22 +11,22 @@ class TerrainEntityManager final
 {
 public:
 	void inject(shared_ptr<ImageLoader> imageLoader);
-	void createEntity(const string & id, const string & heightMapPath);
-	void deleteEntity(const string & id);
+	void createEntity(const string & terrainId, const string & heightMapPath);
+	void deleteEntity(const string & terrainId);
 	void deleteEntities();
-	void loadVertexBuffer(const string & id);
-	void selectEntity(const string & id);
+	void loadVertexBuffer(const string & terrainId);
+	void selectEntity(const string & terrainId);
 
 	const unordered_map<string, shared_ptr<TerrainEntity>> & getEntities() const;
 
-	const shared_ptr<TerrainEntity> getEntity(const string & id) const;
+	const shared_ptr<TerrainEntity> getEntity(const string & terrainId) const;
 	const shared_ptr<TerrainEntity> getSelectedEntity() const;
 
-	const float getPixelHeight(const string & id, float x, float z);
+	const float getPixelHeight(const string & terrainId, float x, float z);
 
-	const bool isEntityExisting(const string & id) const;
+	const bool isEntityExisting(const string & terrainId) const;
 	const bool isEntitiesExisting() const;
-	const bool isInside(const string & id, float x, float z);
+	const bool isInside(const string & terrainId, float x, float z);
 
 private:
 	void _loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float> & pixels);

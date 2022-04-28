@@ -2,9 +2,9 @@
 
 using std::make_shared;
 
-const shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string & id) const
+const shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string & pointlightId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(pointlightId);
 
 	if(iterator == _entities.end())
 	{
@@ -19,9 +19,9 @@ const unordered_map<string, shared_ptr<PointlightEntity>> & PointlightEntityMana
 	return _entities;
 }
 
-void PointlightEntityManager::createEntity(const string & id)
+void PointlightEntityManager::createEntity(const string & pointlightId)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(pointlightId))
 	{
 		abort();
 	}
@@ -31,19 +31,19 @@ void PointlightEntityManager::createEntity(const string & id)
 		abort();
 	}
 
-	auto entity = make_shared<PointlightEntity>(id);
+	auto entity = make_shared<PointlightEntity>(pointlightId);
 
-	_entities.insert({id, entity});
+	_entities.insert({pointlightId, entity});
 }
 
-void PointlightEntityManager::deleteEntity(const string & id)
+void PointlightEntityManager::deleteEntity(const string & pointlightId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(pointlightId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(pointlightId);
 }
 
 void PointlightEntityManager::deleteEntities()
@@ -56,9 +56,9 @@ const int PointlightEntityManager::getMaxEntityCount() const
 	return MAX_ENTITY_COUNT;
 }
 
-const bool PointlightEntityManager::isEntityExisting(const string & id) const
+const bool PointlightEntityManager::isEntityExisting(const string & pointlightId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(pointlightId) != _entities.end());
 }
 
 const bool PointlightEntityManager::isEntitiesExisting() const

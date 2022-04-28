@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-const shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string & id) const
+const shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string & waterId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(waterId);
 
 	if(iterator == _entities.end())
 	{
@@ -30,40 +30,40 @@ const unordered_map<string, shared_ptr<WaterEntity>> & WaterEntityManager::getEn
 	return _entities;
 }
 
-void WaterEntityManager::selectEntity(const string & id)
+void WaterEntityManager::selectEntity(const string & waterId)
 {
-	if(!isEntityExisting(id) && !id.empty())
+	if(!isEntityExisting(waterId) && !waterId.empty())
 	{
 		abort();
 	}
 
-	_selectedEntityId = id;
+	_selectedEntityId = waterId;
 }
 
-void WaterEntityManager::createEntity(const string & id)
+void WaterEntityManager::createEntity(const string & waterId)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(waterId))
 	{
 		abort();
 	}
 
-	auto entity = make_shared<WaterEntity>(id);
+	auto entity = make_shared<WaterEntity>(waterId);
 
-	_entities.insert({id, entity});
+	_entities.insert({waterId, entity});
 
-	loadVertexBuffer(id);
+	loadVertexBuffer(waterId);
 }
 
-void WaterEntityManager::deleteEntity(const string & id)
+void WaterEntityManager::deleteEntity(const string & waterId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(waterId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(waterId);
 
-	if(id == _selectedEntityId)
+	if(waterId == _selectedEntityId)
 	{
 		selectEntity("");
 	}
@@ -76,14 +76,14 @@ void WaterEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-void WaterEntityManager::loadVertexBuffer(const string & id)
+void WaterEntityManager::loadVertexBuffer(const string & waterId)
 {
-	_loadVertexBuffer(getEntity(id), getEntity(id)->getSize());
+	_loadVertexBuffer(getEntity(waterId), getEntity(waterId)->getSize());
 }
 
-const bool WaterEntityManager::isEntityExisting(const string & id) const
+const bool WaterEntityManager::isEntityExisting(const string & waterId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(waterId) != _entities.end());
 }
 
 const bool WaterEntityManager::isEntitiesExisting() const

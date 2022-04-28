@@ -20,15 +20,15 @@ public:
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
-	void createEntity(const string & id, const string & fontMapPath, bool isCentered);
-	void deleteEntity(const string & id);
+	void createEntity(const string & text3dId, const string & fontMapPath, bool isCentered);
+	void deleteEntity(const string & text3dId);
 	void deleteEntities();
 
 	const unordered_map<string, shared_ptr<Text3dEntity>> & getEntities() const;
 
-	const shared_ptr<Text3dEntity> getEntity(const string & id) const;
+	const shared_ptr<Text3dEntity> getEntity(const string & text3dId) const;
 
-	const bool isEntityExisting(const string & id) const;
+	const bool isEntityExisting(const string & text3dId) const;
 	const bool isEntitiesExisting() const;
 
 private:

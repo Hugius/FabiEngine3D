@@ -10,9 +10,9 @@ Text2dEntityManager::Text2dEntityManager()
 
 }
 
-const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string & id) const
+const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string & text2dId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(text2dId);
 
 	if(iterator == _entities.end())
 	{
@@ -27,9 +27,9 @@ const unordered_map<string, shared_ptr<Text2dEntity>> & Text2dEntityManager::get
 	return _entities;
 }
 
-void Text2dEntityManager::createEntity(const string & id, const string & fontMapPath, bool isCentered)
+void Text2dEntityManager::createEntity(const string & text2dId, const string & fontMapPath, bool isCentered)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(text2dId))
 	{
 		abort();
 	}
@@ -50,7 +50,7 @@ void Text2dEntityManager::createEntity(const string & id, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text2dEntity>(id);
+	auto entity = make_shared<Text2dEntity>(text2dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
@@ -59,19 +59,19 @@ void Text2dEntityManager::createEntity(const string & id, const string & fontMap
 	entity->setContent("text");
 	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_entities.insert({id, entity});
+	_entities.insert({text2dId, entity});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
-void Text2dEntityManager::deleteEntity(const string & id)
+void Text2dEntityManager::deleteEntity(const string & text2dId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(text2dId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(text2dId);
 }
 
 void Text2dEntityManager::deleteEntities()
@@ -79,9 +79,9 @@ void Text2dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Text2dEntityManager::isEntityExisting(const string & id) const
+const bool Text2dEntityManager::isEntityExisting(const string & text2dId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(text2dId) != _entities.end());
 }
 
 const bool Text2dEntityManager::isEntitiesExisting() const

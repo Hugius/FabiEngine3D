@@ -2,26 +2,26 @@
 
 using std::make_shared;
 
-void Animation2dManager::createAnimation(const string & id)
+void Animation2dManager::createAnimation(const string & animation2dId)
 {
-	if(isAnimationExisting(id))
+	if(isAnimationExisting(animation2dId))
 	{
 		abort();
 	}
 
-	auto animation = make_shared<Animation2d>(id);
+	auto animation = make_shared<Animation2d>(animation2dId);
 
-	_animations.insert({id, animation});
+	_animations.insert({animation2dId, animation});
 }
 
-void Animation2dManager::deleteAnimation(const string & id)
+void Animation2dManager::deleteAnimation(const string & animation2dId)
 {
-	if(!isAnimationExisting(id))
+	if(!isAnimationExisting(animation2dId))
 	{
 		abort();
 	}
 
-	_animations.erase(id);
+	_animations.erase(animation2dId);
 }
 
 void Animation2dManager::deleteAnimations()
@@ -29,9 +29,9 @@ void Animation2dManager::deleteAnimations()
 	_animations.clear();
 }
 
-const bool Animation2dManager::isAnimationExisting(const string & id) const
+const bool Animation2dManager::isAnimationExisting(const string & animation2dId) const
 {
-	return (_animations.find(id) != _animations.end());
+	return (_animations.find(animation2dId) != _animations.end());
 }
 
 const bool Animation2dManager::isAnimationsExisting() const
@@ -39,9 +39,9 @@ const bool Animation2dManager::isAnimationsExisting() const
 	return !_animations.empty();
 }
 
-const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string & id) const
+const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string & animation2dId) const
 {
-	auto iterator = _animations.find(id);
+	auto iterator = _animations.find(animation2dId);
 
 	if(iterator == _animations.end())
 	{

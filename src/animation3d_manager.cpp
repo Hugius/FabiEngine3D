@@ -2,26 +2,26 @@
 
 using std::make_shared;
 
-void Animation3dManager::createAnimation(const string & id)
+void Animation3dManager::createAnimation(const string & animation3dId)
 {
-	if(isAnimationExisting(id))
+	if(isAnimationExisting(animation3dId))
 	{
 		abort();
 	}
 
-	auto animation3d = make_shared<Animation3d>(id);
+	auto animation3d = make_shared<Animation3d>(animation3dId);
 
-	_animations.insert({id, animation3d});
+	_animations.insert({animation3dId, animation3d});
 }
 
-void Animation3dManager::deleteAnimation(const string & id)
+void Animation3dManager::deleteAnimation(const string & animation3dId)
 {
-	if(!isAnimationExisting(id))
+	if(!isAnimationExisting(animation3dId))
 	{
 		abort();
 	}
 
-	_animations.erase(id);
+	_animations.erase(animation3dId);
 }
 
 void Animation3dManager::deleteAnimations()
@@ -29,9 +29,9 @@ void Animation3dManager::deleteAnimations()
 	_animations.clear();
 }
 
-const bool Animation3dManager::isAnimationExisting(const string & id) const
+const bool Animation3dManager::isAnimationExisting(const string & animation3dId) const
 {
-	return (_animations.find(id) != _animations.end());
+	return (_animations.find(animation3dId) != _animations.end());
 }
 
 const bool Animation3dManager::isAnimationsExisting() const
@@ -39,9 +39,9 @@ const bool Animation3dManager::isAnimationsExisting() const
 	return !_animations.empty();
 }
 
-const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string & id) const
+const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string & animation3dId) const
 {
-	auto iterator = _animations.find(id);
+	auto iterator = _animations.find(animation3dId);
 
 	if(iterator == _animations.end())
 	{

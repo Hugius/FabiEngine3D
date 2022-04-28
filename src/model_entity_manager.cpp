@@ -6,9 +6,9 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string & id) const
+const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string & modelId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(modelId);
 
 	if(iterator == _entities.end())
 	{
@@ -53,9 +53,9 @@ void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 	_vertexBufferCache = vertexBufferCache;
 }
 
-void ModelEntityManager::createEntity(const string & id, const string & meshPath)
+void ModelEntityManager::createEntity(const string & modelId, const string & meshPath)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -67,7 +67,7 @@ void ModelEntityManager::createEntity(const string & id, const string & meshPath
 		return;
 	}
 
-	auto entity = make_shared<ModelEntity>(id);
+	auto entity = make_shared<ModelEntity>(modelId);
 
 	for(const auto & part : mesh->getParts())
 	{
@@ -107,17 +107,17 @@ void ModelEntityManager::createEntity(const string & id, const string & meshPath
 
 	entity->setMeshPath(meshPath);
 
-	_entities.insert({id, entity});
+	_entities.insert({modelId, entity});
 }
 
-void ModelEntityManager::deleteEntity(const string & id)
+void ModelEntityManager::deleteEntity(const string & modelId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(modelId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(modelId);
 }
 
 void ModelEntityManager::deleteEntities()
@@ -125,9 +125,9 @@ void ModelEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ModelEntityManager::isEntityExisting(const string & id) const
+const bool ModelEntityManager::isEntityExisting(const string & modelId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(modelId) != _entities.end());
 }
 
 const bool ModelEntityManager::isEntitiesExisting() const

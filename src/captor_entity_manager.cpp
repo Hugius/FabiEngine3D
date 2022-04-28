@@ -2,9 +2,9 @@
 
 using std::make_shared;
 
-const shared_ptr<CaptorEntity> CaptorEntityManager::getEntity(const string & id) const
+const shared_ptr<CaptorEntity> CaptorEntityManager::getEntity(const string & captorId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(captorId);
 
 	if(iterator == _entities.end())
 	{
@@ -19,16 +19,16 @@ const unordered_map<string, shared_ptr<CaptorEntity>> & CaptorEntityManager::get
 	return _entities;
 }
 
-void CaptorEntityManager::createEntity(const string & id)
+void CaptorEntityManager::createEntity(const string & captorId)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(captorId))
 	{
 		abort();
 	}
 
-	auto entity = make_shared<CaptorEntity>(id);
+	auto entity = make_shared<CaptorEntity>(captorId);
 
-	_entities.insert({id, entity});
+	_entities.insert({captorId, entity});
 }
 
 void CaptorEntityManager::update()
@@ -39,14 +39,14 @@ void CaptorEntityManager::update()
 	}
 }
 
-void CaptorEntityManager::deleteEntity(const string & id)
+void CaptorEntityManager::deleteEntity(const string & captorId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(captorId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(captorId);
 }
 
 void CaptorEntityManager::deleteEntities()
@@ -54,9 +54,9 @@ void CaptorEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool CaptorEntityManager::isEntityExisting(const string & id) const
+const bool CaptorEntityManager::isEntityExisting(const string & captorId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(captorId) != _entities.end());
 }
 
 const bool CaptorEntityManager::isEntitiesExisting() const

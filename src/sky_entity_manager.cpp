@@ -63,9 +63,9 @@ void SkyEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
-const shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string & id) const
+const shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string & skyId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(skyId);
 
 	if(iterator == _entities.end())
 	{
@@ -90,28 +90,28 @@ const unordered_map<string, shared_ptr<SkyEntity>> & SkyEntityManager::getEntiti
 	return _entities;
 }
 
-void SkyEntityManager::selectEntity(const string & id)
+void SkyEntityManager::selectEntity(const string & skyId)
 {
-	if(!isEntityExisting(id) && !id.empty())
+	if(!isEntityExisting(skyId) && !skyId.empty())
 	{
 		abort();
 	}
 
-	_selectedEntityId = id;
+	_selectedEntityId = skyId;
 }
 
-void SkyEntityManager::createEntity(const string & id)
+void SkyEntityManager::createEntity(const string & skyId)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(skyId))
 	{
 		abort();
 	}
 
-	auto entity = make_shared<SkyEntity>(id);
+	auto entity = make_shared<SkyEntity>(skyId);
 
 	entity->setVertexBuffer(_vertexBuffer);
 
-	_entities.insert({id, entity});
+	_entities.insert({skyId, entity});
 }
 
 void SkyEntityManager::update()
@@ -129,16 +129,16 @@ void SkyEntityManager::update()
 	}
 }
 
-void SkyEntityManager::deleteEntity(const string & id)
+void SkyEntityManager::deleteEntity(const string & skyId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(skyId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(skyId);
 
-	if(id == _selectedEntityId)
+	if(skyId == _selectedEntityId)
 	{
 		selectEntity("");
 	}
@@ -151,9 +151,9 @@ void SkyEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-const bool SkyEntityManager::isEntityExisting(const string & id) const
+const bool SkyEntityManager::isEntityExisting(const string & skyId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(skyId) != _entities.end());
 }
 
 const bool SkyEntityManager::isEntitiesExisting() const

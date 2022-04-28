@@ -71,9 +71,9 @@ void AabbEntityManager::inject(shared_ptr<Text3dEntityManager> text3dEntityManag
 	_text3dEntityManager = text3dEntityManager;
 }
 
-const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string & id) const
+const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string & aabbId) const
 {
-	auto iterator = _entities.find(id);
+	auto iterator = _entities.find(aabbId);
 
 	if(iterator == _entities.end())
 	{
@@ -88,20 +88,20 @@ const unordered_map<string, shared_ptr<AabbEntity>> & AabbEntityManager::getEnti
 	return _entities;
 }
 
-void AabbEntityManager::createEntity(const string & id, bool isCentered)
+void AabbEntityManager::createEntity(const string & aabbId, bool isCentered)
 {
-	if(isEntityExisting(id))
+	if(isEntityExisting(aabbId))
 	{
 		abort();
 	}
 
-	auto entity = make_shared<AabbEntity>(id);
+	auto entity = make_shared<AabbEntity>(aabbId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);
 	entity->setVisible(false);
 
-	_entities.insert({id, entity});
+	_entities.insert({aabbId, entity});
 }
 
 void AabbEntityManager::update()
@@ -375,14 +375,14 @@ void AabbEntityManager::update()
 	}
 }
 
-void AabbEntityManager::deleteEntity(const string & id)
+void AabbEntityManager::deleteEntity(const string & aabbId)
 {
-	if(!isEntityExisting(id))
+	if(!isEntityExisting(aabbId))
 	{
 		abort();
 	}
 
-	_entities.erase(id);
+	_entities.erase(aabbId);
 }
 
 void AabbEntityManager::deleteEntities()
@@ -390,9 +390,9 @@ void AabbEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool AabbEntityManager::isEntityExisting(const string & id) const
+const bool AabbEntityManager::isEntityExisting(const string & aabbId) const
 {
-	return (_entities.find(id) != _entities.end());
+	return (_entities.find(aabbId) != _entities.end());
 }
 
 const bool AabbEntityManager::isEntitiesExisting() const

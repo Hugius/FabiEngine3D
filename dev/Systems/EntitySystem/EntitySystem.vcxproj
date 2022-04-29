@@ -19,9 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\aabb.cpp" />
-    <ClCompile Include="..\..\..\src\aabb_manager.cpp" />
+    <ClCompile Include="..\..\..\src\animation2d.cpp" />
+    <ClCompile Include="..\..\..\src\animation2d_manager.cpp" />
+    <ClCompile Include="..\..\..\src\animation3d.cpp" />
+    <ClCompile Include="..\..\..\src\animation3d_manager.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_manager.cpp" />
+    <ClCompile Include="..\..\..\src\sound2d.cpp" />
+    <ClCompile Include="..\..\..\src\sound2d_manager.cpp" />
+    <ClCompile Include="..\..\..\src\sound3d.cpp" />
+    <ClCompile Include="..\..\..\src\sound3d_manager.cpp" />
     <ClCompile Include="..\..\..\src\text3d.cpp" />
     <ClCompile Include="..\..\..\src\quad3d.cpp" />
     <ClCompile Include="..\..\..\src\quad2d.cpp" />
@@ -45,8 +51,15 @@
     <ClCompile Include="..\..\..\src\water_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb.hpp" />
-    <ClInclude Include="..\..\..\src\aabb_manager.hpp" />
+    <ClInclude Include="..\..\..\src\animation2d.hpp" />
+    <ClInclude Include="..\..\..\src\animation2d_manager.hpp" />
+    <ClInclude Include="..\..\..\src\animation3d.hpp" />
+    <ClInclude Include="..\..\..\src\animation3d_frame.hpp" />
+    <ClInclude Include="..\..\..\src\animation3d_manager.hpp" />
+    <ClInclude Include="..\..\..\src\sound2d.hpp" />
+    <ClInclude Include="..\..\..\src\sound2d_manager.hpp" />
+    <ClInclude Include="..\..\..\src\sound3d.hpp" />
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp" />
     <ClInclude Include="..\..\..\src\text3d.hpp" />
     <ClInclude Include="..\..\..\src\quad3d.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_manager.hpp" />

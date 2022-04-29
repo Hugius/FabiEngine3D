@@ -25,9 +25,6 @@
     <Filter Include="Interpreter\Function\Physics">
       <UniqueIdentifier>{569ec7b6-6e81-47d4-9f5b-7a8d10b21ac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interpreter\Function\Entity">
-      <UniqueIdentifier>{8fb47fb8-c477-475e-9548-5caeef410d6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter\Function\Sound">
       <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,15 @@
     </Filter>
     <Filter Include="Interpreter\Function\Main">
       <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interpreter\Function\Quad">
+      <UniqueIdentifier>{57d99cbd-f3cc-4c91-826b-6fd646ccf0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interpreter\Function\Text">
+      <UniqueIdentifier>{10556d58-530c-43bd-aea4-2df0fc02710b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interpreter\Function\Light">
+      <UniqueIdentifier>{3d65d5ea-3f63-4832-9945-4c08e39d91a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,68 +111,11 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_set.cpp">
       <Filter>Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_condition_statement.cpp">
       <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_set.cpp">
       <Filter>Interpreter\Function\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
@@ -188,15 +137,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_get.cpp">
       <Filter>Interpreter\Function\Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_set.cpp">
       <Filter>Interpreter\Function\Physics</Filter>
@@ -234,12 +174,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_set.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_get.cpp">
-      <Filter>Interpreter\Function\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp">
       <Filter>Interpreter\Function\Physics</Filter>
     </ClCompile>
@@ -250,6 +184,78 @@
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_clock_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_set.cpp">
+      <Filter>Interpreter\Function\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_get.cpp">
+      <Filter>Interpreter\Function\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_set.cpp">
+      <Filter>Interpreter\Function\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_get.cpp">
+      <Filter>Interpreter\Function\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_get.cpp">
+      <Filter>Interpreter\Function\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_set.cpp">
+      <Filter>Interpreter\Function\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_get.cpp">
+      <Filter>Interpreter\Function\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_set.cpp">
+      <Filter>Interpreter\Function\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp">
+      <Filter>Interpreter\Function\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp">
+      <Filter>Interpreter\Function\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_get.cpp">
+      <Filter>Interpreter\Function\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_set.cpp">
+      <Filter>Interpreter\Function\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

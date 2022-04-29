@@ -7,168 +7,231 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{1d8410ea-3c56-4706-adbd-dcbc42bbbe01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\2D">
-      <UniqueIdentifier>{9c269b2e-5f39-4569-8230-fef0b9605672}</UniqueIdentifier>
+    <Filter Include="Manager\Sound">
+      <UniqueIdentifier>{c7d5eea2-ebeb-455f-a34b-6151c97ee6b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\3D">
-      <UniqueIdentifier>{b3da1681-98b5-4ed2-adc9-045b6025fc12}</UniqueIdentifier>
+    <Filter Include="Manager\Animation">
+      <UniqueIdentifier>{f3418961-5e2f-4fd1-a872-1d9db80f809d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\2D">
+    <Filter Include="Manager\Quad">
       <UniqueIdentifier>{745e382e-e5f6-4631-9c85-d2670c293c3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\3D">
+    <Filter Include="Manager\Text">
+      <UniqueIdentifier>{75600fa6-e976-49bd-b9c7-88c214e1ba20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Miscellaneous">
       <UniqueIdentifier>{938c1284-eeb1-4887-9efd-5cff51c6bd65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Light">
+      <UniqueIdentifier>{f355d192-8449-4f46-907d-50bd90875521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Quad">
+      <UniqueIdentifier>{9c269b2e-5f39-4569-8230-fef0b9605672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Sound">
+      <UniqueIdentifier>{b643693c-dc32-4cd7-bb01-87e11c350845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Animation">
+      <UniqueIdentifier>{043b77df-2efb-42fc-a698-608a61514498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Text">
+      <UniqueIdentifier>{9b48b4c3-5c5a-4e7b-9a28-e6f822cecad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Miscellaneous">
+      <UniqueIdentifier>{b3da1681-98b5-4ed2-adc9-045b6025fc12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Light">
+      <UniqueIdentifier>{49f4b6d0-9a9d-4b2d-9ab6-196e2915eb80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\aabb.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\model.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\pointlight.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d.cpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Data\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sky.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\spotlight.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\text3d.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\water.cpp">
-      <Filter>Data\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\text2d.cpp">
-      <Filter>Data\2D</Filter>
+      <Filter>Data\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d.cpp">
-      <Filter>Data\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\aabb_manager.cpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Data\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\pointlight_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_manager.cpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sky_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\spotlight_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\text3d_manager.cpp">
-      <Filter>Manager\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\water_manager.cpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_manager.cpp">
-      <Filter>Manager\2D</Filter>
+      <Filter>Manager\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_manager.cpp">
+      <Filter>Manager\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text2d_manager.cpp">
-      <Filter>Manager\2D</Filter>
+      <Filter>Manager\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d_manager.cpp">
+      <Filter>Manager\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_manager.cpp">
+      <Filter>Manager\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_manager.cpp">
+      <Filter>Manager\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
+      <Filter>Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
+      <Filter>Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d_manager.cpp">
+      <Filter>Manager\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d_manager.cpp">
+      <Filter>Manager\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d.cpp">
+      <Filter>Data\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d.cpp">
+      <Filter>Data\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d.cpp">
+      <Filter>Data\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d.cpp">
+      <Filter>Data\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d.cpp">
+      <Filter>Data\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text2d.cpp">
+      <Filter>Data\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d.cpp">
+      <Filter>Data\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight.cpp">
+      <Filter>Data\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight.cpp">
+      <Filter>Data\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sky.cpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\terrain.cpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\water.cpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sky_manager.cpp">
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\terrain_manager.cpp">
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\water_manager.cpp">
+      <Filter>Manager\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\model.hpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Data\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_part.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\pointlight.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\quad3d.hpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Data\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\captor.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sky.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\spotlight.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\terrain.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\text3d.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\water.hpp">
-      <Filter>Data\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\text2d.hpp">
-      <Filter>Data\2D</Filter>
+      <Filter>Data\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d.hpp">
-      <Filter>Data\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\aabb_manager.hpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Data\Quad</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\pointlight_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\quad3d_manager.hpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\captor_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sky_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\spotlight_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\terrain_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\text3d_manager.hpp">
-      <Filter>Manager\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\water_manager.hpp">
-      <Filter>Manager\3D</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_manager.hpp">
-      <Filter>Manager\2D</Filter>
+      <Filter>Manager\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\quad3d_manager.hpp">
+      <Filter>Manager\Quad</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\text2d_manager.hpp">
-      <Filter>Manager\2D</Filter>
+      <Filter>Manager\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d_manager.hpp">
+      <Filter>Manager\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\pointlight_manager.hpp">
+      <Filter>Manager\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spotlight_manager.hpp">
+      <Filter>Manager\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
+      <Filter>Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
+      <Filter>Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation2d_manager.hpp">
+      <Filter>Manager\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d_manager.hpp">
+      <Filter>Manager\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation2d.hpp">
+      <Filter>Data\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d.hpp">
+      <Filter>Data\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d.hpp">
+      <Filter>Data\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
+      <Filter>Data\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d.hpp">
+      <Filter>Data\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d.hpp">
+      <Filter>Data\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text2d.hpp">
+      <Filter>Data\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\quad3d.hpp">
+      <Filter>Data\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\pointlight.hpp">
+      <Filter>Data\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spotlight.hpp">
+      <Filter>Data\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sky.hpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\terrain.hpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\water.hpp">
+      <Filter>Data\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sky_manager.hpp">
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\terrain_manager.hpp">
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\water_manager.hpp">
+      <Filter>Manager\Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

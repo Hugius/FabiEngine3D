@@ -25,6 +25,9 @@
     <Filter Include="Collision\Detector">
       <UniqueIdentifier>{e5a99923-9813-4e5a-a818-3f58048fdabb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AABB">
+      <UniqueIdentifier>{ba674e2c-5208-4054-8353-2efdacfe7475}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ray.cpp">
@@ -54,6 +57,12 @@
     <ClCompile Include="..\..\..\src\box.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_manager.cpp">
+      <Filter>AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb.cpp">
+      <Filter>AABB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\ray.hpp">
@@ -76,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\box.hpp">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb_manager.hpp">
+      <Filter>AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb.hpp">
+      <Filter>AABB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

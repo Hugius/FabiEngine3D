@@ -81,37 +81,37 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3((content / COLOR_MULTIPLIER), position.y, position.z));
+			_fe3d->graphics_setShadowPositionOffset(fvec3(content, position.y, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, (content / COLOR_MULTIPLIER), position.z));
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, content, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, position.y, (content / COLOR_MULTIPLIER)));
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, position.y, content));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3((content / COLOR_MULTIPLIER), position.y, position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(content, position.y, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, (content / COLOR_MULTIPLIER), position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, content, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, (content / COLOR_MULTIPLIER)));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, content));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{

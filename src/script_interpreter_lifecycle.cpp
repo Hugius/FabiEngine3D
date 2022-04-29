@@ -336,7 +336,9 @@ void ScriptInterpreter::unload()
 	_fe3d->graphics_setShadowLightness(0.0f);
 	_fe3d->graphics_setShadowQuality(0);
 	_fe3d->graphics_setShadowInterval(0);
-	_fe3d->graphics_setShadowFollowingCamera(false);
+	_fe3d->graphics_setShadowFollowingCameraX(false);
+	_fe3d->graphics_setShadowFollowingCameraY(false);
+	_fe3d->graphics_setShadowFollowingCameraZ(false);
 	_fe3d->graphics_setBloomIntensity(0.0f);
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);

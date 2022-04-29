@@ -150,20 +150,31 @@ void MasterRenderer::_updateShadows()
 	{
 		if((_renderStorage->getShadowInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getShadowInterval()) == 0)
 		{
-			if(_renderStorage->isShadowsFollowingCamera())
-			{
-				const auto cameraPosition = _camera->getPosition();
-				const auto positionOffset = _renderStorage->getShadowPositionOffset();
-				const auto lookatOffset = _renderStorage->getShadowLookatOffset();
+			const auto cameraPosition = _camera->getPosition();
+			const auto positionOffset = _renderStorage->getShadowPositionOffset();
+			const auto lookatOffset = _renderStorage->getShadowLookatOffset();
 
-				_renderStorage->setShadowPosition(fvec3((cameraPosition.x + positionOffset.x), (cameraPosition.y + positionOffset.y), (cameraPosition.z + positionOffset.z)));
-				_renderStorage->setShadowLookat(fvec3((cameraPosition.x + lookatOffset.x), (cameraPosition.y + lookatOffset.y), (cameraPosition.z + lookatOffset.z)));
-			}
-			else
+			auto position = positionOffset;
+			auto lookat = lookatOffset;
+
+			if(_renderStorage->isShadowsFollowingCameraX())
 			{
-				_renderStorage->setShadowPosition(_renderStorage->getShadowPositionOffset());
-				_renderStorage->setShadowLookat(_renderStorage->getShadowLookatOffset());
+				position.x += cameraPosition.x;
+				lookat.x += cameraPosition.x;
 			}
+			if(_renderStorage->isShadowsFollowingCameraY())
+			{
+				position.y += cameraPosition.y;
+				lookat.y += cameraPosition.y;
+			}
+			if(_renderStorage->isShadowsFollowingCameraZ())
+			{
+				position.z += cameraPosition.z;
+				lookat.z += cameraPosition.z;
+			}
+
+			_renderStorage->setShadowPosition(position);
+			_renderStorage->setShadowLookat(lookat);
 
 			const auto leftX = -(_renderStorage->getShadowSize() * 0.5f);
 			const auto rightX = (_renderStorage->getShadowSize() * 0.5f);

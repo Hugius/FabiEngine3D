@@ -103,19 +103,19 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setDirectionalLightingPosition(fvec3((content / COLOR_MULTIPLIER), position.y, position.z));
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3(content, position.y, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, (content / COLOR_MULTIPLIER), position.z));
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, content, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, position.y, (content / COLOR_MULTIPLIER)));
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, position.y, content));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{

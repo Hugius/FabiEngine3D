@@ -6,7 +6,7 @@ using std::to_string;
 using std::min;
 using std::max;
 
-void TerrainEntityColorRenderer::bind()
+void TerrainColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -58,7 +58,7 @@ void TerrainEntityColorRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void TerrainEntityColorRenderer::unbind()
+void TerrainColorRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -77,7 +77,7 @@ void TerrainEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
+void TerrainColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
 {
 	vector<shared_ptr<Pointlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -100,7 +100,7 @@ void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, 
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
+void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
 {
 	vector<shared_ptr<Spotlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -124,7 +124,7 @@ void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, s
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::render(const shared_ptr<Terrain> entity)
+void TerrainColorRenderer::render(const shared_ptr<Terrain> entity)
 {
 	if(!entity->isVisible())
 	{

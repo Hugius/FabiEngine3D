@@ -10,7 +10,7 @@
 
 using std::unordered_map;
 
-class ModelEntityColorRenderer final : public BaseRenderer
+class ModelColorRenderer final : public BaseRenderer
 {
 public:
 	void bind();

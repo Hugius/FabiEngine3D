@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad3d_entity.hpp"
 
-class Quad3dEntityDepthRenderer final : public BaseRenderer
+class Quad3dDepthRenderer final : public BaseRenderer
 {
 public:
 	void bind();

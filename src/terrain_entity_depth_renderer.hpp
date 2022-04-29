@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "terrain_entity.hpp"
 
-class TerrainEntityDepthRenderer final : public BaseRenderer
+class TerrainDepthRenderer final : public BaseRenderer
 {
 public:
 	void bind();

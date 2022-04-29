@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void ModelEntityDepthRenderer::bind()
+void ModelDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -20,7 +20,7 @@ void ModelEntityDepthRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void ModelEntityDepthRenderer::unbind()
+void ModelDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -33,7 +33,7 @@ void ModelEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityDepthRenderer::render(const shared_ptr<Model> entity)
+void ModelDepthRenderer::render(const shared_ptr<Model> entity)
 {
 	if(!entity->isVisible())
 	{

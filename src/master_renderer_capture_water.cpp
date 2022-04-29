@@ -178,11 +178,11 @@ void MasterRenderer::captureWaterEdges()
 
 		if(_terrainManager->getSelectedTerrain() != nullptr)
 		{
-			_terrainEntityDepthRenderer->bind();
+			_terrainDepthRenderer->bind();
 
-			_terrainEntityDepthRenderer->render(_terrainManager->getSelectedTerrain());
+			_terrainDepthRenderer->render(_terrainManager->getSelectedTerrain());
 
-			_terrainEntityDepthRenderer->unbind();
+			_terrainDepthRenderer->unbind();
 		}
 
 		_waterOpacityCaptureBuffer->unbind();

@@ -5,7 +5,7 @@ using std::to_string;
 using std::min;
 using std::max;
 
-void WaterEntityColorRenderer::bind()
+void WaterColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -60,7 +60,7 @@ void WaterEntityColorRenderer::bind()
 	glEnable(GL_BLEND);
 }
 
-void WaterEntityColorRenderer::unbind()
+void WaterColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
@@ -90,7 +90,7 @@ void WaterEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
+void WaterColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
 {
 	vector<shared_ptr<Pointlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -113,7 +113,7 @@ void WaterEntityColorRenderer::processPointlights(const unordered_map<string, sh
 	//_shader->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void WaterEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
+void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
 {
 	vector<shared_ptr<Spotlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -137,7 +137,7 @@ void WaterEntityColorRenderer::processSpotlights(const unordered_map<string, sha
 	//_shader->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void WaterEntityColorRenderer::render(const shared_ptr<Water> entity)
+void WaterColorRenderer::render(const shared_ptr<Water> entity)
 {
 	if(!entity->isVisible())
 	{

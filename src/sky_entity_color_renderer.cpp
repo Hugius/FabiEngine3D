@@ -1,6 +1,6 @@
 #include "sky_entity_color_renderer.hpp"
 
-void SkyEntityColorRenderer::bind()
+void SkyColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -9,12 +9,12 @@ void SkyEntityColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_cubeMap", 0);
 }
 
-void SkyEntityColorRenderer::unbind()
+void SkyColorRenderer::unbind()
 {
 	_shaderBuffer->unbind();
 }
 
-void SkyEntityColorRenderer::render(const shared_ptr<Sky> entity)
+void SkyColorRenderer::render(const shared_ptr<Sky> entity)
 {
 	if(!entity->isVisible())
 	{

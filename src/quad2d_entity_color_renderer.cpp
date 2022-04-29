@@ -2,7 +2,7 @@
 #include "configuration.hpp"
 #include "text2d_entity.hpp"
 
-void Quad2dEntityColorRenderer::bind()
+void Quad2dColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -15,7 +15,7 @@ void Quad2dEntityColorRenderer::bind()
 	glEnable(GL_BLEND);
 }
 
-void Quad2dEntityColorRenderer::unbind()
+void Quad2dColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -26,7 +26,7 @@ void Quad2dEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2d> entity)
+void Quad2dColorRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	if(!entity->isVisible())
 	{

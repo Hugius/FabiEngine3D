@@ -15,11 +15,11 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	_quad2dEntityColorRenderer->bind();
+	_quad2dColorRenderer->bind();
 
-	_quad2dEntityColorRenderer->render(quad);
+	_quad2dColorRenderer->render(quad);
 
-	_quad2dEntityColorRenderer->unbind();
+	_quad2dColorRenderer->unbind();
 
 	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
 }
@@ -62,11 +62,11 @@ void MasterRenderer::_renderSkyEntity()
 {
 	if(_skyManager->getSelectedSky() != nullptr)
 	{
-		_skyEntityColorRenderer->bind();
+		_skyColorRenderer->bind();
 
-		_skyEntityColorRenderer->render(_skyManager->getSelectedSky());
+		_skyColorRenderer->render(_skyManager->getSelectedSky());
 
-		_skyEntityColorRenderer->unbind();
+		_skyColorRenderer->unbind();
 	}
 }
 
@@ -74,15 +74,15 @@ void MasterRenderer::_renderTerrainEntity()
 {
 	if(_terrainManager->getSelectedTerrain() != nullptr)
 	{
-		_terrainEntityColorRenderer->bind();
+		_terrainColorRenderer->bind();
 
-		_terrainEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
+		_terrainColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
-		_terrainEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
+		_terrainColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
-		_terrainEntityColorRenderer->render(_terrainManager->getSelectedTerrain());
+		_terrainColorRenderer->render(_terrainManager->getSelectedTerrain());
 
-		_terrainEntityColorRenderer->unbind();
+		_terrainColorRenderer->unbind();
 	}
 }
 
@@ -90,15 +90,15 @@ void MasterRenderer::_renderWaterEntity()
 {
 	if(_waterManager->getSelectedWater() != nullptr)
 	{
-		_waterEntityColorRenderer->bind();
+		_waterColorRenderer->bind();
 
-		_waterEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
+		_waterColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
-		_waterEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
+		_waterColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
-		_waterEntityColorRenderer->render(_waterManager->getSelectedWater());
+		_waterColorRenderer->render(_waterManager->getSelectedWater());
 
-		_waterEntityColorRenderer->unbind();
+		_waterColorRenderer->unbind();
 	}
 }
 
@@ -106,11 +106,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 {
 	if(!_modelManager->getModels().empty())
 	{
-		_modelEntityColorRenderer->bind();
+		_modelColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
+		_modelColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
-		_modelEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
+		_modelColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
 		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
@@ -143,7 +143,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailModel->setVisible(model->isVisible());
 				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
+				_modelColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
 
 				levelOfDetailModel->setBasePosition(originalPosition);
 				levelOfDetailModel->setBaseRotation(originalRotation);
@@ -153,11 +153,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(model, _captorManager->getCaptors());
+				_modelColorRenderer->render(model, _captorManager->getCaptors());
 			}
 		}
 
-		_modelEntityColorRenderer->unbind();
+		_modelColorRenderer->unbind();
 	}
 }
 
@@ -165,11 +165,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 {
 	if(!_modelManager->getModels().empty())
 	{
-		_modelEntityColorRenderer->bind();
+		_modelColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
+		_modelColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
-		_modelEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
+		_modelColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
 		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
@@ -204,7 +204,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailModel->setVisible(model->isVisible());
 				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
+				_modelColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
 
 				levelOfDetailModel->setBasePosition(originalPosition);
 				levelOfDetailModel->setBaseRotation(originalRotation);
@@ -214,11 +214,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(model, _captorManager->getCaptors());
+				_modelColorRenderer->render(model, _captorManager->getCaptors());
 			}
 		}
 
-		_modelEntityColorRenderer->unbind();
+		_modelColorRenderer->unbind();
 	}
 }
 
@@ -226,7 +226,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 {
 	if(!_quad3dManager->getQuad3ds().empty())
 	{
-		_quad3dEntityColorRenderer->bind();
+		_quad3dColorRenderer->bind();
 
 		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
@@ -235,10 +235,10 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 				continue;
 			}
 
-			_quad3dEntityColorRenderer->render(quad3d);
+			_quad3dColorRenderer->render(quad3d);
 		}
 
-		_quad3dEntityColorRenderer->unbind();
+		_quad3dColorRenderer->unbind();
 	}
 }
 
@@ -246,7 +246,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 {
 	if(!_quad3dManager->getQuad3ds().empty())
 	{
-		_quad3dEntityColorRenderer->bind();
+		_quad3dColorRenderer->bind();
 
 		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
@@ -255,10 +255,10 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 				continue;
 			}
 
-			_quad3dEntityColorRenderer->render(quad3d);
+			_quad3dColorRenderer->render(quad3d);
 		}
 
-		_quad3dEntityColorRenderer->unbind();
+		_quad3dColorRenderer->unbind();
 	}
 }
 
@@ -266,7 +266,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 {
 	if(!_text3dManager->getText3ds().empty())
 	{
-		_quad3dEntityColorRenderer->bind();
+		_quad3dColorRenderer->bind();
 
 		for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 		{
@@ -277,11 +277,11 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 
 			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
-				_quad3dEntityColorRenderer->render(characterEntity);
+				_quad3dColorRenderer->render(characterEntity);
 			}
 		}
 
-		_quad3dEntityColorRenderer->unbind();
+		_quad3dColorRenderer->unbind();
 	}
 }
 
@@ -289,7 +289,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 {
 	if(!_text3dManager->getText3ds().empty())
 	{
-		_quad3dEntityColorRenderer->bind();
+		_quad3dColorRenderer->bind();
 
 		for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 		{
@@ -300,11 +300,11 @@ void MasterRenderer::_renderTransparentText3dEntities()
 
 			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
-				_quad3dEntityColorRenderer->render(characterEntity);
+				_quad3dColorRenderer->render(characterEntity);
 			}
 		}
 
-		_quad3dEntityColorRenderer->unbind();
+		_quad3dColorRenderer->unbind();
 	}
 }
 
@@ -312,14 +312,14 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if(!_aabbManager->getAabbs().empty())
 	{
-		_aabbEntityColorRenderer->bind();
+		_aabbColorRenderer->bind();
 
 		for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 		{
-			_aabbEntityColorRenderer->render(aabb);
+			_aabbColorRenderer->render(aabb);
 		}
 
-		_aabbEntityColorRenderer->unbind();
+		_aabbColorRenderer->unbind();
 	}
 }
 
@@ -327,16 +327,16 @@ void MasterRenderer::_renderFinalScene()
 {
 	_renderSurface->setDiffuseMap(_renderStorage->getFinalSceneTextureBuffer());
 
-	_quad2dEntityColorRenderer->bind();
-	_quad2dEntityColorRenderer->render(_renderSurface);
-	_quad2dEntityColorRenderer->unbind();
+	_quad2dColorRenderer->bind();
+	_quad2dColorRenderer->render(_renderSurface);
+	_quad2dColorRenderer->unbind();
 }
 
 void MasterRenderer::_renderGUI()
 {
 	if(!_quad2dManager->getQuad2ds().empty() || !_text2dManager->getText2ds().empty())
 	{
-		_quad2dEntityColorRenderer->bind();
+		_quad2dColorRenderer->bind();
 
 		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
 		for(const auto & [quad2dId, quad2d] : _quad2dManager->getQuad2ds())
@@ -358,23 +358,23 @@ void MasterRenderer::_renderGUI()
 
 			if(castedQuad2dEntity != nullptr)
 			{
-				_quad2dEntityColorRenderer->render(castedQuad2dEntity);
+				_quad2dColorRenderer->render(castedQuad2dEntity);
 			}
 
 			if(castedText2dEntity != nullptr)
 			{
 				for(const auto & characterEntity : castedText2dEntity->getCharacterEntities())
 				{
-					_quad2dEntityColorRenderer->render(characterEntity);
+					_quad2dColorRenderer->render(characterEntity);
 				}
 			}
 		}
 
 		if(!_renderStorage->getCursorEntityId().empty())
 		{
-			_quad2dEntityColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
+			_quad2dColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
 		}
 
-		_quad2dEntityColorRenderer->unbind();
+		_quad2dColorRenderer->unbind();
 	}
 }

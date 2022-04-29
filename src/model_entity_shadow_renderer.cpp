@@ -4,7 +4,7 @@
 using std::min;
 using std::max;
 
-void ModelEntityShadowRenderer::bind()
+void ModelShadowRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -21,7 +21,7 @@ void ModelEntityShadowRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void ModelEntityShadowRenderer::unbind()
+void ModelShadowRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -34,7 +34,7 @@ void ModelEntityShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityShadowRenderer::render(const shared_ptr<Model> entity)
+void ModelShadowRenderer::render(const shared_ptr<Model> entity)
 {
 	if(!entity->isVisible() || !entity->isShadowed())
 	{

@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void AabbEntityColorRenderer::bind()
+void AabbColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -25,7 +25,7 @@ void AabbEntityColorRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void AabbEntityColorRenderer::unbind()
+void AabbColorRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -38,7 +38,7 @@ void AabbEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbEntityColorRenderer::render(const shared_ptr<Aabb> entity)
+void AabbColorRenderer::render(const shared_ptr<Aabb> entity)
 {
 	if(!entity->isVisible())
 	{

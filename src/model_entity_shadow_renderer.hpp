@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "model_entity.hpp"
 
-class ModelEntityShadowRenderer final : public BaseRenderer
+class ModelShadowRenderer final : public BaseRenderer
 {
 public:
 	void bind();

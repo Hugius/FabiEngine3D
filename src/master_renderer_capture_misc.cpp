@@ -16,25 +16,25 @@ void MasterRenderer::captureWorldDepth()
 
 	if(_terrainManager->getSelectedTerrain() != nullptr)
 	{
-		_terrainEntityDepthRenderer->bind();
+		_terrainDepthRenderer->bind();
 
-		_terrainEntityDepthRenderer->render(_terrainManager->getSelectedTerrain());
+		_terrainDepthRenderer->render(_terrainManager->getSelectedTerrain());
 
-		_terrainEntityDepthRenderer->unbind();
+		_terrainDepthRenderer->unbind();
 	}
 
 	if(_waterManager->getSelectedWater() != nullptr)
 	{
-		_waterEntityDepthRenderer->bind();
+		_waterDepthRenderer->bind();
 
-		_waterEntityDepthRenderer->render(_waterManager->getSelectedWater());
+		_waterDepthRenderer->render(_waterManager->getSelectedWater());
 
-		_waterEntityDepthRenderer->unbind();
+		_waterDepthRenderer->unbind();
 	}
 
 	if(!_modelManager->getModels().empty())
 	{
-		_modelEntityDepthRenderer->bind();
+		_modelDepthRenderer->bind();
 
 		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
@@ -56,7 +56,7 @@ void MasterRenderer::captureWorldDepth()
 					levelOfDetailModel->setVisible(model->isVisible());
 					levelOfDetailModel->updateTransformation();
 
-					_modelEntityDepthRenderer->render(levelOfDetailModel);
+					_modelDepthRenderer->render(levelOfDetailModel);
 
 					levelOfDetailModel->setBasePosition(originalPosition);
 					levelOfDetailModel->setBaseRotation(originalRotation);
@@ -71,50 +71,50 @@ void MasterRenderer::captureWorldDepth()
 			}
 			else
 			{
-				_modelEntityDepthRenderer->render(model);
+				_modelDepthRenderer->render(model);
 			}
 		}
 
-		_modelEntityDepthRenderer->unbind();
+		_modelDepthRenderer->unbind();
 	}
 
 	if(!_quad3dManager->getQuad3ds().empty())
 	{
-		_quad3dEntityDepthRenderer->bind();
+		_quad3dDepthRenderer->bind();
 
 		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
-			_quad3dEntityDepthRenderer->render(quad3d);
+			_quad3dDepthRenderer->render(quad3d);
 		}
 
-		_quad3dEntityDepthRenderer->unbind();
+		_quad3dDepthRenderer->unbind();
 	}
 
 	if(!_text3dManager->getText3ds().empty())
 	{
-		_quad3dEntityDepthRenderer->bind();
+		_quad3dDepthRenderer->bind();
 
 		for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 		{
 			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
-				_quad3dEntityDepthRenderer->render(characterEntity);
+				_quad3dDepthRenderer->render(characterEntity);
 			}
 		}
 
-		_quad3dEntityDepthRenderer->unbind();
+		_quad3dDepthRenderer->unbind();
 	}
 
 	if(!_aabbManager->getAabbs().empty())
 	{
-		_aabbEntityDepthRenderer->bind();
+		_aabbDepthRenderer->bind();
 
 		for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 		{
-			_aabbEntityDepthRenderer->render(aabb);
+			_aabbDepthRenderer->render(aabb);
 		}
 
-		_aabbEntityDepthRenderer->unbind();
+		_aabbDepthRenderer->unbind();
 	}
 
 	_worldDepthCaptureBuffer->unbind();
@@ -268,7 +268,7 @@ void MasterRenderer::captureShadows()
 
 		if(!_modelManager->getModels().empty())
 		{
-			_modelEntityShadowRenderer->bind();
+			_modelShadowRenderer->bind();
 
 			for(const auto & [modelId, model] : _modelManager->getModels())
 			{
@@ -290,7 +290,7 @@ void MasterRenderer::captureShadows()
 						levelOfDetailModel->setVisible(model->isVisible());
 						levelOfDetailModel->updateTransformation();
 
-						_modelEntityShadowRenderer->render(levelOfDetailModel);
+						_modelShadowRenderer->render(levelOfDetailModel);
 
 						levelOfDetailModel->setBasePosition(originalPosition);
 						levelOfDetailModel->setBaseRotation(originalRotation);
@@ -305,38 +305,38 @@ void MasterRenderer::captureShadows()
 				}
 				else
 				{
-					_modelEntityShadowRenderer->render(model);
+					_modelShadowRenderer->render(model);
 				}
 			}
 
-			_modelEntityShadowRenderer->unbind();
+			_modelShadowRenderer->unbind();
 		}
 
 		if(!_quad3dManager->getQuad3ds().empty())
 		{
-			_quad3dEntityShadowRenderer->bind();
+			_quad3dShadowRenderer->bind();
 
 			for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 			{
-				_quad3dEntityShadowRenderer->render(quad3d);
+				_quad3dShadowRenderer->render(quad3d);
 			}
 
-			_quad3dEntityShadowRenderer->unbind();
+			_quad3dShadowRenderer->unbind();
 		}
 
 		if(!_text3dManager->getText3ds().empty())
 		{
-			_quad3dEntityShadowRenderer->bind();
+			_quad3dShadowRenderer->bind();
 
 			for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 			{
 				for(const auto & characterEntity : text3d->getCharacterEntities())
 				{
-					_quad3dEntityShadowRenderer->render(characterEntity);
+					_quad3dShadowRenderer->render(characterEntity);
 				}
 			}
 
-			_quad3dEntityShadowRenderer->unbind();
+			_quad3dShadowRenderer->unbind();
 		}
 
 		_shadowCaptureBuffer->unbind();

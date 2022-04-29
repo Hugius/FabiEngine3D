@@ -4,7 +4,7 @@
 using std::min;
 using std::max;
 
-void TerrainEntityDepthRenderer::bind()
+void TerrainDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -20,7 +20,7 @@ void TerrainEntityDepthRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void TerrainEntityDepthRenderer::unbind()
+void TerrainDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -33,7 +33,7 @@ void TerrainEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityDepthRenderer::render(const shared_ptr<Terrain> entity)
+void TerrainDepthRenderer::render(const shared_ptr<Terrain> entity)
 {
 	if(!entity->isVisible())
 	{

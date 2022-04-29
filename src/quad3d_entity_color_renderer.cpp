@@ -4,7 +4,7 @@
 using std::min;
 using std::max;
 
-void Quad3dEntityColorRenderer::bind()
+void Quad3dColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -28,7 +28,7 @@ void Quad3dEntityColorRenderer::bind()
 	glEnable(GL_BLEND);
 }
 
-void Quad3dEntityColorRenderer::unbind()
+void Quad3dColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
@@ -42,7 +42,7 @@ void Quad3dEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3d> entity)
+void Quad3dColorRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible())
 	{

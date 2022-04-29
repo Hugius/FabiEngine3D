@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void WaterEntityDepthRenderer::bind()
+void WaterDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -19,7 +19,7 @@ void WaterEntityDepthRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void WaterEntityDepthRenderer::unbind()
+void WaterDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -32,7 +32,7 @@ void WaterEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterEntityDepthRenderer::render(const shared_ptr<Water> entity)
+void WaterDepthRenderer::render(const shared_ptr<Water> entity)
 {
 	if(!entity->isVisible())
 	{

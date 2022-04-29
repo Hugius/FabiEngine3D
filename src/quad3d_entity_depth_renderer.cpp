@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void Quad3dEntityDepthRenderer::bind()
+void Quad3dDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -20,7 +20,7 @@ void Quad3dEntityDepthRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void Quad3dEntityDepthRenderer::unbind()
+void Quad3dDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -33,7 +33,7 @@ void Quad3dEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3d> entity)
+void Quad3dDepthRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible())
 	{

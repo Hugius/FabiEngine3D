@@ -9,7 +9,7 @@
 
 using std::unordered_map;
 
-class TerrainEntityColorRenderer final : public BaseRenderer
+class TerrainColorRenderer final : public BaseRenderer
 {
 public:
 	void bind();

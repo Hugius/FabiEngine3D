@@ -6,7 +6,7 @@ using std::to_string;
 using std::min;
 using std::max;
 
-void ModelEntityColorRenderer::bind()
+void ModelColorRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -64,7 +64,7 @@ void ModelEntityColorRenderer::bind()
 	glEnable(GL_BLEND);
 }
 
-void ModelEntityColorRenderer::unbind()
+void ModelColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
@@ -89,7 +89,7 @@ void ModelEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
+void ModelColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
 {
 	vector<shared_ptr<Pointlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -112,7 +112,7 @@ void ModelEntityColorRenderer::processPointlights(const unordered_map<string, sh
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
+void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
 {
 	vector<shared_ptr<Spotlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -136,7 +136,7 @@ void ModelEntityColorRenderer::processSpotlights(const unordered_map<string, sha
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captorEntities)
+void ModelColorRenderer::render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captorEntities)
 {
 	if(!entity->isVisible())
 	{

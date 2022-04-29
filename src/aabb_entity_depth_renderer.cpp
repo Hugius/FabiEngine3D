@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void AabbEntityDepthRenderer::bind()
+void AabbDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -19,7 +19,7 @@ void AabbEntityDepthRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void AabbEntityDepthRenderer::unbind()
+void AabbDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -32,7 +32,7 @@ void AabbEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbEntityDepthRenderer::render(const shared_ptr<Aabb> entity)
+void AabbDepthRenderer::render(const shared_ptr<Aabb> entity)
 {
 	if(!entity->isVisible())
 	{

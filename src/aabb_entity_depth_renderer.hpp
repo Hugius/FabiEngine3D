@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "aabb_entity.hpp"
 
-class AabbEntityDepthRenderer final : public BaseRenderer
+class AabbDepthRenderer final : public BaseRenderer
 {
 public:
 	void bind();

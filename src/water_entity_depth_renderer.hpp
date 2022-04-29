@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "water_entity.hpp"
 
-class WaterEntityDepthRenderer final : public BaseRenderer
+class WaterDepthRenderer final : public BaseRenderer
 {
 public:
 	void bind();

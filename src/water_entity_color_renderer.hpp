@@ -9,7 +9,7 @@
 
 using std::unordered_map;
 
-class WaterEntityColorRenderer final : public BaseRenderer
+class WaterColorRenderer final : public BaseRenderer
 {
 public:
 	void bind();

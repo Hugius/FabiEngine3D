@@ -3,7 +3,7 @@
 using std::min;
 using std::max;
 
-void Quad3dEntityShadowRenderer::bind()
+void Quad3dShadowRenderer::bind()
 {
 	_shaderBuffer->bind();
 
@@ -20,7 +20,7 @@ void Quad3dEntityShadowRenderer::bind()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void Quad3dEntityShadowRenderer::unbind()
+void Quad3dShadowRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CLIP_DISTANCE0);
@@ -33,7 +33,7 @@ void Quad3dEntityShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3d> entity)
+void Quad3dShadowRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible() || !entity->isShadowed())
 	{

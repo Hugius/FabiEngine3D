@@ -70,10 +70,11 @@ const bool WorldEditor::saveWorldToFile() const
 
 	{
 		auto skyId = _fe3d->sky_getSelectedId();
-		auto templateId = ("@" + skyId);
 
 		if(!skyId.empty())
 		{
+			auto templateId = ("@" + skyId);
+
 			file
 				<< "SKY "
 				<< skyId
@@ -85,10 +86,11 @@ const bool WorldEditor::saveWorldToFile() const
 
 	{
 		auto terrainId = _fe3d->terrain_getSelectedId();
-		auto templateId = ("@" + terrainId);
 
 		if(!terrainId.empty())
 		{
+			auto templateId = ("@" + terrainId);
+
 			file
 				<< "TERRAIN "
 				<< terrainId
@@ -100,11 +102,12 @@ const bool WorldEditor::saveWorldToFile() const
 
 	{
 		auto waterId = _fe3d->water_getSelectedId();
-		auto templateId = ("@" + waterId);
-		auto height = _fe3d->water_getHeight(waterId);
 
 		if(!waterId.empty())
 		{
+			auto templateId = ("@" + waterId);
+			auto height = _fe3d->water_getHeight(waterId);
+
 			file
 				<< "WATER "
 				<< waterId

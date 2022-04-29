@@ -4,7 +4,7 @@
 
 class ModelEntityPart final
 {
-	friend class ModelEntity;
+	friend class Model;
 
 	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> diffuseTextureBuffer = nullptr;

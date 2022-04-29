@@ -8,7 +8,7 @@
 using std::unique_ptr;
 using std::unordered_map;
 
-class ModelEntity final : public BaseEntity
+class Model final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

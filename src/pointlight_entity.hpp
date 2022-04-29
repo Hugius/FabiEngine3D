@@ -4,7 +4,7 @@
 #include "mathematics.hpp"
 #include "pointlight_type.hpp"
 
-class PointlightEntity final : public BaseEntity
+class Pointlight final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

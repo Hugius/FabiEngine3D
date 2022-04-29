@@ -26,9 +26,9 @@ public:
 	void deleteEntity(const string & modelId);
 	void deleteEntities();
 
-	const unordered_map<string, shared_ptr<ModelEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Model>> & getEntities() const;
 
-	const shared_ptr<ModelEntity> getEntity(const string & modelId) const;
+	const shared_ptr<Model> getEntity(const string & modelId) const;
 
 	const bool isEntityExisting(const string & modelId) const;
 	const bool isEntitiesExisting() const;
@@ -36,7 +36,7 @@ public:
 private:
 	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 
-	unordered_map<string, shared_ptr<ModelEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Model>> _entities = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

@@ -5,12 +5,12 @@
 using std::max;
 using std::clamp;
 
-void AabbEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
+void Aabb::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 }
 
-void AabbEntity::updateTarget()
+void Aabb::updateTarget()
 {
 	if(hasParent())
 	{
@@ -96,7 +96,7 @@ void AabbEntity::updateTarget()
 	}
 }
 
-void AabbEntity::updateTransformation()
+void Aabb::updateTransformation()
 {
 	auto translationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 
@@ -105,65 +105,65 @@ void AabbEntity::updateTransformation()
 	_transformation = (translationMatrix * scalingMatrix);
 }
 
-void AabbEntity::setCollisionDirection(DirectionType value)
+void Aabb::setCollisionDirection(DirectionType value)
 {
 	_collisionDirection = value;
 }
 
-void AabbEntity::setRaycastResponsive(bool value)
+void Aabb::setRaycastResponsive(bool value)
 {
 	_isRaycastResponsive = value;
 }
 
-void AabbEntity::setCollisionResponsive(bool value)
+void Aabb::setCollisionResponsive(bool value)
 {
 	_isCollisionResponsive = value;
 }
 
-void AabbEntity::setCollided(bool value)
+void Aabb::setCollided(bool value)
 {
 	_hasCollided = value;
 }
 
-void AabbEntity::setColor(const fvec3 & value)
+void Aabb::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
-void AabbEntity::setCentered(bool value)
+void Aabb::setCentered(bool value)
 {
 	_isCentered = value;
 }
 
-void AabbEntity::setMinClipPosition(const fvec3 & value)
+void Aabb::setMinClipPosition(const fvec3 & value)
 {
 	_minClipPosition = value;
 }
 
-void AabbEntity::setMaxClipPosition(const fvec3 & value)
+void Aabb::setMaxClipPosition(const fvec3 & value)
 {
 	_maxClipPosition = value;
 }
 
-void AabbEntity::setBasePosition(const fvec3 & value)
+void Aabb::setBasePosition(const fvec3 & value)
 {
 	_basePosition = value;
 	_basePositionTarget = value;
 }
 
-void AabbEntity::setBaseSize(const fvec3 & value)
+void Aabb::setBaseSize(const fvec3 & value)
 {
 	_baseSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	_baseSizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void AabbEntity::moveBase(const fvec3 & value)
+void Aabb::moveBase(const fvec3 & value)
 {
 	_basePosition += value;
 	_basePositionTarget += value;
 }
 
-void AabbEntity::scaleBase(const fvec3 & value)
+void Aabb::scaleBase(const fvec3 & value)
 {
 	_baseSize += value;
 	_baseSizeTarget += value;
@@ -171,25 +171,25 @@ void AabbEntity::scaleBase(const fvec3 & value)
 	_baseSizeTarget = fvec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
 }
 
-void AabbEntity::moveBaseTo(const fvec3 & target, float speed)
+void Aabb::moveBaseTo(const fvec3 & target, float speed)
 {
 	_basePositionTarget = target;
 	_basePositionTargetSpeed = speed;
 }
 
-void AabbEntity::scaleBaseTo(const fvec3 & target, float speed)
+void Aabb::scaleBaseTo(const fvec3 & target, float speed)
 {
 	_baseSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_baseSizeTargetSpeed = speed;
 }
 
-void AabbEntity::moveLocal(const fvec3 & value)
+void Aabb::moveLocal(const fvec3 & value)
 {
 	_localPosition += value;
 	_localPositionTarget += value;
 }
 
-void AabbEntity::scaleLocal(const fvec3 & value)
+void Aabb::scaleLocal(const fvec3 & value)
 {
 	_localSize += value;
 	_localSizeTarget += value;
@@ -197,119 +197,119 @@ void AabbEntity::scaleLocal(const fvec3 & value)
 	_localSizeTarget = fvec3(max(0.0f, _localSizeTarget.x), max(0.0f, _localSizeTarget.y), max(0.0f, _localSizeTarget.z));
 }
 
-void AabbEntity::moveLocalTo(const fvec3 & target, float speed)
+void Aabb::moveLocalTo(const fvec3 & target, float speed)
 {
 	_localPositionTarget = target;
 	_localPositionTargetSpeed = speed;
 }
 
-void AabbEntity::scaleLocalTo(const fvec3 & target, float speed)
+void Aabb::scaleLocalTo(const fvec3 & target, float speed)
 {
 	_localSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_localSizeTargetSpeed = speed;
 }
 
-void AabbEntity::setParentId(const string & value)
+void Aabb::setParentId(const string & value)
 {
 	_parentId = value;
 }
 
-void AabbEntity::setParentType(AabbParentType value)
+void Aabb::setParentType(AabbParentType value)
 {
 	_parentType = value;
 }
 
-void AabbEntity::setLocalPosition(const fvec3 & value)
+void Aabb::setLocalPosition(const fvec3 & value)
 {
 	_localPosition = value;
 }
 
-void AabbEntity::setLocalSize(const fvec3 & value)
+void Aabb::setLocalSize(const fvec3 & value)
 {
 	_localSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-const shared_ptr<VertexBuffer> AabbEntity::getVertexBuffer()const
+const shared_ptr<VertexBuffer> Aabb::getVertexBuffer()const
 {
 	return _vertexBuffer;
 }
 
-const mat44 & AabbEntity::getTransformation() const
+const mat44 & Aabb::getTransformation() const
 {
 	return _transformation;
 }
 
-const fvec3 & AabbEntity::getLocalPosition() const
+const fvec3 & Aabb::getLocalPosition() const
 {
 	return _localPosition;
 }
 
-const fvec3 & AabbEntity::getLocalSize() const
+const fvec3 & Aabb::getLocalSize() const
 {
 	return _localSize;
 }
 
-const fvec3 & AabbEntity::getBasePosition() const
+const fvec3 & Aabb::getBasePosition() const
 {
 	return _basePosition;
 }
 
-const fvec3 & AabbEntity::getBaseSize() const
+const fvec3 & Aabb::getBaseSize() const
 {
 	return _baseSize;
 }
 
-const fvec3 & AabbEntity::getColor() const
+const fvec3 & Aabb::getColor() const
 {
 	return _color;
 }
 
-const fvec3 & AabbEntity::getMinClipPosition() const
+const fvec3 & Aabb::getMinClipPosition() const
 {
 	return _minClipPosition;
 }
 
-const fvec3 & AabbEntity::getMaxClipPosition() const
+const fvec3 & Aabb::getMaxClipPosition() const
 {
 	return _maxClipPosition;
 }
 
-const string & AabbEntity::getParentId() const
+const string & Aabb::getParentId() const
 {
 	return _parentId;
 }
 
-const AabbParentType AabbEntity::getParentType() const
+const AabbParentType Aabb::getParentType() const
 {
 	return _parentType;
 }
 
-const DirectionType AabbEntity::getCollisionDirection() const
+const DirectionType Aabb::getCollisionDirection() const
 {
 	return _collisionDirection;
 }
 
-const bool AabbEntity::isCentered() const
+const bool Aabb::isCentered() const
 {
 	return _isCentered;
 }
 
-const bool AabbEntity::isRaycastResponsive() const
+const bool Aabb::isRaycastResponsive() const
 {
 	return _isRaycastResponsive;
 }
 
-const bool AabbEntity::isCollisionResponsive() const
+const bool Aabb::isCollisionResponsive() const
 {
 	return _isCollisionResponsive;
 }
 
-const bool AabbEntity::hasParent() const
+const bool Aabb::hasParent() const
 {
 	return !_parentId.empty();
 }
 
-const bool AabbEntity::hasCollided() const
+const bool Aabb::hasCollided() const
 {
 	return _hasCollided;
 }

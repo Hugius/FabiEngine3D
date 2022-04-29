@@ -9,7 +9,7 @@
 
 using std::shared_ptr;
 
-class AabbEntity final : public BaseEntity
+class Aabb final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

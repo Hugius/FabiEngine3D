@@ -6,7 +6,7 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-const shared_ptr<ModelEntity> ModelManager::getEntity(const string & modelId) const
+const shared_ptr<Model> ModelManager::getEntity(const string & modelId) const
 {
 	auto iterator = _entities.find(modelId);
 
@@ -18,7 +18,7 @@ const shared_ptr<ModelEntity> ModelManager::getEntity(const string & modelId) co
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<ModelEntity>> & ModelManager::getEntities() const
+const unordered_map<string, shared_ptr<Model>> & ModelManager::getEntities() const
 {
 	return _entities;
 }
@@ -67,7 +67,7 @@ void ModelManager::createEntity(const string & modelId, const string & meshPath)
 		return;
 	}
 
-	auto entity = make_shared<ModelEntity>(modelId);
+	auto entity = make_shared<Model>(modelId);
 
 	for(const auto & part : mesh->getParts())
 	{
@@ -182,7 +182,7 @@ void ModelManager::update()
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
-			map<float, shared_ptr<CaptorEntity>> orderedCaptorEntities;
+			map<float, shared_ptr<Captor>> orderedCaptorEntities;
 
 			for(const auto & [captorEntityId, captorEntity] : _captorManager->getEntities())
 			{

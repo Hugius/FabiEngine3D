@@ -23,9 +23,9 @@ public:
 	void deleteEntity(const string & text2dId);
 	void deleteEntities();
 
-	const unordered_map<string, shared_ptr<Text2dEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Text2d>> & getEntities() const;
 
-	const shared_ptr<Text2dEntity> getEntity(const string & text2dId) const;
+	const shared_ptr<Text2d> getEntity(const string & text2dId) const;
 
 	const bool isEntityExisting(const string & text2dId) const;
 	const bool isEntitiesExisting() const;
@@ -34,7 +34,7 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
-	unordered_map<string, shared_ptr<Text2dEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Text2d>> _entities = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;

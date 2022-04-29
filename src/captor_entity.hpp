@@ -8,7 +8,7 @@
 
 using std::array;
 
-class CaptorEntity final : public BaseEntity
+class Captor final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

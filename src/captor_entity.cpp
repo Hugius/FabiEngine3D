@@ -1,6 +1,6 @@
 #include "captor_entity.hpp"
 
-void CaptorEntity::updateTarget()
+void Captor::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -22,60 +22,60 @@ void CaptorEntity::updateTarget()
 	}
 }
 
-void CaptorEntity::capture()
+void Captor::capture()
 {
 	_mustCapture = true;
 }
 
-void CaptorEntity::setCaptured()
+void Captor::setCaptured()
 {
 	_mustCapture = false;
 }
 
-void CaptorEntity::setPosition(const fvec3 & value)
+void Captor::setPosition(const fvec3 & value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void CaptorEntity::move(const fvec3 & change)
+void Captor::move(const fvec3 & change)
 {
 	_position += change;
 	_positionTarget += change;
 }
 
-void CaptorEntity::moveTo(const fvec3 & target, float speed)
+void Captor::moveTo(const fvec3 & target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void CaptorEntity::setCubeMap(shared_ptr<TextureBuffer> value)
+void Captor::setCubeMap(shared_ptr<TextureBuffer> value)
 {
 	_cubeTextureBuffer = value;
 }
 
-void CaptorEntity::setExceptionId(const string & id)
+void Captor::setExceptionId(const string & id)
 {
 	_exceptionId = id;
 }
 
-const string & CaptorEntity::getExceptionId() const
+const string & Captor::getExceptionId() const
 {
 	return _exceptionId;
 }
 
-const fvec3 & CaptorEntity::getPosition() const
+const fvec3 & Captor::getPosition() const
 {
 	return _position;
 }
 
-const bool CaptorEntity::mustCapture() const
+const bool Captor::mustCapture() const
 {
 	return _mustCapture;
 }
 
-const shared_ptr<TextureBuffer> CaptorEntity::getCubeTextureBuffer() const
+const shared_ptr<TextureBuffer> Captor::getCubeTextureBuffer() const
 {
 	return _cubeTextureBuffer;
 }

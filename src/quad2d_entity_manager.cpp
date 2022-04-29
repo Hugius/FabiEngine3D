@@ -10,7 +10,7 @@ Quad2dManager::Quad2dManager()
 
 }
 
-const shared_ptr<Quad2dEntity> Quad2dManager::getEntity(const string & quad2dId) const
+const shared_ptr<Quad2d> Quad2dManager::getEntity(const string & quad2dId) const
 {
 	auto iterator = _entities.find(quad2dId);
 
@@ -22,7 +22,7 @@ const shared_ptr<Quad2dEntity> Quad2dManager::getEntity(const string & quad2dId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad2dEntity>> & Quad2dManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad2d>> & Quad2dManager::getEntities() const
 {
 	return _entities;
 }
@@ -34,7 +34,7 @@ void Quad2dManager::createEntity(const string & quad2dId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<Quad2dEntity>(quad2dId);
+	auto entity = make_shared<Quad2d>(quad2dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	entity->setCentered(isCentered);

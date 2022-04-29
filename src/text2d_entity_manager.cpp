@@ -10,7 +10,7 @@ Text2dManager::Text2dManager()
 
 }
 
-const shared_ptr<Text2dEntity> Text2dManager::getEntity(const string & text2dId) const
+const shared_ptr<Text2d> Text2dManager::getEntity(const string & text2dId) const
 {
 	auto iterator = _entities.find(text2dId);
 
@@ -22,7 +22,7 @@ const shared_ptr<Text2dEntity> Text2dManager::getEntity(const string & text2dId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text2dEntity>> & Text2dManager::getEntities() const
+const unordered_map<string, shared_ptr<Text2d>> & Text2dManager::getEntities() const
 {
 	return _entities;
 }
@@ -50,7 +50,7 @@ void Text2dManager::createEntity(const string & text2dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text2dEntity>(text2dId);
+	auto entity = make_shared<Text2d>(text2dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));

@@ -8,7 +8,7 @@
 using std::shared_ptr;
 using std::unordered_map;
 
-class Text2dEntity final : public BaseEntity
+class Text2d final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
@@ -40,7 +40,7 @@ public:
 	void setCentered(bool value);
 	void setVisible(bool value) override;
 
-	const vector<shared_ptr<Quad2dEntity>> & getCharacterEntities() const;
+	const vector<shared_ptr<Quad2d>> & getCharacterEntities() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
@@ -169,7 +169,7 @@ private:
 	static inline constexpr int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr int FONT_MAP_COLUMN_COUNT = 16;
 
-	vector<shared_ptr<Quad2dEntity>> _characterEntities = {};
+	vector<shared_ptr<Quad2d>> _characterEntities = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;

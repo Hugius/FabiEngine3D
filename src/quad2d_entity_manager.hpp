@@ -18,9 +18,9 @@ public:
 	void deleteEntity(const string & quad2dId);
 	void deleteEntities();
 
-	const unordered_map<string, shared_ptr<Quad2dEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Quad2d>> & getEntities() const;
 
-	const shared_ptr<Quad2dEntity> getEntity(const string & quad2dId) const;
+	const shared_ptr<Quad2d> getEntity(const string & quad2dId) const;
 
 	const bool isEntityExisting(const string & quad2dId) const;
 	const bool isEntitiesExisting() const;
@@ -29,7 +29,7 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
-	unordered_map<string, shared_ptr<Quad2dEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Quad2d>> _entities = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 };

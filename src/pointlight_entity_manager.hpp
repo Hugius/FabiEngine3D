@@ -16,9 +16,9 @@ public:
 	void deleteEntity(const string & pointlightId);
 	void deleteEntities();
 
-	const unordered_map<string, shared_ptr<PointlightEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Pointlight>> & getEntities() const;
 
-	const shared_ptr<PointlightEntity> getEntity(const string & pointlightId) const;
+	const shared_ptr<Pointlight> getEntity(const string & pointlightId) const;
 
 	const int getMaxEntityCount() const;
 
@@ -28,5 +28,5 @@ public:
 private:
 	static inline constexpr int MAX_ENTITY_COUNT = 64;
 
-	unordered_map<string, shared_ptr<PointlightEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Pointlight>> _entities = {};
 };

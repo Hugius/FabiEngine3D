@@ -19,10 +19,10 @@ public:
 	void deleteEntities();
 	void selectEntity(const string & skyId);
 
-	const unordered_map<string, shared_ptr<SkyEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Sky>> & getEntities() const;
 
-	const shared_ptr<SkyEntity> getEntity(const string & skyId) const;
-	const shared_ptr<SkyEntity> getSelectedEntity() const;
+	const shared_ptr<Sky> getEntity(const string & skyId) const;
+	const shared_ptr<Sky> getSelectedEntity() const;
 
 	const bool isEntityExisting(const string & skyId) const;
 	const bool isEntitiesExisting() const;
@@ -30,7 +30,7 @@ public:
 private:
 	const shared_ptr<VertexBuffer> _vertexBuffer;
 
-	unordered_map<string, shared_ptr<SkyEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Sky>> _entities = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 

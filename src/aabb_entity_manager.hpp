@@ -23,9 +23,9 @@ public:
 	void deleteAabb(const string & aabbId);
 	void deleteAabbs();
 
-	const unordered_map<string, shared_ptr<AabbEntity>> & getAabbs() const;
+	const unordered_map<string, shared_ptr<Aabb>> & getAabbs() const;
 
-	const shared_ptr<AabbEntity> getAabb(const string & aabbId) const;
+	const shared_ptr<Aabb> getAabb(const string & aabbId) const;
 
 	const bool isAabbExisting(const string & aabbId) const;
 	const bool isAabbsExisting() const;
@@ -36,7 +36,7 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<AabbEntity>> _aabbEntities = {};
+	unordered_map<string, shared_ptr<Aabb>> _aabbEntities = {};
 
 	shared_ptr<ModelManager> _modelManager = nullptr;
 	shared_ptr<Quad3dManager> _quad3dManager = nullptr;

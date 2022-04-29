@@ -71,7 +71,7 @@ void AabbManager::inject(shared_ptr<Text3dManager> text3dManager)
 	_text3dManager = text3dManager;
 }
 
-const shared_ptr<AabbEntity> AabbManager::getAabb(const string & aabbId) const
+const shared_ptr<Aabb> AabbManager::getAabb(const string & aabbId) const
 {
 	auto iterator = _aabbEntities.find(aabbId);
 
@@ -83,7 +83,7 @@ const shared_ptr<AabbEntity> AabbManager::getAabb(const string & aabbId) const
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<AabbEntity>> & AabbManager::getAabbs() const
+const unordered_map<string, shared_ptr<Aabb>> & AabbManager::getAabbs() const
 {
 	return _aabbEntities;
 }
@@ -95,7 +95,7 @@ void AabbManager::createAabb(const string & aabbId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<AabbEntity>(aabbId);
+	auto entity = make_shared<Aabb>(aabbId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);

@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-const shared_ptr<CaptorEntity> CaptorManager::getEntity(const string & captorId) const
+const shared_ptr<Captor> CaptorManager::getEntity(const string & captorId) const
 {
 	auto iterator = _entities.find(captorId);
 
@@ -14,7 +14,7 @@ const shared_ptr<CaptorEntity> CaptorManager::getEntity(const string & captorId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<CaptorEntity>> & CaptorManager::getEntities() const
+const unordered_map<string, shared_ptr<Captor>> & CaptorManager::getEntities() const
 {
 	return _entities;
 }
@@ -26,7 +26,7 @@ void CaptorManager::createEntity(const string & captorId)
 		abort();
 	}
 
-	auto entity = make_shared<CaptorEntity>(captorId);
+	auto entity = make_shared<Captor>(captorId);
 
 	_entities.insert({captorId, entity});
 }

@@ -54,7 +54,7 @@ void Text3dManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
 	_textureBufferCache = textureBufferCache;
 }
 
-const shared_ptr<Text3dEntity> Text3dManager::getText3d(const string & text3dId) const
+const shared_ptr<Text3d> Text3dManager::getText3d(const string & text3dId) const
 {
 	auto iterator = _text3ds.find(text3dId);
 
@@ -66,7 +66,7 @@ const shared_ptr<Text3dEntity> Text3dManager::getText3d(const string & text3dId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text3dEntity>> & Text3dManager::getText3ds() const
+const unordered_map<string, shared_ptr<Text3d>> & Text3dManager::getText3ds() const
 {
 	return _text3ds;
 }
@@ -95,7 +95,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text3dEntity>(text3dId);
+	auto entity = make_shared<Text3d>(text3dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);

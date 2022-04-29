@@ -33,7 +33,7 @@ void Quad3dEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity)
+void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible())
 	{

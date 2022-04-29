@@ -32,7 +32,7 @@ void WaterEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterEntityDepthRenderer::render(const shared_ptr<WaterEntity> entity)
+void WaterEntityDepthRenderer::render(const shared_ptr<Water> entity)
 {
 	if(!entity->isVisible())
 	{

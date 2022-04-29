@@ -5,12 +5,12 @@
 using std::max;
 using std::clamp;
 
-void SkyEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
+void Sky::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 }
 
-void SkyEntity::updateTarget()
+void Sky::updateTarget()
 {
 	if(_rotation != _rotationTarget)
 	{
@@ -39,7 +39,7 @@ void SkyEntity::updateTarget()
 	}
 }
 
-void SkyEntity::updateTransformation()
+void Sky::updateTransformation()
 {
 	_transformation = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
@@ -47,32 +47,32 @@ void SkyEntity::updateTransformation()
 		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 }
 
-void SkyEntity::setCubeMapPaths(const array<string, 6> & value)
+void Sky::setCubeMapPaths(const array<string, 6> & value)
 {
 	_cubeMapPaths = value;
 }
 
-void SkyEntity::setColor(const fvec3 & value)
+void Sky::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void SkyEntity::setCubeMap(shared_ptr<TextureBuffer> value)
+void Sky::setCubeMap(shared_ptr<TextureBuffer> value)
 {
 	_cubeTextureBuffer = value;
 }
 
-void SkyEntity::setLightness(float value)
+void Sky::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
 }
 
-void SkyEntity::setRotation(const fvec3 & value)
+void Sky::setRotation(const fvec3 & value)
 {
 	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
-void SkyEntity::rotate(const fvec3 & change)
+void Sky::rotate(const fvec3 & change)
 {
 	_rotation += change;
 	_rotationTarget += change;
@@ -80,73 +80,73 @@ void SkyEntity::rotate(const fvec3 & change)
 	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }
 
-void SkyEntity::rotateTo(const fvec3 & target, float speed)
+void Sky::rotateTo(const fvec3 & target, float speed)
 {
 	_rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 
-void SkyEntity::setWireframed(bool value)
+void Sky::setWireframed(bool value)
 {
 	_isWireframed = value;
 }
 
-void SkyEntity::setWireframeColor(const fvec3 & value)
+void Sky::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void SkyEntity::setRotationOrder(DirectionOrderType value)
+void Sky::setRotationOrder(DirectionOrderType value)
 {
 	_rotationOrder = value;
 }
 
-const shared_ptr<VertexBuffer> SkyEntity::getVertexBuffer() const
+const shared_ptr<VertexBuffer> Sky::getVertexBuffer() const
 {
 	return _vertexBuffer;
 }
 
-const array<string, 6> & SkyEntity::getCubeMapPaths() const
+const array<string, 6> & Sky::getCubeMapPaths() const
 {
 	return _cubeMapPaths;
 }
 
-const mat44 & SkyEntity::getTransformation() const
+const mat44 & Sky::getTransformation() const
 {
 	return _transformation;
 }
 
-const fvec3 & SkyEntity::getWireframeColor() const
+const fvec3 & Sky::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 & SkyEntity::getColor() const
+const fvec3 & Sky::getColor() const
 {
 	return _color;
 }
 
-const shared_ptr<TextureBuffer> SkyEntity::getCubeTextureBuffer() const
+const shared_ptr<TextureBuffer> Sky::getCubeTextureBuffer() const
 {
 	return _cubeTextureBuffer;
 }
 
-const float SkyEntity::getLightness() const
+const float Sky::getLightness() const
 {
 	return _lightness;
 }
 
-const fvec3 & SkyEntity::getRotation() const
+const fvec3 & Sky::getRotation() const
 {
 	return _rotation;
 }
 
-const bool SkyEntity::isWireframed() const
+const bool Sky::isWireframed() const
 {
 	return _isWireframed;
 }
 
-const DirectionOrderType SkyEntity::getRotationOrder() const
+const DirectionOrderType Sky::getRotationOrder() const
 {
 	return _rotationOrder;
 }

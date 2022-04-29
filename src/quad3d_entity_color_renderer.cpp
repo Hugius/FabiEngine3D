@@ -42,7 +42,7 @@ void Quad3dEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
+void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible())
 	{

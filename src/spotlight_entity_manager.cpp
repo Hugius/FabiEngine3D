@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-const shared_ptr<SpotlightEntity> SpotlightManager::getSpotlight(const string & spotlightId) const
+const shared_ptr<Spotlight> SpotlightManager::getSpotlight(const string & spotlightId) const
 {
 	auto iterator = _spotlights.find(spotlightId);
 
@@ -14,7 +14,7 @@ const shared_ptr<SpotlightEntity> SpotlightManager::getSpotlight(const string & 
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<SpotlightEntity>> & SpotlightManager::getSpotlights() const
+const unordered_map<string, shared_ptr<Spotlight>> & SpotlightManager::getSpotlights() const
 {
 	return _spotlights;
 }
@@ -31,7 +31,7 @@ void SpotlightManager::createSpotlight(const string & spotlightId)
 		abort();
 	}
 
-	auto entity = make_shared<SpotlightEntity>(spotlightId);
+	auto entity = make_shared<Spotlight>(spotlightId);
 
 	_spotlights.insert({spotlightId, entity});
 }

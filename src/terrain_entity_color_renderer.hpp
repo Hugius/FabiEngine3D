@@ -14,7 +14,7 @@ class TerrainEntityColorRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities);
-	void processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities);
-	void render(const shared_ptr<TerrainEntity> entity);
+	void processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities);
+	void processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities);
+	void render(const shared_ptr<Terrain> entity);
 };

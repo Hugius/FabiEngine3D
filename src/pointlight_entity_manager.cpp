@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-const shared_ptr<PointlightEntity> PointlightManager::getEntity(const string & pointlightId) const
+const shared_ptr<Pointlight> PointlightManager::getEntity(const string & pointlightId) const
 {
 	auto iterator = _entities.find(pointlightId);
 
@@ -14,7 +14,7 @@ const shared_ptr<PointlightEntity> PointlightManager::getEntity(const string & p
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<PointlightEntity>> & PointlightManager::getEntities() const
+const unordered_map<string, shared_ptr<Pointlight>> & PointlightManager::getEntities() const
 {
 	return _entities;
 }
@@ -31,7 +31,7 @@ void PointlightManager::createEntity(const string & pointlightId)
 		abort();
 	}
 
-	auto entity = make_shared<PointlightEntity>(pointlightId);
+	auto entity = make_shared<Pointlight>(pointlightId);
 
 	_entities.insert({pointlightId, entity});
 }

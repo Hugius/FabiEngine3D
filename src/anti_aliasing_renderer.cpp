@@ -26,7 +26,7 @@ void AntiAliasingRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AntiAliasingRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void AntiAliasingRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

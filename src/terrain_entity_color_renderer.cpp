@@ -77,9 +77,9 @@ void TerrainEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
+void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
 {
-	vector<shared_ptr<PointlightEntity>> visibleEntities;
+	vector<shared_ptr<Pointlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
 	{
 		if(entity->isVisible())
@@ -100,9 +100,9 @@ void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, 
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
+void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
 {
-	vector<shared_ptr<SpotlightEntity>> visibleEntities;
+	vector<shared_ptr<Spotlight>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
 	{
 		if(entity->isVisible())
@@ -124,7 +124,7 @@ void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, s
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
+void TerrainEntityColorRenderer::render(const shared_ptr<Terrain> entity)
 {
 	if(!entity->isVisible())
 	{

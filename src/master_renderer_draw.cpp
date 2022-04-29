@@ -9,7 +9,7 @@ using std::dynamic_pointer_cast;
 using std::function;
 using std::map;
 
-void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> quad, const ivec2 & size)
+void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size)
 {
 	glViewport(0, 0, size.x, size.y);
 
@@ -353,8 +353,8 @@ void MasterRenderer::_renderGUI()
 
 		for(const auto & [quad2dId, quad2d] : orderedQuad2dEntities)
 		{
-			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(quad2d);
-			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(quad2d);
+			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2d>(quad2d);
+			auto castedText2dEntity = dynamic_pointer_cast<Text2d>(quad2d);
 
 			if(castedQuad2dEntity != nullptr)
 			{

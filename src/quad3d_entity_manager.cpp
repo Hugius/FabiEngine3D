@@ -44,7 +44,7 @@ void Quad3dManager::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-const shared_ptr<Quad3dEntity> Quad3dManager::getEntity(const string & quad3dId) const
+const shared_ptr<Quad3d> Quad3dManager::getEntity(const string & quad3dId) const
 {
 	auto iterator = _entities.find(quad3dId);
 
@@ -56,7 +56,7 @@ const shared_ptr<Quad3dEntity> Quad3dManager::getEntity(const string & quad3dId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad3dEntity>> & Quad3dManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad3d>> & Quad3dManager::getEntities() const
 {
 	return _entities;
 }
@@ -68,7 +68,7 @@ void Quad3dManager::createEntity(const string & quad3dId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<Quad3dEntity>(quad3dId);
+	auto entity = make_shared<Quad3d>(quad3dId);
 
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);

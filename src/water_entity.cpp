@@ -5,282 +5,282 @@
 using std::max;
 using std::clamp;
 
-void WaterEntity::setHeight(float value)
+void Water::setHeight(float value)
 {
 	_height = value;
 }
 
-void WaterEntity::setColor(const fvec3 & value)
+void Water::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void WaterEntity::setDudvMap(shared_ptr<TextureBuffer> value)
+void Water::setDudvMap(shared_ptr<TextureBuffer> value)
 {
 	_dudvTextureBuffer = value;
 }
 
-void WaterEntity::setNormalMap(shared_ptr<TextureBuffer> value)
+void Water::setNormalMap(shared_ptr<TextureBuffer> value)
 {
 	_normalTextureBuffer = value;
 }
 
-void WaterEntity::setHeightMap(shared_ptr<TextureBuffer> value)
+void Water::setHeightMap(shared_ptr<TextureBuffer> value)
 {
 	_heightTextureBuffer = value;
 }
 
-void WaterEntity::setDudvMapPath(const string & value)
+void Water::setDudvMapPath(const string & value)
 {
 	_dudvMapPath = value;
 }
 
-void WaterEntity::setNormalMapPath(const string & value)
+void Water::setNormalMapPath(const string & value)
 {
 	_normalMapPath = value;
 }
 
-void WaterEntity::setHeightMapPath(const string & value)
+void Water::setHeightMapPath(const string & value)
 {
 	_heightMapPath = value;
 }
 
-void WaterEntity::setRippleOffset(const fvec2 & value)
+void Water::setRippleOffset(const fvec2 & value)
 {
 	_rippleOffset = value;
 }
 
-void WaterEntity::setTextureRepeat(int value)
+void Water::setTextureRepeat(int value)
 {
 	_textureRepeat = max(1, value);
 }
 
-void WaterEntity::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
+void Water::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_lowQualityVertexBuffer = value;
 }
 
-void WaterEntity::setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value)
+void Water::setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_highQualityVertexBuffer = value;
 }
 
-void WaterEntity::setRippleSpeed(const fvec2 & value)
+void Water::setRippleSpeed(const fvec2 & value)
 {
 	_rippleSpeed = value;
 }
 
-void WaterEntity::setWaveSpeed(const fvec2 & value)
+void Water::setWaveSpeed(const fvec2 & value)
 {
 	_waveSpeed = value;
 }
 
-void WaterEntity::setWaveOffset(const fvec2 & value)
+void Water::setWaveOffset(const fvec2 & value)
 {
 	_waveOffset = value;
 }
 
-void WaterEntity::setWaveHeight(float value)
+void Water::setWaveHeight(float value)
 {
 	_waveHeight = max(0.0f, value);
 }
 
-void WaterEntity::setSpecularShininess(float value)
+void Water::setSpecularShininess(float value)
 {
 	_specularShininess = max(0.0f, value);
 }
 
-void WaterEntity::setSpecularIntensity(float value)
+void Water::setSpecularIntensity(float value)
 {
 	_specularIntensity = max(0.0f, value);
 }
 
-void WaterEntity::setSpecular(bool value)
+void Water::setSpecular(bool value)
 {
 	_isSpecular = value;
 }
 
-void WaterEntity::setReflective(bool value)
+void Water::setReflective(bool value)
 {
 	_isReflective = value;
 }
 
-void WaterEntity::setRefractive(bool value)
+void Water::setRefractive(bool value)
 {
 	_isRefractive = value;
 }
 
-void WaterEntity::setWireframed(bool value)
+void Water::setWireframed(bool value)
 {
 	_isWireframed = value;
 }
 
-void WaterEntity::setWireframeColor(const fvec3 & value)
+void Water::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void WaterEntity::setMinClipPosition(const fvec3 & value)
+void Water::setMinClipPosition(const fvec3 & value)
 {
 	_minClipPosition = value;
 }
 
-void WaterEntity::setMaxClipPosition(const fvec3 & value)
+void Water::setMaxClipPosition(const fvec3 & value)
 {
 	_maxClipPosition = value;
 }
 
-void WaterEntity::setSize(float value)
+void Water::setSize(float value)
 {
 	_size = clamp(value, 0.0f, MAX_SIZE);
 }
 
-void WaterEntity::setMaxDepth(float value)
+void Water::setMaxDepth(float value)
 {
 	_maxDepth = max(0.0f, value);
 }
 
-void WaterEntity::setEdged(bool value)
+void Water::setEdged(bool value)
 {
 	_isEdged = value;
 }
 
-const float WaterEntity::getHeight() const
+const float Water::getHeight() const
 {
 	return _height;
 }
 
-const fvec3 & WaterEntity::getColor() const
+const fvec3 & Water::getColor() const
 {
 	return _color;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getDudvTextureBuffer() const
+const shared_ptr<TextureBuffer> Water::getDudvTextureBuffer() const
 {
 	return _dudvTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getNormalTextureBuffer() const
+const shared_ptr<TextureBuffer> Water::getNormalTextureBuffer() const
 {
 	return _normalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getHeightTextureBuffer() const
+const shared_ptr<TextureBuffer> Water::getHeightTextureBuffer() const
 {
 	return _heightTextureBuffer;
 }
 
-const string & WaterEntity::getDudvMapPath() const
+const string & Water::getDudvMapPath() const
 {
 	return _dudvMapPath;
 }
 
-const string & WaterEntity::getNormalMapPath() const
+const string & Water::getNormalMapPath() const
 {
 	return _normalMapPath;
 }
 
-const string & WaterEntity::getHeightMapPath() const
+const string & Water::getHeightMapPath() const
 {
 	return _heightMapPath;
 }
 
-const fvec2 & WaterEntity::getRippleOffset() const
+const fvec2 & Water::getRippleOffset() const
 {
 	return _rippleOffset;
 }
 
-const int WaterEntity::getTextureRepeat() const
+const int Water::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
 
-const shared_ptr<VertexBuffer> WaterEntity::getLowQualityVertexBuffer() const
+const shared_ptr<VertexBuffer> Water::getLowQualityVertexBuffer() const
 {
 	return _lowQualityVertexBuffer;
 }
 
-const shared_ptr<VertexBuffer> WaterEntity::getHighQualityVertexBuffer() const
+const shared_ptr<VertexBuffer> Water::getHighQualityVertexBuffer() const
 {
 	return _highQualityVertexBuffer;
 }
 
-const fvec2 & WaterEntity::getRippleSpeed() const
+const fvec2 & Water::getRippleSpeed() const
 {
 	return _rippleSpeed;
 }
 
-const fvec2 & WaterEntity::getWaveOffset() const
+const fvec2 & Water::getWaveOffset() const
 {
 	return _waveOffset;
 }
 
-const fvec2 & WaterEntity::getWaveSpeed() const
+const fvec2 & Water::getWaveSpeed() const
 {
 	return _waveSpeed;
 }
 
-const fvec3 & WaterEntity::getWireframeColor() const
+const fvec3 & Water::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 & WaterEntity::getMinClipPosition() const
+const fvec3 & Water::getMinClipPosition() const
 {
 	return _minClipPosition;
 }
 
-const fvec3 & WaterEntity::getMaxClipPosition() const
+const fvec3 & Water::getMaxClipPosition() const
 {
 	return _maxClipPosition;
 }
 
-const float WaterEntity::getWaveHeight() const
+const float Water::getWaveHeight() const
 {
 	return _waveHeight;
 }
 
-const float WaterEntity::getMaxDepth() const
+const float Water::getMaxDepth() const
 {
 	return _maxDepth;
 }
 
-const float WaterEntity::getSpecularShininess() const
+const float Water::getSpecularShininess() const
 {
 	return _specularShininess;
 }
 
-const float WaterEntity::getSpecularIntensity() const
+const float Water::getSpecularIntensity() const
 {
 	return _specularIntensity;
 }
 
-const float WaterEntity::getSize() const
+const float Water::getSize() const
 {
 	return _size;
 }
 
-const bool WaterEntity::isEdged() const
+const bool Water::isEdged() const
 {
 	return _isEdged;
 }
 
-const bool WaterEntity::isSpecular() const
+const bool Water::isSpecular() const
 {
 	return _isSpecular;
 }
 
-const bool WaterEntity::isReflective() const
+const bool Water::isReflective() const
 {
 	return _isReflective;
 }
 
-const bool WaterEntity::isRefractive() const
+const bool Water::isRefractive() const
 {
 	return _isRefractive;
 }
 
-const bool WaterEntity::isWireframed() const
+const bool Water::isWireframed() const
 {
 	return _isWireframed;
 }

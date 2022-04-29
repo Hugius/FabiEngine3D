@@ -8,7 +8,7 @@
 
 using std::shared_ptr;
 
-class TerrainEntity final : public BaseEntity
+class Terrain final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

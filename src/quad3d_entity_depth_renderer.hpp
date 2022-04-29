@@ -8,5 +8,5 @@ class Quad3dEntityDepthRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<Quad3dEntity> entity);
+	void render(const shared_ptr<Quad3d> entity);
 };

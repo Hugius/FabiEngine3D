@@ -37,7 +37,7 @@ void BloomRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void BloomRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void BloomRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

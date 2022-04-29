@@ -53,7 +53,7 @@ void DofRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void DofRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void DofRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

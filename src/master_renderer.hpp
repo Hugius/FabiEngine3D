@@ -58,7 +58,7 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
 	void update();
-	void renderLogo(shared_ptr<Quad2dEntity> quad, const ivec2 & size);
+	void renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size);
 	void render3dEntities();
 	void render2dEntities();
 	void reloadBloomBlurQuality();
@@ -105,7 +105,7 @@ private:
 	void _renderFinalScene();
 	void _renderGUI();
 
-	shared_ptr<Quad2dEntity> _renderSurface = nullptr;
+	shared_ptr<Quad2d> _renderSurface = nullptr;
 	shared_ptr<ShaderBuffer> _skyEntityColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _terrainEntityColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _terrainEntityDepthShaderBuffer = nullptr;

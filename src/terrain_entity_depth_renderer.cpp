@@ -33,7 +33,7 @@ void TerrainEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
+void TerrainEntityDepthRenderer::render(const shared_ptr<Terrain> entity)
 {
 	if(!entity->isVisible())
 	{

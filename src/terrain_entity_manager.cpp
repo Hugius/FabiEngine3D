@@ -3,7 +3,7 @@
 using std::make_shared;
 using std::min;
 
-const shared_ptr<TerrainEntity> TerrainManager::getTerrain(const string & terrainId) const
+const shared_ptr<Terrain> TerrainManager::getTerrain(const string & terrainId) const
 {
 	auto iterator = _terrains.find(terrainId);
 
@@ -15,7 +15,7 @@ const shared_ptr<TerrainEntity> TerrainManager::getTerrain(const string & terrai
 	return iterator->second;
 }
 
-const shared_ptr<TerrainEntity> TerrainManager::getSelectedTerrain() const
+const shared_ptr<Terrain> TerrainManager::getSelectedTerrain() const
 {
 	if(_terrains.empty() || _selectedTerrainId.empty())
 	{
@@ -25,7 +25,7 @@ const shared_ptr<TerrainEntity> TerrainManager::getSelectedTerrain() const
 	return getTerrain(_selectedTerrainId);
 }
 
-const unordered_map<string, shared_ptr<TerrainEntity>> & TerrainManager::getTerrains() const
+const unordered_map<string, shared_ptr<Terrain>> & TerrainManager::getTerrains() const
 {
 	return _terrains;
 }
@@ -44,7 +44,7 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 		return;
 	}
 
-	auto entity = make_shared<TerrainEntity>(terrainId);
+	auto entity = make_shared<Terrain>(terrainId);
 
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_TERRAIN_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
@@ -122,7 +122,7 @@ void TerrainManager::loadTerrainVertexBuffer(const string & terrainId)
 	_loadTerrainVertexBuffer(getTerrain(terrainId), getTerrain(terrainId)->getSize(), getTerrain(terrainId)->getMaxHeight(), getTerrain(terrainId)->getPixels());
 }
 
-void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float> & pixels)
+void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> entity, float size, float maxHeight, const vector<float> & pixels)
 {
 	const auto halfSize = (size * 0.5f);
 

@@ -34,7 +34,7 @@ void ModelEntityShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
+void ModelEntityShadowRenderer::render(const shared_ptr<Model> entity)
 {
 	if(!entity->isVisible() || !entity->isShadowed())
 	{

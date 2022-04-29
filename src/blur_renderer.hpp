@@ -14,10 +14,10 @@ public:
 	void bind();
 	void unbind();
 
-	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction);
+	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<Quad2d> entity, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction);
 
 private:
-	void _render(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture);
+	void _render(const shared_ptr<Quad2d> entity, shared_ptr<TextureBuffer> texture);
 
 	shared_ptr<CaptureBuffer> _captureBuffer = nullptr;
 };

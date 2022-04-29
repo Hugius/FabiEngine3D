@@ -9,7 +9,7 @@
 
 using std::array;
 
-class SkyEntity final : public BaseEntity
+class Sky final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

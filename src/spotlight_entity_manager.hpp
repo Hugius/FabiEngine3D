@@ -16,9 +16,9 @@ public:
 	void deleteSpotlight(const string & spotlightId);
 	void deleteSpotlights();
 
-	const unordered_map<string, shared_ptr<SpotlightEntity>> & getSpotlights() const;
+	const unordered_map<string, shared_ptr<Spotlight>> & getSpotlights() const;
 
-	const shared_ptr<SpotlightEntity> getSpotlight(const string & spotlightId) const;
+	const shared_ptr<Spotlight> getSpotlight(const string & spotlightId) const;
 
 	const int getMaxSpotlightCount() const;
 
@@ -28,5 +28,5 @@ public:
 private:
 	static inline constexpr int MAX_SPOTLIGHT_COUNT = 64;
 
-	unordered_map<string, shared_ptr<SpotlightEntity>> _spotlights = {};
+	unordered_map<string, shared_ptr<Spotlight>> _spotlights = {};
 };

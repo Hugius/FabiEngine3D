@@ -33,7 +33,7 @@ void Quad3dEntityShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
+void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3d> entity)
 {
 	if(!entity->isVisible() || !entity->isShadowed())
 	{

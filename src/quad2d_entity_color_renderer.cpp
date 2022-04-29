@@ -26,7 +26,7 @@ void Quad2dEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	if(!entity->isVisible())
 	{

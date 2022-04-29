@@ -8,7 +8,7 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class Text3dEntity final : public BaseEntity
+class Text3d final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
@@ -48,7 +48,7 @@ public:
 	void setRotationOrder(DirectionOrderType value);
 	void setVisible(bool value) override;
 
-	const vector<shared_ptr<Quad3dEntity>> & getCharacterEntities() const;
+	const vector<shared_ptr<Quad3d>> & getCharacterEntities() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
@@ -189,7 +189,7 @@ private:
 	static inline constexpr int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr int FONT_MAP_COLUMN_COUNT = 16;
 
-	vector<shared_ptr<Quad3dEntity>> _characterEntities = {};
+	vector<shared_ptr<Quad3d>> _characterEntities = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;

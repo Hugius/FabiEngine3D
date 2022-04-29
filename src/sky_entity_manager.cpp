@@ -63,7 +63,7 @@ void SkyManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
-const shared_ptr<SkyEntity> SkyManager::getEntity(const string & skyId) const
+const shared_ptr<Sky> SkyManager::getEntity(const string & skyId) const
 {
 	auto iterator = _entities.find(skyId);
 
@@ -75,7 +75,7 @@ const shared_ptr<SkyEntity> SkyManager::getEntity(const string & skyId) const
 	return iterator->second;
 }
 
-const shared_ptr<SkyEntity> SkyManager::getSelectedEntity() const
+const shared_ptr<Sky> SkyManager::getSelectedEntity() const
 {
 	if(_entities.empty() || _selectedEntityId.empty())
 	{
@@ -85,7 +85,7 @@ const shared_ptr<SkyEntity> SkyManager::getSelectedEntity() const
 	return getEntity(_selectedEntityId);
 }
 
-const unordered_map<string, shared_ptr<SkyEntity>> & SkyManager::getEntities() const
+const unordered_map<string, shared_ptr<Sky>> & SkyManager::getEntities() const
 {
 	return _entities;
 }
@@ -107,7 +107,7 @@ void SkyManager::createEntity(const string & skyId)
 		abort();
 	}
 
-	auto entity = make_shared<SkyEntity>(skyId);
+	auto entity = make_shared<Sky>(skyId);
 
 	entity->setVertexBuffer(_vertexBuffer);
 

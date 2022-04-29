@@ -8,5 +8,5 @@ class TerrainEntityDepthRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<TerrainEntity> entity);
+	void render(const shared_ptr<Terrain> entity);
 };

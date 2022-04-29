@@ -8,5 +8,5 @@ class SkyEntityColorRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<SkyEntity> entity);
+	void render(const shared_ptr<Sky> entity);
 };

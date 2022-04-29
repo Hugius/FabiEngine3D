@@ -14,7 +14,7 @@ void SkyEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
+void SkyEntityColorRenderer::render(const shared_ptr<Sky> entity)
 {
 	if(!entity->isVisible())
 	{

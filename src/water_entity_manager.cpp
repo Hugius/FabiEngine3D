@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-const shared_ptr<WaterEntity> WaterManager::getWater(const string & waterId) const
+const shared_ptr<Water> WaterManager::getWater(const string & waterId) const
 {
 	auto iterator = _waters.find(waterId);
 
@@ -15,7 +15,7 @@ const shared_ptr<WaterEntity> WaterManager::getWater(const string & waterId) con
 	return iterator->second;
 }
 
-const shared_ptr<WaterEntity> WaterManager::getSelectedWater() const
+const shared_ptr<Water> WaterManager::getSelectedWater() const
 {
 	if(_waters.empty() || _selectedWaterId.empty())
 	{
@@ -25,7 +25,7 @@ const shared_ptr<WaterEntity> WaterManager::getSelectedWater() const
 	return getWater(_selectedWaterId);
 }
 
-const unordered_map<string, shared_ptr<WaterEntity>> & WaterManager::getWaters() const
+const unordered_map<string, shared_ptr<Water>> & WaterManager::getWaters() const
 {
 	return _waters;
 }
@@ -47,7 +47,7 @@ void WaterManager::createWater(const string & waterId)
 		abort();
 	}
 
-	auto entity = make_shared<WaterEntity>(waterId);
+	auto entity = make_shared<Water>(waterId);
 
 	_waters.insert({waterId, entity});
 
@@ -91,7 +91,7 @@ const bool WaterManager::isWatersExisting() const
 	return !_waters.empty();
 }
 
-void WaterManager::_loadWaterVertexBuffer(shared_ptr<WaterEntity> entity, float size)
+void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> entity, float size)
 {
 	const float halfSize = (size * 0.5f);
 

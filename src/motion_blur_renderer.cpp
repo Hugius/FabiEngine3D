@@ -38,7 +38,7 @@ void MotionBlurRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void MotionBlurRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void MotionBlurRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

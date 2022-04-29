@@ -3,7 +3,7 @@
 #include "base_entity.hpp"
 #include "mathematics.hpp"
 
-class SpotlightEntity final : public BaseEntity
+class Spotlight final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

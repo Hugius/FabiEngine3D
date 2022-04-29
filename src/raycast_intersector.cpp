@@ -256,7 +256,7 @@ const float RaycastIntersector::_calculateDistanceToTerrain() const
 	return Mathematics::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 
-const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> aabb) const
+const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<Aabb> aabb) const
 {
 	if(aabb->isCentered())
 	{

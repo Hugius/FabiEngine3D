@@ -8,5 +8,5 @@ class ModelEntityShadowRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<ModelEntity> entity);
+	void render(const shared_ptr<Model> entity);
 };

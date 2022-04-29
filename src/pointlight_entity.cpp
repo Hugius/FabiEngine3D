@@ -5,7 +5,7 @@
 using std::max;
 using std::clamp;
 
-void PointlightEntity::updateTarget()
+void Pointlight::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -27,65 +27,65 @@ void PointlightEntity::updateTarget()
 	}
 }
 
-void PointlightEntity::setPosition(const fvec3 & value)
+void Pointlight::setPosition(const fvec3 & value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void PointlightEntity::move(const fvec3 & change)
+void Pointlight::move(const fvec3 & change)
 {
 	_position += change;
 	_positionTarget += change;
 }
 
-void PointlightEntity::moveTo(const fvec3 & target, float speed)
+void Pointlight::moveTo(const fvec3 & target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void PointlightEntity::setRadius(const fvec3 & value)
+void Pointlight::setRadius(const fvec3 & value)
 {
 	_radius = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void PointlightEntity::setColor(const fvec3 & value)
+void Pointlight::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void PointlightEntity::setIntensity(float value)
+void Pointlight::setIntensity(float value)
 {
 	_intensity = max(0.0f, value);
 }
 
-void PointlightEntity::setShape(PointlightType value)
+void Pointlight::setShape(PointlightType value)
 {
 	_shape = value;
 }
 
-const fvec3 & PointlightEntity::getPosition() const
+const fvec3 & Pointlight::getPosition() const
 {
 	return _position;
 }
 
-const fvec3 & PointlightEntity::getRadius() const
+const fvec3 & Pointlight::getRadius() const
 {
 	return _radius;
 }
 
-const fvec3 & PointlightEntity::getColor() const
+const fvec3 & Pointlight::getColor() const
 {
 	return _color;
 }
 
-const float PointlightEntity::getIntensity() const
+const float Pointlight::getIntensity() const
 {
 	return _intensity;
 }
 
-const PointlightType PointlightEntity::getShape() const
+const PointlightType Pointlight::getShape() const
 {
 	return _shape;
 }

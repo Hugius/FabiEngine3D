@@ -8,7 +8,7 @@
 
 using std::shared_ptr;
 
-class WaterEntity final : public BaseEntity
+class Water final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

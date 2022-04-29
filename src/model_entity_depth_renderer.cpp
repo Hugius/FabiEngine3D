@@ -33,7 +33,7 @@ void ModelEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
+void ModelEntityDepthRenderer::render(const shared_ptr<Model> entity)
 {
 	if(!entity->isVisible())
 	{

@@ -38,7 +38,7 @@ void AabbEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
+void AabbEntityColorRenderer::render(const shared_ptr<Aabb> entity)
 {
 	if(!entity->isVisible())
 	{

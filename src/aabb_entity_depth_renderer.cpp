@@ -32,7 +32,7 @@ void AabbEntityDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbEntityDepthRenderer::render(const shared_ptr<AabbEntity> entity)
+void AabbEntityDepthRenderer::render(const shared_ptr<Aabb> entity)
 {
 	if(!entity->isVisible())
 	{

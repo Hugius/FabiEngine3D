@@ -17,10 +17,10 @@ public:
 	void loadTerrainVertexBuffer(const string & terrainId);
 	void selectTerrain(const string & terrainId);
 
-	const unordered_map<string, shared_ptr<TerrainEntity>> & getTerrains() const;
+	const unordered_map<string, shared_ptr<Terrain>> & getTerrains() const;
 
-	const shared_ptr<TerrainEntity> getTerrain(const string & terrainId) const;
-	const shared_ptr<TerrainEntity> getSelectedTerrain() const;
+	const shared_ptr<Terrain> getTerrain(const string & terrainId) const;
+	const shared_ptr<Terrain> getSelectedTerrain() const;
 
 	const float getTerrainPixelHeight(const string & terrainId, float x, float z);
 
@@ -29,13 +29,13 @@ public:
 	const bool isInside(const string & terrainId, float x, float z);
 
 private:
-	void _loadTerrainVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float> & pixels);
+	void _loadTerrainVertexBuffer(shared_ptr<Terrain> entity, float size, float maxHeight, const vector<float> & pixels);
 
 	float _getTerrainPixelHeight(float x, float z, float size, float maxHeight, const vector<float> & pixels);
 
 	static inline constexpr float MAX_TERRAIN_SIZE = 1024.0f;
 
-	unordered_map<string, shared_ptr<TerrainEntity>> _terrains = {};
+	unordered_map<string, shared_ptr<Terrain>> _terrains = {};
 
 	shared_ptr<ImageLoader> _imageLoader = nullptr;
 

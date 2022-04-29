@@ -55,7 +55,7 @@ void LensFlareRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void LensFlareRenderer::render(const shared_ptr<Quad2dEntity> entity)
+void LensFlareRenderer::render(const shared_ptr<Quad2d> entity)
 {
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

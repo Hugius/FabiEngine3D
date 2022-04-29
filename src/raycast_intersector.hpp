@@ -36,7 +36,7 @@ private:
 	const fvec3 _calculatePointOnTerrain() const;
 
 	const float _calculateDistanceToTerrain() const;
-	const float _calculateDistanceToAabb(shared_ptr<AabbEntity> aabb) const;
+	const float _calculateDistanceToAabb(shared_ptr<Aabb> aabb) const;
 	const float _calculateRayBoxIntersectionDistance(const shared_ptr<Ray> ray, const shared_ptr<Box> box) const;
 
 	const bool _isUnderTerrain(float distance) const;

@@ -39,7 +39,7 @@ MasterRenderer::MasterRenderer()
 	_dofBlurRenderer = make_unique<BlurRenderer>();
 	_motionBlurBlurRenderer = make_unique<BlurRenderer>();
 
-	_renderSurface = make_shared<Quad2dEntity>("renderQuad");
+	_renderSurface = make_shared<Quad2d>("renderQuad");
 	_renderSurface->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	_renderSurface->setCentered(true);
 

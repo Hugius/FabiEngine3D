@@ -3,11 +3,11 @@
 ## 1. General
 
 - Animation3D is used for creating 3D mesh animations.
-- These animations can be applied to model entities.
+- These animations can be applied to models.
 - Each animation consists of 1 or more frames.
-- The first keyframe is always the default model entity transformation.
+- The first keyframe is always the default model transformation.
 - The last keyframe should be the same as the first keyframe.
-- If the model entity is multiparted, each part can be animated independently.
+- If the model is multiparted, each part can be animated independently.
 
 ## 2. Base Properties
 

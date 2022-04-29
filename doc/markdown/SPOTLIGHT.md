@@ -1,13 +1,16 @@
-# Spotlight Entity
+# Spotlight
 
 ## 1. General
 
-- The spotlight entity is a 3D light in 3D space.
+- The spotlight is a 3D light in 3D space.
 - Emitted light is cast in a direction from a position.
-- Only a maximum of 64 spotlight entities can exist.
+- Only a maximum of 64 spotlights can exist.
 
 ## 2. Properties
 
+- **ID**: the identifier of the spotlight
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
 - **Position**: the XYZ position of the light
   - Type: `decimal3`
   - Constraints: none
@@ -32,3 +35,6 @@
 - **Distance**: the maximum distance of the light emission
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Visible**: the visibility of the spotlight in the world
+  - Type: `boolean`
+  - Constraints: none

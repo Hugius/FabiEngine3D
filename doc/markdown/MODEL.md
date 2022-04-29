@@ -1,13 +1,13 @@
-# Model Entity
+# Model
 
 ## 1. General
 
-- The model entity is a 3D object in 3D space.
+- The model is a 3D object in 3D space.
 - A variety of textures can be used for a more detailed mesh.
-- Each model entity can be the parent of multipe AABB entities.
+- Each model can be the parent of multipe AABBs.
 - If the mesh is multiparted, each part has its own properties.
-- Model entities can be rendered as another model entity to achieve LOD.
-- The instead rendered LOD model entity uses the transformation and visibility of the main model entity.
+- Models can be rendered as another model to achieve LOD.
+- The instead rendered LOD model uses the transformation and visibility of the main model.
 
 ## 2. Assets
 
@@ -20,12 +20,15 @@
 
 ## 3. Base Properties
 
+- **ID**: the identifier of the model
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed
-- **LOD ID**: the ID of another model entity representing the LOD version of the main model entity
+- **LOD ID**: the ID of another model representing the LOD version of the main model
   - Type: `string`
-  - Constraints: entity must exist
+  - Constraints: model must exist
 - **Position**: the XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
@@ -44,7 +47,7 @@
 - **Max Clip Position**: the maximum position to which fragments are visible
   - Type: `decimal3`
   - Constraints: none
-- **LOD Distance**: the minimum distance by which the LOD model entity will appear/disappear
+- **LOD Distance**: the minimum distance by which the LOD model will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
@@ -119,6 +122,9 @@
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `integer`
   - Constraints: at least `1`
+- **Visible**: the visibility of the model in the world
+  - Type: `boolean`
+  - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

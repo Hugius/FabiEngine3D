@@ -2,10 +2,10 @@
 
 ## 1. General
 
-- All quad3D entities will be saved in `~\projects\<your_project>\data\quad3d.fe3d`.
-- You can create/edit/delete quad3D entities.
-- Every created quad3D entity can be placed using the world editor or scripting.
-- The ID of a new quad3D entity cannot contain spaces or `@` signs.
+- All quad3Ds will be saved in `~\projects\<your_project>\data\quad3d.fe3d`.
+- You can create/edit/delete quad3Ds.
+- Every created quad3D can be placed using the world editor or scripting.
+- The ID of a new quad3D cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

@@ -75,7 +75,7 @@
 - **Quality**: the quality of cube reflections
   - Type: `integer`
   - Constraints: between `128` and `1024`
-- **Interval**: the amount of engine updates between entity adaptions
+- **Interval**: the amount of engine updates between model adaptions
   - Type: `integer`
   - Constraints: at least `0`
 

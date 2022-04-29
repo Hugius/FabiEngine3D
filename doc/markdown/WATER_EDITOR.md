@@ -2,10 +2,10 @@
 
 ## 1. General
 
-- All water entities will be saved in `~\projects\<your_project>\data\water.fe3d`.
-- You can create/edit/delete water entities.
-- Every created water entity can be placed using the world editor or scripting.
-- The ID of a new water entity cannot contain spaces or `@` signs.
+- All waters will be saved in `~\projects\<your_project>\data\water.fe3d`.
+- You can create/edit/delete waters.
+- Every created water can be placed using the world editor or scripting.
+- The ID of a new water cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

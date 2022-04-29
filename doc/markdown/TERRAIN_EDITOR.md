@@ -2,10 +2,10 @@
 
 ## 1. General
 
-- All terrain entities will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
-- You can create/edit/delete terrain entities.
-- Every created terrain entity can be placed using the world editor or scripting.
-- The ID of a new terrain entity cannot contain spaces or `@` signs.
+- All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
+- You can create/edit/delete terrains.
+- Every created terrain can be placed using the world editor or scripting.
+- The ID of a new terrain cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

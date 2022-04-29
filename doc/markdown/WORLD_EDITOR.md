@@ -3,19 +3,19 @@
 ## 1. General
 
 - All worlds will be saved in `~\projects\<your_project>\worlds\editor\`.
-- Every entity that you place is based on the version in their own editor.
-- Only the changes in the entities made in the world editor are saved.
-- Placed entities can be selected if it has 1 or more bound AABB entities.
+- Every thing that you place is based on the version in their own editor.
+- Only the changes in the placed things made in the world editor are saved.
+- Placed things can be selected if it has 1 or more bound AABBs.
 - Each world has its own ID counter, which starts from 0.
-- Every entity that you place will increase the ID counter by 1, so that all entities are unique.
+- Every thing that you place will increase the ID counter by 1, so that all placed things are unique.
 
 ## 2. Controls
 
 - Move camera with your mouse
-- Press `LMB` to place entity
+- Press `LMB` to place
 - Press `RMB` to toggle camera
-- Press `MMB` to cancel entity placement
-- Press `B` to toggle AABB entity rendering
+- Press `MMB` to cancel placement
+- Press `B` to toggle AABB rendering
 - Press `F` to toggle wireframe rendering
 - Press `R` to toggle debug rendering
 - Press `SPACE` to move upwards
@@ -25,53 +25,53 @@
 
 ## 3. Sky
 
-- You can select/delete up to 1 sky entity from the sky editor.
+- You can select/delete up to 1 sky from the sky editor.
 
 ## 4. Terrain
 
-- You can select/delete up to 1 terrain entity from the terrain editor.
+- You can select/delete up to 1 terrain from the terrain editor.
 
 ## 5. Water
 
-- You can select/delete up to 1 water entity from the water editor.
-- The water entity height can be moved upwards and downwards
+- You can select/delete up to 1 water from the water editor.
+- The water height can be moved upwards and downwards
 
 ## 6. Models
 
-- You can place/edit/delete model entities in the world.
-- If a terrain entity is selected, you can place the model entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the model entity.
-- You can attach an (endless) animation to a placed model entity.
+- You can place/edit/delete models in the world.
+- If a terrain is selected, you can place the model on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the model.
+- You can attach an (endless) animation to a placed model.
 
 ## 7. Quad3D
 
-- You can place/edit/delete quad3D entities in the world.
-- If a terrain entity is selected, you can place the model entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the sound.
+- You can place/edit/delete quad3Ds in the world.
+- If a terrain is selected, you can place the model on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the sound.
 
 ## 8. Sounds
 
 - You can place/edit/delete sounds in the world.
-- If a terrain entity is selected, you can place the sound on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the model entity.
+- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the model.
 
 ## 9. Pointlights
 
-- You can place/edit/delete pointlight entities in the world.
-- If a terrain entity is selected, you can place the pointlight entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the pointlight entity.
+- You can place/edit/delete pointlights in the world.
+- If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the pointlight.
 
 ## 10. Spotlights
 
-- You can place/edit/delete spotlight entities in the world.
-- If a terrain entity is selected, you can place the spotlight entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the spotlight entity.
+- You can place/edit/delete spotlights in the world.
+- If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the spotlight.
 
 ## 11. Captors
 
-- You can place/edit/delete captor entities in the world.
-- If a terrain entity is selected, you can place the captor entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the captor entity.
+- You can place/edit/delete captors in the world.
+- If a terrain is selected, you can place the captor on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the captor.
 
 ## 12. Settings
 

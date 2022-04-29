@@ -2,10 +2,10 @@
 
 ## 1. General
 
-- All Text3D entities will be saved in `~\projects\<your_project>\data\text3d.fe3d`.
-- You can create/edit/delete Text3D entities.
-- Every created Text3D entity can be placed using the world editor or scripting.
-- The ID of a new Text3D entity cannot contain spaces or `@` signs.
+- All text3Ds will be saved in `~\projects\<your_project>\data\text3d.fe3d`.
+- You can create/edit/delete text3Ds.
+- Every created text3D can be placed using the world editor or scripting.
+- The ID of a new text3D cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

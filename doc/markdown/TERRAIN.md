@@ -1,9 +1,9 @@
-# Terrain Entity
+# Terrain
 
 ## 1. General
 
-- The terrain entity is a 3D object in 3D space.
-- The mesh of a terrain entity is generated using a height map.
+- The terrain is a 3D object in 3D space.
+- The mesh of a terrain is generated using a height map.
 
 ## 2. Assets
 
@@ -14,6 +14,9 @@
 
 ## 3. Properties
 
+- **ID**: the identifier of the terrain
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
 - **Height Map Path**: the path of the height map file
   - Type: `string`
   - Constraints: cannot be changed
@@ -83,6 +86,9 @@
 - **Blue Texture Repeat**: the amount of times the textures of the blue blend map channel are repeated
   - Type: `integer`
   - Constraints: at least `1`
+- **Visible**: the visibility of the terrain in the world
+  - Type: `boolean`
+  - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

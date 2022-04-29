@@ -21,11 +21,11 @@
 
 ## 3. Miscellaneous
 
-- All quad2D/text2D entities are rendered on top of each other.
+- All quad2Ds/text2Ds are rendered on top of each other.
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
 - The engine updates all logic at a fixed speed (144 updates per second), even if the FPS is higher/lower.
 - The maximum amount of messages in the logging console is 100.
-- Transparency in 2D space is based on the order of placed entities.
+- Transparency in 2D space is based on the order of placed quad2Ds/text2Ds.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
 - Graphical effects that are set to low quality can flicker.
 - Internal engine updates happen after the scripting updates.

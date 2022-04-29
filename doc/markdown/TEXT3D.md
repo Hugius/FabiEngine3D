@@ -1,9 +1,9 @@
-# Text3D Entity
+# Text3D
 
 ## 1. General
 
-- The Text3D entity is a composition of quad3D entities.
-- Every quad3D entity represents a text character.
+- The text3D is a composition of quad3Ds.
+- Every quad3D represents a text character.
 - The text is generated using a font map.
 
 ## 2. Assets
@@ -12,6 +12,9 @@
 
 ## 3. Properties
 
+- **ID**: the identifier of the text3D
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
 - **Font Map Path**: the path of the font map file
   - Type: `string`
   - Constraints: cannot be changed
@@ -53,6 +56,9 @@
   - Constraints: none
 - **Max Height**: the maximum Y position to which fragments are visible
   - Type: `decimal`
+  - Constraints: none
+- **Visible**: the visibility of the text3D in the world
+  - Type: `boolean`
   - Constraints: none
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`

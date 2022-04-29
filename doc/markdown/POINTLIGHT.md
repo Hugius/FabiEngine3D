@@ -1,13 +1,16 @@
-# Pointlight Entity
+# Pointlight
 
 ## 1. General
 
-- The pointlight entity is a 3D light in 3D space.
+- The pointlight is a 3D light in 3D space.
 - Emitted light is cast in all directions from a position.
-- Only a maximum of 64 pointlight entities can exist.
+- Only a maximum of 64 pointlights can exist.
 
 ## 2. Properties
 
+- **ID**: the identifier of the pointlight
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
 - **Position**: the XYZ position of the light
   - Type: `decimal3`
   - Constraints: none
@@ -20,6 +23,9 @@
 - **Intensity**: the intensity of the light emission
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Visible**: the visibility of the pointlight in the world
+  - Type: `boolean`
+  - Constraints: none
 - **Shape**: the shape of the light
   - Type: `enumeration`
   - Constraints: `CIRCLE` or `SQUARE`

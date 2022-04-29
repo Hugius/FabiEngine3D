@@ -16,19 +16,19 @@
 - Rendering water refractions
 - Rendering water waves
 - Rendering water edges
-- Rendering pointlight entities
-- Rendering spotlight entities
+- Rendering pointlights
+- Rendering spotlights
 - Rendering complex meshes
 - Rendering high quality shadows
-- Capturing captor entities
+- Capturing captors
 - Loading high resolution textures
 - Loading complex meshes
 
 ## 4. Tips
 
-- Make use of LOD model entities to improve the performance on high-poly meshes.
+- Make use of LOD models to improve the performance on high-poly meshes.
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the logging console if a lot of messages are printed.
 - Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.
-- Capturing a captor entity can take some time (especially when loading a world).
-- Use the face culling optimization in model entities as much as possible.
+- Capturing a captor can take some time (especially when loading a world).
+- Use the face culling optimization in models as much as possible.

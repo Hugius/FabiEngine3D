@@ -110,7 +110,7 @@ void Sound2dPlayer::update()
 		const auto soundId = _volumeThreadQueue.front().first;
 		const auto instanceIndex = _volumeThreadQueue.front().second;
 
-		if(!_sound2dManager->isSoundExisting(soundId))
+		if(!_sound2dManager->isSound2dExisting(soundId))
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
@@ -127,7 +127,7 @@ void Sound2dPlayer::update()
 		}
 
 		const auto startedSound = _startedSounds.at(soundId)[instanceIndex];
-		const auto originalSound = _sound2dManager->getSound(soundId);
+		const auto originalSound = _sound2dManager->getSound2d(soundId);
 
 		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes

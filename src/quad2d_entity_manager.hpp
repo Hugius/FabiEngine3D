@@ -14,22 +14,22 @@ public:
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
-	void createEntity(const string & quad2dId, bool isCentered);
-	void deleteEntity(const string & quad2dId);
-	void deleteEntities();
+	void createQuad2d(const string & quad2dId, bool isCentered);
+	void deleteQuad2d(const string & quad2dId);
+	void deleteQuad2ds();
 
-	const unordered_map<string, shared_ptr<Quad2d>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Quad2d>> & getQuad2ds() const;
 
-	const shared_ptr<Quad2d> getEntity(const string & quad2dId) const;
+	const shared_ptr<Quad2d> getQuad2d(const string & quad2dId) const;
 
-	const bool isEntityExisting(const string & quad2dId) const;
-	const bool isEntitiesExisting() const;
+	const bool isQuad2dExisting(const string & quad2dId) const;
+	const bool isQuad2dsExisting() const;
 
 private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
-	unordered_map<string, shared_ptr<Quad2d>> _entities = {};
+	unordered_map<string, shared_ptr<Quad2d>> _quad2ds = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 };

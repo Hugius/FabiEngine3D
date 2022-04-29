@@ -2,19 +2,19 @@
 
 using std::make_shared;
 
-void Sound2dManager::deleteSounds()
+void Sound2dManager::deleteSound2ds()
 {
-	_sounds.clear();
+	_sound2ds.clear();
 }
 
-void Sound2dManager::deleteSound(const string & sound2dId)
+void Sound2dManager::deleteSound2d(const string & sound2dId)
 {
-	if(!isSoundExisting(sound2dId))
+	if(!isSound2dExisting(sound2dId))
 	{
 		abort();
 	}
 
-	_sounds.erase(sound2dId);
+	_sound2ds.erase(sound2dId);
 }
 
 void Sound2dManager::inject(shared_ptr<AudioLoader> audioLoader)
@@ -27,9 +27,9 @@ void Sound2dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
 	_waveBufferCache = waveBufferCache;
 }
 
-void Sound2dManager::createSound(const string & sound2dId, const string & audioPath)
+void Sound2dManager::createSound2d(const string & sound2dId, const string & audioPath)
 {
-	if(isSoundExisting(sound2dId))
+	if(isSound2dExisting(sound2dId))
 	{
 		abort();
 	}
@@ -62,29 +62,29 @@ void Sound2dManager::createSound(const string & sound2dId, const string & audioP
 	sound->setWaveBuffer(waveBuffer);
 	sound->setAudioPath(audioPath);
 
-	_sounds.insert({sound2dId, sound});
+	_sound2ds.insert({sound2dId, sound});
 }
 
-const bool Sound2dManager::isSoundExisting(const string & sound2dId) const
+const bool Sound2dManager::isSound2dExisting(const string & sound2dId) const
 {
-	return (_sounds.find(sound2dId) != _sounds.end());
+	return (_sound2ds.find(sound2dId) != _sound2ds.end());
 }
 
-const bool Sound2dManager::isSoundsExisting() const
+const bool Sound2dManager::isSound2dsExisting() const
 {
-	return !_sounds.empty();
+	return !_sound2ds.empty();
 }
 
-const unordered_map<string, shared_ptr<Sound2d>> & Sound2dManager::getSounds() const
+const unordered_map<string, shared_ptr<Sound2d>> & Sound2dManager::getSound2ds() const
 {
-	return _sounds;
+	return _sound2ds;
 }
 
-const shared_ptr<Sound2d> Sound2dManager::getSound(const string & sound2dId) const
+const shared_ptr<Sound2d> Sound2dManager::getSound2d(const string & sound2dId) const
 {
-	auto iterator = _sounds.find(sound2dId);
+	auto iterator = _sound2ds.find(sound2dId);
 
-	if(iterator == _sounds.end())
+	if(iterator == _sound2ds.end())
 	{
 		abort();
 	}

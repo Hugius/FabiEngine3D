@@ -14,25 +14,25 @@ public:
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
-	void createEntity(const string & skyId);
-	void deleteEntity(const string & skyId);
-	void deleteEntities();
-	void selectEntity(const string & skyId);
+	void createSky(const string & skyId);
+	void deleteSky(const string & skyId);
+	void deleteSkies();
+	void selectSky(const string & skyId);
 
-	const unordered_map<string, shared_ptr<Sky>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Sky>> & getSkies() const;
 
-	const shared_ptr<Sky> getEntity(const string & skyId) const;
-	const shared_ptr<Sky> getSelectedEntity() const;
+	const shared_ptr<Sky> getSky(const string & skyId) const;
+	const shared_ptr<Sky> getSelectedSky() const;
 
-	const bool isEntityExisting(const string & skyId) const;
-	const bool isEntitiesExisting() const;
+	const bool isSkyExisting(const string & skyId) const;
+	const bool isSkiesExisting() const;
 
 private:
 	const shared_ptr<VertexBuffer> _vertexBuffer;
 
-	unordered_map<string, shared_ptr<Sky>> _entities = {};
+	unordered_map<string, shared_ptr<Sky>> _skies = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 
-	string _selectedEntityId = "";
+	string _selectedSkyId = "";
 };

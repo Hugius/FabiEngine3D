@@ -2,48 +2,48 @@
 
 using std::make_shared;
 
-void Animation3dManager::createAnimation(const string & animation3dId)
+void Animation3dManager::createAnimation3d(const string & animation3dId)
 {
-	if(isAnimationExisting(animation3dId))
+	if(isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
 
 	auto animation3d = make_shared<Animation3d>(animation3dId);
 
-	_animations.insert({animation3dId, animation3d});
+	_animation3ds.insert({animation3dId, animation3d});
 }
 
-void Animation3dManager::deleteAnimation(const string & animation3dId)
+void Animation3dManager::deleteAnimation3d(const string & animation3dId)
 {
-	if(!isAnimationExisting(animation3dId))
+	if(!isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
 
-	_animations.erase(animation3dId);
+	_animation3ds.erase(animation3dId);
 }
 
-void Animation3dManager::deleteAnimations()
+void Animation3dManager::deleteAnimation3ds()
 {
-	_animations.clear();
+	_animation3ds.clear();
 }
 
-const bool Animation3dManager::isAnimationExisting(const string & animation3dId) const
+const bool Animation3dManager::isAnimation3dExisting(const string & animation3dId) const
 {
-	return (_animations.find(animation3dId) != _animations.end());
+	return (_animation3ds.find(animation3dId) != _animation3ds.end());
 }
 
-const bool Animation3dManager::isAnimationsExisting() const
+const bool Animation3dManager::isAnimation3dsExisting() const
 {
-	return !_animations.empty();
+	return !_animation3ds.empty();
 }
 
-const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string & animation3dId) const
+const shared_ptr<Animation3d> Animation3dManager::getAnimation3d(const string & animation3dId) const
 {
-	auto iterator = _animations.find(animation3dId);
+	auto iterator = _animation3ds.find(animation3dId);
 
-	if(iterator == _animations.end())
+	if(iterator == _animation3ds.end())
 	{
 		abort();
 	}
@@ -51,7 +51,7 @@ const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string & an
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Animation3d>> & Animation3dManager::getAnimations() const
+const unordered_map<string, shared_ptr<Animation3d>> & Animation3dManager::getAnimation3ds() const
 {
-	return _animations;
+	return _animation3ds;
 }

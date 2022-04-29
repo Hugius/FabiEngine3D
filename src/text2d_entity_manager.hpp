@@ -19,22 +19,22 @@ public:
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
-	void createEntity(const string & text2dId, const string & fontMapPath, bool isCentered);
-	void deleteEntity(const string & text2dId);
-	void deleteEntities();
+	void createText2d(const string & text2dId, const string & fontMapPath, bool isCentered);
+	void deleteText2d(const string & text2dId);
+	void deleteText2ds();
 
-	const unordered_map<string, shared_ptr<Text2d>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Text2d>> & getText2ds() const;
 
-	const shared_ptr<Text2d> getEntity(const string & text2dId) const;
+	const shared_ptr<Text2d> getText2d(const string & text2dId) const;
 
-	const bool isEntityExisting(const string & text2dId) const;
-	const bool isEntitiesExisting() const;
+	const bool isText2dExisting(const string & text2dId) const;
+	const bool isText2dsExisting() const;
 
 private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
-	unordered_map<string, shared_ptr<Text2d>> _entities = {};
+	unordered_map<string, shared_ptr<Text2d>> _text2ds = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;

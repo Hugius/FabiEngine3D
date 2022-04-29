@@ -2,11 +2,11 @@
 
 using std::make_shared;
 
-const shared_ptr<Captor> CaptorManager::getEntity(const string & captorId) const
+const shared_ptr<Captor> CaptorManager::getCaptor(const string & captorId) const
 {
-	auto iterator = _entities.find(captorId);
+	auto iterator = _captors.find(captorId);
 
-	if(iterator == _entities.end())
+	if(iterator == _captors.end())
 	{
 		abort();
 	}
@@ -14,52 +14,52 @@ const shared_ptr<Captor> CaptorManager::getEntity(const string & captorId) const
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Captor>> & CaptorManager::getEntities() const
+const unordered_map<string, shared_ptr<Captor>> & CaptorManager::getCaptors() const
 {
-	return _entities;
+	return _captors;
 }
 
-void CaptorManager::createEntity(const string & captorId)
+void CaptorManager::createCaptor(const string & captorId)
 {
-	if(isEntityExisting(captorId))
+	if(isCaptorExisting(captorId))
 	{
 		abort();
 	}
 
 	auto entity = make_shared<Captor>(captorId);
 
-	_entities.insert({captorId, entity});
+	_captors.insert({captorId, entity});
 }
 
 void CaptorManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _captors)
 	{
 		entity->updateTarget();
 	}
 }
 
-void CaptorManager::deleteEntity(const string & captorId)
+void CaptorManager::deleteCaptor(const string & captorId)
 {
-	if(!isEntityExisting(captorId))
+	if(!isCaptorExisting(captorId))
 	{
 		abort();
 	}
 
-	_entities.erase(captorId);
+	_captors.erase(captorId);
 }
 
-void CaptorManager::deleteEntities()
+void CaptorManager::deleteCaptors()
 {
-	_entities.clear();
+	_captors.clear();
 }
 
-const bool CaptorManager::isEntityExisting(const string & captorId) const
+const bool CaptorManager::isCaptorExisting(const string & captorId) const
 {
-	return (_entities.find(captorId) != _entities.end());
+	return (_captors.find(captorId) != _captors.end());
 }
 
-const bool CaptorManager::isEntitiesExisting() const
+const bool CaptorManager::isCaptorsExisting() const
 {
-	return !_entities.empty();
+	return !_captors.empty();
 }

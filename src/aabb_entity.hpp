@@ -5,7 +5,9 @@
 #include "aabb_parent_type.hpp"
 
 #include <memory>
+#include <string>
 
+using std::string;
 using std::shared_ptr;
 
 class Aabb final

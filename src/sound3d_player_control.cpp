@@ -5,7 +5,7 @@ using std::make_shared;
 
 void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 {
-	if(!_sound3dManager->isSoundExisting(sound3dId))
+	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
@@ -16,7 +16,7 @@ void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 
 	const auto newSound = make_shared<StartedSound3D>();
 
-	const auto waveBuffer = _sound3dManager->getSound(sound3dId)->getWaveBuffer();
+	const auto waveBuffer = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
 
@@ -133,7 +133,7 @@ void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 
 void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(sound3dId))
+	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
@@ -169,7 +169,7 @@ void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
 
 void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(sound3dId))
+	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
@@ -205,7 +205,7 @@ void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
 
 void Sound3dPlayer::stopSound(const string & sound3dId, int index)
 {
-	if(!_sound3dManager->isSoundExisting(sound3dId))
+	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
 		abort();
 	}

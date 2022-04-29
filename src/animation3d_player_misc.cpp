@@ -29,11 +29,11 @@ const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string & a
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -49,11 +49,11 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string & animation
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -69,11 +69,11 @@ const int Animation3dPlayer::getModelAnimationFrameIndex(const string & animatio
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -89,11 +89,11 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string & animation3d
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -105,11 +105,11 @@ const bool Animation3dPlayer::isModelAnimationPaused(const string & animation3dI
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -125,11 +125,11 @@ const bool Animation3dPlayer::isModelAnimationAutopaused(const string & animatio
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
-	if(!_animation3dManager->isAnimationExisting(animation3dId))
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
 	{
 		abort();
 	}
-	if(!_modelManager->isEntityExisting(modelId))
+	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}

@@ -2,11 +2,11 @@
 
 using std::make_shared;
 
-const shared_ptr<Pointlight> PointlightManager::getEntity(const string & pointlightId) const
+const shared_ptr<Pointlight> PointlightManager::getPointlight(const string & pointlightId) const
 {
-	auto iterator = _entities.find(pointlightId);
+	auto iterator = _pointlights.find(pointlightId);
 
-	if(iterator == _entities.end())
+	if(iterator == _pointlights.end())
 	{
 		abort();
 	}
@@ -14,61 +14,61 @@ const shared_ptr<Pointlight> PointlightManager::getEntity(const string & pointli
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Pointlight>> & PointlightManager::getEntities() const
+const unordered_map<string, shared_ptr<Pointlight>> & PointlightManager::getPointlights() const
 {
-	return _entities;
+	return _pointlights;
 }
 
-void PointlightManager::createEntity(const string & pointlightId)
+void PointlightManager::createPointlight(const string & pointlightId)
 {
-	if(isEntityExisting(pointlightId))
+	if(isPointlightExisting(pointlightId))
 	{
 		abort();
 	}
 
-	if(getEntities().size() == MAX_ENTITY_COUNT)
+	if(getPointlights().size() == MAX_POINTLIGHT_COUNT)
 	{
 		abort();
 	}
 
 	auto entity = make_shared<Pointlight>(pointlightId);
 
-	_entities.insert({pointlightId, entity});
+	_pointlights.insert({pointlightId, entity});
 }
 
-void PointlightManager::deleteEntity(const string & pointlightId)
+void PointlightManager::deletePointlight(const string & pointlightId)
 {
-	if(!isEntityExisting(pointlightId))
+	if(!isPointlightExisting(pointlightId))
 	{
 		abort();
 	}
 
-	_entities.erase(pointlightId);
+	_pointlights.erase(pointlightId);
 }
 
-void PointlightManager::deleteEntities()
+void PointlightManager::deletePointlights()
 {
-	_entities.clear();
+	_pointlights.clear();
 }
 
-const int PointlightManager::getMaxEntityCount() const
+const int PointlightManager::getMaxPointlightCount() const
 {
-	return MAX_ENTITY_COUNT;
+	return MAX_POINTLIGHT_COUNT;
 }
 
-const bool PointlightManager::isEntityExisting(const string & pointlightId) const
+const bool PointlightManager::isPointlightExisting(const string & pointlightId) const
 {
-	return (_entities.find(pointlightId) != _entities.end());
+	return (_pointlights.find(pointlightId) != _pointlights.end());
 }
 
-const bool PointlightManager::isEntitiesExisting() const
+const bool PointlightManager::isPointlightsExisting() const
 {
-	return !_entities.empty();
+	return !_pointlights.empty();
 }
 
 void PointlightManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _pointlights)
 	{
 		entity->updateTarget();
 	}

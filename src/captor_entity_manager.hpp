@@ -12,17 +12,17 @@ class CaptorManager final
 {
 public:
 	void update();
-	void createEntity(const string & captorId);
-	void deleteEntity(const string & captorId);
-	void deleteEntities();
+	void createCaptor(const string & captorId);
+	void deleteCaptor(const string & captorId);
+	void deleteCaptors();
 
-	const unordered_map<string, shared_ptr<Captor>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Captor>> & getCaptors() const;
 
-	const shared_ptr<Captor> getEntity(const string & captorId) const;
+	const shared_ptr<Captor> getCaptor(const string & captorId) const;
 
-	const bool isEntityExisting(const string & captorId) const;
-	const bool isEntitiesExisting() const;
+	const bool isCaptorExisting(const string & captorId) const;
+	const bool isCaptorsExisting() const;
 
 private:
-	unordered_map<string, shared_ptr<Captor>> _entities = {};
+	unordered_map<string, shared_ptr<Captor>> _captors = {};
 };

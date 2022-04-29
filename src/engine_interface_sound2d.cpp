@@ -3,7 +3,7 @@
 
 void EngineInterface::sound2d_create(const string & sound2dId, const string & audioPath)
 {
-	_core->getSound2dManager()->createSound(sound2dId, audioPath);
+	_core->getSound2dManager()->createSound2d(sound2dId, audioPath);
 }
 
 void EngineInterface::sound2d_delete(const string & sound2dId)
@@ -13,7 +13,7 @@ void EngineInterface::sound2d_delete(const string & sound2dId)
 		sound2d_stop(sound2dId, index);
 	}
 
-	_core->getSound2dManager()->deleteSound(sound2dId);
+	_core->getSound2dManager()->deleteSound2d(sound2dId);
 }
 
 void EngineInterface::sound2d_start(const string & sound2dId, int playCount)
@@ -55,7 +55,7 @@ const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [sound2dId, sound] : _core->getSound2dManager()->getSounds())
+	for(const auto & [sound2dId, sound] : _core->getSound2dManager()->getSound2ds())
 	{
 		result.push_back(sound->getId());
 	}
@@ -65,12 +65,12 @@ const vector<string> EngineInterface::sound2d_getIds() const
 
 const string & EngineInterface::sound2d_getAudioPath(const string & sound2dId) const
 {
-	return _core->getSound2dManager()->getSound(sound2dId)->getAudioPath();
+	return _core->getSound2dManager()->getSound2d(sound2dId)->getAudioPath();
 }
 
 const bool EngineInterface::sound2d_isExisting(const string & sound2dId) const
 {
-	return _core->getSound2dManager()->isSoundExisting(sound2dId);
+	return _core->getSound2dManager()->isSound2dExisting(sound2dId);
 }
 
 const bool EngineInterface::sound2d_isStarted(const string & sound2dId, int index) const

@@ -60,11 +60,11 @@ void MasterRenderer::render2dEntities()
 
 void MasterRenderer::_renderSkyEntity()
 {
-	if(_skyManager->getSelectedEntity() != nullptr)
+	if(_skyManager->getSelectedSky() != nullptr)
 	{
 		_skyEntityColorRenderer->bind();
 
-		_skyEntityColorRenderer->render(_skyManager->getSelectedEntity());
+		_skyEntityColorRenderer->render(_skyManager->getSelectedSky());
 
 		_skyEntityColorRenderer->unbind();
 	}
@@ -76,7 +76,7 @@ void MasterRenderer::_renderTerrainEntity()
 	{
 		_terrainEntityColorRenderer->bind();
 
-		_terrainEntityColorRenderer->processPointlights(_pointlightManager->getEntities());
+		_terrainEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
 		_terrainEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
@@ -92,7 +92,7 @@ void MasterRenderer::_renderWaterEntity()
 	{
 		_waterEntityColorRenderer->bind();
 
-		_waterEntityColorRenderer->processPointlights(_pointlightManager->getEntities());
+		_waterEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
 		_waterEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
@@ -104,15 +104,15 @@ void MasterRenderer::_renderWaterEntity()
 
 void MasterRenderer::_renderOpaqueModelEntities()
 {
-	if(!_modelManager->getEntities().empty())
+	if(!_modelManager->getModels().empty())
 	{
 		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlights(_pointlightManager->getEntities());
+		_modelEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
 		_modelEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
-		for(const auto & [modelId, model] : _modelManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
 			bool isTransparent = false;
 
@@ -131,7 +131,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
+				const auto levelOfDetailModel = _modelManager->getModels().find(model->getLevelOfDetailId())->second;
 				const auto originalPosition = levelOfDetailModel->getBasePosition();
 				const auto originalRotation = levelOfDetailModel->getBaseRotation();
 				const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -143,7 +143,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailModel->setVisible(model->isVisible());
 				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
 
 				levelOfDetailModel->setBasePosition(originalPosition);
 				levelOfDetailModel->setBaseRotation(originalRotation);
@@ -153,7 +153,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(model, _captorManager->getEntities());
+				_modelEntityColorRenderer->render(model, _captorManager->getCaptors());
 			}
 		}
 
@@ -163,15 +163,15 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 void MasterRenderer::_renderTransparentModelEntities()
 {
-	if(!_modelManager->getEntities().empty())
+	if(!_modelManager->getModels().empty())
 	{
 		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlights(_pointlightManager->getEntities());
+		_modelEntityColorRenderer->processPointlights(_pointlightManager->getPointlights());
 
 		_modelEntityColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
-		for(const auto & [modelId, model] : _modelManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
 			bool isTransparent = false;
 
@@ -192,7 +192,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
+				const auto levelOfDetailModel = _modelManager->getModels().find(model->getLevelOfDetailId())->second;
 				const auto originalPosition = levelOfDetailModel->getBasePosition();
 				const auto originalRotation = levelOfDetailModel->getBaseRotation();
 				const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -204,7 +204,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailModel->setVisible(model->isVisible());
 				levelOfDetailModel->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailModel, _captorManager->getCaptors());
 
 				levelOfDetailModel->setBasePosition(originalPosition);
 				levelOfDetailModel->setBaseRotation(originalRotation);
@@ -214,7 +214,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(model, _captorManager->getEntities());
+				_modelEntityColorRenderer->render(model, _captorManager->getCaptors());
 			}
 		}
 
@@ -224,11 +224,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 void MasterRenderer::_renderOpaqueQuad3dEntities()
 {
-	if(!_quad3dManager->getEntities().empty())
+	if(!_quad3dManager->getQuad3ds().empty())
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
 			if(quad3d->getOpacity() < 1.0f)
 			{
@@ -244,11 +244,11 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 
 void MasterRenderer::_renderTransparentQuad3dEntities()
 {
-	if(!_quad3dManager->getEntities().empty())
+	if(!_quad3dManager->getQuad3ds().empty())
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
 			if(quad3d->getOpacity() == 1.0f)
 			{
@@ -334,19 +334,19 @@ void MasterRenderer::_renderFinalScene()
 
 void MasterRenderer::_renderGUI()
 {
-	if(!_quad2dManager->getEntities().empty() || !_text2dManager->getEntities().empty())
+	if(!_quad2dManager->getQuad2ds().empty() || !_text2dManager->getText2ds().empty())
 	{
 		_quad2dEntityColorRenderer->bind();
 
 		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
-		for(const auto & [quad2dId, quad2d] : _quad2dManager->getEntities())
+		for(const auto & [quad2dId, quad2d] : _quad2dManager->getQuad2ds())
 		{
 			if(quad2d->getId() != _renderStorage->getCursorEntityId())
 			{
 				orderedQuad2dEntities.insert({quad2d->getDepth(), quad2d});
 			}
 		}
-		for(const auto & [text2dId, text2d] : _text2dManager->getEntities())
+		for(const auto & [text2dId, text2d] : _text2dManager->getText2ds())
 		{
 			orderedQuad2dEntities.insert({text2d->getDepth(), text2d});
 		}
@@ -372,7 +372,7 @@ void MasterRenderer::_renderGUI()
 
 		if(!_renderStorage->getCursorEntityId().empty())
 		{
-			_quad2dEntityColorRenderer->render(_quad2dManager->getEntities().at(_renderStorage->getCursorEntityId()));
+			_quad2dEntityColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
 		}
 
 		_quad2dEntityColorRenderer->unbind();

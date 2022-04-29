@@ -44,11 +44,11 @@ void Quad3dManager::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-const shared_ptr<Quad3d> Quad3dManager::getEntity(const string & quad3dId) const
+const shared_ptr<Quad3d> Quad3dManager::getQuad3d(const string & quad3dId) const
 {
-	auto iterator = _entities.find(quad3dId);
+	auto iterator = _quad3ds.find(quad3dId);
 
-	if(iterator == _entities.end())
+	if(iterator == _quad3ds.end())
 	{
 		abort();
 	}
@@ -56,14 +56,14 @@ const shared_ptr<Quad3d> Quad3dManager::getEntity(const string & quad3dId) const
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad3d>> & Quad3dManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad3d>> & Quad3dManager::getQuad3ds() const
 {
-	return _entities;
+	return _quad3ds;
 }
 
-void Quad3dManager::createEntity(const string & quad3dId, bool isCentered)
+void Quad3dManager::createQuad3d(const string & quad3dId, bool isCentered)
 {
-	if(isEntityExisting(quad3dId))
+	if(isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
@@ -73,12 +73,12 @@ void Quad3dManager::createEntity(const string & quad3dId, bool isCentered)
 	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);
 
-	_entities.insert({quad3dId, entity});
+	_quad3ds.insert({quad3dId, entity});
 }
 
 void Quad3dManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _quad3ds)
 	{
 		entity->updateTarget();
 
@@ -104,27 +104,27 @@ void Quad3dManager::update()
 	}
 }
 
-void Quad3dManager::deleteEntity(const string & quad3dId)
+void Quad3dManager::deleteQuad3d(const string & quad3dId)
 {
-	if(!isEntityExisting(quad3dId))
+	if(!isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
 
-	_entities.erase(quad3dId);
+	_quad3ds.erase(quad3dId);
 }
 
-void Quad3dManager::deleteEntities()
+void Quad3dManager::deleteQuad3ds()
 {
-	_entities.clear();
+	_quad3ds.clear();
 }
 
-const bool Quad3dManager::isEntityExisting(const string & quad3dId) const
+const bool Quad3dManager::isQuad3dExisting(const string & quad3dId) const
 {
-	return (_entities.find(quad3dId) != _entities.end());
+	return (_quad3ds.find(quad3dId) != _quad3ds.end());
 }
 
-const bool Quad3dManager::isEntitiesExisting() const
+const bool Quad3dManager::isQuad3dsExisting() const
 {
-	return !_entities.empty();
+	return !_quad3ds.empty();
 }

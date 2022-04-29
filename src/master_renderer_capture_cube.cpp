@@ -4,13 +4,13 @@ using std::make_shared;
 
 void MasterRenderer::captureCubeReflections()
 {
-	if(_captorManager->getEntities().empty())
+	if(_captorManager->getCaptors().empty())
 	{
 		return;
 	}
 
 	vector<shared_ptr<Model>> savedModelEntities;
-	for(const auto & [modelId, model] : _modelManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
@@ -20,7 +20,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Quad3d>> savedQuad3dEntities;
-	for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
@@ -56,14 +56,14 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto & [captorId, captor] : _captorManager->getEntities())
+	for(const auto & [captorId, captor] : _captorManager->getCaptors())
 	{
 		if(captor->mustCapture())
 		{
-			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getEntity(captor->getExceptionId())->isVisible());
+			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
 			if(!captor->getExceptionId().empty())
 			{
-				_modelManager->getEntity(captor->getExceptionId())->setVisible(false);
+				_modelManager->getModel(captor->getExceptionId())->setVisible(false);
 			}
 
 			_camera->setPosition(captor->getPosition());
@@ -166,7 +166,7 @@ void MasterRenderer::captureCubeReflections()
 
 			if(!captor->getExceptionId().empty())
 			{
-				_modelManager->getEntity(captor->getExceptionId())->setVisible(wasExceptionModelVisible);
+				_modelManager->getModel(captor->getExceptionId())->setVisible(wasExceptionModelVisible);
 			}
 		}
 	}

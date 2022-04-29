@@ -10,11 +10,11 @@ Text2dManager::Text2dManager()
 
 }
 
-const shared_ptr<Text2d> Text2dManager::getEntity(const string & text2dId) const
+const shared_ptr<Text2d> Text2dManager::getText2d(const string & text2dId) const
 {
-	auto iterator = _entities.find(text2dId);
+	auto iterator = _text2ds.find(text2dId);
 
-	if(iterator == _entities.end())
+	if(iterator == _text2ds.end())
 	{
 		abort();
 	}
@@ -22,14 +22,14 @@ const shared_ptr<Text2d> Text2dManager::getEntity(const string & text2dId) const
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text2d>> & Text2dManager::getEntities() const
+const unordered_map<string, shared_ptr<Text2d>> & Text2dManager::getText2ds() const
 {
-	return _entities;
+	return _text2ds;
 }
 
-void Text2dManager::createEntity(const string & text2dId, const string & fontMapPath, bool isCentered)
+void Text2dManager::createText2d(const string & text2dId, const string & fontMapPath, bool isCentered)
 {
-	if(isEntityExisting(text2dId))
+	if(isText2dExisting(text2dId))
 	{
 		abort();
 	}
@@ -59,34 +59,34 @@ void Text2dManager::createEntity(const string & text2dId, const string & fontMap
 	entity->setContent("text");
 	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_entities.insert({text2dId, entity});
+	_text2ds.insert({text2dId, entity});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
-void Text2dManager::deleteEntity(const string & text2dId)
+void Text2dManager::deleteText2d(const string & text2dId)
 {
-	if(!isEntityExisting(text2dId))
+	if(!isText2dExisting(text2dId))
 	{
 		abort();
 	}
 
-	_entities.erase(text2dId);
+	_text2ds.erase(text2dId);
 }
 
-void Text2dManager::deleteEntities()
+void Text2dManager::deleteText2ds()
 {
-	_entities.clear();
+	_text2ds.clear();
 }
 
-const bool Text2dManager::isEntityExisting(const string & text2dId) const
+const bool Text2dManager::isText2dExisting(const string & text2dId) const
 {
-	return (_entities.find(text2dId) != _entities.end());
+	return (_text2ds.find(text2dId) != _text2ds.end());
 }
 
-const bool Text2dManager::isEntitiesExisting() const
+const bool Text2dManager::isText2dsExisting() const
 {
-	return !_entities.empty();
+	return !_text2ds.empty();
 }
 
 void Text2dManager::inject(shared_ptr<RenderStorage> renderStorage)
@@ -96,7 +96,7 @@ void Text2dManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Text2dManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _text2ds)
 	{
 		entity->updateTarget();
 

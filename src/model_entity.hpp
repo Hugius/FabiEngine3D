@@ -3,7 +3,7 @@
 #include "model_entity_part.hpp"
 
 #include <unordered_map>
-#include <sttring>
+#include <string>
 
 using std::string;
 using std::unique_ptr;

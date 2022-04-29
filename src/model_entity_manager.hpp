@@ -22,21 +22,21 @@ public:
 	void inject(shared_ptr<MeshLoader> meshLoader);
 	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
-	void createEntity(const string & modelId, const string & meshPath);
-	void deleteEntity(const string & modelId);
-	void deleteEntities();
+	void createModel(const string & modelId, const string & meshPath);
+	void deleteModel(const string & modelId);
+	void deleteModels();
 
-	const unordered_map<string, shared_ptr<Model>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Model>> & getModels() const;
 
-	const shared_ptr<Model> getEntity(const string & modelId) const;
+	const shared_ptr<Model> getModel(const string & modelId) const;
 
-	const bool isEntityExisting(const string & modelId) const;
-	const bool isEntitiesExisting() const;
+	const bool isModelExisting(const string & modelId) const;
+	const bool isModelsExisting() const;
 
 private:
 	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 
-	unordered_map<string, shared_ptr<Model>> _entities = {};
+	unordered_map<string, shared_ptr<Model>> _models = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

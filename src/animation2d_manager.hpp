@@ -11,17 +11,17 @@ using std::unordered_map;
 class Animation2dManager final
 {
 public:
-	void createAnimation(const string & animation2dId);
-	void deleteAnimation(const string & animation2dId);
-	void deleteAnimations();
+	void createAnimation2d(const string & animation2dId);
+	void deleteAnimation2d(const string & animation2dId);
+	void deleteAnimation2ds();
 
-	const unordered_map<string, shared_ptr<Animation2d>> & getAnimations() const;
+	const unordered_map<string, shared_ptr<Animation2d>> & getAnimation2ds() const;
 
-	const shared_ptr<Animation2d> getAnimation(const string & animation2dId) const;
+	const shared_ptr<Animation2d> getAnimation2d(const string & animation2dId) const;
 
-	const bool isAnimationExisting(const string & animation2dId) const;
-	const bool isAnimationsExisting() const;
+	const bool isAnimation2dExisting(const string & animation2dId) const;
+	const bool isAnimation2dsExisting() const;
 
 private:
-	unordered_map<string, shared_ptr<Animation2d>> _animations = {};
+	unordered_map<string, shared_ptr<Animation2d>> _animation2ds = {};
 };

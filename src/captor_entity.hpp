@@ -4,7 +4,9 @@
 #include "texture_buffer.hpp"
 
 #include <array>
+#include <string>
 
+using std::string;
 using std::array;
 
 class Captor final

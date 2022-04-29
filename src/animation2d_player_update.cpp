@@ -18,8 +18,8 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
-		const auto animation2d = _animation2dManager->getAnimation(splitKey.first);
-		const auto quad3d = _quad3dManager->getEntity(splitKey.second);
+		const auto animation2d = _animation2dManager->getAnimation2d(splitKey.first);
+		const auto quad3d = _quad3dManager->getQuad3d(splitKey.second);
 		const auto interval = static_cast<int>(static_cast<float>(animation2d->getInterval() * startedAnimation->getIntervalMultiplier()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
@@ -89,8 +89,8 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
-		const auto animation2d = _animation2dManager->getAnimation(splitKey.first);
-		const auto quad2d = _quad2dManager->getEntity(splitKey.second);
+		const auto animation2d = _animation2dManager->getAnimation2d(splitKey.first);
+		const auto quad2d = _quad2dManager->getQuad2d(splitKey.second);
 		const auto interval = static_cast<int>(static_cast<float>(animation2d->getInterval()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())

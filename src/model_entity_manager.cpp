@@ -6,11 +6,11 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-const shared_ptr<Model> ModelManager::getEntity(const string & modelId) const
+const shared_ptr<Model> ModelManager::getModel(const string & modelId) const
 {
-	auto iterator = _entities.find(modelId);
+	auto iterator = _models.find(modelId);
 
-	if(iterator == _entities.end())
+	if(iterator == _models.end())
 	{
 		abort();
 	}
@@ -18,9 +18,9 @@ const shared_ptr<Model> ModelManager::getEntity(const string & modelId) const
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Model>> & ModelManager::getEntities() const
+const unordered_map<string, shared_ptr<Model>> & ModelManager::getModels() const
 {
-	return _entities;
+	return _models;
 }
 
 void ModelManager::inject(shared_ptr<RenderStorage> renderStorage)
@@ -53,9 +53,9 @@ void ModelManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 	_vertexBufferCache = vertexBufferCache;
 }
 
-void ModelManager::createEntity(const string & modelId, const string & meshPath)
+void ModelManager::createModel(const string & modelId, const string & meshPath)
 {
-	if(isEntityExisting(modelId))
+	if(isModelExisting(modelId))
 	{
 		abort();
 	}
@@ -107,37 +107,37 @@ void ModelManager::createEntity(const string & modelId, const string & meshPath)
 
 	entity->setMeshPath(meshPath);
 
-	_entities.insert({modelId, entity});
+	_models.insert({modelId, entity});
 }
 
-void ModelManager::deleteEntity(const string & modelId)
+void ModelManager::deleteModel(const string & modelId)
 {
-	if(!isEntityExisting(modelId))
+	if(!isModelExisting(modelId))
 	{
 		abort();
 	}
 
-	_entities.erase(modelId);
+	_models.erase(modelId);
 }
 
-void ModelManager::deleteEntities()
+void ModelManager::deleteModels()
 {
-	_entities.clear();
+	_models.clear();
 }
 
-const bool ModelManager::isEntityExisting(const string & modelId) const
+const bool ModelManager::isModelExisting(const string & modelId) const
 {
-	return (_entities.find(modelId) != _entities.end());
+	return (_models.find(modelId) != _models.end());
 }
 
-const bool ModelManager::isEntitiesExisting() const
+const bool ModelManager::isModelsExisting() const
 {
-	return !_entities.empty();
+	return !_models.empty();
 }
 
 void ModelManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _models)
 	{
 		entity->updateTarget();
 
@@ -152,7 +152,7 @@ void ModelManager::update()
 		}
 		else
 		{
-			if(getEntities().find(entity->getLevelOfDetailId()) == getEntities().end())
+			if(getModels().find(entity->getLevelOfDetailId()) == getModels().end())
 			{
 				abort();
 			}
@@ -164,12 +164,12 @@ void ModelManager::update()
 			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
 		}
 
-		if(_captorManager->getEntities().find(entity->getPreviousCaptorEntityId()) == _captorManager->getEntities().end())
+		if(_captorManager->getCaptors().find(entity->getPreviousCaptorEntityId()) == _captorManager->getCaptors().end())
 		{
 			entity->setPreviousCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(_captorManager->getEntities().find(entity->getCurrentCaptorEntityId()) == _captorManager->getEntities().end())
+		if(_captorManager->getCaptors().find(entity->getCurrentCaptorEntityId()) == _captorManager->getCaptors().end())
 		{
 			entity->setCurrentCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
@@ -184,7 +184,7 @@ void ModelManager::update()
 		{
 			map<float, shared_ptr<Captor>> orderedCaptorEntities;
 
-			for(const auto & [captorEntityId, captorEntity] : _captorManager->getEntities())
+			for(const auto & [captorEntityId, captorEntity] : _captorManager->getCaptors())
 			{
 				if(captorEntity->isVisible())
 				{

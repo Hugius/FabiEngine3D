@@ -12,7 +12,7 @@ void Sound3dPlayer::update()
 
 	for(auto & [soundId, instances] : _startedSounds)
 	{
-		const auto sound = _sound3dManager->getSound(soundId);
+		const auto sound = _sound3dManager->getSound3d(soundId);
 		const auto cameraPosition = _camera->getPosition();
 		const auto distance = Mathematics::calculateDistance(cameraPosition, sound->getPosition());
 		const auto volume = (clamp((1.0f - (distance / sound->getMaxDistance())), 0.0f, 1.0f) * sound->getMaxVolume());
@@ -128,7 +128,7 @@ void Sound3dPlayer::update()
 		const auto soundId = _volumeThreadQueue.front().first;
 		const auto instanceIndex = _volumeThreadQueue.front().second;
 
-		if(!_sound3dManager->isSoundExisting(soundId))
+		if(!_sound3dManager->isSound3dExisting(soundId))
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
@@ -145,7 +145,7 @@ void Sound3dPlayer::update()
 		}
 
 		const auto startedSound = _startedSounds.at(soundId)[instanceIndex];
-		const auto originalSound = _sound3dManager->getSound(soundId);
+		const auto originalSound = _sound3dManager->getSound3d(soundId);
 
 		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes

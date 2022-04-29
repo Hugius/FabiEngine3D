@@ -2,48 +2,48 @@
 
 using std::make_shared;
 
-void Animation2dManager::createAnimation(const string & animation2dId)
+void Animation2dManager::createAnimation2d(const string & animation2dId)
 {
-	if(isAnimationExisting(animation2dId))
+	if(isAnimation2dExisting(animation2dId))
 	{
 		abort();
 	}
 
 	auto animation = make_shared<Animation2d>(animation2dId);
 
-	_animations.insert({animation2dId, animation});
+	_animation2ds.insert({animation2dId, animation});
 }
 
-void Animation2dManager::deleteAnimation(const string & animation2dId)
+void Animation2dManager::deleteAnimation2d(const string & animation2dId)
 {
-	if(!isAnimationExisting(animation2dId))
+	if(!isAnimation2dExisting(animation2dId))
 	{
 		abort();
 	}
 
-	_animations.erase(animation2dId);
+	_animation2ds.erase(animation2dId);
 }
 
-void Animation2dManager::deleteAnimations()
+void Animation2dManager::deleteAnimation2ds()
 {
-	_animations.clear();
+	_animation2ds.clear();
 }
 
-const bool Animation2dManager::isAnimationExisting(const string & animation2dId) const
+const bool Animation2dManager::isAnimation2dExisting(const string & animation2dId) const
 {
-	return (_animations.find(animation2dId) != _animations.end());
+	return (_animation2ds.find(animation2dId) != _animation2ds.end());
 }
 
-const bool Animation2dManager::isAnimationsExisting() const
+const bool Animation2dManager::isAnimation2dsExisting() const
 {
-	return !_animations.empty();
+	return !_animation2ds.empty();
 }
 
-const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string & animation2dId) const
+const shared_ptr<Animation2d> Animation2dManager::getAnimation2d(const string & animation2dId) const
 {
-	auto iterator = _animations.find(animation2dId);
+	auto iterator = _animation2ds.find(animation2dId);
 
-	if(iterator == _animations.end())
+	if(iterator == _animation2ds.end())
 	{
 		abort();
 	}
@@ -51,7 +51,7 @@ const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string & an
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Animation2d>> & Animation2dManager::getAnimations() const
+const unordered_map<string, shared_ptr<Animation2d>> & Animation2dManager::getAnimation2ds() const
 {
-	return _animations;
+	return _animation2ds;
 }

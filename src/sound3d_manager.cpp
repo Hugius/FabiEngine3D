@@ -2,19 +2,19 @@
 
 using std::make_shared;
 
-void Sound3dManager::deleteSounds()
+void Sound3dManager::deleteSound3ds()
 {
-	_sounds.clear();
+	_sound3ds.clear();
 }
 
-void Sound3dManager::deleteSound(const string & sound3dId)
+void Sound3dManager::deleteSound3d(const string & sound3dId)
 {
-	if(!isSoundExisting(sound3dId))
+	if(!isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
 
-	_sounds.erase(sound3dId);
+	_sound3ds.erase(sound3dId);
 }
 
 void Sound3dManager::inject(shared_ptr<AudioLoader> audioLoader)
@@ -27,9 +27,9 @@ void Sound3dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
 	_waveBufferCache = waveBufferCache;
 }
 
-void Sound3dManager::createSound(const string & sound3dId, const string & audioPath)
+void Sound3dManager::createSound3d(const string & sound3dId, const string & audioPath)
 {
-	if(isSoundExisting(sound3dId))
+	if(isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
@@ -62,29 +62,29 @@ void Sound3dManager::createSound(const string & sound3dId, const string & audioP
 	sound->setWaveBuffer(waveBuffer);
 	sound->setAudioPath(audioPath);
 
-	_sounds.insert({sound3dId, sound});
+	_sound3ds.insert({sound3dId, sound});
 }
 
-const bool Sound3dManager::isSoundExisting(const string & sound3dId) const
+const bool Sound3dManager::isSound3dExisting(const string & sound3dId) const
 {
-	return (_sounds.find(sound3dId) != _sounds.end());
+	return (_sound3ds.find(sound3dId) != _sound3ds.end());
 }
 
-const bool Sound3dManager::isSoundsExisting() const
+const bool Sound3dManager::isSound3dsExisting() const
 {
-	return !_sounds.empty();
+	return !_sound3ds.empty();
 }
 
-const unordered_map<string, shared_ptr<Sound3d>> & Sound3dManager::getSounds() const
+const unordered_map<string, shared_ptr<Sound3d>> & Sound3dManager::getSound3ds() const
 {
-	return _sounds;
+	return _sound3ds;
 }
 
-const shared_ptr<Sound3d> Sound3dManager::getSound(const string & sound3dId) const
+const shared_ptr<Sound3d> Sound3dManager::getSound3d(const string & sound3dId) const
 {
-	auto iterator = _sounds.find(sound3dId);
+	auto iterator = _sound3ds.find(sound3dId);
 
-	if(iterator == _sounds.end())
+	if(iterator == _sound3ds.end())
 	{
 		abort();
 	}

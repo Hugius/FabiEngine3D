@@ -116,9 +116,9 @@ void AabbManager::update()
 			{
 				case AabbParentType::MODEL:
 				{
-					auto foundPair = _modelManager->getEntities().find(entity->getParentId());
+					auto foundPair = _modelManager->getModels().find(entity->getParentId());
 
-					if(foundPair == _modelManager->getEntities().end())
+					if(foundPair == _modelManager->getModels().end())
 					{
 						abort();
 					}
@@ -223,9 +223,9 @@ void AabbManager::update()
 				}
 				case AabbParentType::QUAD3D:
 				{
-					auto foundPair = _quad3dManager->getEntities().find(entity->getParentId());
+					auto foundPair = _quad3dManager->getQuad3ds().find(entity->getParentId());
 
-					if(foundPair == _quad3dManager->getEntities().end())
+					if(foundPair == _quad3dManager->getQuad3ds().end())
 					{
 						abort();
 					}

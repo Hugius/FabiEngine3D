@@ -32,19 +32,19 @@ void MasterRenderer::captureWorldDepth()
 		_waterEntityDepthRenderer->unbind();
 	}
 
-	if(!_modelManager->getEntities().empty())
+	if(!_modelManager->getModels().empty())
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto & [modelId, model] : _modelManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
 			if(model->isLevelOfDetailed())
 			{
-				auto foundPair = _modelManager->getEntities().find(model->getLevelOfDetailId());
+				auto foundPair = _modelManager->getModels().find(model->getLevelOfDetailId());
 
-				if(foundPair != _modelManager->getEntities().end())
+				if(foundPair != _modelManager->getModels().end())
 				{
-					const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
+					const auto levelOfDetailModel = _modelManager->getModels().find(model->getLevelOfDetailId())->second;
 					const auto originalPosition = levelOfDetailModel->getBasePosition();
 					const auto originalRotation = levelOfDetailModel->getBaseRotation();
 					const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -78,11 +78,11 @@ void MasterRenderer::captureWorldDepth()
 		_modelEntityDepthRenderer->unbind();
 	}
 
-	if(!_quad3dManager->getEntities().empty())
+	if(!_quad3dManager->getQuad3ds().empty())
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
 			_quad3dEntityDepthRenderer->render(quad3d);
 		}
@@ -266,19 +266,19 @@ void MasterRenderer::captureShadows()
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(!_modelManager->getEntities().empty())
+		if(!_modelManager->getModels().empty())
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto & [modelId, model] : _modelManager->getEntities())
+			for(const auto & [modelId, model] : _modelManager->getModels())
 			{
 				if(model->isLevelOfDetailed())
 				{
-					auto foundPair = _modelManager->getEntities().find(model->getLevelOfDetailId());
+					auto foundPair = _modelManager->getModels().find(model->getLevelOfDetailId());
 
-					if(foundPair != _modelManager->getEntities().end())
+					if(foundPair != _modelManager->getModels().end())
 					{
-						const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
+						const auto levelOfDetailModel = _modelManager->getModels().find(model->getLevelOfDetailId())->second;
 						const auto originalPosition = levelOfDetailModel->getBasePosition();
 						const auto originalRotation = levelOfDetailModel->getBaseRotation();
 						const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -312,11 +312,11 @@ void MasterRenderer::captureShadows()
 			_modelEntityShadowRenderer->unbind();
 		}
 
-		if(!_quad3dManager->getEntities().empty())
+		if(!_quad3dManager->getQuad3ds().empty())
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+			for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 			{
 				_quad3dEntityShadowRenderer->render(quad3d);
 			}

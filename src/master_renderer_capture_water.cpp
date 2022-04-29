@@ -23,7 +23,7 @@ void MasterRenderer::captureWaterReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
-	for(const auto & [modelId, model] : _modelManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isVisible())
 		{
@@ -50,7 +50,7 @@ void MasterRenderer::captureWaterReflections()
 	}
 
 	vector<string> savedQuad3dEntityIds;
-	for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
@@ -87,7 +87,7 @@ void MasterRenderer::captureWaterReflections()
 
 	for(const auto & savedId : savedModelEntityIds)
 	{
-		for(const auto & [modelId, model] : _modelManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
 			if(model->getId() == savedId)
 			{
@@ -98,7 +98,7 @@ void MasterRenderer::captureWaterReflections()
 
 	for(const auto & savedId : savedQuad3dEntityIds)
 	{
-		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
 			if(quad3d->getId() == savedId)
 			{

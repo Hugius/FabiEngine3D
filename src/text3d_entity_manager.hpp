@@ -10,32 +10,32 @@
 
 using std::unordered_map;
 
-class Text3dEntityManager final
+class Text3dManager final
 {
 public:
-	Text3dEntityManager();
+	Text3dManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
-	void createEntity(const string & text3dId, const string & fontMapPath, bool isCentered);
-	void deleteEntity(const string & text3dId);
-	void deleteEntities();
+	void createText3d(const string & text3dId, const string & fontMapPath, bool isCentered);
+	void deleteText3d(const string & text3dId);
+	void deleteText3ds();
 
-	const unordered_map<string, shared_ptr<Text3dEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<Text3dEntity>> & getText3ds() const;
 
-	const shared_ptr<Text3dEntity> getEntity(const string & text3dId) const;
+	const shared_ptr<Text3dEntity> getText3d(const string & text3dId) const;
 
-	const bool isEntityExisting(const string & text3dId) const;
-	const bool isEntitiesExisting() const;
+	const bool isText3dExisting(const string & text3dId) const;
+	const bool isText3dsExisting() const;
 
 private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<Text3dEntity>> _entities = {};
+	unordered_map<string, shared_ptr<Text3dEntity>> _text3ds = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

@@ -6,9 +6,9 @@ using std::make_shared;
 
 void RaycastIntersector::update()
 {
-	if(_isTerrainIntersectionEnabled && (_terrainManager->getSelectedEntity() != nullptr))
+	if(_isTerrainIntersectionEnabled && (_terrainManager->getSelectedTerrain() != nullptr))
 	{
-		_terrainId = _terrainManager->getSelectedEntity()->getId();
+		_terrainId = _terrainManager->getSelectedTerrain()->getId();
 		_pointOnTerrain = _calculatePointOnTerrain();
 		_distanceToTerrain = _calculateDistanceToTerrain();
 	}
@@ -22,7 +22,7 @@ void RaycastIntersector::update()
 	_closestAabbId = "";
 	_aabbIntersections.clear();
 
-	for(const auto & [aabbId, aabb] : _aabbManager->getEntities())
+	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
 		if(!_isAabbIntersectionEnabled || !aabb->isRaycastResponsive())
 		{
@@ -63,12 +63,12 @@ void RaycastIntersector::inject(shared_ptr<RaycastCalculator> raycastCalculator)
 	_raycastCalculator = raycastCalculator;
 }
 
-void RaycastIntersector::inject(shared_ptr<TerrainEntityManager> terrainManager)
+void RaycastIntersector::inject(shared_ptr<TerrainManager> terrainManager)
 {
 	_terrainManager = terrainManager;
 }
 
-void RaycastIntersector::inject(shared_ptr<AabbEntityManager> aabbManager)
+void RaycastIntersector::inject(shared_ptr<AabbManager> aabbManager)
 {
 	_aabbManager = aabbManager;
 }
@@ -208,8 +208,8 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(const share
 const bool RaycastIntersector::_isUnderTerrain(float distance) const
 {
 	const auto pointOnRay = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
-	const auto selectedTerrain = _terrainManager->getSelectedEntity();
-	const auto terrainHeight = _terrainManager->getPixelHeight(selectedTerrain->getId(), pointOnRay.x + (selectedTerrain->getSize() * 0.5f), pointOnRay.z + (selectedTerrain->getSize() * 0.5f));
+	const auto selectedTerrain = _terrainManager->getSelectedTerrain();
+	const auto terrainHeight = _terrainManager->getTerrainPixelHeight(selectedTerrain->getId(), pointOnRay.x + (selectedTerrain->getSize() * 0.5f), pointOnRay.z + (selectedTerrain->getSize() * 0.5f));
 
 	return (pointOnRay.y < terrainHeight);
 }
@@ -226,7 +226,7 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
 
 			fvec3 endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 
-			auto selectedTerrain = _terrainManager->getSelectedEntity();
+			auto selectedTerrain = _terrainManager->getSelectedTerrain();
 
 			if(_terrainManager->isInside(selectedTerrain->getId(), (endPoint.x + (selectedTerrain->getSize() * 0.5f)), (endPoint.z + (selectedTerrain->getSize() * 0.5f))))
 			{

@@ -6,9 +6,9 @@ void Animation3dPlayer::inject(shared_ptr<Animation3dManager> animation3dManager
 	_animation3dManager = animation3dManager;
 }
 
-void Animation3dPlayer::inject(shared_ptr<ModelEntityManager> modelEntityManager)
+void Animation3dPlayer::inject(shared_ptr<ModelManager> modelManager)
 {
-	_modelEntityManager = modelEntityManager;
+	_modelManager = modelManager;
 }
 
 const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationIds() const
@@ -33,7 +33,7 @@ const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string & a
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -53,7 +53,7 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string & animation
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -73,7 +73,7 @@ const int Animation3dPlayer::getModelAnimationFrameIndex(const string & animatio
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -93,7 +93,7 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string & animation3d
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -109,7 +109,7 @@ const bool Animation3dPlayer::isModelAnimationPaused(const string & animation3dI
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -129,7 +129,7 @@ const bool Animation3dPlayer::isModelAnimationAutopaused(const string & animatio
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}

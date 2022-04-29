@@ -48,7 +48,7 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 
-AabbEntityManager::AabbEntityManager()
+AabbManager::AabbManager()
 	:
 	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, centeredBufferData, centeredBufferDataCount)),
 	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, standingBufferData, standingBufferDataCount))
@@ -56,26 +56,26 @@ AabbEntityManager::AabbEntityManager()
 
 }
 
-void AabbEntityManager::inject(shared_ptr<ModelEntityManager> modelEntityManager)
+void AabbManager::inject(shared_ptr<ModelManager> modelManager)
 {
-	_modelEntityManager = modelEntityManager;
+	_modelManager = modelManager;
 }
 
-void AabbEntityManager::inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager)
+void AabbManager::inject(shared_ptr<Quad3dManager> quad3dManager)
 {
-	_quad3dEntityManager = quad3dEntityManager;
+	_quad3dManager = quad3dManager;
 }
 
-void AabbEntityManager::inject(shared_ptr<Text3dEntityManager> text3dEntityManager)
+void AabbManager::inject(shared_ptr<Text3dManager> text3dManager)
 {
-	_text3dEntityManager = text3dEntityManager;
+	_text3dManager = text3dManager;
 }
 
-const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string & aabbId) const
+const shared_ptr<AabbEntity> AabbManager::getAabb(const string & aabbId) const
 {
-	auto iterator = _entities.find(aabbId);
+	auto iterator = _aabbEntities.find(aabbId);
 
-	if(iterator == _entities.end())
+	if(iterator == _aabbEntities.end())
 	{
 		abort();
 	}
@@ -83,14 +83,14 @@ const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string & aabbId)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<AabbEntity>> & AabbEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<AabbEntity>> & AabbManager::getAabbs() const
 {
-	return _entities;
+	return _aabbEntities;
 }
 
-void AabbEntityManager::createEntity(const string & aabbId, bool isCentered)
+void AabbManager::createAabb(const string & aabbId, bool isCentered)
 {
-	if(isEntityExisting(aabbId))
+	if(isAabbExisting(aabbId))
 	{
 		abort();
 	}
@@ -101,12 +101,12 @@ void AabbEntityManager::createEntity(const string & aabbId, bool isCentered)
 	entity->setCentered(isCentered);
 	entity->setVisible(false);
 
-	_entities.insert({aabbId, entity});
+	_aabbEntities.insert({aabbId, entity});
 }
 
-void AabbEntityManager::update()
+void AabbManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _aabbEntities)
 	{
 		entity->updateTarget();
 
@@ -116,9 +116,9 @@ void AabbEntityManager::update()
 			{
 				case AabbParentType::MODEL:
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(entity->getParentId());
+					auto foundPair = _modelManager->getEntities().find(entity->getParentId());
 
-					if(foundPair == _modelEntityManager->getEntities().end())
+					if(foundPair == _modelManager->getEntities().end())
 					{
 						abort();
 					}
@@ -223,9 +223,9 @@ void AabbEntityManager::update()
 				}
 				case AabbParentType::QUAD3D:
 				{
-					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentId());
+					auto foundPair = _quad3dManager->getEntities().find(entity->getParentId());
 
-					if(foundPair == _quad3dEntityManager->getEntities().end())
+					if(foundPair == _quad3dManager->getEntities().end())
 					{
 						abort();
 					}
@@ -295,9 +295,9 @@ void AabbEntityManager::update()
 				}
 				case AabbParentType::TEXT3D:
 				{
-					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentId());
+					auto foundPair = _text3dManager->getText3ds().find(entity->getParentId());
 
-					if(foundPair == _text3dEntityManager->getEntities().end())
+					if(foundPair == _text3dManager->getText3ds().end())
 					{
 						abort();
 					}
@@ -375,27 +375,27 @@ void AabbEntityManager::update()
 	}
 }
 
-void AabbEntityManager::deleteEntity(const string & aabbId)
+void AabbManager::deleteAabb(const string & aabbId)
 {
-	if(!isEntityExisting(aabbId))
+	if(!isAabbExisting(aabbId))
 	{
 		abort();
 	}
 
-	_entities.erase(aabbId);
+	_aabbEntities.erase(aabbId);
 }
 
-void AabbEntityManager::deleteEntities()
+void AabbManager::deleteAabbs()
 {
-	_entities.clear();
+	_aabbEntities.clear();
 }
 
-const bool AabbEntityManager::isEntityExisting(const string & aabbId) const
+const bool AabbManager::isAabbExisting(const string & aabbId) const
 {
-	return (_entities.find(aabbId) != _entities.end());
+	return (_aabbEntities.find(aabbId) != _aabbEntities.end());
 }
 
-const bool AabbEntityManager::isEntitiesExisting() const
+const bool AabbManager::isAabbsExisting() const
 {
-	return !_entities.empty();
+	return !_aabbEntities.empty();
 }

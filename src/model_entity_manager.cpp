@@ -6,7 +6,7 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string & modelId) const
+const shared_ptr<ModelEntity> ModelManager::getEntity(const string & modelId) const
 {
 	auto iterator = _entities.find(modelId);
 
@@ -18,42 +18,42 @@ const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string & model
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<ModelEntity>> & ModelEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<ModelEntity>> & ModelManager::getEntities() const
 {
 	return _entities;
 }
 
-void ModelEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
+void ModelManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;
 }
 
-void ModelEntityManager::inject(shared_ptr<Camera> camera)
+void ModelManager::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
 }
 
-void ModelEntityManager::inject(shared_ptr<Timer> timer)
+void ModelManager::inject(shared_ptr<Timer> timer)
 {
 	_timer = timer;
 }
 
-void ModelEntityManager::inject(shared_ptr<CaptorEntityManager> captorEntityManager)
+void ModelManager::inject(shared_ptr<CaptorManager> captorManager)
 {
-	_captorEntityManager = captorEntityManager;
+	_captorManager = captorManager;
 }
 
-void ModelEntityManager::inject(shared_ptr<MeshLoader> meshLoader)
+void ModelManager::inject(shared_ptr<MeshLoader> meshLoader)
 {
 	_meshLoader = meshLoader;
 }
 
-void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
+void ModelManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 {
 	_vertexBufferCache = vertexBufferCache;
 }
 
-void ModelEntityManager::createEntity(const string & modelId, const string & meshPath)
+void ModelManager::createEntity(const string & modelId, const string & meshPath)
 {
 	if(isEntityExisting(modelId))
 	{
@@ -110,7 +110,7 @@ void ModelEntityManager::createEntity(const string & modelId, const string & mes
 	_entities.insert({modelId, entity});
 }
 
-void ModelEntityManager::deleteEntity(const string & modelId)
+void ModelManager::deleteEntity(const string & modelId)
 {
 	if(!isEntityExisting(modelId))
 	{
@@ -120,22 +120,22 @@ void ModelEntityManager::deleteEntity(const string & modelId)
 	_entities.erase(modelId);
 }
 
-void ModelEntityManager::deleteEntities()
+void ModelManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const bool ModelEntityManager::isEntityExisting(const string & modelId) const
+const bool ModelManager::isEntityExisting(const string & modelId) const
 {
 	return (_entities.find(modelId) != _entities.end());
 }
 
-const bool ModelEntityManager::isEntitiesExisting() const
+const bool ModelManager::isEntitiesExisting() const
 {
 	return !_entities.empty();
 }
 
-void ModelEntityManager::update()
+void ModelManager::update()
 {
 	for(const auto & [entityId, entity] : _entities)
 	{
@@ -164,12 +164,12 @@ void ModelEntityManager::update()
 			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
 		}
 
-		if(_captorEntityManager->getEntities().find(entity->getPreviousCaptorEntityId()) == _captorEntityManager->getEntities().end())
+		if(_captorManager->getEntities().find(entity->getPreviousCaptorEntityId()) == _captorManager->getEntities().end())
 		{
 			entity->setPreviousCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(_captorEntityManager->getEntities().find(entity->getCurrentCaptorEntityId()) == _captorEntityManager->getEntities().end())
+		if(_captorManager->getEntities().find(entity->getCurrentCaptorEntityId()) == _captorManager->getEntities().end())
 		{
 			entity->setCurrentCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
@@ -184,7 +184,7 @@ void ModelEntityManager::update()
 		{
 			map<float, shared_ptr<CaptorEntity>> orderedCaptorEntities;
 
-			for(const auto & [captorEntityId, captorEntity] : _captorEntityManager->getEntities())
+			for(const auto & [captorEntityId, captorEntity] : _captorManager->getEntities())
 			{
 				if(captorEntity->isVisible())
 				{

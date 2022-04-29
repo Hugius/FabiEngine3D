@@ -13,8 +13,8 @@ public:
 	CameraCollisionResponder();
 
 	void inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector);
-	void inject(shared_ptr<TerrainEntityManager> terrainManager);
-	void inject(shared_ptr<AabbEntityManager> aabbManager);
+	void inject(shared_ptr<TerrainManager> terrainManager);
+	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
 	void setCameraBox(const shared_ptr<Box> value);
@@ -37,8 +37,8 @@ private:
 
 	shared_ptr<Box> _cameraBox = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
-	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
+	shared_ptr<TerrainManager> _terrainManager = nullptr;
+	shared_ptr<AabbManager> _aabbManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 
 	fvec3 _lastCameraPosition = fvec3(0.0f);

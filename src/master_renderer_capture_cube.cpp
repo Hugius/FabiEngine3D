@@ -4,13 +4,13 @@ using std::make_shared;
 
 void MasterRenderer::captureCubeReflections()
 {
-	if(_captorEntityManager->getEntities().empty())
+	if(_captorManager->getEntities().empty())
 	{
 		return;
 	}
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
-	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getEntities())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
@@ -20,7 +20,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
@@ -30,7 +30,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
+	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{
@@ -56,14 +56,14 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto & [captorId, captor] : _captorEntityManager->getEntities())
+	for(const auto & [captorId, captor] : _captorManager->getEntities())
 	{
 		if(captor->mustCapture())
 		{
-			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelEntityManager->getEntity(captor->getExceptionId())->isVisible());
+			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getEntity(captor->getExceptionId())->isVisible());
 			if(!captor->getExceptionId().empty())
 			{
-				_modelEntityManager->getEntity(captor->getExceptionId())->setVisible(false);
+				_modelManager->getEntity(captor->getExceptionId())->setVisible(false);
 			}
 
 			_camera->setPosition(captor->getPosition());
@@ -166,7 +166,7 @@ void MasterRenderer::captureCubeReflections()
 
 			if(!captor->getExceptionId().empty())
 			{
-				_modelEntityManager->getEntity(captor->getExceptionId())->setVisible(wasExceptionModelVisible);
+				_modelManager->getEntity(captor->getExceptionId())->setVisible(wasExceptionModelVisible);
 			}
 		}
 	}

@@ -14,8 +14,8 @@ class Animation2dPlayer final
 {
 public:
 	void inject(shared_ptr<Animation2dManager> animation2dManager);
-	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
-	void inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager);
+	void inject(shared_ptr<Quad3dManager> quad3dManager);
+	void inject(shared_ptr<Quad2dManager> quad2dManager);
 	void update();
 	void startQuad3dAnimation(const string & animation2dId, const string & quad3dId, int playCount);
 	void startQuad2dAnimation(const string & animation2dId, const string & quad2dId, int playCount);
@@ -68,6 +68,6 @@ private:
 	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad2dAnimations = {};
 
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
-	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
-	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
+	shared_ptr<Quad3dManager> _quad3dManager = nullptr;
+	shared_ptr<Quad2dManager> _quad2dManager = nullptr;
 };

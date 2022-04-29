@@ -2,11 +2,11 @@
 
 using std::make_shared;
 
-const shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string & spotlightId) const
+const shared_ptr<SpotlightEntity> SpotlightManager::getSpotlight(const string & spotlightId) const
 {
-	auto iterator = _entities.find(spotlightId);
+	auto iterator = _spotlights.find(spotlightId);
 
-	if(iterator == _entities.end())
+	if(iterator == _spotlights.end())
 	{
 		abort();
 	}
@@ -14,31 +14,31 @@ const shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<SpotlightEntity>> & SpotlightEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<SpotlightEntity>> & SpotlightManager::getSpotlights() const
 {
-	return _entities;
+	return _spotlights;
 }
 
-void SpotlightEntityManager::createEntity(const string & spotlightId)
+void SpotlightManager::createSpotlight(const string & spotlightId)
 {
-	if(isEntityExisting(spotlightId))
+	if(isSpotlightExisting(spotlightId))
 	{
 		abort();
 	}
 
-	if(getEntities().size() == MAX_ENTITY_COUNT)
+	if(getSpotlights().size() == MAX_SPOTLIGHT_COUNT)
 	{
 		abort();
 	}
 
 	auto entity = make_shared<SpotlightEntity>(spotlightId);
 
-	_entities.insert({spotlightId, entity});
+	_spotlights.insert({spotlightId, entity});
 }
 
-void SpotlightEntityManager::update()
+void SpotlightManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _spotlights)
 	{
 		entity->updateTarget();
 
@@ -49,32 +49,32 @@ void SpotlightEntityManager::update()
 	}
 }
 
-void SpotlightEntityManager::deleteEntity(const string & spotlightId)
+void SpotlightManager::deleteSpotlight(const string & spotlightId)
 {
-	if(!isEntityExisting(spotlightId))
+	if(!isSpotlightExisting(spotlightId))
 	{
 		abort();
 	}
 
-	_entities.erase(spotlightId);
+	_spotlights.erase(spotlightId);
 }
 
-void SpotlightEntityManager::deleteEntities()
+void SpotlightManager::deleteSpotlights()
 {
-	_entities.clear();
+	_spotlights.clear();
 }
 
-const int SpotlightEntityManager::getMaxEntityCount() const
+const int SpotlightManager::getMaxSpotlightCount() const
 {
-	return MAX_ENTITY_COUNT;
+	return MAX_SPOTLIGHT_COUNT;
 }
 
-const bool SpotlightEntityManager::isEntityExisting(const string & spotlightId) const
+const bool SpotlightManager::isSpotlightExisting(const string & spotlightId) const
 {
-	return (_entities.find(spotlightId) != _entities.end());
+	return (_spotlights.find(spotlightId) != _spotlights.end());
 }
 
-const bool SpotlightEntityManager::isEntitiesExisting() const
+const bool SpotlightManager::isSpotlightsExisting() const
 {
-	return !_entities.empty();
+	return !_spotlights.empty();
 }

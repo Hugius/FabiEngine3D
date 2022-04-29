@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-const shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string & pointlightId) const
+const shared_ptr<PointlightEntity> PointlightManager::getEntity(const string & pointlightId) const
 {
 	auto iterator = _entities.find(pointlightId);
 
@@ -14,12 +14,12 @@ const shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const stri
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<PointlightEntity>> & PointlightEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<PointlightEntity>> & PointlightManager::getEntities() const
 {
 	return _entities;
 }
 
-void PointlightEntityManager::createEntity(const string & pointlightId)
+void PointlightManager::createEntity(const string & pointlightId)
 {
 	if(isEntityExisting(pointlightId))
 	{
@@ -36,7 +36,7 @@ void PointlightEntityManager::createEntity(const string & pointlightId)
 	_entities.insert({pointlightId, entity});
 }
 
-void PointlightEntityManager::deleteEntity(const string & pointlightId)
+void PointlightManager::deleteEntity(const string & pointlightId)
 {
 	if(!isEntityExisting(pointlightId))
 	{
@@ -46,27 +46,27 @@ void PointlightEntityManager::deleteEntity(const string & pointlightId)
 	_entities.erase(pointlightId);
 }
 
-void PointlightEntityManager::deleteEntities()
+void PointlightManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const int PointlightEntityManager::getMaxEntityCount() const
+const int PointlightManager::getMaxEntityCount() const
 {
 	return MAX_ENTITY_COUNT;
 }
 
-const bool PointlightEntityManager::isEntityExisting(const string & pointlightId) const
+const bool PointlightManager::isEntityExisting(const string & pointlightId) const
 {
 	return (_entities.find(pointlightId) != _entities.end());
 }
 
-const bool PointlightEntityManager::isEntitiesExisting() const
+const bool PointlightManager::isEntitiesExisting() const
 {
 	return !_entities.empty();
 }
 
-void PointlightEntityManager::update()
+void PointlightManager::update()
 {
 	for(const auto & [entityId, entity] : _entities)
 	{

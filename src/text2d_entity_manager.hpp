@@ -10,10 +10,10 @@
 
 using std::unordered_map;
 
-class Text2dEntityManager final
+class Text2dManager final
 {
 public:
-	Text2dEntityManager();
+	Text2dManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<ImageLoader> imageLoader);

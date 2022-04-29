@@ -7,10 +7,10 @@
 
 using std::unordered_map;
 
-class Quad2dEntityManager final
+class Quad2dManager final
 {
 public:
-	Quad2dEntityManager();
+	Quad2dManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();

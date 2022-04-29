@@ -8,7 +8,7 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class PointlightEntityManager final
+class PointlightManager final
 {
 public:
 	void update();

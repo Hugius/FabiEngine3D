@@ -8,7 +8,7 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class CaptorEntityManager final
+class CaptorManager final
 {
 public:
 	void update();

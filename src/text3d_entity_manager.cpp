@@ -26,7 +26,7 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(standingBufferData) / sizeof(float));
 
-Text3dEntityManager::Text3dEntityManager()
+Text3dManager::Text3dManager()
 	:
 	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
 	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
@@ -34,31 +34,31 @@ Text3dEntityManager::Text3dEntityManager()
 
 }
 
-void Text3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
+void Text3dManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;
 }
 
-void Text3dEntityManager::inject(shared_ptr<Camera> camera)
+void Text3dManager::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
 }
 
-void Text3dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
+void Text3dManager::inject(shared_ptr<ImageLoader> imageLoader)
 {
 	_imageLoader = imageLoader;
 }
 
-void Text3dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
+void Text3dManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
 {
 	_textureBufferCache = textureBufferCache;
 }
 
-const shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string & text3dId) const
+const shared_ptr<Text3dEntity> Text3dManager::getText3d(const string & text3dId) const
 {
-	auto iterator = _entities.find(text3dId);
+	auto iterator = _text3ds.find(text3dId);
 
-	if(iterator == _entities.end())
+	if(iterator == _text3ds.end())
 	{
 		abort();
 	}
@@ -66,14 +66,14 @@ const shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string & tex
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text3dEntity>> & Text3dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Text3dEntity>> & Text3dManager::getText3ds() const
 {
-	return _entities;
+	return _text3ds;
 }
 
-void Text3dEntityManager::createEntity(const string & text3dId, const string & fontMapPath, bool isCentered)
+void Text3dManager::createText3d(const string & text3dId, const string & fontMapPath, bool isCentered)
 {
-	if(isEntityExisting(text3dId))
+	if(isText3dExisting(text3dId))
 	{
 		abort();
 	}
@@ -103,12 +103,12 @@ void Text3dEntityManager::createEntity(const string & text3dId, const string & f
 	entity->setFontMapPath(fontMapPath);
 	entity->setContent("text");
 
-	_entities.insert({text3dId, entity});
+	_text3ds.insert({text3dId, entity});
 }
 
-void Text3dEntityManager::update()
+void Text3dManager::update()
 {
-	for(const auto & [entityId, entity] : _entities)
+	for(const auto & [entityId, entity] : _text3ds)
 	{
 		entity->updateTarget();
 
@@ -134,27 +134,27 @@ void Text3dEntityManager::update()
 	}
 }
 
-void Text3dEntityManager::deleteEntity(const string & text3dId)
+void Text3dManager::deleteText3d(const string & text3dId)
 {
-	if(!isEntityExisting(text3dId))
+	if(!isText3dExisting(text3dId))
 	{
 		abort();
 	}
 
-	_entities.erase(text3dId);
+	_text3ds.erase(text3dId);
 }
 
-void Text3dEntityManager::deleteEntities()
+void Text3dManager::deleteText3ds()
 {
-	_entities.clear();
+	_text3ds.clear();
 }
 
-const bool Text3dEntityManager::isEntityExisting(const string & text3dId) const
+const bool Text3dManager::isText3dExisting(const string & text3dId) const
 {
-	return (_entities.find(text3dId) != _entities.end());
+	return (_text3ds.find(text3dId) != _text3ds.end());
 }
 
-const bool Text3dEntityManager::isEntitiesExisting() const
+const bool Text3dManager::isText3dsExisting() const
 {
-	return !_entities.empty();
+	return !_text3ds.empty();
 }

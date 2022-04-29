@@ -22,64 +22,64 @@ const shared_ptr<AudioLoader> EngineCore::getAudioLoader() const
 	return _audioLoader;
 }
 
-const shared_ptr<SkyEntityManager> EngineCore::getSkyEntityManager() const
+const shared_ptr<SkyManager> EngineCore::getSkyManager() const
 {
-	return _skyEntityManager;
+	return _skyManager;
 }
 
-const shared_ptr<TerrainEntityManager> EngineCore::getTerrainEntityManager() const
+const shared_ptr<TerrainManager> EngineCore::getTerrainManager() const
 {
-	return _terrainEntityManager;
+	return _terrainManager;
 }
 
-const shared_ptr<WaterEntityManager> EngineCore::getWaterEntityManager() const
+const shared_ptr<WaterManager> EngineCore::getWaterManager() const
 {
-	return _waterEntityManager;
+	return _waterManager;
 }
 
-const shared_ptr<ModelEntityManager> EngineCore::getModelEntityManager() const
+const shared_ptr<ModelManager> EngineCore::getModelManager() const
 {
-	return _modelEntityManager;
+	return _modelManager;
 }
 
-const shared_ptr<Quad3dEntityManager> EngineCore::getQuad3dEntityManager() const
+const shared_ptr<Quad3dManager> EngineCore::getQuad3dManager() const
 {
-	return _quad3dEntityManager;
+	return _quad3dManager;
 }
 
-const shared_ptr<Text3dEntityManager> EngineCore::getText3dEntityManager() const
+const shared_ptr<Text3dManager> EngineCore::getText3dManager() const
 {
-	return _text3dEntityManager;
+	return _text3dManager;
 }
 
-const shared_ptr<AabbEntityManager> EngineCore::getAabbEntityManager() const
+const shared_ptr<AabbManager> EngineCore::getAabbManager() const
 {
-	return _aabbEntityManager;
+	return _aabbManager;
 }
 
-const shared_ptr<Quad2dEntityManager> EngineCore::getQuad2dEntityManager() const
+const shared_ptr<Quad2dManager> EngineCore::getQuad2dManager() const
 {
-	return _quad2dEntityManager;
+	return _quad2dManager;
 }
 
-const shared_ptr<Text2dEntityManager> EngineCore::getText2dEntityManager() const
+const shared_ptr<Text2dManager> EngineCore::getText2dManager() const
 {
-	return _text2dEntityManager;
+	return _text2dManager;
 }
 
-const shared_ptr<PointlightEntityManager> EngineCore::getPointlightEntityManager() const
+const shared_ptr<PointlightManager> EngineCore::getPointlightManager() const
 {
-	return _pointlightEntityManager;
+	return _pointlightManager;
 }
 
-const shared_ptr<SpotlightEntityManager> EngineCore::getSpotlightEntityManager() const
+const shared_ptr<SpotlightManager> EngineCore::getSpotlightManager() const
 {
-	return _spotlightEntityManager;
+	return _spotlightManager;
 }
 
-const shared_ptr<CaptorEntityManager> EngineCore::getCaptorEntityManager() const
+const shared_ptr<CaptorManager> EngineCore::getCaptorManager() const
 {
-	return _captorEntityManager;
+	return _captorManager;
 }
 
 const shared_ptr<Animation3dManager> EngineCore::getAnimation3dManager() const

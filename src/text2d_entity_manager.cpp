@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-Text2dEntityManager::Text2dEntityManager()
+Text2dManager::Text2dManager()
 	:
 	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
@@ -10,7 +10,7 @@ Text2dEntityManager::Text2dEntityManager()
 
 }
 
-const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string & text2dId) const
+const shared_ptr<Text2dEntity> Text2dManager::getEntity(const string & text2dId) const
 {
 	auto iterator = _entities.find(text2dId);
 
@@ -22,12 +22,12 @@ const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string & tex
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text2dEntity>> & Text2dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Text2dEntity>> & Text2dManager::getEntities() const
 {
 	return _entities;
 }
 
-void Text2dEntityManager::createEntity(const string & text2dId, const string & fontMapPath, bool isCentered)
+void Text2dManager::createEntity(const string & text2dId, const string & fontMapPath, bool isCentered)
 {
 	if(isEntityExisting(text2dId))
 	{
@@ -64,7 +64,7 @@ void Text2dEntityManager::createEntity(const string & text2dId, const string & f
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
-void Text2dEntityManager::deleteEntity(const string & text2dId)
+void Text2dManager::deleteEntity(const string & text2dId)
 {
 	if(!isEntityExisting(text2dId))
 	{
@@ -74,27 +74,27 @@ void Text2dEntityManager::deleteEntity(const string & text2dId)
 	_entities.erase(text2dId);
 }
 
-void Text2dEntityManager::deleteEntities()
+void Text2dManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const bool Text2dEntityManager::isEntityExisting(const string & text2dId) const
+const bool Text2dManager::isEntityExisting(const string & text2dId) const
 {
 	return (_entities.find(text2dId) != _entities.end());
 }
 
-const bool Text2dEntityManager::isEntitiesExisting() const
+const bool Text2dManager::isEntitiesExisting() const
 {
 	return !_entities.empty();
 }
 
-void Text2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
+void Text2dManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;
 }
 
-void Text2dEntityManager::update()
+void Text2dManager::update()
 {
 	for(const auto & [entityId, entity] : _entities)
 	{
@@ -107,12 +107,12 @@ void Text2dEntityManager::update()
 	}
 }
 
-void Text2dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
+void Text2dManager::inject(shared_ptr<ImageLoader> imageLoader)
 {
 	_imageLoader = imageLoader;
 }
 
-void Text2dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
+void Text2dManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
 {
 	_textureBufferCache = textureBufferCache;
 }

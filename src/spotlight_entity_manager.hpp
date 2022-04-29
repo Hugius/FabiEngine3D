@@ -8,25 +8,25 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class SpotlightEntityManager final
+class SpotlightManager final
 {
 public:
 	void update();
-	void createEntity(const string & spotlightId);
-	void deleteEntity(const string & spotlightId);
-	void deleteEntities();
+	void createSpotlight(const string & spotlightId);
+	void deleteSpotlight(const string & spotlightId);
+	void deleteSpotlights();
 
-	const unordered_map<string, shared_ptr<SpotlightEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<SpotlightEntity>> & getSpotlights() const;
 
-	const shared_ptr<SpotlightEntity> getEntity(const string & spotlightId) const;
+	const shared_ptr<SpotlightEntity> getSpotlight(const string & spotlightId) const;
 
-	const int getMaxEntityCount() const;
+	const int getMaxSpotlightCount() const;
 
-	const bool isEntityExisting(const string & spotlightId) const;
-	const bool isEntitiesExisting() const;
+	const bool isSpotlightExisting(const string & spotlightId) const;
+	const bool isSpotlightsExisting() const;
 
 private:
-	static inline constexpr int MAX_ENTITY_COUNT = 64;
+	static inline constexpr int MAX_SPOTLIGHT_COUNT = 64;
 
-	unordered_map<string, shared_ptr<SpotlightEntity>> _entities = {};
+	unordered_map<string, shared_ptr<SpotlightEntity>> _spotlights = {};
 };

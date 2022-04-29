@@ -10,25 +10,25 @@
 
 using std::unordered_map;
 
-class AabbEntityManager final
+class AabbManager final
 {
 public:
-	AabbEntityManager();
+	AabbManager();
 
-	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
-	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
-	void inject(shared_ptr<Text3dEntityManager> text3dEntityManager);
-	void createEntity(const string & aabbId, bool isCentered);
+	void inject(shared_ptr<ModelManager> modelManager);
+	void inject(shared_ptr<Quad3dManager> quad3dManager);
+	void inject(shared_ptr<Text3dManager> text3dManager);
+	void createAabb(const string & aabbId, bool isCentered);
 	void update();
-	void deleteEntity(const string & aabbId);
-	void deleteEntities();
+	void deleteAabb(const string & aabbId);
+	void deleteAabbs();
 
-	const unordered_map<string, shared_ptr<AabbEntity>> & getEntities() const;
+	const unordered_map<string, shared_ptr<AabbEntity>> & getAabbs() const;
 
-	const shared_ptr<AabbEntity> getEntity(const string & aabbId) const;
+	const shared_ptr<AabbEntity> getAabb(const string & aabbId) const;
 
-	const bool isEntityExisting(const string & aabbId) const;
-	const bool isEntitiesExisting() const;
+	const bool isAabbExisting(const string & aabbId) const;
+	const bool isAabbsExisting() const;
 
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;
@@ -36,9 +36,9 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<AabbEntity>> _entities = {};
+	unordered_map<string, shared_ptr<AabbEntity>> _aabbEntities = {};
 
-	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
-	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
-	shared_ptr<Text3dEntityManager> _text3dEntityManager = nullptr;
+	shared_ptr<ModelManager> _modelManager = nullptr;
+	shared_ptr<Quad3dManager> _quad3dManager = nullptr;
+	shared_ptr<Text3dManager> _text3dManager = nullptr;
 };

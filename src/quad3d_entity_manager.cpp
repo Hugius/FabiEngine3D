@@ -26,7 +26,7 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(standingBufferData) / sizeof(float));
 
-Quad3dEntityManager::Quad3dEntityManager()
+Quad3dManager::Quad3dManager()
 	:
 	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
 	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
@@ -34,17 +34,17 @@ Quad3dEntityManager::Quad3dEntityManager()
 
 }
 
-void Quad3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
+void Quad3dManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;
 }
 
-void Quad3dEntityManager::inject(shared_ptr<Camera> camera)
+void Quad3dManager::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
 }
 
-const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string & quad3dId) const
+const shared_ptr<Quad3dEntity> Quad3dManager::getEntity(const string & quad3dId) const
 {
 	auto iterator = _entities.find(quad3dId);
 
@@ -56,12 +56,12 @@ const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string & qua
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad3dEntity>> & Quad3dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad3dEntity>> & Quad3dManager::getEntities() const
 {
 	return _entities;
 }
 
-void Quad3dEntityManager::createEntity(const string & quad3dId, bool isCentered)
+void Quad3dManager::createEntity(const string & quad3dId, bool isCentered)
 {
 	if(isEntityExisting(quad3dId))
 	{
@@ -76,7 +76,7 @@ void Quad3dEntityManager::createEntity(const string & quad3dId, bool isCentered)
 	_entities.insert({quad3dId, entity});
 }
 
-void Quad3dEntityManager::update()
+void Quad3dManager::update()
 {
 	for(const auto & [entityId, entity] : _entities)
 	{
@@ -104,7 +104,7 @@ void Quad3dEntityManager::update()
 	}
 }
 
-void Quad3dEntityManager::deleteEntity(const string & quad3dId)
+void Quad3dManager::deleteEntity(const string & quad3dId)
 {
 	if(!isEntityExisting(quad3dId))
 	{
@@ -114,17 +114,17 @@ void Quad3dEntityManager::deleteEntity(const string & quad3dId)
 	_entities.erase(quad3dId);
 }
 
-void Quad3dEntityManager::deleteEntities()
+void Quad3dManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const bool Quad3dEntityManager::isEntityExisting(const string & quad3dId) const
+const bool Quad3dManager::isEntityExisting(const string & quad3dId) const
 {
 	return (_entities.find(quad3dId) != _entities.end());
 }
 
-const bool Quad3dEntityManager::isEntitiesExisting() const
+const bool Quad3dManager::isEntitiesExisting() const
 {
 	return !_entities.empty();
 }

@@ -7,10 +7,10 @@
 
 using std::unordered_map;
 
-class SkyEntityManager final
+class SkyManager final
 {
 public:
-	SkyEntityManager();
+	SkyManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();

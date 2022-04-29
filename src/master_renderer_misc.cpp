@@ -88,64 +88,64 @@ void MasterRenderer::inject(shared_ptr<Timer> timer)
 	_timer = timer;
 }
 
-void MasterRenderer::inject(shared_ptr<SkyEntityManager> skyEntityManager)
+void MasterRenderer::inject(shared_ptr<SkyManager> skyManager)
 {
-	_skyEntityManager = skyEntityManager;
+	_skyManager = skyManager;
 }
 
-void MasterRenderer::inject(shared_ptr<TerrainEntityManager> terrainEntityManager)
+void MasterRenderer::inject(shared_ptr<TerrainManager> terrainManager)
 {
-	_terrainEntityManager = terrainEntityManager;
+	_terrainManager = terrainManager;
 }
 
-void MasterRenderer::inject(shared_ptr<WaterEntityManager> waterEntityManager)
+void MasterRenderer::inject(shared_ptr<WaterManager> waterManager)
 {
-	_waterEntityManager = waterEntityManager;
+	_waterManager = waterManager;
 }
 
-void MasterRenderer::inject(shared_ptr<ModelEntityManager> modelEntityManager)
+void MasterRenderer::inject(shared_ptr<ModelManager> modelManager)
 {
-	_modelEntityManager = modelEntityManager;
+	_modelManager = modelManager;
 }
 
-void MasterRenderer::inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager)
+void MasterRenderer::inject(shared_ptr<Quad3dManager> quad3dManager)
 {
-	_quad3dEntityManager = quad3dEntityManager;
+	_quad3dManager = quad3dManager;
 }
 
-void MasterRenderer::inject(shared_ptr<Text3dEntityManager> text3dEntityManager)
+void MasterRenderer::inject(shared_ptr<Text3dManager> text3dManager)
 {
-	_text3dEntityManager = text3dEntityManager;
+	_text3dManager = text3dManager;
 }
 
-void MasterRenderer::inject(shared_ptr<AabbEntityManager> aabbEntityManager)
+void MasterRenderer::inject(shared_ptr<AabbManager> aabbManager)
 {
-	_aabbEntityManager = aabbEntityManager;
+	_aabbManager = aabbManager;
 }
 
-void MasterRenderer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager)
+void MasterRenderer::inject(shared_ptr<Quad2dManager> quad2dManager)
 {
-	_quad2dEntityManager = quad2dEntityManager;
+	_quad2dManager = quad2dManager;
 }
 
-void MasterRenderer::inject(shared_ptr<Text2dEntityManager> text2dEntityManager)
+void MasterRenderer::inject(shared_ptr<Text2dManager> text2dManager)
 {
-	_text2dEntityManager = text2dEntityManager;
+	_text2dManager = text2dManager;
 }
 
-void MasterRenderer::inject(shared_ptr<PointlightEntityManager> pointlightEntityManager)
+void MasterRenderer::inject(shared_ptr<PointlightManager> pointlightManager)
 {
-	_pointlightEntityManager = pointlightEntityManager;
+	_pointlightManager = pointlightManager;
 }
 
-void MasterRenderer::inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager)
+void MasterRenderer::inject(shared_ptr<SpotlightManager> spotlightManager)
 {
-	_spotlightEntityManager = spotlightEntityManager;
+	_spotlightManager = spotlightManager;
 }
 
-void MasterRenderer::inject(shared_ptr<CaptorEntityManager> captorEntityManager)
+void MasterRenderer::inject(shared_ptr<CaptorManager> captorManager)
 {
-	_captorEntityManager = captorEntityManager;
+	_captorManager = captorManager;
 }
 
 void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)

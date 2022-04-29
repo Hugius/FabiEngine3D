@@ -7,12 +7,12 @@ CameraCollisionResponder::CameraCollisionResponder()
 	_cameraBox = make_shared<Box>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-void CameraCollisionResponder::inject(shared_ptr<TerrainEntityManager> terrainManager)
+void CameraCollisionResponder::inject(shared_ptr<TerrainManager> terrainManager)
 {
 	_terrainManager = terrainManager;
 }
 
-void CameraCollisionResponder::inject(shared_ptr<AabbEntityManager> aabbManager)
+void CameraCollisionResponder::inject(shared_ptr<AabbManager> aabbManager)
 {
 	_aabbManager = aabbManager;
 }
@@ -91,7 +91,7 @@ const bool CameraCollisionResponder::isCameraTerrainResponseEnabled() const
 
 const bool CameraCollisionResponder::_handleCollision(DirectionType direction) const
 {
-	for(const auto & [aabbId, aabb] : _aabbManager->getEntities())
+	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
 		switch(direction)
 		{

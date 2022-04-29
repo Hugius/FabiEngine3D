@@ -2,7 +2,7 @@
 
 void MasterRenderer::captureWaterReflections()
 {
-	const auto waterEntity = _waterEntityManager->getSelectedEntity();
+	const auto waterEntity = _waterManager->getSelectedWater();
 
 	if((waterEntity == nullptr) || !waterEntity->isReflective())
 	{
@@ -23,7 +23,7 @@ void MasterRenderer::captureWaterReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
-	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getEntities())
 	{
 		if(!model->isVisible())
 		{
@@ -50,7 +50,7 @@ void MasterRenderer::captureWaterReflections()
 	}
 
 	vector<string> savedQuad3dEntityIds;
-	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
@@ -87,7 +87,7 @@ void MasterRenderer::captureWaterReflections()
 
 	for(const auto & savedId : savedModelEntityIds)
 	{
-		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getEntities())
 		{
 			if(model->getId() == savedId)
 			{
@@ -98,7 +98,7 @@ void MasterRenderer::captureWaterReflections()
 
 	for(const auto & savedId : savedQuad3dEntityIds)
 	{
-		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 		{
 			if(quad3d->getId() == savedId)
 			{
@@ -120,7 +120,7 @@ void MasterRenderer::captureWaterReflections()
 
 void MasterRenderer::captureWaterRefractions()
 {
-	const auto waterEntity = _waterEntityManager->getSelectedEntity();
+	const auto waterEntity = _waterManager->getSelectedWater();
 
 	if((waterEntity == nullptr) || !waterEntity->isRefractive())
 	{
@@ -168,7 +168,7 @@ void MasterRenderer::captureWaterRefractions()
 
 void MasterRenderer::captureWaterEdges()
 {
-	const auto waterEntity = _waterEntityManager->getSelectedEntity();
+	const auto waterEntity = _waterManager->getSelectedWater();
 
 	if((waterEntity != nullptr) && waterEntity->isEdged())
 	{
@@ -176,11 +176,11 @@ void MasterRenderer::captureWaterEdges()
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(_terrainEntityManager->getSelectedEntity() != nullptr)
+		if(_terrainManager->getSelectedTerrain() != nullptr)
 		{
 			_terrainEntityDepthRenderer->bind();
 
-			_terrainEntityDepthRenderer->render(_terrainEntityManager->getSelectedEntity());
+			_terrainEntityDepthRenderer->render(_terrainManager->getSelectedTerrain());
 
 			_terrainEntityDepthRenderer->unbind();
 		}

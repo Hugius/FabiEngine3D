@@ -4,7 +4,7 @@ void MasterRenderer::capturePlanarReflections()
 {
 	vector<shared_ptr<ModelEntity>> reflectiveModelEntities;
 
-	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getEntities())
 	{
 		for(const auto & partId : model->getPartIds())
 		{
@@ -34,7 +34,7 @@ void MasterRenderer::capturePlanarReflections()
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
 	savedModelEntities.insert(savedModelEntities.end(), reflectiveModelEntities.begin(), reflectiveModelEntities.end());
-	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelManager->getEntities())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
@@ -44,7 +44,7 @@ void MasterRenderer::capturePlanarReflections()
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
@@ -54,7 +54,7 @@ void MasterRenderer::capturePlanarReflections()
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
+	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{

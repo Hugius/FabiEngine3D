@@ -6,14 +6,14 @@ void Animation2dPlayer::inject(shared_ptr<Animation2dManager> animation2dManager
 	_animation2dManager = animation2dManager;
 }
 
-void Animation2dPlayer::inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager)
+void Animation2dPlayer::inject(shared_ptr<Quad3dManager> quad3dManager)
 {
-	_quad3dEntityManager = quad3dEntityManager;
+	_quad3dManager = quad3dManager;
 }
 
-void Animation2dPlayer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager)
+void Animation2dPlayer::inject(shared_ptr<Quad2dManager> quad2dManager)
 {
-	_quad2dEntityManager = quad2dEntityManager;
+	_quad2dManager = quad2dManager;
 }
 
 const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimationIds() const
@@ -52,7 +52,7 @@ const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string & animatio
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -72,7 +72,7 @@ const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string & animatio
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -92,7 +92,7 @@ const int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & animation
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -112,7 +112,7 @@ const int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & animation
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -132,7 +132,7 @@ const int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string & animat
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -152,7 +152,7 @@ const int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string & animat
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -172,7 +172,7 @@ const int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string &
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -192,7 +192,7 @@ const int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string &
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -212,7 +212,7 @@ const int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string & an
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -232,7 +232,7 @@ const int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string & an
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -252,7 +252,7 @@ const bool Animation2dPlayer::isQuad3dAnimationStarted(const string & animation2
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -268,7 +268,7 @@ const bool Animation2dPlayer::isQuad3dAnimationPaused(const string & animation2d
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -288,7 +288,7 @@ const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string & animati
 	{
 		abort();
 	}
-	if(!_quad3dEntityManager->isEntityExisting(quad3dId))
+	if(!_quad3dManager->isEntityExisting(quad3dId))
 	{
 		abort();
 	}
@@ -308,7 +308,7 @@ const bool Animation2dPlayer::isQuad2dAnimationStarted(const string & animation2
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -324,7 +324,7 @@ const bool Animation2dPlayer::isQuad2dAnimationPaused(const string & animation2d
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}
@@ -344,7 +344,7 @@ const bool Animation2dPlayer::isQuad2dAnimationAutopaused(const string & animati
 	{
 		abort();
 	}
-	if(!_quad2dEntityManager->isEntityExisting(quad2dId))
+	if(!_quad2dManager->isEntityExisting(quad2dId))
 	{
 		abort();
 	}

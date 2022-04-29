@@ -8,7 +8,7 @@ class Animation3dPlayer final
 {
 public:
 	void inject(shared_ptr<Animation3dManager> animation3dManager);
-	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
+	void inject(shared_ptr<ModelManager> modelManager);
 	void update();
 	void startModelAnimation(const string & animation3dId, const string & modelId, int playCount);
 	void pauseModelAnimation(const string & animation3dId, const string & modelId);
@@ -40,5 +40,5 @@ private:
 	unordered_map<string, shared_ptr<StartedAnimation3d>> _startedModelAnimations;
 
 	shared_ptr<Animation3dManager> _animation3dManager = nullptr;
-	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
+	shared_ptr<ModelManager> _modelManager = nullptr;
 };

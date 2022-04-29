@@ -10,8 +10,8 @@ class RaycastIntersector final
 public:
 	void update();
 	void inject(shared_ptr<RaycastCalculator> raycastCalculator);
-	void inject(shared_ptr<TerrainEntityManager> terrainManager);
-	void inject(shared_ptr<AabbEntityManager> aabbManager);
+	void inject(shared_ptr<TerrainManager> terrainManager);
+	void inject(shared_ptr<AabbManager> aabbManager);
 	void setTerrainIntersectionEnabled(bool value);
 	void setTerrainIntersectionDistance(float distance);
 	void setTerrainIntersectionPrecision(float precision);
@@ -44,8 +44,8 @@ private:
 	unordered_map<string, float> _aabbIntersections = {};
 
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
-	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
+	shared_ptr<TerrainManager> _terrainManager = nullptr;
+	shared_ptr<AabbManager> _aabbManager = nullptr;
 
 	string _terrainId = "";
 	string _closestAabbId = "";

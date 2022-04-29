@@ -11,7 +11,7 @@ void Animation3dPlayer::startModelAnimation(const string & animation3dId, const 
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -40,7 +40,7 @@ void Animation3dPlayer::pauseModelAnimation(const string & animation3dId, const 
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -65,7 +65,7 @@ void Animation3dPlayer::autopauseModelAnimation(const string & animation3dId, co
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -90,7 +90,7 @@ void Animation3dPlayer::resumeModelAnimation(const string & animation3dId, const
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -114,7 +114,7 @@ void Animation3dPlayer::stopModelAnimation(const string & animation3dId, const s
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -134,7 +134,7 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string & animatio
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}
@@ -154,7 +154,7 @@ void Animation3dPlayer::setModelAnimationFrameIndex(const string & animation3dId
 	{
 		abort();
 	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
+	if(!_modelManager->isEntityExisting(modelId))
 	{
 		abort();
 	}

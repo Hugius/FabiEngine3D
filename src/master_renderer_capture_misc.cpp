@@ -14,37 +14,37 @@ void MasterRenderer::captureWorldDepth()
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	if(_terrainEntityManager->getSelectedEntity() != nullptr)
+	if(_terrainManager->getSelectedTerrain() != nullptr)
 	{
 		_terrainEntityDepthRenderer->bind();
 
-		_terrainEntityDepthRenderer->render(_terrainEntityManager->getSelectedEntity());
+		_terrainEntityDepthRenderer->render(_terrainManager->getSelectedTerrain());
 
 		_terrainEntityDepthRenderer->unbind();
 	}
 
-	if(_waterEntityManager->getSelectedEntity() != nullptr)
+	if(_waterManager->getSelectedWater() != nullptr)
 	{
 		_waterEntityDepthRenderer->bind();
 
-		_waterEntityDepthRenderer->render(_waterEntityManager->getSelectedEntity());
+		_waterEntityDepthRenderer->render(_waterManager->getSelectedWater());
 
 		_waterEntityDepthRenderer->unbind();
 	}
 
-	if(!_modelEntityManager->getEntities().empty())
+	if(!_modelManager->getEntities().empty())
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelManager->getEntities())
 		{
 			if(model->isLevelOfDetailed())
 			{
-				auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailId());
+				auto foundPair = _modelManager->getEntities().find(model->getLevelOfDetailId());
 
-				if(foundPair != _modelEntityManager->getEntities().end())
+				if(foundPair != _modelManager->getEntities().end())
 				{
-					const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+					const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
 					const auto originalPosition = levelOfDetailModel->getBasePosition();
 					const auto originalRotation = levelOfDetailModel->getBaseRotation();
 					const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -78,11 +78,11 @@ void MasterRenderer::captureWorldDepth()
 		_modelEntityDepthRenderer->unbind();
 	}
 
-	if(!_quad3dEntityManager->getEntities().empty())
+	if(!_quad3dManager->getEntities().empty())
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 		{
 			_quad3dEntityDepthRenderer->render(quad3d);
 		}
@@ -90,11 +90,11 @@ void MasterRenderer::captureWorldDepth()
 		_quad3dEntityDepthRenderer->unbind();
 	}
 
-	if(!_text3dEntityManager->getEntities().empty())
+	if(!_text3dManager->getText3ds().empty())
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 		{
 			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
@@ -105,11 +105,11 @@ void MasterRenderer::captureWorldDepth()
 		_quad3dEntityDepthRenderer->unbind();
 	}
 
-	if(!_aabbEntityManager->getEntities().empty())
+	if(!_aabbManager->getAabbs().empty())
 	{
 		_aabbEntityDepthRenderer->bind();
 
-		for(const auto & [aabbId, aabb] : _aabbEntityManager->getEntities())
+		for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 		{
 			_aabbEntityDepthRenderer->render(aabb);
 		}
@@ -266,19 +266,19 @@ void MasterRenderer::captureShadows()
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(!_modelEntityManager->getEntities().empty())
+		if(!_modelManager->getEntities().empty())
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto & [modelId, model] : _modelEntityManager->getEntities())
+			for(const auto & [modelId, model] : _modelManager->getEntities())
 			{
 				if(model->isLevelOfDetailed())
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailId());
+					auto foundPair = _modelManager->getEntities().find(model->getLevelOfDetailId());
 
-					if(foundPair != _modelEntityManager->getEntities().end())
+					if(foundPair != _modelManager->getEntities().end())
 					{
-						const auto levelOfDetailModel = _modelEntityManager->getEntities().find(model->getLevelOfDetailId())->second;
+						const auto levelOfDetailModel = _modelManager->getEntities().find(model->getLevelOfDetailId())->second;
 						const auto originalPosition = levelOfDetailModel->getBasePosition();
 						const auto originalRotation = levelOfDetailModel->getBaseRotation();
 						const auto originalSize = levelOfDetailModel->getBaseSize();
@@ -312,11 +312,11 @@ void MasterRenderer::captureShadows()
 			_modelEntityShadowRenderer->unbind();
 		}
 
-		if(!_quad3dEntityManager->getEntities().empty())
+		if(!_quad3dManager->getEntities().empty())
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
+			for(const auto & [quad3dId, quad3d] : _quad3dManager->getEntities())
 			{
 				_quad3dEntityShadowRenderer->render(quad3d);
 			}
@@ -324,11 +324,11 @@ void MasterRenderer::captureShadows()
 			_quad3dEntityShadowRenderer->unbind();
 		}
 
-		if(!_text3dEntityManager->getEntities().empty())
+		if(!_text3dManager->getText3ds().empty())
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
+			for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 			{
 				for(const auto & characterEntity : text3d->getCharacterEntities())
 				{

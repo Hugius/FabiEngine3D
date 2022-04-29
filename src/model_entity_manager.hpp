@@ -12,13 +12,13 @@
 
 using std::unordered_map;
 
-class ModelEntityManager final
+class ModelManager final
 {
 public:
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
-	void inject(shared_ptr<CaptorEntityManager> captorEntityManager);
+	void inject(shared_ptr<CaptorManager> captorManager);
 	void inject(shared_ptr<MeshLoader> meshLoader);
 	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
@@ -41,7 +41,7 @@ private:
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
-	shared_ptr<CaptorEntityManager> _captorEntityManager = nullptr;
+	shared_ptr<CaptorManager> _captorManager = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 };

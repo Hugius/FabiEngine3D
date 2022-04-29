@@ -17,20 +17,20 @@ void EngineCore::_update()
 	_timer->stopClock("physicsUpdate");
 
 	_timer->startClock("3dEntityUpdate");
-	_skyEntityManager->update();
-	_waterEntityManager->update();
-	_modelEntityManager->update();
-	_quad3dEntityManager->update();
-	_text3dEntityManager->update();
-	_aabbEntityManager->update();
-	_pointlightEntityManager->update();
-	_spotlightEntityManager->update();
-	_captorEntityManager->update();
+	_skyManager->update();
+	_waterManager->update();
+	_modelManager->update();
+	_quad3dManager->update();
+	_text3dManager->update();
+	_aabbManager->update();
+	_pointlightManager->update();
+	_spotlightManager->update();
+	_captorManager->update();
 	_timer->stopClock("3dEntityUpdate");
 
 	_timer->startClock("2dEntityUpdate");
-	_quad2dEntityManager->update();
-	_text2dEntityManager->update();
+	_quad2dManager->update();
+	_text2dManager->update();
 	_timer->stopClock("2dEntityUpdate");
 
 	_timer->startClock("renderUpdate");

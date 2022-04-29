@@ -8,10 +8,10 @@
 
 using std::unordered_map;
 
-class Quad3dEntityManager final
+class Quad3dManager final
 {
 public:
-	Quad3dEntityManager();
+	Quad3dManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);

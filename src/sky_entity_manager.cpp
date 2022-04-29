@@ -51,19 +51,19 @@ constexpr float bufferData[] =
 
 constexpr int bufferDataCount = static_cast<int>(sizeof(bufferData) / sizeof(float));
 
-SkyEntityManager::SkyEntityManager()
+SkyManager::SkyManager()
 	:
 	_vertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount))
 {
 
 }
 
-void SkyEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
+void SkyManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;
 }
 
-const shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string & skyId) const
+const shared_ptr<SkyEntity> SkyManager::getEntity(const string & skyId) const
 {
 	auto iterator = _entities.find(skyId);
 
@@ -75,7 +75,7 @@ const shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string & skyId) co
 	return iterator->second;
 }
 
-const shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity() const
+const shared_ptr<SkyEntity> SkyManager::getSelectedEntity() const
 {
 	if(_entities.empty() || _selectedEntityId.empty())
 	{
@@ -85,12 +85,12 @@ const shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity() const
 	return getEntity(_selectedEntityId);
 }
 
-const unordered_map<string, shared_ptr<SkyEntity>> & SkyEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<SkyEntity>> & SkyManager::getEntities() const
 {
 	return _entities;
 }
 
-void SkyEntityManager::selectEntity(const string & skyId)
+void SkyManager::selectEntity(const string & skyId)
 {
 	if(!isEntityExisting(skyId) && !skyId.empty())
 	{
@@ -100,7 +100,7 @@ void SkyEntityManager::selectEntity(const string & skyId)
 	_selectedEntityId = skyId;
 }
 
-void SkyEntityManager::createEntity(const string & skyId)
+void SkyManager::createEntity(const string & skyId)
 {
 	if(isEntityExisting(skyId))
 	{
@@ -114,7 +114,7 @@ void SkyEntityManager::createEntity(const string & skyId)
 	_entities.insert({skyId, entity});
 }
 
-void SkyEntityManager::update()
+void SkyManager::update()
 {
 	auto entity = getSelectedEntity();
 
@@ -129,7 +129,7 @@ void SkyEntityManager::update()
 	}
 }
 
-void SkyEntityManager::deleteEntity(const string & skyId)
+void SkyManager::deleteEntity(const string & skyId)
 {
 	if(!isEntityExisting(skyId))
 	{
@@ -144,19 +144,19 @@ void SkyEntityManager::deleteEntity(const string & skyId)
 	}
 }
 
-void SkyEntityManager::deleteEntities()
+void SkyManager::deleteEntities()
 {
 	_entities.clear();
 
 	selectEntity("");
 }
 
-const bool SkyEntityManager::isEntityExisting(const string & skyId) const
+const bool SkyManager::isEntityExisting(const string & skyId) const
 {
 	return (_entities.find(skyId) != _entities.end());
 }
 
-const bool SkyEntityManager::isEntitiesExisting() const
+const bool SkyManager::isEntitiesExisting() const
 {
 	return !_entities.empty();
 }

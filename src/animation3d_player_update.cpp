@@ -23,7 +23,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation3d = _animation3dManager->getAnimation(splitKey.first);
-		const auto model = _modelEntityManager->getEntity(splitKey.second);
+		const auto model = _modelManager->getEntity(splitKey.second);
 
 		int finishedPartCount = 0;
 		for(const auto & partId : startedAnimation->getPartIds())

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "texture_buffer.hpp"
 
@@ -8,10 +7,10 @@
 
 using std::shared_ptr;
 
-class Quad3d final : public BaseEntity
+class Quad3d final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Quad3d(const string & id);
 
 	void updateTarget();
 	void updateTransformation();
@@ -51,6 +50,7 @@ public:
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
 	void setRotationOrder(DirectionOrderType value);
+	void setVisible(bool value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -93,6 +93,8 @@ public:
 	const DirectionOrderType getRotationOrder() const;
 
 private:
+	const string _id;
+
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _emissionTextureBuffer = nullptr;
@@ -136,6 +138,7 @@ private:
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
+	bool _isVisible = true;
 
 	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

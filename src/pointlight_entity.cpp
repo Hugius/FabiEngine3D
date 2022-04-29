@@ -5,6 +5,16 @@
 using std::max;
 using std::clamp;
 
+Pointlight::Pointlight(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Pointlight::updateTarget()
 {
 	if(_position != _positionTarget)

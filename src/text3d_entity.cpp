@@ -6,6 +6,16 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
+Text3d::Text3d(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Text3d::updateTarget()
 {
 	if(_position != _positionTarget)

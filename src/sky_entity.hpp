@@ -1,18 +1,19 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "direction_type.hpp"
 #include "texture_buffer.hpp"
 
 #include <array>
+#include <string>
 
+using std::string;
 using std::array;
 
-class Sky final : public BaseEntity
+class Sky final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Sky(const string & id);
 
 	void updateTarget();
 	void updateTransformation();
@@ -27,6 +28,7 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
 	void setRotationOrder(DirectionOrderType value);
+	void setVisible(bool value);
 
 	const array<string, 6> & getCubeMapPaths() const;
 
@@ -46,6 +48,8 @@ public:
 	const DirectionOrderType getRotationOrder() const;
 
 private:
+	const string _id;
+
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -62,6 +66,7 @@ private:
 	float _lightness = 1.0f;
 
 	bool _isWireframed = false;
+	bool _isVisible = true;
 
 	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

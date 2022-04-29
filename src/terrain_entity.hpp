@@ -1,17 +1,18 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "texture_buffer.hpp"
 
 #include <memory>
+#include <string>
 
+using std::string;
 using std::shared_ptr;
 
-class Terrain final : public BaseEntity
+class Terrain final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Terrain(const string & id);
 
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setPixels(const vector<float> & value);
@@ -49,6 +50,7 @@ public:
 	void setColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
+	void setVisible(bool value);
 
 	const vector<float> & getPixels() const;
 
@@ -94,6 +96,8 @@ public:
 	const bool isWireframed() const;
 
 private:
+	const string _id;
+
 	vector<float> _pixels = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -136,4 +140,5 @@ private:
 
 	bool _isSpecular = false;
 	bool _isWireframed = false;
+	bool _isVisible = true;
 };

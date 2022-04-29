@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "direction_type.hpp"
 #include "aabb_parent_type.hpp"
@@ -9,10 +8,10 @@
 
 using std::shared_ptr;
 
-class Aabb final : public BaseEntity
+class Aabb final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Aabb(const string & id);
 
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
@@ -39,6 +38,7 @@ public:
 	void setCentered(bool value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
+	void setVisible(bool value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 
@@ -64,6 +64,8 @@ public:
 	const DirectionType getCollisionDirection() const;
 
 private:
+	const string _id;
+
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 
 	string _parentId = "";
@@ -91,6 +93,7 @@ private:
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
+	bool _isVisible = true;
 
 	AabbParentType _parentType = {};
 	DirectionType _collisionDirection = {};

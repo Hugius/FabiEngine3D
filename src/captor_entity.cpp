@@ -1,5 +1,15 @@
 #include "captor_entity.hpp"
 
+Captor::Captor(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Captor::updateTarget()
 {
 	if(_position != _positionTarget)

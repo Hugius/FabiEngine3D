@@ -5,6 +5,16 @@
 using std::max;
 using std::clamp;
 
+Water::Water(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Water::setHeight(float value)
 {
 	_height = value;

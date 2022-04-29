@@ -7,9 +7,6 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{1d8410ea-3c56-4706-adbd-dcbc42bbbe01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Base">
-      <UniqueIdentifier>{44c1a87c-9396-4875-9ad7-6e6e4fa701c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data\2D">
       <UniqueIdentifier>{9c269b2e-5f39-4569-8230-fef0b9605672}</UniqueIdentifier>
     </Filter>
@@ -24,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\base_entity.cpp">
-      <Filter>Data\Base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_entity.cpp">
       <Filter>Data\3D</Filter>
     </ClCompile>
@@ -101,9 +95,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\base_entity.hpp">
-      <Filter>Data\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_entity.hpp">
       <Filter>Data\3D</Filter>
     </ClInclude>

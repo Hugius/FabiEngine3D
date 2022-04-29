@@ -5,6 +5,16 @@
 using std::max;
 using std::clamp;
 
+Sky::Sky(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Sky::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;

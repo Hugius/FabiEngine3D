@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "model_entity_part.hpp"
 
 #include <unordered_map>
@@ -8,10 +7,10 @@
 using std::unique_ptr;
 using std::unordered_map;
 
-class Model final : public BaseEntity
+class Model final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Model(const string & id);
 
 	void createPart(const string & partId);
 	void deletePart(const string & partId);
@@ -134,6 +133,7 @@ public:
 	const bool isWireframed(const string & partId) const;
 	const bool isSpecular(const string & partId) const;
 	const bool isReflective(const string & partId) const;
+	void setVisible(bool value);
 
 	const ReflectionType getReflectionType(const string & partId) const;
 	const DirectionOrderType getRotationOrder() const;
@@ -142,6 +142,8 @@ private:
 	void _correctPositionTarget(fvec3 & current, const fvec3 & target, float speed);
 	void _correctRotationTarget(fvec3 & current, const fvec3 & target, float speed);
 	void _correctSizeTarget(fvec3 & current, const fvec3 & target, float speed);
+
+	const string _id;
 
 	unordered_map<string, unique_ptr<ModelEntityPart>> _parts = {};
 
@@ -170,6 +172,7 @@ private:
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isLevelOfDetailed = false;
+	bool _isVisible = true;
 
 	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

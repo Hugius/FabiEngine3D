@@ -3,6 +3,16 @@
 using std::max;
 using std::clamp;
 
+Terrain::Terrain(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Terrain::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;

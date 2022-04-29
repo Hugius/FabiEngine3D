@@ -6,6 +6,16 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
+Text2d::Text2d(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Text2d::updateTarget()
 {
 	if(_position != _positionTarget)

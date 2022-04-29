@@ -1,17 +1,18 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "texture_buffer.hpp"
 
 #include <memory>
+#include <string>
 
+using std::string;
 using std::shared_ptr;
 
-class Quad2d final : public BaseEntity
+class Quad2d final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Quad2d(const string & id);
 
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
@@ -40,6 +41,7 @@ public:
 	void setWireframed(bool value);
 	void setCentered(bool value);
 	void setTextureRepeat(int value);
+	void setVisible(bool value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -70,6 +72,8 @@ public:
 	const bool isVerticallyFlipped() const;
 
 private:
+	const string _id;
+
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
 
@@ -103,4 +107,5 @@ private:
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
 	bool _isWireframed = false;
+	bool _isVisible = true;
 };

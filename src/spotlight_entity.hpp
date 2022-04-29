@@ -1,12 +1,15 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "mathematics.hpp"
 
-class Spotlight final : public BaseEntity
+#include <string>
+
+using std::string;
+
+class Spotlight final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Spotlight(const string & id);
 
 	void updateTarget();
 	void updateFront();
@@ -19,6 +22,7 @@ public:
 	void setIntensity(float value);
 	void setAngle(float value);
 	void setDistance(float value);
+	void setVisible(bool value);
 
 	const fvec3 & getPosition() const;
 	const fvec3 & getFront() const;
@@ -33,6 +37,8 @@ public:
 private:
 	static inline constexpr float MAX_ANGLE = 45.0f;
 
+	const string _id;
+
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _front = fvec3(0.0f);
@@ -44,4 +50,6 @@ private:
 	float _intensity = 1.0f;
 	float _angle = 0.0f;
 	float _distance = 0.0f;
+
+	bool _isVisible = true;
 };

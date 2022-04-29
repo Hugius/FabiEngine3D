@@ -5,6 +5,16 @@
 using std::clamp;
 using std::max;
 
+Quad3d::Quad3d(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Quad3d::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;

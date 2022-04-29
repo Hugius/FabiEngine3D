@@ -5,6 +5,16 @@
 using std::max;
 using std::clamp;
 
+Aabb::Aabb(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Aabb::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;

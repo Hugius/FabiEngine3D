@@ -8,10 +8,10 @@
 using std::shared_ptr;
 using std::unordered_map;
 
-class Text2d final : public BaseEntity
+class Text2d final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Text2d(const string & id);
 
 	void updateTarget();
 	void updateCharacterEntities();
@@ -38,7 +38,7 @@ public:
 	void setDepth(int value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
-	void setVisible(bool value) override;
+	void setVisible(bool value);
 
 	const vector<shared_ptr<Quad2d>> & getCharacterEntities() const;
 
@@ -169,6 +169,8 @@ private:
 	static inline constexpr int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr int FONT_MAP_COLUMN_COUNT = 16;
 
+	const string _id;
+
 	vector<shared_ptr<Quad2d>> _characterEntities = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -200,4 +202,5 @@ private:
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
 	bool _isWireframed = false;
+	bool _isVisible = true;
 };

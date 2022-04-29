@@ -5,6 +5,16 @@
 using std::max;
 using std::clamp;
 
+Spotlight::Spotlight(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Spotlight::updateTarget()
 {
 	if(_position != _positionTarget)

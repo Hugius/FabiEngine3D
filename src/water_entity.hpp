@@ -1,17 +1,18 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "texture_buffer.hpp"
 
 #include <memory>
+#include <string>
 
+using std::string;
 using std::shared_ptr;
 
-class Water final : public BaseEntity
+class Water final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Water(const string & id);
 
 	void setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value);
@@ -41,6 +42,7 @@ public:
 	void setWireframeColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
+	void setVisible(bool value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
@@ -80,6 +82,8 @@ public:
 private:
 	static inline constexpr float MAX_SIZE = 1024.0f;
 
+	const string _id;
+
 	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
 	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _dudvTextureBuffer = nullptr;
@@ -114,4 +118,5 @@ private:
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireframed = false;
+	bool _isVisible = true;
 };

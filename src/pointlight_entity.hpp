@@ -1,13 +1,16 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "mathematics.hpp"
 #include "pointlight_type.hpp"
 
-class Pointlight final : public BaseEntity
+#include <string>
+
+using std::string;
+
+class Pointlight final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Pointlight(const string & id);
 
 	void updateTarget();
 	void setPosition(const fvec3 & value);
@@ -17,6 +20,7 @@ public:
 	void setColor(const fvec3 & value);
 	void setIntensity(float value);
 	void setShape(PointlightType value);
+	void setVisible(bool value);
 
 	const fvec3 & getPosition() const;
 	const fvec3 & getColor() const;
@@ -27,6 +31,8 @@ public:
 	const PointlightType getShape() const;
 
 private:
+	const string _id;
+
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _radius = fvec3(0.0f);
@@ -34,6 +40,8 @@ private:
 
 	float _positionTargetSpeed = 0.0f;
 	float _intensity = 1.0f;
+
+	bool _isVisible = true;
 
 	PointlightType _shape = PointlightType::CIRCLE;
 };

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity.hpp"
 #include "mathematics.hpp"
 #include "texture_buffer.hpp"
 
@@ -8,10 +7,10 @@
 
 using std::array;
 
-class Captor final : public BaseEntity
+class Captor final
 {
 public:
-	using BaseEntity::BaseEntity;
+	Captor(const string & id);
 
 	void updateTarget();
 	void capture();
@@ -31,6 +30,8 @@ public:
 	const bool mustCapture() const;
 
 private:
+	const string _id;
+
 	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 
 	string _exceptionId = "";
@@ -42,4 +43,5 @@ private:
 
 	bool _mustCapture = false;
 	bool _isCaptured = false;
+	bool _isVisible = true;
 };

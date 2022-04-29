@@ -6,6 +6,16 @@ using std::max;
 using std::clamp;
 using std::make_unique;
 
+Model::Model(const string & id)
+	:
+	_id(id)
+{
+	if(id.empty())
+	{
+		abort();
+	}
+}
+
 void Model::createPart(const string & partId)
 {
 	_parts.insert({partId, make_unique<ModelEntityPart>()});

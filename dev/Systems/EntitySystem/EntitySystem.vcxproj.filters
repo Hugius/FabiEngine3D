@@ -43,6 +43,12 @@
     <Filter Include="Data\Light">
       <UniqueIdentifier>{49f4b6d0-9a9d-4b2d-9ab6-196e2915eb80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Environment">
+      <UniqueIdentifier>{e82c0600-abcf-44ac-bd51-908edeb6deaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Environment">
+      <UniqueIdentifier>{ff2f2ffd-960f-41af-8bbf-07a116f8d11f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\model.cpp">
@@ -118,22 +124,22 @@
       <Filter>Data\Light</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky.cpp">
-      <Filter>Data\Miscellaneous</Filter>
+      <Filter>Data\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain.cpp">
-      <Filter>Data\Miscellaneous</Filter>
+      <Filter>Data\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water.cpp">
-      <Filter>Data\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sky_manager.cpp">
-      <Filter>Manager\Miscellaneous</Filter>
+      <Filter>Data\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_manager.cpp">
-      <Filter>Manager\Miscellaneous</Filter>
+      <Filter>Manager\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_manager.cpp">
-      <Filter>Manager\Miscellaneous</Filter>
+      <Filter>Manager\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sky_manager.cpp">
+      <Filter>Manager\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,23 +221,23 @@
     <ClInclude Include="..\..\..\src\spotlight.hpp">
       <Filter>Data\Light</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\water.hpp">
+      <Filter>Data\Environment</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\sky.hpp">
-      <Filter>Data\Miscellaneous</Filter>
+      <Filter>Data\Environment</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain.hpp">
-      <Filter>Data\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\water.hpp">
-      <Filter>Data\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sky_manager.hpp">
-      <Filter>Manager\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\terrain_manager.hpp">
-      <Filter>Manager\Miscellaneous</Filter>
+      <Filter>Data\Environment</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_manager.hpp">
-      <Filter>Manager\Miscellaneous</Filter>
+      <Filter>Manager\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sky_manager.hpp">
+      <Filter>Manager\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\terrain_manager.hpp">
+      <Filter>Manager\Environment</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

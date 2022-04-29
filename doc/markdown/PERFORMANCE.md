@@ -3,9 +3,8 @@
 ## 1. Statistics
 
 - You can use the performance statistics in the bottom viewport to analyze your application's performance.
-- In the statistics, the amount of entities is the total existing entity amount.
-- In the statistics, the amount of triangles is the realtime triangle amount being rendered every frame.
-- `coreUpdate` includes all function calls and calculations in your update scripts.
+- The amount of triangles is the realtime amount being rendered every frame.
+- `mainUpdate` includes all function calls and calculations in your update scripts.
 - `physicsUpdate` contains: camera, raycasting, collision.
 - `bufferSwap` means the actual buffering on the output screen.
 

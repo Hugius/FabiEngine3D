@@ -28,14 +28,14 @@ void BottomViewportController::_updateStatistics()
 	{
 		const auto text = ("CPU: " + _fe3d->misc_getCpuName());
 
-		statisticsScreen->getTextField("cpuModel")->setTextContent(text);
+		statisticsScreen->getTextField("cpu")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
 	{
 		const auto text = ("GPU: " + _fe3d->misc_getGpuName());
 
-		statisticsScreen->getTextField("gpuModel")->setTextContent(text);
+		statisticsScreen->getTextField("gpu")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
@@ -47,14 +47,26 @@ void BottomViewportController::_updateStatistics()
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
 	{
-		const auto text = ("Camera Position/Yaw/Pitch: " +
+		const auto text = ("Camera Position: " +
 						   to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
 						   to_string(static_cast<int>(_fe3d->camera_getPosition().y)) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getPosition().z)) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getYaw())) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getPitch())));
+						   to_string(static_cast<int>(_fe3d->camera_getPosition().z)));
 
-		statisticsScreen->getTextField("cameraPositionYawPitch")->setTextContent(text);
+		statisticsScreen->getTextField("cameraPosition")->setTextContent(text);
+	}
+
+	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
+	{
+		const auto text = ("Camera Yaw: " + to_string(static_cast<int>(_fe3d->camera_getYaw())));
+
+		statisticsScreen->getTextField("cameraYaw")->setTextContent(text);
+	}
+
+	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
+	{
+		const auto text = ("Camera Pitch: " + to_string(static_cast<int>(_fe3d->camera_getPitch())));
+
+		statisticsScreen->getTextField("cameraPitch")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
@@ -62,123 +74,16 @@ void BottomViewportController::_updateStatistics()
 		const auto text = ("Raycast Direction: " +
 						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().x * 100.0f)) + "% " +
 						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().y * 100.0f)) + "% " +
-						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().z * 100.0f)) + "%");
+						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().z * 100.0f)) + "% ");
 
-		statisticsScreen->getTextField("cursorPosition")->setTextContent(text);
+		statisticsScreen->getTextField("raycastDirection")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0)
 	{
 		const auto text = ("Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount())));
 
-		statisticsScreen->getTextField("triangleCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & modelId : _fe3d->model_getIds())
-		{
-			if(_fe3d->model_isVisible(modelId))
-			{
-				entityCount++;
-			}
-		}
-
-		const auto text = ("Model Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("modelEntityCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & quad3dId : _fe3d->quad3d_getIds())
-		{
-			if(_fe3d->quad3d_isVisible(quad3dId))
-			{
-				entityCount++;
-			}
-		}
-
-		const auto text = ("Quad3D Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("quad3dEntityCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & aabbId : _fe3d->aabb_getIds())
-		{
-			if(_fe3d->aabb_isVisible(aabbId))
-			{
-				entityCount++;
-			}
-		}
-
-		const auto text = ("AABB Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("aabbEntityCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & pointlightId : _fe3d->pointlight_getIds())
-		{
-			if(_fe3d->pointlight_isVisible(pointlightId))
-			{
-				entityCount++;
-			}
-		}
-		for(const auto & spotlightId : _fe3d->spotlight_getIds())
-		{
-			if(_fe3d->spotlight_isVisible(spotlightId))
-			{
-				entityCount++;
-			}
-		}
-
-		const auto text = ("Light Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("lightEntityCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & captorId : _fe3d->captor_getIds())
-		{
-			entityCount++;
-		}
-
-		const auto text = ("Captor Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("captorEntityCount")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
-	{
-		int entityCount = 0;
-		for(const auto & quad2dId : _fe3d->quad2d_getIds())
-		{
-			if(_fe3d->quad2d_isVisible(quad2dId))
-			{
-				entityCount++;
-			}
-		}
-		for(const auto & text2dId : _fe3d->text2d_getIds())
-		{
-			if(_fe3d->text2d_isVisible(text2dId))
-			{
-				entityCount++;
-			}
-		}
-
-		const auto text = ("GUI Entities: " + to_string(entityCount));
-
-		statisticsScreen->getTextField("quad2dEntityCount")->setTextContent(text);
+		statisticsScreen->getTextField("triangles")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)

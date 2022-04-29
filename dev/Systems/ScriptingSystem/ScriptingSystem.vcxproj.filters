@@ -46,6 +46,9 @@
     <Filter Include="Interpreter\Function\Light">
       <UniqueIdentifier>{3d65d5ea-3f63-4832-9945-4c08e39d91a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interpreter\Function\Environment">
+      <UniqueIdentifier>{55bee4c5-dbd3-4320-846c-237664a2d6dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\script_value.cpp">
@@ -241,22 +244,22 @@
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_set.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Interpreter\Function\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

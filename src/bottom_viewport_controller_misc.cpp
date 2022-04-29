@@ -27,18 +27,14 @@ void BottomViewportController::initialize()
 	auto consoleScreen = consoleWindow->getScreen("main");
 
 	statisticsScreen->createTextField("fps", fvec2(-1.0f, 0.85f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("cpuModel", fvec2(-1.0f, 0.7f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("gpuModel", fvec2(-1.0f, 0.55f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("cpu", fvec2(-1.0f, 0.7f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("gpu", fvec2(-1.0f, 0.55f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("openglVersion", fvec2(-1.0f, 0.4f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("cameraPositionYawPitch", fvec2(-1.0f, 0.25f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("cursorPosition", fvec2(-1.0f, 0.1f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("triangleCount", fvec2(-1.0f, -0.05f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("modelEntityCount", fvec2(-1.0f, -0.2f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("quad3dEntityCount", fvec2(-1.0f, -0.35f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("aabbEntityCount", fvec2(-1.0f, -0.5f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("lightEntityCount", fvec2(-1.0f, -0.65f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("captorEntityCount", fvec2(-1.0f, -0.8f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("quad2dEntityCount", fvec2(-1.0f, -0.95f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("cameraPosition", fvec2(-1.0f, 0.25f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("cameraYaw", fvec2(-1.0f, 0.1f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("cameraPitch", fvec2(-1.0f, -0.05f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("raycastDirection", fvec2(-1.0f, -0.2f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("triangles", fvec2(-1.0f, -0.35f), CHAR_SIZE, "", fvec3(1.0f), false);
 
 	int uCounter = 1;
 	for(const auto & [key, deltaTime] : _fe3d->misc_getUpdateDeltaTimes())

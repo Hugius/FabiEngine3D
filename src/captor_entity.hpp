@@ -43,5 +43,4 @@ private:
 
 	bool _mustCapture = false;
 	bool _isCaptured = false;
-	bool _isVisible = true;
 };

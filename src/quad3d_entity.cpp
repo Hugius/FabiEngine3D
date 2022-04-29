@@ -304,6 +304,11 @@ void Quad3d::setRotationOrder(DirectionOrderType value)
 	_rotationOrder = value;
 }
 
+void Quad3d::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 const shared_ptr<VertexBuffer> Quad3d::getVertexBuffer() const
 {
 	return _vertexBuffer;

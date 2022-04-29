@@ -75,6 +75,11 @@ void Pointlight::setShape(PointlightType value)
 	_shape = value;
 }
 
+void Pointlight::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 const fvec3 & Pointlight::getPosition() const
 {
 	return _position;

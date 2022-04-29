@@ -155,6 +155,11 @@ void Aabb::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
+void Aabb::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 void Aabb::setBasePosition(const fvec3 & value)
 {
 	_basePosition = value;

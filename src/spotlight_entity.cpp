@@ -93,6 +93,11 @@ void Spotlight::setDistance(float value)
 	_distance = max(0.0f, value);
 }
 
+void Spotlight::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 const fvec3 & Spotlight::getPosition() const
 {
 	return _position;

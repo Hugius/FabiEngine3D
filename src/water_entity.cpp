@@ -140,6 +140,11 @@ void Water::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
+void Water::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 void Water::setSize(float value)
 {
 	_size = clamp(value, 0.0f, MAX_SIZE);

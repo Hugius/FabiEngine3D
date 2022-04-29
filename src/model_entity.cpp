@@ -709,6 +709,11 @@ const bool Model::isReflective(const string & partId) const
 	return _parts.at(partId)->isReflective;
 }
 
+void Model::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 const bool Model::isShadowed() const
 {
 	return _isShadowed;

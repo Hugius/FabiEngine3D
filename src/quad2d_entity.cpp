@@ -309,3 +309,8 @@ void Quad2d::setTextureRepeat(int value)
 {
 	_textureRepeat = max(1, value);
 }
+
+void Quad2d::setVisible(bool value)
+{
+	_isVisible = value;
+}

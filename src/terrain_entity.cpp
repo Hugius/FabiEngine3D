@@ -178,6 +178,11 @@ void Terrain::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
+void Terrain::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 void Terrain::setLightness(float value)
 {
 	_lightness = max(0.0f, value);

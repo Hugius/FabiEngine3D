@@ -3,7 +3,9 @@
 #include "model_entity_part.hpp"
 
 #include <unordered_map>
+#include <sttring>
 
+using std::string;
 using std::unique_ptr;
 using std::unordered_map;
 
@@ -77,6 +79,7 @@ public:
 	void setFaceCulled(const string & partId, bool value);
 	void setRotationOrder(DirectionOrderType value);
 	void setMinTextureAlpha(const string & partId, float value);
+	void setVisible(bool value);
 
 	const vector<string> getPartIds() const;
 
@@ -133,7 +136,6 @@ public:
 	const bool isWireframed(const string & partId) const;
 	const bool isSpecular(const string & partId) const;
 	const bool isReflective(const string & partId) const;
-	void setVisible(bool value);
 
 	const ReflectionType getReflectionType(const string & partId) const;
 	const DirectionOrderType getRotationOrder() const;

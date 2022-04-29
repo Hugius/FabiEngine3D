@@ -57,19 +57,6 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:captor_set_visible")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dCaptor(args[0]->getString()))
-			{
-				_fe3d->captor_setVisible(args[0]->getString(), args[1]->getBoolean());
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:captor_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

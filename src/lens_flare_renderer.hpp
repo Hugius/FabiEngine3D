@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_renderer.hpp"
-#include "quad2d_entity.hpp"
+#include "quad2d.hpp"
 
 class LensFlareRenderer final : public BaseRenderer
 {

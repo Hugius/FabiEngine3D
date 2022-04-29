@@ -671,7 +671,6 @@ public:
 
 	void captor_create(const string & captorId);
 	void captor_delete(const string & captorId);
-	void captor_setVisible(const string & captorId, bool value);
 	void captor_setPosition(const string & captorId, const fvec3 & value);
 	void captor_move(const string & captorId, const fvec3 & change);
 	void captor_moveTo(const string & captorId, const fvec3 & target, float speed);
@@ -682,7 +681,6 @@ public:
 	const string & captor_getExceptionId(const string & captorId) const;
 	const fvec3 & captor_getPosition(const string & captorId) const;
 	const bool captor_isExisting(const string & captorId) const;
-	const bool captor_isVisible(const string & captorId) const;
 
 	void animation3d_create(const string & animation3dId);
 	void animation3d_delete(const string & animation3dId);

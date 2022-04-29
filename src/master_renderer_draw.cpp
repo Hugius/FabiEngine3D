@@ -338,43 +338,41 @@ void MasterRenderer::_renderGUI()
 	{
 		_quad2dColorRenderer->bind();
 
-		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
+		map<int, vector<shared_ptr<Quad2d>>> orderedQuad2ds;
+
 		for(const auto & [quad2dId, quad2d] : _quad2dManager->getQuad2ds())
 		{
 			if(quad2d->getId() != _renderStorage->getCursorEntityId())
 			{
-				orderedQuad2dEntities.insert({quad2d->getDepth(), quad2d});
+				orderedQuad2ds.insert({quad2d->getDepth(), {quad2d}});
 			}
 		}
+
 		for(const auto & [text2dId, text2d] : _text2dManager->getText2ds())
 		{
-			orderedQuad2dEntities.insert({text2d->getDepth(), text2d});
-		}
+			vector<shared_ptr<Quad2d>> characterQuad2ds = {};
 
-		for(const auto & [quad2dId, quad2d] : orderedQuad2dEntities)
-		{
-			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2d>(quad2d);
-			auto castedText2dEntity = dynamic_pointer_cast<Text2d>(quad2d);
-
-			if(castedQuad2dEntity != nullptr)
+			for(const auto & characterQuad2d : text2d->getCharacterEntities())
 			{
-				_quad2dColorRenderer->render(castedQuad2dEntity);
+				characterQuad2ds.push_back(characterQuad2d);
 			}
 
-			if(castedText2dEntity != nullptr)
+			orderedQuad2ds.insert({text2d->getDepth(), characterQuad2ds});
+		}
+
+		for(const auto & [quad2dId, quad2ds] : orderedQuad2ds)
+		{
+			for(const auto & quad2d : quad2ds)
 			{
-				for(const auto & characterEntity : castedText2dEntity->getCharacterEntities())
-				{
-					_quad2dColorRenderer->render(characterEntity);
-				}
+				_quad2dColorRenderer->render(quad2d);
 			}
 		}
-
-		if(!_renderStorage->getCursorEntityId().empty())
-		{
-			_quad2dColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
-		}
-
-		_quad2dColorRenderer->unbind();
 	}
+
+	if(!_renderStorage->getCursorEntityId().empty())
+	{
+		_quad2dColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
+	}
+
+	_quad2dColorRenderer->unbind();
 }

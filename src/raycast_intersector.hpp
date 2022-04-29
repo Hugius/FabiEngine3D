@@ -1,8 +1,8 @@
 #pragma once
 
 #include "raycast_calculator.hpp"
-#include "terrain_entity_manager.hpp"
-#include "aabb_entity_manager.hpp"
+#include "terrain_manager.hpp"
+#include "aabb_manager.hpp"
 #include "box.hpp"
 
 class RaycastIntersector final

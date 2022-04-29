@@ -69,52 +69,52 @@
     <ClCompile Include="..\..\..\src\engine_interface_sound3d.cpp">
       <Filter>Interface\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text2d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_text2d.cpp">
       <Filter>Interface\Entity\2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_quad2d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_quad2d.cpp">
       <Filter>Interface\Entity\2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_aabb.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_aabb.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_model.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_model.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_pointlight.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_quad3d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_quad3d.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_captor.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_captor.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_sky.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_sky.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_spotlight.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_terrain.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_terrain.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text3d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_text3d.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_water.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_water.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_core_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_animation2d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_animation2d.cpp">
       <Filter>Interface\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_graphics.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_animation3d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_animation3d.cpp">
       <Filter>Interface\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_clock.cpp">

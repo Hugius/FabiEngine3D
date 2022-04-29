@@ -49,7 +49,6 @@ void WorldEditor::_load()
 	_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 	_fe3d->captor_create(TEMPLATE_CAPTOR_ID);
-	_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 
 	for(const auto & soundId : _soundEditor->getLoadedSoundIds())
 	{

@@ -2,8 +2,8 @@
 
 #include "camera.hpp"
 #include "camera_collision_detector.hpp"
-#include "terrain_entity_manager.hpp"
-#include "aabb_entity_manager.hpp"
+#include "terrain_manager.hpp"
+#include "aabb_manager.hpp"
 #include "box.hpp"
 #include "direction_order_type.hpp"
 

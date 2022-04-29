@@ -56,20 +56,6 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:captor_is_visible")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dCaptor(args[0]->getString()))
-			{
-				const auto result = _fe3d->captor_isVisible(args[0]->getString());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:captor_get_position_x")
 	{
 		auto types = {SVT::STRING};

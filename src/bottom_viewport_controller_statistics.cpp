@@ -150,10 +150,7 @@ void BottomViewportController::_updateStatistics()
 		int entityCount = 0;
 		for(const auto & captorId : _fe3d->captor_getIds())
 		{
-			if(_fe3d->captor_isVisible(captorId))
-			{
-				entityCount++;
-			}
+			entityCount++;
 		}
 
 		const auto text = ("Captor Entities: " + to_string(entityCount));

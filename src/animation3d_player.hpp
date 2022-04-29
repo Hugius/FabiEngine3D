@@ -1,7 +1,7 @@
 #pragma once
 
 #include "animation3d_manager.hpp"
-#include "model_entity_manager.hpp"
+#include "model_manager.hpp"
 #include "started_animation3d.hpp"
 
 class Animation3dPlayer final

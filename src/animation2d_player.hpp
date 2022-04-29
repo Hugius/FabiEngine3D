@@ -1,8 +1,8 @@
 #pragma once
 
 #include "animation2d_manager.hpp"
-#include "quad3d_entity_manager.hpp"
-#include "quad2d_entity_manager.hpp"
+#include "quad3d_manager.hpp"
+#include "quad2d_manager.hpp"
 #include "started_animation2d.hpp"
 
 #include <vector>

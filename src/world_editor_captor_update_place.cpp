@@ -48,7 +48,6 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 
 				_isPlacingCaptor = false;
@@ -56,7 +55,6 @@ void WorldEditor::_updateCaptorPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 
 				_isPlacingCaptor = false;
@@ -66,7 +64,6 @@ void WorldEditor::_updateCaptorPlacing()
 		{
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 
 				return;
@@ -74,7 +71,6 @@ void WorldEditor::_updateCaptorPlacing()
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 
 				return;
@@ -82,7 +78,6 @@ void WorldEditor::_updateCaptorPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingCaptor = false;
 
@@ -91,14 +86,12 @@ void WorldEditor::_updateCaptorPlacing()
 
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
-				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + CAPTOR_TERRAIN_OFFSET);
-			_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, true);
 			_fe3d->captor_setPosition(TEMPLATE_CAPTOR_ID, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);

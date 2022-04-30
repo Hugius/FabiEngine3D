@@ -4,9 +4,9 @@
 
 - All animations will be saved in `~\projects\<your_project>\data\animation2d.fe3d`.
 - You can create/edit/delete animations.
-- Every created animation can be applied to quad2Ds/quad3Ds.
-- You can select a preview texture for the animation playback.
-- The ID of a new animation cannot contain spaces or `@` signs.
+- Every created animation2D can be applied to quad2Ds/quad3Ds.
+- You can select a preview texture for the animation2D playback.
+- The ID of a new animation2D cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

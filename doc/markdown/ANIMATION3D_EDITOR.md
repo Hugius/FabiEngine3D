@@ -4,9 +4,9 @@
 
 - All animations will be saved in `~\projects\<your_project>\data\animation3d.fe3d`.
 - You can create/edit/delete animations.
-- Every created animation can be applied to models.
-- You can select a preview model for the animation playback.
-- The ID of a new animation cannot contain spaces or `@` signs.
+- Every created animation3D can be applied to models.
+- You can select a preview model for the animation3D playback.
+- The ID of a new animation3D cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

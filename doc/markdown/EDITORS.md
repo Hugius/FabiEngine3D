@@ -10,6 +10,6 @@
 - [Text2D Editor](TEXT2D_EDITOR.md)
 - [Animation3D Editor](ANIMATION3D_EDITOR.md)
 - [Animation2D Editor](ANIMATION2D_EDITOR.md)
-- [Sound Editor](SOUND_EDITOR.md)
+- [Sound2D Editor](SOUND2D_EDITOR.md)
 - [World Editor](WORLD_EDITOR.md)
 - [Script Editor](SCRIPT_EDITOR.md)

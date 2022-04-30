@@ -3,9 +3,9 @@
 ## 1. General
 
 - Sound2D is stereo audio in 2D space.
-- A single sound can be simultaneously started multiple times.
-- Each of these sound instances can be started and stopped individually.
-- Every sound instance plays on a unique sound channel.
+- A single sound2D can be simultaneously started multiple times.
+- Each of these sound2D instances can be started and stopped individually.
+- Every sound2D instance plays on a unique sound channel.
 - Sound channels make sure that all the sound waves are mixed together.
 - Changes in volume can be delayed if too many sounds are playing simultanously.
 - If no audio memory is available, sounds cannot be started.

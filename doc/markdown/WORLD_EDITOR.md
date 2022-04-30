@@ -41,13 +41,14 @@
 - You can place/edit/delete models in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
-- You can attach an (endless) animation to a placed model.
+- You can attach an (endless) animation3D to a placed model.
 
 ## 7. Quad3D
 
 - You can place/edit/delete quad3Ds in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the sound.
+- You can attach an (endless) animation2D to a placed quad3D.
 
 ## 8. Sounds
 

@@ -4,7 +4,7 @@
 
 using std::istringstream;
 
-void ScriptEditor::_createDisplayText()
+void ScriptEditor::_createDisplayContent()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 
@@ -88,7 +88,7 @@ void ScriptEditor::_createDisplayText()
 	}
 }
 
-void ScriptEditor::_deleteDisplayText()
+void ScriptEditor::_deleteDisplayContent()
 {
 	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
@@ -112,7 +112,7 @@ void ScriptEditor::_deleteDisplayText()
 
 void ScriptEditor::_clearDisplay()
 {
-	_deleteDisplayText();
+	_deleteDisplayContent();
 	_fe3d->quad3d_setVisible("selection", false);
 	_fe3d->text3d_setVisible("cursor", false);
 	_isWritingScript = false;

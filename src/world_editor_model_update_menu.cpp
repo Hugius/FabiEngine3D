@@ -63,7 +63,7 @@ void WorldEditor::_updateModelPlacingMenu()
 
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound();
+				_deactivateSound3d();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
@@ -108,7 +108,7 @@ void WorldEditor::_updateModelChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound();
+				_deactivateSound3d();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();

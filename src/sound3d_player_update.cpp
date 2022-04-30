@@ -10,39 +10,39 @@ void Sound3dPlayer::update()
 {
 	vector<pair<string, int>> sound3dsToStop;
 
-	for(auto & [sound3dId, instances] : _startedSound3ds)
+	for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 	{
 		const auto sound3d = _sound3dManager->getSound3d(sound3dId);
 		const auto cameraPosition = _camera->getPosition();
 		const auto distance = Mathematics::calculateDistance(cameraPosition, sound3d->getPosition());
 		const auto volume = (clamp((1.0f - (distance / sound3d->getMaxDistance())), 0.0f, 1.0f) * sound3d->getMaxVolume());
 		const auto cameraDirection = _camera->getFront();
-		const auto soundDirection = (cameraPosition - sound3d->getPosition());
+		const auto sound3dDirection = (cameraPosition - sound3d->getPosition());
 		const auto rotationMatrix = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(90.0f));
-		const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-		const auto normalizedSoundDirection = Mathematics::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
-		const auto dotProduct = Mathematics::calculateDotProduct(normalizedSoundDirection, cameraDirection);
+		const auto rotatedSound3dDirection = (rotationMatrix * fvec4(sound3dDirection.x, sound3dDirection.y, sound3dDirection.z, 1.0f));
+		const auto normalizedSound3dDirection = Mathematics::normalize(fvec3(rotatedSound3dDirection.x, rotatedSound3dDirection.y, rotatedSound3dDirection.z));
+		const auto dotProduct = Mathematics::calculateDotProduct(normalizedSound3dDirection, cameraDirection);
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
 		{
-			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if((startedSound3ds[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
-				if(instances[instanceIndex]->getPlayCount() != -1)
+				if(startedSound3ds[instanceIndex]->getPlayCount() != -1)
 				{
-					instances[instanceIndex]->setPlayCount(instances[instanceIndex]->getPlayCount() - 1);
+					startedSound3ds[instanceIndex]->setPlayCount(startedSound3ds[instanceIndex]->getPlayCount() - 1);
 				}
 
-				if(instances[instanceIndex]->getPlayCount() == 0)
+				if(startedSound3ds[instanceIndex]->getPlayCount() == 0)
 				{
 					sound3dsToStop.push_back({sound3dId, instanceIndex});
 				}
 				else
 				{
-					instances[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
+					startedSound3ds[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
 
-					const auto writeResult = waveOutWrite(instances[instanceIndex]->getHandle(), instances[instanceIndex]->getHeader(), sizeof(WAVEHDR));
+					const auto writeResult = waveOutWrite(startedSound3ds[instanceIndex]->getHandle(), startedSound3ds[instanceIndex]->getHeader(), sizeof(WAVEHDR));
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -61,9 +61,9 @@ void Sound3dPlayer::update()
 				}
 			}
 
-			instances[instanceIndex]->setVolume(volume);
-			instances[instanceIndex]->setLeftIntensity(leftIntensity);
-			instances[instanceIndex]->setRightIntensity(rightIntensity);
+			startedSound3ds[instanceIndex]->setVolume(volume);
+			startedSound3ds[instanceIndex]->setLeftIntensity(leftIntensity);
+			startedSound3ds[instanceIndex]->setRightIntensity(rightIntensity);
 		}
 	}
 
@@ -108,9 +108,9 @@ void Sound3dPlayer::update()
 
 	if(_volumeThreadQueue.empty())
 	{
-		for(auto & [sound3dId, instances] : _startedSound3ds)
+		for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 		{
-			for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+			for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({sound3dId, instanceIndex});
 			}
@@ -144,16 +144,16 @@ void Sound3dPlayer::update()
 			continue;
 		}
 
-		const auto startedSound = _startedSound3ds.at(sound3dId)[instanceIndex];
-		const auto originalSound = _sound3dManager->getSound3d(sound3dId);
+		const auto startedSound3d = _startedSound3ds.at(sound3dId)[instanceIndex];
+		const auto originalSound3d = _sound3dManager->getSound3d(sound3dId);
 
-		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
-		const auto startedSamples = reinterpret_cast<short *>(startedSound->getHeader()->lpData); // short = 2 bytes
+		const auto sampleCount = (originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto originalSamples = reinterpret_cast<short *>(originalSound3d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+		const auto startedSamples = reinterpret_cast<short *>(startedSound3d->getHeader()->lpData); // short = 2 bytes
 
-		const auto volume = startedSound->getVolume();
-		const auto leftIntensity = startedSound->getLeftIntensity();
-		const auto rightIntensity = startedSound->getRightIntensity();
+		const auto volume = startedSound3d->getVolume();
+		const auto leftIntensity = startedSound3d->getLeftIntensity();
+		const auto rightIntensity = startedSound3d->getRightIntensity();
 
 		_volumeThread = async(launch::async, &Sound3dPlayer::_updateSamplesVolume, this, sampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
 	}

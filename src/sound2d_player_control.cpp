@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
+void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -14,7 +14,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 		abort();
 	}
 
-	const auto newSound = make_shared<StartedSound2D>();
+	const auto newSound2d = make_shared<StartedSound2D>();
 
 	const auto waveBuffer = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer();
 
@@ -119,19 +119,19 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 		}
 	}
 
-	newSound->setHeader(header);
-	newSound->setHandle(handle);
-	newSound->setPlayCount(playCount);
+	newSound2d->setHeader(header);
+	newSound2d->setHandle(handle);
+	newSound2d->setPlayCount(playCount);
 
 	if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 	{
 		_startedSound2ds.insert({sound2dId, {}});
 	}
 
-	_startedSound2ds.at(sound2dId).push_back(newSound);
+	_startedSound2ds.at(sound2dId).push_back(newSound2d);
 }
 
-void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
+void Sound2dPlayer::pauseSound2d(const string & sound2dId, int index)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -141,7 +141,7 @@ void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
 	{
 		abort();
 	}
-	if(isSoundPaused(sound2dId, index))
+	if(isSound2dPaused(sound2dId, index))
 	{
 		abort();
 	}
@@ -167,7 +167,7 @@ void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
 	}
 }
 
-void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
+void Sound2dPlayer::resumeSound2d(const string & sound2dId, int index)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -177,7 +177,7 @@ void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
 	{
 		abort();
 	}
-	if(!isSoundPaused(sound2dId, index))
+	if(!isSound2dPaused(sound2dId, index))
 	{
 		abort();
 	}
@@ -203,7 +203,7 @@ void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
 	}
 }
 
-void Sound2dPlayer::stopSound(const string & sound2dId, int index)
+void Sound2dPlayer::stopSound2d(const string & sound2dId, int index)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -265,10 +265,10 @@ void Sound2dPlayer::stopSound(const string & sound2dId, int index)
 		}
 	}
 
-	_terminateSound(sound2dId, index);
+	_terminateSound2d(sound2dId, index);
 }
 
-void Sound2dPlayer::setSoundVolume(const string & sound2dId, int index, float value)
+void Sound2dPlayer::setSound2dVolume(const string & sound2dId, int index, float value)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -282,7 +282,7 @@ void Sound2dPlayer::setSoundVolume(const string & sound2dId, int index, float va
 	_startedSound2ds.at(sound2dId)[index]->setVolume(value);
 }
 
-void Sound2dPlayer::setSoundLeftIntensity(const string & sound2dId, int index, float value)
+void Sound2dPlayer::setSound2dLeftIntensity(const string & sound2dId, int index, float value)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -296,7 +296,7 @@ void Sound2dPlayer::setSoundLeftIntensity(const string & sound2dId, int index, f
 	_startedSound2ds.at(sound2dId)[index]->setLeftIntensity(value);
 }
 
-void Sound2dPlayer::setSoundRightIntensity(const string & sound2dId, int index, float value)
+void Sound2dPlayer::setSound2dRightIntensity(const string & sound2dId, int index, float value)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{

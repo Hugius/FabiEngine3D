@@ -112,11 +112,11 @@ void WorldEditor::_activateSound3d(const string & sound3dId)
 	const auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSound3dId);
 	const auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSound3dId);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("volume")->setTextContent(to_string(static_cast<int>(maxVolume * SOUND_VOLUME_MULTIPLIER)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("volume")->setTextContent(to_string(static_cast<int>(maxVolume * SOUND3D_VOLUME_MULTIPLIER)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound3D: " + _activeSound3dId);
 }
@@ -181,7 +181,7 @@ void WorldEditor::_deactivateCaptor()
 	_activeCaptorId = "";
 }
 
-void WorldEditor::_deactivateSound()
+void WorldEditor::_deactivateSound3d()
 {
 	if(!_activeSound3dId.empty())
 	{

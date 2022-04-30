@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void WorldEditor::_updateSoundMenu()
+void WorldEditor::_updateSound3dMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
@@ -29,17 +29,17 @@ void WorldEditor::_updateSoundMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundPlace");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3dPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sound3dList")->deleteOptions();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("sound3dList")->deleteOptions();
 
 			for(auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sound3dList")->createOption(placedSound3dId, placedSound3dId);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("sound3dList")->createOption(placedSound3dId, placedSound3dId);
 			}
 		}
 
@@ -47,7 +47,7 @@ void WorldEditor::_updateSoundMenu()
 	}
 }
 
-void WorldEditor::_updateSoundPlacingMenu()
+void WorldEditor::_updateSound3dPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
@@ -69,7 +69,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound();
+				_deactivateSound3d();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
@@ -91,11 +91,11 @@ void WorldEditor::_updateSoundPlacingMenu()
 	}
 }
 
-void WorldEditor::_updateSoundChoosingMenu()
+void WorldEditor::_updateSound3dChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "worldEditorMenuSoundChoice")
+	if(screen->getId() == "worldEditorMenuSound3dChoice")
 	{
 		for(const auto & optionId : screen->getScrollingList("sound3dList")->getOptionIds())
 		{
@@ -115,7 +115,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound();
+				_deactivateSound3d();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
@@ -126,7 +126,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 			{
 				_selectSound3d(hoveredOptionId);
 
-				_dontResetSelectedSound = true;
+				_dontResetSelectedSound3d = true;
 			}
 		}
 

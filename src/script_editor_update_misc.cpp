@@ -117,8 +117,8 @@ void ScriptEditor::_updateScriptFileCreating()
 		_currentScriptFileId = newScriptFileId;
 		_isWritingScript = true;
 
-		_deleteDisplayText();
-		_createDisplayText();
+		_deleteDisplayContent();
+		_createDisplayContent();
 		_fe3d->text3d_setVisible("cursor", true);
 	}
 }
@@ -130,8 +130,8 @@ void ScriptEditor::_updateScriptFileChoosing()
 		_currentScriptFileId = _gui->getOverlay()->getChoiceFormOptionId();
 		_isWritingScript = true;
 
-		_deleteDisplayText();
-		_createDisplayText();
+		_deleteDisplayContent();
+		_createDisplayContent();
 
 		_fe3d->text3d_setVisible("cursor", true);
 	}
@@ -204,8 +204,8 @@ void ScriptEditor::_updateDisplay()
 
 	if(_hasTextChanged)
 	{
-		_deleteDisplayText();
-		_createDisplayText();
+		_deleteDisplayContent();
+		_createDisplayContent();
 
 		_hasTextChanged = false;
 	}

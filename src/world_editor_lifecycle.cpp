@@ -53,8 +53,8 @@ void WorldEditor::_load()
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
 		_fe3d->sound3d_create(sound2dId, _fe3d->sound2d_getAudioPath(sound2dId));
-		_fe3d->sound3d_setMaxVolume(sound2dId, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(sound2dId, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d->sound3d_setMaxVolume(sound2dId, DEFAULT_SOUND3D_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(sound2dId, DEFAULT_SOUND3D_MAX_DISTANCE);
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
@@ -86,7 +86,7 @@ void WorldEditor::_load()
 
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -186,7 +186,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundPlacing();
+		_updateSound3dPlacing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -226,7 +226,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundMenu();
+		_updateSound3dMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -242,7 +242,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundPlacingMenu();
+		_updateSound3dPlacingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -270,7 +270,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundChoosingMenu();
+		_updateSound3dChoosingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -298,7 +298,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundEditing();
+		_updateSound3dEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

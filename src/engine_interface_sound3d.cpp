@@ -8,7 +8,7 @@ void EngineInterface::sound3d_create(const string & sound3dId, const string & au
 
 void EngineInterface::sound3d_delete(const string & sound3dId)
 {
-	for(int index = 0; index < _core->getSound3dPlayer()->getStartedSoundCount(sound3dId); index++)
+	for(int index = 0; index < _core->getSound3dPlayer()->getStartedSound3dCount(sound3dId); index++)
 	{
 		sound3d_stop(sound3dId, index);
 	}
@@ -43,22 +43,22 @@ void EngineInterface::sound3d_setMaxDistance(const string & sound3dId, float val
 
 void EngineInterface::sound3d_start(const string & sound3dId, int playCount)
 {
-	_core->getSound3dPlayer()->startSound(sound3dId, playCount);
+	_core->getSound3dPlayer()->startSound3d(sound3dId, playCount);
 }
 
 void EngineInterface::sound3d_pause(const string & sound3dId, int index)
 {
-	_core->getSound3dPlayer()->pauseSound(sound3dId, index);
+	_core->getSound3dPlayer()->pauseSound3d(sound3dId, index);
 }
 
 void EngineInterface::sound3d_resume(const string & sound3dId, int index)
 {
-	_core->getSound3dPlayer()->resumeSound(sound3dId, index);
+	_core->getSound3dPlayer()->resumeSound3d(sound3dId, index);
 }
 
 void EngineInterface::sound3d_stop(const string & sound3dId, int index)
 {
-	_core->getSound3dPlayer()->stopSound(sound3dId, index);
+	_core->getSound3dPlayer()->stopSound3d(sound3dId, index);
 }
 
 const vector<string> EngineInterface::sound3d_getIds() const
@@ -105,7 +105,7 @@ const bool EngineInterface::sound3d_isStarted(const string & sound3dId, int inde
 
 const bool EngineInterface::sound3d_isPaused(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->isSoundPaused(sound3dId, index);
+	return _core->getSound3dPlayer()->isSound3dPaused(sound3dId, index);
 }
 
 const bool EngineInterface::sound3d_isDeviceConnected() const
@@ -115,25 +115,25 @@ const bool EngineInterface::sound3d_isDeviceConnected() const
 
 const float EngineInterface::sound3d_getVolume(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->getSoundVolume(sound3dId, index);
+	return _core->getSound3dPlayer()->getSound3dVolume(sound3dId, index);
 }
 
 const float EngineInterface::sound3d_getLeftIntensity(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->getSoundLeftIntensity(sound3dId, index);
+	return _core->getSound3dPlayer()->getSound3dLeftIntensity(sound3dId, index);
 }
 
 const float EngineInterface::sound3d_getRightIntensity(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->getSoundRightIntensity(sound3dId, index);
+	return _core->getSound3dPlayer()->getSound3dRightIntensity(sound3dId, index);
 }
 
 const int EngineInterface::sound3d_getStartedCount(const string & sound3dId) const
 {
-	return _core->getSound3dPlayer()->getStartedSoundCount(sound3dId);
+	return _core->getSound3dPlayer()->getStartedSound3dCount(sound3dId);
 }
 
 const int EngineInterface::sound3d_getTime(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->getSoundTime(sound3dId, index);
+	return _core->getSound3dPlayer()->getSound3dTime(sound3dId, index);
 }

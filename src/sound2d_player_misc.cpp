@@ -15,11 +15,11 @@ const bool Sound2dPlayer::isDeviceConnected() const
 
 void Sound2dPlayer::_terminateSound2ds()
 {
-	for(const auto & [sound2dId, instances] : _startedSound2ds)
+	for(const auto & [sound2dId, startedSound2ds] : _startedSound2ds)
 	{
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound2ds.size()); instanceIndex++)
 		{
-			_terminateSound(sound2dId, instanceIndex);
+			_terminateSound2d(sound2dId, instanceIndex);
 		}
 	}
 }
@@ -39,7 +39,7 @@ void Sound2dPlayer::_updateSamplesVolume(int sampleCount, short * originalSample
 	}
 }
 
-void Sound2dPlayer::_terminateSound(const string & sound2dId, int index)
+void Sound2dPlayer::_terminateSound2d(const string & sound2dId, int index)
 {
 	if(!_volumeThreadQueue.empty())
 	{
@@ -81,7 +81,7 @@ const bool Sound2dPlayer::isSound2dStarted(const string & sound2dId, int index) 
 	return (index < _startedSound2ds.at(sound2dId).size());
 }
 
-const bool Sound2dPlayer::isSoundPaused(const string & sound2dId, int index) const
+const bool Sound2dPlayer::isSound2dPaused(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -95,7 +95,7 @@ const bool Sound2dPlayer::isSoundPaused(const string & sound2dId, int index) con
 	return _startedSound2ds.at(sound2dId)[index]->isPaused();
 }
 
-const float Sound2dPlayer::getSoundVolume(const string & sound2dId, int index) const
+const float Sound2dPlayer::getSound2dVolume(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -109,7 +109,7 @@ const float Sound2dPlayer::getSoundVolume(const string & sound2dId, int index) c
 	return _startedSound2ds.at(sound2dId)[index]->getVolume();
 }
 
-const float Sound2dPlayer::getSoundLeftIntensity(const string & sound2dId, int index) const
+const float Sound2dPlayer::getSound2dLeftIntensity(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -123,7 +123,7 @@ const float Sound2dPlayer::getSoundLeftIntensity(const string & sound2dId, int i
 	return _startedSound2ds.at(sound2dId)[index]->getLeftIntensity();
 }
 
-const float Sound2dPlayer::getSoundRightIntensity(const string & sound2dId, int index) const
+const float Sound2dPlayer::getSound2dRightIntensity(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -151,7 +151,7 @@ const int Sound2dPlayer::getPlayCount(const string & sound2dId, int index) const
 	return _startedSound2ds.at(sound2dId)[index]->getPlayCount();
 }
 
-const int Sound2dPlayer::getStartedSoundCount(const string & sound2dId) const
+const int Sound2dPlayer::getStartedSound2dCount(const string & sound2dId) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -166,7 +166,7 @@ const int Sound2dPlayer::getStartedSoundCount(const string & sound2dId) const
 	return static_cast<int>(_startedSound2ds.at(sound2dId).size());
 }
 
-const int Sound2dPlayer::getSoundTime(const string & sound2dId, int index) const
+const int Sound2dPlayer::getSound2dTime(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -177,16 +177,17 @@ const int Sound2dPlayer::getSoundTime(const string & sound2dId, int index) const
 		abort();
 	}
 
-	auto currentSoundTime = new MMTIME();
-	currentSoundTime->wType = TIME_SAMPLES;
+	auto currentTime = new MMTIME();
 
-	waveOutGetPosition(_startedSound2ds.at(sound2dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+	currentTime->wType = TIME_SAMPLES;
 
-	const auto sampleIndex = currentSoundTime->u.sample;
+	waveOutGetPosition(_startedSound2ds.at(sound2dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
+
+	const auto sampleIndex = currentTime->u.sample;
 	const auto sampleRate = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;
 	const auto result = static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
 
-	delete currentSoundTime;
+	delete currentTime;
 
 	return result;
 }

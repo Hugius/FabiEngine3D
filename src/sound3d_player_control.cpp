@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
+void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount)
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -14,7 +14,7 @@ void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 		abort();
 	}
 
-	const auto newSound = make_shared<StartedSound3D>();
+	const auto newSound3d = make_shared<StartedSound3D>();
 
 	const auto waveBuffer = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer();
 
@@ -119,19 +119,19 @@ void Sound3dPlayer::startSound(const string & sound3dId, int playCount)
 		}
 	}
 
-	newSound->setHeader(header);
-	newSound->setHandle(handle);
-	newSound->setPlayCount(playCount);
+	newSound3d->setHeader(header);
+	newSound3d->setHandle(handle);
+	newSound3d->setPlayCount(playCount);
 
 	if(_startedSound3ds.find(sound3dId) == _startedSound3ds.end())
 	{
 		_startedSound3ds.insert({sound3dId, {}});
 	}
 
-	_startedSound3ds.at(sound3dId).push_back(newSound);
+	_startedSound3ds.at(sound3dId).push_back(newSound3d);
 }
 
-void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
+void Sound3dPlayer::pauseSound3d(const string & sound3dId, int index)
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -141,7 +141,7 @@ void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
 	{
 		abort();
 	}
-	if(isSoundPaused(sound3dId, index))
+	if(isSound3dPaused(sound3dId, index))
 	{
 		abort();
 	}
@@ -167,7 +167,7 @@ void Sound3dPlayer::pauseSound(const string & sound3dId, int index)
 	}
 }
 
-void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
+void Sound3dPlayer::resumeSound3d(const string & sound3dId, int index)
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -177,7 +177,7 @@ void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
 	{
 		abort();
 	}
-	if(!isSoundPaused(sound3dId, index))
+	if(!isSound3dPaused(sound3dId, index))
 	{
 		abort();
 	}
@@ -203,7 +203,7 @@ void Sound3dPlayer::resumeSound(const string & sound3dId, int index)
 	}
 }
 
-void Sound3dPlayer::stopSound(const string & sound3dId, int index)
+void Sound3dPlayer::stopSound3d(const string & sound3dId, int index)
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{

@@ -73,11 +73,11 @@ private:
 	void _updateCaptorChoosingMenu();
 	void _updateCaptorPlacing();
 	void _updateCaptorEditing();
-	void _updateSoundMenu();
-	void _updateSoundPlacingMenu();
-	void _updateSoundChoosingMenu();
-	void _updateSoundPlacing();
-	void _updateSoundEditing();
+	void _updateSound3dMenu();
+	void _updateSound3dPlacingMenu();
+	void _updateSound3dChoosingMenu();
+	void _updateSound3dPlacing();
+	void _updateSound3dEditing();
 	void _updateSettingsMenu();
 	void _updateLightingSettingsMenu();
 	void _updateAmbientLightingSettingsMenu();
@@ -131,7 +131,7 @@ private:
 	void _deactivatePointlight();
 	void _deactivateSpotlight();
 	void _deactivateCaptor();
-	void _deactivateSound();
+	void _deactivateSound3d();
 	void _handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta = 0.0f, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	const vector<string> _getWorldIds() const;
@@ -139,7 +139,7 @@ private:
 	static inline const string TEMPLATE_POINTLIGHT_ID = "@@template_pointlight";
 	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";
 	static inline const string TEMPLATE_CAPTOR_ID = "@@template_captor";
-	static inline const string TEMPLATE_SOUND_ID = "@@template_sound3d";
+	static inline const string TEMPLATE_SOUND3D_ID = "@@template_sound3d";
 	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
 	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
 	static inline const string TEMPLATE_CAMERA_ID = "@@template_camera";
@@ -164,7 +164,7 @@ private:
 	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 CAPTOR_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-	static inline const fvec3 SOUND_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 
 	static inline constexpr float MODEL_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;
@@ -194,26 +194,26 @@ private:
 	static inline constexpr float SPOTLIGHT_DISTANCE_DIVIDER = 100.0f;
 	static inline constexpr float SPOTLIGHT_INTENSITY_MULTIPLIER = 10.0f;
 	static inline constexpr float CAPTOR_POSITION_DIVIDER = 100.0f;
-	static inline constexpr float SOUND_POSITION_DIVIDER = 100.0f;
-	static inline constexpr float SOUND_DISTANCE_DIVIDER = 100.0f;
-	static inline constexpr float SOUND_VOLUME_MULTIPLIER = 100.0f;
-	static inline constexpr float SOUND_VOLUME_SPEED = 0.01f;
+	static inline constexpr float SOUND3D_POSITION_DIVIDER = 100.0f;
+	static inline constexpr float SOUND3D_DISTANCE_DIVIDER = 100.0f;
+	static inline constexpr float SOUND3D_VOLUME_MULTIPLIER = 100.0f;
+	static inline constexpr float SOUND3D_VOLUME_SPEED = 0.01f;
 	static inline constexpr float LAMP_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr float LAMP_SIZE_INCREASE = 1.25f;
 	static inline constexpr float SPOTLIGHT_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr float SPOTLIGHT_SIZE_INCREASE = 1.25f;
 	static inline constexpr float CAPTOR_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr float CAPTOR_SIZE_INCREASE = 1.25f;
-	static inline constexpr float SOUND_HIGHLIGHT_SPEED = 0.025f;
-	static inline constexpr float SOUND_SIZE_INCREASE = 1.25f;
+	static inline constexpr float SOUND3D_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float SOUND3D_SIZE_INCREASE = 1.25f;
 	static inline constexpr float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
 	static inline constexpr float DEFAULT_POINTLIGHT_INTENSITY = 10.0f;
 	static inline constexpr float DEFAULT_SPOTLIGHT_PITCH = -90.0f;
 	static inline constexpr float DEFAULT_SPOTLIGHT_INTENSITY = 10.0f;
 	static inline constexpr float DEFAULT_SPOTLIGHT_ANGLE = 25.0f;
 	static inline constexpr float DEFAULT_SPOTLIGHT_DISTANCE = 10.0f;
-	static inline constexpr float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
-	static inline constexpr float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
+	static inline constexpr float DEFAULT_SOUND3D_MAX_VOLUME = 1.0f;
+	static inline constexpr float DEFAULT_SOUND3D_MAX_DISTANCE = 25.0f;
 	static inline constexpr float GRID_SIZE = 1024.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;
@@ -269,14 +269,14 @@ private:
 	int _selectedPointlightHighlightDirection = 1;
 	int _selectedSpotlightHighlightDirection = 1;
 	int _selectedCaptorHighlightDirection = 1;
-	int _selectedSoundHighlightDirection = 1;
+	int _selectedSound3dHighlightDirection = 1;
 	int _activeModelHighlightDirection = 1;
 	int _activeQuad3dHighlightDirection = 1;
 	int _activeText3dHighlightDirection = 1;
 	int _activePointlightHighlightDirection = 1;
 	int _activeSpotlightHighlightDirection = 1;
 	int _activeCaptorHighlightDirection = 1;
-	int _activeSoundHighlightDirection = 1;
+	int _activeSound3dHighlightDirection = 1;
 
 	bool _dontResetSelectedModel = false;
 	bool _dontResetSelectedQuad3d = false;
@@ -284,7 +284,7 @@ private:
 	bool _dontResetSelectedPointlight = false;
 	bool _dontResetSelectedSpotlight = false;
 	bool _dontResetSelectedCaptor = false;
-	bool _dontResetSelectedSound = false;
+	bool _dontResetSelectedSound3d = false;
 	bool _isPlacingPointlight = false;
 	bool _isPlacingSpotlight = false;
 	bool _isPlacingCaptor = false;

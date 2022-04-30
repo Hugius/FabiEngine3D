@@ -91,15 +91,15 @@ void WorldEditor::_updateSound3dHighlighting(const string & sound3dId, int & dir
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y > (DEFAULT_SPEAKER_SIZE.y * SOUND_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y > (DEFAULT_SPEAKER_SIZE.y * SOUND3D_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (DEFAULT_SPEAKER_SIZE * SOUND_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (DEFAULT_SPEAKER_SIZE * SOUND3D_SIZE_INCREASE));
 		direction *= -1;
 	}
 
 	const auto color = _fe3d->model_getBaseSize("@@speaker_" + sound3dId);
-	fvec3 speed = (fvec3(SOUND_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_SPEAKER_SIZE * SOUND_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
+	fvec3 speed = (fvec3(SOUND3D_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
+	speed *= ((DEFAULT_SPEAKER_SIZE * SOUND3D_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
 	_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (color + speed));
 }
 

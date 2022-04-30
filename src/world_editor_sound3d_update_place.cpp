@@ -1,7 +1,7 @@
 #include "world_editor.hpp"
 #include "tools.hpp"
 
-void WorldEditor::_updateSoundPlacing()
+void WorldEditor::_updateSound3dPlacing()
 {
 	if(!_currentTemplateSound3dId.empty())
 	{
@@ -33,12 +33,12 @@ void WorldEditor::_updateSoundPlacing()
 
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound(newId, _currentTemplateSound3dId);
+				_worldHelper->copyTemplateSound2d(newId, _currentTemplateSound3dId);
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
-				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);
+				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
@@ -119,7 +119,7 @@ void WorldEditor::_updateSoundPlacing()
 				return;
 			}
 
-			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET);
+			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SOUND3D_TERRAIN_OFFSET);
 			if(!_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 			{
 				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
@@ -137,12 +137,12 @@ void WorldEditor::_updateSoundPlacing()
 
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound(newId, _currentTemplateSound3dId);
+				_worldHelper->copyTemplateSound2d(newId, _currentTemplateSound3dId);
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);
-				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);
+				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));

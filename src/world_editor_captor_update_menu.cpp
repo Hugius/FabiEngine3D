@@ -27,7 +27,7 @@ void WorldEditor::_updateCaptorMenu()
 
 			_deactivateModel();
 			_deactivateQuad3d();
-			_deactivateSound();
+			_deactivateSound3d();
 			_deactivatePointlight();
 			_deactivateSpotlight();
 			_deactivateCaptor();
@@ -84,7 +84,7 @@ void WorldEditor::_updateCaptorChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound();
+				_deactivateSound3d();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();

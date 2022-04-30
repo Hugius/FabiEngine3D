@@ -33,7 +33,7 @@ const bool Sound3dPlayer::isSound3dStarted(const string & sound3dId, int index) 
 	return (index < _startedSound3ds.at(sound3dId).size());
 }
 
-const bool Sound3dPlayer::isSoundPaused(const string & sound3dId, int index) const
+const bool Sound3dPlayer::isSound3dPaused(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -47,7 +47,7 @@ const bool Sound3dPlayer::isSoundPaused(const string & sound3dId, int index) con
 	return _startedSound3ds.at(sound3dId)[index]->isPaused();
 }
 
-const float Sound3dPlayer::getSoundVolume(const string & sound3dId, int index) const
+const float Sound3dPlayer::getSound3dVolume(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -61,7 +61,7 @@ const float Sound3dPlayer::getSoundVolume(const string & sound3dId, int index) c
 	return _startedSound3ds.at(sound3dId)[index]->getVolume();
 }
 
-const float Sound3dPlayer::getSoundLeftIntensity(const string & sound3dId, int index) const
+const float Sound3dPlayer::getSound3dLeftIntensity(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -75,7 +75,7 @@ const float Sound3dPlayer::getSoundLeftIntensity(const string & sound3dId, int i
 	return _startedSound3ds.at(sound3dId)[index]->getLeftIntensity();
 }
 
-const float Sound3dPlayer::getSoundRightIntensity(const string & sound3dId, int index) const
+const float Sound3dPlayer::getSound3dRightIntensity(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -103,7 +103,7 @@ const int Sound3dPlayer::getPlayCount(const string & sound3dId, int index) const
 	return _startedSound3ds.at(sound3dId)[index]->getPlayCount();
 }
 
-const int Sound3dPlayer::getStartedSoundCount(const string & sound3dId) const
+const int Sound3dPlayer::getStartedSound3dCount(const string & sound3dId) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -121,9 +121,9 @@ const int Sound3dPlayer::getStartedSoundCount(const string & sound3dId) const
 
 void Sound3dPlayer::_terminateSound3ds()
 {
-	for(const auto & [sound3dId, instances] : _startedSound3ds)
+	for(const auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 	{
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
 		{
 			_terminateSound3d(sound3dId, instanceIndex);
 		}
@@ -172,7 +172,7 @@ void Sound3dPlayer::_updateSamplesVolume(int sampleCount, short * originalSample
 	}
 }
 
-const int Sound3dPlayer::getSoundTime(const string & sound3dId, int index) const
+const int Sound3dPlayer::getSound3dTime(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -183,16 +183,17 @@ const int Sound3dPlayer::getSoundTime(const string & sound3dId, int index) const
 		abort();
 	}
 
-	auto currentSoundTime = new MMTIME();
-	currentSoundTime->wType = TIME_SAMPLES;
+	auto currentTime = new MMTIME();
 
-	waveOutGetPosition(_startedSound3ds.at(sound3dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+	currentTime->wType = TIME_SAMPLES;
 
-	const auto sampleIndex = currentSoundTime->u.sample;
+	waveOutGetPosition(_startedSound3ds.at(sound3dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
+
+	const auto sampleIndex = currentTime->u.sample;
 	const auto sampleRate = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;
 	const auto result = static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
 
-	delete currentSoundTime;
+	delete currentTime;
 
 	return result;
 }

@@ -314,7 +314,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedSound3dIds.insert({sound3dId, templateId});
 
-			_worldHelper->copyTemplateSound(sound3dId, templateId);
+			_worldHelper->copyTemplateSound2d(sound3dId, templateId);
 
 			_fe3d->sound3d_setPosition(sound3dId, position);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);

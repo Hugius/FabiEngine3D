@@ -269,7 +269,7 @@ void WorldHelper::copyTemplateText3d(const string & newId, const string & templa
 	}
 }
 
-void WorldHelper::copyTemplateSound(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateSound2d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{

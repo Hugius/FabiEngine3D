@@ -26,64 +26,64 @@ void Quad2dColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad2dColorRenderer::render(const shared_ptr<Quad2d> entity)
+void Quad2dColorRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
-	if(!entity->isVisible())
+	if(!quad2d->isVisible())
 	{
 		return;
 	}
 
-	if(entity->isCentered())
+	if(quad2d->isCentered())
 	{
-		if(((entity->getPosition().x - (entity->getSize().x * 0.5f)) > entity->getMaxClipPosition().x) ||
-		   ((entity->getPosition().x + (entity->getSize().x * 0.5f)) < entity->getMinClipPosition().x) ||
-		   ((entity->getPosition().y - (entity->getSize().y * 0.5f)) > entity->getMaxClipPosition().y) ||
-		   ((entity->getPosition().y + (entity->getSize().y * 0.5f)) < entity->getMinClipPosition().y))
+		if(((quad2d->getPosition().x - (quad2d->getSize().x * 0.5f)) > quad2d->getMaxClipPosition().x) ||
+		   ((quad2d->getPosition().x + (quad2d->getSize().x * 0.5f)) < quad2d->getMinClipPosition().x) ||
+		   ((quad2d->getPosition().y - (quad2d->getSize().y * 0.5f)) > quad2d->getMaxClipPosition().y) ||
+		   ((quad2d->getPosition().y + (quad2d->getSize().y * 0.5f)) < quad2d->getMinClipPosition().y))
 		{
 			return;
 		}
 	}
 	else
 	{
-		if((entity->getPosition().x > entity->getMaxClipPosition().x) ||
-		   ((entity->getPosition().x + entity->getSize().x) < entity->getMinClipPosition().x) ||
-		   (entity->getPosition().y > entity->getMaxClipPosition().y) ||
-		   ((entity->getPosition().y + entity->getSize().y) < entity->getMinClipPosition().y))
+		if((quad2d->getPosition().x > quad2d->getMaxClipPosition().x) ||
+		   ((quad2d->getPosition().x + quad2d->getSize().x) < quad2d->getMinClipPosition().x) ||
+		   (quad2d->getPosition().y > quad2d->getMaxClipPosition().y) ||
+		   ((quad2d->getPosition().y + quad2d->getSize().y) < quad2d->getMinClipPosition().y))
 		{
 			return;
 		}
 	}
 
-	_shaderBuffer->uploadUniform("u_minX", entity->getMinClipPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", entity->getMinClipPosition().y);
-	_shaderBuffer->uploadUniform("u_maxX", entity->getMaxClipPosition().x);
-	_shaderBuffer->uploadUniform("u_maxY", entity->getMaxClipPosition().y);
-	_shaderBuffer->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
-	_shaderBuffer->uploadUniform("u_uvOffset", entity->getUvOffset());
-	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
-	_shaderBuffer->uploadUniform("u_isHorizontallyFlipped", entity->isHorizontallyFlipped());
-	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
-	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());
-	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
+	_shaderBuffer->uploadUniform("u_minX", quad2d->getMinClipPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", quad2d->getMinClipPosition().y);
+	_shaderBuffer->uploadUniform("u_maxX", quad2d->getMaxClipPosition().x);
+	_shaderBuffer->uploadUniform("u_maxY", quad2d->getMaxClipPosition().y);
+	_shaderBuffer->uploadUniform("u_uvMultiplier", quad2d->getUvMultiplier());
+	_shaderBuffer->uploadUniform("u_uvOffset", quad2d->getUvOffset());
+	_shaderBuffer->uploadUniform("u_transformation", quad2d->getTransformation());
+	_shaderBuffer->uploadUniform("u_isHorizontallyFlipped", quad2d->isHorizontallyFlipped());
+	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", quad2d->isVerticallyFlipped());
+	_shaderBuffer->uploadUniform("u_color", quad2d->getColor());
+	_shaderBuffer->uploadUniform("u_opacity", quad2d->getOpacity());
+	_shaderBuffer->uploadUniform("u_textureRepeat", quad2d->getTextureRepeat());
+	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (quad2d->getDiffuseTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_wireframeColor", quad2d->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_isWireframed", quad2d->isWireframed());
 
-	if(entity->getDiffuseTextureBuffer() != nullptr)
+	if(quad2d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, quad2d->getDiffuseTextureBuffer()->getTboId());
 	}
 
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(quad2d->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
-	if(entity->getDiffuseTextureBuffer() != nullptr)
+	if(quad2d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);

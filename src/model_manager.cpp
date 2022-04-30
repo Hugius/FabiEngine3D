@@ -67,7 +67,7 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 		return;
 	}
 
-	auto entity = make_shared<Model>(modelId);
+	auto model = make_shared<Model>(modelId);
 
 	for(const auto & part : mesh->getParts())
 	{
@@ -91,7 +91,7 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 			bufferData.push_back(part->getTangents()[index].z);
 		}
 
-		entity->createPart(part->getName());
+		model->createPart(part->getName());
 
 		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getName());
 
@@ -102,12 +102,12 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 			_vertexBufferCache->storeBuffer(meshPath, part->getName(), vertexBuffer);
 		}
 
-		entity->setVertexBuffer(part->getName(), vertexBuffer);
+		model->setVertexBuffer(part->getName(), vertexBuffer);
 	}
 
-	entity->setMeshPath(meshPath);
+	model->setMeshPath(meshPath);
 
-	_models.insert({modelId, entity});
+	_models.insert({modelId, model});
 }
 
 void ModelManager::deleteModel(const string & modelId)
@@ -164,19 +164,19 @@ void ModelManager::update()
 			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
 		}
 
-		if(_captorManager->getCaptors().find(entity->getPreviousCaptorEntityId()) == _captorManager->getCaptors().end())
+		if(_captorManager->getCaptors().find(entity->getPreviousCaptorId()) == _captorManager->getCaptors().end())
 		{
-			entity->setPreviousCaptorEntityId("");
+			entity->setPreviousCaptorId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(_captorManager->getCaptors().find(entity->getCurrentCaptorEntityId()) == _captorManager->getCaptors().end())
+		if(_captorManager->getCaptors().find(entity->getCurrentCaptorId()) == _captorManager->getCaptors().end())
 		{
-			entity->setCurrentCaptorEntityId("");
+			entity->setCurrentCaptorId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(entity->getPreviousCaptorEntityId() == entity->getCurrentCaptorEntityId())
+		if(entity->getPreviousCaptorId() == entity->getCurrentCaptorId())
 		{
-			entity->setPreviousCaptorEntityId("");
+			entity->setPreviousCaptorId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
 
@@ -184,23 +184,23 @@ void ModelManager::update()
 		{
 			map<float, shared_ptr<Captor>> orderedCaptors;
 
-			for(const auto & [captorEntityId, captorEntity] : _captorManager->getCaptors())
+			for(const auto & [captorId, captor] : _captorManager->getCaptors())
 			{
-				const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), captorEntity->getPosition());
+				const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), captor->getPosition());
 
-				orderedCaptors.insert({absoluteDistance, captorEntity});
+				orderedCaptors.insert({absoluteDistance, captor});
 			}
 
 			if(!orderedCaptors.empty())
 			{
-				const auto closestCaptorEntityId = orderedCaptors.begin()->second->getId();
+				const auto closestCaptorId = orderedCaptors.begin()->second->getId();
 
-				if(entity->getCurrentCaptorEntityId() != closestCaptorEntityId)
+				if(entity->getCurrentCaptorId() != closestCaptorId)
 				{
-					entity->setPreviousCaptorEntityId(entity->getCurrentCaptorEntityId());
-					entity->setCurrentCaptorEntityId(closestCaptorEntityId);
+					entity->setPreviousCaptorId(entity->getCurrentCaptorId());
+					entity->setCurrentCaptorId(closestCaptorId);
 
-					if(!entity->getPreviousCaptorEntityId().empty())
+					if(!entity->getPreviousCaptorId().empty())
 					{
 						entity->setCubeReflectionMixValue(0.0f);
 					}

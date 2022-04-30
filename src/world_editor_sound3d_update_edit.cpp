@@ -25,7 +25,7 @@ void WorldEditor::_updateSound3dEditing()
 			{
 				_selectSound3d(placedSound3dId);
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -35,7 +35,7 @@ void WorldEditor::_updateSound3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{

@@ -12,7 +12,6 @@ using std::string;
 class RenderStorage final
 {
 public:
-
 	void setPrimarySceneMap(shared_ptr<TextureBuffer> value);
 	void setSecondarySceneMap(shared_ptr<TextureBuffer> value);
 	void setPlanarReflectionMap(shared_ptr<TextureBuffer> value);
@@ -26,7 +25,7 @@ public:
 	void setLensFlareMap(shared_ptr<TextureBuffer> value);
 	void setMotionBlurMap(shared_ptr<TextureBuffer> value);
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
-	void setCursorEntityId(const string & value);
+	void setCursorId(const string & value);
 	void setLensFlareMapPath(const string & value);
 	void setShadowView(const mat44 & value);
 	void setShadowProjection(const mat44 & value);
@@ -110,7 +109,7 @@ public:
 	const shared_ptr<TextureBuffer> getFinalSceneTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getMotionBlurTextureBuffer() const;
 
-	const string & getCursorEntityId() const;
+	const string & getCursorId() const;
 	const string & getLensFlareMapPath() const;
 
 	const mat44 & getShadowView() const;
@@ -230,7 +229,7 @@ private:
 	shared_ptr<TextureBuffer> _finalSceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _motionBlurTextureBuffer = nullptr;
 
-	string _cursorEntityId = "";
+	string _cursorId = "";
 	string _lensFlareMapPath = "";
 
 	mat44 _shadowView = mat44(1.0f);

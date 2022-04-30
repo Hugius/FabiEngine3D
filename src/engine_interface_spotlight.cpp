@@ -113,9 +113,9 @@ const float EngineInterface::spotlight_getDistance(const string & spotlightId) c
 	return _core->getSpotlightManager()->getSpotlight(spotlightId)->getDistance();
 }
 
-const int EngineInterface::spotlight_getMaxEntityCount() const
+const int EngineInterface::spotlight_getMaxCount() const
 {
-	return _core->getSpotlightManager()->getMaxSpotlightCount();
+	return _core->getSpotlightManager()->getMaxCount();
 }
 
 const bool EngineInterface::spotlight_isExisting(const string & spotlightId) const

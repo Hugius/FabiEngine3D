@@ -16,7 +16,7 @@ void WorldEditor::_updateSkyMenu()
 		{
 			vector<string> skyIds;
 
-			for(const auto & skyId : _skyEditor->getLoadedEntityIds())
+			for(const auto & skyId : _skyEditor->getLoadedSkyIds())
 			{
 				if(skyId[0] == '@')
 				{

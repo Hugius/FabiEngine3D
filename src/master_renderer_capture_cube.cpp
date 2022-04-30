@@ -135,9 +135,9 @@ void MasterRenderer::captureCubeReflections()
 
 				_cubeReflectionCaptureBuffer->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				_renderSkyEntity();
-				_renderTerrainEntity();
-				_renderWaterEntity();
+				_renderSky();
+				_renderTerrain();
+				_renderWater();
 				_renderOpaqueModels();
 				_renderOpaqueQuad3ds();
 				_renderOpaqueText3ds();

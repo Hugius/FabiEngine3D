@@ -32,7 +32,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_idCounter++;
 
-				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
+				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxCount())
 				{
 					Logger::throwWarning("spotlight maximum is reached");
 
@@ -123,7 +123,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_idCounter++;
 
-				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
+				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxCount())
 				{
 					Logger::throwWarning("spotlight maximum is reached");
 

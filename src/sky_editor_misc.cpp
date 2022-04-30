@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & SkyEditor::getLoadedEntityIds() const
+const vector<string> & SkyEditor::getLoadedSkyIds() const
 {
 	return _loadedSkyIds;
 }

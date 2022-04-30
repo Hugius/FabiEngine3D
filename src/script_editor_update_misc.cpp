@@ -253,7 +253,7 @@ void ScriptEditor::_updateCursor()
 
 	if(Tools::isCursorInsideDisplay())
 	{
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)

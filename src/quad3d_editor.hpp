@@ -11,7 +11,7 @@ public:
 	void deleteLoadedQuad3ds();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedQuad3dIds() const;
 
 	const bool loadQuad3dsFromFile();
 	const bool saveQuad3dsToFile() const;

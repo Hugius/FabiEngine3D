@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 				return true;
 			}
 
-			if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
+			if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxCount())
 			{
 				_throwRuntimeError("spotlight maximum is reached");
 

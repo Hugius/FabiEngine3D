@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & ModelEditor::getLoadedEntityIds() const
+const vector<string> & ModelEditor::getLoadedModelIds() const
 {
 	return _loadedModelIds;
 }

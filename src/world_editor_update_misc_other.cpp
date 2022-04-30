@@ -15,7 +15,7 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d->camera_isFirstPersonEnabled())
 			{
-				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
 			}
 		}
 		else
@@ -24,7 +24,7 @@ void WorldEditor::_updateCamera()
 
 			if(Tools::isCursorInsideWindow())
 			{
-				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), true);
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), true);
 			}
 		}
 

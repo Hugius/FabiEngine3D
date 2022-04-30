@@ -11,7 +11,7 @@ public:
 	void deleteLoadedSkies();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedSkyIds() const;
 
 	const bool loadSkiesFromFile();
 	const bool saveSkiesToFile() const;

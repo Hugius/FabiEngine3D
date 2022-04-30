@@ -109,7 +109,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				_fe3d->model_setVisible(_previewModelId, false);
 			}
 
-			auto modelIds = _modelEditor->getLoadedEntityIds();
+			auto modelIds = _modelEditor->getLoadedModelIds();
 
 			for(auto & modelId : modelIds)
 			{

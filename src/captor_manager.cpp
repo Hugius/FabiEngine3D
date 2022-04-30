@@ -26,16 +26,16 @@ void CaptorManager::createCaptor(const string & captorId)
 		abort();
 	}
 
-	auto entity = make_shared<Captor>(captorId);
+	auto captor = make_shared<Captor>(captorId);
 
-	_captors.insert({captorId, entity});
+	_captors.insert({captorId, captor});
 }
 
 void CaptorManager::update()
 {
-	for(const auto & [entityId, entity] : _captors)
+	for(const auto & [captorId, captor] : _captors)
 	{
-		entity->updateTarget();
+		captor->updateTarget();
 	}
 }
 

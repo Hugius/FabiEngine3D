@@ -32,7 +32,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_idCounter++;
 
-				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
+				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxCount())
 				{
 					Logger::throwWarning("pointlight maximum is reached");
 
@@ -120,7 +120,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_idCounter++;
 
-				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
+				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxCount())
 				{
 					Logger::throwWarning("pointlight maximum is reached");
 

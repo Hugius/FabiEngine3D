@@ -69,12 +69,12 @@ void WorldEditor::_load()
 	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
-	for(const auto & modelId : _modelEditor->getLoadedEntityIds())
+	for(const auto & modelId : _modelEditor->getLoadedModelIds())
 	{
 		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
 	}
 
-	for(const auto & quad3dId : _quad3dEditor->getLoadedEntityIds())
+	for(const auto & quad3dId : _quad3dEditor->getLoadedQuad3dIds())
 	{
 		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
 	}

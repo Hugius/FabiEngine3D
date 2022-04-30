@@ -79,9 +79,9 @@ void MasterRenderer::capturePlanarReflections()
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	_renderSkyEntity();
-	_renderTerrainEntity();
-	_renderWaterEntity();
+	_renderSky();
+	_renderTerrain();
+	_renderWater();
 	_renderOpaqueModels();
 	_renderOpaqueQuad3ds();
 	_renderOpaqueText3ds();

@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 				return true;
 			}
 
-			if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
+			if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxCount())
 			{
 				_throwRuntimeError("pointlight maximum is reached");
 

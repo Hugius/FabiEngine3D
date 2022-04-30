@@ -80,11 +80,12 @@ void TerrainColorRenderer::unbind()
 void TerrainColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
 	vector<shared_ptr<Pointlight>> visiblePointlights;
-	for(const auto & [entityId, entity] : pointlights)
+
+	for(const auto & [pointlightId, pointlight] : pointlights)
 	{
-		if(entity->isVisible())
+		if(pointlight->isVisible())
 		{
-			visiblePointlights.push_back(entity);
+			visiblePointlights.push_back(pointlight);
 		}
 	}
 
@@ -103,11 +104,12 @@ void TerrainColorRenderer::processPointlights(const unordered_map<string, shared
 void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
 	vector<shared_ptr<Spotlight>> visibleSpotlights;
-	for(const auto & [entityId, entity] : spotlights)
+
+	for(const auto & [spotlightId, spotlight] : spotlights)
 	{
-		if(entity->isVisible())
+		if(spotlight->isVisible())
 		{
-			visibleSpotlights.push_back(entity);
+			visibleSpotlights.push_back(spotlight);
 		}
 	}
 
@@ -124,147 +126,147 @@ void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void TerrainColorRenderer::render(const shared_ptr<Terrain> entity)
+void TerrainColorRenderer::render(const shared_ptr<Terrain> terrain)
 {
-	if(!entity->isVisible())
+	if(!terrain->isVisible())
 	{
 		return;
 	}
 
 	glEnable(GL_CULL_FACE);
 
-	if(entity->isWireframed())
+	if(terrain->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shaderBuffer->uploadUniform("u_isSpecular", entity->isSpecular());
-	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-	_shaderBuffer->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
-	_shaderBuffer->uploadUniform("u_greenTextureRepeat", entity->getGreenTextureRepeat());
-	_shaderBuffer->uploadUniform("u_blueTextureRepeat", entity->getBlueTextureRepeat());
-	_shaderBuffer->uploadUniform("u_lightness", entity->getLightness());
-	_shaderBuffer->uploadUniform("u_specularShininess", entity->getSpecularShininess());
-	_shaderBuffer->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasBlendMap", (entity->getBlendTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasRedDiffuseMap", (entity->getRedDiffuseTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasGreenDiffuseMap", (entity->getGreenDiffuseTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasBlueDiffuseMap", (entity->getBlueDiffuseTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasRedNormalMap", (entity->getRedNormalTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
-	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
-	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
-	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
+	_shaderBuffer->uploadUniform("u_isWireframed", terrain->isWireframed());
+	_shaderBuffer->uploadUniform("u_isSpecular", terrain->isSpecular());
+	_shaderBuffer->uploadUniform("u_textureRepeat", terrain->getTextureRepeat());
+	_shaderBuffer->uploadUniform("u_redTextureRepeat", terrain->getRedTextureRepeat());
+	_shaderBuffer->uploadUniform("u_greenTextureRepeat", terrain->getGreenTextureRepeat());
+	_shaderBuffer->uploadUniform("u_blueTextureRepeat", terrain->getBlueTextureRepeat());
+	_shaderBuffer->uploadUniform("u_lightness", terrain->getLightness());
+	_shaderBuffer->uploadUniform("u_specularShininess", terrain->getSpecularShininess());
+	_shaderBuffer->uploadUniform("u_specularIntensity", terrain->getSpecularIntensity());
+	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (terrain->getDiffuseTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasNormalMap", (terrain->getNormalTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasBlendMap", (terrain->getBlendTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasRedDiffuseMap", (terrain->getRedDiffuseTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasGreenDiffuseMap", (terrain->getGreenDiffuseTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasBlueDiffuseMap", (terrain->getBlueDiffuseTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasRedNormalMap", (terrain->getRedNormalTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasGreenNormalMap", (terrain->getGreenNormalTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasBlueNormalMap", (terrain->getBlueNormalTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_wireframeColor", terrain->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_color", terrain->getColor());
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, terrain->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, terrain->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, terrain->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, terrain->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, terrain->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, terrain->getMaxClipPosition().z));
 
-	if(entity->getDiffuseTextureBuffer() != nullptr)
+	if(terrain->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getDiffuseTextureBuffer()->getTboId());
 	}
-	if(entity->getNormalTextureBuffer() != nullptr)
+	if(terrain->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getNormalTextureBuffer()->getTboId());
 	}
-	if(entity->getBlendTextureBuffer() != nullptr)
+	if(terrain->getBlendTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getBlendTextureBuffer()->getTboId());
 	}
-	if(entity->getRedDiffuseTextureBuffer() != nullptr)
+	if(terrain->getRedDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getRedDiffuseTextureBuffer()->getTboId());
 	}
-	if(entity->getGreenDiffuseTextureBuffer() != nullptr)
+	if(terrain->getGreenDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getGreenDiffuseTextureBuffer()->getTboId());
 	}
-	if(entity->getBlueDiffuseTextureBuffer() != nullptr)
+	if(terrain->getBlueDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getBlueDiffuseTextureBuffer()->getTboId());
 	}
-	if(entity->getRedNormalTextureBuffer() != nullptr)
+	if(terrain->getRedNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE7);
-		glBindTexture(GL_TEXTURE_2D, entity->getRedNormalTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getRedNormalTextureBuffer()->getTboId());
 	}
-	if(entity->getGreenNormalTextureBuffer() != nullptr)
+	if(terrain->getGreenNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE8);
-		glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getGreenNormalTextureBuffer()->getTboId());
 	}
-	if(entity->getBlueNormalTextureBuffer() != nullptr)
+	if(terrain->getBlueNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE9);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, terrain->getBlueNormalTextureBuffer()->getTboId());
 	}
 
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(terrain->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, terrain->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(terrain->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
-	if(entity->getDiffuseTextureBuffer() != nullptr)
+	if(terrain->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getNormalTextureBuffer() != nullptr)
+	if(terrain->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getBlendTextureBuffer() != nullptr)
+	if(terrain->getBlendTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getRedDiffuseTextureBuffer() != nullptr)
+	if(terrain->getRedDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getGreenDiffuseTextureBuffer() != nullptr)
+	if(terrain->getGreenDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getBlueDiffuseTextureBuffer() != nullptr)
+	if(terrain->getBlueDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getRedNormalTextureBuffer() != nullptr)
+	if(terrain->getRedNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE7);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getGreenNormalTextureBuffer() != nullptr)
+	if(terrain->getGreenNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE8);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getBlueNormalTextureBuffer() != nullptr)
+	if(terrain->getBlueNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE9);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	if(entity->isWireframed())
+	if(terrain->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}

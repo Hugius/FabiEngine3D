@@ -55,11 +55,11 @@ void LensFlareRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void LensFlareRenderer::render(const shared_ptr<Quad2d> entity)
+void LensFlareRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
+	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
 
 	glBindVertexArray(0);
 }

@@ -116,15 +116,15 @@ void SkyManager::createSky(const string & skyId)
 
 void SkyManager::update()
 {
-	auto entity = getSelectedSky();
+	auto sky = getSelectedSky();
 
-	if(entity != nullptr)
+	if(sky != nullptr)
 	{
-		entity->updateTarget();
+		sky->updateTarget();
 
-		if(entity->isVisible())
+		if(sky->isVisible())
 		{
-			entity->updateTransformation();
+			sky->updateTransformation();
 		}
 	}
 }

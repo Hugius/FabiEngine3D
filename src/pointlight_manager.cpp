@@ -26,14 +26,14 @@ void PointlightManager::createPointlight(const string & pointlightId)
 		abort();
 	}
 
-	if(getPointlights().size() == MAX_POINTLIGHT_COUNT)
+	if(getPointlights().size() == MAX_COUNT)
 	{
 		abort();
 	}
 
-	auto entity = make_shared<Pointlight>(pointlightId);
+	auto pointlight = make_shared<Pointlight>(pointlightId);
 
-	_pointlights.insert({pointlightId, entity});
+	_pointlights.insert({pointlightId, pointlight});
 }
 
 void PointlightManager::deletePointlight(const string & pointlightId)
@@ -51,9 +51,9 @@ void PointlightManager::deletePointlights()
 	_pointlights.clear();
 }
 
-const int PointlightManager::getMaxPointlightCount() const
+const int PointlightManager::getMaxCount() const
 {
-	return MAX_POINTLIGHT_COUNT;
+	return MAX_COUNT;
 }
 
 const bool PointlightManager::isPointlightExisting(const string & pointlightId) const

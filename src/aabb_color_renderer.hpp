@@ -8,5 +8,5 @@ class AabbColorRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<Aabb> entity);
+	void render(const shared_ptr<Aabb> aabb);
 };

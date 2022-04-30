@@ -13,7 +13,7 @@ public:
 
 	const vector<string> getMeshPathsFromFile() const;
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedModelIds() const;
 
 	const bool loadModelsFromFile();
 	const bool saveModelsToFile() const;

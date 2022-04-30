@@ -38,7 +38,7 @@ void ScriptExecutor::update(bool isDebugging)
 	{
 		if(!Configuration::getInst().isApplicationExported())
 		{
-			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), !_isRunning);
+			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), !_isRunning);
 		}
 
 		if(_isRunning)

@@ -11,9 +11,9 @@ void EngineInterface::misc_setVsyncEnabled(bool value)
 	_core->getRenderWindow()->setVsyncEnabled(value);
 }
 
-void EngineInterface::misc_setCursorEntityId(const string & value)
+void EngineInterface::misc_setCursorId(const string & value)
 {
-	_core->getRenderStorage()->setCursorEntityId(value);
+	_core->getRenderStorage()->setCursorId(value);
 }
 
 void EngineInterface::misc_cacheMesh(const string & filePath, bool isCrucial)
@@ -152,7 +152,7 @@ const vector<pair<string, float>> & EngineInterface::misc_getRenderDeltaTimes() 
 	return _core->getRenderDeltaTimes();
 }
 
-const string EngineInterface::misc_getCursorEntityId() const
+const string EngineInterface::misc_getCursorId() const
 {
-	return _core->getRenderStorage()->getCursorEntityId();
+	return _core->getRenderStorage()->getCursorId();
 }

@@ -696,7 +696,7 @@ void GuiInputBox::_updateHovering(bool isInteractable)
 
 			if(_isHovered)
 			{
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 		}
 		else

@@ -12,7 +12,7 @@ void TerrainEditor::_updateCamera()
 
 		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, (_fe3d->camera_getThirdPersonDistance() - (distanceOffset * CAMERA_DISTANCE_SPEED))));
 
-		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())

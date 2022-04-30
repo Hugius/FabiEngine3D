@@ -32,25 +32,25 @@ void AabbDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbDepthRenderer::render(const shared_ptr<Aabb> entity)
+void AabbDepthRenderer::render(const shared_ptr<Aabb> aabb)
 {
-	if(!entity->isVisible())
+	if(!aabb->isVisible())
 	{
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
-	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
-	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
-	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
-	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
+	_shaderBuffer->uploadUniform("u_transformation", aabb->getTransformation());
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, aabb->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, aabb->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, aabb->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, aabb->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, aabb->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, aabb->getMaxClipPosition().z));
 
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(aabb->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_LINE_STRIP, 0, entity->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
+	glDrawArrays(GL_LINE_STRIP, 0, aabb->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(aabb->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

@@ -24,8 +24,8 @@ public:
 	void setFrozen(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailId(const string & value);
-	void setPreviousCaptorEntityId(const string & value);
-	void setCurrentCaptorEntityId(const string & value);
+	void setPreviousCaptorId(const string & value);
+	void setCurrentCaptorId(const string & value);
 	void setCubeReflectionMixValue(float value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
@@ -93,8 +93,8 @@ public:
 	const string & getId() const;
 	const string & getMeshPath() const;
 	const string & getLevelOfDetailId() const;
-	const string & getPreviousCaptorEntityId() const;
-	const string & getCurrentCaptorEntityId() const;
+	const string & getPreviousCaptorId() const;
+	const string & getCurrentCaptorId() const;
 	const string & getDiffuseMapPath(const string & partId) const;
 	const string & getEmissionMapPath(const string & partId) const;
 	const string & getSpecularMapPath(const string & partId) const;
@@ -153,8 +153,8 @@ private:
 
 	string _meshPath = "";
 	string _levelOfDetailId = "";
-	string _previousCaptorEntityId = "";
-	string _currentCaptorEntityId = "";
+	string _previousCaptorId = "";
+	string _currentCaptorId = "";
 
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseRotation = fvec3(0.0f);

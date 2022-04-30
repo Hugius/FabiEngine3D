@@ -20,13 +20,13 @@ public:
 
 	const shared_ptr<Spotlight> getSpotlight(const string & spotlightId) const;
 
-	const int getMaxSpotlightCount() const;
+	const int getMaxCount() const;
 
 	const bool isSpotlightExisting(const string & spotlightId) const;
 	const bool isSpotlightsExisting() const;
 
 private:
-	static inline constexpr int MAX_SPOTLIGHT_COUNT = 64;
+	static inline constexpr int MAX_COUNT = 64;
 
 	unordered_map<string, shared_ptr<Spotlight>> _spotlights = {};
 };

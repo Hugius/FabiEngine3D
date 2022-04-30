@@ -638,7 +638,7 @@ public:
 	const fvec3 & pointlight_getRadius(const string & pointlightId) const;
 	const fvec3 & pointlight_getColor(const string & pointlightId) const;
 	const float pointlight_getIntensity(const string & pointlightId) const;
-	const int pointlight_getMaxEntityCount() const;
+	const int pointlight_getMaxCount() const;
 	const bool pointlight_isExisting(const string & pointlightId) const;
 	const bool pointlight_isVisible(const string & pointlightId) const;
 	const PointlightType pointlight_getShape(const string & pointlightId) const;
@@ -665,7 +665,7 @@ public:
 	const float spotlight_getIntensity(const string & spotlightId) const;
 	const float spotlight_getAngle(const string & spotlightId) const;
 	const float spotlight_getDistance(const string & spotlightId) const;
-	const int spotlight_getMaxEntityCount() const;
+	const int spotlight_getMaxCount() const;
 	const bool spotlight_isExisting(const string & spotlightId) const;
 	const bool spotlight_isVisible(const string & spotlightId) const;
 
@@ -1017,7 +1017,7 @@ public:
 	const bool clock_isIdReserved(const string & clockId) const;
 
 	void misc_setVsyncEnabled(bool value);
-	void misc_setCursorEntityId(const string & value);
+	void misc_setCursorId(const string & value);
 	void misc_cacheMesh(const string & filePath, bool isCrucial);
 	void misc_cacheImage(const string & filePath, bool isCrucial);
 	void misc_cacheAudio(const string & filePath, bool isCrucial);
@@ -1033,7 +1033,7 @@ public:
 
 	const vector<pair<string, float>> & misc_getUpdateDeltaTimes() const;
 	const vector<pair<string, float>> & misc_getRenderDeltaTimes() const;
-	const string misc_getCursorEntityId() const;
+	const string misc_getCursorId() const;
 	const string misc_getCpuName() const;
 	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & Quad2dEditor::getLoadedEntityIds() const
+const vector<string> & Quad2dEditor::getLoadedQuad2dIds() const
 {
 	return _loadedQuad2dIds;
 }

@@ -2,16 +2,16 @@
 
 void MasterRenderer::captureWaterReflections()
 {
-	const auto waterEntity = _waterManager->getSelectedWater();
+	const auto water = _waterManager->getSelectedWater();
 
-	if((waterEntity == nullptr) || !waterEntity->isReflective())
+	if((water == nullptr) || !water->isReflective())
 	{
 		_renderStorage->setWaterReflectionMap(nullptr);
 
 		return;
 	}
 
-	if(_camera->getPosition().y < waterEntity->getHeight())
+	if(_camera->getPosition().y < water->getHeight())
 	{
 		_renderStorage->setWaterReflectionMap(nullptr);
 
@@ -22,7 +22,7 @@ void MasterRenderer::captureWaterReflections()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<string> savedModelEntityIds;
+	vector<string> savedModelIds;
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isVisible())
@@ -33,7 +33,7 @@ void MasterRenderer::captureWaterReflections()
 		if(!model->isReflected())
 		{
 			model->setVisible(false);
-			savedModelEntityIds.push_back(model->getId());
+			savedModelIds.push_back(model->getId());
 			continue;
 		}
 
@@ -42,24 +42,24 @@ void MasterRenderer::captureWaterReflections()
 			if(model->isReflective(partId) && (model->getReflectionType(partId) == ReflectionType::PLANAR))
 			{
 				model->setVisible(false);
-				savedModelEntityIds.push_back(model->getId());
+				savedModelIds.push_back(model->getId());
 
 				break;
 			}
 		}
 	}
 
-	vector<string> savedQuad3dEntityIds;
+	vector<string> savedQuad3dIds;
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
-			savedQuad3dEntityIds.push_back(quad3d->getId());
+			savedQuad3dIds.push_back(quad3d->getId());
 		}
 	}
 
-	const auto cameraDistance = fabsf(_camera->getPosition().y - waterEntity->getHeight());
+	const auto cameraDistance = fabsf(_camera->getPosition().y - water->getHeight());
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
@@ -70,13 +70,13 @@ void MasterRenderer::captureWaterReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->setPitch(originalCameraPitch);
 
-	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (water->getHeight() - 1.0f), -FLT_MAX));
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	_renderSkyEntity();
-	_renderTerrainEntity();
+	_renderSky();
+	_renderTerrain();
 	_renderOpaqueModels();
 	_renderOpaqueQuad3ds();
 	_renderOpaqueText3ds();
@@ -85,7 +85,7 @@ void MasterRenderer::captureWaterReflections()
 	_renderTransparentQuad3ds();
 	_renderTransparentText3ds();
 
-	for(const auto & savedId : savedModelEntityIds)
+	for(const auto & savedId : savedModelIds)
 	{
 		for(const auto & [modelId, model] : _modelManager->getModels())
 		{
@@ -96,7 +96,7 @@ void MasterRenderer::captureWaterReflections()
 		}
 	}
 
-	for(const auto & savedId : savedQuad3dEntityIds)
+	for(const auto & savedId : savedQuad3dIds)
 	{
 		for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 		{
@@ -120,16 +120,16 @@ void MasterRenderer::captureWaterReflections()
 
 void MasterRenderer::captureWaterRefractions()
 {
-	const auto waterEntity = _waterManager->getSelectedWater();
+	const auto water = _waterManager->getSelectedWater();
 
-	if((waterEntity == nullptr) || !waterEntity->isRefractive())
+	if((water == nullptr) || !water->isRefractive())
 	{
 		_renderStorage->setWaterRefractionMap(nullptr);
 
 		return;
 	}
 
-	if(_camera->getPosition().y > waterEntity->getHeight())
+	if(_camera->getPosition().y > water->getHeight())
 	{
 		_renderStorage->setWaterRefractionMap(nullptr);
 
@@ -142,13 +142,13 @@ void MasterRenderer::captureWaterRefractions()
 
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
 
-	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (water->getHeight() - 1.0f), -FLT_MAX));
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	_renderSkyEntity();
-	_renderTerrainEntity();
+	_renderSky();
+	_renderTerrain();
 	_renderOpaqueModels();
 	_renderOpaqueQuad3ds();
 	_renderOpaqueText3ds();
@@ -168,9 +168,9 @@ void MasterRenderer::captureWaterRefractions()
 
 void MasterRenderer::captureWaterEdges()
 {
-	const auto waterEntity = _waterManager->getSelectedWater();
+	const auto water = _waterManager->getSelectedWater();
 
-	if((waterEntity != nullptr) && waterEntity->isEdged())
+	if((water != nullptr) && water->isEdged())
 	{
 		_waterOpacityCaptureBuffer->bind();
 

@@ -92,11 +92,12 @@ void ModelColorRenderer::unbind()
 void ModelColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
 	vector<shared_ptr<Pointlight>> visiblePointlights;
-	for(const auto & [entityId, entity] : pointlights)
+
+	for(const auto & [pointlightId, pointlight] : pointlights)
 	{
-		if(entity->isVisible())
+		if(pointlight->isVisible())
 		{
-			visiblePointlights.push_back(entity);
+			visiblePointlights.push_back(pointlight);
 		}
 	}
 
@@ -115,11 +116,12 @@ void ModelColorRenderer::processPointlights(const unordered_map<string, shared_p
 void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
 	vector<shared_ptr<Spotlight>> visibleSpotlights;
-	for(const auto & [entityId, entity] : spotlights)
+
+	for(const auto & [spotlightId, spotlight] : spotlights)
 	{
-		if(entity->isVisible())
+		if(spotlight->isVisible())
 		{
-			visibleSpotlights.push_back(entity);
+			visibleSpotlights.push_back(spotlight);
 		}
 	}
 
@@ -136,150 +138,150 @@ void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_pt
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void ModelColorRenderer::render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captors)
+void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_map<string, shared_ptr<Captor>> & captors)
 {
-	if(!entity->isVisible())
+	if(!model->isVisible())
 	{
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
-	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
-	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
-	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
-	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-	_shaderBuffer->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, model->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, model->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, model->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, model->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, model->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, model->getMaxClipPosition().z));
+	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", model->getCubeReflectionMixValue());
+	_shaderBuffer->uploadUniform("u_cameraView", (model->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
-	if(!entity->getPreviousCaptorEntityId().empty())
+	if(!model->getPreviousCaptorId().empty())
 	{
-		if(captors.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(model->getPreviousCaptorId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
-	if(!entity->getCurrentCaptorEntityId().empty())
+	if(!model->getCurrentCaptorId().empty())
 	{
-		if(captors.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(model->getCurrentCaptorId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
 
-	for(const auto & partId : entity->getPartIds())
+	for(const auto & partId : model->getPartIds())
 	{
-		_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
-		_shaderBuffer->uploadUniform("u_isReflective", entity->isReflective(partId));
-		_shaderBuffer->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partId));
-		_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
-		_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity(partId));
-		_shaderBuffer->uploadUniform("u_isSpecular", entity->isSpecular(partId));
-		_shaderBuffer->uploadUniform("u_reflectivity", entity->getReflectivity(partId));
-		_shaderBuffer->uploadUniform("u_lightness", entity->getLightness(partId));
-		_shaderBuffer->uploadUniform("u_specularShininess", entity->getSpecularShininess(partId));
-		_shaderBuffer->uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partId));
-		_shaderBuffer->uploadUniform("u_color", entity->getColor(partId));
-		_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor(partId));
-		_shaderBuffer->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseTextureBuffer(partId) != nullptr));
-		_shaderBuffer->uploadUniform("u_hasEmissionMap", (entity->getEmissionTextureBuffer(partId) != nullptr));
-		_shaderBuffer->uploadUniform("u_hasSpecularMap", (entity->getSpecularTextureBuffer(partId) != nullptr));
-		_shaderBuffer->uploadUniform("u_hasReflectionMap", (entity->getReflectionTextureBuffer(partId) != nullptr));
-		_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer(partId) != nullptr));
-		_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation(partId));
-		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(entity->getTransformation(partId)))));
-		_shaderBuffer->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
-		_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed(partId));
-		_shaderBuffer->uploadUniform("u_isBright", entity->isBright(partId));
+		_shaderBuffer->uploadUniform("u_minTextureAlpha", model->getMinTextureAlpha(partId));
+		_shaderBuffer->uploadUniform("u_isReflective", model->isReflective(partId));
+		_shaderBuffer->uploadUniform("u_emissionIntensity", model->getEmissionIntensity(partId));
+		_shaderBuffer->uploadUniform("u_textureRepeat", model->getTextureRepeat(partId));
+		_shaderBuffer->uploadUniform("u_opacity", model->getOpacity(partId));
+		_shaderBuffer->uploadUniform("u_isSpecular", model->isSpecular(partId));
+		_shaderBuffer->uploadUniform("u_reflectivity", model->getReflectivity(partId));
+		_shaderBuffer->uploadUniform("u_lightness", model->getLightness(partId));
+		_shaderBuffer->uploadUniform("u_specularShininess", model->getSpecularShininess(partId));
+		_shaderBuffer->uploadUniform("u_specularIntensity", model->getSpecularIntensity(partId));
+		_shaderBuffer->uploadUniform("u_color", model->getColor(partId));
+		_shaderBuffer->uploadUniform("u_wireframeColor", model->getWireframeColor(partId));
+		_shaderBuffer->uploadUniform("u_hasDiffuseMap", (model->getDiffuseTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_hasEmissionMap", (model->getEmissionTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_hasSpecularMap", (model->getSpecularTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_hasReflectionMap", (model->getReflectionTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_hasNormalMap", (model->getNormalTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_transformation", model->getTransformation(partId));
+		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(model->getTransformation(partId)))));
+		_shaderBuffer->uploadUniform("u_reflectionType", static_cast<int>(model->getReflectionType(partId)));
+		_shaderBuffer->uploadUniform("u_isWireframed", model->isWireframed(partId));
+		_shaderBuffer->uploadUniform("u_isBright", model->isBright(partId));
 
-		if(entity->isFaceCulled(partId))
+		if(model->isFaceCulled(partId))
 		{
 			glEnable(GL_CULL_FACE);
 		}
 
-		if(entity->isWireframed(partId))
+		if(model->isWireframed(partId))
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		if(entity->getDiffuseTextureBuffer(partId) != nullptr)
+		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer(partId)->getTboId());
+			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
-		if(entity->getEmissionTextureBuffer(partId) != nullptr)
+		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getEmissionTextureBuffer(partId)->getTboId());
+			glBindTexture(GL_TEXTURE_2D, model->getEmissionTextureBuffer(partId)->getTboId());
 		}
-		if(entity->getSpecularTextureBuffer(partId) != nullptr)
+		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE6);
-			glBindTexture(GL_TEXTURE_2D, entity->getSpecularTextureBuffer(partId)->getTboId());
+			glBindTexture(GL_TEXTURE_2D, model->getSpecularTextureBuffer(partId)->getTboId());
 		}
-		if(entity->getReflectionTextureBuffer(partId) != nullptr)
+		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
-			glBindTexture(GL_TEXTURE_2D, entity->getReflectionTextureBuffer(partId)->getTboId());
+			glBindTexture(GL_TEXTURE_2D, model->getReflectionTextureBuffer(partId)->getTboId());
 		}
-		if(entity->getNormalTextureBuffer(partId) != nullptr)
+		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer(partId)->getTboId());
+			glBindTexture(GL_TEXTURE_2D, model->getNormalTextureBuffer(partId)->getTboId());
 		}
 
-		glBindVertexArray(entity->getVertexBuffer(partId)->getVaoId());
+		glBindVertexArray(model->getVertexBuffer(partId)->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer(partId)->getVertexCount());
-		_renderStorage->increaseTriangleCount(entity->getVertexBuffer(partId)->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, model->getVertexBuffer(partId)->getVertexCount());
+		_renderStorage->increaseTriangleCount(model->getVertexBuffer(partId)->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 
-		if(entity->getDiffuseTextureBuffer(partId) != nullptr)
+		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->getEmissionTextureBuffer(partId) != nullptr)
+		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->getSpecularTextureBuffer(partId) != nullptr)
+		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->getReflectionTextureBuffer(partId) != nullptr)
+		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->getNormalTextureBuffer(partId) != nullptr)
+		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		if(entity->isWireframed(partId))
+		if(model->isWireframed(partId))
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 
-		if(entity->isFaceCulled(partId))
+		if(model->isFaceCulled(partId))
 		{
 			glDisable(GL_CULL_FACE);
 		}
 	}
 
-	if(entity->getPreviousCaptorEntityId().empty())
+	if(model->getPreviousCaptorId().empty())
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
-	if(entity->getCurrentCaptorEntityId().empty())
+	if(model->getCurrentCaptorId().empty())
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

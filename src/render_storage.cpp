@@ -363,9 +363,9 @@ void RenderStorage::setAnisotropicFilteringQuality(int value)
 	_anisotropicFilteringQuality = clamp(value, MIN_ANISOTROPIC_FILTERING_QUALITY, MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
 
-void RenderStorage::setCursorEntityId(const string & value)
+void RenderStorage::setCursorId(const string & value)
 {
-	_cursorEntityId = value;
+	_cursorId = value;
 }
 
 void RenderStorage::setLensFlareMapPath(const string & value)
@@ -843,9 +843,9 @@ const BloomType RenderStorage::getBloomType() const
 	return _bloomType;
 }
 
-const string & RenderStorage::getCursorEntityId() const
+const string & RenderStorage::getCursorId() const
 {
-	return _cursorEntityId;
+	return _cursorId;
 }
 
 const string & RenderStorage::getLensFlareMapPath() const

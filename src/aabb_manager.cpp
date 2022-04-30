@@ -95,38 +95,38 @@ void AabbManager::createAabb(const string & aabbId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<Aabb>(aabbId);
+	auto aabb = make_shared<Aabb>(aabbId);
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
-	entity->setCentered(isCentered);
-	entity->setVisible(false);
+	aabb->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	aabb->setCentered(isCentered);
+	aabb->setVisible(false);
 
-	_aabbs.insert({aabbId, entity});
+	_aabbs.insert({aabbId, aabb});
 }
 
 void AabbManager::update()
 {
-	for(const auto & [entityId, entity] : _aabbs)
+	for(const auto & [aabbId, aabb] : _aabbs)
 	{
-		entity->updateTarget();
+		aabb->updateTarget();
 
-		if(entity->hasParent())
+		if(aabb->hasParent())
 		{
-			switch(entity->getParentType())
+			switch(aabb->getParentType())
 			{
 				case AabbParentType::MODEL:
 				{
-					auto foundPair = _modelManager->getModels().find(entity->getParentId());
+					auto foundPair = _modelManager->getModels().find(aabb->getParentId());
 
 					if(foundPair == _modelManager->getModels().end())
 					{
 						abort();
 					}
 
-					auto parentEntity = foundPair->second;
+					auto parentModel = foundPair->second;
 
-					const auto newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
-					const auto parentRotation = parentEntity->getBaseRotation();
+					const auto newAabbSize = (aabb->getLocalSize() * parentModel->getBaseSize());
+					const auto parentRotation = parentModel->getBaseRotation();
 
 					DirectionType rotationDirection;
 					float rotation = 0.0f;
@@ -155,38 +155,38 @@ void AabbManager::update()
 					{
 						if(rotationDirection == DirectionType::X)
 						{
-							entity->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+							aabb->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
 						}
 						else if(rotationDirection == DirectionType::Y)
 						{
-							entity->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+							aabb->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
 						}
 						else if(rotationDirection == DirectionType::Z)
 						{
-							entity->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+							aabb->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
 						}
 					}
 					else
 					{
-						entity->setBaseSize(newAabbSize);
+						aabb->setBaseSize(newAabbSize);
 					}
 
-					if((roundedRotation == 0.0f) || entity->isCentered())
+					if((roundedRotation == 0.0f) || aabb->isCentered())
 					{
-						const fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
-						entity->setBasePosition(parentEntity->getBasePosition() + localPosition);
+						const fvec3 localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
+						aabb->setBasePosition(parentModel->getBasePosition() + localPosition);
 					}
 					else
 					{
 						fvec3 localPosition;
 						if(rotationDirection == DirectionType::Y)
 						{
-							localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
+							localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
 						}
 						else
 						{
-							const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y * 0.5f), 0.0f);
-							localPosition = (entity->getLocalPosition() + offset) * parentEntity->getBaseSize();
+							const fvec3 offset = fvec3(0.0f, (aabb->getLocalSize().y * 0.5f), 0.0f);
+							localPosition = (aabb->getLocalPosition() + offset) * parentModel->getBaseSize();
 						}
 
 						mat44 rotationMatrix;
@@ -209,32 +209,32 @@ void AabbManager::update()
 
 						auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
 						rotatedLocalPosition += rotationOffset;
-						entity->setBasePosition(parentEntity->getBasePosition() + rotatedLocalPosition);
+						aabb->setBasePosition(parentModel->getBasePosition() + rotatedLocalPosition);
 					}
 
-					if(!parentEntity->isVisible() || parentEntity->isFrozen())
+					if(!parentModel->isVisible() || parentModel->isFrozen())
 					{
-						entity->setVisible(false);
-						entity->setCollisionResponsive(false);
-						entity->setRaycastResponsive(false);
+						aabb->setVisible(false);
+						aabb->setCollisionResponsive(false);
+						aabb->setRaycastResponsive(false);
 					}
 
 					break;
 				}
 				case AabbParentType::QUAD3D:
 				{
-					auto foundPair = _quad3dManager->getQuad3ds().find(entity->getParentId());
+					auto foundPair = _quad3dManager->getQuad3ds().find(aabb->getParentId());
 
 					if(foundPair == _quad3dManager->getQuad3ds().end())
 					{
 						abort();
 					}
 
-					auto parentEntity = foundPair->second;
+					auto parentQuad3d = foundPair->second;
 
-					const auto parentPosition = parentEntity->getPosition();
-					const auto parentRotation = parentEntity->getRotation();
-					const auto parentSize = parentEntity->getSize();
+					const auto parentPosition = parentQuad3d->getPosition();
+					const auto parentRotation = parentQuad3d->getRotation();
+					const auto parentSize = parentQuad3d->getSize();
 
 					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
 					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
@@ -275,38 +275,38 @@ void AabbManager::update()
 						newAabbSize.z = MIN_SIZE;
 					}
 
-					auto newAabbPosition = (parentPosition + entity->getLocalPosition());
-					if(!entity->isCentered())
+					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
+					if(!aabb->isCentered())
 					{
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 					}
 
-					entity->setBasePosition(newAabbPosition);
-					entity->setBaseSize(newAabbSize);
+					aabb->setBasePosition(newAabbPosition);
+					aabb->setBaseSize(newAabbSize);
 
-					if(!parentEntity->isVisible() || parentEntity->isFrozen())
+					if(!parentQuad3d->isVisible() || parentQuad3d->isFrozen())
 					{
-						entity->setVisible(false);
-						entity->setCollisionResponsive(false);
-						entity->setRaycastResponsive(false);
+						aabb->setVisible(false);
+						aabb->setCollisionResponsive(false);
+						aabb->setRaycastResponsive(false);
 					}
 
 					break;
 				}
 				case AabbParentType::TEXT3D:
 				{
-					auto foundPair = _text3dManager->getText3ds().find(entity->getParentId());
+					auto foundPair = _text3dManager->getText3ds().find(aabb->getParentId());
 
 					if(foundPair == _text3dManager->getText3ds().end())
 					{
 						abort();
 					}
 
-					auto parentEntity = foundPair->second;
+					auto parentText3d = foundPair->second;
 
-					const auto parentPosition = parentEntity->getPosition();
-					const auto parentRotation = parentEntity->getRotation();
-					const auto parentSize = parentEntity->getSize();
+					const auto parentPosition = parentText3d->getPosition();
+					const auto parentRotation = parentText3d->getRotation();
+					const auto parentSize = parentText3d->getSize();
 
 					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
 					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
@@ -347,20 +347,20 @@ void AabbManager::update()
 						newAabbSize.z = MIN_SIZE;
 					}
 
-					auto newAabbPosition = (parentPosition + entity->getLocalPosition());
-					if(!entity->isCentered())
+					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
+					if(!aabb->isCentered())
 					{
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 					}
 
-					entity->setBasePosition(newAabbPosition);
-					entity->setBaseSize(newAabbSize);
+					aabb->setBasePosition(newAabbPosition);
+					aabb->setBaseSize(newAabbSize);
 
-					if(!parentEntity->isVisible() || parentEntity->isFrozen())
+					if(!parentText3d->isVisible() || parentText3d->isFrozen())
 					{
-						entity->setVisible(false);
-						entity->setCollisionResponsive(false);
-						entity->setRaycastResponsive(false);
+						aabb->setVisible(false);
+						aabb->setCollisionResponsive(false);
+						aabb->setRaycastResponsive(false);
 					}
 
 					break;
@@ -368,9 +368,9 @@ void AabbManager::update()
 			}
 		}
 
-		if(entity->isVisible())
+		if(aabb->isVisible())
 		{
-			entity->updateTransformation();
+			aabb->updateTransformation();
 		}
 	}
 }

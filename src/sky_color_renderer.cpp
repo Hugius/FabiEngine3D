@@ -14,45 +14,45 @@ void SkyColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void SkyColorRenderer::render(const shared_ptr<Sky> entity)
+void SkyColorRenderer::render(const shared_ptr<Sky> sky)
 {
-	if(!entity->isVisible())
+	if(!sky->isVisible())
 	{
 		return;
 	}
 
-	if(entity->isWireframed())
+	if(sky->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
-	_shaderBuffer->uploadUniform("u_lightness", (entity->getLightness() + (_renderStorage->isSkyExposureEnabled() ? _renderStorage->getSkyExposureLightness() : 0.0f)));
-	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shaderBuffer->uploadUniform("u_hasCubeMap", (entity->getCubeTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_isWireframed", sky->isWireframed());
+	_shaderBuffer->uploadUniform("u_transformation", sky->getTransformation());
+	_shaderBuffer->uploadUniform("u_lightness", (sky->getLightness() + (_renderStorage->isSkyExposureEnabled() ? _renderStorage->getSkyExposureLightness() : 0.0f)));
+	_shaderBuffer->uploadUniform("u_color", sky->getColor());
+	_shaderBuffer->uploadUniform("u_wireframeColor", sky->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_hasCubeMap", (sky->getCubeTextureBuffer() != nullptr));
 
-	if(entity->getCubeTextureBuffer() != nullptr)
+	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_CUBE_MAP, sky->getCubeTextureBuffer()->getTboId());
 	}
 
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(sky->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, sky->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(sky->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
-	if(entity->getCubeTextureBuffer() != nullptr)
+	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 
-	if(entity->isWireframed())
+	if(sky->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}

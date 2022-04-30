@@ -34,13 +34,13 @@ void Quad2dManager::createQuad2d(const string & quad2dId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<Quad2d>(quad2dId);
+	auto quad2d = make_shared<Quad2d>(quad2dId);
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
-	entity->setCentered(isCentered);
-	entity->setDepth(_renderStorage->getGuiDepth());
+	quad2d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
+	quad2d->setCentered(isCentered);
+	quad2d->setDepth(_renderStorage->getGuiDepth());
 
-	_quad2ds.insert({quad2dId, entity});
+	_quad2ds.insert({quad2dId, quad2d});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }

@@ -26,14 +26,14 @@ void SpotlightManager::createSpotlight(const string & spotlightId)
 		abort();
 	}
 
-	if(getSpotlights().size() == MAX_SPOTLIGHT_COUNT)
+	if(getSpotlights().size() == MAX_COUNT)
 	{
 		abort();
 	}
 
-	auto entity = make_shared<Spotlight>(spotlightId);
+	auto spotlight = make_shared<Spotlight>(spotlightId);
 
-	_spotlights.insert({spotlightId, entity});
+	_spotlights.insert({spotlightId, spotlight});
 }
 
 void SpotlightManager::update()
@@ -64,9 +64,9 @@ void SpotlightManager::deleteSpotlights()
 	_spotlights.clear();
 }
 
-const int SpotlightManager::getMaxSpotlightCount() const
+const int SpotlightManager::getMaxCount() const
 {
-	return MAX_SPOTLIGHT_COUNT;
+	return MAX_COUNT;
 }
 
 const bool SpotlightManager::isSpotlightExisting(const string & spotlightId) const

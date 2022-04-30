@@ -29,9 +29,9 @@ void MasterRenderer::render3d()
 	_worldColorCaptureBuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_renderStorage->setTriangleCountingEnabled(true);
-	_renderSkyEntity();
-	_renderTerrainEntity();
-	_renderWaterEntity();
+	_renderSky();
+	_renderTerrain();
+	_renderWater();
 	_renderOpaqueModels();
 	_renderOpaqueQuad3ds();
 	_renderOpaqueText3ds();
@@ -58,7 +58,7 @@ void MasterRenderer::render2d()
 	_renderStorage->setTriangleCountingEnabled(false);
 }
 
-void MasterRenderer::_renderSkyEntity()
+void MasterRenderer::_renderSky()
 {
 	if(_skyManager->getSelectedSky() != nullptr)
 	{
@@ -70,7 +70,7 @@ void MasterRenderer::_renderSkyEntity()
 	}
 }
 
-void MasterRenderer::_renderTerrainEntity()
+void MasterRenderer::_renderTerrain()
 {
 	if(_terrainManager->getSelectedTerrain() != nullptr)
 	{
@@ -86,7 +86,7 @@ void MasterRenderer::_renderTerrainEntity()
 	}
 }
 
-void MasterRenderer::_renderWaterEntity()
+void MasterRenderer::_renderWater()
 {
 	if(_waterManager->getSelectedWater() != nullptr)
 	{
@@ -342,7 +342,7 @@ void MasterRenderer::_renderGUI()
 
 		for(const auto & [quad2dId, quad2d] : _quad2dManager->getQuad2ds())
 		{
-			if(quad2d->getId() != _renderStorage->getCursorEntityId())
+			if(quad2d->getId() != _renderStorage->getCursorId())
 			{
 				orderedQuad2ds.insert({quad2d->getDepth(), {quad2d}});
 			}
@@ -369,9 +369,9 @@ void MasterRenderer::_renderGUI()
 		}
 	}
 
-	if(!_renderStorage->getCursorEntityId().empty())
+	if(!_renderStorage->getCursorId().empty())
 	{
-		_quad2dColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorEntityId()));
+		_quad2dColorRenderer->render(_quad2dManager->getQuad2ds().at(_renderStorage->getCursorId()));
 	}
 
 	_quad2dColorRenderer->unbind();

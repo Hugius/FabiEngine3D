@@ -53,11 +53,11 @@ void DofRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void DofRenderer::render(const shared_ptr<Quad2d> entity)
+void DofRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
-	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
+	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
+	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
 
 	glBindVertexArray(0);
 }

@@ -226,7 +226,7 @@ void EngineController::initialize()
 		_fe3d->quad2d_create("@@cursor", true);
 		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
 		_fe3d->quad2d_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
-		_fe3d->misc_setCursorEntityId("@@cursor");
+		_fe3d->misc_setCursorId("@@cursor");
 		Tools::setCursorVisible(false);
 
 		_guiManager->initialize();
@@ -252,9 +252,9 @@ void EngineController::update()
 	}
 	else
 	{
-		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorEntityId(), Tools::convertToNdc(Tools::getCursorPosition()));
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
-		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), Tools::isCursorInsideWindow());
+		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorId(), Tools::convertToNdc(Tools::getCursorPosition()));
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
 		_guiManager->update();
 

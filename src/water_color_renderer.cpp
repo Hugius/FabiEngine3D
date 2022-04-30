@@ -93,11 +93,12 @@ void WaterColorRenderer::unbind()
 void WaterColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
 	vector<shared_ptr<Pointlight>> visiblePointlights;
-	for(const auto & [entityId, entity] : pointlights)
+
+	for(const auto & [pointlightId, pointlight] : pointlights)
 	{
-		if(entity->isVisible())
+		if(pointlight->isVisible())
 		{
-			visiblePointlights.push_back(entity);
+			visiblePointlights.push_back(pointlight);
 		}
 	}
 
@@ -116,11 +117,12 @@ void WaterColorRenderer::processPointlights(const unordered_map<string, shared_p
 void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
 	vector<shared_ptr<Spotlight>> visibleSpotlights;
-	for(const auto & [entityId, entity] : spotlights)
+
+	for(const auto & [spotlightId, spotlight] : spotlights)
 	{
-		if(entity->isVisible())
+		if(spotlight->isVisible())
 		{
-			visibleSpotlights.push_back(entity);
+			visibleSpotlights.push_back(spotlight);
 		}
 	}
 

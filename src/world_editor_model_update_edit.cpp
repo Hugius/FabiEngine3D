@@ -97,7 +97,7 @@ void WorldEditor::_updateModelEditing()
 			{
 				if(currentAnimation3dIds.empty())
 				{
-					auto animation3dIds = _animation3dEditor->getLoadedAnimationIds();
+					auto animation3dIds = _animation3dEditor->getLoadedAnimation3dIds();
 
 					for(auto & animation3dId : animation3dIds)
 					{

@@ -11,7 +11,7 @@ public:
 	void update();
 	void deleteLoadedAnimation2ds();
 
-	const vector<string> & getLoadedAnimationIds() const;
+	const vector<string> & getLoadedAnimation2dIds() const;
 
 	const bool loadAnimation2dsFromFile();
 	const bool saveAnimation2dsToFile() const;

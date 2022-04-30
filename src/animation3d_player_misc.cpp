@@ -11,11 +11,11 @@ void Animation3dPlayer::inject(shared_ptr<ModelManager> modelManager)
 	_modelManager = modelManager;
 }
 
-const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationIds() const
+const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimation3dIds() const
 {
 	vector<pair<string, string>> result;
 
-	for(const auto & [mergedId, startedAnimation3d] : _startedModelAnimations)
+	for(const auto & [mergedId, startedAnimation3d] : _startedModelAnimation3ds)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
@@ -25,7 +25,7 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationId
 	return result;
 }
 
-const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string & animation3dId, const string & modelId) const
+const float Animation3dPlayer::getModelAnimation3dSpeedMultiplier(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -37,15 +37,15 @@ const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string & a
 	{
 		abort();
 	}
-	if(!isModelAnimationStarted(animation3dId, modelId))
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
 
-	return _startedModelAnimations.at(mergedId)->getSpeedMultiplier();
+	return _startedModelAnimation3ds.at(mergedId)->getSpeedMultiplier();
 }
 
-const int Animation3dPlayer::getModelAnimationPlayCount(const string & animation3dId, const string & modelId) const
+const int Animation3dPlayer::getModelAnimation3dPlayCount(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -57,15 +57,15 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string & animation
 	{
 		abort();
 	}
-	if(!isModelAnimationStarted(animation3dId, modelId))
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
 
-	return _startedModelAnimations.at(mergedId)->getPlayCount();
+	return _startedModelAnimation3ds.at(mergedId)->getPlayCount();
 }
 
-const int Animation3dPlayer::getModelAnimationFrameIndex(const string & animation3dId, const string & modelId) const
+const int Animation3dPlayer::getModelAnimation3dFrameIndex(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -77,15 +77,15 @@ const int Animation3dPlayer::getModelAnimationFrameIndex(const string & animatio
 	{
 		abort();
 	}
-	if(!isModelAnimationStarted(animation3dId, modelId))
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
 
-	return _startedModelAnimations.at(mergedId)->getFrameIndex();
+	return _startedModelAnimation3ds.at(mergedId)->getFrameIndex();
 }
 
-const bool Animation3dPlayer::isModelAnimationStarted(const string & animation3dId, const string & modelId) const
+const bool Animation3dPlayer::isModelAnimation3dStarted(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -98,10 +98,10 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string & animation3d
 		abort();
 	}
 
-	return (_startedModelAnimations.find(mergedId) != _startedModelAnimations.end());
+	return (_startedModelAnimation3ds.find(mergedId) != _startedModelAnimation3ds.end());
 }
 
-const bool Animation3dPlayer::isModelAnimationPaused(const string & animation3dId, const string & modelId) const
+const bool Animation3dPlayer::isModelAnimation3dPaused(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -113,15 +113,15 @@ const bool Animation3dPlayer::isModelAnimationPaused(const string & animation3dI
 	{
 		abort();
 	}
-	if(!isModelAnimationStarted(animation3dId, modelId))
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
 
-	return _startedModelAnimations.at(mergedId)->isPaused();
+	return _startedModelAnimation3ds.at(mergedId)->isPaused();
 }
 
-const bool Animation3dPlayer::isModelAnimationAutopaused(const string & animation3dId, const string & modelId) const
+const bool Animation3dPlayer::isModelAnimation3dAutopaused(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
 
@@ -133,12 +133,12 @@ const bool Animation3dPlayer::isModelAnimationAutopaused(const string & animatio
 	{
 		abort();
 	}
-	if(!isModelAnimationStarted(animation3dId, modelId))
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
 
-	return _startedModelAnimations.at(mergedId)->isAutopaused();
+	return _startedModelAnimation3ds.at(mergedId)->isAutopaused();
 }
 
 const bool Animation3dPlayer::_hasReachedTarget(float total, float target, float speed) const

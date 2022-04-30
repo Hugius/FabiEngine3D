@@ -8,7 +8,7 @@ void EngineInterface::animation3d_create(const string & animation3dId)
 
 void EngineInterface::animation3d_delete(const string & animation3dId)
 {
-	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
+	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
 	{
 		if(animation3dId == animation3dId)
 		{

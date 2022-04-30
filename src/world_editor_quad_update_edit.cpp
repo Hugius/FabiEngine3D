@@ -101,7 +101,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				if(currentAnimation2dIds.empty())
 				{
-					auto animation2dIds = _animation2dEditor->getLoadedAnimationIds();
+					auto animation2dIds = _animation2dEditor->getLoadedAnimation2dIds();
 
 					for(auto & animation2dId : animation2dIds)
 					{

@@ -7,14 +7,14 @@ using std::set;
 
 void Animation3dPlayer::update()
 {
-	_updateModelAnimationExecution();
+	_updateModelAnimation3dExecution();
 }
 
-void Animation3dPlayer::_updateModelAnimationExecution()
+void Animation3dPlayer::_updateModelAnimation3dExecution()
 {
 	vector<string> modelAnimationsToStop;
 
-	for(auto & [mergedId, startedAnimation] : _startedModelAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedModelAnimation3ds)
 	{
 		if(startedAnimation->isPaused())
 		{
@@ -402,6 +402,6 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 	for(const auto & mergedId : modelAnimationsToStop)
 	{
-		_startedModelAnimations.erase(mergedId);
+		_startedModelAnimation3ds.erase(mergedId);
 	}
 }

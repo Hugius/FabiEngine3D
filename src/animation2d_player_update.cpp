@@ -7,15 +7,15 @@ using std::set;
 
 void Animation2dPlayer::update()
 {
-	_updateQuad3dAnimationExecution();
-	_updateQuad2dAnimationExecution();
+	_updateQuad3dAnimation2dExecution();
+	_updateQuad2dAnimation2dExecution();
 }
 
-void Animation2dPlayer::_updateQuad3dAnimationExecution()
+void Animation2dPlayer::_updateQuad3dAnimation2dExecution()
 {
 	vector<string> quad3dAnimationsToStop;
 
-	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimation2ds)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation2d = _animation2dManager->getAnimation2d(splitKey.first);
@@ -78,15 +78,15 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 	for(const auto & mergedId : quad3dAnimationsToStop)
 	{
-		_startedQuad3dAnimations.erase(mergedId);
+		_startedQuad3dAnimation2ds.erase(mergedId);
 	}
 }
 
-void Animation2dPlayer::_updateQuad2dAnimationExecution()
+void Animation2dPlayer::_updateQuad2dAnimation2dExecution()
 {
 	vector<string> quad2dAnimationsToStop;
 
-	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimation2ds)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation2d = _animation2dManager->getAnimation2d(splitKey.first);
@@ -144,6 +144,6 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 	for(const auto & mergedId : quad2dAnimationsToStop)
 	{
-		_startedQuad2dAnimations.erase(mergedId);
+		_startedQuad2dAnimation2ds.erase(mergedId);
 	}
 }

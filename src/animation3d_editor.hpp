@@ -14,7 +14,7 @@ public:
 	void update();
 	void deleteLoadedAnimation3ds();
 
-	const vector<string> & getLoadedAnimationIds() const;
+	const vector<string> & getLoadedAnimation3dIds() const;
 
 	const bool loadAnimation3dsFromFile();
 	const bool saveAnimation3dsToFile() const;

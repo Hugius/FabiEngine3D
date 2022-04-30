@@ -1,6 +1,6 @@
 #include "animation2d_editor.hpp"
 
-const vector<string> & Animation2dEditor::getLoadedAnimationIds() const
+const vector<string> & Animation2dEditor::getLoadedAnimation2dIds() const
 {
 	return _loadedAnimation2dIds;
 }

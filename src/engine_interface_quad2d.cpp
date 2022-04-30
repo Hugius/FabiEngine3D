@@ -8,7 +8,7 @@ void EngineInterface::quad2d_create(const string & quad2dId, bool isCentered)
 
 void EngineInterface::quad2d_delete(const string & quad2dId)
 {
-	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{
 		if(quad2dId == quad2dId)
 		{
@@ -144,47 +144,47 @@ void EngineInterface::quad2d_setUvOffset(const string & quad2dId, const fvec2 & 
 
 void EngineInterface::quad2d_startAnimation(const string & quad2dId, const string & animation2dId, int playCount)
 {
-	_core->getAnimation2dPlayer()->startQuad2dAnimation(animation2dId, quad2dId, playCount);
+	_core->getAnimation2dPlayer()->startQuad2dAnimation2d(animation2dId, quad2dId, playCount);
 }
 
 void EngineInterface::quad2d_pauseAnimation(const string & quad2dId, const string & animation2dId)
 {
-	_core->getAnimation2dPlayer()->pauseQuad2dAnimation(animation2dId, quad2dId);
+	_core->getAnimation2dPlayer()->pauseQuad2dAnimation2d(animation2dId, quad2dId);
 }
 
 void EngineInterface::quad2d_autopauseAnimation(const string & quad2dId, const string & animation2dId)
 {
-	_core->getAnimation2dPlayer()->autopauseQuad2dAnimation(animation2dId, quad2dId);
+	_core->getAnimation2dPlayer()->autopauseQuad2dAnimation2d(animation2dId, quad2dId);
 }
 
 void EngineInterface::quad2d_resumeAnimation(const string & quad2dId, const string & animation2dId)
 {
-	_core->getAnimation2dPlayer()->resumeQuad2dAnimation(animation2dId, quad2dId);
+	_core->getAnimation2dPlayer()->resumeQuad2dAnimation2d(animation2dId, quad2dId);
 }
 
 void EngineInterface::quad2d_stopAnimation(const string & quad2dId, const string & animation2dId)
 {
-	_core->getAnimation2dPlayer()->stopQuad2dAnimation(animation2dId, quad2dId);
+	_core->getAnimation2dPlayer()->stopQuad2dAnimation2d(animation2dId, quad2dId);
 }
 
 void EngineInterface::quad2d_setAnimationRowIndex(const string & animation2dId, const string & quad2dId, int value)
 {
-	_core->getAnimation2dPlayer()->setQuad2dAnimationRowIndex(animation2dId, quad2dId, value);
+	_core->getAnimation2dPlayer()->setQuad2dAnimation2dRowIndex(animation2dId, quad2dId, value);
 }
 
 void EngineInterface::quad2d_setAnimationColumnIndex(const string & animation2dId, const string & quad2dId, int value)
 {
-	_core->getAnimation2dPlayer()->setQuad2dAnimationColumnIndex(animation2dId, quad2dId, value);
+	_core->getAnimation2dPlayer()->setQuad2dAnimation2dColumnIndex(animation2dId, quad2dId, value);
 }
 
 void EngineInterface::quad2d_setAnimationIntervalMultiplier(const string & animation2dId, const string & quad2dId, int value)
 {
-	_core->getAnimation2dPlayer()->setQuad2dAnimationIntervalMultiplier(animation2dId, quad2dId, value);
+	_core->getAnimation2dPlayer()->setQuad2dAnimation2dIntervalMultiplier(animation2dId, quad2dId, value);
 }
 
 void EngineInterface::quad2d_setAnimationIntervalDivider(const string & animation2dId, const string & quad2dId, int value)
 {
-	_core->getAnimation2dPlayer()->setQuad2dAnimationIntervalDivider(animation2dId, quad2dId, value);
+	_core->getAnimation2dPlayer()->setQuad2dAnimation2dIntervalDivider(animation2dId, quad2dId, value);
 }
 
 void EngineInterface::quad2d_setTextureRepeat(const string & quad2dId, int value)
@@ -229,27 +229,27 @@ const int EngineInterface::quad2d_getTextureRepeat(const string & quad2dId) cons
 
 const int EngineInterface::quad2d_getAnimationPlayCount(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimationPlayCount(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dPlayCount(quad2dId, animation2dId);
 }
 
 const int EngineInterface::quad2d_getAnimationRowIndex(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimationRowIndex(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dRowIndex(quad2dId, animation2dId);
 }
 
 const int EngineInterface::quad2d_getAnimationColumnIndex(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimationColumnIndex(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dColumnIndex(quad2dId, animation2dId);
 }
 
 const int EngineInterface::quad2d_getAnimationIntervalMultiplier(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimationIntervalMultiplier(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalMultiplier(quad2dId, animation2dId);
 }
 
 const int EngineInterface::quad2d_getAnimationIntervalDivider(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimationIntervalDivider(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalDivider(quad2dId, animation2dId);
 }
 
 const vector<string> EngineInterface::quad2d_getIds() const
@@ -268,7 +268,7 @@ const vector<string> EngineInterface::quad2d_getAnimationIds(const string & quad
 {
 	vector<string> result;
 
-	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{
 		if(quad2dId == quad2dId)
 		{
@@ -341,17 +341,17 @@ const bool EngineInterface::quad2d_isWireframed(const string & quad2dId) const
 
 const bool EngineInterface::quad2d_isAnimationStarted(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->isQuad2dAnimationStarted(animation2dId, quad2dId);
+	return _core->getAnimation2dPlayer()->isQuad2dAnimation2dStarted(animation2dId, quad2dId);
 }
 
 const bool EngineInterface::quad2d_isAnimationPaused(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->isQuad2dAnimationPaused(animation2dId, quad2dId);
+	return _core->getAnimation2dPlayer()->isQuad2dAnimation2dPaused(animation2dId, quad2dId);
 }
 
 const bool EngineInterface::quad2d_isAnimationAutopaused(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->isQuad2dAnimationAutopaused(animation2dId, quad2dId);
+	return _core->getAnimation2dPlayer()->isQuad2dAnimation2dAutopaused(animation2dId, quad2dId);
 }
 
 const bool EngineInterface::quad2d_isHorizontallyFlipped(const string & quad2dId) const

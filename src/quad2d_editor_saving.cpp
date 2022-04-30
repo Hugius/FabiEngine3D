@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool Quad2dEditor::saveEntitiesToFile() const
+const bool Quad2dEditor::saveQuad2dsToFile() const
 {
 	if(!isLoaded())
 	{

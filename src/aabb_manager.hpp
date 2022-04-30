@@ -36,7 +36,7 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<Aabb>> _aabbEntities = {};
+	unordered_map<string, shared_ptr<Aabb>> _aabbs = {};
 
 	shared_ptr<ModelManager> _modelManager = nullptr;
 	shared_ptr<Quad3dManager> _quad3dManager = nullptr;

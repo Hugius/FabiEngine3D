@@ -42,7 +42,7 @@ void Quad3dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveEntitiesToFile();
+				saveQuad3dsToFile();
 				unload();
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")

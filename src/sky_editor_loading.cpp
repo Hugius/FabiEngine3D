@@ -68,7 +68,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool SkyEditor::loadEntitiesFromFile()
+const bool SkyEditor::loadSkiesFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

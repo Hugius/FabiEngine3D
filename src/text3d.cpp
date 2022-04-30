@@ -83,7 +83,7 @@ void Text3d::updateTarget()
 	}
 }
 
-void Text3d::updateCharacterEntities()
+void Text3d::updateQuad3ds()
 {
 	const auto rotationMatrix = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
@@ -92,7 +92,7 @@ void Text3d::updateCharacterEntities()
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	int index = 0;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 		offset.x -= (this->getSize().x * 0.5f);
@@ -116,7 +116,7 @@ void Text3d::setContent(const string & value)
 	if(value != _content)
 	{
 		_content = value;
-		_characterEntities.clear();
+		_quad3ds.clear();
 
 		for(const auto & character : _content)
 		{
@@ -148,7 +148,7 @@ void Text3d::setContent(const string & value)
 			characterEntity->setUvMultiplier(uvMultiplier);
 			characterEntity->setUvOffset(uvOffset);
 
-			_characterEntities.push_back(characterEntity);
+			_quad3ds.push_back(characterEntity);
 		}
 	}
 }
@@ -157,7 +157,7 @@ void Text3d::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setVertexBuffer(_vertexBuffer);
 	}
@@ -167,7 +167,7 @@ void Text3d::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setDiffuseMapPath(_fontMapPath);
 	}
@@ -177,7 +177,7 @@ void Text3d::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontTextureBuffer = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setDiffuseMap(_fontTextureBuffer);
 	}
@@ -187,7 +187,7 @@ void Text3d::setFacingCameraHorizontally(bool value)
 {
 	_isFacingCameraHorizontally = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setFacingCameraHorizontally(_isFacingCameraHorizontally);
 	}
@@ -197,7 +197,7 @@ void Text3d::setFacingCameraVertically(bool value)
 {
 	_isFacingCameraVertically = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setFacingCameraVertically(_isFacingCameraVertically);
 	}
@@ -207,7 +207,7 @@ void Text3d::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setColor(_color);
 	}
@@ -217,7 +217,7 @@ void Text3d::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setWireframeColor(_wireframeColor);
 	}
@@ -227,7 +227,7 @@ void Text3d::setReflected(bool value)
 {
 	_isReflected = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setReflected(_isReflected);
 	}
@@ -237,7 +237,7 @@ void Text3d::setBright(bool value)
 {
 	_isBright = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setBright(_isBright);
 	}
@@ -247,7 +247,7 @@ void Text3d::setWireframed(bool value)
 {
 	_isWireframed = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setWireframed(_isWireframed);
 	}
@@ -257,7 +257,7 @@ void Text3d::setShadowed(bool value)
 {
 	_isShadowed = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setShadowed(_isShadowed);
 	}
@@ -267,7 +267,7 @@ void Text3d::setCentered(bool value)
 {
 	_isCentered = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setCentered(_isCentered);
 	}
@@ -277,7 +277,7 @@ void Text3d::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setLightness(_lightness);
 	}
@@ -287,7 +287,7 @@ void Text3d::setOpacity(float value)
 {
 	_opacity = clamp(value, 0.0f, 1.0f);
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setOpacity(_opacity);
 	}
@@ -297,7 +297,7 @@ void Text3d::setMinClipPosition(const fvec3 & value)
 {
 	_minClipPosition = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setMinClipPosition(_minClipPosition);
 	}
@@ -307,7 +307,7 @@ void Text3d::setMaxClipPosition(const fvec3 & value)
 {
 	_maxClipPosition = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setMaxClipPosition(_maxClipPosition);
 	}
@@ -317,7 +317,7 @@ void Text3d::setMinTextureAlpha(float value)
 {
 	_minTextureAlpha = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setMinTextureAlpha(_minTextureAlpha);
 	}
@@ -327,7 +327,7 @@ void Text3d::setFrozen(bool value)
 {
 	_isFrozen = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setFrozen(_isFrozen);
 	}
@@ -337,7 +337,7 @@ void Text3d::setHorizontallyFlipped(bool value)
 {
 	_isHorizontallyFlipped = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setHorizontallyFlipped(_isHorizontallyFlipped);
 	}
@@ -347,7 +347,7 @@ void Text3d::setVerticallyFlipped(bool value)
 {
 	_isVerticallyFlipped = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setVerticallyFlipped(_isVerticallyFlipped);
 	}
@@ -362,7 +362,7 @@ void Text3d::setVisible(bool value)
 {
 	_isVisible = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad3ds)
 	{
 		character->setVisible(_isVisible);
 	}
@@ -441,9 +441,9 @@ const string & Text3d::getFontMapPath() const
 	return _fontMapPath;
 }
 
-const vector<shared_ptr<Quad3d>> & Text3d::getCharacterEntities() const
+const vector<shared_ptr<Quad3d>> & Text3d::getQuad3ds() const
 {
-	return _characterEntities;
+	return _quad3ds;
 }
 
 const shared_ptr<VertexBuffer> Text3d::getVertexBuffer() const

@@ -36,7 +36,7 @@ void LeftViewportController::update()
 	{
 		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
-			if(_skyEditor->loadEntitiesFromFile())
+			if(_skyEditor->loadSkiesFromFile())
 			{
 				_skyEditor->load();
 				window->setActiveScreen("skyEditorMenuMain");
@@ -44,7 +44,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
 		{
-			if(_terrainEditor->loadEntitiesFromFile())
+			if(_terrainEditor->loadTerrainsFromFile())
 			{
 				_terrainEditor->load();
 				window->setActiveScreen("terrainEditorMenuMain");
@@ -52,7 +52,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
 		{
-			if(_waterEditor->loadEntitiesFromFile())
+			if(_waterEditor->loadWatersFromFile())
 			{
 				_waterEditor->load();
 				window->setActiveScreen("waterEditorMenuMain");
@@ -60,7 +60,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
 		{
-			if(_modelEditor->loadEntitiesFromFile())
+			if(_modelEditor->loadModelsFromFile())
 			{
 				_modelEditor->load();
 				window->setActiveScreen("modelEditorMenuMain");
@@ -68,7 +68,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad3dEditor")->isHovered())
 		{
-			if(_quad3dEditor->loadEntitiesFromFile())
+			if(_quad3dEditor->loadQuad3dsFromFile())
 			{
 				_quad3dEditor->load();
 				window->setActiveScreen("quad3dEditorMenuMain");
@@ -76,7 +76,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
 		{
-			if(_text3dEditor->loadEntitiesFromFile())
+			if(_text3dEditor->loadText3dsFromFile())
 			{
 				_text3dEditor->load();
 				window->setActiveScreen("text3dEditorMenuMain");
@@ -84,7 +84,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
 		{
-			if(_quad2dEditor->loadEntitiesFromFile())
+			if(_quad2dEditor->loadQuad2dsFromFile())
 			{
 				_quad2dEditor->load();
 				window->setActiveScreen("quad2dEditorMenuMain");
@@ -92,7 +92,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text2dEditor")->isHovered())
 		{
-			if(_text2dEditor->loadEntitiesFromFile())
+			if(_text2dEditor->loadText2dsFromFile())
 			{
 				_text2dEditor->load();
 				window->setActiveScreen("text2dEditorMenuMain");
@@ -108,7 +108,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
-			if(_modelEditor->loadEntitiesFromFile() && _animation3dEditor->loadAnimationsFromFile())
+			if(_modelEditor->loadModelsFromFile() && _animation3dEditor->loadAnimationsFromFile())
 			{
 				_animation3dEditor->load();
 				window->setActiveScreen("animation3dEditorMenuMain");

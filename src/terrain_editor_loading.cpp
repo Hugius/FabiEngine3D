@@ -186,7 +186,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool TerrainEditor::loadEntitiesFromFile()
+const bool TerrainEditor::loadTerrainsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

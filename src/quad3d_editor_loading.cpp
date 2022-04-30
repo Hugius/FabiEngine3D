@@ -74,7 +74,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Quad3dEditor::loadEntitiesFromFile()
+const bool Quad3dEditor::loadQuad3dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

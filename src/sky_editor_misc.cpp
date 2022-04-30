@@ -7,7 +7,7 @@ const vector<string> & SkyEditor::getLoadedEntityIds() const
 	return _loadedSkyIds;
 }
 
-void SkyEditor::deleteLoadedEntities()
+void SkyEditor::deleteLoadedSkies()
 {
 	for(const auto & skyId : _loadedSkyIds)
 	{

@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool SkyEditor::saveEntitiesToFile() const
+const bool SkyEditor::saveSkiesToFile() const
 {
 	if(!isLoaded())
 	{

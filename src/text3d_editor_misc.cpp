@@ -7,7 +7,7 @@ const vector<string> & Text3dEditor::getLoadedEntityIds() const
 	return _loadedText3dIds;
 }
 
-void Text3dEditor::deleteLoadedEntities()
+void Text3dEditor::deleteLoadedText3ds()
 {
 	for(const auto & text3dId : _loadedText3dIds)
 	{

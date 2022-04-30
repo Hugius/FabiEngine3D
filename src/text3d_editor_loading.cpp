@@ -60,7 +60,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Text3dEditor::loadEntitiesFromFile()
+const bool Text3dEditor::loadText3dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

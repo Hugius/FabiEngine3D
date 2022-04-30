@@ -77,51 +77,51 @@ void TerrainColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
+void TerrainColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
-	vector<shared_ptr<Pointlight>> visibleEntities;
-	for(const auto & [entityId, entity] : entities)
+	vector<shared_ptr<Pointlight>> visiblePointlights;
+	for(const auto & [entityId, entity] : pointlights)
 	{
 		if(entity->isVisible())
 		{
-			visibleEntities.push_back(entity);
+			visiblePointlights.push_back(entity);
 		}
 	}
 
-	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visiblePointlights.size()); index++)
 	{
-		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
-		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
-		_shaderBuffer->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visibleEntities[index]->getRadius());
-		_shaderBuffer->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visibleEntities[index]->getShape()));
+		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visiblePointlights[index]->getPosition());
+		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visiblePointlights[index]->getColor());
+		_shaderBuffer->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visiblePointlights[index]->getIntensity());
+		_shaderBuffer->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visiblePointlights[index]->getRadius());
+		_shaderBuffer->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visiblePointlights[index]->getShape()));
 	}
 
-	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
+	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visiblePointlights.size()));
 }
 
-void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
+void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
-	vector<shared_ptr<Spotlight>> visibleEntities;
-	for(const auto & [entityId, entity] : entities)
+	vector<shared_ptr<Spotlight>> visibleSpotlights;
+	for(const auto & [entityId, entity] : spotlights)
 	{
 		if(entity->isVisible())
 		{
-			visibleEntities.push_back(entity);
+			visibleSpotlights.push_back(entity);
 		}
 	}
 
-	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visibleSpotlights.size()); index++)
 	{
-		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
-		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());
-		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
-		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleEntities[index]->getAngle())));
-		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleEntities[index]->getDistance());
+		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleSpotlights[index]->getPosition());
+		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleSpotlights[index]->getFront());
+		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleSpotlights[index]->getColor());
+		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleSpotlights[index]->getIntensity());
+		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleSpotlights[index]->getAngle())));
+		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleSpotlights[index]->getDistance());
 	}
 
-	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
+	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
 void TerrainColorRenderer::render(const shared_ptr<Terrain> entity)

@@ -8,13 +8,13 @@ public:
 	using BaseEditor::inject;
 
 	void update();
-	void deleteLoadedEntities();
+	void deleteLoadedQuad3ds();
 
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string> & getLoadedEntityIds() const;
 
-	const bool loadEntitiesFromFile();
-	const bool saveEntitiesToFile() const;
+	const bool loadQuad3dsFromFile();
+	const bool saveQuad3dsToFile() const;
 
 private:
 	void _load();

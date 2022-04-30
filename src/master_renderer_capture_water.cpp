@@ -77,13 +77,13 @@ void MasterRenderer::captureWaterReflections()
 
 	_renderSkyEntity();
 	_renderTerrainEntity();
-	_renderOpaqueModelEntities();
-	_renderOpaqueQuad3dEntities();
-	_renderOpaqueText3dEntities();
-	_renderAabbEntities();
-	_renderTransparentModelEntities();
-	_renderTransparentQuad3dEntities();
-	_renderTransparentText3dEntities();
+	_renderOpaqueModels();
+	_renderOpaqueQuad3ds();
+	_renderOpaqueText3ds();
+	_renderAabbs();
+	_renderTransparentModels();
+	_renderTransparentQuad3ds();
+	_renderTransparentText3ds();
 
 	for(const auto & savedId : savedModelEntityIds)
 	{
@@ -149,13 +149,13 @@ void MasterRenderer::captureWaterRefractions()
 
 	_renderSkyEntity();
 	_renderTerrainEntity();
-	_renderOpaqueModelEntities();
-	_renderOpaqueQuad3dEntities();
-	_renderOpaqueText3dEntities();
-	_renderAabbEntities();
-	_renderTransparentModelEntities();
-	_renderTransparentQuad3dEntities();
-	_renderTransparentText3dEntities();
+	_renderOpaqueModels();
+	_renderOpaqueQuad3ds();
+	_renderOpaqueText3ds();
+	_renderAabbs();
+	_renderTransparentModels();
+	_renderTransparentQuad3ds();
+	_renderTransparentText3ds();
 
 	_renderStorage->setWaterRefractionMap(_waterRefractionCaptureBuffer->getTexture(0));
 	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX));

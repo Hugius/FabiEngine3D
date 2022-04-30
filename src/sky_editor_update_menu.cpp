@@ -42,7 +42,7 @@ void SkyEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveEntitiesToFile();
+				saveSkiesToFile();
 				unload();
 
 				return;

@@ -7,7 +7,7 @@ const vector<string> & TerrainEditor::getLoadedEntityIds() const
 	return _loadedTerrainIds;
 }
 
-void TerrainEditor::deleteLoadedEntities()
+void TerrainEditor::deleteLoadedTerrains()
 {
 	for(const auto & terrainId : _loadedTerrainIds)
 	{

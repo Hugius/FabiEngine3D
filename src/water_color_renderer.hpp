@@ -14,7 +14,7 @@ class WaterColorRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities);
-	void processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities);
+	void processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights);
+	void processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights);
 	void render(const shared_ptr<Water> entity);
 };

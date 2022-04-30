@@ -44,7 +44,7 @@ void WaterEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveEntitiesToFile();
+				saveWatersToFile();
 				unload();
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")

@@ -59,7 +59,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Text2dEditor::loadEntitiesFromFile()
+const bool Text2dEditor::loadText2dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

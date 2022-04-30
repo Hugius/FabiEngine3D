@@ -4,12 +4,12 @@
 
 void WorldEditor::_load()
 {
-	_skyEditor->loadEntitiesFromFile();
-	_terrainEditor->loadEntitiesFromFile();
-	_waterEditor->loadEntitiesFromFile();
-	_modelEditor->loadEntitiesFromFile();
-	_quad3dEditor->loadEntitiesFromFile();
-	_text3dEditor->loadEntitiesFromFile();
+	_skyEditor->loadSkiesFromFile();
+	_terrainEditor->loadTerrainsFromFile();
+	_waterEditor->loadWatersFromFile();
+	_modelEditor->loadModelsFromFile();
+	_quad3dEditor->loadQuad3dsFromFile();
+	_text3dEditor->loadText3dsFromFile();
 	_animation2dEditor->loadAnimationsFromFile();
 	_animation3dEditor->loadAnimationsFromFile();
 	_soundEditor->loadSoundsFromFile();
@@ -99,12 +99,12 @@ void WorldEditor::_unload()
 {
 	const auto soundIds = _soundEditor->getLoadedSoundIds();
 
-	_skyEditor->deleteLoadedEntities();
-	_terrainEditor->deleteLoadedEntities();
-	_waterEditor->deleteLoadedEntities();
-	_modelEditor->deleteLoadedEntities();
-	_quad3dEditor->deleteLoadedEntities();
-	_text3dEditor->deleteLoadedEntities();
+	_skyEditor->deleteLoadedSkies();
+	_terrainEditor->deleteLoadedTerrains();
+	_waterEditor->deleteLoadedWaters();
+	_modelEditor->deleteLoadedModels();
+	_quad3dEditor->deleteLoadedQuad3ds();
+	_text3dEditor->deleteLoadedText3ds();
 	_animation3dEditor->deleteLoadedAnimations();
 	_animation2dEditor->deleteLoadedAnimations();
 	_soundEditor->deleteLoadedSounds();

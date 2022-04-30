@@ -7,7 +7,7 @@ const vector<string> & ModelEditor::getLoadedEntityIds() const
 	return _loadedModelIds;
 }
 
-void ModelEditor::deleteLoadedEntities()
+void ModelEditor::deleteLoadedModels()
 {
 	for(const auto & modelId : _loadedModelIds)
 	{

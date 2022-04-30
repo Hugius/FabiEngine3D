@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool Quad3dEditor::saveEntitiesToFile() const
+const bool Quad3dEditor::saveQuad3dsToFile() const
 {
 	if(!isLoaded())
 	{

@@ -7,7 +7,7 @@ const vector<string> & WaterEditor::getLoadedEntityIds() const
 	return _loadedWaterIds;
 }
 
-void WaterEditor::deleteLoadedEntities()
+void WaterEditor::deleteLoadedWaters()
 {
 	for(const auto & waterId : _loadedWaterIds)
 	{

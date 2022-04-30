@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool Text2dEditor::saveEntitiesToFile() const
+const bool Text2dEditor::saveText2dsToFile() const
 {
 	if(!isLoaded())
 	{

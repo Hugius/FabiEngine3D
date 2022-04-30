@@ -8,13 +8,13 @@ public:
 	using BaseEditor::inject;
 
 	void update();
-	void deleteLoadedEntities();
+	void deleteLoadedSkies();
 
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string> & getLoadedEntityIds() const;
 
-	const bool loadEntitiesFromFile();
-	const bool saveEntitiesToFile() const;
+	const bool loadSkiesFromFile();
+	const bool saveSkiesToFile() const;
 
 private:
 	void _load();

@@ -88,7 +88,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool WaterEditor::loadEntitiesFromFile()
+const bool WaterEditor::loadWatersFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

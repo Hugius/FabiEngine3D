@@ -14,7 +14,7 @@ public:
 	Text2d(const string & id);
 
 	void updateTarget();
-	void updateCharacterEntities();
+	void updateQuad2ds();
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string & value);
 	void setFontMapPath(const string & value);
@@ -40,7 +40,7 @@ public:
 	void setCentered(bool value);
 	void setVisible(bool value);
 
-	const vector<shared_ptr<Quad2d>> & getCharacterEntities() const;
+	const vector<shared_ptr<Quad2d>> & getQuad2ds() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
@@ -173,7 +173,7 @@ private:
 
 	const string _id;
 
-	vector<shared_ptr<Quad2d>> _characterEntities = {};
+	vector<shared_ptr<Quad2d>> _quad2ds = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;

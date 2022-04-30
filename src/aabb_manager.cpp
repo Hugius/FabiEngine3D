@@ -73,9 +73,9 @@ void AabbManager::inject(shared_ptr<Text3dManager> text3dManager)
 
 const shared_ptr<Aabb> AabbManager::getAabb(const string & aabbId) const
 {
-	auto iterator = _aabbEntities.find(aabbId);
+	auto iterator = _aabbs.find(aabbId);
 
-	if(iterator == _aabbEntities.end())
+	if(iterator == _aabbs.end())
 	{
 		abort();
 	}
@@ -85,7 +85,7 @@ const shared_ptr<Aabb> AabbManager::getAabb(const string & aabbId) const
 
 const unordered_map<string, shared_ptr<Aabb>> & AabbManager::getAabbs() const
 {
-	return _aabbEntities;
+	return _aabbs;
 }
 
 void AabbManager::createAabb(const string & aabbId, bool isCentered)
@@ -101,12 +101,12 @@ void AabbManager::createAabb(const string & aabbId, bool isCentered)
 	entity->setCentered(isCentered);
 	entity->setVisible(false);
 
-	_aabbEntities.insert({aabbId, entity});
+	_aabbs.insert({aabbId, entity});
 }
 
 void AabbManager::update()
 {
-	for(const auto & [entityId, entity] : _aabbEntities)
+	for(const auto & [entityId, entity] : _aabbs)
 	{
 		entity->updateTarget();
 
@@ -382,20 +382,20 @@ void AabbManager::deleteAabb(const string & aabbId)
 		abort();
 	}
 
-	_aabbEntities.erase(aabbId);
+	_aabbs.erase(aabbId);
 }
 
 void AabbManager::deleteAabbs()
 {
-	_aabbEntities.clear();
+	_aabbs.clear();
 }
 
 const bool AabbManager::isAabbExisting(const string & aabbId) const
 {
-	return (_aabbEntities.find(aabbId) != _aabbEntities.end());
+	return (_aabbs.find(aabbId) != _aabbs.end());
 }
 
 const bool AabbManager::isAabbsExisting() const
 {
-	return !_aabbEntities.empty();
+	return !_aabbs.empty();
 }

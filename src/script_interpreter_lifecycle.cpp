@@ -171,13 +171,13 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	_skyEditor->loadEntitiesFromFile();
-	_terrainEditor->loadEntitiesFromFile();
-	_waterEditor->loadEntitiesFromFile();
-	_modelEditor->loadEntitiesFromFile();
-	_quad3dEditor->loadEntitiesFromFile();
-	_quad2dEditor->loadEntitiesFromFile();
-	_text2dEditor->loadEntitiesFromFile();
+	_skyEditor->loadSkiesFromFile();
+	_terrainEditor->loadTerrainsFromFile();
+	_waterEditor->loadWatersFromFile();
+	_modelEditor->loadModelsFromFile();
+	_quad3dEditor->loadQuad3dsFromFile();
+	_quad2dEditor->loadQuad2dsFromFile();
+	_text2dEditor->loadText2dsFromFile();
 	_animation2dEditor->loadAnimationsFromFile();
 	_animation3dEditor->loadAnimationsFromFile();
 	_soundEditor->loadSoundsFromFile();
@@ -198,13 +198,13 @@ void ScriptInterpreter::unload()
 		_worldEditor->clearLoadedWorld();
 	}
 
-	_skyEditor->deleteLoadedEntities();
-	_terrainEditor->deleteLoadedEntities();
-	_waterEditor->deleteLoadedEntities();
-	_modelEditor->deleteLoadedEntities();
-	_quad3dEditor->deleteLoadedEntities();
-	_quad2dEditor->deleteLoadedEntities();
-	_text2dEditor->deleteLoadedEntities();
+	_skyEditor->deleteLoadedSkies();
+	_terrainEditor->deleteLoadedTerrains();
+	_waterEditor->deleteLoadedWaters();
+	_modelEditor->deleteLoadedModels();
+	_quad3dEditor->deleteLoadedQuad3ds();
+	_quad2dEditor->deleteLoadedQuad2ds();
+	_text2dEditor->deleteLoadedText2ds();
 	_animation2dEditor->deleteLoadedAnimations();
 	_animation3dEditor->deleteLoadedAnimations();
 	_soundEditor->deleteLoadedSounds();

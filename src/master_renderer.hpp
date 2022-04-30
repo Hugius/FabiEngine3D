@@ -95,13 +95,13 @@ private:
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
-	void _renderOpaqueModelEntities();
-	void _renderTransparentModelEntities();
-	void _renderOpaqueQuad3dEntities();
-	void _renderTransparentQuad3dEntities();
-	void _renderOpaqueText3dEntities();
-	void _renderTransparentText3dEntities();
-	void _renderAabbEntities();
+	void _renderOpaqueModels();
+	void _renderTransparentModels();
+	void _renderOpaqueQuad3ds();
+	void _renderTransparentQuad3ds();
+	void _renderOpaqueText3ds();
+	void _renderTransparentText3ds();
+	void _renderAabbs();
 	void _renderFinalScene();
 	void _renderGUI();
 

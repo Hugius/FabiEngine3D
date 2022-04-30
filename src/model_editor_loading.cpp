@@ -183,7 +183,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool ModelEditor::loadEntitiesFromFile()
+const bool ModelEditor::loadModelsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

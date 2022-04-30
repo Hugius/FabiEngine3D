@@ -9,14 +9,14 @@ public:
 	using BaseEditor::inject;
 
 	void update();
-	void deleteLoadedEntities();
+	void deleteLoadedModels();
 
 	const vector<string> getMeshPathsFromFile() const;
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string> & getLoadedEntityIds() const;
 
-	const bool loadEntitiesFromFile();
-	const bool saveEntitiesToFile() const;
+	const bool loadModelsFromFile();
+	const bool saveModelsToFile() const;
 
 private:
 	void _load();

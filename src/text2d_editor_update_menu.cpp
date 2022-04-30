@@ -43,7 +43,7 @@ void Text2dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveEntitiesToFile();
+				saveText2dsToFile();
 				unload();
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")

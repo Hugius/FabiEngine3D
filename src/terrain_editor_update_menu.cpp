@@ -43,7 +43,7 @@ void TerrainEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveEntitiesToFile();
+				saveTerrainsToFile();
 				unload();
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")

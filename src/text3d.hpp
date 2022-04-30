@@ -14,7 +14,7 @@ public:
 	Text3d(const string & id);
 
 	void updateTarget();
-	void updateCharacterEntities();
+	void updateQuad3ds();
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string & value);
 	void setFontMapPath(const string & value);
@@ -48,7 +48,7 @@ public:
 	void setRotationOrder(DirectionOrderType value);
 	void setVisible(bool value);
 
-	const vector<shared_ptr<Quad3d>> & getCharacterEntities() const;
+	const vector<shared_ptr<Quad3d>> & getQuad3ds() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
@@ -193,7 +193,7 @@ private:
 
 	const string _id;
 
-	vector<shared_ptr<Quad3d>> _characterEntities = {};
+	vector<shared_ptr<Quad3d>> _quad3ds = {};
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;

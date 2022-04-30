@@ -96,9 +96,9 @@ void MasterRenderer::captureWorldDepth()
 
 		for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 		{
-			for(const auto & characterEntity : text3d->getCharacterEntities())
+			for(const auto & quad3d : text3d->getQuad3ds())
 			{
-				_quad3dDepthRenderer->render(characterEntity);
+				_quad3dDepthRenderer->render(quad3d);
 			}
 		}
 
@@ -330,9 +330,9 @@ void MasterRenderer::captureShadows()
 
 			for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 			{
-				for(const auto & characterEntity : text3d->getCharacterEntities())
+				for(const auto & quad3d : text3d->getQuad3ds())
 				{
-					_quad3dShadowRenderer->render(characterEntity);
+					_quad3dShadowRenderer->render(quad3d);
 				}
 			}
 

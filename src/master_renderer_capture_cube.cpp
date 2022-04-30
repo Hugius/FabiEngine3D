@@ -9,33 +9,33 @@ void MasterRenderer::captureCubeReflections()
 		return;
 	}
 
-	vector<shared_ptr<Model>> savedModelEntities;
+	vector<shared_ptr<Model>> savedModels;
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
 			model->setVisible(false);
-			savedModelEntities.push_back(model);
+			savedModels.push_back(model);
 		}
 	}
 
-	vector<shared_ptr<Quad3d>> savedQuad3dEntities;
+	vector<shared_ptr<Quad3d>> savedQuad3ds;
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
-			savedQuad3dEntities.push_back(quad3d);
+			savedQuad3ds.push_back(quad3d);
 		}
 	}
 
-	vector<shared_ptr<Text3d>> savedText3dEntities;
+	vector<shared_ptr<Text3d>> savedText3ds;
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
-			savedText3dEntities.push_back(text3d);
+			savedText3ds.push_back(text3d);
 		}
 	}
 
@@ -138,13 +138,13 @@ void MasterRenderer::captureCubeReflections()
 				_renderSkyEntity();
 				_renderTerrainEntity();
 				_renderWaterEntity();
-				_renderOpaqueModelEntities();
-				_renderOpaqueQuad3dEntities();
-				_renderOpaqueText3dEntities();
-				_renderAabbEntities();
-				_renderTransparentModelEntities();
-				_renderTransparentQuad3dEntities();
-				_renderTransparentText3dEntities();
+				_renderOpaqueModels();
+				_renderOpaqueQuad3ds();
+				_renderOpaqueText3ds();
+				_renderAabbs();
+				_renderTransparentModels();
+				_renderTransparentQuad3ds();
+				_renderTransparentText3ds();
 				_cubeReflectionCaptureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
@@ -171,17 +171,17 @@ void MasterRenderer::captureCubeReflections()
 		}
 	}
 
-	for(const auto & model : savedModelEntities)
+	for(const auto & model : savedModels)
 	{
 		model->setVisible(true);
 	}
 
-	for(const auto & quad3d : savedQuad3dEntities)
+	for(const auto & quad3d : savedQuad3ds)
 	{
 		quad3d->setVisible(true);
 	}
 
-	for(const auto & text3d : savedText3dEntities)
+	for(const auto & text3d : savedText3ds)
 	{
 		text3d->setVisible(true);
 	}

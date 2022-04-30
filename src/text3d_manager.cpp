@@ -129,7 +129,7 @@ void Text3dManager::update()
 
 		if(entity->isVisible())
 		{
-			entity->updateCharacterEntities();
+			entity->updateQuad3ds();
 		}
 	}
 }

@@ -102,7 +102,7 @@ void Text2dManager::update()
 
 		if(entity->isVisible())
 		{
-			entity->updateCharacterEntities();
+			entity->updateQuad2ds();
 		}
 	}
 }

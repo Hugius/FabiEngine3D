@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool TerrainEditor::saveEntitiesToFile() const
+const bool TerrainEditor::saveTerrainsToFile() const
 {
 	if(!isLoaded())
 	{

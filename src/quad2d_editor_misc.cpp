@@ -7,7 +7,7 @@ const vector<string> & Quad2dEditor::getLoadedEntityIds() const
 	return _loadedQuad2dIds;
 }
 
-void Quad2dEditor::deleteLoadedEntities()
+void Quad2dEditor::deleteLoadedQuad2ds()
 {
 	for(const auto & quad2dId : _loadedQuad2dIds)
 	{

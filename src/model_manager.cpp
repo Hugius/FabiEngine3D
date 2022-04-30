@@ -182,18 +182,18 @@ void ModelManager::update()
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
-			map<float, shared_ptr<Captor>> orderedCaptorEntities;
+			map<float, shared_ptr<Captor>> orderedCaptors;
 
 			for(const auto & [captorEntityId, captorEntity] : _captorManager->getCaptors())
 			{
 				const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), captorEntity->getPosition());
 
-				orderedCaptorEntities.insert({absoluteDistance, captorEntity});
+				orderedCaptors.insert({absoluteDistance, captorEntity});
 			}
 
-			if(!orderedCaptorEntities.empty())
+			if(!orderedCaptors.empty())
 			{
-				const auto closestCaptorEntityId = orderedCaptorEntities.begin()->second->getId();
+				const auto closestCaptorEntityId = orderedCaptors.begin()->second->getId();
 
 				if(entity->getCurrentCaptorEntityId() != closestCaptorEntityId)
 				{

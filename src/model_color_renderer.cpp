@@ -89,54 +89,54 @@ void ModelColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & entities)
+void ModelColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
-	vector<shared_ptr<Pointlight>> visibleEntities;
-	for(const auto & [entityId, entity] : entities)
+	vector<shared_ptr<Pointlight>> visiblePointlights;
+	for(const auto & [entityId, entity] : pointlights)
 	{
 		if(entity->isVisible())
 		{
-			visibleEntities.push_back(entity);
+			visiblePointlights.push_back(entity);
 		}
 	}
 
-	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visiblePointlights.size()); index++)
 	{
-		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
-		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
-		_shaderBuffer->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visibleEntities[index]->getRadius());
-		_shaderBuffer->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visibleEntities[index]->getShape()));
+		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visiblePointlights[index]->getPosition());
+		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visiblePointlights[index]->getColor());
+		_shaderBuffer->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visiblePointlights[index]->getIntensity());
+		_shaderBuffer->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visiblePointlights[index]->getRadius());
+		_shaderBuffer->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visiblePointlights[index]->getShape()));
 	}
 
-	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
+	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visiblePointlights.size()));
 }
 
-void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & entities)
+void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
-	vector<shared_ptr<Spotlight>> visibleEntities;
-	for(const auto & [entityId, entity] : entities)
+	vector<shared_ptr<Spotlight>> visibleSpotlights;
+	for(const auto & [entityId, entity] : spotlights)
 	{
 		if(entity->isVisible())
 		{
-			visibleEntities.push_back(entity);
+			visibleSpotlights.push_back(entity);
 		}
 	}
 
-	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visibleSpotlights.size()); index++)
 	{
-		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
-		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());
-		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
-		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleEntities[index]->getAngle())));
-		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleEntities[index]->getDistance());
+		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleSpotlights[index]->getPosition());
+		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleSpotlights[index]->getFront());
+		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleSpotlights[index]->getColor());
+		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleSpotlights[index]->getIntensity());
+		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleSpotlights[index]->getAngle())));
+		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleSpotlights[index]->getDistance());
 	}
 
-	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
+	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void ModelColorRenderer::render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captorEntities)
+void ModelColorRenderer::render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captors)
 {
 	if(!entity->isVisible())
 	{
@@ -154,18 +154,18 @@ void ModelColorRenderer::render(const shared_ptr<Model> entity, const unordered_
 
 	if(!entity->getPreviousCaptorEntityId().empty())
 	{
-		if(captorEntities.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captorEntities.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
 	if(!entity->getCurrentCaptorEntityId().empty())
 	{
-		if(captorEntities.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captorEntities.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
 

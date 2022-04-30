@@ -64,7 +64,7 @@ void Text2d::updateTarget()
 	}
 }
 
-void Text2d::updateCharacterEntities()
+void Text2d::updateQuad2ds()
 {
 	const auto rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
@@ -72,10 +72,10 @@ void Text2d::updateCharacterEntities()
 
 	if(_isHorizontallyFlipped)
 	{
-		reverse(_characterEntities.begin(), _characterEntities.end());
+		reverse(_quad2ds.begin(), _quad2ds.end());
 	}
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 
@@ -96,7 +96,7 @@ void Text2d::updateCharacterEntities()
 
 	if(_isHorizontallyFlipped)
 	{
-		reverse(_characterEntities.begin(), _characterEntities.end());
+		reverse(_quad2ds.begin(), _quad2ds.end());
 	}
 }
 
@@ -105,7 +105,7 @@ void Text2d::setContent(const string & value)
 	if(value != _content)
 	{
 		_content = value;
-		_characterEntities.clear();
+		_quad2ds.clear();
 
 		for(const auto & character : _content)
 		{
@@ -137,7 +137,7 @@ void Text2d::setContent(const string & value)
 			characterEntity->setUvMultiplier(uvMultiplier);
 			characterEntity->setUvOffset(uvOffset);
 
-			_characterEntities.push_back(characterEntity);
+			_quad2ds.push_back(characterEntity);
 		}
 	}
 }
@@ -146,7 +146,7 @@ void Text2d::setMinClipPosition(const fvec2 & value)
 {
 	_minClipPosition = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setMinClipPosition(_minClipPosition);
 	}
@@ -156,7 +156,7 @@ void Text2d::setMaxClipPosition(const fvec2 & value)
 {
 	_maxClipPosition = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setMaxClipPosition(_maxClipPosition);
 	}
@@ -166,7 +166,7 @@ void Text2d::setDepth(int value)
 {
 	_depth = max(0, value);
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setDepth(_depth);
 	}
@@ -176,7 +176,7 @@ void Text2d::setWireframed(bool value)
 {
 	_isWireframed = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setWireframed(_isWireframed);
 	}
@@ -186,7 +186,7 @@ void Text2d::setCentered(bool value)
 {
 	_isCentered = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setCentered(_isCentered);
 	}
@@ -196,7 +196,7 @@ void Text2d::setVisible(bool value)
 {
 	_isVisible = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setVisible(_isVisible);
 	}
@@ -206,7 +206,7 @@ void Text2d::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setDiffuseMapPath(_fontMapPath);
 	}
@@ -216,7 +216,7 @@ void Text2d::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setVertexBuffer(_vertexBuffer);
 	}
@@ -226,7 +226,7 @@ void Text2d::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontTextureBuffer = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setDiffuseMap(_fontTextureBuffer);
 	}
@@ -236,7 +236,7 @@ void Text2d::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setColor(_color);
 	}
@@ -246,7 +246,7 @@ void Text2d::setHorizontallyFlipped(bool value)
 {
 	_isHorizontallyFlipped = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setHorizontallyFlipped(_isHorizontallyFlipped);
 	}
@@ -256,7 +256,7 @@ void Text2d::setVerticallyFlipped(bool value)
 {
 	_isVerticallyFlipped = value;
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setVerticallyFlipped(_isVerticallyFlipped);
 	}
@@ -266,7 +266,7 @@ void Text2d::setOpacity(float value)
 {
 	_opacity = clamp(value, 0.0f, 1.0f);
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setOpacity(_opacity);
 	}
@@ -276,7 +276,7 @@ void Text2d::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _characterEntities)
+	for(const auto & character : _quad2ds)
 	{
 		character->setWireframeColor(_wireframeColor);
 	}
@@ -355,9 +355,9 @@ const string & Text2d::getFontMapPath() const
 	return _fontMapPath;
 }
 
-const vector<shared_ptr<Quad2d>> & Text2d::getCharacterEntities() const
+const vector<shared_ptr<Quad2d>> & Text2d::getQuad2ds() const
 {
-	return _characterEntities;
+	return _quad2ds;
 }
 
 const shared_ptr<VertexBuffer> Text2d::getVertexBuffer() const

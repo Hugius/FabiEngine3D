@@ -32,8 +32,8 @@ private:
 	void _updateDisplay();
 	void _updateCamera();
 	void _updateCursor();
-	void _createScriptDisplayEntities();
-	void _deleteScriptDisplayEntities();
+	void _createDisplayText();
+	void _deleteDisplayText();
 	void _clearDisplay();
 	void _clearSelection();
 

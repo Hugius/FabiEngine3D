@@ -32,13 +32,13 @@ void MasterRenderer::render3d()
 	_renderSkyEntity();
 	_renderTerrainEntity();
 	_renderWaterEntity();
-	_renderOpaqueModelEntities();
-	_renderOpaqueQuad3dEntities();
-	_renderOpaqueText3dEntities();
-	_renderAabbEntities();
-	_renderTransparentModelEntities();
-	_renderTransparentQuad3dEntities();
-	_renderTransparentText3dEntities();
+	_renderOpaqueModels();
+	_renderOpaqueQuad3ds();
+	_renderOpaqueText3ds();
+	_renderAabbs();
+	_renderTransparentModels();
+	_renderTransparentQuad3ds();
+	_renderTransparentText3ds();
 	_renderStorage->setTriangleCountingEnabled(false);
 	_worldColorCaptureBuffer->unbind();
 	_renderStorage->setPrimarySceneMap(_worldColorCaptureBuffer->getTexture(0));
@@ -102,7 +102,7 @@ void MasterRenderer::_renderWaterEntity()
 	}
 }
 
-void MasterRenderer::_renderOpaqueModelEntities()
+void MasterRenderer::_renderOpaqueModels()
 {
 	if(!_modelManager->getModels().empty())
 	{
@@ -161,7 +161,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 	}
 }
 
-void MasterRenderer::_renderTransparentModelEntities()
+void MasterRenderer::_renderTransparentModels()
 {
 	if(!_modelManager->getModels().empty())
 	{
@@ -222,7 +222,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 	}
 }
 
-void MasterRenderer::_renderOpaqueQuad3dEntities()
+void MasterRenderer::_renderOpaqueQuad3ds()
 {
 	if(!_quad3dManager->getQuad3ds().empty())
 	{
@@ -242,7 +242,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 	}
 }
 
-void MasterRenderer::_renderTransparentQuad3dEntities()
+void MasterRenderer::_renderTransparentQuad3ds()
 {
 	if(!_quad3dManager->getQuad3ds().empty())
 	{
@@ -262,7 +262,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 	}
 }
 
-void MasterRenderer::_renderOpaqueText3dEntities()
+void MasterRenderer::_renderOpaqueText3ds()
 {
 	if(!_text3dManager->getText3ds().empty())
 	{
@@ -275,9 +275,9 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 				continue;
 			}
 
-			for(const auto & characterEntity : text3d->getCharacterEntities())
+			for(const auto & quad3d : text3d->getQuad3ds())
 			{
-				_quad3dColorRenderer->render(characterEntity);
+				_quad3dColorRenderer->render(quad3d);
 			}
 		}
 
@@ -285,7 +285,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 	}
 }
 
-void MasterRenderer::_renderTransparentText3dEntities()
+void MasterRenderer::_renderTransparentText3ds()
 {
 	if(!_text3dManager->getText3ds().empty())
 	{
@@ -298,9 +298,9 @@ void MasterRenderer::_renderTransparentText3dEntities()
 				continue;
 			}
 
-			for(const auto & characterEntity : text3d->getCharacterEntities())
+			for(const auto & quad3d : text3d->getQuad3ds())
 			{
-				_quad3dColorRenderer->render(characterEntity);
+				_quad3dColorRenderer->render(quad3d);
 			}
 		}
 
@@ -308,7 +308,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 	}
 }
 
-void MasterRenderer::_renderAabbEntities()
+void MasterRenderer::_renderAabbs()
 {
 	if(!_aabbManager->getAabbs().empty())
 	{
@@ -352,9 +352,9 @@ void MasterRenderer::_renderGUI()
 		{
 			vector<shared_ptr<Quad2d>> characterQuad2ds = {};
 
-			for(const auto & characterQuad2d : text2d->getCharacterEntities())
+			for(const auto & quad3d : text2d->getQuad2ds())
 			{
-				characterQuad2ds.push_back(characterQuad2d);
+				characterQuad2ds.push_back(quad3d);
 			}
 
 			orderedQuad2ds.insert({text2d->getDepth(), characterQuad2ds});

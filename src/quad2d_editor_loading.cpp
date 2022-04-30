@@ -59,7 +59,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Quad2dEditor::loadEntitiesFromFile()
+const bool Quad2dEditor::loadQuad2dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

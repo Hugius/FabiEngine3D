@@ -7,7 +7,7 @@ const vector<string> & Text2dEditor::getLoadedEntityIds() const
 	return _loadedText2dIds;
 }
 
-void Text2dEditor::deleteLoadedEntities()
+void Text2dEditor::deleteLoadedText2ds()
 {
 	for(const auto & text2dId : _loadedText2dIds)
 	{

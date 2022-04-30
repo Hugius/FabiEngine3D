@@ -123,8 +123,13 @@ const bool EngineInterface::clock_isIdReserved(const string & clockId) const
 		clockId == "total" ||
 		clockId == "mainUpdate" ||
 		clockId == "physicsUpdate" ||
-		clockId == "3dEntityUpdate" ||
-		clockId == "2dEntityUpdate" ||
+		clockId == "environmentUpdate" ||
+		clockId == "modelUpdate" ||
+		clockId == "quadUpdate" ||
+		clockId == "textUpdate" ||
+		clockId == "aabbUpdate" ||
+		clockId == "lightUpdate" ||
+		clockId == "captorUpdate" ||
 		clockId == "renderUpdate" ||
 		clockId == "animationUpdate" ||
 		clockId == "soundUpdate" ||

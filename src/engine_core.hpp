@@ -50,8 +50,8 @@ public:
 	void start();
 	void stop();
 
-	const unordered_map<string, float> & getUpdateDeltaTimes() const;
-	const unordered_map<string, float> & getRenderDeltaTimes() const;
+	const vector<pair<string, float>> & getUpdateDeltaTimes() const;
+	const vector<pair<string, float>> & getRenderDeltaTimes() const;
 
 	const shared_ptr<InputHandler> getInputHandler() const;
 	const shared_ptr<MeshLoader> getMeshLoader() const;
@@ -102,8 +102,8 @@ private:
 	void _update();
 	void _render();
 
-	unordered_map<string, float> _updateDeltaTimes;
-	unordered_map<string, float> _renderDeltaTimes;
+	vector<pair<string, float>> _updateDeltaTimes;
+	vector<pair<string, float>> _renderDeltaTimes;
 
 	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<InputHandler> _inputHandler = nullptr;

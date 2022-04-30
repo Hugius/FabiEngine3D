@@ -72,19 +72,10 @@ void EngineCore::_update()
 	_networkingClient->update();
 	_timer->stopClock("networkUpdate");
 
-	_updateDeltaTimes.at("mainUpdate") = _timer->getClockDeltaTime("mainUpdate");
-	_updateDeltaTimes.at("physicsUpdate") = _timer->getClockDeltaTime("physicsUpdate");
-	_updateDeltaTimes.at("environmentUpdate") = _timer->getClockDeltaTime("environmentUpdate");
-	_updateDeltaTimes.at("modelUpdate") = _timer->getClockDeltaTime("modelUpdate");
-	_updateDeltaTimes.at("quadUpdate") = _timer->getClockDeltaTime("quadUpdate");
-	_updateDeltaTimes.at("textUpdate") = _timer->getClockDeltaTime("textUpdate");
-	_updateDeltaTimes.at("aabbUpdate") = _timer->getClockDeltaTime("aabbUpdate");
-	_updateDeltaTimes.at("lightUpdate") = _timer->getClockDeltaTime("lightUpdate");
-	_updateDeltaTimes.at("captorUpdate") = _timer->getClockDeltaTime("captorUpdate");
-	_updateDeltaTimes.at("renderUpdate") = _timer->getClockDeltaTime("renderUpdate");
-	_updateDeltaTimes.at("animationUpdate") = _timer->getClockDeltaTime("animationUpdate");
-	_updateDeltaTimes.at("soundUpdate") = _timer->getClockDeltaTime("soundUpdate");
-	_updateDeltaTimes.at("networkUpdate") = _timer->getClockDeltaTime("networkUpdate");
+	for(auto & [clockId, deltaTime] : _updateDeltaTimes)
+	{
+		deltaTime = _timer->getClockDeltaTime(clockId);
+	}
 
 	_timer->increasePassedUpdateCount();
 }
@@ -140,17 +131,8 @@ void EngineCore::_render()
 	_renderWindow->swapBuffer();
 	_timer->stopClock("bufferSwap");
 
-	_renderDeltaTimes.at("depthPreRender") = _timer->getClockDeltaTime("depthPreRender");
-	_renderDeltaTimes.at("shadowPreRender") = _timer->getClockDeltaTime("shadowPreRender");
-	_renderDeltaTimes.at("reflectionPreRender") = _timer->getClockDeltaTime("reflectionPreRender");
-	_renderDeltaTimes.at("refractionPreRender") = _timer->getClockDeltaTime("refractionPreRender");
-	_renderDeltaTimes.at("waterPreRender") = _timer->getClockDeltaTime("waterPreRender");
-	_renderDeltaTimes.at("3dRender") = _timer->getClockDeltaTime("3dRender");
-	_renderDeltaTimes.at("antiAliasingPostRender") = _timer->getClockDeltaTime("antiAliasingPostRender");
-	_renderDeltaTimes.at("bloomPreRender") = _timer->getClockDeltaTime("bloomPreRender");
-	_renderDeltaTimes.at("dofPreRender") = _timer->getClockDeltaTime("dofPreRender");
-	_renderDeltaTimes.at("lensFlarePreRender") = _timer->getClockDeltaTime("lensFlarePreRender");
-	_renderDeltaTimes.at("motionBlurPreRender") = _timer->getClockDeltaTime("motionBlurPreRender");
-	_renderDeltaTimes.at("2dRender") = _timer->getClockDeltaTime("2dRender");
-	_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
+	for(auto & [clockId, deltaTime] : _renderDeltaTimes)
+	{
+		deltaTime = _timer->getClockDeltaTime(clockId);
+	}
 }

@@ -142,12 +142,12 @@ const string EngineInterface::misc_getOpenglVersion() const
 	return _core->getMasterRenderer()->getOpenglVersion();
 }
 
-const unordered_map<string, float> & EngineInterface::misc_getUpdateDeltaTimes() const
+const vector<pair<string, float>> & EngineInterface::misc_getUpdateDeltaTimes() const
 {
 	return _core->getUpdateDeltaTimes();
 }
 
-const unordered_map<string, float> & EngineInterface::misc_getRenderDeltaTimes() const
+const vector<pair<string, float>> & EngineInterface::misc_getRenderDeltaTimes() const
 {
 	return _core->getRenderDeltaTimes();
 }

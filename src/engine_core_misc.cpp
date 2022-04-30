@@ -212,12 +212,12 @@ const bool EngineCore::isRunning() const
 	return _isRunning;
 }
 
-const unordered_map<string, float> & EngineCore::getUpdateDeltaTimes() const
+const vector<pair<string, float>> & EngineCore::getUpdateDeltaTimes() const
 {
 	return _updateDeltaTimes;
 }
 
-const unordered_map<string, float> & EngineCore::getRenderDeltaTimes() const
+const vector<pair<string, float>> & EngineCore::getRenderDeltaTimes() const
 {
 	return _renderDeltaTimes;
 }

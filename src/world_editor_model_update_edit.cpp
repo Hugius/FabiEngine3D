@@ -93,7 +93,7 @@ void WorldEditor::_updateModelEditing()
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3d")->isHovered())
 			{
 				if(currentAnimation3dIds.empty())
 				{
@@ -104,7 +104,7 @@ void WorldEditor::_updateModelEditing()
 						animation3dId = animation3dId.substr(1);
 					}
 
-					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation", fvec2(0.0f, 0.1f), animation3dIds);
+					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
 				}
 				else
 				{
@@ -196,7 +196,7 @@ void WorldEditor::_updateModelEditing()
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
 
-			screen->getButton("animation")->setTextContent(currentAnimation3dIds.empty() ? "Start Animation" : "Stop Animation");
+			screen->getButton("animation3d")->setTextContent(currentAnimation3dIds.empty() ? "Start Animation3D" : "Stop Animation3D");
 			screen->getButton("freeze")->setTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
 		}
 	}

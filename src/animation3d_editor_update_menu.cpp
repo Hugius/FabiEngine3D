@@ -43,7 +43,7 @@ void Animation3dEditor::_updateMainMenu()
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
-				saveAnimationsToFile();
+				saveAnimation3dsToFile();
 				unload();
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			}

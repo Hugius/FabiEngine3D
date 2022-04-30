@@ -43,7 +43,7 @@ void Animation2dEditor::_updateMainMenu()
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
-				saveAnimationsToFile();
+				saveAnimation2dsToFile();
 				unload();
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			}

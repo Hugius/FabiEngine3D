@@ -89,22 +89,22 @@ void Text3d::updateQuad3ds()
 		Mathematics::convertToRadians(_rotation.x),
 		Mathematics::convertToRadians(_rotation.y),
 		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
-	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
+	const auto quad3dSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	int index = 0;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
+		auto offset = fvec2((static_cast<float>(index) * quad3dSize.x), 0.0f);
 		offset.x -= (this->getSize().x * 0.5f);
-		offset.x += (characterSize.x * 0.5f);
+		offset.x += (quad3dSize.x * 0.5f);
 
-		character->setPosition(_position + (rotationMatrix * offset));
-		character->setRotation(_rotation);
-		character->setSize(characterSize);
+		quad3d->setPosition(_position + (rotationMatrix * offset));
+		quad3d->setRotation(_rotation);
+		quad3d->setSize(quad3dSize);
 
 		if(_isVisible)
 		{
-			character->updateTransformation();
+			quad3d->updateTransformation();
 		}
 
 		index++;
@@ -125,30 +125,31 @@ void Text3d::setContent(const string & value)
 			const auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
 			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
-			auto characterEntity = make_shared<Quad3d>("dummy");
-			characterEntity->setVertexBuffer(_vertexBuffer);
-			characterEntity->setDiffuseMapPath(_fontMapPath);
-			characterEntity->setDiffuseMap(_fontTextureBuffer);
-			characterEntity->setOpacity(_opacity);
-			characterEntity->setMinTextureAlpha(_minTextureAlpha);
-			characterEntity->setWireframeColor(_wireframeColor);
-			characterEntity->setColor(_color);
-			characterEntity->setWireframed(_isWireframed);
-			characterEntity->setCentered(_isCentered);
-			characterEntity->setVisible(_isVisible);
-			characterEntity->setFacingCameraHorizontally(_isFacingCameraHorizontally);
-			characterEntity->setFacingCameraVertically(_isFacingCameraVertically);
-			characterEntity->setShadowed(_isShadowed);
-			characterEntity->setReflected(_isReflected);
-			characterEntity->setBright(_isBright);
-			characterEntity->setLightness(_lightness);
-			characterEntity->setMinClipPosition(_minClipPosition);
-			characterEntity->setMaxClipPosition(_maxClipPosition);
-			characterEntity->setFrozen(_isFrozen);
-			characterEntity->setUvMultiplier(uvMultiplier);
-			characterEntity->setUvOffset(uvOffset);
+			auto quad3d = make_shared<Quad3d>("dummy");
 
-			_quad3ds.push_back(characterEntity);
+			quad3d->setVertexBuffer(_vertexBuffer);
+			quad3d->setDiffuseMapPath(_fontMapPath);
+			quad3d->setDiffuseMap(_fontTextureBuffer);
+			quad3d->setOpacity(_opacity);
+			quad3d->setMinTextureAlpha(_minTextureAlpha);
+			quad3d->setWireframeColor(_wireframeColor);
+			quad3d->setColor(_color);
+			quad3d->setWireframed(_isWireframed);
+			quad3d->setCentered(_isCentered);
+			quad3d->setVisible(_isVisible);
+			quad3d->setFacingCameraHorizontally(_isFacingCameraHorizontally);
+			quad3d->setFacingCameraVertically(_isFacingCameraVertically);
+			quad3d->setShadowed(_isShadowed);
+			quad3d->setReflected(_isReflected);
+			quad3d->setBright(_isBright);
+			quad3d->setLightness(_lightness);
+			quad3d->setMinClipPosition(_minClipPosition);
+			quad3d->setMaxClipPosition(_maxClipPosition);
+			quad3d->setFrozen(_isFrozen);
+			quad3d->setUvMultiplier(uvMultiplier);
+			quad3d->setUvOffset(uvOffset);
+
+			_quad3ds.push_back(quad3d);
 		}
 	}
 }
@@ -157,9 +158,9 @@ void Text3d::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setVertexBuffer(_vertexBuffer);
+		quad3d->setVertexBuffer(_vertexBuffer);
 	}
 }
 
@@ -167,9 +168,9 @@ void Text3d::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setDiffuseMapPath(_fontMapPath);
+		quad3d->setDiffuseMapPath(_fontMapPath);
 	}
 }
 
@@ -177,9 +178,9 @@ void Text3d::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontTextureBuffer = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setDiffuseMap(_fontTextureBuffer);
+		quad3d->setDiffuseMap(_fontTextureBuffer);
 	}
 }
 
@@ -187,9 +188,9 @@ void Text3d::setFacingCameraHorizontally(bool value)
 {
 	_isFacingCameraHorizontally = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setFacingCameraHorizontally(_isFacingCameraHorizontally);
+		quad3d->setFacingCameraHorizontally(_isFacingCameraHorizontally);
 	}
 }
 
@@ -197,9 +198,9 @@ void Text3d::setFacingCameraVertically(bool value)
 {
 	_isFacingCameraVertically = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setFacingCameraVertically(_isFacingCameraVertically);
+		quad3d->setFacingCameraVertically(_isFacingCameraVertically);
 	}
 }
 
@@ -207,9 +208,9 @@ void Text3d::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setColor(_color);
+		quad3d->setColor(_color);
 	}
 }
 
@@ -217,9 +218,9 @@ void Text3d::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setWireframeColor(_wireframeColor);
+		quad3d->setWireframeColor(_wireframeColor);
 	}
 }
 
@@ -227,9 +228,9 @@ void Text3d::setReflected(bool value)
 {
 	_isReflected = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setReflected(_isReflected);
+		quad3d->setReflected(_isReflected);
 	}
 }
 
@@ -237,9 +238,9 @@ void Text3d::setBright(bool value)
 {
 	_isBright = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setBright(_isBright);
+		quad3d->setBright(_isBright);
 	}
 }
 
@@ -247,9 +248,9 @@ void Text3d::setWireframed(bool value)
 {
 	_isWireframed = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setWireframed(_isWireframed);
+		quad3d->setWireframed(_isWireframed);
 	}
 }
 
@@ -257,9 +258,9 @@ void Text3d::setShadowed(bool value)
 {
 	_isShadowed = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setShadowed(_isShadowed);
+		quad3d->setShadowed(_isShadowed);
 	}
 }
 
@@ -267,9 +268,9 @@ void Text3d::setCentered(bool value)
 {
 	_isCentered = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setCentered(_isCentered);
+		quad3d->setCentered(_isCentered);
 	}
 }
 
@@ -277,9 +278,9 @@ void Text3d::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setLightness(_lightness);
+		quad3d->setLightness(_lightness);
 	}
 }
 
@@ -287,9 +288,9 @@ void Text3d::setOpacity(float value)
 {
 	_opacity = clamp(value, 0.0f, 1.0f);
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setOpacity(_opacity);
+		quad3d->setOpacity(_opacity);
 	}
 }
 
@@ -297,9 +298,9 @@ void Text3d::setMinClipPosition(const fvec3 & value)
 {
 	_minClipPosition = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setMinClipPosition(_minClipPosition);
+		quad3d->setMinClipPosition(_minClipPosition);
 	}
 }
 
@@ -307,9 +308,9 @@ void Text3d::setMaxClipPosition(const fvec3 & value)
 {
 	_maxClipPosition = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setMaxClipPosition(_maxClipPosition);
+		quad3d->setMaxClipPosition(_maxClipPosition);
 	}
 }
 
@@ -317,9 +318,9 @@ void Text3d::setMinTextureAlpha(float value)
 {
 	_minTextureAlpha = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setMinTextureAlpha(_minTextureAlpha);
+		quad3d->setMinTextureAlpha(_minTextureAlpha);
 	}
 }
 
@@ -327,9 +328,9 @@ void Text3d::setFrozen(bool value)
 {
 	_isFrozen = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setFrozen(_isFrozen);
+		quad3d->setFrozen(_isFrozen);
 	}
 }
 
@@ -337,9 +338,9 @@ void Text3d::setHorizontallyFlipped(bool value)
 {
 	_isHorizontallyFlipped = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setHorizontallyFlipped(_isHorizontallyFlipped);
+		quad3d->setHorizontallyFlipped(_isHorizontallyFlipped);
 	}
 }
 
@@ -347,9 +348,9 @@ void Text3d::setVerticallyFlipped(bool value)
 {
 	_isVerticallyFlipped = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setVerticallyFlipped(_isVerticallyFlipped);
+		quad3d->setVerticallyFlipped(_isVerticallyFlipped);
 	}
 }
 
@@ -362,9 +363,9 @@ void Text3d::setVisible(bool value)
 {
 	_isVisible = value;
 
-	for(const auto & character : _quad3ds)
+	for(const auto & quad3d : _quad3ds)
 	{
-		character->setVisible(_isVisible);
+		quad3d->setVisible(_isVisible);
 	}
 }
 

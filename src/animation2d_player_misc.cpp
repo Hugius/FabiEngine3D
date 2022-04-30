@@ -20,7 +20,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimationI
 {
 	vector<pair<string, string>> result;
 
-	for(const auto & [mergedId, animation] : _startedQuad3dAnimations)
+	for(const auto & [mergedId, startedAnimation2d] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
@@ -34,7 +34,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationI
 {
 	vector<pair<string, string>> result;
 
-	for(const auto & [mergedId, animation] : _startedQuad2dAnimations)
+	for(const auto & [mergedId, startedAnimation2d] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 

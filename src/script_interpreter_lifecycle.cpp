@@ -178,8 +178,8 @@ void ScriptInterpreter::load()
 	_quad3dEditor->loadQuad3dsFromFile();
 	_quad2dEditor->loadQuad2dsFromFile();
 	_text2dEditor->loadText2dsFromFile();
-	_animation2dEditor->loadAnimationsFromFile();
-	_animation3dEditor->loadAnimationsFromFile();
+	_animation2dEditor->loadAnimation2dsFromFile();
+	_animation3dEditor->loadAnimation3dsFromFile();
 	_soundEditor->loadSoundsFromFile();
 
 	_fe3d->camera_reset();
@@ -205,8 +205,8 @@ void ScriptInterpreter::unload()
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_quad2dEditor->deleteLoadedQuad2ds();
 	_text2dEditor->deleteLoadedText2ds();
-	_animation2dEditor->deleteLoadedAnimations();
-	_animation3dEditor->deleteLoadedAnimations();
+	_animation2dEditor->deleteLoadedAnimation2ds();
+	_animation3dEditor->deleteLoadedAnimation3ds();
 	_soundEditor->deleteLoadedSounds();
 
 	for(const auto & skyId : _fe3d->sky_getIds())

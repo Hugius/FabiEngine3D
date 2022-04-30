@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool Animation3dEditor::saveAnimationsToFile() const
+const bool Animation3dEditor::saveAnimation3dsToFile() const
 {
 	if(!isLoaded())
 	{

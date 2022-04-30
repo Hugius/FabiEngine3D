@@ -78,9 +78,9 @@ const vector<string> EngineInterface::animation3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [animation3dId, animation] : _core->getAnimation3dManager()->getAnimation3ds())
+	for(const auto & [animation3dId, animation3d] : _core->getAnimation3dManager()->getAnimation3ds())
 	{
-		result.push_back(animation->getId());
+		result.push_back(animation3d->getId());
 	}
 
 	return result;

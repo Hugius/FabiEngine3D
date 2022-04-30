@@ -350,14 +350,14 @@ void MasterRenderer::_renderGUI()
 
 		for(const auto & [text2dId, text2d] : _text2dManager->getText2ds())
 		{
-			vector<shared_ptr<Quad2d>> characterQuad2ds = {};
+			vector<shared_ptr<Quad2d>> quad2ds = {};
 
-			for(const auto & quad3d : text2d->getQuad2ds())
+			for(const auto & quad2d : text2d->getQuad2ds())
 			{
-				characterQuad2ds.push_back(quad3d);
+				quad2ds.push_back(quad2d);
 			}
 
-			orderedQuad2ds.insert({text2d->getDepth(), characterQuad2ds});
+			orderedQuad2ds.insert({text2d->getDepth(), quad2ds});
 		}
 
 		for(const auto & [quad2dId, quad2ds] : orderedQuad2ds)

@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::istringstream;
 
-const bool Animation3dEditor::loadAnimationsFromFile()
+const bool Animation3dEditor::loadAnimation3dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

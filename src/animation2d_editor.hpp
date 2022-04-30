@@ -9,12 +9,12 @@ public:
 	using BaseEditor::inject;
 
 	void update();
-	void deleteLoadedAnimations();
+	void deleteLoadedAnimation2ds();
 
 	const vector<string> & getLoadedAnimationIds() const;
 
-	const bool loadAnimationsFromFile();
-	const bool saveAnimationsToFile() const;
+	const bool loadAnimation2dsFromFile();
+	const bool saveAnimation2dsToFile() const;
 
 private:
 	void _load();

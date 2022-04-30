@@ -97,7 +97,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				_fe3d->quad3d_setFrozen(_activeQuad3dId, !_fe3d->quad3d_isFrozen(_activeQuad3dId));
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2d")->isHovered())
 			{
 				if(currentAnimation2dIds.empty())
 				{
@@ -108,7 +108,7 @@ void WorldEditor::_updateQuad3dEditing()
 						animation2dId = animation2dId.substr(1);
 					}
 
-					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation", fvec2(0.0f, 0.1f), animation2dIds);
+					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation2D", fvec2(0.0f, 0.1f), animation2dIds);
 				}
 				else
 				{
@@ -184,7 +184,7 @@ void WorldEditor::_updateQuad3dEditing()
 			screen->getButton("yPlus")->setHoverable(true);
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 
-			screen->getButton("animation")->setTextContent(currentAnimation2dIds.empty() ? "Start Animation" : "Stop Animation");
+			screen->getButton("animation2d")->setTextContent(currentAnimation2dIds.empty() ? "Start Animation2D" : "Stop Animation2D");
 			screen->getButton("freeze")->setTextContent(_fe3d->quad3d_isFrozen(_activeQuad3dId) ? "Unfreeze" : "Freeze");
 		}
 	}

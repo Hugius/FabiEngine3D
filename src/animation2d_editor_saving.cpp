@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool Animation2dEditor::saveAnimationsToFile() const
+const bool Animation2dEditor::saveAnimation2dsToFile() const
 {
 	if(!isLoaded())
 	{

@@ -10,7 +10,7 @@ const vector<string> & Animation3dEditor::getLoadedAnimationIds() const
 	return _loadedAnimation3dIds;
 }
 
-void Animation3dEditor::deleteLoadedAnimations()
+void Animation3dEditor::deleteLoadedAnimation3ds()
 {
 	for(const auto & animation3dId : _loadedAnimation3dIds)
 	{

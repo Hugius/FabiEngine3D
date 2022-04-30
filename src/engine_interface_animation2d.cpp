@@ -46,9 +46,9 @@ const vector<string> EngineInterface::animation2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [animation2dId, animation] : _core->getAnimation2dManager()->getAnimation2ds())
+	for(const auto & [animation2dId, animation2d] : _core->getAnimation2dManager()->getAnimation2ds())
 	{
-		result.push_back(animation->getId());
+		result.push_back(animation2d->getId());
 	}
 
 	return result;

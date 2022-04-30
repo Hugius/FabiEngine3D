@@ -9,9 +9,9 @@ void Animation2dManager::createAnimation2d(const string & animation2dId)
 		abort();
 	}
 
-	auto animation = make_shared<Animation2d>(animation2dId);
+	auto animation2d = make_shared<Animation2d>(animation2dId);
 
-	_animation2ds.insert({animation2dId, animation});
+	_animation2ds.insert({animation2dId, animation2d});
 }
 
 void Animation2dManager::deleteAnimation2d(const string & animation2dId)

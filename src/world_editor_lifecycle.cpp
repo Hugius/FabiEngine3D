@@ -10,8 +10,8 @@ void WorldEditor::_load()
 	_modelEditor->loadModelsFromFile();
 	_quad3dEditor->loadQuad3dsFromFile();
 	_text3dEditor->loadText3dsFromFile();
-	_animation2dEditor->loadAnimationsFromFile();
-	_animation3dEditor->loadAnimationsFromFile();
+	_animation2dEditor->loadAnimation2dsFromFile();
+	_animation3dEditor->loadAnimation3dsFromFile();
 	_soundEditor->loadSoundsFromFile();
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
@@ -105,8 +105,8 @@ void WorldEditor::_unload()
 	_modelEditor->deleteLoadedModels();
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_text3dEditor->deleteLoadedText3ds();
-	_animation3dEditor->deleteLoadedAnimations();
-	_animation2dEditor->deleteLoadedAnimations();
+	_animation3dEditor->deleteLoadedAnimation3ds();
+	_animation2dEditor->deleteLoadedAnimation2ds();
 	_soundEditor->deleteLoadedSounds();
 
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);

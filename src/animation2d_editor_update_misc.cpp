@@ -6,10 +6,10 @@ void Animation2dEditor::_updateMiscellaneous()
 {
 	if(!_currentAnimation2dId.empty())
 	{
-		if(!_fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimation2dId))
+		if(!_fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD2D_ID, _currentAnimation2dId))
 		{
-			_fe3d->quad3d_setUvMultiplier(PREVIEW_QUAD_ID, fvec2(1.0f));
-			_fe3d->quad3d_setUvOffset(PREVIEW_QUAD_ID, fvec2(0.0f));
+			_fe3d->quad3d_setUvMultiplier(PREVIEW_QUAD2D_ID, fvec2(1.0f));
+			_fe3d->quad3d_setUvOffset(PREVIEW_QUAD2D_ID, fvec2(0.0f));
 		}
 	}
 }
@@ -56,7 +56,7 @@ void Animation2dEditor::_updateAnimation2dCreating()
 
 		_fe3d->animation2d_create(newAnimation2dId);
 
-		_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
+		_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, true);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 		_gui->getOverlay()->getTextField("animation2dId")->setTextContent("Animation2D: " + newAnimation2dId);
@@ -80,7 +80,7 @@ void Animation2dEditor::_updateAnimation2dChoosing()
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
-				_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
+				_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, true);
 
 				_gui->getOverlay()->getTextField("animation2dId")->setTextContent("Animation2D: " + _currentAnimation2dId.substr(1));
 				_gui->getOverlay()->getTextField("animation2dId")->setVisible(true);
@@ -95,8 +95,8 @@ void Animation2dEditor::_updateAnimation2dDeleting()
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
-			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
-			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
+			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD2D_ID, "");
+			_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, false);
 
 			_fe3d->animation2d_delete(_currentAnimation2dId);
 
@@ -145,7 +145,7 @@ void Animation2dEditor::_updateImageChoosing()
 
 		const string finalFilePath = filePath.substr(rootPath.size());
 		_fe3d->misc_clearImageCache(finalFilePath);
-		_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
+		_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD2D_ID, finalFilePath);
 		_isPreviewTextureChosen = true;
 	}
 }

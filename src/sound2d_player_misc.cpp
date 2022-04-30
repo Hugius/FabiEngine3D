@@ -17,9 +17,9 @@ void Sound2dPlayer::_terminateSound2ds()
 {
 	for(const auto & [sound2dId, startedSound2ds] : _startedSound2ds)
 	{
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound2ds.size()); instanceIndex++)
+		for(int index = 0; index < static_cast<int>(startedSound2ds.size()); index++)
 		{
-			_terminateSound2d(sound2dId, instanceIndex);
+			_terminateSound2d(sound2dId, index);
 		}
 	}
 }

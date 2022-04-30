@@ -29,9 +29,9 @@ private:
 	void _updateImageChoosing();
 	void _updateMiscellaneous();
 
-	static inline const string PREVIEW_QUAD_ID = "@@preview_quad";
+	static inline const string PREVIEW_QUAD2D_ID = "@@preview_quad2d";
 
-	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
+	static inline const fvec3 PREVIEW_QUAD2D_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
 	vector<string> _loadedAnimation2dIds = {};
 

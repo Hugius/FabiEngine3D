@@ -7,9 +7,9 @@
 
 void Animation2dEditor::_load()
 {
-	_fe3d->quad3d_create(PREVIEW_QUAD_ID, true);
-	_fe3d->quad3d_setPosition(PREVIEW_QUAD_ID, PREVIEW_QUAD_POSITION);
-	_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
+	_fe3d->quad3d_create(PREVIEW_QUAD2D_ID, true);
+	_fe3d->quad3d_setPosition(PREVIEW_QUAD2D_ID, PREVIEW_QUAD2D_POSITION);
+	_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 
@@ -29,7 +29,7 @@ void Animation2dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
+	_fe3d->quad3d_delete(PREVIEW_QUAD2D_ID);
 
 	_gui->getOverlay()->deleteTextField("animation2dId");
 

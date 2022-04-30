@@ -123,9 +123,9 @@ void Sound3dPlayer::_terminateSound3ds()
 {
 	for(const auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 	{
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
+		for(int index = 0; index < static_cast<int>(startedSound3ds.size()); index++)
 		{
-			_terminateSound3d(sound3dId, instanceIndex);
+			_terminateSound3d(sound3dId, index);
 		}
 	}
 }

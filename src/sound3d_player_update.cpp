@@ -25,24 +25,24 @@ void Sound3dPlayer::update()
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 
-		for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
+		for(int index = 0; index < static_cast<int>(startedSound3ds.size()); index++)
 		{
-			if((startedSound3ds[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if((startedSound3ds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
-				if(startedSound3ds[instanceIndex]->getPlayCount() != -1)
+				if(startedSound3ds[index]->getPlayCount() != -1)
 				{
-					startedSound3ds[instanceIndex]->setPlayCount(startedSound3ds[instanceIndex]->getPlayCount() - 1);
+					startedSound3ds[index]->setPlayCount(startedSound3ds[index]->getPlayCount() - 1);
 				}
 
-				if(startedSound3ds[instanceIndex]->getPlayCount() == 0)
+				if(startedSound3ds[index]->getPlayCount() == 0)
 				{
-					sound3dsToStop.push_back({sound3dId, instanceIndex});
+					sound3dsToStop.push_back({sound3dId, index});
 				}
 				else
 				{
-					startedSound3ds[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
+					startedSound3ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
-					const auto writeResult = waveOutWrite(startedSound3ds[instanceIndex]->getHandle(), startedSound3ds[instanceIndex]->getHeader(), sizeof(WAVEHDR));
+					const auto writeResult = waveOutWrite(startedSound3ds[index]->getHandle(), startedSound3ds[index]->getHeader(), sizeof(WAVEHDR));
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -61,9 +61,9 @@ void Sound3dPlayer::update()
 				}
 			}
 
-			startedSound3ds[instanceIndex]->setVolume(volume);
-			startedSound3ds[instanceIndex]->setLeftIntensity(leftIntensity);
-			startedSound3ds[instanceIndex]->setRightIntensity(rightIntensity);
+			startedSound3ds[index]->setVolume(volume);
+			startedSound3ds[index]->setLeftIntensity(leftIntensity);
+			startedSound3ds[index]->setRightIntensity(rightIntensity);
 		}
 	}
 
@@ -110,9 +110,9 @@ void Sound3dPlayer::update()
 	{
 		for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 		{
-			for(int instanceIndex = 0; instanceIndex < static_cast<int>(startedSound3ds.size()); instanceIndex++)
+			for(int index = 0; index < static_cast<int>(startedSound3ds.size()); index++)
 			{
-				_volumeThreadQueue.push_back({sound3dId, instanceIndex});
+				_volumeThreadQueue.push_back({sound3dId, index});
 			}
 		}
 	}
@@ -126,7 +126,7 @@ void Sound3dPlayer::update()
 	while(!_volumeThread.valid() && !_volumeThreadQueue.empty())
 	{
 		const auto sound3dId = _volumeThreadQueue.front().first;
-		const auto instanceIndex = _volumeThreadQueue.front().second;
+		const auto index = _volumeThreadQueue.front().second;
 
 		if(!_sound3dManager->isSound3dExisting(sound3dId))
 		{
@@ -138,13 +138,13 @@ void Sound3dPlayer::update()
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
 		}
-		if(instanceIndex >= _startedSound3ds.at(sound3dId).size())
+		if(index >= _startedSound3ds.at(sound3dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
 		}
 
-		const auto startedSound3d = _startedSound3ds.at(sound3dId)[instanceIndex];
+		const auto startedSound3d = _startedSound3ds.at(sound3dId)[index];
 		const auto originalSound3d = _sound3dManager->getSound3d(sound3dId);
 
 		const auto sampleCount = (originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes

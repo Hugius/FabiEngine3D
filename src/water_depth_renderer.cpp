@@ -32,25 +32,25 @@ void WaterDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterDepthRenderer::render(const shared_ptr<Water> entity)
+void WaterDepthRenderer::render(const shared_ptr<Water> water)
 {
-	if(!entity->isVisible())
+	if(!water->isVisible())
 	{
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_height", entity->getHeight());
-	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
-	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
-	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
-	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
+	_shaderBuffer->uploadUniform("u_height", water->getHeight());
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, water->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, water->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, water->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, water->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, water->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, water->getMaxClipPosition().z));
 
-	glBindVertexArray(entity->getLowQualityVertexBuffer()->getVaoId());
+	glBindVertexArray(water->getLowQualityVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, water->getLowQualityVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(water->getLowQualityVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

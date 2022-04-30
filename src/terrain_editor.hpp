@@ -11,7 +11,7 @@ public:
 	void deleteLoadedTerrains();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedTerrainIds() const;
 
 	const bool loadTerrainsFromFile();
 	const bool saveTerrainsToFile() const;

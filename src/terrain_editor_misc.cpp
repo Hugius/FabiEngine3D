@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & TerrainEditor::getLoadedEntityIds() const
+const vector<string> & TerrainEditor::getLoadedTerrainIds() const
 {
 	return _loadedTerrainIds;
 }

@@ -137,47 +137,47 @@ const bool ModelManager::isModelsExisting() const
 
 void ModelManager::update()
 {
-	for(const auto & [entityId, entity] : _models)
+	for(const auto & [modelId, model] : _models)
 	{
-		entity->updateTarget();
+		model->updateTarget();
 
-		if(!entity->isVisible())
+		if(!model->isVisible())
 		{
 			continue;
 		}
 
-		if(entity->getLevelOfDetailId().empty())
+		if(model->getLevelOfDetailId().empty())
 		{
-			entity->setLevelOfDetailed(false);
+			model->setLevelOfDetailed(false);
 		}
 		else
 		{
-			if(getModels().find(entity->getLevelOfDetailId()) == getModels().end())
+			if(getModels().find(model->getLevelOfDetailId()) == getModels().end())
 			{
 				abort();
 			}
 
 			const auto cameraPosition = _camera->getPosition();
-			const auto entityPosition = entity->getBasePosition();
-			const auto absolsuteDistance = Mathematics::calculateDistance(cameraPosition, entityPosition);
+			const auto modelPosition = model->getBasePosition();
+			const auto absolsuteDistance = Mathematics::calculateDistance(cameraPosition, modelPosition);
 
-			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
+			model->setLevelOfDetailed((absolsuteDistance > model->getLevelOfDetailDistance()));
 		}
 
-		if(_captorManager->getCaptors().find(entity->getPreviousCaptorId()) == _captorManager->getCaptors().end())
+		if(_captorManager->getCaptors().find(model->getPreviousCaptorId()) == _captorManager->getCaptors().end())
 		{
-			entity->setPreviousCaptorId("");
-			entity->setCubeReflectionMixValue(1.0f);
+			model->setPreviousCaptorId("");
+			model->setCubeReflectionMixValue(1.0f);
 		}
-		if(_captorManager->getCaptors().find(entity->getCurrentCaptorId()) == _captorManager->getCaptors().end())
+		if(_captorManager->getCaptors().find(model->getCurrentCaptorId()) == _captorManager->getCaptors().end())
 		{
-			entity->setCurrentCaptorId("");
-			entity->setCubeReflectionMixValue(1.0f);
+			model->setCurrentCaptorId("");
+			model->setCubeReflectionMixValue(1.0f);
 		}
-		if(entity->getPreviousCaptorId() == entity->getCurrentCaptorId())
+		if(model->getPreviousCaptorId() == model->getCurrentCaptorId())
 		{
-			entity->setPreviousCaptorId("");
-			entity->setCubeReflectionMixValue(1.0f);
+			model->setPreviousCaptorId("");
+			model->setCubeReflectionMixValue(1.0f);
 		}
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
@@ -186,7 +186,7 @@ void ModelManager::update()
 
 			for(const auto & [captorId, captor] : _captorManager->getCaptors())
 			{
-				const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), captor->getPosition());
+				const auto absoluteDistance = Mathematics::calculateDistance(model->getBasePosition(), captor->getPosition());
 
 				orderedCaptors.insert({absoluteDistance, captor});
 			}
@@ -195,21 +195,21 @@ void ModelManager::update()
 			{
 				const auto closestCaptorId = orderedCaptors.begin()->second->getId();
 
-				if(entity->getCurrentCaptorId() != closestCaptorId)
+				if(model->getCurrentCaptorId() != closestCaptorId)
 				{
-					entity->setPreviousCaptorId(entity->getCurrentCaptorId());
-					entity->setCurrentCaptorId(closestCaptorId);
+					model->setPreviousCaptorId(model->getCurrentCaptorId());
+					model->setCurrentCaptorId(closestCaptorId);
 
-					if(!entity->getPreviousCaptorId().empty())
+					if(!model->getPreviousCaptorId().empty())
 					{
-						entity->setCubeReflectionMixValue(0.0f);
+						model->setCubeReflectionMixValue(0.0f);
 					}
 				}
 			}
 
-			entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
+			model->setCubeReflectionMixValue(model->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
 		}
 
-		entity->updateTransformation();
+		model->updateTransformation();
 	}
 }

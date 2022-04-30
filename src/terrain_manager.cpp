@@ -44,7 +44,7 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 		return;
 	}
 
-	auto entity = make_shared<Terrain>(terrainId);
+	auto terrain = make_shared<Terrain>(terrainId);
 
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_TERRAIN_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
@@ -61,11 +61,11 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 		pixels.push_back(intensity);
 	}
 
-	entity->setHeightMapPath(heightMapPath);
-	entity->setPixels(pixels);
-	entity->setSize(static_cast<float>(size));
+	terrain->setHeightMapPath(heightMapPath);
+	terrain->setPixels(pixels);
+	terrain->setSize(static_cast<float>(size));
 
-	_terrains.insert({terrainId, entity});
+	_terrains.insert({terrainId, terrain});
 
 	loadTerrainVertexBuffer(terrainId);
 }
@@ -122,7 +122,7 @@ void TerrainManager::loadTerrainVertexBuffer(const string & terrainId)
 	_loadTerrainVertexBuffer(getTerrain(terrainId), getTerrain(terrainId)->getSize(), getTerrain(terrainId)->getMaxHeight(), getTerrain(terrainId)->getPixels());
 }
 
-void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> entity, float size, float maxHeight, const vector<float> & pixels)
+void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float size, float maxHeight, const vector<float> & pixels)
 {
 	const auto halfSize = (size * 0.5f);
 
@@ -236,7 +236,7 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> entity, float 
 
 	auto bufferDataCount = static_cast<int>(bufferData.size());
 
-	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
+	terrain->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
 
 const float TerrainManager::getTerrainPixelHeight(const string & terrainId, float x, float z)

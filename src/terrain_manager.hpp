@@ -29,7 +29,7 @@ public:
 	const bool isInside(const string & terrainId, float x, float z);
 
 private:
-	void _loadTerrainVertexBuffer(shared_ptr<Terrain> entity, float size, float maxHeight, const vector<float> & pixels);
+	void _loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float size, float maxHeight, const vector<float> & pixels);
 
 	float _getTerrainPixelHeight(float x, float z, float size, float maxHeight, const vector<float> & pixels);
 

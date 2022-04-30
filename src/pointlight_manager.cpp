@@ -68,8 +68,8 @@ const bool PointlightManager::isPointlightsExisting() const
 
 void PointlightManager::update()
 {
-	for(const auto & [entityId, entity] : _pointlights)
+	for(const auto & [pointlightId, pointlight] : _pointlights)
 	{
-		entity->updateTarget();
+		pointlight->updateTarget();
 	}
 }

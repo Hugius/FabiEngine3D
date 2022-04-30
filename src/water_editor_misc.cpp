@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & WaterEditor::getLoadedEntityIds() const
+const vector<string> & WaterEditor::getLoadedWaterIds() const
 {
 	return _loadedWaterIds;
 }

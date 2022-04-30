@@ -47,9 +47,9 @@ void WaterManager::createWater(const string & waterId)
 		abort();
 	}
 
-	auto entity = make_shared<Water>(waterId);
+	auto water = make_shared<Water>(waterId);
 
-	_waters.insert({waterId, entity});
+	_waters.insert({waterId, water});
 
 	loadWaterVertexBuffer(waterId);
 }
@@ -91,7 +91,7 @@ const bool WaterManager::isWatersExisting() const
 	return !_waters.empty();
 }
 
-void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> entity, float size)
+void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 {
 	const float halfSize = (size * 0.5f);
 
@@ -175,25 +175,25 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> entity, float size)
 	const auto lowQualityBufferDataCount = static_cast<int>(sizeof(lowQualityBufferData) / sizeof(float));
 	const auto highQualityBufferDataCount = static_cast<int>(highQualityBufferData.size());
 
-	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
-	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
+	water->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
+	water->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
 }
 
 void WaterManager::update()
 {
-	auto entity = getSelectedWater();
+	auto water = getSelectedWater();
 
-	if(entity == nullptr)
+	if(water == nullptr)
 	{
 		return;
 	}
 
-	if(!entity->isVisible())
+	if(!water->isVisible())
 	{
 		return;
 	}
 
-	entity->setRippleOffset(fvec2(fmodf((entity->getRippleOffset().x + entity->getRippleSpeed().x), 1.0f), fmodf((entity->getRippleOffset().y - entity->getRippleSpeed().y), 1.0f)));
+	water->setRippleOffset(fvec2(fmodf((water->getRippleOffset().x + water->getRippleSpeed().x), 1.0f), fmodf((water->getRippleOffset().y - water->getRippleSpeed().y), 1.0f)));
 
-	entity->setWaveOffset(entity->getWaveOffset() + (entity->getWaveSpeed()));
+	water->setWaveOffset(water->getWaveOffset() + (water->getWaveSpeed()));
 }

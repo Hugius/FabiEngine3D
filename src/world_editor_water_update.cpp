@@ -16,7 +16,7 @@ void WorldEditor::_updateWaterMenu()
 		{
 			vector<string> waterIds;
 
-			for(const auto & waterId : _waterEditor->getLoadedEntityIds())
+			for(const auto & waterId : _waterEditor->getLoadedWaterIds())
 			{
 				if(waterId[0] == '@')
 				{

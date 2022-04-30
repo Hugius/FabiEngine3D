@@ -11,7 +11,7 @@ public:
 	void deleteLoadedText3ds();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedText3dIds() const;
 
 	const bool loadText3dsFromFile();
 	const bool saveText3dsToFile() const;

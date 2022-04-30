@@ -16,7 +16,7 @@ void WorldEditor::_updateTerrainMenu()
 		{
 			vector<string> terrainIds;
 
-			for(const auto & terrainId : _terrainEditor->getLoadedEntityIds())
+			for(const auto & terrainId : _terrainEditor->getLoadedTerrainIds())
 			{
 				if(terrainId[0] == '@')
 				{

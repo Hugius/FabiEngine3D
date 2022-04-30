@@ -68,38 +68,38 @@ void Quad3dManager::createQuad3d(const string & quad3dId, bool isCentered)
 		abort();
 	}
 
-	auto entity = make_shared<Quad3d>(quad3dId);
+	auto quad3d = make_shared<Quad3d>(quad3dId);
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
-	entity->setCentered(isCentered);
+	quad3d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	quad3d->setCentered(isCentered);
 
-	_quad3ds.insert({quad3dId, entity});
+	_quad3ds.insert({quad3dId, quad3d});
 }
 
 void Quad3dManager::update()
 {
-	for(const auto & [entityId, entity] : _quad3ds)
+	for(const auto & [quad3dId, quad3d] : _quad3ds)
 	{
-		entity->updateTarget();
+		quad3d->updateTarget();
 
-		if(entity->isFacingCameraHorizontally() || entity->isFacingCameraVertically())
+		if(quad3d->isFacingCameraHorizontally() || quad3d->isFacingCameraVertically())
 		{
-			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
+			auto position = (quad3d->getPosition() + fvec3(0.0f, (quad3d->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _camera->getPosition());
 
 			auto degreesX = Mathematics::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
 			auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
 
-			auto rotation = entity->getRotation();
-			rotation.x = (degreesX * static_cast<float>(entity->isFacingCameraHorizontally()));
-			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(entity->isFacingCameraVertically()));
+			auto rotation = quad3d->getRotation();
+			rotation.x = (degreesX * static_cast<float>(quad3d->isFacingCameraHorizontally()));
+			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(quad3d->isFacingCameraVertically()));
 
-			entity->setRotation(rotation);
+			quad3d->setRotation(rotation);
 		}
 
-		if(entity->isVisible())
+		if(quad3d->isVisible())
 		{
-			entity->updateTransformation();
+			quad3d->updateTransformation();
 		}
 	}
 }

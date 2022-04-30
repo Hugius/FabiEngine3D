@@ -139,98 +139,98 @@ void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_pt
 	//_shader->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void WaterColorRenderer::render(const shared_ptr<Water> entity)
+void WaterColorRenderer::render(const shared_ptr<Water> water)
 {
-	if(!entity->isVisible())
+	if(!water->isVisible())
 	{
 		return;
 	}
 
-	if(entity->isWireframed())
+	if(water->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shaderBuffer->uploadUniform("u_rippleOffset", entity->getRippleOffset());
-	_shaderBuffer->uploadUniform("u_waveOffset", entity->getWaveOffset());
-	_shaderBuffer->uploadUniform("u_waveHeight", entity->getWaveHeight());
-	_shaderBuffer->uploadUniform("u_maxDepth", entity->getMaxDepth());
-	_shaderBuffer->uploadUniform("u_height", entity->getHeight());
-	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-	_shaderBuffer->uploadUniform("u_specularShininess", entity->getSpecularShininess());
-	_shaderBuffer->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-	_shaderBuffer->uploadUniform("u_isEdged", entity->isEdged());
-	_shaderBuffer->uploadUniform("u_isSpecular", entity->isSpecular());
-	_shaderBuffer->uploadUniform("u_isReflective", entity->isReflective());
-	_shaderBuffer->uploadUniform("u_isRefractive", entity->isRefractive());
-	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
-	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
-	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
-	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
-	_shaderBuffer->uploadUniform("u_hasHeightMap", (entity->getHeightTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasDudvMap", (entity->getDudvTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer() != nullptr));
-	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_isWireframed", water->isWireframed());
+	_shaderBuffer->uploadUniform("u_rippleOffset", water->getRippleOffset());
+	_shaderBuffer->uploadUniform("u_waveOffset", water->getWaveOffset());
+	_shaderBuffer->uploadUniform("u_waveHeight", water->getWaveHeight());
+	_shaderBuffer->uploadUniform("u_maxDepth", water->getMaxDepth());
+	_shaderBuffer->uploadUniform("u_height", water->getHeight());
+	_shaderBuffer->uploadUniform("u_textureRepeat", water->getTextureRepeat());
+	_shaderBuffer->uploadUniform("u_specularShininess", water->getSpecularShininess());
+	_shaderBuffer->uploadUniform("u_specularIntensity", water->getSpecularIntensity());
+	_shaderBuffer->uploadUniform("u_isEdged", water->isEdged());
+	_shaderBuffer->uploadUniform("u_isSpecular", water->isSpecular());
+	_shaderBuffer->uploadUniform("u_isReflective", water->isReflective());
+	_shaderBuffer->uploadUniform("u_isRefractive", water->isRefractive());
+	_shaderBuffer->uploadUniform("u_color", water->getColor());
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, water->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, water->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, water->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, water->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, water->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, water->getMaxClipPosition().z));
+	_shaderBuffer->uploadUniform("u_hasHeightMap", (water->getHeightTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasDudvMap", (water->getDudvTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_hasNormalMap", (water->getNormalTextureBuffer() != nullptr));
+	_shaderBuffer->uploadUniform("u_wireframeColor", water->getWireframeColor());
 
-	if(entity->getDudvTextureBuffer() != nullptr)
+	if(water->getDudvTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getDudvTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, water->getDudvTextureBuffer()->getTboId());
 	}
-	if(entity->getNormalTextureBuffer() != nullptr)
+	if(water->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, water->getNormalTextureBuffer()->getTboId());
 	}
-	if(entity->getHeightTextureBuffer() != nullptr)
+	if(water->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getHeightTextureBuffer()->getTboId());
+		glBindTexture(GL_TEXTURE_2D, water->getHeightTextureBuffer()->getTboId());
 	}
 
-	if(entity->getHeightTextureBuffer() != nullptr)
+	if(water->getHeightTextureBuffer() != nullptr)
 	{
-		glBindVertexArray(entity->getHighQualityVertexBuffer()->getVaoId());
+		glBindVertexArray(water->getHighQualityVertexBuffer()->getVaoId());
 	}
 	else
 	{
-		glBindVertexArray(entity->getLowQualityVertexBuffer()->getVaoId());
+		glBindVertexArray(water->getLowQualityVertexBuffer()->getVaoId());
 	}
 
-	if(entity->getHeightTextureBuffer() != nullptr)
+	if(water->getHeightTextureBuffer() != nullptr)
 	{
-		glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityVertexBuffer()->getVertexCount());
-		_renderStorage->increaseTriangleCount(entity->getHighQualityVertexBuffer()->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, water->getHighQualityVertexBuffer()->getVertexCount());
+		_renderStorage->increaseTriangleCount(water->getHighQualityVertexBuffer()->getVertexCount() / 3);
 	}
 	else
 	{
-		glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityVertexBuffer()->getVertexCount());
-		_renderStorage->increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, water->getLowQualityVertexBuffer()->getVertexCount());
+		_renderStorage->increaseTriangleCount(water->getLowQualityVertexBuffer()->getVertexCount() / 3);
 	}
 
 	glBindVertexArray(0);
 
-	if(entity->getDudvTextureBuffer() != nullptr)
+	if(water->getDudvTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getNormalTextureBuffer() != nullptr)
+	if(water->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(entity->getHeightTextureBuffer() != nullptr)
+	if(water->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	if(entity->isWireframed())
+	if(water->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}

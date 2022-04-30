@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-const vector<string> & Text3dEditor::getLoadedEntityIds() const
+const vector<string> & Text3dEditor::getLoadedText3dIds() const
 {
 	return _loadedText3dIds;
 }

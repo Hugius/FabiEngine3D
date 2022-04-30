@@ -107,11 +107,11 @@ void SkyManager::createSky(const string & skyId)
 		abort();
 	}
 
-	auto entity = make_shared<Sky>(skyId);
+	auto sky = make_shared<Sky>(skyId);
 
-	entity->setVertexBuffer(_vertexBuffer);
+	sky->setVertexBuffer(_vertexBuffer);
 
-	_skies.insert({skyId, entity});
+	_skies.insert({skyId, sky});
 }
 
 void SkyManager::update()

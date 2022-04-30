@@ -25,7 +25,7 @@ public:
 	const bool isWatersExisting() const;
 
 private:
-	void _loadWaterVertexBuffer(shared_ptr<Water> entity, float size);
+	void _loadWaterVertexBuffer(shared_ptr<Water> water, float size);
 
 	unordered_map<string, shared_ptr<Water>> _waters = {};
 

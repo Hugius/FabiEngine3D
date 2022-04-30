@@ -17,5 +17,5 @@ public:
 	void unbind();
 	void processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights);
 	void processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights);
-	void render(const shared_ptr<Model> entity, const unordered_map<string, shared_ptr<Captor>> & captors);
+	void render(const shared_ptr<Model> model, const unordered_map<string, shared_ptr<Captor>> & captors);
 };

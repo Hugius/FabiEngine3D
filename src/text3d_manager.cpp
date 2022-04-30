@@ -95,41 +95,41 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text3d>(text3dId);
+	auto text3d = make_shared<Text3d>(text3dId);
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
-	entity->setCentered(isCentered);
-	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
-	entity->setFontMapPath(fontMapPath);
-	entity->setContent("text");
+	text3d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	text3d->setCentered(isCentered);
+	text3d->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
+	text3d->setFontMapPath(fontMapPath);
+	text3d->setContent("text");
 
-	_text3ds.insert({text3dId, entity});
+	_text3ds.insert({text3dId, text3d});
 }
 
 void Text3dManager::update()
 {
-	for(const auto & [entityId, entity] : _text3ds)
+	for(const auto & [text3dId, text3d] : _text3ds)
 	{
-		entity->updateTarget();
+		text3d->updateTarget();
 
-		if(entity->isFacingCameraHorizontally() || entity->isFacingCameraVertically())
+		if(text3d->isFacingCameraHorizontally() || text3d->isFacingCameraVertically())
 		{
-			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
+			auto position = (text3d->getPosition() + fvec3(0.0f, (text3d->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _camera->getPosition());
 
 			auto degreesX = Mathematics::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
 			auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
 
-			auto rotation = entity->getRotation();
-			rotation.x = (degreesX * static_cast<float>(entity->isFacingCameraHorizontally()));
-			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(entity->isFacingCameraVertically()));
+			auto rotation = text3d->getRotation();
+			rotation.x = (degreesX * static_cast<float>(text3d->isFacingCameraHorizontally()));
+			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(text3d->isFacingCameraVertically()));
 
-			entity->setRotation(rotation);
+			text3d->setRotation(rotation);
 		}
 
-		if(entity->isVisible())
+		if(text3d->isVisible())
 		{
-			entity->updateQuad3ds();
+			text3d->updateQuad3ds();
 		}
 	}
 }

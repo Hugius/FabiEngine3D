@@ -38,13 +38,13 @@ void SpotlightManager::createSpotlight(const string & spotlightId)
 
 void SpotlightManager::update()
 {
-	for(const auto & [entityId, entity] : _spotlights)
+	for(const auto & [spotlightId, spotlight] : _spotlights)
 	{
-		entity->updateTarget();
+		spotlight->updateTarget();
 
-		if(entity->isVisible())
+		if(spotlight->isVisible())
 		{
-			entity->updateFront();
+			spotlight->updateFront();
 		}
 	}
 }

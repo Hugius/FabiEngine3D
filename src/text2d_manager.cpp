@@ -50,16 +50,16 @@ void Text2dManager::createText2d(const string & text2dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto entity = make_shared<Text2d>(text2dId);
+	auto text2d = make_shared<Text2d>(text2dId);
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
-	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
-	entity->setFontMapPath(fontMapPath);
-	entity->setCentered(isCentered);
-	entity->setContent("text");
-	entity->setDepth(_renderStorage->getGuiDepth());
+	text2d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
+	text2d->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
+	text2d->setFontMapPath(fontMapPath);
+	text2d->setCentered(isCentered);
+	text2d->setContent("text");
+	text2d->setDepth(_renderStorage->getGuiDepth());
 
-	_text2ds.insert({text2dId, entity});
+	_text2ds.insert({text2dId, text2d});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
@@ -96,13 +96,13 @@ void Text2dManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Text2dManager::update()
 {
-	for(const auto & [entityId, entity] : _text2ds)
+	for(const auto & [text2dId, text2d] : _text2ds)
 	{
-		entity->updateTarget();
+		text2d->updateTarget();
 
-		if(entity->isVisible())
+		if(text2d->isVisible())
 		{
-			entity->updateQuad2ds();
+			text2d->updateQuad2ds();
 		}
 	}
 }

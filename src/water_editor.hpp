@@ -11,7 +11,7 @@ public:
 	void deleteLoadedWaters();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedEntityIds() const;
+	const vector<string> & getLoadedWaterIds() const;
 
 	const bool loadWatersFromFile();
 	const bool saveWatersToFile() const;

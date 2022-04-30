@@ -79,7 +79,7 @@ void WorldEditor::_load()
 		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
 	}
 
-	for(const auto & text3dId : _text3dEditor->getLoadedEntityIds())
+	for(const auto & text3dId : _text3dEditor->getLoadedText3dIds())
 	{
 		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
 	}

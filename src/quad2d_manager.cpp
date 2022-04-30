@@ -77,13 +77,13 @@ void Quad2dManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Quad2dManager::update()
 {
-	for(const auto & [entityId, entity] : _quad2ds)
+	for(const auto & [quad2dId, quad2d] : _quad2ds)
 	{
-		entity->updateTarget();
+		quad2d->updateTarget();
 
-		if(entity->isVisible())
+		if(quad2d->isVisible())
 		{
-			entity->updateTransformation();
+			quad2d->updateTransformation();
 		}
 	}
 }

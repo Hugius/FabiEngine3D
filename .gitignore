@@ -5,8 +5,8 @@ dev/Systems/AnimationSystem/Temp/
 dev/Systems/AssetSystem/Temp/
 dev/Systems/ControlSystem/Temp/
 dev/Systems/CoreSystem/Temp/
+dev/Systems/DomainSystem/Temp/
 dev/Systems/EditorSystem/Temp/
-dev/Systems/EntitySystem/Temp/
 dev/Systems/GuiSystem/Temp/
 dev/Systems/MathSystem/Temp/
 dev/Systems/NetworkingSystem/Temp/
@@ -21,8 +21,8 @@ dev/Systems/AnimationSystem.lib
 dev/Systems/AssetSystem.lib
 dev/Systems/ControlSystem.lib
 dev/Systems/CoreSystem.lib
+dev/Systems/DomainSystem.lib
 dev/Systems/EditorSystem.lib
-dev/Systems/EntitySystem.lib
 dev/Systems/GuiSystem.lib
 dev/Systems/MathSystem.lib
 dev/Systems/NetworkingSystem.lib
@@ -36,8 +36,8 @@ dev/Systems/AnimationSystem.pdb
 dev/Systems/AssetSystem.pdb
 dev/Systems/ControlSystem.pdb
 dev/Systems/CoreSystem.pdb
+dev/Systems/DomainSystem.pdb
 dev/Systems/EditorSystem.pdb
-dev/Systems/EntitySystem.pdb
 dev/Systems/GuiSystem.pdb
 dev/Systems/MathSystem.pdb
 dev/Systems/NetworkingSystem.pdb

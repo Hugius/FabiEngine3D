@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\aabb.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_manager.cpp" />
     <ClCompile Include="..\..\..\src\animation2d.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_manager.cpp" />
     <ClCompile Include="..\..\..\src\animation3d.cpp" />
@@ -51,6 +53,8 @@
     <ClCompile Include="..\..\..\src\water_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\aabb.hpp" />
+    <ClInclude Include="..\..\..\src\aabb_manager.hpp" />
     <ClInclude Include="..\..\..\src\animation2d.hpp" />
     <ClInclude Include="..\..\..\src\animation2d_manager.hpp" />
     <ClInclude Include="..\..\..\src\animation3d.hpp" />
@@ -87,9 +91,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{03CAF36B-F2BB-4DAB-B622-E8C3F2E45942}</ProjectGuid>
-    <RootNamespace>EntitySystem</RootNamespace>
+    <ProjectGuid>{6B8F62B2-FEF1-4988-A9D5-28A95A4CFB8E}</ProjectGuid>
+    <RootNamespace>DomainSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>DomainSystem</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

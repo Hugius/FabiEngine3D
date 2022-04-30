@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\aabb.cpp" />
-    <ClCompile Include="..\..\..\src\aabb_manager.cpp" />
     <ClCompile Include="..\..\..\src\box.cpp" />
     <ClCompile Include="..\..\..\src\camera_collision_detector.cpp" />
     <ClCompile Include="..\..\..\src\camera_collision_responder_update.cpp" />
@@ -32,8 +30,6 @@
     <ClCompile Include="..\..\..\src\raycast_intersector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb.hpp" />
-    <ClInclude Include="..\..\..\src\aabb_manager.hpp" />
     <ClInclude Include="..\..\..\src\box.hpp" />
     <ClInclude Include="..\..\..\src\camera.hpp" />
     <ClInclude Include="..\..\..\src\camera_collision_detector.hpp" />

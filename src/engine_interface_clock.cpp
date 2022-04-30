@@ -129,19 +129,18 @@ const bool EngineInterface::clock_isIdReserved(const string & clockId) const
 		clockId == "animationUpdate" ||
 		clockId == "soundUpdate" ||
 		clockId == "networkUpdate" ||
-		clockId == "miscUpdate" ||
 		clockId == "depthPreRender" ||
 		clockId == "shadowPreRender" ||
 		clockId == "reflectionPreRender" ||
 		clockId == "refractionPreRender" ||
 		clockId == "waterPreRender" ||
-		clockId == "3dEntityRender" ||
+		clockId == "3dRender" ||
 		clockId == "antiAliasingPostRender" ||
 		clockId == "bloomPreRender" ||
 		clockId == "dofPreRender" ||
 		clockId == "lensFlarePreRender" ||
 		clockId == "motionBlurPreRender" ||
-		clockId == "2dEntityRender" ||
+		clockId == "2dRender" ||
 		clockId == "bufferSwap"
 		);
 }

@@ -59,8 +59,8 @@ public:
 	void inject(shared_ptr<Timer> timer);
 	void update();
 	void renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size);
-	void render3dEntities();
-	void render2dEntities();
+	void render3d();
+	void render2d();
 	void reloadBloomBlurQuality();
 	void reloadDofBlurQuality();
 	void reloadMotionBlurBlurQuality();

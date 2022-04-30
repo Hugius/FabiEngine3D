@@ -24,7 +24,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size)
 	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
 }
 
-void MasterRenderer::render3dEntities()
+void MasterRenderer::render3d()
 {
 	_worldColorCaptureBuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -46,7 +46,7 @@ void MasterRenderer::render3dEntities()
 	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneTextureBuffer());
 }
 
-void MasterRenderer::render2dEntities()
+void MasterRenderer::render2d()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(Configuration::getInst().getDisplayPosition().x, Configuration::getInst().getDisplayPosition().y, Configuration::getInst().getDisplaySize().x, Configuration::getInst().getDisplaySize().y);

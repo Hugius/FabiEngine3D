@@ -4,9 +4,19 @@
 
 - You can use the performance statistics in the bottom viewport to analyze your application's performance.
 - The amount of triangles is the realtime amount being rendered every frame.
-- `mainUpdate` includes all function calls and calculations in your update scripts.
-- `physicsUpdate` contains: camera, raycasting, collision.
-- `bufferSwap` means the actual buffering on the output screen.
+- `mainUpdate`: input handling + the execution of your update scripts
+- `physicsUpdate`: camera + raycasting + collision
+- `environmentUpdate`: sky + terrain + water
+- `modelUpdate`: model
+- `quadUpdate`: quad3D + quad2D
+- `textUpdate`: text3D + text2D
+- `aabbUpdate`: AABB
+- `lightUpdate`: pointlight + spotlight
+- `captorUpdate`: captor
+- `renderUpdate`: window + sky exposure + shadows + motion blur + lens flare
+- `animationUpdate`: animation3D + animation2D
+- `soundUpdate`: sound3D + sound2D
+- `networkUpdate`: server + client
 
 ## 3. Dangers
 

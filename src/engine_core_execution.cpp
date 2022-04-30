@@ -16,22 +16,37 @@ void EngineCore::_update()
 	_camera->updateMatrices();
 	_timer->stopClock("physicsUpdate");
 
-	_timer->startClock("3dEntityUpdate");
+	_timer->startClock("environmentUpdate");
 	_skyManager->update();
 	_waterManager->update();
+	_timer->stopClock("environmentUpdate");
+
+	_timer->startClock("modelUpdate");
 	_modelManager->update();
+	_timer->stopClock("modelUpdate");
+
+	_timer->startClock("quadUpdate");
 	_quad3dManager->update();
+	_quad2dManager->update();
+	_timer->stopClock("quadUpdate");
+
+	_timer->startClock("textUpdate");
 	_text3dManager->update();
+	_text2dManager->update();
+	_timer->stopClock("textUpdate");
+
+	_timer->startClock("aabbUpdate");
 	_aabbManager->update();
+	_timer->stopClock("aabbUpdate");
+
+	_timer->startClock("lightUpdate");
 	_pointlightManager->update();
 	_spotlightManager->update();
-	_captorManager->update();
-	_timer->stopClock("3dEntityUpdate");
+	_timer->stopClock("lightUpdate");
 
-	_timer->startClock("2dEntityUpdate");
-	_quad2dManager->update();
-	_text2dManager->update();
-	_timer->stopClock("2dEntityUpdate");
+	_timer->startClock("captorUpdate");
+	_captorManager->update();
+	_timer->stopClock("captorUpdate");
 
 	_timer->startClock("renderUpdate");
 	_renderWindow->update();
@@ -57,19 +72,21 @@ void EngineCore::_update()
 	_networkingClient->update();
 	_timer->stopClock("networkUpdate");
 
-	_timer->startClock("miscUpdate");
-	_timer->increasePassedUpdateCount();
-	_timer->stopClock("miscUpdate");
-
 	_updateDeltaTimes.at("mainUpdate") = _timer->getClockDeltaTime("mainUpdate");
 	_updateDeltaTimes.at("physicsUpdate") = _timer->getClockDeltaTime("physicsUpdate");
-	_updateDeltaTimes.at("3dEntityUpdate") = _timer->getClockDeltaTime("3dEntityUpdate");
-	_updateDeltaTimes.at("2dEntityUpdate") = _timer->getClockDeltaTime("2dEntityUpdate");
+	_updateDeltaTimes.at("environmentUpdate") = _timer->getClockDeltaTime("environmentUpdate");
+	_updateDeltaTimes.at("modelUpdate") = _timer->getClockDeltaTime("modelUpdate");
+	_updateDeltaTimes.at("quadUpdate") = _timer->getClockDeltaTime("quadUpdate");
+	_updateDeltaTimes.at("textUpdate") = _timer->getClockDeltaTime("textUpdate");
+	_updateDeltaTimes.at("aabbUpdate") = _timer->getClockDeltaTime("aabbUpdate");
+	_updateDeltaTimes.at("lightUpdate") = _timer->getClockDeltaTime("lightUpdate");
+	_updateDeltaTimes.at("captorUpdate") = _timer->getClockDeltaTime("captorUpdate");
 	_updateDeltaTimes.at("renderUpdate") = _timer->getClockDeltaTime("renderUpdate");
 	_updateDeltaTimes.at("animationUpdate") = _timer->getClockDeltaTime("animationUpdate");
 	_updateDeltaTimes.at("soundUpdate") = _timer->getClockDeltaTime("soundUpdate");
 	_updateDeltaTimes.at("networkUpdate") = _timer->getClockDeltaTime("networkUpdate");
-	_updateDeltaTimes.at("miscUpdate") = _timer->getClockDeltaTime("miscUpdate");
+
+	_timer->increasePassedUpdateCount();
 }
 
 void EngineCore::_render()
@@ -95,9 +112,9 @@ void EngineCore::_render()
 	_masterRenderer->captureWaterEdges();
 	_timer->stopClock("waterPreRender");
 
-	_timer->startClock("3dEntityRender");
-	_masterRenderer->render3dEntities();
-	_timer->stopClock("3dEntityRender");
+	_timer->startClock("3dRender");
+	_masterRenderer->render3d();
+	_timer->stopClock("3dRender");
 
 	_timer->startClock("antiAliasingPostRender");
 	_masterRenderer->captureAntiAliasing();
@@ -115,9 +132,9 @@ void EngineCore::_render()
 	_masterRenderer->captureMotionBlur();
 	_timer->stopClock("motionBlurPreRender");
 
-	_timer->startClock("2dEntityRender");
-	_masterRenderer->render2dEntities();
-	_timer->stopClock("2dEntityRender");
+	_timer->startClock("2dRender");
+	_masterRenderer->render2d();
+	_timer->stopClock("2dRender");
 
 	_timer->startClock("bufferSwap");
 	_renderWindow->swapBuffer();
@@ -128,12 +145,12 @@ void EngineCore::_render()
 	_renderDeltaTimes.at("reflectionPreRender") = _timer->getClockDeltaTime("reflectionPreRender");
 	_renderDeltaTimes.at("refractionPreRender") = _timer->getClockDeltaTime("refractionPreRender");
 	_renderDeltaTimes.at("waterPreRender") = _timer->getClockDeltaTime("waterPreRender");
-	_renderDeltaTimes.at("3dEntityRender") = _timer->getClockDeltaTime("3dEntityRender");
+	_renderDeltaTimes.at("3dRender") = _timer->getClockDeltaTime("3dRender");
 	_renderDeltaTimes.at("antiAliasingPostRender") = _timer->getClockDeltaTime("antiAliasingPostRender");
 	_renderDeltaTimes.at("bloomPreRender") = _timer->getClockDeltaTime("bloomPreRender");
 	_renderDeltaTimes.at("dofPreRender") = _timer->getClockDeltaTime("dofPreRender");
 	_renderDeltaTimes.at("lensFlarePreRender") = _timer->getClockDeltaTime("lensFlarePreRender");
 	_renderDeltaTimes.at("motionBlurPreRender") = _timer->getClockDeltaTime("motionBlurPreRender");
-	_renderDeltaTimes.at("2dEntityRender") = _timer->getClockDeltaTime("2dEntityRender");
+	_renderDeltaTimes.at("2dRender") = _timer->getClockDeltaTime("2dRender");
 	_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
 }

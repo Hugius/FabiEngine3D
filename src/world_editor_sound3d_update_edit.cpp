@@ -3,35 +3,35 @@
 
 void WorldEditor::_updateSoundEditing()
 {
-	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
 		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedSound)
 		{
-			_selectedSoundId = "";
+			_selectedSound3dId = "";
 		}
 		else
 		{
 			_dontResetSelectedSound = false;
 		}
 
-		for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
+		for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@speaker_" + placedSoundId));
+			const auto isHovered = (hoveredAabbId == ("@@speaker_" + placedSound3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectSound(placedSoundId);
+				_selectSound3d(placedSound3dId);
 
 				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
-					if(_selectedSoundId != _activeSoundId)
+					if(_selectedSound3dId != _activeSound3dId)
 					{
-						_activateSound(_selectedSoundId);
+						_activateSound3d(_selectedSound3dId);
 					}
 				}
 
@@ -39,9 +39,9 @@ void WorldEditor::_updateSoundEditing()
 			}
 			else
 			{
-				if((placedSoundId != _selectedSoundId) && (placedSoundId != _activeSoundId))
+				if((placedSound3dId != _selectedSound3dId) && (placedSound3dId != _activeSound3dId))
 				{
-					_deselectSound(placedSoundId);
+					_deselectSound3d(placedSound3dId);
 				}
 			}
 		}
@@ -50,27 +50,27 @@ void WorldEditor::_updateSoundEditing()
 		{
 			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeSoundId.empty())
+				if(!_activeSound3dId.empty())
 				{
-					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSoundId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSound3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeSoundId = "";
+						_activeSound3dId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedSoundId.empty())
+		if(_selectedSound3dId.empty())
 		{
-			_updateSoundHighlighting(_activeSoundId, _activeSoundHighlightDirection);
+			_updateSound3dHighlighting(_activeSound3dId, _activeSoundHighlightDirection);
 		}
 		else
 		{
-			_updateSoundHighlighting(_selectedSoundId, _selectedSoundHighlightDirection);
+			_updateSound3dHighlighting(_selectedSound3dId, _selectedSoundHighlightDirection);
 		}
 
-		if(!_activeSoundId.empty())
+		if(!_activeSound3dId.empty())
 		{
 			auto screen = rightWindow->getScreen("soundPropertiesMenu");
 
@@ -78,18 +78,18 @@ void WorldEditor::_updateSoundEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@speaker_" + _activeSoundId);
-				_fe3d->sound3d_delete(_activeSoundId);
-				_loadedSoundIds.erase(_activeSoundId);
-				_activeSoundId = "";
+				_fe3d->model_delete("@@speaker_" + _activeSound3dId);
+				_fe3d->sound3d_delete(_activeSound3dId);
+				_loadedSound3dIds.erase(_activeSound3dId);
+				_activeSound3dId = "";
 				rightWindow->setActiveScreen("main");
 
 				return;
 			}
 
-			auto position = _fe3d->sound3d_getPosition(_activeSoundId);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
+			auto position = _fe3d->sound3d_getPosition(_activeSound3dId);
+			auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSound3dId);
+			auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSound3dId);
 
 			_handleInputBox("soundPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleInputBox("soundPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SOUND_POSITION_DIVIDER));
@@ -97,10 +97,10 @@ void WorldEditor::_updateSoundEditing()
 			_handleInputBox("soundPropertiesMenu", "distanceMinus", "distance", "distancePlus", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_handleInputBox("soundPropertiesMenu", "volumeMinus", "volume", "volumePlus", maxVolume, SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 
-			_fe3d->sound3d_setPosition(_activeSoundId, position);
-			_fe3d->sound3d_setMaxDistance(_activeSoundId, maxDistance);
-			_fe3d->sound3d_setMaxVolume(_activeSoundId, maxVolume);
-			_fe3d->model_setBasePosition(("@@speaker_" + _activeSoundId), position);
+			_fe3d->sound3d_setPosition(_activeSound3dId, position);
+			_fe3d->sound3d_setMaxDistance(_activeSound3dId, maxDistance);
+			_fe3d->sound3d_setMaxVolume(_activeSound3dId, maxVolume);
+			_fe3d->model_setBasePosition(("@@speaker_" + _activeSound3dId), position);
 		}
 	}
 }

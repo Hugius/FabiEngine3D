@@ -41,7 +41,7 @@ void Sound3dManager::createSound3d(const string & sound3dId, const string & audi
 		return;
 	}
 
-	auto sound = make_shared<Sound3d>(sound3dId);
+	auto sound3d = make_shared<Sound3d>(sound3dId);
 
 	auto waveBuffer = _waveBufferCache->getBuffer(audioPath);
 
@@ -59,10 +59,10 @@ void Sound3dManager::createSound3d(const string & sound3dId, const string & audi
 		_waveBufferCache->storeBuffer(audioPath, waveBuffer);
 	}
 
-	sound->setWaveBuffer(waveBuffer);
-	sound->setAudioPath(audioPath);
+	sound3d->setWaveBuffer(waveBuffer);
+	sound3d->setAudioPath(audioPath);
 
-	_sound3ds.insert({sound3dId, sound});
+	_sound3ds.insert({sound3dId, sound3d});
 }
 
 const bool Sound3dManager::isSound3dExisting(const string & sound3dId) const

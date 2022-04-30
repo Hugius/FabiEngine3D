@@ -18,19 +18,19 @@ const bool Sound3dPlayer::isDeviceConnected() const
 	return (waveOutGetNumDevs() > 0);
 }
 
-const bool Sound3dPlayer::isSoundStarted(const string & sound3dId, int index) const
+const bool Sound3dPlayer::isSound3dStarted(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
 		abort();
 	}
 
-	if(_startedSounds.find(sound3dId) == _startedSounds.end())
+	if(_startedSound3ds.find(sound3dId) == _startedSound3ds.end())
 	{
 		return false;
 	}
 
-	return (index < _startedSounds.at(sound3dId).size());
+	return (index < _startedSound3ds.at(sound3dId).size());
 }
 
 const bool Sound3dPlayer::isSoundPaused(const string & sound3dId, int index) const
@@ -39,12 +39,12 @@ const bool Sound3dPlayer::isSoundPaused(const string & sound3dId, int index) con
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound3dId)[index]->isPaused();
+	return _startedSound3ds.at(sound3dId)[index]->isPaused();
 }
 
 const float Sound3dPlayer::getSoundVolume(const string & sound3dId, int index) const
@@ -53,12 +53,12 @@ const float Sound3dPlayer::getSoundVolume(const string & sound3dId, int index) c
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound3dId)[index]->getVolume();
+	return _startedSound3ds.at(sound3dId)[index]->getVolume();
 }
 
 const float Sound3dPlayer::getSoundLeftIntensity(const string & sound3dId, int index) const
@@ -67,12 +67,12 @@ const float Sound3dPlayer::getSoundLeftIntensity(const string & sound3dId, int i
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound3dId)[index]->getLeftIntensity();
+	return _startedSound3ds.at(sound3dId)[index]->getLeftIntensity();
 }
 
 const float Sound3dPlayer::getSoundRightIntensity(const string & sound3dId, int index) const
@@ -81,12 +81,12 @@ const float Sound3dPlayer::getSoundRightIntensity(const string & sound3dId, int 
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound3dId)[index]->getRightIntensity();
+	return _startedSound3ds.at(sound3dId)[index]->getRightIntensity();
 }
 
 const int Sound3dPlayer::getPlayCount(const string & sound3dId, int index) const
@@ -95,12 +95,12 @@ const int Sound3dPlayer::getPlayCount(const string & sound3dId, int index) const
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound3dId)[index]->getPlayCount();
+	return _startedSound3ds.at(sound3dId)[index]->getPlayCount();
 }
 
 const int Sound3dPlayer::getStartedSoundCount(const string & sound3dId) const
@@ -110,27 +110,27 @@ const int Sound3dPlayer::getStartedSoundCount(const string & sound3dId) const
 		abort();
 	}
 
-	if(_startedSounds.find(sound3dId) == _startedSounds.end())
+	if(_startedSound3ds.find(sound3dId) == _startedSound3ds.end())
 	{
 		return 0;
 	}
 
-	return static_cast<int>(_startedSounds.at(sound3dId).size());
+	return static_cast<int>(_startedSound3ds.at(sound3dId).size());
 }
 
 
-void Sound3dPlayer::_terminateSounds()
+void Sound3dPlayer::_terminateSound3ds()
 {
-	for(const auto & [soundId, instances] : _startedSounds)
+	for(const auto & [sound3dId, instances] : _startedSound3ds)
 	{
 		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
-			_terminateSound(soundId, instanceIndex);
+			_terminateSound3d(sound3dId, instanceIndex);
 		}
 	}
 }
 
-void Sound3dPlayer::_terminateSound(const string & sound3dId, int index)
+void Sound3dPlayer::_terminateSound3d(const string & sound3dId, int index)
 {
 	if(!_volumeThreadQueue.empty())
 	{
@@ -146,14 +146,14 @@ void Sound3dPlayer::_terminateSound(const string & sound3dId, int index)
 		}
 	}
 
-	delete[] _startedSounds.at(sound3dId)[index]->getHeader()->lpData;
-	delete _startedSounds.at(sound3dId)[index]->getHeader();
+	delete[] _startedSound3ds.at(sound3dId)[index]->getHeader()->lpData;
+	delete _startedSound3ds.at(sound3dId)[index]->getHeader();
 
-	_startedSounds.at(sound3dId).erase(_startedSounds.at(sound3dId).begin() + index);
+	_startedSound3ds.at(sound3dId).erase(_startedSound3ds.at(sound3dId).begin() + index);
 
-	if(_startedSounds.at(sound3dId).empty())
+	if(_startedSound3ds.at(sound3dId).empty())
 	{
-		_startedSounds.erase(sound3dId);
+		_startedSound3ds.erase(sound3dId);
 	}
 }
 
@@ -178,7 +178,7 @@ const int Sound3dPlayer::getSoundTime(const string & sound3dId, int index) const
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound3dId, index))
+	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
 	}
@@ -186,7 +186,7 @@ const int Sound3dPlayer::getSoundTime(const string & sound3dId, int index) const
 	auto currentSoundTime = new MMTIME();
 	currentSoundTime->wType = TIME_SAMPLES;
 
-	waveOutGetPosition(_startedSounds.at(sound3dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+	waveOutGetPosition(_startedSound3ds.at(sound3dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
 
 	const auto sampleIndex = currentSoundTime->u.sample;
 	const auto sampleRate = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;

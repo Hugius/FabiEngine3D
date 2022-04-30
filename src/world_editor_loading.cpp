@@ -274,16 +274,16 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setRotation(text3dId, rotation);
 			_fe3d->text3d_setSize(text3dId, size);
 		}
-		else if(lineType == "SOUND")
+		else if(lineType == "SOUND3D")
 		{
-			string soundId;
+			string sound3dId;
 			string templateId;
 			fvec3 position;
 			float maxVolume;
 			float maxDistance;
 
 			iss
-				>> soundId
+				>> sound3dId
 				>> templateId
 				>> position.x
 				>> position.y
@@ -293,7 +293,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@speaker_" + soundId);
+				const string newModelId = ("@@speaker_" + sound3dId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\speaker.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
@@ -312,14 +312,14 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_loadedSoundIds.insert({soundId, templateId});
+			_loadedSound3dIds.insert({sound3dId, templateId});
 
-			_worldHelper->copyTemplateSound(soundId, templateId);
+			_worldHelper->copyTemplateSound(sound3dId, templateId);
 
-			_fe3d->sound3d_setPosition(soundId, position);
-			_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
-			_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
-			_fe3d->sound3d_start(soundId, -1);
+			_fe3d->sound3d_setPosition(sound3dId, position);
+			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
+			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
+			_fe3d->sound3d_start(sound3dId, -1);
 		}
 		else if(lineType == "POINTLIGHT")
 		{

@@ -119,13 +119,13 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
+	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 	{
-		_fe3d->sound3d_delete(placedSoundId);
+		_fe3d->sound3d_delete(placedSound3dId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@speaker_" + placedSoundId);
+			_fe3d->model_delete("@@speaker_" + placedSound3dId);
 		}
 	}
 
@@ -135,7 +135,7 @@ void WorldEditor::clearLoadedWorld()
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedCaptorIds.clear();
-	_loadedSoundIds.clear();
+	_loadedSound3dIds.clear();
 	_loadedWorldId = "";
 	_idCounter = 0;
 }
@@ -252,9 +252,9 @@ void WorldEditor::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 	_animation3dEditor = animation3dEditor;
 }
 
-void WorldEditor::inject(shared_ptr<SoundEditor> soundEditor)
+void WorldEditor::inject(shared_ptr<Sound2dEditor> sound2dEditor)
 {
-	_soundEditor = soundEditor;
+	_sound2dEditor = sound2dEditor;
 }
 
 void WorldEditor::inject(shared_ptr<WorldHelper> worldHelper)

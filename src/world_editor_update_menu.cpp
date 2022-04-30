@@ -71,9 +71,9 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound3d")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3d");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pointlight")->isHovered())
 		{
@@ -114,21 +114,21 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateModelId = "";
 			_currentTemplateQuad3dId = "";
 			_currentTemplateText3dId = "";
-			_currentTemplateSoundId = "";
+			_currentTemplateSound3dId = "";
 			_selectedModelId = "";
 			_selectedQuad3dId = "";
 			_selectedText3dId = "";
 			_selectedPointlightId = "";
 			_selectedSpotlightId = "";
 			_selectedCaptorId = "";
-			_selectedSoundId = "";
+			_selectedSound3dId = "";
 			_activeModelId = "";
 			_activeQuad3dId = "";
 			_activeText3dId = "";
 			_activePointlightId = "";
 			_activeSpotlightId = "";
 			_activeCaptorId = "";
-			_activeSoundId = "";
+			_activeSound3dId = "";
 			_editorSpeed = 1.0f;
 			_idCounter = 0;
 			_selectedModelHighlightDirection = 1;

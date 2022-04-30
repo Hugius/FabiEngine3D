@@ -249,16 +249,16 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_frame.cpp">
       <Filter>Animation3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_lifecycle.cpp">
       <Filter>Sound Editor\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_misc.cpp">
       <Filter>Sound Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_update_misc.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_update_misc.cpp">
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_update_menu.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_update_menu.cpp">
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp">
@@ -480,7 +480,7 @@
     <ClCompile Include="..\..\..\src\quad3d_editor_saving.cpp">
       <Filter>Quad3D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_saving.cpp">
       <Filter>Sound Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_saving.cpp">
@@ -510,7 +510,7 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp">
       <Filter>Animation3D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_editor_loading.cpp">
       <Filter>Sound Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_loading.cpp">
@@ -641,7 +641,7 @@
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
       <Filter>Animation3D Editor\Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sound_editor.hpp">
+    <ClInclude Include="..\..\..\src\sound2d_editor.hpp">
       <Filter>Sound Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp">

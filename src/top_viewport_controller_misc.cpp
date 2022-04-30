@@ -91,7 +91,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("text2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
-	screen->getButton("soundEditor")->setHoverable(isHoverable);
+	screen->getButton("sound2dEditor")->setHoverable(isHoverable);
 	screen->getButton("worldEditor")->setHoverable(isHoverable);
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
@@ -110,7 +110,7 @@ void TopViewportController::_setProject(const string & projectId)
 	_text2dEditor->setCurrentProjectId(_currentProjectId);
 	_animation2dEditor->setCurrentProjectId(_currentProjectId);
 	_animation3dEditor->setCurrentProjectId(_currentProjectId);
-	_soundEditor->setCurrentProjectId(_currentProjectId);
+	_sound2dEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
 	_customWorldBuilder->setCurrentProjectId(_currentProjectId);
 	_scriptEditor->setCurrentProjectId(_currentProjectId);
@@ -170,7 +170,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\sound.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\sound2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\text2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\text3d.fe3d");
@@ -249,9 +249,9 @@ void TopViewportController::inject(shared_ptr<Animation3dEditor> animation3dEdit
 	_animation3dEditor = animation3dEditor;
 }
 
-void TopViewportController::inject(shared_ptr<SoundEditor> soundEditor)
+void TopViewportController::inject(shared_ptr<Sound2dEditor> sound2dEditor)
 {
-	_soundEditor = soundEditor;
+	_sound2dEditor = sound2dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<WorldEditor> worldEditor)

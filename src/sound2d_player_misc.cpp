@@ -13,13 +13,13 @@ const bool Sound2dPlayer::isDeviceConnected() const
 	return (waveOutGetNumDevs() > 0);
 }
 
-void Sound2dPlayer::_terminateSounds()
+void Sound2dPlayer::_terminateSound2ds()
 {
-	for(const auto & [soundId, instances] : _startedSounds)
+	for(const auto & [sound2dId, instances] : _startedSound2ds)
 	{
 		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
-			_terminateSound(soundId, instanceIndex);
+			_terminateSound(sound2dId, instanceIndex);
 		}
 	}
 }
@@ -55,30 +55,30 @@ void Sound2dPlayer::_terminateSound(const string & sound2dId, int index)
 		}
 	}
 
-	delete[] _startedSounds.at(sound2dId)[index]->getHeader()->lpData;
-	delete _startedSounds.at(sound2dId)[index]->getHeader();
+	delete[] _startedSound2ds.at(sound2dId)[index]->getHeader()->lpData;
+	delete _startedSound2ds.at(sound2dId)[index]->getHeader();
 
-	_startedSounds.at(sound2dId).erase(_startedSounds.at(sound2dId).begin() + index);
+	_startedSound2ds.at(sound2dId).erase(_startedSound2ds.at(sound2dId).begin() + index);
 
-	if(_startedSounds.at(sound2dId).empty())
+	if(_startedSound2ds.at(sound2dId).empty())
 	{
-		_startedSounds.erase(sound2dId);
+		_startedSound2ds.erase(sound2dId);
 	}
 }
 
-const bool Sound2dPlayer::isSoundStarted(const string & sound2dId, int index) const
+const bool Sound2dPlayer::isSound2dStarted(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
 		abort();
 	}
 
-	if(_startedSounds.find(sound2dId) == _startedSounds.end())
+	if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 	{
 		return false;
 	}
 
-	return (index < _startedSounds.at(sound2dId).size());
+	return (index < _startedSound2ds.at(sound2dId).size());
 }
 
 const bool Sound2dPlayer::isSoundPaused(const string & sound2dId, int index) const
@@ -87,12 +87,12 @@ const bool Sound2dPlayer::isSoundPaused(const string & sound2dId, int index) con
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound2dId)[index]->isPaused();
+	return _startedSound2ds.at(sound2dId)[index]->isPaused();
 }
 
 const float Sound2dPlayer::getSoundVolume(const string & sound2dId, int index) const
@@ -101,12 +101,12 @@ const float Sound2dPlayer::getSoundVolume(const string & sound2dId, int index) c
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound2dId)[index]->getVolume();
+	return _startedSound2ds.at(sound2dId)[index]->getVolume();
 }
 
 const float Sound2dPlayer::getSoundLeftIntensity(const string & sound2dId, int index) const
@@ -115,12 +115,12 @@ const float Sound2dPlayer::getSoundLeftIntensity(const string & sound2dId, int i
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound2dId)[index]->getLeftIntensity();
+	return _startedSound2ds.at(sound2dId)[index]->getLeftIntensity();
 }
 
 const float Sound2dPlayer::getSoundRightIntensity(const string & sound2dId, int index) const
@@ -129,12 +129,12 @@ const float Sound2dPlayer::getSoundRightIntensity(const string & sound2dId, int 
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound2dId)[index]->getRightIntensity();
+	return _startedSound2ds.at(sound2dId)[index]->getRightIntensity();
 }
 
 const int Sound2dPlayer::getPlayCount(const string & sound2dId, int index) const
@@ -143,12 +143,12 @@ const int Sound2dPlayer::getPlayCount(const string & sound2dId, int index) const
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	return _startedSounds.at(sound2dId)[index]->getPlayCount();
+	return _startedSound2ds.at(sound2dId)[index]->getPlayCount();
 }
 
 const int Sound2dPlayer::getStartedSoundCount(const string & sound2dId) const
@@ -158,12 +158,12 @@ const int Sound2dPlayer::getStartedSoundCount(const string & sound2dId) const
 		abort();
 	}
 
-	if(_startedSounds.find(sound2dId) == _startedSounds.end())
+	if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 	{
 		return 0;
 	}
 
-	return static_cast<int>(_startedSounds.at(sound2dId).size());
+	return static_cast<int>(_startedSound2ds.at(sound2dId).size());
 }
 
 const int Sound2dPlayer::getSoundTime(const string & sound2dId, int index) const
@@ -172,7 +172,7 @@ const int Sound2dPlayer::getSoundTime(const string & sound2dId, int index) const
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
@@ -180,7 +180,7 @@ const int Sound2dPlayer::getSoundTime(const string & sound2dId, int index) const
 	auto currentSoundTime = new MMTIME();
 	currentSoundTime->wType = TIME_SAMPLES;
 
-	waveOutGetPosition(_startedSounds.at(sound2dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+	waveOutGetPosition(_startedSound2ds.at(sound2dId)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
 
 	const auto sampleIndex = currentSoundTime->u.sample;
 	const auto sampleRate = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;

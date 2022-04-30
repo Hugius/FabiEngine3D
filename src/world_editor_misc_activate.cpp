@@ -103,14 +103,14 @@ void WorldEditor::_activateCaptor(const string & captorId)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Captor: " + _activeCaptorId);
 }
 
-void WorldEditor::_activateSound(const string & soundId)
+void WorldEditor::_activateSound3d(const string & sound3dId)
 {
-	_activeSoundId = soundId;
+	_activeSound3dId = sound3dId;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	const auto position = _fe3d->sound3d_getPosition(_activeSoundId);
-	const auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
-	const auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
+	const auto position = _fe3d->sound3d_getPosition(_activeSound3dId);
+	const auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSound3dId);
+	const auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSound3dId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
@@ -118,7 +118,7 @@ void WorldEditor::_activateSound(const string & soundId)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("volume")->setTextContent(to_string(static_cast<int>(maxVolume * SOUND_VOLUME_MULTIPLIER)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound: " + _activeSoundId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound3D: " + _activeSound3dId);
 }
 
 void WorldEditor::_deactivateModel()
@@ -183,10 +183,10 @@ void WorldEditor::_deactivateCaptor()
 
 void WorldEditor::_deactivateSound()
 {
-	if(!_activeSoundId.empty())
+	if(!_activeSound3dId.empty())
 	{
-		_deselectSound(_activeSoundId);
+		_deselectSound3d(_activeSound3dId);
 	}
 
-	_activeSoundId = "";
+	_activeSound3dId = "";
 }

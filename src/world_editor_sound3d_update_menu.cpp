@@ -7,20 +7,20 @@ void WorldEditor::_updateSoundMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "worldEditorMenuSound")
+	if(screen->getId() == "worldEditorMenuSound3d")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateSoundId.empty())
+			if(!_currentTemplateSound3dId.empty())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
 
-				_currentTemplateSoundId = "";
+				_currentTemplateSound3dId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -35,15 +35,15 @@ void WorldEditor::_updateSoundMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteOptions();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sound3dList")->deleteOptions();
 
-			for(auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
+			for(auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createOption(placedSoundId, placedSoundId);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sound3dList")->createOption(placedSound3dId, placedSound3dId);
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateSoundId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateSound3dId.empty());
 	}
 }
 
@@ -51,17 +51,17 @@ void WorldEditor::_updateSoundPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "worldEditorMenuSoundPlace")
+	if(screen->getId() == "worldEditorMenuSound3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3d");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("soundList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("sound3dList")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -74,14 +74,14 @@ void WorldEditor::_updateSoundPlacingMenu()
 				_deactivateSpotlight();
 				_deactivateCaptor();
 
-				_currentTemplateSoundId = hoveredOptionId;
+				_currentTemplateSound3dId = hoveredOptionId;
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
-				_fe3d->sound3d_start(_currentTemplateSoundId, -1);
+				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->sound3d_setPosition(_currentTemplateSoundId, fvec3(0.0f));
+					_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(0.0f));
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
@@ -97,17 +97,17 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSoundChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("soundList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("sound3dList")->getOptionIds())
 		{
 			if(!_fe3d->sound3d_isExisting(optionId))
 			{
-				screen->getScrollingList("soundList")->deleteOption(optionId);
+				screen->getScrollingList("sound3dList")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("soundList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("sound3dList")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{
@@ -120,11 +120,11 @@ void WorldEditor::_updateSoundChoosingMenu()
 				_deactivateSpotlight();
 				_deactivateCaptor();
 
-				_activateSound(hoveredOptionId);
+				_activateSound3d(hoveredOptionId);
 			}
 			else
 			{
-				_selectSound(hoveredOptionId);
+				_selectSound3d(hoveredOptionId);
 
 				_dontResetSelectedSound = true;
 			}
@@ -132,7 +132,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3d");
 
 			return;
 		}

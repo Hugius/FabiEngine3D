@@ -25,7 +25,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 	{
 		if(openResult == MMSYSERR_BADDEVICEID)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -52,7 +52,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 	{
 		if(prepareResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -69,7 +69,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 	{
 		if(writeResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -80,7 +80,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 			{
 				if(unprepareResult == MMSYSERR_NODRIVER)
 				{
-					_terminateSounds();
+					_terminateSound2ds();
 
 					return;
 				}
@@ -97,7 +97,7 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 			{
 				if(closeResult == MMSYSERR_NODRIVER)
 				{
-					_terminateSounds();
+					_terminateSound2ds();
 
 					return;
 				}
@@ -123,12 +123,12 @@ void Sound2dPlayer::startSound(const string & sound2dId, int playCount)
 	newSound->setHandle(handle);
 	newSound->setPlayCount(playCount);
 
-	if(_startedSounds.find(sound2dId) == _startedSounds.end())
+	if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 	{
-		_startedSounds.insert({sound2dId, {}});
+		_startedSound2ds.insert({sound2dId, {}});
 	}
 
-	_startedSounds.at(sound2dId).push_back(newSound);
+	_startedSound2ds.at(sound2dId).push_back(newSound);
 }
 
 void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
@@ -137,7 +137,7 @@ void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
@@ -146,15 +146,15 @@ void Sound2dPlayer::pauseSound(const string & sound2dId, int index)
 		abort();
 	}
 
-	_startedSounds.at(sound2dId)[index]->setPaused(true);
+	_startedSound2ds.at(sound2dId)[index]->setPaused(true);
 
-	const auto pauseResult = waveOutPause(_startedSounds.at(sound2dId)[index]->getHandle());
+	const auto pauseResult = waveOutPause(_startedSound2ds.at(sound2dId)[index]->getHandle());
 
 	if(pauseResult != MMSYSERR_NOERROR)
 	{
 		if(pauseResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -173,7 +173,7 @@ void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
@@ -182,15 +182,15 @@ void Sound2dPlayer::resumeSound(const string & sound2dId, int index)
 		abort();
 	}
 
-	_startedSounds.at(sound2dId)[index]->setPaused(false);
+	_startedSound2ds.at(sound2dId)[index]->setPaused(false);
 
-	const auto restartResult = waveOutRestart(_startedSounds.at(sound2dId)[index]->getHandle());
+	const auto restartResult = waveOutRestart(_startedSound2ds.at(sound2dId)[index]->getHandle());
 
 	if(restartResult != MMSYSERR_NOERROR)
 	{
 		if(restartResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -209,17 +209,17 @@ void Sound2dPlayer::stopSound(const string & sound2dId, int index)
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	const auto resetResult = waveOutReset(_startedSounds.at(sound2dId)[index]->getHandle());
+	const auto resetResult = waveOutReset(_startedSound2ds.at(sound2dId)[index]->getHandle());
 	if(resetResult != MMSYSERR_NOERROR)
 	{
 		if(resetResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -231,12 +231,12 @@ void Sound2dPlayer::stopSound(const string & sound2dId, int index)
 		}
 	}
 
-	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound2dId)[index]->getHandle(), _startedSounds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		if(unprepareResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -248,12 +248,12 @@ void Sound2dPlayer::stopSound(const string & sound2dId, int index)
 		}
 	}
 
-	const auto closeResult = waveOutClose(_startedSounds.at(sound2dId)[index]->getHandle());
+	const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
 	if(closeResult != MMSYSERR_NOERROR)
 	{
 		if(closeResult == MMSYSERR_NODRIVER)
 		{
-			_terminateSounds();
+			_terminateSound2ds();
 
 			return;
 		}
@@ -274,12 +274,12 @@ void Sound2dPlayer::setSoundVolume(const string & sound2dId, int index, float va
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(sound2dId)[index]->setVolume(value);
+	_startedSound2ds.at(sound2dId)[index]->setVolume(value);
 }
 
 void Sound2dPlayer::setSoundLeftIntensity(const string & sound2dId, int index, float value)
@@ -288,12 +288,12 @@ void Sound2dPlayer::setSoundLeftIntensity(const string & sound2dId, int index, f
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(sound2dId)[index]->setLeftIntensity(value);
+	_startedSound2ds.at(sound2dId)[index]->setLeftIntensity(value);
 }
 
 void Sound2dPlayer::setSoundRightIntensity(const string & sound2dId, int index, float value)
@@ -302,10 +302,10 @@ void Sound2dPlayer::setSoundRightIntensity(const string & sound2dId, int index, 
 	{
 		abort();
 	}
-	if(!isSoundStarted(sound2dId, index))
+	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
 
-	_startedSounds.at(sound2dId)[index]->setRightIntensity(value);
+	_startedSound2ds.at(sound2dId)[index]->setRightIntensity(value);
 }

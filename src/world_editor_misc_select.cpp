@@ -42,11 +42,11 @@ void WorldEditor::_selectCaptor(const string & captorId)
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Captor: " + _selectedCaptorId);
 }
 
-void WorldEditor::_selectSound(const string & soundId)
+void WorldEditor::_selectSound3d(const string & sound3dId)
 {
-	_selectedSoundId = soundId;
+	_selectedSound3dId = sound3dId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Sound: " + _selectedSoundId);
+	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Sound3D: " + _selectedSound3dId);
 }
 
 void WorldEditor::_deselectModel(const string & modelId)
@@ -85,8 +85,8 @@ void WorldEditor::_deselectCaptor(const string & captorId)
 	_fe3d->aabb_setLocalSize(("@@camera_" + captorId), DEFAULT_CAMERA_AABB_SIZE);
 }
 
-void WorldEditor::_deselectSound(const string & soundId)
+void WorldEditor::_deselectSound3d(const string & sound3dId)
 {
-	_fe3d->model_setBaseSize(("@@speaker_" + soundId), DEFAULT_SPEAKER_SIZE);
-	_fe3d->aabb_setLocalSize(("@@speaker_" + soundId), DEFAULT_SPEAKER_AABB_SIZE);
+	_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), DEFAULT_SPEAKER_SIZE);
+	_fe3d->aabb_setLocalSize(("@@speaker_" + sound3dId), DEFAULT_SPEAKER_AABB_SIZE);
 }

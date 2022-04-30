@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string & functionN
 
 			if(_fe3d->sound2d_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("sound already exists");
+				_throwRuntimeError("sound2D already exists");
 
 				return true;
 			}

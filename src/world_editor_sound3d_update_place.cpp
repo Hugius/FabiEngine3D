@@ -3,38 +3,38 @@
 
 void WorldEditor::_updateSoundPlacing()
 {
-	if(!_currentTemplateSoundId.empty())
+	if(!_currentTemplateSound3dId.empty())
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			const auto newPosition = _fe3d->sound3d_getPosition(_currentTemplateSoundId);
+			const auto newPosition = _fe3d->sound3d_getPosition(_currentTemplateSound3dId);
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-				_fe3d->sound3d_setPosition(_currentTemplateSoundId, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(content, newPosition.y, newPosition.z));
 				_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, fvec3(content, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-				_fe3d->sound3d_setPosition(_currentTemplateSoundId, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(newPosition.x, content, newPosition.z));
 				_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, fvec3(newPosition.x, content, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
-				const auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
 				const auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;
 
-				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
+				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound(newId, _currentTemplateSoundId);
-				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
+				_worldHelper->copyTemplateSound(newId, _currentTemplateSound3dId);
+				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
@@ -54,17 +54,17 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+				_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 
-				_currentTemplateSoundId = "";
+				_currentTemplateSound3dId = "";
 			}
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+				_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 
-				_currentTemplateSoundId = "";
+				_currentTemplateSound3dId = "";
 			}
 		}
 		else
@@ -73,9 +73,9 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
 
 				return;
@@ -85,9 +85,9 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
 
 				return;
@@ -97,9 +97,9 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
 
 				return;
@@ -109,36 +109,36 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
 
-				_currentTemplateSoundId = "";
+				_currentTemplateSound3dId = "";
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET);
-			if(!_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
+			if(!_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 			{
-				_fe3d->sound3d_start(_currentTemplateSoundId, -1);
+				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
 			}
-			_fe3d->sound3d_setPosition(_currentTemplateSoundId, newPosition);
+			_fe3d->sound3d_setPosition(_currentTemplateSound3dId, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;
 
-				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
+				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound(newId, _currentTemplateSoundId);
-				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
+				_worldHelper->copyTemplateSound(newId, _currentTemplateSound3dId);
+				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);

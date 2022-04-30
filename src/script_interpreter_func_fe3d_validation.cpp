@@ -358,7 +358,7 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string & sound2dId, boo
 	{
 		if(!_fe3d->sound2d_isExisting("@" + sound2dId))
 		{
-			_throwRuntimeError("template sound does not exist");
+			_throwRuntimeError("template sound2D does not exist");
 
 			return false;
 		}
@@ -387,7 +387,7 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string & sound3dId, boo
 	{
 		if(!_fe3d->sound3d_isExisting("@" + sound3dId))
 		{
-			_throwRuntimeError("template sound does not exist");
+			_throwRuntimeError("template sound2D does not exist");
 
 			return false;
 		}

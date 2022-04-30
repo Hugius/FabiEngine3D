@@ -38,7 +38,7 @@ private:
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
-	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;

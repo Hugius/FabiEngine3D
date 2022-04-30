@@ -160,7 +160,7 @@ void WorldEditor::_updateMiscellaneous()
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
 							 !_selectedCaptorId.empty() ||
-							 !_selectedSoundId.empty());
+							 !_selectedSound3dId.empty());
 
 	const auto isActive = (!_activeModelId.empty() ||
 						   !_activeQuad3dId.empty() ||
@@ -168,7 +168,7 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
 						   !_activeCaptorId.empty() ||
-						   !_activeSoundId.empty());
+						   !_activeSound3dId.empty());
 
 	_gui->getOverlay()->getTextField("selectedId")->setVisible(isSelected);
 	_gui->getOverlay()->getTextField("activeId")->setVisible(isActive);

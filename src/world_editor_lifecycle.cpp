@@ -12,7 +12,7 @@ void WorldEditor::_load()
 	_text3dEditor->loadText3dsFromFile();
 	_animation2dEditor->loadAnimation2dsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
-	_soundEditor->loadSoundsFromFile();
+	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d->model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
@@ -50,11 +50,11 @@ void WorldEditor::_load()
 
 	_fe3d->captor_create(TEMPLATE_CAPTOR_ID);
 
-	for(const auto & soundId : _soundEditor->getLoadedSoundIds())
+	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
-		_fe3d->sound3d_create(soundId, _fe3d->sound2d_getAudioPath(soundId));
-		_fe3d->sound3d_setMaxVolume(soundId, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(soundId, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d->sound3d_create(sound2dId, _fe3d->sound2d_getAudioPath(sound2dId));
+		_fe3d->sound3d_setMaxVolume(sound2dId, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(sound2dId, DEFAULT_SOUND_MAX_DISTANCE);
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
@@ -84,9 +84,9 @@ void WorldEditor::_load()
 		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
 	}
 
-	for(const auto & soundId : _soundEditor->getLoadedSoundIds())
+	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("soundList")->createOption(soundId, soundId.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -97,7 +97,7 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
-	const auto soundIds = _soundEditor->getLoadedSoundIds();
+	const auto sound2dIds = _sound2dEditor->getLoadedSound2dIds();
 
 	_skyEditor->deleteLoadedSkies();
 	_terrainEditor->deleteLoadedTerrains();
@@ -107,7 +107,7 @@ void WorldEditor::_unload()
 	_text3dEditor->deleteLoadedText3ds();
 	_animation3dEditor->deleteLoadedAnimation3ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
-	_soundEditor->deleteLoadedSounds();
+	_sound2dEditor->deleteLoadedSound2ds();
 
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
 	_fe3d->model_delete(TEMPLATE_TORCH_ID);
@@ -120,9 +120,9 @@ void WorldEditor::_unload()
 
 	_fe3d->captor_delete(TEMPLATE_CAPTOR_ID);
 
-	for(const auto & soundId : soundIds)
+	for(const auto & sound2dId : sound2dIds)
 	{
-		_fe3d->sound3d_delete(soundId);
+		_fe3d->sound3d_delete(sound2dId);
 	}
 
 	_fe3d->model_delete("@@grid");

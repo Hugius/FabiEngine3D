@@ -18,7 +18,7 @@ public:
 	void addPointlight(const string & pointlightId);
 	void addSpotlight(const string & spotlightId);
 	void addCaptor(const string & captorId);
-	void addSound(const string & soundId);
+	void addSound3d(const string & sound3dId);
 	void addGraphics();
 	void clearLoadedWorld();
 

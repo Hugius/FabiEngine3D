@@ -65,9 +65,9 @@ const vector<string> EngineInterface::sound3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [sound3dId, sound] : _core->getSound3dManager()->getSound3ds())
+	for(const auto & [sound3dId, sound3d] : _core->getSound3dManager()->getSound3ds())
 	{
-		result.push_back(sound->getId());
+		result.push_back(sound3d->getId());
 	}
 
 	return result;
@@ -100,7 +100,7 @@ const bool EngineInterface::sound3d_isExisting(const string & sound3dId) const
 
 const bool EngineInterface::sound3d_isStarted(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->isSoundStarted(sound3dId, index);
+	return _core->getSound3dPlayer()->isSound3dStarted(sound3dId, index);
 }
 
 const bool EngineInterface::sound3d_isPaused(const string & sound3dId, int index) const

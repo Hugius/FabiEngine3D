@@ -37,16 +37,16 @@ public:
 
 	const int getPlayCount(const string & sound3dId, int index) const;
 
-	const bool isSoundStarted(const string & sound3dId, int index) const;
+	const bool isSound3dStarted(const string & sound3dId, int index) const;
 	const bool isSoundPaused(const string & sound3dId, int index) const;
 	const bool isDeviceConnected() const;
 
 private:
-	void _terminateSound(const string & sound3dId, int index);
-	void _terminateSounds();
+	void _terminateSound3d(const string & sound3dId, int index);
+	void _terminateSound3ds();
 	void _updateSamplesVolume(int sampleCount, short * originalSamples, short * currentSamples, float volume, float leftIntensity, float rightIntensity);
 
-	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSounds = {};
+	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSound3ds = {};
 
 	vector<pair<string, int>> _volumeThreadQueue;
 

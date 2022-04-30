@@ -76,31 +76,31 @@ void WorldEditor::_updateText3dHighlighting(const string & text3dId, int & direc
 	_fe3d->text3d_setOpacity(text3dId, (opacity + speed));
 }
 
-void WorldEditor::_updateSoundHighlighting(const string & soundId, int & direction)
+void WorldEditor::_updateSound3dHighlighting(const string & sound3dId, int & direction)
 {
-	if(soundId.empty())
+	if(sound3dId.empty())
 	{
 		direction = 1;
 
 		return;
 	}
 
-	if(_fe3d->model_getBaseSize("@@speaker_" + soundId).y < DEFAULT_SPEAKER_SIZE.y)
+	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y < DEFAULT_SPEAKER_SIZE.y)
 	{
-		_fe3d->model_setBaseSize(("@@speaker_" + soundId), DEFAULT_SPEAKER_SIZE);
+		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), DEFAULT_SPEAKER_SIZE);
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@speaker_" + soundId).y > (DEFAULT_SPEAKER_SIZE.y * SOUND_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y > (DEFAULT_SPEAKER_SIZE.y * SOUND_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@speaker_" + soundId), (DEFAULT_SPEAKER_SIZE * SOUND_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (DEFAULT_SPEAKER_SIZE * SOUND_SIZE_INCREASE));
 		direction *= -1;
 	}
 
-	const auto color = _fe3d->model_getBaseSize("@@speaker_" + soundId);
+	const auto color = _fe3d->model_getBaseSize("@@speaker_" + sound3dId);
 	fvec3 speed = (fvec3(SOUND_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
 	speed *= ((DEFAULT_SPEAKER_SIZE * SOUND_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
-	_fe3d->model_setBaseSize(("@@speaker_" + soundId), (color + speed));
+	_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (color + speed));
 }
 
 void WorldEditor::_updatePointlightHighlighting(const string & pointlightId, int & direction)

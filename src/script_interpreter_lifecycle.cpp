@@ -180,7 +180,7 @@ void ScriptInterpreter::load()
 	_text2dEditor->loadText2dsFromFile();
 	_animation2dEditor->loadAnimation2dsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
-	_soundEditor->loadSoundsFromFile();
+	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->camera_reset();
 
@@ -207,7 +207,7 @@ void ScriptInterpreter::unload()
 	_text2dEditor->deleteLoadedText2ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
 	_animation3dEditor->deleteLoadedAnimation3ds();
-	_soundEditor->deleteLoadedSounds();
+	_sound2dEditor->deleteLoadedSound2ds();
 
 	for(const auto & skyId : _fe3d->sky_getIds())
 	{

@@ -19,7 +19,7 @@ EngineController::EngineController()
 	_text2dEditor = make_shared<Text2dEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
 	_animation3dEditor = make_shared<Animation3dEditor>();
-	_soundEditor = make_shared<SoundEditor>();
+	_sound2dEditor = make_shared<Sound2dEditor>();
 	_worldEditor = make_shared<WorldEditor>();
 	_scriptEditor = make_shared<ScriptEditor>();
 	_customWorldBuilder = make_shared<CustomWorldBuilder>();
@@ -39,7 +39,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_text2dEditor);
 	_leftViewportController->inject(_animation2dEditor);
 	_leftViewportController->inject(_animation3dEditor);
-	_leftViewportController->inject(_soundEditor);
+	_leftViewportController->inject(_sound2dEditor);
 	_leftViewportController->inject(_worldEditor);
 	_leftViewportController->inject(_scriptEditor);
 	_rightViewportController->inject(_guiManager);
@@ -57,7 +57,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_text2dEditor);
 	_topViewportController->inject(_animation2dEditor);
 	_topViewportController->inject(_animation3dEditor);
-	_topViewportController->inject(_soundEditor);
+	_topViewportController->inject(_sound2dEditor);
 	_topViewportController->inject(_worldEditor);
 	_topViewportController->inject(_scriptEditor);
 	_topViewportController->inject(_customWorldBuilder);
@@ -74,7 +74,7 @@ EngineController::EngineController()
 	_animation2dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_modelEditor);
-	_soundEditor->inject(_guiManager);
+	_sound2dEditor->inject(_guiManager);
 	_worldEditor->inject(_guiManager);
 	_worldEditor->inject(_skyEditor);
 	_worldEditor->inject(_terrainEditor);
@@ -84,7 +84,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_text3dEditor);
 	_worldEditor->inject(_animation2dEditor);
 	_worldEditor->inject(_animation3dEditor);
-	_worldEditor->inject(_soundEditor);
+	_worldEditor->inject(_sound2dEditor);
 	_worldEditor->inject(_worldHelper);
 	_scriptEditor->inject(_guiManager);
 	_scriptEditor->inject(_script);
@@ -99,7 +99,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_text2dEditor);
 	_scriptInterpreter->inject(_animation2dEditor);
 	_scriptInterpreter->inject(_animation3dEditor);
-	_scriptInterpreter->inject(_soundEditor);
+	_scriptInterpreter->inject(_sound2dEditor);
 	_scriptInterpreter->inject(_worldEditor);
 	_scriptInterpreter->inject(_customWorldBuilder);
 	_scriptInterpreter->inject(_worldHelper);
@@ -125,7 +125,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_text2dEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);
 	_animation3dEditor->inject(_fe3d);
-	_soundEditor->inject(_fe3d);
+	_sound2dEditor->inject(_fe3d);
 	_worldEditor->inject(_fe3d);
 	_scriptEditor->inject(_fe3d);
 	_customWorldBuilder->inject(_fe3d);
@@ -159,7 +159,7 @@ void EngineController::initialize()
 		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
 		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
-		auto audioPaths = _soundEditor->getAudioPathsFromFile();
+		auto audioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 

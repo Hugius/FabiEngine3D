@@ -41,7 +41,7 @@ void Sound2dManager::createSound2d(const string & sound2dId, const string & audi
 		return;
 	}
 
-	auto sound = make_shared<Sound2d>(sound2dId);
+	auto sound2d = make_shared<Sound2d>(sound2dId);
 
 	auto waveBuffer = _waveBufferCache->getBuffer(audioPath);
 
@@ -59,10 +59,10 @@ void Sound2dManager::createSound2d(const string & sound2dId, const string & audi
 		_waveBufferCache->storeBuffer(audioPath, waveBuffer);
 	}
 
-	sound->setWaveBuffer(waveBuffer);
-	sound->setAudioPath(audioPath);
+	sound2d->setWaveBuffer(waveBuffer);
+	sound2d->setAudioPath(audioPath);
 
-	_sound2ds.insert({sound2dId, sound});
+	_sound2ds.insert({sound2dId, sound2d});
 }
 
 const bool Sound2dManager::isSound2dExisting(const string & sound2dId) const

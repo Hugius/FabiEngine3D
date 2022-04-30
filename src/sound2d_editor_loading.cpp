@@ -1,4 +1,4 @@
-#include "sound_editor.hpp"
+#include "sound2d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> SoundEditor::getAudioPathsFromFile() const
+const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
@@ -17,12 +17,12 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
 		return {};
 	}
 
@@ -30,13 +30,13 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string soundId;
+		string sound2dId;
 		string audioPath;
 
 		istringstream iss(line);
 
 		iss
-			>> soundId
+			>> sound2dId
 			>> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
@@ -56,23 +56,23 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	return audioPaths;
 }
 
-const bool SoundEditor::loadSoundsFromFile()
+const bool Sound2dEditor::loadSound2dsFromFile()
 {
 	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	_loadedSoundIds.clear();
+	_loadedSound2dIds.clear();
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
 
 		return false;
 	}
@@ -80,12 +80,12 @@ const bool SoundEditor::loadSoundsFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string soundId, audioPath;
+		string sound2dId, audioPath;
 
 		istringstream iss(line);
 
 		iss
-			>> soundId
+			>> sound2dId
 			>> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
@@ -97,17 +97,17 @@ const bool SoundEditor::loadSoundsFromFile()
 			audioPath = ("projects\\" + getCurrentProjectId() + "\\" + audioPath);
 		}
 
-		_fe3d->sound2d_create(soundId, audioPath);
+		_fe3d->sound2d_create(sound2dId, audioPath);
 
-		if(_fe3d->sound2d_isExisting(soundId))
+		if(_fe3d->sound2d_isExisting(sound2dId))
 		{
-			_loadedSoundIds.push_back(soundId);
+			_loadedSound2dIds.push_back(sound2dId);
 		}
 	}
 
 	file.close();
 
-	Logger::throwInfo("Sound editor data loaded");
+	Logger::throwInfo("Sound2D editor data loaded");
 
 	return true;
 }

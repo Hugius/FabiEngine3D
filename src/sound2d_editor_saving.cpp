@@ -1,4 +1,4 @@
-#include "sound_editor.hpp"
+#include "sound2d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool SoundEditor::saveSoundsToFile() const
+const bool Sound2dEditor::saveSound2dsToFile() const
 {
 	if(!isLoaded())
 	{
@@ -19,11 +19,11 @@ const bool SoundEditor::saveSoundsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sound.fe3d");
+	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sound2d.fe3d");
 
-	for(const auto & soundId : _loadedSoundIds)
+	for(const auto & sound2dId : _loadedSound2dIds)
 	{
-		auto audioPath = _fe3d->sound2d_getAudioPath(soundId);
+		auto audioPath = _fe3d->sound2d_getAudioPath(sound2dId);
 
 		audioPath = (audioPath.empty() ? "" : audioPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -32,7 +32,7 @@ const bool SoundEditor::saveSoundsToFile() const
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		file
-			<< soundId
+			<< sound2dId
 			<< " "
 			<< audioPath
 			<< endl;
@@ -40,7 +40,7 @@ const bool SoundEditor::saveSoundsToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Sound editor data saved");
+	Logger::throwInfo("Sound2D editor data saved");
 
 	return true;
 }

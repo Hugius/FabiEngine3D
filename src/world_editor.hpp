@@ -9,7 +9,7 @@
 #include "text3d_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
-#include "sound_editor.hpp"
+#include "sound2d_editor.hpp"
 #include "transformation_type.hpp"
 #include "world_helper.hpp"
 
@@ -26,7 +26,7 @@ public:
 	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
-	void inject(shared_ptr<SoundEditor> soundEditor);
+	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldHelper> worldHelper);
 	void update();
 	void clearLoadedWorld();
@@ -102,7 +102,7 @@ private:
 	void _updatePointlightHighlighting(const string & pointlightId, int & direction);
 	void _updateSpotlightHighlighting(const string & spotlightId, int & direction);
 	void _updateCaptorHighlighting(const string & captorId, int & direction);
-	void _updateSoundHighlighting(const string & soundId, int & direction);
+	void _updateSound3dHighlighting(const string & sound3dId, int & direction);
 	void _deleteWorldFile(const string & worldId);
 	void _selectModel(const string & modelId);
 	void _selectQuad3d(const string & quad3dId);
@@ -110,21 +110,21 @@ private:
 	void _selectPointlight(const string & pointlightId);
 	void _selectSpotlight(const string & spotlightId);
 	void _selectCaptor(const string & captorId);
-	void _selectSound(const string & soundId);
+	void _selectSound3d(const string & sound3dId);
 	void _deselectModel(const string & modelId);
 	void _deselectQuad3d(const string & quad3dId);
 	void _deselectText3d(const string & text3dId);
 	void _deselectPointlight(const string & pointlightId);
 	void _deselectSpotlight(const string & spotlightId);
 	void _deselectCaptor(const string & captorId);
-	void _deselectSound(const string & soundId);
+	void _deselectSound3d(const string & sound3dId);
 	void _activateModel(const string & modelId);
 	void _activateQuad3d(const string & quad3dId);
 	void _activateText3d(const string & text3dId);
 	void _activatePointlight(const string & pointlightId);
 	void _activateSpotlight(const string & spotlightId);
 	void _activateCaptor(const string & captorId);
-	void _activateSound(const string & soundId);
+	void _activateSound3d(const string & sound3dId);
 	void _deactivateModel();
 	void _deactivateQuad3d();
 	void _deactivateText3d();
@@ -139,7 +139,7 @@ private:
 	static inline const string TEMPLATE_POINTLIGHT_ID = "@@template_pointlight";
 	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";
 	static inline const string TEMPLATE_CAPTOR_ID = "@@template_captor";
-	static inline const string TEMPLATE_SOUND_ID = "@@template_sound";
+	static inline const string TEMPLATE_SOUND_ID = "@@template_sound3d";
 	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
 	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
 	static inline const string TEMPLATE_CAMERA_ID = "@@template_camera";
@@ -221,7 +221,7 @@ private:
 	unordered_map<string, string> _loadedModelIds = {};
 	unordered_map<string, string> _loadedQuad3dIds = {};
 	unordered_map<string, string> _loadedText3dIds = {};
-	unordered_map<string, string> _loadedSoundIds = {};
+	unordered_map<string, string> _loadedSound3dIds = {};
 
 	vector<string> _loadedAabbIds = {};
 	vector<string> _loadedPointlightIds = {};
@@ -236,7 +236,7 @@ private:
 	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
-	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;
 	shared_ptr<WorldHelper> _worldHelper = nullptr;
 
 	string _loadedWorldId = "";
@@ -244,21 +244,21 @@ private:
 	string _currentTemplateModelId = "";
 	string _currentTemplateQuad3dId = "";
 	string _currentTemplateText3dId = "";
-	string _currentTemplateSoundId = "";
+	string _currentTemplateSound3dId = "";
 	string _selectedModelId = "";
 	string _selectedQuad3dId = "";
 	string _selectedText3dId = "";
 	string _selectedPointlightId = "";
 	string _selectedSpotlightId = "";
 	string _selectedCaptorId = "";
-	string _selectedSoundId = "";
+	string _selectedSound3dId = "";
 	string _activeModelId = "";
 	string _activeQuad3dId = "";
 	string _activeText3dId = "";
 	string _activePointlightId = "";
 	string _activeSpotlightId = "";
 	string _activeCaptorId = "";
-	string _activeSoundId = "";
+	string _activeSound3dId = "";
 
 	float _editorSpeed = 1.0f;
 

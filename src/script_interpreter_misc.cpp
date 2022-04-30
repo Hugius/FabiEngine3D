@@ -197,9 +197,9 @@ void ScriptInterpreter::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 	_animation3dEditor = animation3dEditor;
 }
 
-void ScriptInterpreter::inject(shared_ptr<SoundEditor> soundEditor)
+void ScriptInterpreter::inject(shared_ptr<Sound2dEditor> sound2dEditor)
 {
-	_soundEditor = soundEditor;
+	_sound2dEditor = sound2dEditor;
 }
 
 void ScriptInterpreter::inject(shared_ptr<Quad2dEditor> quad2dEditor)

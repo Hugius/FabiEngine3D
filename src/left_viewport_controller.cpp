@@ -20,7 +20,7 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[8]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[9]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("soundEditor", fvec2(0.0f, positions[10]), TEXT_SIZE("Sound"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[10]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[11]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[12]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
@@ -114,12 +114,12 @@ void LeftViewportController::update()
 				window->setActiveScreen("animation3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("soundEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound2dEditor")->isHovered())
 		{
-			if(_soundEditor->loadSoundsFromFile())
+			if(_sound2dEditor->loadSound2dsFromFile())
 			{
-				_soundEditor->load();
-				window->setActiveScreen("soundEditorMenuMain");
+				_sound2dEditor->load();
+				window->setActiveScreen("sound2dEditorMenuMain");
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
@@ -147,7 +147,7 @@ void LeftViewportController::update()
 	_text2dEditor->update();
 	_animation2dEditor->update();
 	_animation3dEditor->update();
-	_soundEditor->update();
+	_sound2dEditor->update();
 	_worldEditor->update();
 	_scriptEditor->update();
 }
@@ -202,9 +202,9 @@ void LeftViewportController::inject(shared_ptr<Animation3dEditor> animation3dEdi
 	_animation3dEditor = animation3dEditor;
 }
 
-void LeftViewportController::inject(shared_ptr<SoundEditor> soundEditor)
+void LeftViewportController::inject(shared_ptr<Sound2dEditor> sound2dEditor)
 {
-	_soundEditor = soundEditor;
+	_sound2dEditor = sound2dEditor;
 }
 
 void LeftViewportController::inject(shared_ptr<WorldEditor> worldEditor)

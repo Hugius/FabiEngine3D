@@ -1,10 +1,10 @@
-#include "sound_editor.hpp"
+#include "sound2d_editor.hpp"
 
-void SoundEditor::_updateMainMenu()
+void Sound2dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "soundEditorMenuMain")
+	if(screen->getId() == "sound2dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -12,29 +12,29 @@ void SoundEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createSound", "Create Sound", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createSound2d", "Create Sound2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto soundIds = _loadedSoundIds;
+			auto sound2dIds = _loadedSound2dIds;
 
-			for(auto & soundId : soundIds)
+			for(auto & sound2dId : sound2dIds)
 			{
-				soundId = soundId.substr(1);
+				sound2dId = sound2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editSound", "Edit Sound", fvec2(0.0f, 0.1f), soundIds);
+			_gui->getOverlay()->openChoiceForm("editSound2d", "Edit Sound2D", fvec2(0.0f, 0.1f), sound2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto soundIds = _loadedSoundIds;
+			auto sound2dIds = _loadedSound2dIds;
 
-			for(auto & soundId : soundIds)
+			for(auto & sound2dId : sound2dIds)
 			{
-				soundId = soundId.substr(1);
+				sound2dId = sound2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteSound", "Delete Sound", fvec2(0.0f, 0.1f), soundIds);
+			_gui->getOverlay()->openChoiceForm("deleteSound2d", "Delete Sound2D", fvec2(0.0f, 0.1f), sound2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -42,7 +42,7 @@ void SoundEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				saveSoundsToFile();
+				saveSound2dsToFile();
 				unload();
 
 				return;
@@ -58,45 +58,45 @@ void SoundEditor::_updateMainMenu()
 	}
 }
 
-void SoundEditor::_updateChoiceMenu()
+void Sound2dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "soundEditorMenuChoice")
+	if(screen->getId() == "sound2dEditorMenuChoice")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_fe3d->sound2d_isStarted(_currentSoundId, 0))
+			if(_fe3d->sound2d_isStarted(_currentSound2dId, 0))
 			{
-				_fe3d->sound2d_stop(_currentSoundId, 0);
+				_fe3d->sound2d_stop(_currentSound2dId, 0);
 			}
 
-			_currentSoundId = "";
-			_gui->getOverlay()->getTextField("soundId")->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuMain");
+			_currentSound2dId = "";
+			_gui->getOverlay()->getTextField("sound2dId")->setVisible(false);
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuMain");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d->sound2d_start(_currentSoundId, 1);
+			_fe3d->sound2d_start(_currentSound2dId, 1);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{
-			_fe3d->sound2d_pause(_currentSoundId, 0);
+			_fe3d->sound2d_pause(_currentSound2dId, 0);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
-			_fe3d->sound2d_resume(_currentSoundId, 0);
+			_fe3d->sound2d_resume(_currentSound2dId, 0);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d->sound2d_stop(_currentSoundId, 0);
+			_fe3d->sound2d_stop(_currentSound2dId, 0);
 		}
 
-		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSoundId, 0));
-		screen->getButton("resume")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0) && _fe3d->sound2d_isPaused(_currentSoundId, 0));
-		screen->getButton("pause")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0) && !_fe3d->sound2d_isPaused(_currentSoundId, 0));
-		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0));
+		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSound2dId, 0));
+		screen->getButton("resume")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0) && _fe3d->sound2d_isPaused(_currentSound2dId, 0));
+		screen->getButton("pause")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0) && !_fe3d->sound2d_isPaused(_currentSound2dId, 0));
+		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0));
 	}
 }

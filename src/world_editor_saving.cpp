@@ -249,17 +249,17 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
+	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 	{
-		auto position = _fe3d->sound3d_getPosition(placedSoundId);
-		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSoundId);
-		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSoundId);
+		auto position = _fe3d->sound3d_getPosition(placedSound3dId);
+		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSound3dId);
+		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSound3dId);
 
 		file
-			<< "SOUND "
-			<< placedSoundId
+			<< "SOUND3D "
+			<< placedSound3dId
 			<< " "
-			<< templateSoundId
+			<< templateSound3dId
 			<< " "
 			<< position.x
 			<< " "

@@ -55,9 +55,9 @@ const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [sound2dId, sound] : _core->getSound2dManager()->getSound2ds())
+	for(const auto & [sound2dId, sound2d] : _core->getSound2dManager()->getSound2ds())
 	{
-		result.push_back(sound->getId());
+		result.push_back(sound2d->getId());
 	}
 
 	return result;
@@ -75,7 +75,7 @@ const bool EngineInterface::sound2d_isExisting(const string & sound2dId) const
 
 const bool EngineInterface::sound2d_isStarted(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->isSoundStarted(sound2dId, index);
+	return _core->getSound2dPlayer()->isSound2dStarted(sound2dId, index);
 }
 
 const bool EngineInterface::sound2d_isPaused(const string & sound2dId, int index) const

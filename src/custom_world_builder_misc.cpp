@@ -90,14 +90,14 @@ void CustomWorldBuilder::addAabb(const string & aabbId)
 	_addedAabbIds.push_back(aabbId);
 }
 
-void CustomWorldBuilder::addSound(const string & soundId)
+void CustomWorldBuilder::addSound3d(const string & sound3dId)
 {
-	if(find(_addedSound3dIds.begin(), _addedSound3dIds.end(), soundId) != _addedSound3dIds.end())
+	if(find(_addedSound3dIds.begin(), _addedSound3dIds.end(), sound3dId) != _addedSound3dIds.end())
 	{
 		abort();
 	}
 
-	_addedSound3dIds.push_back(soundId);
+	_addedSound3dIds.push_back(sound3dId);
 }
 
 void CustomWorldBuilder::addPointlight(const string & pointlightId)

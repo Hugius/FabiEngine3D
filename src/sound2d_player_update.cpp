@@ -7,9 +7,9 @@ using std::chrono::seconds;
 
 void Sound2dPlayer::update()
 {
-	vector<pair<string, int>> soundsToStop;
+	vector<pair<string, int>> sound2dsToStop;
 
-	for(auto & [soundId, instances] : _startedSounds)
+	for(auto & [sound2dId, instances] : _startedSound2ds)
 	{
 		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
@@ -22,7 +22,7 @@ void Sound2dPlayer::update()
 
 				if(instances[instanceIndex]->getPlayCount() == 0)
 				{
-					soundsToStop.push_back({soundId, instanceIndex});
+					sound2dsToStop.push_back({sound2dId, instanceIndex});
 				}
 				else
 				{
@@ -33,7 +33,7 @@ void Sound2dPlayer::update()
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
 						{
-							_terminateSounds();
+							_terminateSound2ds();
 
 							return;
 						}
@@ -49,14 +49,14 @@ void Sound2dPlayer::update()
 		}
 	}
 
-	for(const auto & [sound2dId, index] : soundsToStop)
+	for(const auto & [sound2dId, index] : sound2dsToStop)
 	{
-		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(sound2dId)[index]->getHandle(), _startedSounds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
+		const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
 		if(unprepareResult != MMSYSERR_NOERROR)
 		{
 			if(unprepareResult == MMSYSERR_NODRIVER)
 			{
-				_terminateSounds();
+				_terminateSound2ds();
 
 				return;
 			}
@@ -68,12 +68,12 @@ void Sound2dPlayer::update()
 			}
 		}
 
-		const auto closeResult = waveOutClose(_startedSounds.at(sound2dId)[index]->getHandle());
+		const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
 		if(closeResult != MMSYSERR_NOERROR)
 		{
 			if(closeResult == MMSYSERR_NODRIVER)
 			{
-				_terminateSounds();
+				_terminateSound2ds();
 
 				return;
 			}
@@ -90,11 +90,11 @@ void Sound2dPlayer::update()
 
 	if(_volumeThreadQueue.empty())
 	{
-		for(auto & [soundId, instances] : _startedSounds)
+		for(auto & [sound2dId, instances] : _startedSound2ds)
 		{
 			for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 			{
-				_volumeThreadQueue.push_back({soundId, instanceIndex});
+				_volumeThreadQueue.push_back({sound2dId, instanceIndex});
 			}
 		}
 	}
@@ -107,27 +107,27 @@ void Sound2dPlayer::update()
 
 	while(!_volumeThread.valid() && !_volumeThreadQueue.empty())
 	{
-		const auto soundId = _volumeThreadQueue.front().first;
+		const auto sound2dId = _volumeThreadQueue.front().first;
 		const auto instanceIndex = _volumeThreadQueue.front().second;
 
-		if(!_sound2dManager->isSound2dExisting(soundId))
+		if(!_sound2dManager->isSound2dExisting(sound2dId))
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
 		}
-		if(_startedSounds.find(soundId) == _startedSounds.end())
+		if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
 		}
-		if(instanceIndex >= _startedSounds.at(soundId).size())
+		if(instanceIndex >= _startedSound2ds.at(sound2dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 			continue;
 		}
 
-		const auto startedSound = _startedSounds.at(soundId)[instanceIndex];
-		const auto originalSound = _sound2dManager->getSound2d(soundId);
+		const auto startedSound = _startedSound2ds.at(sound2dId)[instanceIndex];
+		const auto originalSound = _sound2dManager->getSound2d(sound2dId);
 
 		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes

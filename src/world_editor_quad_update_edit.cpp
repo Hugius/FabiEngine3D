@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateQuad3dEditing()
 {
-	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingCaptor)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingCaptor)
 	{
 		if(!_dontResetSelectedQuad3d)
 		{

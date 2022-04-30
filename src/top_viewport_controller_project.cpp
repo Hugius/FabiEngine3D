@@ -95,7 +95,7 @@ void TopViewportController::_updateProjectCreating()
 		auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
 		auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
 		auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
-		auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
+		auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound2d.fe3d");
 		auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 		auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
 		auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
@@ -142,7 +142,7 @@ void TopViewportController::_updateProjectLoading()
 		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
 		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
-		auto audioPaths = _soundEditor->getAudioPathsFromFile();
+		auto audioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 

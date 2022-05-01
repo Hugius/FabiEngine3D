@@ -95,7 +95,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@lamp_" + pointlightId);
+			_fe3d->model_delete("@@pointlight_" + pointlightId);
 		}
 	}
 
@@ -105,7 +105,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@torch_" + spotlightId);
+			_fe3d->model_delete("@@spotlight_" + spotlightId);
 		}
 	}
 
@@ -115,7 +115,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@camera_" + captorId);
+			_fe3d->model_delete("@@captor_" + captorId);
 		}
 	}
 
@@ -125,7 +125,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@speaker_" + placedSound3dId);
+			_fe3d->model_delete("@@sound3d_" + placedSound3dId);
 		}
 	}
 

@@ -85,22 +85,22 @@ void WorldEditor::_updateSound3dHighlighting(const string & sound3dId, int & dir
 		return;
 	}
 
-	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y < DEFAULT_SPEAKER_SIZE.y)
+	if(_fe3d->model_getBaseSize("@@sound3d_" + sound3dId).y < DEFAULT_SOUND3D_SIZE.y)
 	{
-		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), DEFAULT_SPEAKER_SIZE);
+		_fe3d->model_setBaseSize(("@@sound3d_" + sound3dId), DEFAULT_SOUND3D_SIZE);
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@speaker_" + sound3dId).y > (DEFAULT_SPEAKER_SIZE.y * SOUND3D_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@sound3d_" + sound3dId).y > (DEFAULT_SOUND3D_SIZE.y * SOUND3D_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (DEFAULT_SPEAKER_SIZE * SOUND3D_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@sound3d_" + sound3dId), (DEFAULT_SOUND3D_SIZE * SOUND3D_SIZE_INCREASE));
 		direction *= -1;
 	}
 
-	const auto color = _fe3d->model_getBaseSize("@@speaker_" + sound3dId);
+	const auto color = _fe3d->model_getBaseSize("@@sound3d_" + sound3dId);
 	fvec3 speed = (fvec3(SOUND3D_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_SPEAKER_SIZE * SOUND3D_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
-	_fe3d->model_setBaseSize(("@@speaker_" + sound3dId), (color + speed));
+	speed *= ((DEFAULT_SOUND3D_SIZE * SOUND3D_SIZE_INCREASE) - DEFAULT_SOUND3D_SIZE);
+	_fe3d->model_setBaseSize(("@@sound3d_" + sound3dId), (color + speed));
 }
 
 void WorldEditor::_updatePointlightHighlighting(const string & pointlightId, int & direction)
@@ -112,22 +112,22 @@ void WorldEditor::_updatePointlightHighlighting(const string & pointlightId, int
 		return;
 	}
 
-	if(_fe3d->model_getBaseSize("@@lamp_" + pointlightId).y < DEFAULT_LAMP_SIZE.y)
+	if(_fe3d->model_getBaseSize("@@pointlight_" + pointlightId).y < DEFAULT_POINTLIGHT_SIZE.y)
 	{
-		_fe3d->model_setBaseSize(("@@lamp_" + pointlightId), DEFAULT_LAMP_SIZE);
+		_fe3d->model_setBaseSize(("@@pointlight_" + pointlightId), DEFAULT_POINTLIGHT_SIZE);
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@lamp_" + pointlightId).y > (DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@pointlight_" + pointlightId).y > (DEFAULT_POINTLIGHT_SIZE.y * POINTLIGHT_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@lamp_" + pointlightId), (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@pointlight_" + pointlightId), (DEFAULT_POINTLIGHT_SIZE * POINTLIGHT_SIZE_INCREASE));
 		direction *= -1;
 	}
 
-	const auto size = _fe3d->model_getBaseSize("@@lamp_" + pointlightId);
-	fvec3 speed = (fvec3(LAMP_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_SIZE);
-	_fe3d->model_setBaseSize(("@@lamp_" + pointlightId), (size + speed));
+	const auto size = _fe3d->model_getBaseSize("@@pointlight_" + pointlightId);
+	fvec3 speed = (fvec3(POINTLIGHT_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
+	speed *= ((DEFAULT_POINTLIGHT_SIZE * POINTLIGHT_SIZE_INCREASE) - DEFAULT_POINTLIGHT_SIZE);
+	_fe3d->model_setBaseSize(("@@pointlight_" + pointlightId), (size + speed));
 }
 
 void WorldEditor::_updateSpotlightHighlighting(const string & spotlightId, int & direction)
@@ -139,22 +139,22 @@ void WorldEditor::_updateSpotlightHighlighting(const string & spotlightId, int &
 		return;
 	}
 
-	if(_fe3d->model_getBaseSize("@@torch_" + spotlightId).y < DEFAULT_TORCH_SIZE.y)
+	if(_fe3d->model_getBaseSize("@@spotlight_" + spotlightId).y < DEFAULT_SPOTLIGHT_SIZE.y)
 	{
-		_fe3d->model_setBaseSize(("@@torch_" + spotlightId), DEFAULT_TORCH_SIZE);
+		_fe3d->model_setBaseSize(("@@spotlight_" + spotlightId), DEFAULT_SPOTLIGHT_SIZE);
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@torch_" + spotlightId).y > (DEFAULT_TORCH_SIZE.y * SPOTLIGHT_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@spotlight_" + spotlightId).y > (DEFAULT_SPOTLIGHT_SIZE.y * SPOTLIGHT_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@torch_" + spotlightId), (DEFAULT_TORCH_SIZE * SPOTLIGHT_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@spotlight_" + spotlightId), (DEFAULT_SPOTLIGHT_SIZE * SPOTLIGHT_SIZE_INCREASE));
 		direction *= -1;
 	}
 
-	const auto size = _fe3d->model_getBaseSize("@@torch_" + spotlightId);
+	const auto size = _fe3d->model_getBaseSize("@@spotlight_" + spotlightId);
 	fvec3 speed = (fvec3(SPOTLIGHT_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_TORCH_SIZE * SPOTLIGHT_SIZE_INCREASE) - DEFAULT_TORCH_SIZE);
-	_fe3d->model_setBaseSize(("@@torch_" + spotlightId), (size + speed));
+	speed *= ((DEFAULT_SPOTLIGHT_SIZE * SPOTLIGHT_SIZE_INCREASE) - DEFAULT_SPOTLIGHT_SIZE);
+	_fe3d->model_setBaseSize(("@@spotlight_" + spotlightId), (size + speed));
 }
 
 void WorldEditor::_updateCaptorHighlighting(const string & captorId, int & direction)
@@ -166,20 +166,20 @@ void WorldEditor::_updateCaptorHighlighting(const string & captorId, int & direc
 		return;
 	}
 
-	if(_fe3d->model_getBaseSize("@@camera_" + captorId).y < DEFAULT_CAMERA_SIZE.y)
+	if(_fe3d->model_getBaseSize("@@captor_" + captorId).y < DEFAULT_CAPTOR_SIZE.y)
 	{
-		_fe3d->model_setBaseSize(("@@camera_" + captorId), DEFAULT_CAMERA_SIZE);
+		_fe3d->model_setBaseSize(("@@captor_" + captorId), DEFAULT_CAPTOR_SIZE);
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@camera_" + captorId).y > (DEFAULT_CAMERA_SIZE.y * CAPTOR_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@captor_" + captorId).y > (DEFAULT_CAPTOR_SIZE.y * CAPTOR_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@camera_" + captorId), (DEFAULT_CAMERA_SIZE * CAPTOR_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@captor_" + captorId), (DEFAULT_CAPTOR_SIZE * CAPTOR_SIZE_INCREASE));
 		direction *= -1;
 	}
 
-	const auto size = _fe3d->model_getBaseSize("@@camera_" + captorId);
+	const auto size = _fe3d->model_getBaseSize("@@captor_" + captorId);
 	fvec3 speed = (fvec3(CAPTOR_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_CAMERA_SIZE * CAPTOR_SIZE_INCREASE) - DEFAULT_CAMERA_SIZE);
-	_fe3d->model_setBaseSize(("@@camera_" + captorId), (size + speed));
+	speed *= ((DEFAULT_CAPTOR_SIZE * CAPTOR_SIZE_INCREASE) - DEFAULT_CAPTOR_SIZE);
+	_fe3d->model_setBaseSize(("@@captor_" + captorId), (size + speed));
 }

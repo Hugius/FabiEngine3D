@@ -19,7 +19,7 @@ void WorldEditor::_updateCaptorEditing()
 
 		for(const auto & captorId : _loadedCaptorIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@camera_" + captorId));
+			const auto isHovered = (hoveredAabbId == ("@@captor_" + captorId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
@@ -91,7 +91,7 @@ void WorldEditor::_updateCaptorEditing()
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@camera_" + _activeCaptorId);
+				_fe3d->model_delete("@@captor_" + _activeCaptorId);
 				_fe3d->captor_delete(_activeCaptorId);
 				_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _activeCaptorId), _loadedCaptorIds.end());
 				_activeCaptorId = "";
@@ -118,7 +118,7 @@ void WorldEditor::_updateCaptorEditing()
 
 			_fe3d->captor_setPosition(_activeCaptorId, position);
 
-			_fe3d->model_setBasePosition(("@@camera_" + _activeCaptorId), position);
+			_fe3d->model_setBasePosition(("@@captor_" + _activeCaptorId), position);
 		}
 	}
 }

@@ -15,20 +15,20 @@ void WorldEditor::_updateSpotlightPlacing()
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_TORCH_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_TORCH_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 				const auto newId = ("spotlight_" + to_string(_idCounter));
-				const auto newModelId = ("@@torch_" + newId);
+				const auto newModelId = ("@@spotlight_" + newId);
 
 				_idCounter++;
 
@@ -48,21 +48,21 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
 				_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
 
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+				_fe3d->model_create(newModelId, TEMPLATE_SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPOTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 				_isPlacingSpotlight = false;
 			}
@@ -70,7 +70,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 				_isPlacingSpotlight = false;
 			}
@@ -80,7 +80,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 				return;
 			}
@@ -88,7 +88,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 				return;
 			}
@@ -96,7 +96,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_isPlacingSpotlight = false;
 
 				return;
@@ -105,7 +105,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 				return;
 			}
@@ -113,13 +113,13 @@ void WorldEditor::_updateSpotlightPlacing()
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET);
 			_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, true);
 			_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, newPosition);
-			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
-			_fe3d->model_setBasePosition(TEMPLATE_TORCH_ID, newPosition);
+			_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, true);
+			_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				auto newId = ("spotlight_" + to_string(_idCounter));
-				auto newModelId = ("@@torch_" + newId);
+				auto newModelId = ("@@spotlight_" + newId);
 
 				_idCounter++;
 
@@ -139,17 +139,17 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
 				_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
 
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+				_fe3d->model_create(newModelId, TEMPLATE_SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPOTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

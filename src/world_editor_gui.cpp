@@ -429,15 +429,15 @@ void WorldEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3d");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3dPlace");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3dChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3d");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3dPlace");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3dChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuPointlight");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuPointlightChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSpotlight");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSpotlightChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuCaptor");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuCaptorChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3d");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3dPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound3dChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettings");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsLighting");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingAmbient");
@@ -454,8 +454,8 @@ void WorldEditor::_unloadGUI()
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("modelPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("quad3dPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("text3dPropertiesMenu");
-	_gui->getRightViewport()->getWindow("main")->deleteScreen("sound3dPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("spotlightPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("captorPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("sound3dPropertiesMenu");
 }

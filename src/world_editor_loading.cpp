@@ -293,17 +293,17 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@speaker_" + sound3dId);
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\speaker.obj");
+				const string newModelId = ("@@sound3d_" + sound3dId);
+				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPEAKER_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SOUND3D_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
@@ -346,10 +346,10 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@lamp_" + pointlightId);
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				const string newModelId = ("@@pointlight_" + pointlightId);
+				_fe3d->model_create(newModelId, TEMPLATE_POINTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
 				_fe3d->model_setColor(newModelId, "", color);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
@@ -357,7 +357,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_POINTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
@@ -397,11 +397,11 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@torch_" + spotlightId);
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+				const string newModelId = ("@@spotlight_" + spotlightId);
+				_fe3d->model_create(newModelId, TEMPLATE_SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, -yaw, pitch));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setColor(newModelId, "", color);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
@@ -409,7 +409,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPOTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
@@ -438,17 +438,17 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@camera_" + captorId);
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+				const string newModelId = ("@@captor_" + captorId);
+				_fe3d->model_create(newModelId, TEMPLATE_CAPTOR_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAPTOR_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAPTOR_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 

@@ -13,7 +13,7 @@ void WorldEditor::_updateSpotlightMenu()
 		{
 			if(_isPlacingSpotlight)
 			{
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_isPlacingSpotlight = false;
 			}
@@ -34,7 +34,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_deactivateCaptor();
 
 			_isPlacingSpotlight = true;
-			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
+			_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, true);
 			_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, true);
 			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 

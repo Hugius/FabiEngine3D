@@ -15,20 +15,20 @@ void WorldEditor::_updatePointlightPlacing()
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 				const auto newId = ("pointlight_" + to_string(_idCounter));
-				const auto newModelId = ("@@lamp_" + newId);
+				const auto newModelId = ("@@pointlight_" + newId);
 
 				_idCounter++;
 
@@ -46,20 +46,20 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				_fe3d->model_create(newModelId, TEMPLATE_POINTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_POINTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 				_isPlacingPointlight = false;
 			}
@@ -67,7 +67,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 				_isPlacingPointlight = false;
 			}
@@ -77,7 +77,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 				return;
 			}
@@ -85,7 +85,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 				return;
 			}
@@ -93,7 +93,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_isPlacingPointlight = false;
 
 				return;
@@ -102,7 +102,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 				return;
 			}
@@ -110,13 +110,13 @@ void WorldEditor::_updatePointlightPlacing()
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET);
 			_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, true);
 			_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, newPosition);
-			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
-			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
+			_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, true);
+			_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				auto newId = ("pointlight_" + to_string(_idCounter));
-				auto newModelId = ("@@lamp_" + newId);
+				auto newModelId = ("@@pointlight_" + newId);
 
 				_idCounter++;
 
@@ -134,16 +134,16 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
-				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				_fe3d->model_create(newModelId, TEMPLATE_POINTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_POINTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

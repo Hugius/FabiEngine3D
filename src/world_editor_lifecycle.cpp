@@ -14,27 +14,27 @@ void WorldEditor::_load()
 	_animation3dEditor->loadAnimation3dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
-	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
-	_fe3d->model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
-	_fe3d->model_create(TEMPLATE_CAMERA_ID, CAMERA_MODEL_PATH);
-	_fe3d->model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
-	_fe3d->model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
-	_fe3d->model_setBaseSize(TEMPLATE_TORCH_ID, DEFAULT_TORCH_SIZE);
-	_fe3d->model_setBaseSize(TEMPLATE_CAMERA_ID, DEFAULT_CAMERA_SIZE);
-	_fe3d->model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
-	_fe3d->model_setBaseRotation(TEMPLATE_TORCH_ID, DEFAULT_TORCH_ROTATION);
-	_fe3d->model_setShadowed(TEMPLATE_LAMP_ID, false);
-	_fe3d->model_setShadowed(TEMPLATE_TORCH_ID, false);
-	_fe3d->model_setShadowed(TEMPLATE_CAMERA_ID, false);
-	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
-	_fe3d->model_setReflected(TEMPLATE_LAMP_ID, false);
-	_fe3d->model_setReflected(TEMPLATE_TORCH_ID, false);
-	_fe3d->model_setReflected(TEMPLATE_CAMERA_ID, false);
-	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
-	_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
-	_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
-	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
-	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+	_fe3d->model_create(TEMPLATE_POINTLIGHT_ID, TEMPLATE_POINTLIGHT_MODEL_PATH);
+	_fe3d->model_create(TEMPLATE_SPOTLIGHT_ID, TEMPLATE_SPOTLIGHT_MODEL_PATH);
+	_fe3d->model_create(TEMPLATE_CAPTOR_ID, TEMPLATE_CAPTOR_MODEL_PATH);
+	_fe3d->model_create(TEMPLATE_SOUND3D_ID, TEMPLATE_SOUND3D_MODEL_PATH);
+	_fe3d->model_setBaseSize(TEMPLATE_POINTLIGHT_ID, DEFAULT_POINTLIGHT_SIZE);
+	_fe3d->model_setBaseSize(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_SIZE);
+	_fe3d->model_setBaseSize(TEMPLATE_CAPTOR_ID, DEFAULT_CAPTOR_SIZE);
+	_fe3d->model_setBaseSize(TEMPLATE_SOUND3D_ID, DEFAULT_SOUND3D_SIZE);
+	_fe3d->model_setBaseRotation(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_ROTATION);
+	_fe3d->model_setShadowed(TEMPLATE_POINTLIGHT_ID, false);
+	_fe3d->model_setShadowed(TEMPLATE_SPOTLIGHT_ID, false);
+	_fe3d->model_setShadowed(TEMPLATE_CAPTOR_ID, false);
+	_fe3d->model_setShadowed(TEMPLATE_SOUND3D_ID, false);
+	_fe3d->model_setReflected(TEMPLATE_POINTLIGHT_ID, false);
+	_fe3d->model_setReflected(TEMPLATE_SPOTLIGHT_ID, false);
+	_fe3d->model_setReflected(TEMPLATE_CAPTOR_ID, false);
+	_fe3d->model_setReflected(TEMPLATE_SOUND3D_ID, false);
+	_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
+	_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
+	_fe3d->model_setVisible(TEMPLATE_CAPTOR_ID, false);
+	_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
 
 	_fe3d->pointlight_create(TEMPLATE_POINTLIGHT_ID);
 	_fe3d->pointlight_setRadius(TEMPLATE_POINTLIGHT_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
@@ -109,10 +109,10 @@ void WorldEditor::_unload()
 	_animation2dEditor->deleteLoadedAnimation2ds();
 	_sound2dEditor->deleteLoadedSound2ds();
 
-	_fe3d->model_delete(TEMPLATE_LAMP_ID);
-	_fe3d->model_delete(TEMPLATE_TORCH_ID);
-	_fe3d->model_delete(TEMPLATE_CAMERA_ID);
-	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
+	_fe3d->model_delete(TEMPLATE_POINTLIGHT_ID);
+	_fe3d->model_delete(TEMPLATE_SPOTLIGHT_ID);
+	_fe3d->model_delete(TEMPLATE_CAPTOR_ID);
+	_fe3d->model_delete(TEMPLATE_SOUND3D_ID);
 
 	_fe3d->pointlight_delete(TEMPLATE_POINTLIGHT_ID);
 

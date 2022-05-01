@@ -140,24 +140,11 @@ private:
 	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";
 	static inline const string TEMPLATE_CAPTOR_ID = "@@template_captor";
 	static inline const string TEMPLATE_SOUND3D_ID = "@@template_sound3d";
-	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
-	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
-	static inline const string TEMPLATE_CAMERA_ID = "@@template_camera";
-	static inline const string TEMPLATE_SPEAKER_ID = "@@template_speaker";
-	static inline const string LAMP_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
-	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
-	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
-	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
+	static inline const string TEMPLATE_POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string TEMPLATE_SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
+	static inline const string TEMPLATE_CAPTOR_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
+	static inline const string TEMPLATE_SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
 
-	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
-	static inline const fvec3 DEFAULT_TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
-	static inline const fvec3 DEFAULT_TORCH_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 DEFAULT_TORCH_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
-	static inline const fvec3 DEFAULT_CAMERA_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 DEFAULT_CAMERA_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 DEFAULT_SPEAKER_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 DEFAULT_SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 TEXT3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
@@ -165,6 +152,15 @@ private:
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 CAPTOR_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 DEFAULT_POINTLIGHT_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_POINTLIGHT_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
+	static inline const fvec3 DEFAULT_SPOTLIGHT_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
+	static inline const fvec3 DEFAULT_SPOTLIGHT_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_SPOTLIGHT_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
+	static inline const fvec3 DEFAULT_CAPTOR_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_CAPTOR_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_SOUND3D_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_SOUND3D_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 
 	static inline constexpr float MODEL_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;
@@ -185,6 +181,8 @@ private:
 	static inline constexpr float POINTLIGHT_RADIUS_DIVIDER = 100.0f;
 	static inline constexpr float POINTLIGHT_COLOR_SPEED = 0.005f;
 	static inline constexpr float POINTLIGHT_INTENSITY_SPEED = 0.1f;
+	static inline constexpr float POINTLIGHT_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float POINTLIGHT_SIZE_INCREASE = 1.25f;
 	static inline constexpr float SPOTLIGHT_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float SPOTLIGHT_COLOR_SPEED = 0.005f;
 	static inline constexpr float SPOTLIGHT_YAW_SPEED = 0.5f;
@@ -193,17 +191,15 @@ private:
 	static inline constexpr float SPOTLIGHT_ANGLE_SPEED = 0.1f;
 	static inline constexpr float SPOTLIGHT_DISTANCE_DIVIDER = 100.0f;
 	static inline constexpr float SPOTLIGHT_INTENSITY_MULTIPLIER = 10.0f;
+	static inline constexpr float SPOTLIGHT_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float SPOTLIGHT_SIZE_INCREASE = 1.25f;
 	static inline constexpr float CAPTOR_POSITION_DIVIDER = 100.0f;
+	static inline constexpr float CAPTOR_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float CAPTOR_SIZE_INCREASE = 1.25f;
 	static inline constexpr float SOUND3D_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_DISTANCE_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_MULTIPLIER = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_SPEED = 0.01f;
-	static inline constexpr float LAMP_HIGHLIGHT_SPEED = 0.025f;
-	static inline constexpr float LAMP_SIZE_INCREASE = 1.25f;
-	static inline constexpr float SPOTLIGHT_HIGHLIGHT_SPEED = 0.025f;
-	static inline constexpr float SPOTLIGHT_SIZE_INCREASE = 1.25f;
-	static inline constexpr float CAPTOR_HIGHLIGHT_SPEED = 0.025f;
-	static inline constexpr float CAPTOR_SIZE_INCREASE = 1.25f;
 	static inline constexpr float SOUND3D_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr float SOUND3D_SIZE_INCREASE = 1.25f;
 	static inline constexpr float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
@@ -223,7 +219,6 @@ private:
 	unordered_map<string, string> _loadedText3dIds = {};
 	unordered_map<string, string> _loadedSound3dIds = {};
 
-	vector<string> _loadedAabbIds = {};
 	vector<string> _loadedPointlightIds = {};
 	vector<string> _loadedSpotlightIds = {};
 	vector<string> _loadedCaptorIds = {};

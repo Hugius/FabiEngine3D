@@ -13,7 +13,7 @@ void WorldEditor::_updateCaptorMenu()
 		{
 			if(_isPlacingCaptor)
 			{
-				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_isPlacingCaptor = false;
 			}
 
@@ -33,7 +33,7 @@ void WorldEditor::_updateCaptorMenu()
 			_deactivateCaptor();
 
 			_isPlacingCaptor = true;
-			_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, true);
+			_fe3d->model_setVisible(TEMPLATE_CAPTOR_ID, true);
 			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 			if(_fe3d->terrain_getSelectedId().empty())

@@ -13,7 +13,7 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			if(_isPlacingPointlight)
 			{
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_isPlacingPointlight = false;
 			}
@@ -34,7 +34,7 @@ void WorldEditor::_updatePointlightMenu()
 			_deactivateCaptor();
 
 			_isPlacingPointlight = true;
-			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
+			_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, true);
 			_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, true);
 			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 

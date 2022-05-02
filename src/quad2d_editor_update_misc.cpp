@@ -122,7 +122,7 @@ void Quad2dEditor::_updateQuad2dChoosing()
 	}
 }
 
-void Quad2dEditor::_updateQuadDeleting()
+void Quad2dEditor::_updateQuad2dDeleting()
 {
 	if((_gui->getOverlay()->getAnswerFormId() == "deleteQuad2d") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{

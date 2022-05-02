@@ -2,19 +2,18 @@
 
 #include "base_editor.hpp"
 
-class Quad3dEditor final : public BaseEditor
+class AabbEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;
 
 	void update();
-	void deleteLoadedQuad3ds();
+	void deleteLoadedAabbs();
 
-	const vector<string> getImagePathsFromFile() const;
-	const vector<string> & getLoadedQuad3dIds() const;
+	const vector<string> & getLoadedAabbIds() const;
 
-	const bool loadQuad3dsFromFile();
-	const bool saveQuad3dsToFile() const;
+	const bool loadAabbsFromFile();
+	const bool saveAabbsToFile() const;
 
 private:
 	void _load();
@@ -23,13 +22,9 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateTexturingMenu();
-	void _updateLightingMenu();
-	void _updateMiscellaneousMenu();
-	void _updateAabbMenu();
-	void _updateQuad3dCreating();
-	void _updateQuad3dChoosing();
-	void _updateQuad3dDeleting();
+	void _updateAabbCreating();
+	void _updateAabbChoosing();
+	void _updateAabbDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -45,8 +40,8 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 10;
 
-	vector<string> _loadedQuad3dIds = {};
+	vector<string> _loadedAabbIds = {};
 
-	string _hoveredQuad3dId = "";
-	string _currentQuad3dId = "";
+	string _hoveredAabbId = "";
+	string _currentAabbId = "";
 };

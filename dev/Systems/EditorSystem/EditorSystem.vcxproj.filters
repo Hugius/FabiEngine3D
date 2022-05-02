@@ -235,6 +235,21 @@
     <Filter Include="World Editor\Update\Text">
       <UniqueIdentifier>{e883bcb7-32af-4b5b-93f3-8630d13b2807}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AABB Editor">
+      <UniqueIdentifier>{fa9f4a55-d711-428f-a4df-089208b2cffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABB Editor\Main">
+      <UniqueIdentifier>{f7f10e6c-0b94-46c3-b93b-054feedc6b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABB Editor\Miscellaneous">
+      <UniqueIdentifier>{72bdd7cc-d6ec-4d22-b434-b8e7ad6a54f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABB Editor\Update">
+      <UniqueIdentifier>{65aa9dad-da93-43ef-944b-65c96d28f382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABB Editor\Persistence">
+      <UniqueIdentifier>{a564af86-a972-4d12-8b35-2298d2af6d5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -636,6 +651,24 @@
     <ClCompile Include="..\..\..\src\text3d_editor_update_aabb.cpp">
       <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_lifecycle.cpp">
+      <Filter>AABB Editor\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_update_misc.cpp">
+      <Filter>AABB Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_update_menu.cpp">
+      <Filter>AABB Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_loading.cpp">
+      <Filter>AABB Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_saving.cpp">
+      <Filter>AABB Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_editor_misc.cpp">
+      <Filter>AABB Editor\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -679,6 +712,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\text3d_editor.hpp">
       <Filter>Text3D Editor\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb_editor.hpp">
+      <Filter>AABB Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

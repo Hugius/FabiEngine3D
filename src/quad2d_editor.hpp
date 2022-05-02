@@ -25,7 +25,7 @@ private:
 	void _updateChoiceMenu();
 	void _updateQuad2dCreating();
 	void _updateQuad2dChoosing();
-	void _updateQuadDeleting();
+	void _updateQuad2dDeleting();
 	void _updateMiscellaneous();
 
 	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);

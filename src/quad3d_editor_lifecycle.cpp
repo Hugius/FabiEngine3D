@@ -184,7 +184,7 @@ void Quad3dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateQuadDeleting();
+		_updateQuad3dDeleting();
 	}
 	if(isLoaded())
 	{

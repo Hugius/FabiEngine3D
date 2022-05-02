@@ -144,7 +144,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 	}
 }
 
-void Quad3dEditor::_updateQuadDeleting()
+void Quad3dEditor::_updateQuad3dDeleting()
 {
 	if((_gui->getOverlay()->getAnswerFormId() == "deleteQuad3d") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{

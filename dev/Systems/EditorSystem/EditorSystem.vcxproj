@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\aabb_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_misc.cpp" />
@@ -33,6 +34,11 @@
     <ClCompile Include="..\..\..\src\quad2d_editor_saving.cpp" />
     <ClCompile Include="..\..\..\src\quad2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\quad2d_editor_update_misc.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_editor_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\aabb_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_aabb.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_lifecycle.cpp" />
@@ -157,6 +163,7 @@
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\base_editor.hpp" />
     <ClInclude Include="..\..\..\src\quad2d_editor.hpp" />
+    <ClInclude Include="..\..\..\src\aabb_editor.hpp" />
     <ClInclude Include="..\..\..\src\text3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\sound2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp" />

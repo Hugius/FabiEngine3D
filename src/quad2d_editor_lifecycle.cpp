@@ -74,6 +74,6 @@ void Quad2dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateQuadDeleting();
+		_updateQuad2dDeleting();
 	}
 }

@@ -24,8 +24,8 @@ public:
 	void deleteScrollingList(const string & scrolingListId);
 	void deleteInputBox(const string & inputBoxId);
 	void deleteButton(const string & buttonId);
-	void deleteQuadField(const string & quadId);
-	void deleteTextField(const string & textId);
+	void deleteQuadField(const string & quadFieldId);
+	void deleteTextField(const string & textFieldId);
 	void deleteScrollingLists();
 	void deleteInputBoxes();
 	void deleteButtons();

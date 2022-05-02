@@ -24,21 +24,21 @@ void Text2dEditor::_updateText2dCreating()
 
 		if(newText2dId.empty())
 		{
-			Logger::throwWarning("Text ID cannot be empty");
+			Logger::throwWarning("Text2D ID cannot be empty");
 
 			return;
 		}
 
 		if(any_of(newText2dId.begin(), newText2dId.end(), isspace))
 		{
-			Logger::throwWarning("Text ID cannot contain any spaces");
+			Logger::throwWarning("Text2D ID cannot contain any spaces");
 
 			return;
 		}
 
 		if(any_of(newText2dId.begin(), newText2dId.end(), isupper))
 		{
-			Logger::throwWarning("Text ID cannot contain any capitals");
+			Logger::throwWarning("Text2D ID cannot contain any capitals");
 
 			return;
 		}
@@ -47,7 +47,7 @@ void Text2dEditor::_updateText2dCreating()
 
 		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), newText2dId) != _loadedText2dIds.end())
 		{
-			Logger::throwWarning("Text already exists");
+			Logger::throwWarning("Text2D already exists");
 
 			return;
 		}

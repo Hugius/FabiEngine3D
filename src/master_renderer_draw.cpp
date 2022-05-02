@@ -9,7 +9,7 @@ using std::dynamic_pointer_cast;
 using std::function;
 using std::map;
 
-void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size)
+void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size)
 {
 	glViewport(0, 0, size.x, size.y);
 
@@ -17,7 +17,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size)
 
 	_quad2dColorRenderer->bind();
 
-	_quad2dColorRenderer->render(quad);
+	_quad2dColorRenderer->render(quad2d);
 
 	_quad2dColorRenderer->unbind();
 

@@ -58,7 +58,7 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
 	void update();
-	void renderLogo(shared_ptr<Quad2d> quad, const ivec2 & size);
+	void renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size);
 	void render3d();
 	void render2d();
 	void reloadBloomBlurQuality();

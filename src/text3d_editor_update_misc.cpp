@@ -59,21 +59,21 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(newText3dId.empty())
 		{
-			Logger::throwWarning("Text ID cannot be empty");
+			Logger::throwWarning("Text3D ID cannot be empty");
 
 			return;
 		}
 
 		if(any_of(newText3dId.begin(), newText3dId.end(), isspace))
 		{
-			Logger::throwWarning("Text ID cannot contain any spaces");
+			Logger::throwWarning("Text3D ID cannot contain any spaces");
 
 			return;
 		}
 
 		if(any_of(newText3dId.begin(), newText3dId.end(), isupper))
 		{
-			Logger::throwWarning("Text ID cannot contain any capitals");
+			Logger::throwWarning("Text3D ID cannot contain any capitals");
 
 			return;
 		}
@@ -82,7 +82,7 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(find(_loadedText3dIds.begin(), _loadedText3dIds.end(), newText3dId) != _loadedText3dIds.end())
 		{
-			Logger::throwWarning("Text already exists");
+			Logger::throwWarning("Text3D already exists");
 
 			return;
 		}

@@ -24,21 +24,21 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 		if(newQuad2dId.empty())
 		{
-			Logger::throwWarning("Quad ID cannot be empty");
+			Logger::throwWarning("Quad2D ID cannot be empty");
 
 			return;
 		}
 
 		if(any_of(newQuad2dId.begin(), newQuad2dId.end(), isspace))
 		{
-			Logger::throwWarning("Quad ID cannot contain any spaces");
+			Logger::throwWarning("Quad2D ID cannot contain any spaces");
 
 			return;
 		}
 
 		if(any_of(newQuad2dId.begin(), newQuad2dId.end(), isupper))
 		{
-			Logger::throwWarning("Quad ID cannot contain any capitals");
+			Logger::throwWarning("Quad2D ID cannot contain any capitals");
 
 			return;
 		}
@@ -47,7 +47,7 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 		if(find(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), newQuad2dId) != _loadedQuad2dIds.end())
 		{
-			Logger::throwWarning("Quad already exists");
+			Logger::throwWarning("Quad2D already exists");
 
 			return;
 		}

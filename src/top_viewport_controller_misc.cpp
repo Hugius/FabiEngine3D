@@ -87,10 +87,11 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("quad3dEditor")->setHoverable(isHoverable);
 	screen->getButton("text3dEditor")->setHoverable(isHoverable);
+	screen->getButton("aabbEditor")->setHoverable(isHoverable);
 	screen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	screen->getButton("text2dEditor")->setHoverable(isHoverable);
-	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
+	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("sound2dEditor")->setHoverable(isHoverable);
 	screen->getButton("worldEditor")->setHoverable(isHoverable);
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
@@ -106,10 +107,11 @@ void TopViewportController::_setProject(const string & projectId)
 	_modelEditor->setCurrentProjectId(_currentProjectId);
 	_quad3dEditor->setCurrentProjectId(_currentProjectId);
 	_text3dEditor->setCurrentProjectId(_currentProjectId);
+	_aabbEditor->setCurrentProjectId(_currentProjectId);
 	_quad2dEditor->setCurrentProjectId(_currentProjectId);
 	_text2dEditor->setCurrentProjectId(_currentProjectId);
-	_animation2dEditor->setCurrentProjectId(_currentProjectId);
 	_animation3dEditor->setCurrentProjectId(_currentProjectId);
+	_animation2dEditor->setCurrentProjectId(_currentProjectId);
 	_sound2dEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
 	_customWorldBuilder->setCurrentProjectId(_currentProjectId);
@@ -164,6 +166,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	directoryPaths.push_back(projectDirectoryPath + "worlds\\custom\\");
 	directoryPaths.push_back(projectDirectoryPath + "worlds\\editor\\");
 
+	filePaths.push_back(projectDirectoryPath + "data\\aabb.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\animation2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\animation3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
@@ -247,6 +250,11 @@ void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEdit
 void TopViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 {
 	_animation3dEditor = animation3dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<AabbEditor> aabbEditor)
+{
+	_aabbEditor = aabbEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Sound2dEditor> sound2dEditor)

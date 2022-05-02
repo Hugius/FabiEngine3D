@@ -10,8 +10,9 @@ void WorldEditor::_load()
 	_modelEditor->loadModelsFromFile();
 	_quad3dEditor->loadQuad3dsFromFile();
 	_text3dEditor->loadText3dsFromFile();
-	_animation2dEditor->loadAnimation2dsFromFile();
+	_aabbEditor->loadAabbsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
+	_animation2dEditor->loadAnimation2dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->model_create(TEMPLATE_POINTLIGHT_ID, TEMPLATE_POINTLIGHT_MODEL_PATH);

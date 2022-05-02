@@ -257,6 +257,11 @@ void WorldEditor::inject(shared_ptr<Sound2dEditor> sound2dEditor)
 	_sound2dEditor = sound2dEditor;
 }
 
+void WorldEditor::inject(shared_ptr<AabbEditor> aabbEditor)
+{
+	_aabbEditor = aabbEditor;
+}
+
 void WorldEditor::inject(shared_ptr<WorldHelper> worldHelper)
 {
 	_worldHelper = worldHelper;

@@ -89,6 +89,7 @@ void TopViewportController::_updateProjectCreating()
 		Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
 		Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
+		auto aabbFile = ofstream(newProjectDirectoryPath + "data\\aabb.fe3d");
 		auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 		auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 		auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");

@@ -64,7 +64,7 @@ void AabbEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "aabbEditorMenuChoice")
 	{
-		const auto size = _fe3d->aabb_getBaseSize(_currentAabbId));
+		const auto size = _fe3d->aabb_getBaseSize(_currentAabbId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

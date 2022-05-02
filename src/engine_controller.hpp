@@ -34,6 +34,7 @@ private:
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
 	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
+	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;

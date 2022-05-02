@@ -8,7 +8,7 @@ void LeftViewportController::initialize()
 	_gui->getLeftViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), FRAME_COLOR);
 	auto window = _gui->getLeftViewport()->getWindow("main");
 
-	auto positions = Mathematics::calculateDistributedPositions(13, CH, false);
+	auto positions = Mathematics::calculateDistributedPositions(14, CH, false);
 	window->createScreen("main");
 	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Terrain"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -16,13 +16,14 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("text3dEditor", fvec2(0.0f, positions[5]), TEXT_SIZE("Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[6]), TEXT_SIZE("Quad2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[8]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("aabbEditor", fvec2(0.0f, positions[6]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Quad2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[8]), TEXT_SIZE("Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[9]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[10]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[11]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[12]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[10]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[11]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[12]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[13]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	window->setActiveScreen("main");
 }
@@ -82,6 +83,14 @@ void LeftViewportController::update()
 				window->setActiveScreen("text3dEditorMenuMain");
 			}
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("aabbEditor")->isHovered())
+		{
+			if(_aabbEditor->loadAabbsFromFile())
+			{
+				_aabbEditor->load();
+				window->setActiveScreen("aabbEditorMenuMain");
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
 		{
 			if(_quad2dEditor->loadQuad2dsFromFile())
@@ -98,20 +107,20 @@ void LeftViewportController::update()
 				window->setActiveScreen("text2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
-		{
-			if(_animation2dEditor->loadAnimation2dsFromFile())
-			{
-				_animation2dEditor->load();
-				window->setActiveScreen("animation2dEditorMenuMain");
-			}
-		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
 			if(_modelEditor->loadModelsFromFile() && _animation3dEditor->loadAnimation3dsFromFile())
 			{
 				_animation3dEditor->load();
 				window->setActiveScreen("animation3dEditorMenuMain");
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
+		{
+			if(_animation2dEditor->loadAnimation2dsFromFile())
+			{
+				_animation2dEditor->load();
+				window->setActiveScreen("animation2dEditorMenuMain");
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound2dEditor")->isHovered())
@@ -143,10 +152,11 @@ void LeftViewportController::update()
 	_modelEditor->update();
 	_quad3dEditor->update();
 	_text3dEditor->update();
+	_aabbEditor->update();
 	_quad2dEditor->update();
 	_text2dEditor->update();
-	_animation2dEditor->update();
 	_animation3dEditor->update();
+	_animation2dEditor->update();
 	_sound2dEditor->update();
 	_worldEditor->update();
 	_scriptEditor->update();
@@ -195,6 +205,11 @@ void LeftViewportController::inject(shared_ptr<Text2dEditor> text2dEditor)
 void LeftViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)
 {
 	_animation2dEditor = animation2dEditor;
+}
+
+void LeftViewportController::inject(shared_ptr<AabbEditor> aabbEditor)
+{
+	_aabbEditor = aabbEditor;
 }
 
 void LeftViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)

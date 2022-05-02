@@ -176,10 +176,12 @@ void ScriptInterpreter::load()
 	_waterEditor->loadWatersFromFile();
 	_modelEditor->loadModelsFromFile();
 	_quad3dEditor->loadQuad3dsFromFile();
+	_text3dEditor->loadText3dsFromFile();
+	_aabbEditor->loadAabbsFromFile();
 	_quad2dEditor->loadQuad2dsFromFile();
 	_text2dEditor->loadText2dsFromFile();
-	_animation2dEditor->loadAnimation2dsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
+	_animation2dEditor->loadAnimation2dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->camera_reset();
@@ -204,9 +206,10 @@ void ScriptInterpreter::unload()
 	_modelEditor->deleteLoadedModels();
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_quad2dEditor->deleteLoadedQuad2ds();
+	_aabbEditor->deleteLoadedAabbs();
 	_text2dEditor->deleteLoadedText2ds();
-	_animation2dEditor->deleteLoadedAnimation2ds();
 	_animation3dEditor->deleteLoadedAnimation3ds();
+	_animation2dEditor->deleteLoadedAnimation2ds();
 	_sound2dEditor->deleteLoadedSound2ds();
 
 	for(const auto & skyId : _fe3d->sky_getIds())

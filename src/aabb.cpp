@@ -237,11 +237,13 @@ void Aabb::setParentType(AabbParentType value)
 void Aabb::setLocalPosition(const fvec3 & value)
 {
 	_localPosition = value;
+	_localPositionTarget = value;
 }
 
 void Aabb::setLocalSize(const fvec3 & value)
 {
 	_localSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_localSizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 const shared_ptr<VertexBuffer> Aabb::getVertexBuffer()const

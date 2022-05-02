@@ -41,7 +41,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
-				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SOUND3D_ID));
+				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
@@ -145,7 +145,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
-				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SOUND3D_ID));
+				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);

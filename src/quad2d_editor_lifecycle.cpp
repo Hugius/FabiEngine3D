@@ -50,8 +50,10 @@ void Quad2dEditor::_loadGUI()
 
 void Quad2dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad2dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad2dEditorMenuChoice");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("quad2dEditorMenuMain");
+	window->deleteScreen("quad2dEditorMenuChoice");
 }
 
 void Quad2dEditor::update()

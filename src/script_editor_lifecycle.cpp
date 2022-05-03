@@ -77,7 +77,7 @@ void ScriptEditor::_unload()
 
 void ScriptEditor::_loadGUI()
 {
-	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto window = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(8, CH, false);
 	window->createScreen("scriptEditorMenuMain");
@@ -93,7 +93,9 @@ void ScriptEditor::_loadGUI()
 
 void ScriptEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("scriptEditorMenuMain");
+	const auto window = _gui->getRightViewport()->getWindow("main");
+
+	window->deleteScreen("scriptEditorMenuMain");
 }
 
 void ScriptEditor::update()

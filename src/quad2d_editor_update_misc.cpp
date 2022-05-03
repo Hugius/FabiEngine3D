@@ -85,7 +85,7 @@ void Quad2dEditor::_updateQuad2dChoosing()
 		{
 			if(!_hoveredQuad2dId.empty())
 			{
-				_fe3d->quad2d_setVisible(_hoveredQuad2dId, true);
+				_fe3d->quad2d_setVisible(_hoveredQuad2dId, false);
 
 				_hoveredQuad2dId = "";
 			}
@@ -96,7 +96,7 @@ void Quad2dEditor::_updateQuad2dChoosing()
 			{
 				_hoveredQuad2dId = ("@" + selectedOptionId);
 
-				_fe3d->quad2d_setVisible(_hoveredQuad2dId, false);
+				_fe3d->quad2d_setVisible(_hoveredQuad2dId, true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())

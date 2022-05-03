@@ -73,10 +73,12 @@ void SkyEditor::_loadGUI()
 
 void SkyEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuMiscellaneous");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("skyEditorMenuMain");
+	window->deleteScreen("skyEditorMenuChoice");
+	window->deleteScreen("skyEditorMenuTexturing");
+	window->deleteScreen("skyEditorMenuMiscellaneous");
 }
 
 void SkyEditor::update()

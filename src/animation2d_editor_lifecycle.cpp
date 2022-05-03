@@ -38,7 +38,7 @@ void Animation2dEditor::_unload()
 
 void Animation2dEditor::_loadGUI()
 {
-	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto window = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	window->createScreen("animation2dEditorMenuMain");
@@ -60,8 +60,10 @@ void Animation2dEditor::_loadGUI()
 
 void Animation2dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation2dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation2dEditorMenuChoice");
+	const auto window = _gui->getRightViewport()->getWindow("main");
+
+	window->deleteScreen("animation2dEditorMenuMain");
+	window->deleteScreen("animation2dEditorMenuChoice");
 }
 
 void Animation2dEditor::update()

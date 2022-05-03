@@ -32,9 +32,9 @@ void Text2dEditor::_loadGUI()
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	window->createScreen("text2dEditorMenuMain");
-	window->getScreen("text2dEditorMenuMain")->createButton("create2d", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("text2dEditorMenuMain")->createButton("edit2d", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("text2dEditorMenuMain")->createButton("delete2d", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("text2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("text2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("text2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(5, CH, false);
@@ -48,8 +48,10 @@ void Text2dEditor::_loadGUI()
 
 void Text2dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text2dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text2dEditorMenuChoice");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("text2dEditorMenuMain");
+	window->deleteScreen("text2dEditorMenuChoice");
 }
 
 void Text2dEditor::update()

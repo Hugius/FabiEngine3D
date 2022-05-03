@@ -132,13 +132,15 @@ void TerrainEditor::_loadGUI()
 
 void TerrainEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuDiffuseTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuBlendTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuNormalTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuLighting");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuMiscellaneous");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("terrainEditorMenuMain");
+	window->deleteScreen("terrainEditorMenuChoice");
+	window->deleteScreen("terrainEditorMenuDiffuseTexturing");
+	window->deleteScreen("terrainEditorMenuBlendTexturing");
+	window->deleteScreen("terrainEditorMenuNormalTexturing");
+	window->deleteScreen("terrainEditorMenuLighting");
+	window->deleteScreen("terrainEditorMenuMiscellaneous");
 }
 
 void TerrainEditor::update()

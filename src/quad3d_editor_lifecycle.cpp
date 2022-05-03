@@ -140,12 +140,14 @@ void Quad3dEditor::_loadGUI()
 
 void Quad3dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuLighting");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuMiscellaneous");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuAabb");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("quad3dEditorMenuMain");
+	window->deleteScreen("quad3dEditorMenuChoice");
+	window->deleteScreen("quad3dEditorMenuTexturing");
+	window->deleteScreen("quad3dEditorMenuLighting");
+	window->deleteScreen("quad3dEditorMenuMiscellaneous");
+	window->deleteScreen("quad3dEditorMenuAabb");
 }
 
 void Quad3dEditor::update()

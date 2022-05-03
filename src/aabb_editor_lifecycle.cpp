@@ -92,8 +92,10 @@ void AabbEditor::_loadGUI()
 
 void AabbEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("aabbEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("aabbEditorMenuChoice");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("aabbEditorMenuMain");
+	window->deleteScreen("aabbEditorMenuChoice");
 }
 
 void AabbEditor::update()

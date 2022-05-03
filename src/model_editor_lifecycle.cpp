@@ -173,13 +173,15 @@ void ModelEditor::_loadGUI()
 
 void ModelEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuLighting");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuMiscellaneous");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuAabbMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuAabbChoice");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("modelEditorMenuMain");
+	window->deleteScreen("modelEditorMenuChoice");
+	window->deleteScreen("modelEditorMenuTexturing");
+	window->deleteScreen("modelEditorMenuLighting");
+	window->deleteScreen("modelEditorMenuMiscellaneous");
+	window->deleteScreen("modelEditorMenuAabbMain");
+	window->deleteScreen("modelEditorMenuAabbChoice");
 }
 
 void ModelEditor::update()

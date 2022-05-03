@@ -98,13 +98,13 @@ void Animation3dEditor::_unload()
 
 void Animation3dEditor::_loadGUI()
 {
-	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto window = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	window->createScreen("animation3dEditorMenuMain");
-	window->getScreen("animation3dEditorMenuMain")->createButton("create3d", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("animation3dEditorMenuMain")->createButton("edit3d", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("animation3dEditorMenuMain")->createButton("delete3d", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("animation3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(7, CH, false);
@@ -132,9 +132,11 @@ void Animation3dEditor::_loadGUI()
 
 void Animation3dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuFrame");
+	const auto window = _gui->getRightViewport()->getWindow("main");
+
+	window->deleteScreen("animation3dEditorMenuMain");
+	window->deleteScreen("animation3dEditorMenuChoice");
+	window->deleteScreen("animation3dEditorMenuFrame");
 }
 
 void Animation3dEditor::update()

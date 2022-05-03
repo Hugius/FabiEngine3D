@@ -112,6 +112,7 @@ void Text2dEditor::_updateText2dChoosing()
 			if(!_hoveredText2dId.empty())
 			{
 				_fe3d->text2d_setVisible(_hoveredText2dId, false);
+
 				_hoveredText2dId = "";
 			}
 		}
@@ -120,6 +121,7 @@ void Text2dEditor::_updateText2dChoosing()
 			if(_hoveredText2dId.empty())
 			{
 				_hoveredText2dId = ("@" + selectedOptionId);
+
 				_fe3d->text2d_setVisible(_hoveredText2dId, true);
 			}
 

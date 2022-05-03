@@ -117,11 +117,13 @@ void WaterEditor::_loadGUI()
 
 void WaterEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuTexturing");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuLighting");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuMiscellaneous");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("waterEditorMenuMain");
+	window->deleteScreen("waterEditorMenuChoice");
+	window->deleteScreen("waterEditorMenuTexturing");
+	window->deleteScreen("waterEditorMenuLighting");
+	window->deleteScreen("waterEditorMenuMiscellaneous");
 }
 
 void WaterEditor::update()

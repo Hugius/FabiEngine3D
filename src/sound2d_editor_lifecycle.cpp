@@ -51,7 +51,7 @@ void Sound2dEditor::_unload()
 
 void Sound2dEditor::_loadGUI()
 {
-	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto window = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	window->createScreen("sound2dEditorMenuMain");
@@ -71,8 +71,10 @@ void Sound2dEditor::_loadGUI()
 
 void Sound2dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("sound2dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("sound2dEditorMenuChoice");
+	const auto window = _gui->getRightViewport()->getWindow("main");
+
+	window->deleteScreen("sound2dEditorMenuMain");
+	window->deleteScreen("sound2dEditorMenuChoice");
 }
 
 void Sound2dEditor::update()

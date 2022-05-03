@@ -6,7 +6,6 @@
 #include "sound2d_editor.hpp"
 #include "world_editor.hpp"
 #include "script_editor.hpp"
-#include "model_editor.hpp"
 
 class RightViewportController final : public BaseViewportController
 {

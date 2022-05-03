@@ -130,11 +130,13 @@ void Text3dEditor::_loadGUI()
 
 void Text3dEditor::_unloadGUI()
 {
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuMain");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuLighting");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuMiscellaneous");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuAabb");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+
+	window->deleteScreen("text3dEditorMenuMain");
+	window->deleteScreen("text3dEditorMenuChoice");
+	window->deleteScreen("text3dEditorMenuLighting");
+	window->deleteScreen("text3dEditorMenuMiscellaneous");
+	window->deleteScreen("text3dEditorMenuAabb");
 }
 
 void Text3dEditor::update()

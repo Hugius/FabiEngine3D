@@ -14,7 +14,7 @@ void WorldEditor::_updateQuad3dEditing()
 			_dontResetSelectedQuad3d = false;
 		}
 
-		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
@@ -53,7 +53,7 @@ void WorldEditor::_updateQuad3dEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedQuad3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeQuad3dId = "";
-						rightWindow->setActiveScreen("main");
+						window->setActiveScreen("main");
 					}
 				}
 			}
@@ -70,10 +70,10 @@ void WorldEditor::_updateQuad3dEditing()
 
 		if(!_activeQuad3dId.empty())
 		{
-			auto screen = rightWindow->getScreen("quad3dPropertiesMenu");
+			auto screen = window->getScreen("quad3dPropertiesMenu");
 			auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
 
-			rightWindow->setActiveScreen("quad3dPropertiesMenu");
+			window->setActiveScreen("quad3dPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
@@ -128,7 +128,7 @@ void WorldEditor::_updateQuad3dEditing()
 				_fe3d->quad3d_delete(_activeQuad3dId);
 				_loadedQuad3dIds.erase(_activeQuad3dId);
 				_activeQuad3dId = "";
-				rightWindow->setActiveScreen("main");
+				window->setActiveScreen("main");
 
 				return;
 			}

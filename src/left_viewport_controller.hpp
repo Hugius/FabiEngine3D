@@ -10,11 +10,6 @@
 #include "aabb_editor.hpp"
 #include "quad2d_editor.hpp"
 #include "text2d_editor.hpp"
-#include "animation3d_editor.hpp"
-#include "animation2d_editor.hpp"
-#include "sound2d_editor.hpp"
-#include "world_editor.hpp"
-#include "script_editor.hpp"
 
 class LeftViewportController final : public BaseViewportController
 {
@@ -30,11 +25,6 @@ public:
 	void inject(shared_ptr<AabbEditor> aabbEditor);
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
-	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
-	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
-	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
-	void inject(shared_ptr<WorldEditor> worldEditor);
-	void inject(shared_ptr<ScriptEditor> scriptEditor);
 	void initialize();
 	void update();
 
@@ -57,11 +47,4 @@ private:
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
-	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
-	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
-	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;
-	shared_ptr<WorldEditor> _worldEditor = nullptr;
-	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
-
-	string _lastActiveEditorScreen = "";
 };

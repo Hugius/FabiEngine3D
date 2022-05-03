@@ -98,36 +98,36 @@ void Animation3dEditor::_unload()
 
 void Animation3dEditor::_loadGUI()
 {
-	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto window = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
-	leftWindow->createScreen("animation3dEditorMenuMain");
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("create3d", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("edit3d", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("delete3d", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->createScreen("animation3dEditorMenuMain");
+	window->getScreen("animation3dEditorMenuMain")->createButton("create3d", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("edit3d", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("delete3d", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(7, CH, false);
-	leftWindow->createScreen("animation3dEditorMenuChoice");
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("preview", fvec2(0.0f, positions[0]), TEXT_SIZE("Preview Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Preview Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("create", fvec2(0.0f, positions[1]), TEXT_SIZE("Create Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("edit", fvec2(0.0f, positions[2]), TEXT_SIZE("Edit Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("prev", fvec2(-0.5f, positions[4]), TEXT_SIZE("Prev"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Prev", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("next", fvec2(0.5f, positions[4]), TEXT_SIZE("Next"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Next", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("start", fvec2(-0.5f, positions[5]), TEXT_SIZE("Start"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Start", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("stop", fvec2(0.5f, positions[5]), TEXT_SIZE("Stop"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Stop", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->createScreen("animation3dEditorMenuChoice");
+	window->getScreen("animation3dEditorMenuChoice")->createButton("preview", fvec2(0.0f, positions[0]), TEXT_SIZE("Preview Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Preview Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("create", fvec2(0.0f, positions[1]), TEXT_SIZE("Create Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("edit", fvec2(0.0f, positions[2]), TEXT_SIZE("Edit Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Frame"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Frame", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("prev", fvec2(-0.5f, positions[4]), TEXT_SIZE("Prev"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Prev", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("next", fvec2(0.5f, positions[4]), TEXT_SIZE("Next"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Next", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("start", fvec2(-0.5f, positions[5]), TEXT_SIZE("Start"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Start", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("stop", fvec2(0.5f, positions[5]), TEXT_SIZE("Stop"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Stop", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(7, CH, false);
-	leftWindow->createScreen("animation3dEditorMenuFrame");
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("part", fvec2(0.0f, positions[0]), TEXT_SIZE("Select Part"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Part", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("transformation", fvec2(0.0f, positions[1]), TEXT_SIZE("Transformation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Transformation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("transformationType", fvec2(0.0f, positions[2]), TEXT_SIZE("Type: MOVE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: MOVE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("speed", fvec2(0.0f, positions[3]), TEXT_SIZE("Speed"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Speed", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("speedType", fvec2(0.0f, positions[4]), TEXT_SIZE("Type: LINEAR"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: LINEAR", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("rotationOrigin", fvec2(0.0f, positions[5]), TEXT_SIZE("Rotation Origin"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation Origin", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuFrame")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->createScreen("animation3dEditorMenuFrame");
+	window->getScreen("animation3dEditorMenuFrame")->createButton("part", fvec2(0.0f, positions[0]), TEXT_SIZE("Select Part"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Part", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("transformation", fvec2(0.0f, positions[1]), TEXT_SIZE("Transformation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Transformation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("transformationType", fvec2(0.0f, positions[2]), TEXT_SIZE("Type: MOVE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: MOVE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("speed", fvec2(0.0f, positions[3]), TEXT_SIZE("Speed"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Speed", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("speedType", fvec2(0.0f, positions[4]), TEXT_SIZE("Type: LINEAR"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: LINEAR", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("rotationOrigin", fvec2(0.0f, positions[5]), TEXT_SIZE("Rotation Origin"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation Origin", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("animation3dEditorMenuFrame")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Animation3dEditor::_unloadGUI()

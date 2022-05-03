@@ -5,7 +5,7 @@ void WorldEditor::_updateModelEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedModel)
@@ -53,7 +53,7 @@ void WorldEditor::_updateModelEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedModelId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeModelId = "";
-						rightWindow->setActiveScreen("main");
+						window->setActiveScreen("main");
 					}
 				}
 			}
@@ -70,10 +70,10 @@ void WorldEditor::_updateModelEditing()
 
 		if(!_activeModelId.empty())
 		{
-			auto screen = rightWindow->getScreen("modelPropertiesMenu");
+			auto screen = window->getScreen("modelPropertiesMenu");
 			auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
 
-			rightWindow->setActiveScreen("modelPropertiesMenu");
+			window->setActiveScreen("modelPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
@@ -135,7 +135,7 @@ void WorldEditor::_updateModelEditing()
 
 				_fe3d->model_delete(_activeModelId);
 				_loadedModelIds.erase(_activeModelId);
-				rightWindow->setActiveScreen("main");
+				window->setActiveScreen("main");
 				_activeModelId = "";
 
 				return;

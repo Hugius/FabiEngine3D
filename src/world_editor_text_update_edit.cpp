@@ -5,7 +5,7 @@ void WorldEditor::_updateText3dEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateText3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingCaptor)
 	{
-		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedText3d)
@@ -53,7 +53,7 @@ void WorldEditor::_updateText3dEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedText3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeText3dId = "";
-						rightWindow->setActiveScreen("main");
+						window->setActiveScreen("main");
 					}
 				}
 			}
@@ -70,9 +70,9 @@ void WorldEditor::_updateText3dEditing()
 
 		if(!_activeText3dId.empty())
 		{
-			auto screen = rightWindow->getScreen("text3dPropertiesMenu");
+			auto screen = window->getScreen("text3dPropertiesMenu");
 
-			rightWindow->setActiveScreen("text3dPropertiesMenu");
+			window->setActiveScreen("text3dPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
@@ -105,7 +105,7 @@ void WorldEditor::_updateText3dEditing()
 				_fe3d->text3d_delete(_activeText3dId);
 				_loadedText3dIds.erase(_activeText3dId);
 				_activeText3dId = "";
-				rightWindow->setActiveScreen("main");
+				window->setActiveScreen("main");
 
 				return;
 			}

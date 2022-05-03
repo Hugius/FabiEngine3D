@@ -5,7 +5,7 @@ void WorldEditor::_updateSpotlightEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedSpotlight)
@@ -53,7 +53,7 @@ void WorldEditor::_updateSpotlightEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSpotlightId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeSpotlightId = "";
-						rightWindow->setActiveScreen("main");
+						window->setActiveScreen("main");
 					}
 				}
 			}
@@ -70,9 +70,9 @@ void WorldEditor::_updateSpotlightEditing()
 
 		if(!_activeSpotlightId.empty())
 		{
-			auto screen = rightWindow->getScreen("spotlightPropertiesMenu");
+			auto screen = window->getScreen("spotlightPropertiesMenu");
 
-			rightWindow->setActiveScreen("spotlightPropertiesMenu");
+			window->setActiveScreen("spotlightPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
@@ -90,7 +90,7 @@ void WorldEditor::_updateSpotlightEditing()
 				_fe3d->spotlight_delete(_activeSpotlightId);
 				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _activeSpotlightId), _loadedSpotlightIds.end());
 				_activeSpotlightId = "";
-				rightWindow->setActiveScreen("main");
+				window->setActiveScreen("main");
 
 				return;
 			}
@@ -105,9 +105,9 @@ void WorldEditor::_updateSpotlightEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
@@ -115,9 +115,9 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("R");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("R");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
+				window->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
 				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
 				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);

@@ -39,12 +39,13 @@ EngineController::EngineController()
 	_leftViewportController->inject(_aabbEditor);
 	_leftViewportController->inject(_quad2dEditor);
 	_leftViewportController->inject(_text2dEditor);
-	_leftViewportController->inject(_animation3dEditor);
-	_leftViewportController->inject(_animation2dEditor);
-	_leftViewportController->inject(_sound2dEditor);
-	_leftViewportController->inject(_worldEditor);
-	_leftViewportController->inject(_scriptEditor);
 	_rightViewportController->inject(_guiManager);
+	_rightViewportController->inject(_animation3dEditor);
+	_rightViewportController->inject(_animation2dEditor);
+	_rightViewportController->inject(_sound2dEditor);
+	_rightViewportController->inject(_worldEditor);
+	_rightViewportController->inject(_scriptEditor);
+	_rightViewportController->inject(_modelEditor);
 	_bottomViewportController->inject(_guiManager);
 	_bottomViewportController->inject(_scriptEditor);
 	_bottomViewportController->inject(_scriptExecutor);

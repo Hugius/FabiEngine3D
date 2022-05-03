@@ -5,7 +5,7 @@ void WorldEditor::_updatePointlightEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedPointlight)
@@ -53,7 +53,7 @@ void WorldEditor::_updatePointlightEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedPointlightId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activePointlightId = "";
-						rightWindow->setActiveScreen("main");
+						window->setActiveScreen("main");
 					}
 				}
 			}
@@ -70,9 +70,9 @@ void WorldEditor::_updatePointlightEditing()
 
 		if(!_activePointlightId.empty())
 		{
-			auto screen = rightWindow->getScreen("pointlightPropertiesMenu");
+			auto screen = window->getScreen("pointlightPropertiesMenu");
 
-			rightWindow->setActiveScreen("pointlightPropertiesMenu");
+			window->setActiveScreen("pointlightPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
@@ -116,7 +116,7 @@ void WorldEditor::_updatePointlightEditing()
 				_fe3d->pointlight_delete(_activePointlightId);
 				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _activePointlightId), _loadedPointlightIds.end());
 				_activePointlightId = "";
-				rightWindow->setActiveScreen("main");
+				window->setActiveScreen("main");
 
 				return;
 			}
@@ -128,9 +128,9 @@ void WorldEditor::_updatePointlightEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
@@ -138,9 +138,9 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
@@ -148,9 +148,9 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("R");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("R");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
+				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);

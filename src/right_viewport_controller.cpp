@@ -1,16 +1,114 @@
+#define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
+
 #include "right_viewport_controller.hpp"
 
 void RightViewportController::initialize()
 {
 	_gui->getRightViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), FRAME_COLOR);
+
 	auto window = _gui->getRightViewport()->getWindow("main");
 
+	auto positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	window->createScreen("main");
+	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	window->setActiveScreen("main");
 }
 
 void RightViewportController::update()
 {
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	auto rightScreen = rightWindow->getActiveScreen();
 
+	if(rightScreen->getId() == "main")
+	{
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("animation3dEditor")->isHovered())
+		{
+			if(_modelEditor->loadModelsFromFile() && _animation3dEditor->loadAnimation3dsFromFile())
+			{
+				_animation3dEditor->load();
+
+				leftWindow->setActiveScreen("animation3dEditorMenuMain");
+				rightWindow->setActiveScreen("");
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("animation2dEditor")->isHovered())
+		{
+			if(_animation2dEditor->loadAnimation2dsFromFile())
+			{
+				_animation2dEditor->load();
+
+				leftWindow->setActiveScreen("animation2dEditorMenuMain");
+				rightWindow->setActiveScreen("");
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("sound2dEditor")->isHovered())
+		{
+			if(_sound2dEditor->loadSound2dsFromFile())
+			{
+				_sound2dEditor->load();
+
+				leftWindow->setActiveScreen("sound2dEditorMenuMain");
+				rightWindow->setActiveScreen("");
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("worldEditor")->isHovered())
+		{
+			_worldEditor->load();
+
+			leftWindow->setActiveScreen("worldEditorMenuMain");
+			rightWindow->setActiveScreen("");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("scriptEditor")->isHovered())
+		{
+			if(_scriptEditor->loadScriptFiles(true))
+			{
+				_scriptEditor->load();
+
+				leftWindow->setActiveScreen("scriptEditorMenuMain");
+				rightWindow->setActiveScreen("");
+			}
+		}
+	}
+
+	_animation3dEditor->update();
+	_animation2dEditor->update();
+	_sound2dEditor->update();
+	_worldEditor->update();
+	_scriptEditor->update();
+}
+
+void RightViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)
+{
+	_animation3dEditor = animation3dEditor;
+}
+
+void RightViewportController::inject(shared_ptr<Sound2dEditor> sound2dEditor)
+{
+	_sound2dEditor = sound2dEditor;
+}
+
+void RightViewportController::inject(shared_ptr<WorldEditor> worldEditor)
+{
+	_worldEditor = worldEditor;
+}
+
+void RightViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
+{
+	_scriptEditor = scriptEditor;
+}
+
+void RightViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)
+{
+	_animation2dEditor = animation2dEditor;
+}
+
+void RightViewportController::inject(shared_ptr<ModelEditor> modelEditor)
+{
+	_modelEditor = modelEditor;
 }

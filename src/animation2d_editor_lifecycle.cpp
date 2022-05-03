@@ -1,7 +1,6 @@
 #define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "animation2d_editor.hpp"
-#include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
 void Animation2dEditor::_load()
@@ -58,7 +57,7 @@ void Animation2dEditor::_loadGUI()
 	rightWindow->getScreen("animation2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
-	rightWindow->setActiveScreen("animation2dEditorMenuChoice");
+	rightWindow->setActiveScreen("animation2dEditorMenuMain");
 }
 
 void Animation2dEditor::_unloadGUI()

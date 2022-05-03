@@ -4,7 +4,7 @@
 
 void Animation3dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation3dEditorMenuMain")
 	{
@@ -60,7 +60,7 @@ void Animation3dEditor::_updateMainMenu()
 
 void Animation3dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation3dEditorMenuChoice")
 	{
@@ -100,7 +100,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentFrameIndex = 0;
 			_gui->getOverlay()->getTextField("animation3dId")->setVisible(false);
 			_gui->getOverlay()->getTextField("animation3dFrame")->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
 			return;
 		}
@@ -118,7 +118,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				modelId = modelId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
+			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(0.5f, 0.1f), modelIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -187,7 +187,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

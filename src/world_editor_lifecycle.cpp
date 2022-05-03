@@ -1,5 +1,4 @@
 #include "world_editor.hpp"
-#include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
 void WorldEditor::_load()
@@ -72,28 +71,26 @@ void WorldEditor::_load()
 
 	for(const auto & modelId : _modelEditor->getLoadedModelIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
 	}
 
 	for(const auto & quad3dId : _quad3dEditor->getLoadedQuad3dIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
 	}
 
 	for(const auto & text3dId : _text3dEditor->getLoadedText3dIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
 	}
 
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("activeId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-
-	_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 }
 
 void WorldEditor::_unload()

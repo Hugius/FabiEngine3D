@@ -102,7 +102,7 @@ void Sound2dEditor::_updateSound2dCreating()
 			_loadedSound2dIds.push_back(newSound2dId);
 			sort(_loadedSound2dIds.begin(), _loadedSound2dIds.end());
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
 			_gui->getOverlay()->getTextField("sound2dId")->setTextContent("Sound2D: " + newSound2dId.substr(1));
 			_gui->getOverlay()->getTextField("sound2dId")->setVisible(true);
 		}
@@ -125,7 +125,7 @@ void Sound2dEditor::_updateSound2dChoosing()
 			}
 			else
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
 
 				_gui->getOverlay()->getTextField("sound2dId")->setTextContent("Sound2D: " + _currentSound2dId.substr(1));
 				_gui->getOverlay()->getTextField("sound2dId")->setVisible(true);

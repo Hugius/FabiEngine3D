@@ -200,7 +200,7 @@ void Animation3dEditor::_updateAnimation3dCreating()
 
 		_fe3d->animation3d_create(newAnimation3dId);
 
-		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 		_gui->getOverlay()->getTextField("animation3dId")->setTextContent("Animation3D: " + newAnimation3dId);
 		_gui->getOverlay()->getTextField("animation3dId")->setVisible(true);
 		_gui->getOverlay()->getTextField("animation3dFrame")->setVisible(true);
@@ -221,7 +221,7 @@ void Animation3dEditor::_updateAnimation3dChoosing()
 			}
 			else
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
 				_gui->getOverlay()->getTextField("animation3dId")->setTextContent("Animation3D: " + _currentAnimation3dId.substr(1));
 				_gui->getOverlay()->getTextField("animation3dId")->setVisible(true);

@@ -58,7 +58,7 @@ void Animation2dEditor::_updateAnimation2dCreating()
 
 		_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, true);
 
-		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 		_gui->getOverlay()->getTextField("animation2dId")->setTextContent("Animation2D: " + newAnimation2dId);
 		_gui->getOverlay()->getTextField("animation2dId")->setVisible(true);
 	}
@@ -78,7 +78,7 @@ void Animation2dEditor::_updateAnimation2dChoosing()
 			}
 			else
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
 				_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, true);
 

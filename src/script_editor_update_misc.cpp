@@ -8,7 +8,7 @@ using std::clamp;
 
 void ScriptEditor::_updateMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "scriptEditorMenuMain")
 	{

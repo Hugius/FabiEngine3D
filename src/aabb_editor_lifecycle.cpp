@@ -1,7 +1,6 @@
 #define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "aabb_editor.hpp"
-#include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
 

@@ -2,7 +2,7 @@
 
 void Sound2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "sound2dEditorMenuMain")
 	{
@@ -58,7 +58,7 @@ void Sound2dEditor::_updateMainMenu()
 
 void Sound2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "sound2dEditorMenuChoice")
 	{
@@ -71,7 +71,7 @@ void Sound2dEditor::_updateChoiceMenu()
 
 			_currentSound2dId = "";
 			_gui->getOverlay()->getTextField("sound2dId")->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuMain");
 
 			return;
 		}

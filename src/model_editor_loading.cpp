@@ -1,5 +1,4 @@
 #include "model_editor.hpp"
-#include "left_viewport_controller.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"

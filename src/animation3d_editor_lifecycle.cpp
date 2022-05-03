@@ -1,7 +1,6 @@
 #define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "animation3d_editor.hpp"
-#include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
 void Animation3dEditor::_load()
@@ -130,7 +129,7 @@ void Animation3dEditor::_loadGUI()
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
-	rightWindow->setActiveScreen("animation3dEditorMenuChoice");
+	rightWindow->setActiveScreen("animation3dEditorMenuMain");
 }
 
 void Animation3dEditor::_unloadGUI()

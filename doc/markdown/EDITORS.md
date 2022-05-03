@@ -6,6 +6,7 @@
 - [Model Editor](MODEL_EDITOR.md)
 - [Quad3D Editor](QUAD3D_EDITOR.md)
 - [Text3D Editor](TEXT3D_EDITOR.md)
+- [AABB Editor](AABB_EDITOR.md)
 - [Quad2D Editor](QUAD2D_EDITOR.md)
 - [Text2D Editor](TEXT2D_EDITOR.md)
 - [Animation3D Editor](ANIMATION3D_EDITOR.md)

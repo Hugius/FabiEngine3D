@@ -6,7 +6,7 @@
 - You can create/edit/delete animations.
 - Every created animation3D can be applied to models.
 - You can select a preview model for the animation3D playback.
-- The ID of a new animation3D cannot contain spaces or `@` signs.
+- The ID of a new animation3D cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

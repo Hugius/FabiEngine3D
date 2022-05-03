@@ -32,6 +32,7 @@ const bool AabbEditor::loadAabbsFromFile()
 	{
 		string aabbId;
 		fvec3 size;
+		fvec3 color;
 
 		istringstream iss(line);
 
@@ -39,7 +40,10 @@ const bool AabbEditor::loadAabbsFromFile()
 			>> aabbId
 			>> size.x
 			>> size.y
-			>> size.z;
+			>> size.z
+			>> color.r
+			>> color.g
+			>> color.b;
 
 		_loadedAabbIds.push_back(aabbId);
 		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());

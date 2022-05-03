@@ -65,6 +65,7 @@ void AabbEditor::_updateChoiceMenu()
 	if(screen->getId() == "aabbEditorMenuChoice")
 	{
 		const auto size = _fe3d->aabb_getBaseSize(_currentAabbId);
+		const auto color = _fe3d->aabb_getColor(_currentAabbId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -80,6 +81,12 @@ void AabbEditor::_updateChoiceMenu()
 			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
@@ -99,6 +106,24 @@ void AabbEditor::_updateChoiceMenu()
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->aabb_setBaseSize(_currentAabbId, fvec3(size.x, size.y, (content / 100.0f)));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->aabb_setColor(_currentAabbId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->aabb_setColor(_currentAabbId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->aabb_setColor(_currentAabbId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 	}
 }

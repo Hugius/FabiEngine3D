@@ -5,7 +5,7 @@
 - All text3Ds will be saved in `~\projects\<your_project>\data\text3d.fe3d`.
 - You can create/edit/delete text3Ds.
 - Every created text3D can be placed using the world editor or scripting.
-- The ID of a new text3D cannot contain spaces or `@` signs.
+- The ID of a new text3D cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

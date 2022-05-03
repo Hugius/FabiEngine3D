@@ -83,10 +83,11 @@ void AabbEditor::_loadGUI()
 	leftWindow->getScreen("aabbEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("aabbEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(2, CH, false);
+	positions = Mathematics::calculateDistributedPositions(3, CH, false);
 	leftWindow->createScreen("aabbEditorMenuChoice");
 	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("size", fvec2(0.0f, positions[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[1]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void AabbEditor::_unloadGUI()

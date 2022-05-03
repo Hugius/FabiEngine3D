@@ -24,6 +24,7 @@ const bool AabbEditor::saveAabbsToFile() const
 	for(const auto & aabbId : _loadedAabbIds)
 	{
 		auto size = _fe3d->aabb_getBaseSize(aabbId);
+		auto color = _fe3d->aabb_getColor(aabbId);
 
 		file
 			<< aabbId
@@ -33,6 +34,12 @@ const bool AabbEditor::saveAabbsToFile() const
 			<< size.y
 			<< " "
 			<< size.z
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
 			<< endl;
 	}
 

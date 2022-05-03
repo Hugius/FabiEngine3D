@@ -5,7 +5,7 @@
 - All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
 - You can create/edit/delete terrains.
 - Every created terrain can be placed using the world editor or scripting.
-- The ID of a new terrain cannot contain spaces or `@` signs.
+- The ID of a new terrain cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

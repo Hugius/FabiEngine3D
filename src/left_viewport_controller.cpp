@@ -25,100 +25,71 @@ void LeftViewportController::initialize()
 
 void LeftViewportController::update()
 {
-	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto leftScreen = leftWindow->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(leftScreen->getId() == "main")
+	if(screen->getId() == "main")
 	{
-		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("skyEditor")->isHovered())
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
 			if(_skyEditor->loadSkiesFromFile())
 			{
 				_skyEditor->load();
-
-				leftWindow->setActiveScreen("skyEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("terrainEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
 		{
 			if(_terrainEditor->loadTerrainsFromFile())
 			{
 				_terrainEditor->load();
-
-				leftWindow->setActiveScreen("terrainEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("waterEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
 		{
 			if(_waterEditor->loadWatersFromFile())
 			{
 				_waterEditor->load();
-
-				leftWindow->setActiveScreen("waterEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("modelEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
 		{
 			if(_modelEditor->loadModelsFromFile())
 			{
 				_modelEditor->load();
-
-				leftWindow->setActiveScreen("modelEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("quad3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad3dEditor")->isHovered())
 		{
 			if(_quad3dEditor->loadQuad3dsFromFile())
 			{
 				_quad3dEditor->load();
-
-				leftWindow->setActiveScreen("quad3dEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("text3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
 		{
 			if(_text3dEditor->loadText3dsFromFile())
 			{
 				_text3dEditor->load();
-
-				leftWindow->setActiveScreen("text3dEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("aabbEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("aabbEditor")->isHovered())
 		{
 			if(_aabbEditor->loadAabbsFromFile())
 			{
 				_aabbEditor->load();
-
-				leftWindow->setActiveScreen("aabbEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("quad2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
 		{
 			if(_quad2dEditor->loadQuad2dsFromFile())
 			{
 				_quad2dEditor->load();
-
-				leftWindow->setActiveScreen("quad2dEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && leftScreen->getButton("text2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text2dEditor")->isHovered())
 		{
 			if(_text2dEditor->loadText2dsFromFile())
 			{
 				_text2dEditor->load();
-
-				leftWindow->setActiveScreen("text2dEditorMenuMain");
-				rightWindow->setActiveScreen("empty");
 			}
 		}
 	}

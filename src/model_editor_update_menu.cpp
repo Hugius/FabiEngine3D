@@ -41,7 +41,6 @@ void ModelEditor::_updateMainMenu()
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveModelsToFile();
 				unload();
 
@@ -49,7 +48,6 @@ void ModelEditor::_updateMainMenu()
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
 
 				return;

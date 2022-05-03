@@ -45,12 +45,14 @@ void Animation3dEditor::_updateMainMenu()
 			{
 				saveAnimation3dsToFile();
 				unload();
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+
+				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+
+				return;
 			}
 		}
 	}

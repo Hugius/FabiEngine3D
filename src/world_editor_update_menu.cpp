@@ -12,8 +12,6 @@ void WorldEditor::_updateMainMenu()
 		{
 			unload();
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())

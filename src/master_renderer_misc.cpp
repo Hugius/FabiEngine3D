@@ -46,12 +46,26 @@ const string MasterRenderer::getCpuName() const
 
 const string MasterRenderer::getGpuName() const
 {
-	return (reinterpret_cast<char *>(const_cast<GLubyte *>(glGetString(GL_RENDERER))));
+	const auto rawString = glGetString(GL_RENDERER);
+
+	if(rawString == nullptr)
+	{
+		return "";
+	}
+
+	return (reinterpret_cast<char *>(const_cast<GLubyte *>(rawString)));
 }
 
 const string MasterRenderer::getOpenglVersion() const
 {
-	return string(reinterpret_cast<char *>(const_cast<GLubyte *>(glGetString(GL_VERSION)))).substr(0, 3);
+	const auto rawString = glGetString(GL_VERSION);
+
+	if(rawString == nullptr)
+	{
+		return "";
+	}
+
+	return string(reinterpret_cast<char *>(const_cast<GLubyte *>(rawString))).substr(0, 3);
 }
 
 void MasterRenderer::inject(shared_ptr<Camera> camera)

@@ -4,7 +4,7 @@
 
 void Animation2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation2dEditorMenuMain")
 	{
@@ -45,12 +45,14 @@ void Animation2dEditor::_updateMainMenu()
 			{
 				saveAnimation2dsToFile();
 				unload();
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+
+				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+
+				return;
 			}
 		}
 	}
@@ -58,7 +60,7 @@ void Animation2dEditor::_updateMainMenu()
 
 void Animation2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation2dEditorMenuChoice")
 	{
@@ -80,7 +82,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			_currentAnimation2dId = "";
 			_isPreviewTextureChosen = false;
 			_gui->getOverlay()->getTextField("animation2dId")->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 
 			return;
 		}

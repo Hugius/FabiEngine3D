@@ -21,57 +21,40 @@ void RightViewportController::initialize()
 
 void RightViewportController::update()
 {
-	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto rightScreen = rightWindow->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
-	if(rightScreen->getId() == "main")
+	if(screen->getId() == "main")
 	{
-		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("animation3dEditor")->isHovered())
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
 			if(_modelEditor->loadModelsFromFile() && _animation3dEditor->loadAnimation3dsFromFile())
 			{
 				_animation3dEditor->load();
-
-				leftWindow->setActiveScreen("empty");
-				rightWindow->setActiveScreen("animation3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("animation2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
 		{
 			if(_animation2dEditor->loadAnimation2dsFromFile())
 			{
 				_animation2dEditor->load();
-
-				leftWindow->setActiveScreen("empty");
-				rightWindow->setActiveScreen("animation2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("sound2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound2dEditor")->isHovered())
 		{
 			if(_sound2dEditor->loadSound2dsFromFile())
 			{
 				_sound2dEditor->load();
-
-				leftWindow->setActiveScreen("empty");
-				rightWindow->setActiveScreen("sound2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("worldEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
 		{
 			_worldEditor->load();
-
-			leftWindow->setActiveScreen("empty");
-			rightWindow->setActiveScreen("worldEditorMenuMain");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && rightScreen->getButton("scriptEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
 			if(_scriptEditor->loadScriptFiles(true))
 			{
 				_scriptEditor->load();
-
-				leftWindow->setActiveScreen("empty");
-				rightWindow->setActiveScreen("scriptEditorMenuMain");
 			}
 		}
 	}

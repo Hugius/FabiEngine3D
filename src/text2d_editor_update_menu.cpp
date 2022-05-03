@@ -42,14 +42,16 @@ void Text2dEditor::_updateMainMenu()
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveText2dsToFile();
 				unload();
+
+				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
+
+				return;
 			}
 		}
 	}

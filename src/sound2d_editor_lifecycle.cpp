@@ -51,30 +51,38 @@ void Sound2dEditor::_unload()
 
 void Sound2dEditor::_loadGUI()
 {
-	const auto window = _gui->getRightViewport()->getWindow("main");
+	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
-	window->createScreen("sound2dEditorMenuMain");
-	window->getScreen("sound2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->createScreen("sound2dEditorMenuMain");
+	rightWindow->getScreen("sound2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(5, CH, false);
-	window->createScreen("sound2dEditorMenuChoice");
-	window->getScreen("sound2dEditorMenuChoice")->createButton("play", fvec2(0.0f, positions[0]), TEXT_SIZE("Play"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Play", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuChoice")->createButton("pause", fvec2(0.0f, positions[1]), TEXT_SIZE("Pause"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pause", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuChoice")->createButton("resume", fvec2(0.0f, positions[2]), TEXT_SIZE("Resume"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Resume", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuChoice")->createButton("stop", fvec2(0.0f, positions[3]), TEXT_SIZE("Stop"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Stop", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("sound2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->createScreen("sound2dEditorMenuChoice");
+	rightWindow->getScreen("sound2dEditorMenuChoice")->createButton("play", fvec2(0.0f, positions[0]), TEXT_SIZE("Play"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Play", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuChoice")->createButton("pause", fvec2(0.0f, positions[1]), TEXT_SIZE("Pause"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pause", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuChoice")->createButton("resume", fvec2(0.0f, positions[2]), TEXT_SIZE("Resume"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Resume", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuChoice")->createButton("stop", fvec2(0.0f, positions[3]), TEXT_SIZE("Stop"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Stop", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	leftWindow->setActiveScreen("empty");
+	rightWindow->setActiveScreen("sound2dEditorMenuMain");
 }
 
 void Sound2dEditor::_unloadGUI()
 {
-	const auto window = _gui->getRightViewport()->getWindow("main");
+	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	window->deleteScreen("sound2dEditorMenuMain");
-	window->deleteScreen("sound2dEditorMenuChoice");
+	rightWindow->deleteScreen("sound2dEditorMenuMain");
+	rightWindow->deleteScreen("sound2dEditorMenuChoice");
+
+	leftWindow->setActiveScreen("main");
+	rightWindow->setActiveScreen("main");
 }
 
 void Sound2dEditor::update()

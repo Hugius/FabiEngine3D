@@ -5,7 +5,7 @@ void WorldEditor::_updateModelEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto window = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedModel)
@@ -53,7 +53,7 @@ void WorldEditor::_updateModelEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedModelId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeModelId = "";
-						window->setActiveScreen("main");
+						window->setActiveScreen("empty");
 					}
 				}
 			}
@@ -135,7 +135,7 @@ void WorldEditor::_updateModelEditing()
 
 				_fe3d->model_delete(_activeModelId);
 				_loadedModelIds.erase(_activeModelId);
-				window->setActiveScreen("main");
+				window->setActiveScreen("empty");
 				_activeModelId = "";
 
 				return;

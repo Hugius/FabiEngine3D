@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateText3dMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3d")
 	{
@@ -17,23 +17,23 @@ void WorldEditor::_updateText3dMenu()
 				_currentTemplateText3dId = "";
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dPlace");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteOptions();
 
 			for(auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createOption(placedText3dId, placedText3dId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createOption(placedText3dId, placedText3dId);
 			}
 		}
 
@@ -43,13 +43,13 @@ void WorldEditor::_updateText3dMenu()
 
 void WorldEditor::_updateText3dPlacingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 
 			return;
 		}
@@ -59,7 +59,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 
 			if(!hoveredOptionId.empty())
 			{
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 				_deactivateModel();
 				_deactivateText3d();
@@ -85,7 +85,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 
 void WorldEditor::_updateText3dChoosingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
@@ -124,7 +124,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 
 			return;
 		}

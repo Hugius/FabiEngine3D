@@ -180,7 +180,7 @@ void WorldEditor::_deleteWorldFile(const string & worldId)
 
 void WorldEditor::_handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta, float multiplier, float minimum, float maximum)
 {
-	const auto inputBox = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
+	const auto inputBox = _gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
 
 	if(inputBox->isHovered())
 	{
@@ -199,11 +199,11 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 	}
 	else
 	{
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
+		if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value - delta), minimum, maximum);
 		}
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
+		if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value + delta), minimum, maximum);
 		}

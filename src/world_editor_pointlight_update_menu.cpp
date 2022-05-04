@@ -5,7 +5,7 @@
 
 void WorldEditor::_updatePointlightMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuPointlight")
 	{
@@ -18,13 +18,13 @@ void WorldEditor::_updatePointlightMenu()
 				_isPlacingPointlight = false;
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 			_deactivateModel();
 			_deactivateQuad3d();
@@ -48,13 +48,13 @@ void WorldEditor::_updatePointlightMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteOptions();
 
 			for(auto & pointlightId : _loadedPointlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(pointlightId, pointlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(pointlightId, pointlightId);
 			}
 		}
 
@@ -64,7 +64,7 @@ void WorldEditor::_updatePointlightMenu()
 
 void WorldEditor::_updatePointlightChoosingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{
@@ -103,7 +103,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
 
 			return;
 		}

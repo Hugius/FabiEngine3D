@@ -5,7 +5,7 @@ void WorldEditor::_updateSound3dEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto window = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedSound3d)
@@ -55,7 +55,7 @@ void WorldEditor::_updateSound3dEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSound3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activeSound3dId = "";
-						window->setActiveScreen("main");
+						window->setActiveScreen("empty");
 					}
 				}
 			}
@@ -82,7 +82,7 @@ void WorldEditor::_updateSound3dEditing()
 				_fe3d->sound3d_delete(_activeSound3dId);
 				_loadedSound3dIds.erase(_activeSound3dId);
 				_activeSound3dId = "";
-				window->setActiveScreen("main");
+				window->setActiveScreen("empty");
 
 				return;
 			}

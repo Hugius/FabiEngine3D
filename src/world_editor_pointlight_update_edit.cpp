@@ -5,7 +5,7 @@ void WorldEditor::_updatePointlightEditing()
 {
 	if(_currentTemplateModelId.empty() && _currentTemplateQuad3dId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
-		const auto window = _gui->getRightViewport()->getWindow("main");
+		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		if(!_dontResetSelectedPointlight)
@@ -53,7 +53,7 @@ void WorldEditor::_updatePointlightEditing()
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedPointlightId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
 						_activePointlightId = "";
-						window->setActiveScreen("main");
+						window->setActiveScreen("empty");
 					}
 				}
 			}
@@ -116,7 +116,7 @@ void WorldEditor::_updatePointlightEditing()
 				_fe3d->pointlight_delete(_activePointlightId);
 				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _activePointlightId), _loadedPointlightIds.end());
 				_activePointlightId = "";
-				window->setActiveScreen("main");
+				window->setActiveScreen("empty");
 
 				return;
 			}

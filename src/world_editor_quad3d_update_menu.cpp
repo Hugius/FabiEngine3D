@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateQuad3dMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3d")
 	{
@@ -17,23 +17,23 @@ void WorldEditor::_updateQuad3dMenu()
 				_currentTemplateQuad3dId = "";
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dPlace");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteOptions();
 
 			for(auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createOption(placedQuad3dId, placedQuad3dId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createOption(placedQuad3dId, placedQuad3dId);
 			}
 		}
 
@@ -43,13 +43,13 @@ void WorldEditor::_updateQuad3dMenu()
 
 void WorldEditor::_updateQuad3dPlacingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 
 			return;
 		}
@@ -59,7 +59,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 			if(!hoveredOptionId.empty())
 			{
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 				_deactivateModel();
 				_deactivateQuad3d();
@@ -85,7 +85,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 void WorldEditor::_updateQuad3dChoosingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
@@ -124,7 +124,7 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 
 			return;
 		}

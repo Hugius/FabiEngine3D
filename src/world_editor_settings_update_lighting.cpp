@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingAmbient")
 	{
@@ -13,7 +13,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
 
 			return;
 		}
@@ -63,7 +63,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 void WorldEditor::_updateDirectionalLightingSettingsMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingDirectional")
 	{
@@ -74,7 +74,7 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
 
 			return;
 		}

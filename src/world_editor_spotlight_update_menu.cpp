@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateSpotlightMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSpotlight")
 	{
@@ -18,13 +18,13 @@ void WorldEditor::_updateSpotlightMenu()
 				_isPlacingSpotlight = false;
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 			_deactivateModel();
 			_deactivateQuad3d();
@@ -48,13 +48,13 @@ void WorldEditor::_updateSpotlightMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteOptions();
 
 			for(auto & spotlightId : _loadedSpotlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createOption(spotlightId, spotlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createOption(spotlightId, spotlightId);
 			}
 		}
 
@@ -64,7 +64,7 @@ void WorldEditor::_updateSpotlightMenu()
 
 void WorldEditor::_updateSpotlightChoosingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSpotlightChoice")
 	{
@@ -103,7 +103,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
 
 			return;
 		}

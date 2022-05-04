@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateCaptorMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuCaptor")
 	{
@@ -17,13 +17,13 @@ void WorldEditor::_updateCaptorMenu()
 				_isPlacingCaptor = false;
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 			_deactivateModel();
 			_deactivateQuad3d();
@@ -46,13 +46,13 @@ void WorldEditor::_updateCaptorMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorChoice");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->deleteOptions();
 
 			for(auto & captorId : _loadedCaptorIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->createOption(captorId, captorId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->createOption(captorId, captorId);
 			}
 		}
 
@@ -62,7 +62,7 @@ void WorldEditor::_updateCaptorMenu()
 
 void WorldEditor::_updateCaptorChoosingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuCaptorChoice")
 	{
@@ -101,7 +101,7 @@ void WorldEditor::_updateCaptorChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptor");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptor");
 
 			return;
 		}

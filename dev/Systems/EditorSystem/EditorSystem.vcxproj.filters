@@ -97,18 +97,6 @@
     <Filter Include="World Editor\Update\Miscellaneous">
       <UniqueIdentifier>{f6631a60-1ac4-40dd-87c9-b86aba73bf79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound Editor">
-      <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound Editor\Miscellaneous">
-      <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound Editor\Persistence">
-      <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound Editor\Update">
-      <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base">
       <UniqueIdentifier>{b047c6b1-8ea5-4051-aec8-8206cf6e491b}</UniqueIdentifier>
     </Filter>
@@ -205,9 +193,6 @@
     <Filter Include="Sky Editor\Main">
       <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound Editor\Main">
-      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Terrain Editor\Main">
       <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
     </Filter>
@@ -226,15 +211,6 @@
     <Filter Include="World Editor\Update\Captor">
       <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Update\Quad">
-      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Update\Sound">
-      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Update\Text">
-      <UniqueIdentifier>{e883bcb7-32af-4b5b-93f3-8630d13b2807}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AABB Editor">
       <UniqueIdentifier>{fa9f4a55-d711-428f-a4df-089208b2cffd}</UniqueIdentifier>
     </Filter>
@@ -249,6 +225,30 @@
     </Filter>
     <Filter Include="AABB Editor\Persistence">
       <UniqueIdentifier>{a564af86-a972-4d12-8b35-2298d2af6d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound2d Editor">
+      <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound2d Editor\Miscellaneous">
+      <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound2d Editor\Persistence">
+      <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound2d Editor\Update">
+      <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound2d Editor\Main">
+      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Quad3d">
+      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Text3D">
+      <UniqueIdentifier>{e883bcb7-32af-4b5b-93f3-8630d13b2807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Sound3D">
+      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -265,16 +265,16 @@
       <Filter>Animation3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_lifecycle.cpp">
-      <Filter>Sound Editor\Main</Filter>
+      <Filter>Sound2d Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_misc.cpp">
-      <Filter>Sound Editor\Miscellaneous</Filter>
+      <Filter>Sound2d Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_update_misc.cpp">
-      <Filter>Sound Editor\Update</Filter>
+      <Filter>Sound2d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_update_menu.cpp">
-      <Filter>Sound Editor\Update</Filter>
+      <Filter>Sound2d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp">
       <Filter>Quad3D Editor\Main</Filter>
@@ -348,14 +348,14 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_other.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad_update_edit.cpp">
-      <Filter>World Editor\Update\Quad</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_edit.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad_update_menu.cpp">
-      <Filter>World Editor\Update\Quad</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_menu.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad_update_place.cpp">
-      <Filter>World Editor\Update\Quad</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_place.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_model_update_edit.cpp">
       <Filter>World Editor\Update\Model</Filter>
@@ -367,13 +367,13 @@
       <Filter>World Editor\Update\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_edit.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+      <Filter>World Editor\Update\Sound3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_place.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+      <Filter>World Editor\Update\Sound3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_menu.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+      <Filter>World Editor\Update\Sound3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp">
       <Filter>Script Editor\Main</Filter>
@@ -496,7 +496,7 @@
       <Filter>Quad3D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_saving.cpp">
-      <Filter>Sound Editor\Persistence</Filter>
+      <Filter>Sound2d Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_saving.cpp">
       <Filter>Animation3D Editor\Persistence</Filter>
@@ -526,7 +526,7 @@
       <Filter>Animation3D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_editor_loading.cpp">
-      <Filter>Sound Editor\Persistence</Filter>
+      <Filter>Sound2d Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_loading.cpp">
       <Filter>Script Editor\Persistence</Filter>
@@ -627,14 +627,14 @@
     <ClCompile Include="..\..\..\src\text3d_editor_misc.cpp">
       <Filter>Text3D Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text_update_place.cpp">
-      <Filter>World Editor\Update\Text</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp">
+      <Filter>World Editor\Update\Text3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text_update_edit.cpp">
-      <Filter>World Editor\Update\Text</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_edit.cpp">
+      <Filter>World Editor\Update\Text3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text_update_menu.cpp">
-      <Filter>World Editor\Update\Text</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp">
+      <Filter>World Editor\Update\Text3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_loading.cpp">
       <Filter>World Editor\Persistence</Filter>
@@ -675,7 +675,7 @@
       <Filter>Animation3D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d_editor.hpp">
-      <Filter>Sound Editor\Main</Filter>
+      <Filter>Sound2d Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp">
       <Filter>Quad3D Editor\Main</Filter>

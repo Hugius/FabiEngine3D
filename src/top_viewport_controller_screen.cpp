@@ -10,8 +10,8 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectScreenManagement()
 {
-	auto topScreen = _gui->getTopViewport()->getWindow("projectWindow")->getActiveScreen();
-	auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto topScreen = _gui->getTopViewport()->getWindow("projectWindow")->getActiveScreen();
+	const auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 	{
@@ -60,8 +60,8 @@ void TopViewportController::_updateProjectScreenManagement()
 
 void TopViewportController::_updateApplicationScreenManagement()
 {
-	auto topScreen = _gui->getTopViewport()->getWindow("executionWindow")->getActiveScreen();
-	auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto topScreen = _gui->getTopViewport()->getWindow("executionWindow")->getActiveScreen();
+	const auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(_currentProjectId.empty())
 	{
@@ -139,7 +139,7 @@ void TopViewportController::_updateApplicationScreenManagement()
 
 void TopViewportController::_updateMiscScreenManagement()
 {
-	auto screen = _gui->getTopViewport()->getWindow("miscellaneousWindow")->getActiveScreen();
+	const auto screen = _gui->getTopViewport()->getWindow("miscellaneousWindow")->getActiveScreen();
 
 	if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{

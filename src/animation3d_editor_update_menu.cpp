@@ -4,7 +4,7 @@
 
 void Animation3dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation3dEditorMenuMain")
 	{
@@ -60,7 +60,7 @@ void Animation3dEditor::_updateMainMenu()
 
 void Animation3dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation3dEditorMenuChoice")
 	{

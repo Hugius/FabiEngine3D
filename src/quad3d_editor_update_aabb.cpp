@@ -6,7 +6,7 @@
 
 void Quad3dEditor::_updateAabbMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "quad3dEditorMenuAabb")
 	{

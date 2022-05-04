@@ -5,7 +5,7 @@
 
 void ModelEditor::_updateMainAabbMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "modelEditorMenuAabbMain")
 	{
@@ -50,7 +50,7 @@ void ModelEditor::_updateMainAabbMenu()
 
 void ModelEditor::_updateChoiceAabbMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "modelEditorMenuAabbChoice")
 	{

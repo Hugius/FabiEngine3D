@@ -4,7 +4,7 @@
 
 void Quad2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "quad2dEditorMenuMain")
 	{
@@ -60,7 +60,7 @@ void Quad2dEditor::_updateMainMenu()
 
 void Quad2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "quad2dEditorMenuChoice")
 	{

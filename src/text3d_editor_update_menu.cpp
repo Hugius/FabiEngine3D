@@ -2,7 +2,7 @@
 
 void Text3dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "text3dEditorMenuMain")
 	{
@@ -58,7 +58,7 @@ void Text3dEditor::_updateMainMenu()
 
 void Text3dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "text3dEditorMenuChoice")
 	{

@@ -6,7 +6,7 @@
 
 void AabbEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "aabbEditorMenuMain")
 	{
@@ -62,7 +62,7 @@ void AabbEditor::_updateMainMenu()
 
 void AabbEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "aabbEditorMenuChoice")
 	{

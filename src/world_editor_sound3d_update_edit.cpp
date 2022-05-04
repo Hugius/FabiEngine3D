@@ -72,7 +72,7 @@ void WorldEditor::_updateSound3dEditing()
 
 		if(!_activeSound3dId.empty())
 		{
-			auto screen = window->getScreen("sound3dPropertiesMenu");
+			const auto screen = window->getScreen("sound3dPropertiesMenu");
 
 			window->setActiveScreen("sound3dPropertiesMenu");
 

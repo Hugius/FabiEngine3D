@@ -70,7 +70,7 @@ void WorldEditor::_updateText3dEditing()
 
 		if(!_activeText3dId.empty())
 		{
-			auto screen = window->getScreen("text3dPropertiesMenu");
+			const auto screen = window->getScreen("text3dPropertiesMenu");
 
 			window->setActiveScreen("text3dPropertiesMenu");
 

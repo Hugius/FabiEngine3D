@@ -4,7 +4,7 @@
 
 void WaterEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "waterEditorMenuMain")
 	{
@@ -60,7 +60,7 @@ void WaterEditor::_updateMainMenu()
 
 void WaterEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "waterEditorMenuChoice")
 	{

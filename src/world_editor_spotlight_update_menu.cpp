@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateSpotlightMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSpotlight")
 	{
@@ -64,7 +64,7 @@ void WorldEditor::_updateSpotlightMenu()
 
 void WorldEditor::_updateSpotlightChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSpotlightChoice")
 	{

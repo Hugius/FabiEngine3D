@@ -4,7 +4,7 @@
 
 void TerrainEditor::_updateNormalMapMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "terrainEditorMenuNormalTexturing")
 	{

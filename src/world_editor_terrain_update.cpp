@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateTerrainMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuTerrain")
 	{

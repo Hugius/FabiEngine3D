@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettings")
 	{
@@ -37,7 +37,7 @@ void WorldEditor::_updateSettingsMenu()
 
 void WorldEditor::_updateLightingSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsLighting")
 	{
@@ -60,7 +60,7 @@ void WorldEditor::_updateLightingSettingsMenu()
 
 void WorldEditor::_updateGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphics")
 	{

@@ -6,8 +6,8 @@ void LeftViewportController::initialize()
 {
 	_gui->getLeftViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), FRAME_COLOR);
 
-	auto window = _gui->getLeftViewport()->getWindow("main");
-	auto positions = Mathematics::calculateDistributedPositions(9, CH, false);
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto positions = Mathematics::calculateDistributedPositions(9, CH, false);
 
 	window->createScreen("empty");
 	window->createScreen("main");
@@ -25,7 +25,7 @@ void LeftViewportController::initialize()
 
 void LeftViewportController::update()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "main")
 	{

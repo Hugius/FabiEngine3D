@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateMainMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuMain")
 	{
@@ -35,7 +35,7 @@ void WorldEditor::_updateMainMenu()
 
 void WorldEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuChoice")
 	{

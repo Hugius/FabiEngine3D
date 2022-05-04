@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateText3dMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3d")
 	{
@@ -43,7 +43,7 @@ void WorldEditor::_updateText3dMenu()
 
 void WorldEditor::_updateText3dPlacingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3dPlace")
 	{
@@ -85,7 +85,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 
 void WorldEditor::_updateText3dChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{

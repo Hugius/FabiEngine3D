@@ -70,8 +70,8 @@ void WorldEditor::_updateModelEditing()
 
 		if(!_activeModelId.empty())
 		{
-			auto screen = window->getScreen("modelPropertiesMenu");
-			auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
+			const auto screen = window->getScreen("modelPropertiesMenu");
+			const auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
 
 			window->setActiveScreen("modelPropertiesMenu");
 

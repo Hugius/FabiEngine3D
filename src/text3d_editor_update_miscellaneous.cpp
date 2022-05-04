@@ -3,7 +3,7 @@
 
 void Text3dEditor::_updateMiscellaneousMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "text3dEditorMenuMiscellaneous")
 	{

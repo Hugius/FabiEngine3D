@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsShadows")
 	{
@@ -141,7 +141,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsReflections")
 	{
@@ -191,7 +191,7 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
@@ -219,7 +219,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateDofGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsDof")
 	{
@@ -282,7 +282,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 
 void WorldEditor::_updateFogGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsFog")
 	{
@@ -364,7 +364,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 
 void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
@@ -444,7 +444,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsSkyExposure")
 	{
@@ -490,7 +490,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 
 void WorldEditor::_updateBloomGraphicsSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsBloom")
 	{

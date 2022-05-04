@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateQuad3dMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3d")
 	{
@@ -43,7 +43,7 @@ void WorldEditor::_updateQuad3dMenu()
 
 void WorldEditor::_updateQuad3dPlacingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3dPlace")
 	{
@@ -85,7 +85,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 void WorldEditor::_updateQuad3dChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{

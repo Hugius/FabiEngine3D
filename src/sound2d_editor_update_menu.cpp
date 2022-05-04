@@ -2,7 +2,7 @@
 
 void Sound2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "sound2dEditorMenuMain")
 	{
@@ -58,7 +58,7 @@ void Sound2dEditor::_updateMainMenu()
 
 void Sound2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "sound2dEditorMenuChoice")
 	{

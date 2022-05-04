@@ -70,7 +70,7 @@ void WorldEditor::_updateSpotlightEditing()
 
 		if(!_activeSpotlightId.empty())
 		{
-			auto screen = window->getScreen("spotlightPropertiesMenu");
+			const auto screen = window->getScreen("spotlightPropertiesMenu");
 
 			window->setActiveScreen("spotlightPropertiesMenu");
 

@@ -70,7 +70,7 @@ void WorldEditor::_updateCaptorEditing()
 
 		if(!_activeCaptorId.empty())
 		{
-			auto screen = window->getScreen("captorPropertiesMenu");
+			const auto screen = window->getScreen("captorPropertiesMenu");
 
 			window->setActiveScreen("captorPropertiesMenu");
 

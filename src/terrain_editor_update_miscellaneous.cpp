@@ -3,7 +3,7 @@
 
 void TerrainEditor::_updateMiscellaneousMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "terrainEditorMenuMiscellaneous")
 	{

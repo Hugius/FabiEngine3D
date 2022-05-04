@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateCaptorMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuCaptor")
 	{
@@ -62,7 +62,7 @@ void WorldEditor::_updateCaptorMenu()
 
 void WorldEditor::_updateCaptorChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuCaptorChoice")
 	{

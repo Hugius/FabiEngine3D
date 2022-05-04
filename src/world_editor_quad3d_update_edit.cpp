@@ -70,8 +70,8 @@ void WorldEditor::_updateQuad3dEditing()
 
 		if(!_activeQuad3dId.empty())
 		{
-			auto screen = window->getScreen("quad3dPropertiesMenu");
-			auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
+			const auto screen = window->getScreen("quad3dPropertiesMenu");
+			const auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
 
 			window->setActiveScreen("quad3dPropertiesMenu");
 

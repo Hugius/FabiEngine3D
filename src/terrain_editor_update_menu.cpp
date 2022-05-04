@@ -3,7 +3,7 @@
 
 void TerrainEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "terrainEditorMenuMain")
 	{
@@ -59,7 +59,7 @@ void TerrainEditor::_updateMainMenu()
 
 void TerrainEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "terrainEditorMenuChoice")
 	{

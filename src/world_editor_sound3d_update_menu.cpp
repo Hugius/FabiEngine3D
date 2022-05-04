@@ -5,7 +5,7 @@
 
 void WorldEditor::_updateSound3dMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSound3d")
 	{
@@ -49,7 +49,7 @@ void WorldEditor::_updateSound3dMenu()
 
 void WorldEditor::_updateSound3dPlacingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSound3dPlace")
 	{
@@ -93,7 +93,7 @@ void WorldEditor::_updateSound3dPlacingMenu()
 
 void WorldEditor::_updateSound3dChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSound3dChoice")
 	{

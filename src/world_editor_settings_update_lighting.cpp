@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingAmbient")
 	{
@@ -63,7 +63,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 void WorldEditor::_updateDirectionalLightingSettingsMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingDirectional")
 	{

@@ -2,7 +2,7 @@
 
 void ModelEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "modelEditorMenuMain")
 	{
@@ -58,7 +58,7 @@ void ModelEditor::_updateMainMenu()
 
 void ModelEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "modelEditorMenuChoice")
 	{

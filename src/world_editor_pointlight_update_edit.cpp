@@ -70,7 +70,7 @@ void WorldEditor::_updatePointlightEditing()
 
 		if(!_activePointlightId.empty())
 		{
-			auto screen = window->getScreen("pointlightPropertiesMenu");
+			const auto screen = window->getScreen("pointlightPropertiesMenu");
 
 			window->setActiveScreen("pointlightPropertiesMenu");
 

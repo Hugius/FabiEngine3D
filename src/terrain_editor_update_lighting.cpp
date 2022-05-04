@@ -7,7 +7,7 @@ using std::clamp;
 
 void TerrainEditor::_updateLightingMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "terrainEditorMenuLighting")
 	{

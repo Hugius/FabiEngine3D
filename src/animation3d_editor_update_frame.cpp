@@ -3,7 +3,7 @@
 
 void Animation3dEditor::_updateFrameMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation3dEditorMenuFrame")
 	{

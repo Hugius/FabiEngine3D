@@ -5,7 +5,7 @@
 
 void WorldEditor::_updatePointlightMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuPointlight")
 	{
@@ -64,7 +64,7 @@ void WorldEditor::_updatePointlightMenu()
 
 void WorldEditor::_updatePointlightChoosingMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{

@@ -3,7 +3,7 @@
 
 void Text2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "text2dEditorMenuMain")
 	{
@@ -59,7 +59,7 @@ void Text2dEditor::_updateMainMenu()
 
 void Text2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "text2dEditorMenuChoice")
 	{

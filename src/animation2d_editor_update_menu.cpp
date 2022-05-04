@@ -4,7 +4,7 @@
 
 void Animation2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "animation2dEditorMenuMain")
 	{
@@ -60,7 +60,8 @@ void Animation2dEditor::_updateMainMenu()
 
 void Animation2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+	const auto window = _gui->getRightViewport()->getWindow("main");
+	const auto screen = window->getActiveScreen();
 
 	if(screen->getId() == "animation2dEditorMenuChoice")
 	{

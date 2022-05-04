@@ -54,6 +54,23 @@ void WorldEditor::_activateText3d(const string & text3dId)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeText3dId);
 }
 
+void WorldEditor::_activateAabb(const string & aabbId)
+{
+	_activeAabbId = aabbId;
+
+	const auto window = _gui->getLeftViewport()->getWindow("main");
+	const auto position = _fe3d->aabb_getBasePosition(_activeAabbId);
+
+	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getButton("position")->setHoverable(false);
+	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getButton("size")->setHoverable(true);
+
+	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active AABB: " + _activeAabbId);
+}
+
 void WorldEditor::_activatePointlight(const string & pointlightId)
 {
 	_activePointlightId = pointlightId;
@@ -149,6 +166,16 @@ void WorldEditor::_deactivateText3d()
 	}
 
 	_activeText3dId = "";
+}
+
+void WorldEditor::_deactivateAabb()
+{
+	if(!_activeAabbId.empty())
+	{
+		_deselectAabb(_activeAabbId);
+	}
+
+	_activeAabbId = "";
 }
 
 void WorldEditor::_deactivatePointlight()

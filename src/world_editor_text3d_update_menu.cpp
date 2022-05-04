@@ -62,10 +62,13 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 				_deactivateModel();
+				_deactivateQuad3d();
 				_deactivateText3d();
-				_deactivateSound3d();
+				_deactivateAabb();
 				_deactivatePointlight();
+				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateText3dId = hoveredOptionId;
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, true);
@@ -107,10 +110,12 @@ void WorldEditor::_updateText3dChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateText3d(hoveredOptionId);
 			}

@@ -28,10 +28,12 @@ void WorldEditor::_updatePointlightMenu()
 
 			_deactivateModel();
 			_deactivateQuad3d();
-			_deactivateSound3d();
+			_deactivateText3d();
+			_deactivateAabb();
 			_deactivatePointlight();
 			_deactivateSpotlight();
 			_deactivateCaptor();
+			_deactivateSound3d();
 
 			_isPlacingPointlight = true;
 			_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, true);
@@ -86,10 +88,12 @@ void WorldEditor::_updatePointlightChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activatePointlight(hoveredOptionId);
 			}

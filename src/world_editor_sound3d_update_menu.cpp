@@ -69,10 +69,12 @@ void WorldEditor::_updateSound3dPlacingMenu()
 
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateSound3dId = hoveredOptionId;
 				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, true);
@@ -115,10 +117,12 @@ void WorldEditor::_updateSound3dChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateSound3d(hoveredOptionId);
 			}

@@ -157,6 +157,7 @@ void WorldEditor::_updateMiscellaneous()
 	const auto isSelected = (!_selectedModelId.empty() ||
 							 !_selectedQuad3dId.empty() ||
 							 !_selectedText3dId.empty() ||
+							 !_selectedAabbId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
 							 !_selectedCaptorId.empty() ||
@@ -165,6 +166,7 @@ void WorldEditor::_updateMiscellaneous()
 	const auto isActive = (!_activeModelId.empty() ||
 						   !_activeQuad3dId.empty() ||
 						   !_activeText3dId.empty() ||
+						   !_activeAabbId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
 						   !_activeCaptorId.empty() ||

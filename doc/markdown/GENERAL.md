@@ -45,8 +45,8 @@
 
 ### 1.7 Networking
 
-- Central networking server
-- Multiple networking clients
+- Server
+- Clients
 - TCP messaging
 - UDP messaging
 - Multithreading

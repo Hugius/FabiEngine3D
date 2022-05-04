@@ -84,6 +84,11 @@ void WorldEditor::_load()
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
 	}
 
+	for(const auto & aabbId : _aabbEditor->getLoadedAabbIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbPlace")->getScrollingList("aabbList")->createOption(aabbId, aabbId.substr(1));
+	}
+
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
@@ -103,6 +108,7 @@ void WorldEditor::_unload()
 	_modelEditor->deleteLoadedModels();
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_text3dEditor->deleteLoadedText3ds();
+	_aabbEditor->deleteLoadedAabbs();
 	_animation3dEditor->deleteLoadedAnimation3ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
 	_sound2dEditor->deleteLoadedSound2ds();
@@ -172,6 +178,10 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateAabbPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updatePointlightPlacing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
@@ -212,6 +222,10 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateAabbMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updatePointlightMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
@@ -240,6 +254,10 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateAabbPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updateSound3dPlacingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
@@ -253,6 +271,10 @@ void WorldEditor::update()
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateAabbChoosingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -281,6 +303,10 @@ void WorldEditor::update()
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateAabbEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

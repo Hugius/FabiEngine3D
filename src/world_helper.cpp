@@ -269,6 +269,18 @@ void WorldHelper::copyTemplateText3d(const string & newId, const string & templa
 	}
 }
 
+void WorldHelper::copyTemplateAabb(const string & newId, const string & templateId)
+{
+	if(!_fe3d->aabb_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->aabb_create(newId, false);
+	_fe3d->aabb_setBaseSize(newId, _fe3d->aabb_getBaseSize(templateId));
+	_fe3d->aabb_setColor(newId, _fe3d->aabb_getColor(templateId));
+}
+
 void WorldHelper::copyTemplateSound2d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))

@@ -27,10 +27,12 @@ void WorldEditor::_updateCaptorMenu()
 
 			_deactivateModel();
 			_deactivateQuad3d();
-			_deactivateSound3d();
+			_deactivateText3d();
+			_deactivateAabb();
 			_deactivatePointlight();
 			_deactivateSpotlight();
 			_deactivateCaptor();
+			_deactivateSound3d();
 
 			_isPlacingCaptor = true;
 			_fe3d->model_setVisible(TEMPLATE_CAPTOR_ID, true);
@@ -84,10 +86,12 @@ void WorldEditor::_updateCaptorChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateCaptor(hoveredOptionId);
 			}

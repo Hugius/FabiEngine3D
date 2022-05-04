@@ -63,9 +63,12 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
+				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateQuad3dId = hoveredOptionId;
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, true);
@@ -107,10 +110,12 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateQuad3d(hoveredOptionId);
 			}

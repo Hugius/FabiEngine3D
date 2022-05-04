@@ -69,9 +69,9 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound3d")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3d");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuAabb");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pointlight")->isHovered())
 		{
@@ -84,6 +84,10 @@ void WorldEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("captor")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptor");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound3d")->isHovered())
+		{
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3d");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("settings")->isHovered())
 		{
@@ -112,10 +116,12 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateModelId = "";
 			_currentTemplateQuad3dId = "";
 			_currentTemplateText3dId = "";
+			_currentTemplateAabbId = "";
 			_currentTemplateSound3dId = "";
 			_selectedModelId = "";
 			_selectedQuad3dId = "";
 			_selectedText3dId = "";
+			_selectedAabbId = "";
 			_selectedPointlightId = "";
 			_selectedSpotlightId = "";
 			_selectedCaptorId = "";
@@ -123,6 +129,7 @@ void WorldEditor::_updateChoiceMenu()
 			_activeModelId = "";
 			_activeQuad3dId = "";
 			_activeText3dId = "";
+			_activeAabbId = "";
 			_activePointlightId = "";
 			_activeSpotlightId = "";
 			_activeCaptorId = "";
@@ -132,6 +139,7 @@ void WorldEditor::_updateChoiceMenu()
 			_selectedModelHighlightDirection = 1;
 			_selectedQuad3dHighlightDirection = 1;
 			_selectedText3dHighlightDirection = 1;
+			_selectedAabbHighlightDirection = 1;
 			_selectedPointlightHighlightDirection = 1;
 			_selectedSpotlightHighlightDirection = 1;
 			_selectedCaptorHighlightDirection = 1;
@@ -139,6 +147,7 @@ void WorldEditor::_updateChoiceMenu()
 			_activeModelHighlightDirection = 1;
 			_activeQuad3dHighlightDirection = 1;
 			_activeText3dHighlightDirection = 1;
+			_activeAabbHighlightDirection = 1;
 			_activePointlightHighlightDirection = 1;
 			_activeSpotlightHighlightDirection = 1;
 			_activeCaptorHighlightDirection = 1;
@@ -146,6 +155,7 @@ void WorldEditor::_updateChoiceMenu()
 			_dontResetSelectedModel = false;
 			_dontResetSelectedQuad3d = false;
 			_dontResetSelectedText3d = false;
+			_dontResetSelectedAabb = false;
 			_dontResetSelectedPointlight = false;
 			_dontResetSelectedSpotlight = false;
 			_dontResetSelectedCaptor = false;

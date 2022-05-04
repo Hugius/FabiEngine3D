@@ -250,6 +250,9 @@
     <Filter Include="World Editor\Update\Sound3D">
       <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Editor\Update\AABB">
+      <UniqueIdentifier>{bcfc1795-4e30-464e-b315-0660a8472034}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -668,6 +671,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_editor_misc.cpp">
       <Filter>AABB Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_aabb_update_place.cpp">
+      <Filter>World Editor\Update\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_aabb_update_edit.cpp">
+      <Filter>World Editor\Update\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_aabb_update_menu.cpp">
+      <Filter>World Editor\Update\AABB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -76,6 +76,11 @@ void WorldEditor::_updateText3dHighlighting(const string & text3dId, int & direc
 	_fe3d->text3d_setOpacity(text3dId, (opacity + speed));
 }
 
+void WorldEditor::_updateAabbHighlighting(const string & aabbId, int & direction)
+{
+
+}
+
 void WorldEditor::_updateSound3dHighlighting(const string & sound3dId, int & direction)
 {
 	if(sound3dId.empty())

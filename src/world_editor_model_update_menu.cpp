@@ -63,10 +63,12 @@ void WorldEditor::_updateModelPlacingMenu()
 
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateModelId = hoveredOptionId;
 				_fe3d->model_setVisible(_currentTemplateModelId, true);
@@ -108,10 +110,12 @@ void WorldEditor::_updateModelChoosingMenu()
 			{
 				_deactivateModel();
 				_deactivateQuad3d();
-				_deactivateSound3d();
+				_deactivateText3d();
+				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateModel(hoveredOptionId);
 			}

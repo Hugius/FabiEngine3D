@@ -50,7 +50,7 @@ void WorldEditor::_updateWaterPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("waterList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateWaters")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{

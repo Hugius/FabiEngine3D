@@ -52,11 +52,11 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 
-			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->deleteOptions();
 
 			for(auto & pointlightId : _loadedPointlightIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(pointlightId, pointlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->createOption(pointlightId, pointlightId);
 			}
 		}
 
@@ -70,17 +70,17 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("pointlightList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("placedPointlights")->getOptionIds())
 		{
 			if(!_fe3d->pointlight_isExisting(optionId))
 			{
-				screen->getScrollingList("pointlightList")->deleteOption(optionId);
+				screen->getScrollingList("placedPointlights")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("pointlightList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("placedPointlights")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

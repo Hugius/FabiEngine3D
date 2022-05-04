@@ -29,11 +29,11 @@ void WorldEditor::_updateModelMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModelChoice");
 
-			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->deleteOptions();
 
 			for(auto & [placedModelId, templateModelId] : _loadedModelIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createOption(placedModelId, placedModelId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->createOption(placedModelId, placedModelId);
 			}
 		}
 
@@ -55,7 +55,7 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("modelList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateModels")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -92,17 +92,17 @@ void WorldEditor::_updateModelChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuModelChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("modelList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("placedModels")->getOptionIds())
 		{
 			if(!_fe3d->model_isExisting(optionId))
 			{
-				screen->getScrollingList("modelList")->deleteOption(optionId);
+				screen->getScrollingList("placedModels")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("modelList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("placedModels")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

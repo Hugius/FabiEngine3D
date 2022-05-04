@@ -71,42 +71,42 @@ void WorldEditor::_load()
 
 	for(const auto & skyId : _skyEditor->getLoadedSkyIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSkyPlace")->getScrollingList("skyList")->createOption(skyId, skyId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSkyPlace")->getScrollingList("templateSkies")->createOption(skyId, skyId.substr(1));
 	}
 
 	for(const auto & terrainId : _terrainEditor->getLoadedTerrainIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuTerrainPlace")->getScrollingList("terrainList")->createOption(terrainId, terrainId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuTerrainPlace")->getScrollingList("templateTerrains")->createOption(terrainId, terrainId.substr(1));
 	}
 
 	for(const auto & waterId : _waterEditor->getLoadedWaterIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuWaterPlace")->getScrollingList("waterList")->createOption(waterId, waterId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuWaterPlace")->getScrollingList("templateWaters")->createOption(waterId, waterId.substr(1));
 	}
 
 	for(const auto & modelId : _modelEditor->getLoadedModelIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("templateModels")->createOption(modelId, modelId.substr(1));
 	}
 
 	for(const auto & quad3dId : _quad3dEditor->getLoadedQuad3dIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(quad3dId, quad3dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("templateQuad3ds")->createOption(quad3dId, quad3dId.substr(1));
 	}
 
 	for(const auto & text3dId : _text3dEditor->getLoadedText3dIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(text3dId, text3dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("templateText3ds")->createOption(text3dId, text3dId.substr(1));
 	}
 
 	for(const auto & aabbId : _aabbEditor->getLoadedAabbIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbPlace")->getScrollingList("aabbList")->createOption(aabbId, aabbId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbPlace")->getScrollingList("templateAabbs")->createOption(aabbId, aabbId.substr(1));
 	}
 
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("sound3dList")->createOption(sound2dId, sound2dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("templateSound3ds")->createOption(sound2dId, sound2dId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);

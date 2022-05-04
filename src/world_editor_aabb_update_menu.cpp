@@ -29,11 +29,11 @@ void WorldEditor::_updateAabbMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuAabbChoice");
 
-			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("aabbList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->deleteOptions();
 
 			for(auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("aabbList")->createOption(placedAabbId, placedAabbId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->createOption(placedAabbId, placedAabbId);
 			}
 		}
 
@@ -55,7 +55,7 @@ void WorldEditor::_updateAabbPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("aabbList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateAabbs")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -92,17 +92,17 @@ void WorldEditor::_updateAabbChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuAabbChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("aabbList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("placedAabbs")->getOptionIds())
 		{
 			if(!_fe3d->aabb_isExisting(optionId))
 			{
-				screen->getScrollingList("aabbList")->deleteOption(optionId);
+				screen->getScrollingList("placedAabbs")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("aabbList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("placedAabbs")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

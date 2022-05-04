@@ -29,11 +29,11 @@ void WorldEditor::_updateText3dMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
 
-			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->deleteOptions();
 
 			for(auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createOption(placedText3dId, placedText3dId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->createOption(placedText3dId, placedText3dId);
 			}
 		}
 
@@ -55,7 +55,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("text3dList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateText3ds")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -92,17 +92,17 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("text3dList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("placedText3ds")->getOptionIds())
 		{
 			if(!_fe3d->text3d_isExisting(optionId))
 			{
-				screen->getScrollingList("text3dList")->deleteOption(optionId);
+				screen->getScrollingList("placedText3ds")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("text3dList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("placedText3ds")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

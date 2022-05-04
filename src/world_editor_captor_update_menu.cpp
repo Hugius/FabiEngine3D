@@ -50,11 +50,11 @@ void WorldEditor::_updateCaptorMenu()
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorChoice");
 
-			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->deleteOptions();
+			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->deleteOptions();
 
 			for(auto & captorId : _loadedCaptorIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("captorList")->createOption(captorId, captorId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->createOption(captorId, captorId);
 			}
 		}
 
@@ -68,17 +68,17 @@ void WorldEditor::_updateCaptorChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuCaptorChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("captorList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("placedCaptors")->getOptionIds())
 		{
 			if(!_fe3d->captor_isExisting(optionId))
 			{
-				screen->getScrollingList("captorList")->deleteOption(optionId);
+				screen->getScrollingList("placedCaptors")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("captorList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("placedCaptors")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

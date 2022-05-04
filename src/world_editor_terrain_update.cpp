@@ -40,7 +40,7 @@ void WorldEditor::_updateTerrainPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("terrainList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateTerrains")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{

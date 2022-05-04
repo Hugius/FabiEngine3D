@@ -40,7 +40,7 @@ void WorldEditor::_updateSkyPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("skyList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("templateSkies")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{

@@ -69,6 +69,21 @@ void WorldEditor::_load()
 	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
+	for(const auto & skyId : _skyEditor->getLoadedSkyIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSkyPlace")->getScrollingList("skyList")->createOption(skyId, skyId.substr(1));
+	}
+
+	for(const auto & terrainId : _terrainEditor->getLoadedTerrainIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuTerrainPlace")->getScrollingList("terrainList")->createOption(terrainId, terrainId.substr(1));
+	}
+
+	for(const auto & waterId : _waterEditor->getLoadedWaterIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuWaterPlace")->getScrollingList("waterList")->createOption(waterId, waterId.substr(1));
+	}
+
 	for(const auto & modelId : _modelEditor->getLoadedModelIds())
 	{
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->createOption(modelId, modelId.substr(1));
@@ -239,6 +254,18 @@ void WorldEditor::update()
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSkyPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateTerrainPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateWaterPlacingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

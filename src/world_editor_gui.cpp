@@ -33,23 +33,35 @@ void WorldEditor::_loadGUI()
 
 	positions = Mathematics::calculateDistributedPositions(3, CH, false);
 	rightWindow->createScreen("worldEditorMenuSky");
-	rightWindow->getScreen("worldEditorMenuSky")->createButton("choose", fvec2(0.0f, positions[0]), TEXT_SIZE("Choose Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSky")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSky")->createButton("delete", fvec2(0.0f, positions[1]), TEXT_SIZE("Delete Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSky")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
+	rightWindow->createScreen("worldEditorMenuSkyPlace");
+	rightWindow->getScreen("worldEditorMenuSkyPlace")->createScrollingList("skyList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
+	rightWindow->getScreen("worldEditorMenuSkyPlace")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
 	positions = Mathematics::calculateDistributedPositions(3, CH, false);
 	rightWindow->createScreen("worldEditorMenuTerrain");
-	rightWindow->getScreen("worldEditorMenuTerrain")->createButton("choose", fvec2(0.0f, positions[0]), TEXT_SIZE("Choose Terrain"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuTerrain")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Terrain"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuTerrain")->createButton("delete", fvec2(0.0f, positions[1]), TEXT_SIZE("Delete Terrain"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuTerrain")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
+	rightWindow->createScreen("worldEditorMenuTerrainPlace");
+	rightWindow->getScreen("worldEditorMenuTerrainPlace")->createScrollingList("terrainList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
+	rightWindow->getScreen("worldEditorMenuTerrainPlace")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
 	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	rightWindow->createScreen("worldEditorMenuWater");
-	rightWindow->getScreen("worldEditorMenuWater")->createButton("choose", fvec2(0.0f, positions[0]), TEXT_SIZE("Choose Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuWater")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuWater")->createButton("up", fvec2(0.0f, positions[1]), TEXT_SIZE("Move Up"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Up", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuWater")->createButton("down", fvec2(0.0f, positions[2]), TEXT_SIZE("Move Down"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Down", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuWater")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuWater")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	rightWindow->createScreen("worldEditorMenuWaterPlace");
+	rightWindow->getScreen("worldEditorMenuWaterPlace")->createScrollingList("waterList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
+	rightWindow->getScreen("worldEditorMenuWaterPlace")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(3, CH, false);
 	rightWindow->createScreen("worldEditorMenuModel");
@@ -465,8 +477,11 @@ void WorldEditor::_unloadGUI()
 	rightWindow->deleteScreen("worldEditorMenuMain");
 	rightWindow->deleteScreen("worldEditorMenuChoice");
 	rightWindow->deleteScreen("worldEditorMenuSky");
+	rightWindow->deleteScreen("worldEditorMenuSkyPlace");
 	rightWindow->deleteScreen("worldEditorMenuTerrain");
+	rightWindow->deleteScreen("worldEditorMenuTerrainPlace");
 	rightWindow->deleteScreen("worldEditorMenuWater");
+	rightWindow->deleteScreen("worldEditorMenuWaterPlace");
 	rightWindow->deleteScreen("worldEditorMenuModel");
 	rightWindow->deleteScreen("worldEditorMenuModelPlace");
 	rightWindow->deleteScreen("worldEditorMenuModelChoice");

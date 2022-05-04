@@ -12,19 +12,9 @@ void WorldEditor::_updateWaterMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			vector<string> waterIds;
-
-			for(const auto & waterId : _waterEditor->getLoadedWaterIds())
-			{
-				if(waterId[0] == '@')
-				{
-					waterIds.push_back(waterId.substr(1));
-				}
-			}
-
-			_gui->getOverlay()->openChoiceForm("selectWater", "Select Water", fvec2(0.0f, 0.1f), waterIds);
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuWaterPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -39,18 +29,35 @@ void WorldEditor::_updateWaterMenu()
 			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / 100.0f)));
 		}
 
-		if((_gui->getOverlay()->getChoiceFormId() == "selectWater") && _gui->getOverlay()->isChoiceFormConfirmed())
-		{
-			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-
-			_worldHelper->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
-
-			_fe3d->water_select(selectedOptionId);
-		}
-
-		screen->getButton("choose")->setHoverable(_fe3d->water_getSelectedId().empty());
+		screen->getButton("place")->setHoverable(_fe3d->water_getSelectedId().empty());
 		screen->getButton("up")->setHoverable(!_fe3d->water_getSelectedId().empty());
 		screen->getButton("down")->setHoverable(!_fe3d->water_getSelectedId().empty());
 		screen->getButton("delete")->setHoverable(!_fe3d->water_getSelectedId().empty());
+	}
+}
+
+void WorldEditor::_updateWaterPlacingMenu()
+{
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+
+	if(screen->getId() == "worldEditorMenuWaterPlace")
+	{
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		{
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuWater");
+
+			return;
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			const auto hoveredOptionId = screen->getScrollingList("waterList")->getHoveredOptionId();
+
+			if(!hoveredOptionId.empty())
+			{
+				_worldHelper->copyTemplateWater(hoveredOptionId.substr(1), hoveredOptionId);
+
+				_fe3d->water_select(hoveredOptionId.substr(1));
+			}
+		}
 	}
 }

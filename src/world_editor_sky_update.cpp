@@ -12,35 +12,42 @@ void WorldEditor::_updateSkyMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			vector<string> skyIds;
-
-			for(const auto & skyId : _skyEditor->getLoadedSkyIds())
-			{
-				if(skyId[0] == '@')
-				{
-					skyIds.push_back(skyId.substr(1));
-				}
-			}
-
-			_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSkyPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d->sky_delete(_fe3d->sky_getSelectedId());
 		}
 
-		if((_gui->getOverlay()->getChoiceFormId() == "selectSky") && _gui->getOverlay()->isChoiceFormConfirmed())
-		{
-			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-
-			_worldHelper->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
-
-			_fe3d->sky_select(selectedOptionId);
-		}
-
-		screen->getButton("choose")->setHoverable(_fe3d->sky_getSelectedId().empty());
+		screen->getButton("place")->setHoverable(_fe3d->sky_getSelectedId().empty());
 		screen->getButton("delete")->setHoverable(!_fe3d->sky_getSelectedId().empty());
+	}
+}
+
+void WorldEditor::_updateSkyPlacingMenu()
+{
+	auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+
+	if(screen->getId() == "worldEditorMenuSkyPlace")
+	{
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		{
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSky");
+
+			return;
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			const auto hoveredOptionId = screen->getScrollingList("skyList")->getHoveredOptionId();
+
+			if(!hoveredOptionId.empty())
+			{
+				_worldHelper->copyTemplateSky(hoveredOptionId.substr(1), hoveredOptionId);
+
+				_fe3d->sky_select(hoveredOptionId.substr(1));
+			}
+		}
 	}
 }

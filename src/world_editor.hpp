@@ -46,8 +46,11 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateSkyMenu();
+	void _updateSkyPlacingMenu();
 	void _updateTerrainMenu();
+	void _updateTerrainPlacingMenu();
 	void _updateWaterMenu();
+	void _updateWaterPlacingMenu();
 	void _updateModelMenu();
 	void _updateModelPlacingMenu();
 	void _updateModelChoosingMenu();

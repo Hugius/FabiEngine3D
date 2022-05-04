@@ -189,6 +189,7 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 	{
 		const string newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
 		_fe3d->aabb_create(newAabbId, false);
+		_fe3d->aabb_setVisible(newAabbId, false);
 		_fe3d->aabb_setParentId(newAabbId, newId);
 		_fe3d->aabb_setParentType(newAabbId, AabbParentType::MODEL);
 		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getLocalPosition(templateAabbId));
@@ -233,6 +234,7 @@ void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templa
 	if(_fe3d->aabb_isExisting(templateId))
 	{
 		_fe3d->aabb_create(newId, false);
+		_fe3d->aabb_setVisible(newId, false);
 		_fe3d->aabb_setParentId(newId, newId);
 		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 	}
@@ -264,6 +266,7 @@ void WorldHelper::copyTemplateText3d(const string & newId, const string & templa
 	if(_fe3d->aabb_isExisting(templateId))
 	{
 		_fe3d->aabb_create(newId, false);
+		_fe3d->aabb_setVisible(newId, false);
 		_fe3d->aabb_setParentId(newId, newId);
 		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 	}

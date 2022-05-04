@@ -65,6 +65,7 @@ void ScriptEditor::_createDisplayContent()
 		const auto lineAabbSize = fvec3(FLT_MAX, CHAR_SIZE.y, AABB_DEPTH);
 
 		_fe3d->aabb_create(lineAabbId, true);
+		_fe3d->aabb_setVisible(lineAabbId, false);
 		_fe3d->aabb_setBasePosition(lineAabbId, lineAabbPosition);
 		_fe3d->aabb_setBaseSize(lineAabbId, lineAabbSize);
 
@@ -80,6 +81,7 @@ void ScriptEditor::_createDisplayContent()
 			const auto characterAabbSize = fvec3(CHAR_SIZE.x, CHAR_SIZE.y, AABB_DEPTH);
 
 			_fe3d->aabb_create(characterId, true);
+			_fe3d->aabb_setVisible(characterId, false);
 			_fe3d->aabb_setBasePosition(characterId, characterAabbPosition);
 			_fe3d->aabb_setBaseSize(characterId, characterAabbSize);
 

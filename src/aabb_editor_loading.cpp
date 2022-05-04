@@ -51,6 +51,7 @@ const bool AabbEditor::loadAabbsFromFile()
 		_fe3d->aabb_create(aabbId, false);
 		_fe3d->aabb_setVisible(aabbId, false);
 		_fe3d->aabb_setBaseSize(aabbId, size);
+		_fe3d->aabb_setColor(aabbId, color);
 	}
 
 	file.close();

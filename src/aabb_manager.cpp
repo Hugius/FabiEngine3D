@@ -99,7 +99,6 @@ void AabbManager::createAabb(const string & aabbId, bool isCentered)
 
 	aabb->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	aabb->setCentered(isCentered);
-	aabb->setVisible(false);
 
 	_aabbs.insert({aabbId, aabb});
 }

@@ -156,6 +156,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 			if(hasAabb)
 			{
 				_fe3d->aabb_create(text3dId, false);
+				_fe3d->aabb_setVisible(text3dId, false);
 				_fe3d->aabb_setParentId(text3dId, text3dId);
 				_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
 			}

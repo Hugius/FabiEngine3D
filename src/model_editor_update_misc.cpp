@@ -295,7 +295,6 @@ void ModelEditor::_updateAabbCreating()
 		_currentAabbId = newAabbId;
 
 		_fe3d->aabb_create((_currentModelId + "@" + _currentAabbId), false);
-		_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), true);
 		_fe3d->aabb_setParentId((_currentModelId + "@" + _currentAabbId), _currentModelId);
 		_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
 

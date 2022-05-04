@@ -7,7 +7,6 @@
 - AABB stands for "Axis Aligned Bounding Box".
 - AABBs can only rotate with angles of 90&deg;.
 - AABBs are used for collision and raycasting.
-- AABBs are invisible by default.
 - AABBs can be bound to a parent (model/quad3D).
 - Bound AABBs follow the transformation of their parent.
 - Bound AABBs are invisible and unresponsive if their parent is invisible.

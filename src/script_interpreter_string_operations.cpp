@@ -1,6 +1,5 @@
 #include "script_interpreter.hpp"
-
-#include <sstream>
+#include "tools.hpp"
 
 const bool ScriptInterpreter::_isListValue(const string & valueString) const
 {
@@ -59,26 +58,7 @@ const bool ScriptInterpreter::_isDecimalValue(const string & valueString) const
 
 const bool ScriptInterpreter::_isIntegerValue(const string & valueString) const
 {
-	if(valueString.empty())
-	{
-		return false;
-	}
-
-	int startingIndex = 0;
-	if(valueString[0] == '-')
-	{
-		startingIndex = 1;
-	}
-
-	for(int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
-	{
-		if(!isdigit(valueString[index]))
-		{
-			return false;
-		}
-	}
-
-	return true;
+	return Tools::isInteger(valueString);
 }
 
 const bool ScriptInterpreter::_isBooleanValue(const string & valueString) const

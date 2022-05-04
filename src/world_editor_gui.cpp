@@ -324,21 +324,21 @@ void WorldEditor::_loadGUI()
 
 	leftWindow->createScreen("aabbPropertiesMenu");
 	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.125f, 0.1f), "AABB Menu", fvec3(0.0f, 1.0f, 0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("position", fvec2(-0.5f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("size", fvec2(0.5f, 0.8f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.725f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("y", fvec2(0.0f, 0.525f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("z", fvec2(0.0f, 0.325f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.625f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("yPlus", fvec2(0.75f, 0.425f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("zPlus", fvec2(0.75f, 0.225f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.625f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, 0.425f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, 0.225f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("x", fvec2(0.0f, 0.625f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("y", fvec2(0.0f, 0.425f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("z", fvec2(0.0f, 0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("aabbPropertiesMenu")->createButton("delete", fvec2(0.0f, 0.125f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("size", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.385f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("y", fvec2(0.0f, 0.135f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("z", fvec2(0.0f, -0.115f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.275f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("yPlus", fvec2(0.75f, 0.025f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("zPlus", fvec2(0.75f, -0.225f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.275f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, 0.025f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, -0.225f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("x", fvec2(0.0f, 0.275f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("y", fvec2(0.0f, 0.025f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createInputBox("z", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("aabbPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.375f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("pointlightPropertiesMenu");
 	leftWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.875f, 0.1f), "Pointlight Menu", fvec3(0.0f, 1.0f, 0.0f), true);

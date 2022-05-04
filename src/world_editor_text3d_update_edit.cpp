@@ -141,14 +141,8 @@ void WorldEditor::_updateText3dEditing()
 			_fe3d->text3d_setRotation(_activeText3dId, rotation);
 			_fe3d->text3d_setSize(_activeText3dId, size);
 
-			screen->getInputBox("x")->setHoverable(true);
-			screen->getInputBox("y")->setHoverable(true);
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xMinus")->setHoverable(true);
-			screen->getButton("yMinus")->setHoverable(true);
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xPlus")->setHoverable(true);
-			screen->getButton("yPlus")->setHoverable(true);
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 
 			screen->getButton("freeze")->setTextContent(_fe3d->text3d_isFrozen(_activeText3dId) ? "Unfreeze" : "Freeze");

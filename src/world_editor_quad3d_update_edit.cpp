@@ -174,14 +174,8 @@ void WorldEditor::_updateQuad3dEditing()
 			_fe3d->quad3d_setRotation(_activeQuad3dId, rotation);
 			_fe3d->quad3d_setSize(_activeQuad3dId, size);
 
-			screen->getInputBox("x")->setHoverable(true);
-			screen->getInputBox("y")->setHoverable(true);
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xMinus")->setHoverable(true);
-			screen->getButton("yMinus")->setHoverable(true);
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xPlus")->setHoverable(true);
-			screen->getButton("yPlus")->setHoverable(true);
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 
 			screen->getButton("animation2d")->setTextContent(currentAnimation2dIds.empty() ? "Start Animation2D" : "Stop Animation2D");

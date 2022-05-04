@@ -249,17 +249,16 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	for(const auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
 	{
-		auto position = _fe3d->sound3d_getPosition(placedSound3dId);
-		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSound3dId);
-		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSound3dId);
+		auto position = _fe3d->aabb_getBasePosition(placedAabbId);
+		auto size = _fe3d->aabb_getBaseSize(placedAabbId);
 
 		file
-			<< "SOUND3D "
-			<< placedSound3dId
+			<< "AABB "
+			<< placedAabbId
 			<< " "
-			<< templateSound3dId
+			<< templateAabbId
 			<< " "
 			<< position.x
 			<< " "
@@ -267,9 +266,12 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< position.z
 			<< " "
-			<< maxVolume
+			<< size.x
 			<< " "
-			<< maxDistance
+			<< size.y
+			<< " "
+			<< size.z
+			<< " "
 			<< endl;
 	}
 
@@ -363,6 +365,30 @@ const bool WorldEditor::saveWorldToFile() const
 			<< position.z
 			<< " "
 			<< exceptionId
+			<< endl;
+	}
+
+	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	{
+		auto position = _fe3d->sound3d_getPosition(placedSound3dId);
+		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSound3dId);
+		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSound3dId);
+
+		file
+			<< "SOUND3D "
+			<< placedSound3dId
+			<< " "
+			<< templateSound3dId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< maxVolume
+			<< " "
+			<< maxDistance
 			<< endl;
 	}
 

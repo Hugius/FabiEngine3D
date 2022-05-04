@@ -274,6 +274,35 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setRotation(text3dId, rotation);
 			_fe3d->text3d_setSize(text3dId, size);
 		}
+		else if(lineType == "AABB")
+		{
+			string aabbId;
+			string templateId;
+			fvec3 position;
+			fvec3 size;
+
+			iss
+				>> aabbId
+				>> templateId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> size.x
+				>> size.y
+				>> size.z;
+
+			if(!_fe3d->aabb_isExisting(templateId))
+			{
+				continue;
+			}
+
+			_loadedAabbIds.insert({aabbId, templateId});
+
+			_worldHelper->copyTemplateAabb(aabbId, templateId);
+
+			_fe3d->aabb_setBasePosition(aabbId, position);
+			_fe3d->aabb_setBaseSize(aabbId, size);
+		}
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
@@ -479,7 +508,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec3 position;
 			fvec3 color;
 			float intensity;
-			float quad3dSize;
 
 			iss
 				>> position.x
@@ -488,8 +516,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> color.r
 				>> color.g
 				>> color.b
-				>> intensity
-				>> quad3dSize;
+				>> intensity;
 
 			_fe3d->graphics_setDirectionalLightingEnabled(true);
 			_fe3d->graphics_setDirectionalLightingPosition(position);

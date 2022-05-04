@@ -107,20 +107,11 @@ void WorldEditor::_updateAabbEditing()
 			{
 				_handleInputBox("aabbPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
 				_handleInputBox("aabbPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("aabbPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
 			}
 
 			_fe3d->aabb_setBasePosition(_activeAabbId, position);
 			_fe3d->aabb_setBaseSize(_activeAabbId, size);
-
-			screen->getInputBox("x")->setHoverable(true);
-			screen->getInputBox("y")->setHoverable(true);
-			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xMinus")->setHoverable(true);
-			screen->getButton("yMinus")->setHoverable(true);
-			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("xPlus")->setHoverable(true);
-			screen->getButton("yPlus")->setHoverable(true);
-			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 		}
 	}
 }

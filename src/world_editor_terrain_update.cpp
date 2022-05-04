@@ -47,6 +47,10 @@ void WorldEditor::_updateTerrainPlacingMenu()
 				_worldHelper->copyTemplateTerrain(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->terrain_select(hoveredOptionId.substr(1));
+
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuTerrain");
+
+				return;
 			}
 		}
 	}

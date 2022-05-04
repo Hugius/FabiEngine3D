@@ -215,6 +215,10 @@ void WorldEditor::_updateWorldCreating()
 		}
 
 		_currentWorldId = newWorldId;
+		_loadedWorldId = newWorldId;
+
+		_fe3d->misc_setVsyncEnabled(false);
+
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 	}
 }
@@ -240,6 +244,7 @@ void WorldEditor::_updateWorldChoosing()
 					if(loadWorldFromFile(_currentWorldId))
 					{
 						_fe3d->misc_setVsyncEnabled(false);
+
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
 				}

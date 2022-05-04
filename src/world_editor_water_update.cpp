@@ -57,6 +57,10 @@ void WorldEditor::_updateWaterPlacingMenu()
 				_worldHelper->copyTemplateWater(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->water_select(hoveredOptionId.substr(1));
+
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuWater");
+
+				return;
 			}
 		}
 	}

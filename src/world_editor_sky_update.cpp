@@ -47,6 +47,10 @@ void WorldEditor::_updateSkyPlacingMenu()
 				_worldHelper->copyTemplateSky(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->sky_select(hoveredOptionId.substr(1));
+
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSky");
+
+				return;
 			}
 		}
 	}

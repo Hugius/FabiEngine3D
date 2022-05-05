@@ -3,6 +3,7 @@
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
+#define SHADOW_BIAS 0.000001f
 
 in vec4 f_clipSpacePos;
 in vec4 f_shadowSpacePos;
@@ -431,8 +432,7 @@ float calculateShadows()
 					vec2 uvOffset = (vec2(x, y) * texelSize);
 
 					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
-
-					float lightness = ((uvCoords.z > depth) ? u_shadowLightness : 1.0f);
+					float lightness = (((uvCoords.z - SHADOW_BIAS) > depth) ? u_shadowLightness : 1.0f);
 
 					shadow += lightness;         
 				}    

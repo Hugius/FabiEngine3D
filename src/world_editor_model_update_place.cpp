@@ -11,20 +11,22 @@ void WorldEditor::_updateModelPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(value, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(newPosition.x, value, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
-
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
@@ -33,7 +35,7 @@ void WorldEditor::_updateModelPlacing()
 
 				_loadedModelIds.insert({newId, _currentTemplateModelId});
 
-				_fe3d->model_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->model_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 

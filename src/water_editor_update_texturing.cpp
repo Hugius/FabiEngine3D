@@ -131,9 +131,10 @@ void WaterEditor::_updateTexturingMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->water_setTextureRepeat(_currentWaterId, content);
+			_fe3d->water_setTextureRepeat(_currentWaterId, value);
 		}
 	}
 }

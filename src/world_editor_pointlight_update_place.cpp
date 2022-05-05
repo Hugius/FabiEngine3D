@@ -12,21 +12,24 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = ("pointlight_" + to_string(_idCounter));
 				const auto newModelId = ("@@pointlight_" + newId);
 
@@ -42,12 +45,12 @@ void WorldEditor::_updatePointlightPlacing()
 				_loadedPointlightIds.push_back(newId);
 
 				_fe3d->pointlight_create(newId);
-				_fe3d->pointlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->pointlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
 				_fe3d->model_create(newModelId, TEMPLATE_POINTLIGHT_MODEL_PATH);
-				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);

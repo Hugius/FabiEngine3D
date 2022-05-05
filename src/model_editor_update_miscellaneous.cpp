@@ -109,29 +109,33 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3((content / 100.0f), size.y, size.z));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3((value / 100.0f), size.y, size.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, (content / 100.0f), size.z));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, (value / 100.0f), size.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, size.y, (content / 100.0f)));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, size.y, (value / 100.0f)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			if(_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelId, _currentPartId, (content / 100.0f));
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, (value / 100.0f));
 			}
 			else
 			{
@@ -140,32 +144,34 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (content / 100.0f));
+			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (value / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailId") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = _gui->getOverlay()->getValueFormContent();
 
-			if(content.empty())
+			if(value.empty())
 			{
 				_fe3d->model_setLevelOfDetailId(_currentModelId, "");
 			}
-			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + content)) == _loadedModelIds.end())
+			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + value)) == _loadedModelIds.end())
 			{
 				Logger::throwWarning("LOD model does not exist");
 			}
 			else
 			{
-				_fe3d->model_setLevelOfDetailId(_currentModelId, ("@" + content));
+				_fe3d->model_setLevelOfDetailId(_currentModelId, ("@" + value));
 			}
 		}
 		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setLevelOfDetailDistance(_currentModelId, content);
+			_fe3d->model_setLevelOfDetailDistance(_currentModelId, value);
 		}
 
 		screen->getButton("isFaceCulled")->setTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");

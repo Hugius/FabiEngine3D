@@ -11,21 +11,24 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(content, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(newPosition.x, content, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
 				const auto newModelId = ("@@sound3d_" + newId);
 
@@ -36,13 +39,13 @@ void WorldEditor::_updateSound3dPlacing()
 				_worldHelper->copyTemplateSound2d(newId, _currentTemplateSound3dId);
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND3D_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
-				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);

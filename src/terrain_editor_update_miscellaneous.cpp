@@ -42,33 +42,38 @@ void TerrainEditor::_updateMiscellaneousMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "maxHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setMaxHeight(_currentTerrainId, content);
+			_fe3d->terrain_setMaxHeight(_currentTerrainId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->terrain_setTextureRepeat(_currentTerrainId, content);
+			_fe3d->terrain_setTextureRepeat(_currentTerrainId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "redTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->terrain_setRedTextureRepeat(_currentTerrainId, content);
+			_fe3d->terrain_setRedTextureRepeat(_currentTerrainId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "greenTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->terrain_setGreenTextureRepeat(_currentTerrainId, content);
+			_fe3d->terrain_setGreenTextureRepeat(_currentTerrainId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "blueTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->terrain_setBlueTextureRepeat(_currentTerrainId, content);
+			_fe3d->terrain_setBlueTextureRepeat(_currentTerrainId, value);
 		}
 	}
 }

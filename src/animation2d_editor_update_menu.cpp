@@ -114,21 +114,24 @@ void Animation2dEditor::_updateChoiceMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "rowCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->animation2d_setRowCount(_currentAnimation2dId, content);
+			_fe3d->animation2d_setRowCount(_currentAnimation2dId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "columnCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->animation2d_setColumnCount(_currentAnimation2dId, content);
+			_fe3d->animation2d_setColumnCount(_currentAnimation2dId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
-			_fe3d->animation2d_setInterval(_currentAnimation2dId, content);
+			_fe3d->animation2d_setInterval(_currentAnimation2dId, value);
 		}
 
 		screen->getButton("preview")->setHoverable(!isStarted);

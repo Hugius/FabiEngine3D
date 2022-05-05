@@ -44,45 +44,52 @@ void WaterEditor::_updateMiscellaneousMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setSize(_currentWaterId, content);
+			_fe3d->water_setSize(_currentWaterId, value);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "rippleSpeedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2((content / 100000.0f), rippleSpeed.y));
+			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2((value / 100000.0f), rippleSpeed.y));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "rippleSpeedY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2(rippleSpeed.x, (content / 100000.0f)));
+			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2(rippleSpeed.x, (value / 100000.0f)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "waveSpeedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2((content / 100000.0f), waveSpeed.y));
+			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2((value / 100000.0f), waveSpeed.y));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "waveSpeedY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2(waveSpeed.x, (content / 100000.0f)));
+			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2(waveSpeed.x, (value / 100000.0f)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "waveHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setWaveHeight(_currentWaterId, (content / 100.0f));
+			_fe3d->water_setWaveHeight(_currentWaterId, (value / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "maxDepth") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->water_setMaxDepth(_currentWaterId, content);
+			_fe3d->water_setMaxDepth(_currentWaterId, value);
 		}
 	}
 }

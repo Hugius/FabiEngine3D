@@ -12,21 +12,24 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_SPOTLIGHT_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = _gui->getOverlay()->getValueFormContent();
+				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = ("spotlight_" + to_string(_idCounter));
 				const auto newModelId = ("@@spotlight_" + newId);
 
@@ -42,14 +45,14 @@ void WorldEditor::_updateSpotlightPlacing()
 				_loadedSpotlightIds.push_back(newId);
 
 				_fe3d->spotlight_create(newId);
-				_fe3d->spotlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->spotlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->spotlight_setPitch(newId, DEFAULT_SPOTLIGHT_PITCH);
 				_fe3d->spotlight_setIntensity(newId, DEFAULT_SPOTLIGHT_INTENSITY);
 				_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
 				_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
 
 				_fe3d->model_create(newModelId, TEMPLATE_SPOTLIGHT_MODEL_PATH);
-				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);

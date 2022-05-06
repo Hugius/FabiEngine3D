@@ -24,9 +24,10 @@
 - All quad2Ds/text2Ds are rendered on top of each other.
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
 - The engine updates all logic at a fixed speed (144 updates per second), even if the FPS is higher/lower.
-- The maximum amount of messages in the logging console is 100.
 - Transparency in 2D space is based on the order of placed quad2Ds/text2Ds.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
 - Graphical effects that are set to low quality can flicker.
 - Internal engine updates happen after the scripting updates.
 - The messages of the logging console work like a FIFO (First In First Out) system.
+- The maximum amount of messages in the logging console is 100.
+- If a message is too long for the logging console, the full message can be found in the external console window.

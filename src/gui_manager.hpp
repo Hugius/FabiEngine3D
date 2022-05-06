@@ -9,7 +9,8 @@ class GuiManager final
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void initialize();
-	void update();
+	void updateOverlay();
+	void updateViewports();
 
 	const shared_ptr<GuiViewport> getLeftViewport();
 	const shared_ptr<GuiViewport> getRightViewport();

@@ -264,12 +264,14 @@ void EngineController::update()
 		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
-		_guiManager->update();
+		_guiManager->updateOverlay();
 
 		_leftViewportController->update();
 		_rightViewportController->update();
 		_bottomViewportController->update();
 		_topViewportController->update();
+
+		_guiManager->updateViewports();
 	}
 }
 

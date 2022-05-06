@@ -15,10 +15,13 @@ void GuiManager::initialize()
 	_topViewport = make_shared<GuiViewport>(_fe3d, "top", fvec2(0.0f, 0.95f), fvec2(2.0f, 0.1f), FRAME_COLOR);
 }
 
-void GuiManager::update()
+void GuiManager::updateOverlay()
 {
 	_overlay->update(true);
+}
 
+void GuiManager::updateViewports()
+{
 	_leftViewport->update(!_overlay->isFocused());
 	_rightViewport->update(!_overlay->isFocused());
 	_bottomViewport->update(!_overlay->isFocused());

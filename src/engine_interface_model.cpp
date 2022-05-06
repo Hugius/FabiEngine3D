@@ -196,6 +196,36 @@ void EngineInterface::model_setReflectionMap(const string & modelId, const strin
 	}
 }
 
+void EngineInterface::model_setRefractionMap(const string & modelId, const string & partId, const string & value)
+{
+	if(value.empty())
+	{
+		_core->getModelManager()->getModel(modelId)->setRefractionTextureBuffer(partId, 0);
+		_core->getModelManager()->getModel(modelId)->setRefractionMapPath(partId, "");
+	}
+	else
+	{
+		auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
+
+		if(texture == nullptr)
+		{
+			auto image = _core->getImageLoader()->loadImage(value);
+
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
+		}
+
+		_core->getModelManager()->getModel(modelId)->setRefractionTextureBuffer(partId, texture);
+		_core->getModelManager()->getModel(modelId)->setRefractionMapPath(partId, value);
+	}
+}
+
 void EngineInterface::model_setLevelOfDetailId(const string & modelId, const string & value)
 {
 	_core->getModelManager()->getModel(modelId)->setLevelOfDetailId(value);
@@ -539,6 +569,11 @@ const bool EngineInterface::model_hasReflectionMap(const string & modelId, const
 	return (_core->getModelManager()->getModel(modelId)->getReflectionTextureBuffer(partId) != nullptr);
 }
 
+const bool EngineInterface::model_hasRefractionMap(const string & modelId, const string & partId) const
+{
+	return (_core->getModelManager()->getModel(modelId)->getRefractionTextureBuffer(partId) != nullptr);
+}
+
 const bool EngineInterface::model_hasNormalMap(const string & modelId, const string & partId) const
 {
 	return (_core->getModelManager()->getModel(modelId)->getNormalTextureBuffer(partId) != nullptr);
@@ -712,6 +747,11 @@ const string & EngineInterface::model_getSpecularMapPath(const string & modelId,
 const string & EngineInterface::model_getReflectionMapPath(const string & modelId, const string & partId) const
 {
 	return _core->getModelManager()->getModel(modelId)->getReflectionMapPath(partId);
+}
+
+const string & EngineInterface::model_getRefractionMapPath(const string & modelId, const string & partId) const
+{
+	return _core->getModelManager()->getModel(modelId)->getRefractionMapPath(partId);
 }
 
 const string & EngineInterface::model_getNormalMapPath(const string & modelId, const string & partId) const

@@ -20,7 +20,8 @@ layout (location = 4) uniform sampler2D u_diffuseMap;
 layout (location = 5) uniform sampler2D u_emissionMap;
 layout (location = 6) uniform sampler2D u_specularMap;
 layout (location = 7) uniform sampler2D u_reflectionMap;
-layout (location = 8) uniform sampler2D u_normalMap;
+layout (location = 8) uniform sampler2D u_refractionMap;
+layout (location = 9) uniform sampler2D u_normalMap;
 
 uniform vec3 u_wireframeColor;
 uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
@@ -69,11 +70,13 @@ uniform bool u_isShadowCircleEnabled;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isReflectionsEnabled;
+uniform bool u_isRefractionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasEmissionMap;
 uniform bool u_hasReflectionMap;
+uniform bool u_hasRefractionMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasSpecularMap;
 uniform bool u_isBright;
@@ -85,6 +88,7 @@ vec3 calculateDiffuseMapping();
 vec3 calculateEmissionMapping();
 vec3 calculateSpecularMapping();
 vec3 calculateReflectionMapping();
+vec3 calculateRefractionMapping();
 vec3 calculateNormalMapping();
 vec3 calculateAmbientLighting();
 vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal);
@@ -110,6 +114,7 @@ void main()
 	vec3 emissionMapping = calculateEmissionMapping();
     vec3 specularMapping = calculateSpecularMapping();
     vec3 reflectionMapping = calculateReflectionMapping();
+	vec3 refractionMapping = calculateRefractionMapping();
     vec3 normalMapping = calculateNormalMapping();
 
 	float shadowLighting = calculateShadows();
@@ -217,6 +222,25 @@ vec3 calculateReflectionMapping()
 		}
 
 		return reflectionMapColor.rgb;
+	}
+	else
+	{
+		return vec3(1.0f);
+	}
+}
+
+vec3 calculateRefractionMapping()
+{
+    if(u_hasRefractionMap)
+    {
+		vec4 refractionMapColor = texture(u_refractionMap, f_uv);
+
+		if(refractionMapColor.a < u_minTextureAlpha)
+		{
+			return vec3(0.0f);
+		}
+
+		return refractionMapColor.rgb;
 	}
 	else
 	{

@@ -566,6 +566,23 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_set_refraction_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					_fe3d->model_setRefractionMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_set_normal_map")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};

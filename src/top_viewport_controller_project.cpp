@@ -60,6 +60,7 @@ void TopViewportController::_updateProjectCreating()
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\emission_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\normal_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\reflection_map\\");
+		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\refraction_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\specular_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\quad2d\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\quad2d\\diffuse_map\\");

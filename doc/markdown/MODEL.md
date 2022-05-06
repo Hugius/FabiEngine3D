@@ -16,6 +16,7 @@
 - Emission map
 - Specular map
 - Reflection map
+- Refraction map
 - Normal map
 
 ## 3. Base Properties
@@ -75,6 +76,9 @@
   - Type: `string`
   - Constraints: none
 - **Reflection Map Path**: the path of the reflection map file
+  - Type: `string`
+  - Constraints: none
+- **Refraction Map Path**: the path of the refraction map file
   - Type: `string`
   - Constraints: none
 - **Normal Map Path**: the path of the normal map file

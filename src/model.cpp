@@ -164,6 +164,11 @@ void Model::setReflectionTextureBuffer(const string & partId, shared_ptr<Texture
 	_parts.at(partId)->reflectionTextureBuffer = value;
 }
 
+void Model::setRefractionTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value)
+{
+	_parts.at(partId)->refractionTextureBuffer = value;
+}
+
 void Model::setNormalTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value)
 {
 	_parts.at(partId)->normalTextureBuffer = value;
@@ -332,6 +337,11 @@ void Model::setSpecularMapPath(const string & partId, const string & value)
 void Model::setReflectionMapPath(const string & partId, const string & value)
 {
 	_parts.at(partId)->reflectionMapPath = value;
+}
+
+void Model::setRefractionMapPath(const string & partId, const string & value)
+{
+	_parts.at(partId)->refractionMapPath = value;
 }
 
 void Model::setNormalMapPath(const string & partId, const string & value)
@@ -557,6 +567,11 @@ const shared_ptr<TextureBuffer> Model::getReflectionTextureBuffer(const string &
 	return _parts.at(partId)->reflectionTextureBuffer;
 }
 
+const shared_ptr<TextureBuffer> Model::getRefractionTextureBuffer(const string & partId) const
+{
+	return _parts.at(partId)->refractionTextureBuffer;
+}
+
 const shared_ptr<TextureBuffer> Model::getNormalTextureBuffer(const string & partId) const
 {
 	return _parts.at(partId)->normalTextureBuffer;
@@ -660,6 +675,11 @@ const string & Model::getSpecularMapPath(const string & partId) const
 const string & Model::getReflectionMapPath(const string & partId) const
 {
 	return _parts.at(partId)->reflectionMapPath;
+}
+
+const string & Model::getRefractionMapPath(const string & partId) const
+{
+	return _parts.at(partId)->refractionMapPath;
 }
 
 const string & Model::getNormalMapPath(const string & partId) const

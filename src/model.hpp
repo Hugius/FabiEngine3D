@@ -36,6 +36,7 @@ public:
 	void setEmissionTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value);
 	void setSpecularTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value);
 	void setReflectionTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value);
+	void setRefractionTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value);
 	void setNormalTextureBuffer(const string & partId, shared_ptr<TextureBuffer> value);
 	void setBasePosition(const fvec3 & value);
 	void setBaseRotation(const fvec3 & value);
@@ -64,6 +65,7 @@ public:
 	void setEmissionMapPath(const string & partId, const string & value);
 	void setSpecularMapPath(const string & partId, const string & value);
 	void setReflectionMapPath(const string & partId, const string & value);
+	void setRefractionMapPath(const string & partId, const string & value);
 	void setNormalMapPath(const string & partId, const string & value);
 	void setReflectivity(const string & partId, float value);
 	void setLightness(const string & partId, float value);
@@ -88,6 +90,7 @@ public:
 	const shared_ptr<TextureBuffer> getEmissionTextureBuffer(const string & partId) const;
 	const shared_ptr<TextureBuffer> getSpecularTextureBuffer(const string & partId) const;
 	const shared_ptr<TextureBuffer> getReflectionTextureBuffer(const string & partId) const;
+	const shared_ptr<TextureBuffer> getRefractionTextureBuffer(const string & partId) const;
 	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string & partId) const;
 
 	const string & getId() const;
@@ -99,6 +102,7 @@ public:
 	const string & getEmissionMapPath(const string & partId) const;
 	const string & getSpecularMapPath(const string & partId) const;
 	const string & getReflectionMapPath(const string & partId) const;
+	const string & getRefractionMapPath(const string & partId) const;
 	const string & getNormalMapPath(const string & partId) const;
 
 	const mat44 & getTransformation(const string & partId) const;

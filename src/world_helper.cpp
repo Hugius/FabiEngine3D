@@ -179,6 +179,11 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 			_fe3d->model_setReflectionMap(newId, partId, _fe3d->model_getReflectionMapPath(templateId, partId));
 		}
 
+		if(_fe3d->model_hasRefractionMap(templateId, partId))
+		{
+			_fe3d->model_setRefractionMap(newId, partId, _fe3d->model_getRefractionMapPath(templateId, partId));
+		}
+
 		if(_fe3d->model_hasNormalMap(templateId, partId))
 		{
 			_fe3d->model_setNormalMap(newId, partId, _fe3d->model_getNormalMapPath(templateId, partId));

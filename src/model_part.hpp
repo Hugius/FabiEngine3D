@@ -15,12 +15,14 @@ class ModelPart final
 	shared_ptr<TextureBuffer> emissionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> specularTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> reflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> refractionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> normalTextureBuffer = nullptr;
 
 	string diffuseMapPath = "";
 	string emissionMapPath = "";
 	string specularMapPath = "";
 	string reflectionMapPath = "";
+	string refractionMapPath = "";
 	string normalMapPath = "";
 
 	mat44 transformation = mat44(1.0f);

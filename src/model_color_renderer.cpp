@@ -27,7 +27,7 @@ void ModelColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_isAmbientLightingEnabled", _renderStorage->isAmbientLightingEnabled());
 	_shaderBuffer->uploadUniform("u_isDirectionalLightingEnabled", _renderStorage->isDirectionalLightingEnabled());
 	_shaderBuffer->uploadUniform("u_isReflectionsEnabled", _renderStorage->isReflectionsEnabled());
-	//_shader->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
+	_shaderBuffer->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
 	_shaderBuffer->uploadUniform("u_shadowSize", _renderStorage->getShadowSize());
 	_shaderBuffer->uploadUniform("u_shadowLookat", _renderStorage->getShadowLookat());
 	_shaderBuffer->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());
@@ -41,7 +41,8 @@ void ModelColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_emissionMap", 5);
 	_shaderBuffer->uploadUniform("u_specularMap", 6);
 	_shaderBuffer->uploadUniform("u_reflectionMap", 7);
-	_shaderBuffer->uploadUniform("u_normalMap", 8);
+	_shaderBuffer->uploadUniform("u_refractionMap", 8);
+	_shaderBuffer->uploadUniform("u_normalMap", 9);
 
 	if(_renderStorage->getPlanarReflectionTextureBuffer() != nullptr)
 	{
@@ -189,6 +190,7 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		_shaderBuffer->uploadUniform("u_hasEmissionMap", (model->getEmissionTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_hasSpecularMap", (model->getSpecularTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_hasReflectionMap", (model->getReflectionTextureBuffer(partId) != nullptr));
+		_shaderBuffer->uploadUniform("u_hasRefractionMap", (model->getRefractionTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_hasNormalMap", (model->getNormalTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_transformation", model->getTransformation(partId));
 		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(model->getTransformation(partId)))));
@@ -226,9 +228,14 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, model->getReflectionTextureBuffer(partId)->getTboId());
 		}
-		if(model->getNormalTextureBuffer(partId) != nullptr)
+		if(model->getRefractionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
+			glBindTexture(GL_TEXTURE_2D, model->getRefractionTextureBuffer(partId)->getTboId());
+		}
+		if(model->getNormalTextureBuffer(partId) != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, model->getNormalTextureBuffer(partId)->getTboId());
 		}
 
@@ -251,17 +258,22 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		}
 		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE5);
+			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE6);
+			glActiveTexture(GL_TEXTURE7);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if(model->getRefractionTextureBuffer(partId) != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE7);
+			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

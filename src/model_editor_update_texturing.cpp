@@ -15,6 +15,7 @@ void ModelEditor::_updateTexturingMenu()
 		const auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelId, _currentPartId) : false);
 		const auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelId, _currentPartId) : false);
 		const auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelId, _currentPartId) : false);
+		const auto hasRefractionMap = (isPartSelected ? _fe3d->model_hasRefractionMap(_currentModelId, _currentPartId) : false);
 		const auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelId, _currentPartId) : false);
 		const auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelId, _currentPartId) : 0);
 
@@ -160,6 +161,40 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("refractionMap")->isHovered())
+		{
+			if(getCurrentProjectId().empty())
+			{
+				abort();
+			}
+
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\model\\refraction_map\\");
+
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
+				return;
+			}
+
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+			if(filePath.empty())
+			{
+				return;
+			}
+
+			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
+				return;
+			}
+
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->model_setRefractionMap(_currentModelId, _currentPartId, finalFilePath);
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
@@ -200,6 +235,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, "");
 			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, "");
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, "");
+			_fe3d->model_setRefractionMap(_currentModelId, _currentPartId, "");
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
@@ -219,6 +255,7 @@ void ModelEditor::_updateTexturingMenu()
 		screen->getButton("emissionMap")->setHoverable(isPartSelected);
 		screen->getButton("specularMap")->setHoverable(isPartSelected);
 		screen->getButton("reflectionMap")->setHoverable(isPartSelected);
+		screen->getButton("refractionMap")->setHoverable(isPartSelected);
 		screen->getButton("normalMap")->setHoverable(isPartSelected);
 		screen->getButton("clearMaps")->setHoverable(isPartSelected);
 		screen->getButton("textureRepeat")->setHoverable(isPartSelected);

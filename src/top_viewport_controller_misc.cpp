@@ -136,6 +136,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\emission_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\normal_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\reflection_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\refraction_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\specular_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\quad2d\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\quad2d\\diffuse_map\\");

@@ -223,6 +223,7 @@ public:
 	void model_setEmissionMap(const string & modelId, const string & partId, const string & value);
 	void model_setSpecularMap(const string & modelId, const string & partId, const string & value);
 	void model_setReflectionMap(const string & modelId, const string & partId, const string & value);
+	void model_setRefractionMap(const string & modelId, const string & partId, const string & value);
 	void model_setNormalMap(const string & modelId, const string & partId, const string & value);
 	void model_setLevelOfDetailId(const string & modelId, const string & value);
 	void model_setFaceCulled(const string & modelId, const string & partId, bool value);
@@ -285,6 +286,7 @@ public:
 	const string & model_getEmissionMapPath(const string & modelId, const string & partId) const;
 	const string & model_getSpecularMapPath(const string & modelId, const string & partId) const;
 	const string & model_getReflectionMapPath(const string & modelId, const string & partId) const;
+	const string & model_getRefractionMapPath(const string & modelId, const string & partId) const;
 	const string & model_getNormalMapPath(const string & modelId, const string & partId) const;
 	const string & model_getLevelOfDetailId(const string & modelId) const;
 	const fvec3 & model_getBasePosition(const string & modelId) const;
@@ -327,6 +329,7 @@ public:
 	const bool model_hasEmissionMap(const string & modelId, const string & partId) const;
 	const bool model_hasSpecularMap(const string & modelId, const string & partId) const;
 	const bool model_hasReflectionMap(const string & modelId, const string & partId) const;
+	const bool model_hasRefractionMap(const string & modelId, const string & partId) const;
 	const bool model_hasNormalMap(const string & modelId, const string & partId) const;
 	const bool model_isAnimationStarted(const string & modelId, const string & animation3dId) const;
 	const bool model_isAnimationPaused(const string & modelId, const string & animation3dId) const;

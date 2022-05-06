@@ -75,10 +75,10 @@ uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasEmissionMap;
+uniform bool u_hasSpecularMap;
 uniform bool u_hasReflectionMap;
 uniform bool u_hasRefractionMap;
 uniform bool u_hasNormalMap;
-uniform bool u_hasSpecularMap;
 uniform bool u_isBright;
 
 layout (location = 0) out vec4 o_primaryColor;

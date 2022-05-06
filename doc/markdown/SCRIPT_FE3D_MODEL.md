@@ -41,6 +41,7 @@
 - `fe3d:model_set_emission_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_specular_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_reflection_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_refraction_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_normal_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_wireframe_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
@@ -85,6 +86,7 @@
 - `fe3d:model_has_emission_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_specular_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_reflection_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_has_refraction_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_normal_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_get_ids` () -----> `LIST`
 - `fe3d:model_get_base_position_x` (`STR` id) -----> `DEC`
@@ -137,6 +139,7 @@
 - `fe3d:model_get_emission_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_specular_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_reflection_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_refraction_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_normal_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_min_texture_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`

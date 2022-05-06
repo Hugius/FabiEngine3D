@@ -73,6 +73,7 @@ const bool ModelEditor::saveModelsToFile() const
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
 			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelId, partId);
 			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(modelId, partId);
+			auto refractionMapPath = _fe3d->model_getRefractionMapPath(modelId, partId);
 			auto normalMapPath = _fe3d->model_getNormalMapPath(modelId, partId);
 			auto isSpecular = _fe3d->model_isSpecular(modelId, partId);
 			auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
@@ -93,6 +94,7 @@ const bool ModelEditor::saveModelsToFile() const
 			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 			specularMapPath = (specularMapPath.empty() ? "" : specularMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 			reflectionMapPath = (reflectionMapPath.empty() ? "" : reflectionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			refractionMapPath = (refractionMapPath.empty() ? "" : refractionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 			normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 			partId = (partId.empty()) ? "?" : partId;
@@ -100,12 +102,14 @@ const bool ModelEditor::saveModelsToFile() const
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 			specularMapPath = (specularMapPath.empty()) ? "?" : specularMapPath;
 			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
+			refractionMapPath = (refractionMapPath.empty()) ? "?" : refractionMapPath;
 			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 			replace(specularMapPath.begin(), specularMapPath.end(), ' ', '?');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
+			replace(refractionMapPath.begin(), refractionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 			file
@@ -121,6 +125,8 @@ const bool ModelEditor::saveModelsToFile() const
 				<< specularMapPath
 				<< " "
 				<< reflectionMapPath
+				<< " "
+				<< refractionMapPath
 				<< " "
 				<< normalMapPath
 				<< " "

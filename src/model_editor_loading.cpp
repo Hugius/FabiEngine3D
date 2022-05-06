@@ -101,6 +101,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 			string emissionMapPath;
 			string specularMapPath;
 			string reflectionMapPath;
+			string refractionMapPath;
 			string normalMapPath;
 
 			iss
@@ -110,6 +111,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				>> emissionMapPath
 				>> specularMapPath
 				>> reflectionMapPath
+				>> refractionMapPath
 				>> normalMapPath;
 
 			partId = (partId == "?") ? "" : partId;
@@ -117,12 +119,14 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 			specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			refractionMapPath = (refractionMapPath == "?") ? "" : refractionMapPath;
 			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 			replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(refractionMapPath.begin(), refractionMapPath.end(), '?', ' ');
 			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 			if(!diffuseMapPath.empty())
@@ -163,6 +167,16 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				}
 
 				imagePaths.push_back(reflectionMapPath);
+			}
+
+			if(!refractionMapPath.empty())
+			{
+				if(!Configuration::getInst().isApplicationExported())
+				{
+					refractionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + refractionMapPath);
+				}
+
+				imagePaths.push_back(refractionMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -266,6 +280,7 @@ const bool ModelEditor::loadModelsFromFile()
 			string emissionMapPath;
 			string specularMapPath;
 			string reflectionMapPath;
+			string refractionMapPath;
 			string normalMapPath;
 			fvec3 color;
 			float specularShininess;
@@ -289,6 +304,7 @@ const bool ModelEditor::loadModelsFromFile()
 				>> emissionMapPath
 				>> specularMapPath
 				>> reflectionMapPath
+				>> refractionMapPath
 				>> normalMapPath
 				>> reflectionType
 				>> isSpecular
@@ -312,12 +328,14 @@ const bool ModelEditor::loadModelsFromFile()
 			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 			specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			refractionMapPath = (refractionMapPath == "?") ? "" : refractionMapPath;
 			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 			replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(refractionMapPath.begin(), refractionMapPath.end(), '?', ' ');
 			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 			if(!_fe3d->model_isExisting(modelId))
@@ -383,6 +401,16 @@ const bool ModelEditor::loadModelsFromFile()
 				}
 
 				_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
+			}
+
+			if(!refractionMapPath.empty())
+			{
+				if(!Configuration::getInst().isApplicationExported())
+				{
+					refractionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + refractionMapPath);
+				}
+
+				_fe3d->model_setRefractionMap(modelId, partId, refractionMapPath);
 			}
 
 			if(!normalMapPath.empty())

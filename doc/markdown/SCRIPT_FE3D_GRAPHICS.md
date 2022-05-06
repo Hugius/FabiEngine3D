@@ -8,7 +8,10 @@
 - `fe3d:graphics_set_directional_lighting_enabled` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_directional_lighting_color` (`DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:graphics_set_directional_lighting_intensity` (`DEC` value) -----> `NONE`
+- `fe3d:graphics_set_cube_reflection_interval` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_cube_reflection_quality` (`INT` value) -----> `NONE`
+- `fe3d:graphics_set_cube_refraction_interval` (`INT` value) -----> `NONE`
+- `fe3d:graphics_set_cube_refraction_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_planar_reflection_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_planar_refraction_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_planar_reflection_height` (`DEC` value) -----> `NONE`
@@ -78,7 +81,10 @@
 - `fe3d:graphics_get_directional_lighting_color_g` () -----> `DEC`
 - `fe3d:graphics_get_directional_lighting_color_b` () -----> `DEC`
 - `fe3d:graphics_get_directional_lighting_intensity` () -----> `DEC`
+- `fe3d:graphics_get_cube_reflection_interval` () -----> `INT`
 - `fe3d:graphics_get_cube_reflection_quality` () -----> `INT`
+- `fe3d:graphics_get_cube_refraction_interval` () -----> `INT`
+- `fe3d:graphics_get_cube_refraction_quality` () -----> `INT`
 - `fe3d:graphics_get_planar_reflection_quality` () -----> `INT`
 - `fe3d:graphics_get_planar_refraction_quality` () -----> `INT`
 - `fe3d:graphics_get_planar_reflection_height` () -----> `DEC`

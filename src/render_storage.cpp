@@ -263,6 +263,11 @@ void RenderStorage::setCubeReflectionQuality(int value)
 	_cubeReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
 }
 
+void RenderStorage::setCubeRefractionQuality(int value)
+{
+	_cubeRefractionQuality = clamp(value, MIN_REFRACTION_QUALITY, MAX_REFRACTION_QUALITY);
+}
+
 void RenderStorage::setPlanarReflectionQuality(int value)
 {
 	_planarReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
@@ -416,6 +421,11 @@ void RenderStorage::setShadowsFollowingCameraZ(bool value)
 void RenderStorage::setCubeReflectionInterval(int value)
 {
 	_cubeReflectionInterval = max(0, value);
+}
+
+void RenderStorage::setCubeRefractionInterval(int value)
+{
+	_cubeRefractionInterval = max(0, value);
 }
 
 const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionTextureBuffer() const
@@ -678,6 +688,11 @@ const int RenderStorage::getCubeReflectionInterval() const
 	return _cubeReflectionInterval;
 }
 
+const int RenderStorage::getCubeRefractionInterval() const
+{
+	return _cubeRefractionInterval;
+}
+
 const int RenderStorage::getShadowQuality() const
 {
 	return _shadowQuality;
@@ -686,6 +701,11 @@ const int RenderStorage::getShadowQuality() const
 const int RenderStorage::getCubeReflectionQuality() const
 {
 	return _cubeReflectionQuality;
+}
+
+const int RenderStorage::getCubeRefractionQuality() const
+{
+	return _cubeRefractionQuality;
 }
 
 const int RenderStorage::getPlanarReflectionQuality() const

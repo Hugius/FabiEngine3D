@@ -72,12 +72,12 @@
 
 #### 1.6.2 Properties
 
-- **Quality**: the quality of cube reflections
-  - Type: `integer`
-  - Constraints: between `128` and `1024`
 - **Interval**: the amount of engine updates between model adaptions
   - Type: `integer`
   - Constraints: at least `0`
+- **Quality**: the quality of cube reflections
+  - Type: `integer`
+  - Constraints: between `128` and `1024`
 
 ### 1.7 Planar Reflections
 

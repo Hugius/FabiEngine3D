@@ -779,6 +779,8 @@ public:
 	void graphics_setLensFlareEnabled(bool value);
 	void graphics_setCubeReflectionInterval(int value);
 	void graphics_setCubeReflectionQuality(int value);
+	void graphics_setCubeRefractionInterval(int value);
+	void graphics_setCubeRefractionQuality(int value);
 	void graphics_setPlanarReflectionQuality(int value);
 	void graphics_setPlanarRefractionQuality(int value);
 	void graphics_setAnisotropicFilteringQuality(int value);
@@ -846,7 +848,10 @@ public:
 	const int graphics_getMotionBlurQuality() const;
 	const int graphics_getAnisotropicFilteringQuality() const;
 	const int graphics_getShadowQuality() const;
+	const int graphics_getCubeReflectionInterval() const;
 	const int graphics_getCubeReflectionQuality() const;
+	const int graphics_getCubeRefractionInterval() const;
+	const int graphics_getCubeRefractionQuality() const;
 	const int graphics_getPlanarReflectionQuality() const;
 	const int graphics_getPlanarRefractionQuality() const;
 	const int graphics_getBloomBlurCount() const;

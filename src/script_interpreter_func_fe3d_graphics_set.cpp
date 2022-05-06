@@ -72,6 +72,17 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:graphics_set_cube_reflection_interval")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setCubeReflectionInterval(args[0]->getInteger());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:graphics_set_cube_reflection_quality")
 	{
 		auto types = {SVT::INTEGER};
@@ -79,6 +90,28 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->graphics_setCubeReflectionQuality(args[0]->getInteger());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:graphics_set_cube_refraction_interval")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setCubeRefractionInterval(args[0]->getInteger());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:graphics_set_cube_refraction_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setCubeRefractionQuality(args[0]->getInteger());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

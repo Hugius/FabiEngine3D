@@ -145,6 +145,11 @@ void RenderStorage::setPlanarReflectionHeight(float value)
 	_planarReflectionHeight = value;
 }
 
+void RenderStorage::setPlanarRefractionHeight(float value)
+{
+	_planarRefractionHeight = max(0.0f, value);
+}
+
 void RenderStorage::setShadowSize(float value)
 {
 	_shadowSize = max(0.0f, value);
@@ -566,6 +571,11 @@ const fvec3 & RenderStorage::getDirectionalLightingColor() const
 const float RenderStorage::getPlanarReflectionHeight() const
 {
 	return _planarReflectionHeight;
+}
+
+const float RenderStorage::getPlanarRefractionHeight() const
+{
+	return _planarRefractionHeight;
 }
 
 const float RenderStorage::getShadowSize() const

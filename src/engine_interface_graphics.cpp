@@ -71,6 +71,11 @@ void EngineInterface::graphics_setPlanarReflectionHeight(float value)
 	_core->getRenderStorage()->setPlanarReflectionHeight(value);
 }
 
+void EngineInterface::graphics_setPlanarRefractionHeight(float value)
+{
+	_core->getRenderStorage()->setPlanarRefractionHeight(value);
+}
+
 void EngineInterface::graphics_setBloomQuality(int value)
 {
 	_core->getRenderStorage()->setBloomQuality(value);
@@ -461,6 +466,11 @@ const fvec3 & EngineInterface::graphics_getFogColor() const
 const float EngineInterface::graphics_getPlanarReflectionHeight() const
 {
 	return _core->getRenderStorage()->getPlanarReflectionHeight();
+}
+
+const float EngineInterface::graphics_getPlanarRefractionHeight() const
+{
+	return _core->getRenderStorage()->getPlanarRefractionHeight();
 }
 
 const fvec3 & EngineInterface::graphics_getShadowPositionOffset() const

@@ -138,7 +138,14 @@
 - Recommended bit depth: **24**
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
-### 4.11 Specular Map
+### 4.11 Refraction Map
+
+<img src="../image/refraction_map.png" width="25%"/>
+
+- Recommended bit depth: **24**
+- Refraction maps are used to specify which parts of a mesh are refractive.
+
+### 4.12 Specular Map
 
 <img src="../image/specular_map.png" width="25%"/>
 

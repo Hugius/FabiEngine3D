@@ -79,15 +79,32 @@
   - Type: `integer`
   - Constraints: between `128` and `1024`
 
-### 1.7 Planar Reflections
+### 1.7 Cube Refractions
 
 #### 1.7.1 General
+
+- Cube reflections are reflections based on pre-captured cube maps.
+- The reflections are static, but very efficient.
+- Normal vectors are used to render this type of reflection.
+
+#### 1.7.2 Properties
+
+- **Interval**: the amount of engine updates between model adaptions
+  - Type: `integer`
+  - Constraints: at least `0`
+- **Quality**: the quality of cube refractions
+  - Type: `integer`
+  - Constraints: between `128` and `1024`
+
+### 1.8 Planar Reflections
+
+#### 1.8.1 General
 
 - Planar reflections are real-time reflections rendered on flat surfaces.
 - The reflections are performance-heavy, but very realistic.
 - Projective texturing is used to render this type of reflection.
 
-#### 1.7.2 Properties
+#### 1.8.2 Properties
 
 - **Height**: the Y coordinate from which planar reflections are captured
   - Type: `decimal`
@@ -96,28 +113,31 @@
   - Type: `integer`
   - Constraints: between `128` and `1024`
 
-### 1.8 Planar Refractions
+### 1.98 Planar Refractions
 
-#### 1.8.1 General
+#### 1.9.1 General
 
 - Planar refractions are real-time refractions rendered on flat surfaces.
 - The refractions are performance-heavy, but very realistic.
 - Projective texturing is used to render this type of refraction.
 
-#### 1.8.2 Properties
+#### 1.9.2 Properties
 
+- **Height**: the Y coordinate from which planar refractions are captured
+  - Type: `decimal`
+  - Constraints: none
 - **Quality**: the quality of planar refractions
   - Type: `integer`
   - Constraints: between `128` and `1024`
 
-### 1.9 Shadows
+### 1.10 Shadows
 
-#### 1.9.1 General
+#### 1.10.1 General
 
 - Shadows are cast from a directional shadow source.
 - Shadow mapping is used to render this type of lighting.
 
-#### 1.9.2 Properties
+#### 1.10.2 Properties
 
 - **Position**: the position of the shadow source
   - Type: `decimal3`

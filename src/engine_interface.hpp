@@ -819,6 +819,7 @@ public:
 	void graphics_setLensFlareIntensity(float value);
 	void graphics_setLensFlareSensitivity(float value);
 	void graphics_setPlanarReflectionHeight(float value);
+	void graphics_setPlanarRefractionHeight(float value);
 
 	const string & graphics_getLensFlareMapPath() const;
 	const fvec3 & graphics_getDirectionalLightingPosition() const;
@@ -833,6 +834,7 @@ public:
 	const float graphics_getFogMaxDistance() const;
 	const float graphics_getFogThickness() const;
 	const float graphics_getPlanarReflectionHeight() const;
+	const float graphics_getPlanarRefractionHeight() const;
 	const float graphics_getShadowSize() const;
 	const float graphics_getShadowLightness() const;
 	const float graphics_getBloomIntensity() const;

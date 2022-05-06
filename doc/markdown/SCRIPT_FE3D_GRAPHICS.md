@@ -12,9 +12,10 @@
 - `fe3d:graphics_set_cube_reflection_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_cube_refraction_interval` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_cube_refraction_quality` (`INT` value) -----> `NONE`
-- `fe3d:graphics_set_planar_reflection_quality` (`INT` value) -----> `NONE`
-- `fe3d:graphics_set_planar_refraction_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_planar_reflection_height` (`DEC` value) -----> `NONE`
+- `fe3d:graphics_set_planar_reflection_quality` (`INT` value) -----> `NONE`
+- `fe3d:graphics_set_planar_refraction_height` (`DEC` value) -----> `NONE`
+- `fe3d:graphics_set_planar_refraction_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_shadows_enabled` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_position` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:graphics_set_shadow_lookat` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
@@ -85,9 +86,10 @@
 - `fe3d:graphics_get_cube_reflection_quality` () -----> `INT`
 - `fe3d:graphics_get_cube_refraction_interval` () -----> `INT`
 - `fe3d:graphics_get_cube_refraction_quality` () -----> `INT`
-- `fe3d:graphics_get_planar_reflection_quality` () -----> `INT`
-- `fe3d:graphics_get_planar_refraction_quality` () -----> `INT`
 - `fe3d:graphics_get_planar_reflection_height` () -----> `DEC`
+- `fe3d:graphics_get_planar_reflection_quality` () -----> `INT`
+- `fe3d:graphics_get_planar_refraction_height` () -----> `DEC`
+- `fe3d:graphics_get_planar_refraction_quality` () -----> `INT`
 - `fe3d:graphics_get_shadow_position_x` () -----> `DEC`
 - `fe3d:graphics_get_shadow_position_y` () -----> `DEC`
 - `fe3d:graphics_get_shadow_position_z` () -----> `DEC`

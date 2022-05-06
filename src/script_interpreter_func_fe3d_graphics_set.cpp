@@ -116,6 +116,17 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:graphics_set_planar_reflection_height")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setPlanarReflectionHeight(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:graphics_set_planar_reflection_quality")
 	{
 		auto types = {SVT::INTEGER};
@@ -127,6 +138,17 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:graphics_set_planar_refraction_height")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setPlanarRefractionHeight(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:graphics_set_planar_refraction_quality")
 	{
 		auto types = {SVT::INTEGER};
@@ -134,17 +156,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->graphics_setPlanarRefractionQuality(args[0]->getInteger());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_set_planar_reflection_height")
-	{
-		auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->graphics_setPlanarReflectionHeight(args[0]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

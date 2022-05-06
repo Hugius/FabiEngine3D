@@ -51,6 +51,7 @@ public:
 	void setDofDynamicDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
+	void setPlanarRefractionHeight(float value);
 	void setShadowSize(float value);
 	void setShadowLightness(float value);
 	void setLensFlareOpacity(float value);
@@ -141,6 +142,7 @@ public:
 	const float getDofDynamicDistance() const;
 	const float getDofBlurDistance() const;
 	const float getPlanarReflectionHeight() const;
+	const float getPlanarRefractionHeight() const;
 	const float getShadowSize() const;
 	const float getShadowLightness() const;
 	const float getLensFlareOpacity() const;
@@ -263,6 +265,7 @@ private:
 	float _dofDynamicDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
 	float _planarReflectionHeight = 0.0f;
+	float _planarRefractionHeight = 0.0f;
 	float _shadowSize = 0.0f;
 	float _shadowLightness = 0.0f;
 	float _lensFlareOpacity = 0.0f;

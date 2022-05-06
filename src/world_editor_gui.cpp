@@ -217,17 +217,21 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("quality", fvec2(0.0f, positions[9]), TEXT_SIZE("Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("back", fvec2(0.0f, positions[10]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(4, CH, false);
+	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	rightWindow->createScreen("worldEditorMenuSettingsGraphicsReflections");
-	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("planarHeight", fvec2(0.0f, positions[0]), TEXT_SIZE("Planar Height"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Height", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("cubeInterval", fvec2(0.0f, positions[0]), TEXT_SIZE("Cube Interval"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Cube Interval", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("cubeQuality", fvec2(0.0f, positions[1]), TEXT_SIZE("Cube Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Cube Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("planarQuality", fvec2(0.0f, positions[2]), TEXT_SIZE("Planar Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("planarHeight", fvec2(0.0f, positions[2]), TEXT_SIZE("Planar Height"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Height", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("planarQuality", fvec2(0.0f, positions[3]), TEXT_SIZE("Planar Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(2, CH, false);
+	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	rightWindow->createScreen("worldEditorMenuSettingsGraphicsRefractions");
-	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("planarQuality", fvec2(0.0f, positions[0]), TEXT_SIZE("Planar Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("back", fvec2(0.0f, positions[1]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("cubeInterval", fvec2(0.0f, positions[0]), TEXT_SIZE("Cube Interval"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Interval", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("cubeQuality", fvec2(0.0f, positions[1]), TEXT_SIZE("Cube Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("planarHeight", fvec2(0.0f, positions[2]), TEXT_SIZE("Planar Height"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Height", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("planarQuality", fvec2(0.0f, positions[3]), TEXT_SIZE("Planar Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Planar Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(6, CH, false);
 	rightWindow->createScreen("worldEditorMenuSettingsGraphicsDof");

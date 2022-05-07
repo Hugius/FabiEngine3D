@@ -70,4 +70,6 @@ private:
 	float _originalPartOpacity = 0.0f;
 
 	int _selectedPartHighlightDirection = 1;
+
+	bool _isSkyHovered = false;
 };

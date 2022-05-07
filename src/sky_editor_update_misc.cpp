@@ -91,21 +91,30 @@ void SkyEditor::_updateSkyCreating()
 
 void SkyEditor::_updateSkyChoosing()
 {
+	if(_isSkyHovered)
+	{
+		_fe3d->sky_select("");
+
+		_isSkyHovered = false;
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editSky") || (_gui->getOverlay()->getChoiceFormId() == "deleteSky"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
+		if(!selectedOptionId.empty())
 		{
-			_fe3d->sky_select("");
-		}
-		else
-		{
-			_fe3d->sky_select("@" + selectedOptionId);
+			if(!_isSkyHovered)
+			{
+				_isSkyHovered = true;
+
+				_fe3d->sky_select("@" + selectedOptionId);
+			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentSkyId = _fe3d->sky_getSelectedId();
+				_isSkyHovered = false;
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteSky")
 				{

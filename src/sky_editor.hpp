@@ -36,4 +36,6 @@ private:
 	vector <string> _loadedSkyIds = {};
 
 	string _currentSkyId = "";
+
+	bool _isSkyHovered = false;
 };

@@ -251,20 +251,18 @@ void Animation3dEditor::_updateAnimation3dDeleting()
 
 void Animation3dEditor::_updateModelChoosing()
 {
+	if(!_hoveredModelId.empty())
+	{
+		_fe3d->model_setVisible(_hoveredModelId, false);
+
+		_hoveredModelId = "";
+	}
+
 	if(_gui->getOverlay()->getChoiceFormId() == "selectModel")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
-
-				_hoveredModelId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredModelId.empty())
 			{
@@ -315,20 +313,18 @@ void Animation3dEditor::_updateModelChoosing()
 
 void Animation3dEditor::_updatePartChoosing()
 {
+	if(!_hoveredPartId.empty())
+	{
+		_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
+
+		_hoveredPartId = "";
+	}
+
 	if(_gui->getOverlay()->getChoiceFormId() == "selectPart")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredPartId.empty())
-			{
-				_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
-
-				_hoveredPartId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredPartId.empty())
 			{

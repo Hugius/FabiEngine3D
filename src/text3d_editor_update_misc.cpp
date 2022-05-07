@@ -135,20 +135,18 @@ void Text3dEditor::_updateText3dCreating()
 
 void Text3dEditor::_updateText3dChoosing()
 {
+	if(!_hoveredText3dId.empty())
+	{
+		_fe3d->text3d_setVisible(_hoveredText3dId, false);
+
+		_hoveredText3dId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editText3d") || (_gui->getOverlay()->getChoiceFormId() == "deleteText3d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredText3dId.empty())
-			{
-				_fe3d->text3d_setVisible(_hoveredText3dId, false);
-
-				_hoveredText3dId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredText3dId.empty())
 			{

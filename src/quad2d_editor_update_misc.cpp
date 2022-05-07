@@ -77,20 +77,18 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 void Quad2dEditor::_updateQuad2dChoosing()
 {
+	if(!_hoveredQuad2dId.empty())
+	{
+		_fe3d->quad2d_setVisible(_hoveredQuad2dId, false);
+
+		_hoveredQuad2dId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editQuad2d") || (_gui->getOverlay()->getChoiceFormId() == "deleteQuad2d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredQuad2dId.empty())
-			{
-				_fe3d->quad2d_setVisible(_hoveredQuad2dId, false);
-
-				_hoveredQuad2dId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredQuad2dId.empty())
 			{

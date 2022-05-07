@@ -165,20 +165,18 @@ void ModelEditor::_updateModelCreating()
 
 void ModelEditor::_updateModelChoosing()
 {
+	if(!_hoveredModelId.empty())
+	{
+		_fe3d->model_setVisible(_hoveredModelId, false);
+
+		_hoveredModelId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editModel") || (_gui->getOverlay()->getChoiceFormId() == "deleteModel"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
-
-				_hoveredModelId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredModelId.empty())
 			{
@@ -231,19 +229,18 @@ void ModelEditor::_updateModelDeleting()
 
 void ModelEditor::_updatePartChoosing()
 {
+	if(!_hoveredPartId.empty())
+	{
+		_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
+
+		_hoveredPartId = "";
+	}
+
 	if(_gui->getOverlay()->getChoiceFormId() == "selectPart")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredPartId.empty())
-			{
-				_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
-				_hoveredPartId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredPartId.empty())
 			{
@@ -308,20 +305,18 @@ void ModelEditor::_updateAabbCreating()
 
 void ModelEditor::_updateAabbChoosing()
 {
+	if(!_hoveredAabbId.empty())
+	{
+		_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+
+		_hoveredAabbId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editAabb") || (_gui->getOverlay()->getChoiceFormId() == "deleteAabb"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredAabbId.empty())
-			{
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
-
-				_hoveredAabbId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredAabbId.empty())
 			{
@@ -369,21 +364,31 @@ void ModelEditor::_updateAabbDeleting()
 
 void ModelEditor::_updateSkyChoosing()
 {
+	if(_isSkyHovered)
+	{
+		_fe3d->sky_select("");
+
+		_isSkyHovered = false;
+	}
+
 	if(_gui->getOverlay()->getChoiceFormId() == "selectSky")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
+		if(!selectedOptionId.empty())
 		{
-			_fe3d->sky_select("");
-		}
-		else
-		{
-			_fe3d->sky_select("@" + selectedOptionId);
+			if(!_isSkyHovered)
+			{
+				_isSkyHovered = true;
+
+				_fe3d->sky_select("@" + selectedOptionId);
+			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_fe3d->captor_capture("@@captor");
+
+				_isSkyHovered = false;
 			}
 		}
 	}

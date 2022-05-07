@@ -101,19 +101,18 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 void Quad3dEditor::_updateQuad3dChoosing()
 {
+	if(!_hoveredQuad3dId.empty())
+	{
+		_fe3d->quad3d_setVisible(_hoveredQuad3dId, false);
+
+		_hoveredQuad3dId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editQuad3d") || (_gui->getOverlay()->getChoiceFormId() == "deleteQuad3d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredQuad3dId.empty())
-			{
-				_fe3d->quad3d_setVisible(_hoveredQuad3dId, false);
-				_hoveredQuad3dId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredQuad3dId.empty())
 			{

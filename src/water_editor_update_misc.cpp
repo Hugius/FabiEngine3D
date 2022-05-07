@@ -97,21 +97,30 @@ void WaterEditor::_updateWaterCreating()
 
 void WaterEditor::_updateWaterChoosing()
 {
+	if(_isWaterHovered)
+	{
+		_fe3d->water_select("");
+
+		_isWaterHovered = false;
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editWater") || (_gui->getOverlay()->getChoiceFormId() == "deleteWater"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
+		if(!selectedOptionId.empty())
 		{
-			_fe3d->water_select("");
-		}
-		else
-		{
-			_fe3d->water_select("@" + selectedOptionId);
+			if(!_isWaterHovered)
+			{
+				_isWaterHovered = true;
+
+				_fe3d->water_select("@" + selectedOptionId);
+			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentWaterId = _fe3d->water_getSelectedId();
+				_isWaterHovered = false;
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteWater")
 				{

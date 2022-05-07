@@ -47,4 +47,6 @@ private:
 	vector <string> _loadedWaterIds = {};
 
 	string _currentWaterId = "";
+
+	bool _isWaterHovered = false;
 };

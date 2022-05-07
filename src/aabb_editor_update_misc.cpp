@@ -91,19 +91,18 @@ void AabbEditor::_updateAabbCreating()
 
 void AabbEditor::_updateAabbChoosing()
 {
+	if(!_hoveredAabbId.empty())
+	{
+		_fe3d->aabb_setVisible(_hoveredAabbId, false);
+
+		_hoveredAabbId = "";
+	}
+
 	if((_gui->getOverlay()->getChoiceFormId() == "editAabb") || (_gui->getOverlay()->getChoiceFormId() == "deleteAabb"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
-		{
-			if(!_hoveredAabbId.empty())
-			{
-				_fe3d->aabb_setVisible(_hoveredAabbId, false);
-				_hoveredAabbId = "";
-			}
-		}
-		else
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredAabbId.empty())
 			{

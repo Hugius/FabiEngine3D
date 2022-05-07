@@ -49,4 +49,6 @@ private:
 	vector <string> _loadedTerrainIds = {};
 
 	string _currentTerrainId = "";
+
+	bool _isTerrainHovered = false;
 };

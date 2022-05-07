@@ -47,7 +47,7 @@
 
 ### 1.3 Specular Lighting
 
-- Specular lighting is light that is reflected from another light source.
+- Specular lighting is light that is mirroring light from another source.
 - Normal vectors are used to render this type of lighting.
 
 ### 1.4 Point Lighting
@@ -83,9 +83,9 @@
 
 #### 1.7.1 General
 
-- Cube reflections are reflections based on pre-captured cube maps.
-- The reflections are static, but very efficient.
-- Normal vectors are used to render this type of reflection.
+- Cube refractions are refractions based on pre-captured cube maps.
+- The refractions are static, but very efficient.
+- Normal vectors are used to render this type of refraction.
 
 #### 1.7.2 Properties
 
@@ -109,7 +109,7 @@
 - **Height**: the Y coordinate from which planar reflections are captured
   - Type: `decimal`
   - Constraints: none
-- **Quality**: the quality of planar refractions
+- **Quality**: the quality of planar reflections
   - Type: `integer`
   - Constraints: between `128` and `1024`
 

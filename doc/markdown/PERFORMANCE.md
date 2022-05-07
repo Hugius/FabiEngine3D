@@ -21,6 +21,7 @@
 ## 3. Dangers
 
 - Rendering planar reflections
+- Rendering planar refractions
 - Rendering water reflections
 - Rendering water refractions
 - Rendering water waves

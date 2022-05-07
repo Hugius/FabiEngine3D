@@ -34,6 +34,7 @@
 - `fe3d:quad3d_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_shadowed` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_reflected` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:quad3d_set_refracted` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_bright` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_frozen` (`STR` id, `BOL` value) -----> `NONE`
@@ -60,6 +61,7 @@
 - `fe3d:quad3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_shadowed` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_reflected` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_refracted` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_bright` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_wireframed` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_frozen` (`STR` id) -----> `BOL`

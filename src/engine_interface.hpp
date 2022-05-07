@@ -11,6 +11,7 @@
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
+#include "refraction_type.hpp"
 #include "pointlight_type.hpp"
 #include "ray.hpp"
 #include "speed_type.hpp"

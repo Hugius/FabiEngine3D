@@ -410,6 +410,20 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:text3d_is_refracted")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_isRefracted(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:text3d_is_bright")
 	{
 		auto types = {SVT::STRING};

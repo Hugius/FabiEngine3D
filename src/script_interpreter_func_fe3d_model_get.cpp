@@ -747,6 +747,23 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_get_refractivity")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->model_getRefractivity(args[0]->getString(), args[1]->getString());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_get_lod_distance")
 	{
 		auto types = {SVT::STRING};
@@ -851,6 +868,23 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
 					const auto result = _fe3d->model_getReflectionMapPath(args[0]->getString(), args[1]->getString());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_refraction_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->model_getRefractionMapPath(args[0]->getString(), args[1]->getString());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}
@@ -1035,6 +1069,20 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_is_refracted")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->model_isRefracted(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_is_bright")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -1086,6 +1134,23 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_is_refractive")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->model_isRefractive(args[0]->getString(), args[1]->getString());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_get_reflection_type")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -1105,6 +1170,34 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					}
 					if(reflectionType == ReflectionType::PLANAR)
+					{
+						const auto result = "PLANAR";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_refraction_type")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					const auto refractionType = _fe3d->model_getRefractionType(args[0]->getString(), args[1]->getString());
+
+					if(refractionType == RefractionType::CUBE)
+					{
+						const auto result = "CUBE";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
+					if(refractionType == RefractionType::PLANAR)
 					{
 						const auto result = "PLANAR";
 

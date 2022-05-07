@@ -50,17 +50,21 @@
 - `fe3d:model_set_specular_shininess` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_reflectivity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_refractivity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_lod_distance` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_opacity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_reflected` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_refracted` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_reflective` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_refractive` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_shadowed` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_frozen` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_wireframed` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_bright` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_emission_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_reflection_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
+- `fe3d:model_set_refraction_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
 - `fe3d:model_set_min_texture_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_animation_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
@@ -74,9 +78,11 @@
 - `fe3d:model_is_shadowed` (`STR` id) -----> `BOL`
 - `fe3d:model_is_frozen` (`STR` id) -----> `BOL`
 - `fe3d:model_is_reflected` (`STR` id) -----> `BOL`
+- `fe3d:model_is_refracted` (`STR` id) -----> `BOL`
 - `fe3d:model_is_bright` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_face_culled` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_reflective` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_is_refractive` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_specular` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_wireframed` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_animation_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
@@ -132,6 +138,7 @@
 - `fe3d:model_get_specular_shininess` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_specular_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_reflectivity` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_refractivity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_lod_distance` (`STR` id) -----> `DEC`
 - `fe3d:model_get_lod_id` (`STR` id) -----> `STR`
 - `fe3d:model_get_mesh_path` (`STR` id) -----> `STR`
@@ -142,6 +149,7 @@
 - `fe3d:model_get_refraction_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_normal_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_refraction_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_min_texture_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_rotation_order` (`STR` id) -----> `STR`
 - `fe3d:model_get_animation_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`

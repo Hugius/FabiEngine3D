@@ -716,6 +716,23 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_set_refractivity")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					_fe3d->model_setRefractivity(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_set_lod_distance")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -778,6 +795,20 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_set_refracted")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				_fe3d->model_setRefracted(args[0]->getString(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_set_reflective")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
@@ -789,6 +820,23 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
 					_fe3d->model_setReflective(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_refractive")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					_fe3d->model_setRefractive(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
@@ -916,6 +964,38 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 					else
 					{
 						_throwRuntimeError("reflection type is invalid");
+
+						return true;
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_refraction_type")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
+				{
+					if(args[2]->getString() == "CUBE")
+					{
+						_fe3d->model_setRefractionType(args[0]->getString(), args[1]->getString(), RefractionType::CUBE);
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+					}
+					else if(args[2]->getString() == "PLANAR")
+					{
+						_fe3d->model_setRefractionType(args[0]->getString(), args[1]->getString(), RefractionType::PLANAR);
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+					}
+					else
+					{
+						_throwRuntimeError("refraction type is invalid");
 
 						return true;
 					}

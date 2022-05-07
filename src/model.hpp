@@ -21,12 +21,14 @@ public:
 	void updateTransformation();
 	void setShadowed(bool value);
 	void setReflected(bool value);
+	void setRefracted(bool value);
 	void setFrozen(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailId(const string & value);
 	void setPreviousCaptorId(const string & value);
 	void setCurrentCaptorId(const string & value);
 	void setCubeReflectionMixValue(float value);
+	void setCubeRefractionMixValue(float value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
 	void setLevelOfDetailDistance(float value);
@@ -68,6 +70,7 @@ public:
 	void setRefractionMapPath(const string & partId, const string & value);
 	void setNormalMapPath(const string & partId, const string & value);
 	void setReflectivity(const string & partId, float value);
+	void setRefractivity(const string & partId, float value);
 	void setLightness(const string & partId, float value);
 	void setSpecularShininess(const string & partId, float value);
 	void setSpecularIntensity(const string & partId, float value);
@@ -76,7 +79,9 @@ public:
 	void setEmissionIntensity(const string & partId, float value);
 	void setSpecular(const string & partId, bool value);
 	void setReflective(const string & partId, bool value);
+	void setRefractive(const string & partId, bool value);
 	void setReflectionType(const string & partId, ReflectionType value);
+	void setRefractionType(const string & partId, RefractionType value);
 	void setWireframed(const string & partId, bool value);
 	void setFaceCulled(const string & partId, bool value);
 	void setRotationOrder(DirectionOrderType value);
@@ -121,8 +126,10 @@ public:
 	const fvec3 & getMaxClipPosition() const;
 
 	const float getCubeReflectionMixValue() const;
+	const float getCubeRefractionMixValue() const;
 	const float getLevelOfDetailDistance() const;
 	const float getReflectivity(const string & partId) const;
+	const float getRefractivity(const string & partId) const;
 	const float getLightness(const string & partId) const;
 	const float getSpecularShininess(const string & partId) const;
 	const float getSpecularIntensity(const string & partId) const;
@@ -137,13 +144,16 @@ public:
 	const bool isLevelOfDetailed() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
+	const bool isRefracted() const;
 	const bool isBright(const string & partId) const;
 	const bool isFaceCulled(const string & partId) const;
 	const bool isWireframed(const string & partId) const;
 	const bool isSpecular(const string & partId) const;
 	const bool isReflective(const string & partId) const;
+	const bool isRefractive(const string & partId) const;
 
 	const ReflectionType getReflectionType(const string & partId) const;
+	const RefractionType getRefractionType(const string & partId) const;
 	const DirectionOrderType getRotationOrder() const;
 
 private:
@@ -174,11 +184,13 @@ private:
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
 	float _cubeReflectionMixValue = 1.0f;
+	float _cubeRefractionMixValue = 1.0f;
 	float _levelOfDetailDistance = 0.0f;
 
 	bool _isFrozen = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
+	bool _isRefracted = true;
 	bool _isLevelOfDetailed = false;
 	bool _isVisible = true;
 

@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\..\src\mouse_button_type.hpp" />
     <ClInclude Include="..\..\..\src\clock.hpp" />
     <ClInclude Include="..\..\..\src\mouse_wheel_type.hpp" />
+    <ClInclude Include="..\..\..\src\refraction_type.hpp" />
     <ClInclude Include="..\..\..\src\script_selection_type.hpp" />
     <ClInclude Include="..\..\..\src\speed_type.hpp" />
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />

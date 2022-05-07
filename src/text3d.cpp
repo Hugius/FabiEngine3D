@@ -234,6 +234,16 @@ void Text3d::setReflected(bool value)
 	}
 }
 
+void Text3d::setRefracted(bool value)
+{
+	_isRefracted = value;
+
+	for(const auto & quad3d : _quad3ds)
+	{
+		quad3d->setRefracted(_isRefracted);
+	}
+}
+
 void Text3d::setBright(bool value)
 {
 	_isBright = value;
@@ -545,6 +555,11 @@ const bool Text3d::isShadowed() const
 const bool Text3d::isReflected() const
 {
 	return _isReflected;
+}
+
+const bool Text3d::isRefracted() const
+{
+	return _isRefracted;
 }
 
 const bool Text3d::isBright() const

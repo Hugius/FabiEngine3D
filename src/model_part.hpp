@@ -1,5 +1,6 @@
 #include "vertex_buffer.hpp"
 #include "reflection_type.hpp"
+#include "refraction_type.hpp"
 #include "texture_buffer.hpp"
 
 #include <string>
@@ -41,6 +42,7 @@ class ModelPart final
 	float rotationTargetSpeed = 0.0f;
 	float sizeTargetSpeed = 0.0f;
 	float reflectivity = 0.5f;
+	float refractivity = 0.5f;
 	float lightness = 1.0f;
 	float specularShininess = 1.0f;
 	float specularIntensity = 1.0f;
@@ -52,9 +54,11 @@ class ModelPart final
 
 	bool isSpecular = false;
 	bool isReflective = false;
+	bool isRefractive = false;
 	bool isWireframed = false;
 	bool isBright = false;
 	bool isFaceCulled = false;
 
 	ReflectionType reflectionType = {};
+	RefractionType refractionType = {};
 };

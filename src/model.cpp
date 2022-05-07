@@ -369,9 +369,19 @@ void Model::setCubeReflectionMixValue(float value)
 	_cubeReflectionMixValue = clamp(value, 0.0f, 1.0f);
 }
 
+void Model::setCubeRefractionMixValue(float value)
+{
+	_cubeRefractionMixValue = clamp(value, 0.0f, 1.0f);
+}
+
 void Model::setReflectivity(const string & partId, float value)
 {
 	_parts.at(partId)->reflectivity = clamp(value, 0.0f, 1.0f);
+}
+
+void Model::setRefractivity(const string & partId, float value)
+{
+	_parts.at(partId)->refractivity = clamp(value, 0.0f, 1.0f);
 }
 
 void Model::setFaceCulled(const string & partId, bool value)
@@ -394,6 +404,11 @@ void Model::setReflectionType(const string & partId, ReflectionType value)
 	_parts.at(partId)->reflectionType = value;
 }
 
+void Model::setRefractionType(const string & partId, RefractionType value)
+{
+	_parts.at(partId)->refractionType = value;
+}
+
 void Model::setSpecular(const string & partId, bool value)
 {
 	_parts.at(partId)->isSpecular = value;
@@ -404,6 +419,11 @@ void Model::setReflective(const string & partId, bool value)
 	_parts.at(partId)->isReflective = value;
 }
 
+void Model::setRefractive(const string & partId, bool value)
+{
+	_parts.at(partId)->isRefractive = value;
+}
+
 void Model::setShadowed(bool value)
 {
 	_isShadowed = value;
@@ -412,6 +432,11 @@ void Model::setShadowed(bool value)
 void Model::setReflected(bool value)
 {
 	_isReflected = value;
+}
+
+void Model::setRefracted(bool value)
+{
+	_isRefracted = value;
 }
 
 void Model::setFrozen(bool value)
@@ -642,9 +667,19 @@ const float Model::getCubeReflectionMixValue() const
 	return _cubeReflectionMixValue;
 }
 
+const float Model::getCubeRefractionMixValue() const
+{
+	return _cubeRefractionMixValue;
+}
+
 const float Model::getReflectivity(const string & partId) const
 {
 	return _parts.at(partId)->reflectivity;
+}
+
+const float Model::getRefractivity(const string & partId) const
+{
+	return _parts.at(partId)->refractivity;
 }
 
 const string & Model::getId() const
@@ -734,6 +769,11 @@ const bool Model::isReflective(const string & partId) const
 	return _parts.at(partId)->isReflective;
 }
 
+const bool Model::isRefractive(const string & partId) const
+{
+	return _parts.at(partId)->isRefractive;
+}
+
 void Model::setVisible(bool value)
 {
 	_isVisible = value;
@@ -749,9 +789,19 @@ const bool Model::isReflected() const
 	return _isReflected;
 }
 
+const bool Model::isRefracted() const
+{
+	return _isRefracted;
+}
+
 const ReflectionType Model::getReflectionType(const string & partId) const
 {
 	return _parts.at(partId)->reflectionType;
+}
+
+const RefractionType Model::getRefractionType(const string & partId) const
+{
+	return _parts.at(partId)->refractionType;
 }
 
 const DirectionOrderType Model::getRotationOrder() const

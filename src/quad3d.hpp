@@ -22,6 +22,7 @@ public:
 	void setShadowed(bool value);
 	void setCentered(bool value);
 	void setReflected(bool value);
+	void setRefracted(bool value);
 	void setBright(bool value);
 	void setWireframed(bool value);
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
@@ -87,6 +88,7 @@ public:
 	const bool isFacingCameraVertically() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
+	const bool isRefracted() const;
 	const bool isBright() const;
 	const bool isFrozen() const;
 	const bool isWireframed() const;
@@ -136,6 +138,7 @@ private:
 	bool _isFacingCameraVertically = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
+	bool _isRefracted = true;
 	bool _isBright = false;
 	bool _isWireframed = false;
 	bool _isFrozen = false;

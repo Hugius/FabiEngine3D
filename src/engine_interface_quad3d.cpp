@@ -263,6 +263,11 @@ void EngineInterface::quad3d_setReflected(const string & quad3dId, bool value)
 	_core->getQuad3dManager()->getQuad3d(quad3dId)->setReflected(value);
 }
 
+void EngineInterface::quad3d_setRefracted(const string & quad3dId, bool value)
+{
+	_core->getQuad3dManager()->getQuad3d(quad3dId)->setRefracted(value);
+}
+
 void EngineInterface::quad3d_setBright(const string & quad3dId, bool value)
 {
 	_core->getQuad3dManager()->getQuad3d(quad3dId)->setBright(value);
@@ -464,6 +469,11 @@ const bool EngineInterface::quad3d_isShadowed(const string & quad3dId) const
 const bool EngineInterface::quad3d_isReflected(const string & quad3dId) const
 {
 	return _core->getQuad3dManager()->getQuad3d(quad3dId)->isReflected();
+}
+
+const bool EngineInterface::quad3d_isRefracted(const string & quad3dId) const
+{
+	return _core->getQuad3dManager()->getQuad3d(quad3dId)->isRefracted();
 }
 
 const bool EngineInterface::quad3d_isBright(const string & quad3dId) const

@@ -145,6 +145,11 @@ void EngineInterface::text3d_setReflected(const string & text3dId, bool value)
 	_core->getText3dManager()->getText3d(text3dId)->setReflected(value);
 }
 
+void EngineInterface::text3d_setRefracted(const string & text3dId, bool value)
+{
+	_core->getText3dManager()->getText3d(text3dId)->setRefracted(value);
+}
+
 void EngineInterface::text3d_setBright(const string & text3dId, bool value)
 {
 	_core->getText3dManager()->getText3d(text3dId)->setBright(value);
@@ -286,6 +291,11 @@ const bool EngineInterface::text3d_isShadowed(const string & text3dId) const
 const bool EngineInterface::text3d_isReflected(const string & text3dId) const
 {
 	return _core->getText3dManager()->getText3d(text3dId)->isReflected();
+}
+
+const bool EngineInterface::text3d_isRefracted(const string & text3dId) const
+{
+	return _core->getText3dManager()->getText3d(text3dId)->isRefracted();
 }
 
 const bool EngineInterface::text3d_isBright(const string & text3dId) const

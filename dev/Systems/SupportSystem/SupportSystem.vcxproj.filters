@@ -93,6 +93,9 @@
     <ClInclude Include="..\..\..\src\logger_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\refraction_type.hpp">
+      <Filter>Enumeration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">

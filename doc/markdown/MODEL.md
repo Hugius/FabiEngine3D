@@ -60,6 +60,9 @@
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
+- **Refracted**: the mesh is captured for refractions
+  - Type: `boolean`
+  - Constraints: none
 - **Rotation Order**: the order of directions in which the mesh is rotated
   - Type: `enumeration`
   - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
@@ -114,6 +117,9 @@
 - **Reflectivity**: the percentage of how reflective the mesh is
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Refractivity**: the percentage of how refractive the mesh is
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
@@ -135,6 +141,9 @@
 - **Reflective**: cube/planar reflections are rendered on the mesh
   - Type: `boolean`
   - Constraints: none
+- **Refractive**: cube/planar refractions are rendered on the mesh
+  - Type: `boolean`
+  - Constraints: none
 - **Face Culled**: the mesh uses the face culling optimization
   - Type: `boolean`
   - Constraints: none
@@ -145,5 +154,8 @@
   - Type: `boolean`
   - Constraints: none
 - **Reflection Type**: the type of reflection
+  - Type: `enumeration`
+  - Constraints: `CUBE` or `PLANAR`
+- **Refraction Type**: the type of refraction
   - Type: `enumeration`
   - Constraints: `CUBE` or `PLANAR`

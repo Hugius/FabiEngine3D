@@ -241,6 +241,11 @@ void EngineInterface::model_setReflectionType(const string & modelId, const stri
 	_core->getModelManager()->getModel(modelId)->setReflectionType(partId, value);
 }
 
+void EngineInterface::model_setRefractionType(const string & modelId, const string & partId, RefractionType value)
+{
+	_core->getModelManager()->getModel(modelId)->setRefractionType(partId, value);
+}
+
 void EngineInterface::model_setSpecular(const string & modelId, const string & partId, bool value)
 {
 	_core->getModelManager()->getModel(modelId)->setSpecular(partId, value);
@@ -249,6 +254,11 @@ void EngineInterface::model_setSpecular(const string & modelId, const string & p
 void EngineInterface::model_setReflective(const string & modelId, const string & partId, bool value)
 {
 	_core->getModelManager()->getModel(modelId)->setReflective(partId, value);
+}
+
+void EngineInterface::model_setRefractive(const string & modelId, const string & partId, bool value)
+{
+	_core->getModelManager()->getModel(modelId)->setRefractive(partId, value);
 }
 
 void EngineInterface::model_setBasePosition(const string & modelId, const fvec3 & value)
@@ -349,6 +359,11 @@ void EngineInterface::model_setSpecularIntensity(const string & modelId, const s
 void EngineInterface::model_setReflectivity(const string & modelId, const string & partId, float value)
 {
 	_core->getModelManager()->getModel(modelId)->setReflectivity(partId, value);
+}
+
+void EngineInterface::model_setRefractivity(const string & modelId, const string & partId, float value)
+{
+	_core->getModelManager()->getModel(modelId)->setRefractivity(partId, value);
 }
 
 void EngineInterface::model_setLightness(const string & modelId, const string & partId, float value)
@@ -481,6 +496,11 @@ void EngineInterface::model_setReflected(const string & modelId, bool value)
 	_core->getModelManager()->getModel(modelId)->setReflected(value);
 }
 
+void EngineInterface::model_setRefracted(const string & modelId, bool value)
+{
+	_core->getModelManager()->getModel(modelId)->setRefracted(value);
+}
+
 const bool EngineInterface::model_isExisting(const string & modelId) const
 {
 	return _core->getModelManager()->isModelExisting(modelId);
@@ -516,6 +536,11 @@ const bool EngineInterface::model_isReflected(const string & modelId) const
 	return _core->getModelManager()->getModel(modelId)->isReflected();
 }
 
+const bool EngineInterface::model_isRefracted(const string & modelId) const
+{
+	return _core->getModelManager()->getModel(modelId)->isRefracted();
+}
+
 const bool EngineInterface::model_isFrozen(const string & modelId) const
 {
 	return _core->getModelManager()->getModel(modelId)->isFrozen();
@@ -547,6 +572,11 @@ const bool EngineInterface::model_isBright(const string & modelId, const string 
 const bool EngineInterface::model_isReflective(const string & modelId, const string & partId) const
 {
 	return _core->getModelManager()->getModel(modelId)->isReflective(partId);
+}
+
+const bool EngineInterface::model_isRefractive(const string & modelId, const string & partId) const
+{
+	return _core->getModelManager()->getModel(modelId)->isRefractive(partId);
 }
 
 const bool EngineInterface::model_hasDiffuseMap(const string & modelId, const string & partId) const
@@ -597,6 +627,11 @@ const bool EngineInterface::model_isAnimationAutopaused(const string & modelId, 
 const ReflectionType EngineInterface::model_getReflectionType(const string & modelId, const string & partId) const
 {
 	return _core->getModelManager()->getModel(modelId)->getReflectionType(partId);
+}
+
+const RefractionType EngineInterface::model_getRefractionType(const string & modelId, const string & partId) const
+{
+	return _core->getModelManager()->getModel(modelId)->getRefractionType(partId);
 }
 
 const DirectionOrderType EngineInterface::model_getRotationOrder(const string & modelId) const
@@ -672,6 +707,11 @@ const float EngineInterface::model_getLightness(const string & modelId, const st
 const float EngineInterface::model_getReflectivity(const string & modelId, const string & partId) const
 {
 	return _core->getModelManager()->getModel(modelId)->getReflectivity(partId);
+}
+
+const float EngineInterface::model_getRefractivity(const string & modelId, const string & partId) const
+{
+	return _core->getModelManager()->getModel(modelId)->getRefractivity(partId);
 }
 
 const float EngineInterface::model_getSpecularShininess(const string & modelId, const string & partId) const

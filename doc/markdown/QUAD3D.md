@@ -80,6 +80,9 @@
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
+- **Refracted**: the mesh is captured for refractions
+  - Type: `boolean`
+  - Constraints: none
 - **Facing Camera Horizontally**: the mesh is horizontally facing the camera
   - Type: `boolean`
   - Constraints: none

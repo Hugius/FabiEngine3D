@@ -228,10 +228,13 @@ public:
 	void model_setLevelOfDetailId(const string & modelId, const string & value);
 	void model_setFaceCulled(const string & modelId, const string & partId, bool value);
 	void model_setReflectionType(const string & modelId, const string & partId, ReflectionType value);
+	void model_setRefractionType(const string & modelId, const string & partId, RefractionType value);
 	void model_setSpecular(const string & modelId, const string & partId, bool value);
 	void model_setReflective(const string & modelId, const string & partId, bool value);
+	void model_setRefractive(const string & modelId, const string & partId, bool value);
 	void model_setShadowed(const string & modelId, bool value);
 	void model_setReflected(const string & modelId, bool value);
+	void model_setRefracted(const string & modelId, bool value);
 	void model_setFrozen(const string & modelId, bool value);
 	void model_setWireframed(const string & modelId, const string & partId, bool value);
 	void model_setBasePosition(const string & modelId, const fvec3 & value);
@@ -257,6 +260,7 @@ public:
 	void model_setSpecularShininess(const string & modelId, const string & partId, float value);
 	void model_setSpecularIntensity(const string & modelId, const string & partId, float value);
 	void model_setReflectivity(const string & modelId, const string & partId, float value);
+	void model_setRefractivity(const string & modelId, const string & partId, float value);
 	void model_setLightness(const string & modelId, const string & partId, float value);
 	void model_setEmissionIntensity(const string & modelId, const string & partId, float value);
 	void model_setOpacity(const string & modelId, const string & partId, float value);
@@ -302,6 +306,7 @@ public:
 	const fvec3 & model_getMinClipPosition(const string & modelId) const;
 	const fvec3 & model_getMaxClipPosition(const string & modelId) const;
 	const float model_getReflectivity(const string & modelId, const string & partId) const;
+	const float model_getRefractivity(const string & modelId, const string & partId) const;
 	const float model_getLightness(const string & modelId, const string & partId) const;
 	const float model_getSpecularShininess(const string & modelId, const string & partId) const;
 	const float model_getSpecularIntensity(const string & modelId, const string & partId) const;
@@ -320,11 +325,13 @@ public:
 	const bool model_isSpecular(const string & modelId, const string & partId) const;
 	const bool model_isShadowed(const string & modelId) const;
 	const bool model_isReflected(const string & modelId) const;
+	const bool model_isRefracted(const string & modelId) const;
 	const bool model_isFrozen(const string & modelId) const;
 	const bool model_isWireframed(const string & modelId, const string & partId) const;
 	const bool model_hasPart(const string & modelId, const string & partId) const;
 	const bool model_isBright(const string & modelId, const string & partId) const;
 	const bool model_isReflective(const string & modelId, const string & partId) const;
+	const bool model_isRefractive(const string & modelId, const string & partId) const;
 	const bool model_hasDiffuseMap(const string & modelId, const string & partId) const;
 	const bool model_hasEmissionMap(const string & modelId, const string & partId) const;
 	const bool model_hasSpecularMap(const string & modelId, const string & partId) const;
@@ -335,6 +342,7 @@ public:
 	const bool model_isAnimationPaused(const string & modelId, const string & animation3dId) const;
 	const bool model_isAnimationAutopaused(const string & modelId, const string & animation3dId) const;
 	const ReflectionType model_getReflectionType(const string & modelId, const string & partId) const;
+	const RefractionType model_getRefractionType(const string & modelId, const string & partId) const;
 	const DirectionOrderType model_getRotationOrder(const string & modelId) const;
 
 	void quad3d_create(const string & quad3dId, bool isCentered);
@@ -366,6 +374,7 @@ public:
 	void quad3d_setFacingCameraVertically(const string & quad3dId, bool value);
 	void quad3d_setShadowed(const string & quad3dId, bool value);
 	void quad3d_setReflected(const string & quad3dId, bool value);
+	void quad3d_setRefracted(const string & quad3dId, bool value);
 	void quad3d_setBright(const string & quad3dId, bool value);
 	void quad3d_setWireframed(const string & quad3dId, bool value);
 	void quad3d_setFrozen(const string & quad3dId, bool value);
@@ -412,6 +421,7 @@ public:
 	const bool quad3d_isFacingCameraVertically(const string & quad3dId) const;
 	const bool quad3d_isShadowed(const string & quad3dId) const;
 	const bool quad3d_isReflected(const string & quad3dId) const;
+	const bool quad3d_isRefracted(const string & quad3dId) const;
 	const bool quad3d_isBright(const string & quad3dId) const;
 	const bool quad3d_isWireframed(const string & quad3dId) const;
 	const bool quad3d_hasDiffuseMap(const string & quad3dId) const;
@@ -448,6 +458,7 @@ public:
 	void text3d_setFacingCameraVertically(const string & text3dId, bool value);
 	void text3d_setShadowed(const string & text3dId, bool value);
 	void text3d_setReflected(const string & text3dId, bool value);
+	void text3d_setRefracted(const string & text3dId, bool value);
 	void text3d_setBright(const string & text3dId, bool value);
 	void text3d_setWireframed(const string & text3dId, bool value);
 	void text3d_setFrozen(const string & text3dId, bool value);
@@ -475,6 +486,7 @@ public:
 	const bool text3d_isFacingCameraVertically(const string & text3dId) const;
 	const bool text3d_isShadowed(const string & text3dId) const;
 	const bool text3d_isReflected(const string & text3dId) const;
+	const bool text3d_isRefracted(const string & text3dId) const;
 	const bool text3d_isBright(const string & text3dId) const;
 	const bool text3d_isWireframed(const string & text3dId) const;
 	const bool text3d_isFrozen(const string & text3dId) const;
@@ -784,7 +796,9 @@ public:
 	void graphics_setCubeReflectionQuality(int value);
 	void graphics_setCubeRefractionInterval(int value);
 	void graphics_setCubeRefractionQuality(int value);
+	void graphics_setPlanarReflectionHeight(float value);
 	void graphics_setPlanarReflectionQuality(int value);
+	void graphics_setPlanarRefractionHeight(float value);
 	void graphics_setPlanarRefractionQuality(int value);
 	void graphics_setAnisotropicFilteringQuality(int value);
 	void graphics_setAmbientLightingColor(const fvec3 & value);
@@ -821,8 +835,6 @@ public:
 	void graphics_setLensFlareMap(const string & value);
 	void graphics_setLensFlareIntensity(float value);
 	void graphics_setLensFlareSensitivity(float value);
-	void graphics_setPlanarReflectionHeight(float value);
-	void graphics_setPlanarRefractionHeight(float value);
 
 	const string & graphics_getLensFlareMapPath() const;
 	const fvec3 & graphics_getDirectionalLightingPosition() const;

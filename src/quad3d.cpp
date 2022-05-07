@@ -229,6 +229,11 @@ void Quad3d::setReflected(bool value)
 	_isReflected = value;
 }
 
+void Quad3d::setRefracted(bool value)
+{
+	_isRefracted = value;
+}
+
 void Quad3d::setBright(bool value)
 {
 	_isBright = value;
@@ -437,6 +442,11 @@ const bool Quad3d::isShadowed() const
 const bool Quad3d::isReflected() const
 {
 	return _isReflected;
+}
+
+const bool Quad3d::isRefracted() const
+{
+	return _isRefracted;
 }
 
 const bool Quad3d::isBright() const

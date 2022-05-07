@@ -201,3 +201,8 @@ void MasterRenderer::captureCubeReflections()
 
 	_updateShadows();
 }
+
+void MasterRenderer::captureCubeRefractions()
+{
+
+}

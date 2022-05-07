@@ -2,7 +2,6 @@
 
 #include "base_editor.hpp"
 #include "sky_editor.hpp"
-#include "reflection_type.hpp"
 
 class ModelEditor final : public BaseEditor
 {

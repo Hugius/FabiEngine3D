@@ -10,6 +10,11 @@ void RenderStorage::setPlanarReflectionMap(shared_ptr<TextureBuffer> value)
 	_planarReflectionTextureBuffer = value;
 }
 
+void RenderStorage::setPlanarRefractionMap(shared_ptr<TextureBuffer> value)
+{
+	_planarRefractionTextureBuffer = value;
+}
+
 void RenderStorage::setWaterReflectionMap(shared_ptr<TextureBuffer> value)
 {
 	_waterReflectionTextureBuffer = value;
@@ -436,6 +441,11 @@ void RenderStorage::setCubeRefractionInterval(int value)
 const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionTextureBuffer() const
 {
 	return _planarReflectionTextureBuffer;
+}
+
+const shared_ptr<TextureBuffer> RenderStorage::getPlanarRefractionTextureBuffer() const
+{
+	return _planarRefractionTextureBuffer;
 }
 
 const shared_ptr<TextureBuffer> RenderStorage::getWaterReflectionTextureBuffer() const

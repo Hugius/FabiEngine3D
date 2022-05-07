@@ -57,6 +57,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setRefracted(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
@@ -149,6 +150,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setRefracted(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);

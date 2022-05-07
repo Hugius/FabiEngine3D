@@ -93,13 +93,9 @@ MasterRenderer::MasterRenderer()
 	_lensFlareRenderer->inject(_lensFlareShaderBuffer);
 	_motionBlurRenderer->inject(_motionBlurShaderBuffer);
 	_bloomBlurRendererHighQuality->inject(_blurShaderBuffer);
-	_bloomBlurRendererHighQuality->inject(_bloomBlurHighQualityCaptureBuffer);
 	_bloomBlurRendererLowQuality->inject(_blurShaderBuffer);
-	_bloomBlurRendererLowQuality->inject(_bloomBlurLowQualityCaptureBuffer);
 	_dofBlurRenderer->inject(_blurShaderBuffer);
-	_dofBlurRenderer->inject(_dofBlurCaptureBuffer);
 	_motionBlurBlurRenderer->inject(_blurShaderBuffer);
-	_motionBlurBlurRenderer->inject(_motionBlurBlurCaptureBuffer);
 
 	glDepthFunc(GL_LEQUAL);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

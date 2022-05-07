@@ -31,6 +31,10 @@ void WorldEditor::_load()
 	_fe3d->model_setReflected(TEMPLATE_SPOTLIGHT_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_CAPTOR_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_SOUND3D_ID, false);
+	_fe3d->model_setRefracted(TEMPLATE_POINTLIGHT_ID, false);
+	_fe3d->model_setRefracted(TEMPLATE_SPOTLIGHT_ID, false);
+	_fe3d->model_setRefracted(TEMPLATE_CAPTOR_ID, false);
+	_fe3d->model_setRefracted(TEMPLATE_SOUND3D_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_CAPTOR_ID, false);

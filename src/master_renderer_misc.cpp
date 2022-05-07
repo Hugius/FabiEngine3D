@@ -190,17 +190,19 @@ void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 	_dofBlurRenderer->inject(_renderStorage);
 	_motionBlurBlurRenderer->inject(_renderStorage);
 
-	reloadBloomBlurQuality();
-	reloadDofBlurQuality();
-	reloadMotionBlurBlurQuality();
-	reloadCubeReflectionQuality();
-	reloadPlanarReflectionQuality();
-	reloadWaterReflectionQuality();
-	reloadWaterRefractionQuality();
-	reloadShadowQuality();
+	loadShadowQuality();
+	loadBloomBlurQuality();
+	loadDofBlurQuality();
+	loadMotionBlurBlurQuality();
+	loadCubeReflectionQuality();
+	loadCubeRefractionQuality();
+	loadPlanarReflectionQuality();
+	loadPlanarRefractionQuality();
+	loadWaterReflectionQuality();
+	loadWaterRefractionQuality();
 }
 
-void MasterRenderer::reloadBloomBlurQuality()
+void MasterRenderer::loadBloomBlurQuality()
 {
 	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
@@ -211,7 +213,7 @@ void MasterRenderer::reloadBloomBlurQuality()
 	_bloomBlurRendererLowQuality->inject(_bloomBlurLowQualityCaptureBuffer);
 }
 
-void MasterRenderer::reloadDofBlurQuality()
+void MasterRenderer::loadDofBlurQuality()
 {
 	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
@@ -220,7 +222,7 @@ void MasterRenderer::reloadDofBlurQuality()
 	_dofBlurRenderer->inject(_dofBlurCaptureBuffer);
 }
 
-void MasterRenderer::reloadMotionBlurBlurQuality()
+void MasterRenderer::loadMotionBlurBlurQuality()
 {
 	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
@@ -229,27 +231,37 @@ void MasterRenderer::reloadMotionBlurBlurQuality()
 	_motionBlurBlurRenderer->inject(_motionBlurBlurCaptureBuffer);
 }
 
-void MasterRenderer::reloadCubeReflectionQuality()
+void MasterRenderer::loadCubeReflectionQuality()
 {
 	_cubeReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadPlanarReflectionQuality()
+void MasterRenderer::loadCubeRefractionQuality()
+{
+	_cubeRefractionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeRefractionQuality()), 1, false);
+}
+
+void MasterRenderer::loadPlanarReflectionQuality()
 {
 	_planarReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadWaterReflectionQuality()
+void MasterRenderer::loadPlanarRefractionQuality()
+{
+	_planarRefractionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarRefractionQuality()), 1, false);
+}
+
+void MasterRenderer::loadWaterReflectionQuality()
 {
 	_waterReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadWaterRefractionQuality()
+void MasterRenderer::loadWaterRefractionQuality()
 {
 	_waterRefractionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarRefractionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadShadowQuality()
+void MasterRenderer::loadShadowQuality()
 {
 	_shadowCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getShadowQuality()));
 }

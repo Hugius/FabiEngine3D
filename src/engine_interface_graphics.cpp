@@ -80,21 +80,21 @@ void EngineInterface::graphics_setBloomQuality(int value)
 {
 	_core->getRenderStorage()->setBloomQuality(value);
 
-	_core->getMasterRenderer()->reloadBloomBlurQuality();
+	_core->getMasterRenderer()->loadBloomBlurQuality();
 }
 
 void EngineInterface::graphics_setDofQuality(int value)
 {
 	_core->getRenderStorage()->setDofQuality(value);
 
-	_core->getMasterRenderer()->reloadDofBlurQuality();
+	_core->getMasterRenderer()->loadDofBlurQuality();
 }
 
 void EngineInterface::graphics_setMotionBlurQuality(int value)
 {
 	_core->getRenderStorage()->setMotionBlurQuality(value);
 
-	_core->getMasterRenderer()->reloadMotionBlurBlurQuality();
+	_core->getMasterRenderer()->loadMotionBlurBlurQuality();
 }
 
 void EngineInterface::graphics_setAnisotropicFilteringQuality(int value)
@@ -125,29 +125,29 @@ void EngineInterface::graphics_setCubeReflectionQuality(int value)
 {
 	_core->getRenderStorage()->setCubeReflectionQuality(value);
 
-	_core->getMasterRenderer()->reloadCubeReflectionQuality();
+	_core->getMasterRenderer()->loadCubeReflectionQuality();
 }
 
 void EngineInterface::graphics_setPlanarReflectionQuality(int value)
 {
 	_core->getRenderStorage()->setPlanarReflectionQuality(value);
 
-	_core->getMasterRenderer()->reloadPlanarReflectionQuality();
-	_core->getMasterRenderer()->reloadWaterReflectionQuality();
+	_core->getMasterRenderer()->loadPlanarReflectionQuality();
+	_core->getMasterRenderer()->loadWaterReflectionQuality();
 }
 
 void EngineInterface::graphics_setPlanarRefractionQuality(int value)
 {
 	_core->getRenderStorage()->setPlanarRefractionQuality(value);
 
-	_core->getMasterRenderer()->reloadWaterRefractionQuality();
+	_core->getMasterRenderer()->loadWaterRefractionQuality();
 }
 
 void EngineInterface::graphics_setShadowQuality(int value)
 {
 	_core->getRenderStorage()->setShadowQuality(value);
 
-	_core->getMasterRenderer()->reloadShadowQuality();
+	_core->getMasterRenderer()->loadShadowQuality();
 }
 
 void EngineInterface::graphics_setAmbientLightingColor(const fvec3 & value)

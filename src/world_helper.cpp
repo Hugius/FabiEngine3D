@@ -138,6 +138,7 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
 	_fe3d->model_setShadowed(newId, _fe3d->model_isShadowed(templateId));
 	_fe3d->model_setReflected(newId, _fe3d->model_isReflected(templateId));
+	_fe3d->model_setRefracted(newId, _fe3d->model_isRefracted(templateId));
 	_fe3d->model_setLevelOfDetailId(newId, _fe3d->model_getLevelOfDetailId(templateId));
 	_fe3d->model_setLevelOfDetailDistance(newId, _fe3d->model_getLevelOfDetailDistance(templateId));
 	_fe3d->model_setRotationOrder(newId, _fe3d->model_getRotationOrder(templateId));
@@ -151,8 +152,11 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 		_fe3d->model_setSpecularShininess(newId, partId, _fe3d->model_getSpecularShininess(templateId, partId));
 		_fe3d->model_setSpecularIntensity(newId, partId, _fe3d->model_getSpecularIntensity(templateId, partId));
 		_fe3d->model_setReflective(newId, partId, _fe3d->model_isReflective(templateId, partId));
+		_fe3d->model_setRefractive(newId, partId, _fe3d->model_isRefractive(templateId, partId));
 		_fe3d->model_setReflectionType(newId, partId, _fe3d->model_getReflectionType(templateId, partId));
+		_fe3d->model_setRefractionType(newId, partId, _fe3d->model_getRefractionType(templateId, partId));
 		_fe3d->model_setReflectivity(newId, partId, _fe3d->model_getReflectivity(templateId, partId));
+		_fe3d->model_setRefractivity(newId, partId, _fe3d->model_getRefractivity(templateId, partId));
 		_fe3d->model_setColor(newId, partId, _fe3d->model_getColor(templateId, partId));
 		_fe3d->model_setTextureRepeat(newId, partId, _fe3d->model_getTextureRepeat(templateId, partId));
 		_fe3d->model_setFaceCulled(newId, partId, _fe3d->model_isFaceCulled(templateId, partId));
@@ -220,6 +224,7 @@ void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templa
 	_fe3d->quad3d_setTextureRepeat(newId, _fe3d->quad3d_getTextureRepeat(templateId));
 	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
 	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
+	_fe3d->quad3d_setRefracted(newId, _fe3d->quad3d_isRefracted(templateId));
 	_fe3d->quad3d_setEmissionIntensity(newId, _fe3d->quad3d_getEmissionIntensity(templateId));
 	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
 	_fe3d->quad3d_setOpacity(newId, _fe3d->quad3d_getOpacity(templateId));
@@ -261,6 +266,7 @@ void WorldHelper::copyTemplateText3d(const string & newId, const string & templa
 	_fe3d->text3d_setColor(newId, _fe3d->text3d_getColor(templateId));
 	_fe3d->text3d_setShadowed(newId, _fe3d->text3d_isShadowed(templateId));
 	_fe3d->text3d_setReflected(newId, _fe3d->text3d_isReflected(templateId));
+	_fe3d->text3d_setRefracted(newId, _fe3d->text3d_isRefracted(templateId));
 	_fe3d->text3d_setLightness(newId, _fe3d->text3d_getLightness(templateId));
 	_fe3d->text3d_setBright(newId, _fe3d->text3d_isBright(templateId));
 	_fe3d->text3d_setOpacity(newId, _fe3d->text3d_getOpacity(templateId));

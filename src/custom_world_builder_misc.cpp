@@ -179,10 +179,14 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->graphics_setLensFlareMap("");
 		_fe3d->graphics_setLensFlareIntensity(0.0f);
 		_fe3d->graphics_setLensFlareSensitivity(0.0f);
+		_fe3d->graphics_setCubeReflectionInterval(0);
 		_fe3d->graphics_setCubeReflectionQuality(0);
-		_fe3d->graphics_setPlanarReflectionQuality(0);
-		_fe3d->graphics_setPlanarRefractionQuality(0);
+		_fe3d->graphics_setCubeRefractionQuality(0);
+		_fe3d->graphics_setCubeRefractionInterval(0);
 		_fe3d->graphics_setPlanarReflectionHeight(0.0f);
+		_fe3d->graphics_setPlanarReflectionQuality(0);
+		_fe3d->graphics_setPlanarRefractionHeight(0.0f);
+		_fe3d->graphics_setPlanarRefractionQuality(0);
 	}
 
 	for(const auto & skyId : _loadedSkyIds)

@@ -70,7 +70,7 @@ uniform bool u_isShadowCircleEnabled;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isReflectionsEnabled;
-//uniform bool u_isRefractionsEnabled;
+uniform bool u_isRefractionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;

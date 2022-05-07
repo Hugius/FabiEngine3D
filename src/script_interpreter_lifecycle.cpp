@@ -358,10 +358,11 @@ void ScriptInterpreter::unload()
 	_fe3d->graphics_setLensFlareIntensity(0.0f);
 	_fe3d->graphics_setLensFlareSensitivity(0.0f);
 	_fe3d->graphics_setCubeReflectionQuality(0);
+	_fe3d->graphics_setPlanarReflectionHeight(0.0f);
 	_fe3d->graphics_setPlanarReflectionQuality(0);
+	_fe3d->graphics_setPlanarRefractionHeight(0.0f);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
-	_fe3d->graphics_setPlanarReflectionHeight(0.0f);
 
 	if(_fe3d->server_isRunning())
 	{

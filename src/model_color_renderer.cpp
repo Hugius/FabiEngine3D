@@ -27,7 +27,7 @@ void ModelColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_isAmbientLightingEnabled", _renderStorage->isAmbientLightingEnabled());
 	_shaderBuffer->uploadUniform("u_isDirectionalLightingEnabled", _renderStorage->isDirectionalLightingEnabled());
 	_shaderBuffer->uploadUniform("u_isReflectionsEnabled", _renderStorage->isReflectionsEnabled());
-	//_shaderBuffer->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
+	_shaderBuffer->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
 	_shaderBuffer->uploadUniform("u_shadowSize", _renderStorage->getShadowSize());
 	_shaderBuffer->uploadUniform("u_shadowLookat", _renderStorage->getShadowLookat());
 	_shaderBuffer->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());

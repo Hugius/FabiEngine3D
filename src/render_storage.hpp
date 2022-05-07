@@ -15,6 +15,7 @@ public:
 	void setPrimarySceneMap(shared_ptr<TextureBuffer> value);
 	void setSecondarySceneMap(shared_ptr<TextureBuffer> value);
 	void setPlanarReflectionMap(shared_ptr<TextureBuffer> value);
+	void setPlanarRefractionMap(shared_ptr<TextureBuffer> value);
 	void setWaterReflectionMap(shared_ptr<TextureBuffer> value);
 	void setWaterRefractionMap(shared_ptr<TextureBuffer> value);
 	void setWaterEdgeMap(shared_ptr<TextureBuffer> value);
@@ -101,6 +102,7 @@ public:
 	const shared_ptr<TextureBuffer> getPrimarySceneTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getSecondarySceneTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getPlanarReflectionTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getPlanarRefractionTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getWaterReflectionTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getWaterRefractionTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getWaterEdgeTextureBuffer() const;
@@ -224,6 +226,7 @@ private:
 	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _planarReflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _planarRefractionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _waterReflectionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _waterRefractionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _waterEdgeTextureBuffer = nullptr;

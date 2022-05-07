@@ -115,3 +115,8 @@ void MasterRenderer::capturePlanarReflections()
 
 	_planarReflectionCaptureBuffer->unbind();
 }
+
+void MasterRenderer::capturePlanarRefractions()
+{
+
+}

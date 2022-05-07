@@ -95,7 +95,8 @@ void EngineCore::_render()
 	_masterRenderer->capturePlanarReflections();
 	_timer->stopClock("reflectionPreRender");
 	_timer->startClock("refractionPreRender");
-	// insert capture cube/planar refractions here
+	_masterRenderer->captureCubeRefractions();
+	_masterRenderer->capturePlanarRefractions();
 	_timer->stopClock("refractionPreRender");
 	_timer->startClock("waterPreRender");
 	_masterRenderer->captureWaterReflections();

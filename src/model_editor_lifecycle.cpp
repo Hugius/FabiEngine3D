@@ -10,6 +10,8 @@
 
 void ModelEditor::_load()
 {
+	_skyEditor->loadSkiesFromFile();
+
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
 	_fe3d->model_setFaceCulled("@@box", "", true);
@@ -105,12 +107,13 @@ void ModelEditor::_loadGUI()
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
+	auto positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("modelEditorMenuMain");
-	leftWindow->getScreen("modelEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMain")->createButton("sky", fvec2(0.0f, positions[0]), TEXT_SIZE("Select Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMain")->createButton("create", fvec2(0.0f, positions[1]), TEXT_SIZE("Create Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[2]), TEXT_SIZE("Edit Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMain")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(6, CH, false);
 	leftWindow->createScreen("modelEditorMenuChoice");
@@ -255,6 +258,10 @@ void ModelEditor::update()
 	if(isLoaded())
 	{
 		_updateAabbDeleting();
+	}
+	if(isLoaded())
+	{
+		_updateSkyChoosing();
 	}
 	if(isLoaded())
 	{

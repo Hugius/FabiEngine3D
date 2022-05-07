@@ -1,6 +1,7 @@
 #pragma once
 
 #include "base_editor.hpp"
+#include "sky_editor.hpp"
 #include "reflection_type.hpp"
 
 class ModelEditor final : public BaseEditor
@@ -8,6 +9,7 @@ class ModelEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
+	void inject(shared_ptr<SkyEditor> skyEditor);
 	void update();
 	void deleteLoadedModels();
 
@@ -37,6 +39,7 @@ private:
 	void _updateAabbCreating();
 	void _updateAabbChoosing();
 	void _updateAabbDeleting();
+	void _updateSkyChoosing();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -54,6 +57,8 @@ private:
 	static inline constexpr int GRID_REPEAT = 10;
 
 	vector<string> _loadedModelIds = {};
+
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
 
 	string _currentModelId = "";
 	string _currentPartId = "";

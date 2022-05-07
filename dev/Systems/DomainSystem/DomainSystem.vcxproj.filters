@@ -49,12 +49,6 @@
     <Filter Include="Manager\Environment">
       <UniqueIdentifier>{ff2f2ffd-960f-41af-8bbf-07a116f8d11f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\AABB">
-      <UniqueIdentifier>{27fbcd26-1458-4302-a096-b38985d78e85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\AABB">
-      <UniqueIdentifier>{290819c3-e278-43ea-b563-fda8aa8484a0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\model.cpp">
@@ -147,11 +141,11 @@
     <ClCompile Include="..\..\..\src\sky_manager.cpp">
       <Filter>Manager\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\aabb.cpp">
-      <Filter>Data\AABB</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_manager.cpp">
-      <Filter>Manager\AABB</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb.cpp">
+      <Filter>Data\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +245,11 @@
     <ClInclude Include="..\..\..\src\terrain_manager.hpp">
       <Filter>Manager\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\aabb.hpp">
-      <Filter>Data\AABB</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_manager.hpp">
-      <Filter>Manager\AABB</Filter>
+      <Filter>Manager\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb.hpp">
+      <Filter>Data\Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

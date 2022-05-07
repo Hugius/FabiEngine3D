@@ -34,6 +34,9 @@
     <Filter Include="Interface\Text">
       <UniqueIdentifier>{77dc7b31-eb38-4456-a83b-69b7ea776750}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\Environment">
+      <UniqueIdentifier>{5cbccca3-edcd-486b-89a4-ec13a6af0014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_core_lifecycle.cpp">
@@ -114,14 +117,14 @@
     <ClCompile Include="..\..\..\src\engine_interface_model.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_sky.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\engine_interface_water.cpp">
+      <Filter>Interface\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_terrain.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
+      <Filter>Interface\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_water.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\engine_interface_sky.cpp">
+      <Filter>Interface\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

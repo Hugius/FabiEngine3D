@@ -10,6 +10,24 @@ void ModelEditor::_updateMainMenu()
 		{
 			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sky")->isHovered())
+		{
+			if(_fe3d->sky_getSelectedId().empty())
+			{
+				auto skyIds = _skyEditor->getLoadedSkyIds();
+
+				for(auto & skyId : skyIds)
+				{
+					skyId = skyId.substr(1);
+				}
+
+				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			}
+			else
+			{
+				_fe3d->sky_select("");
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createModel", "Create Model", "", fvec2(0.0f, 0.1f), 10, true, true, true);
@@ -36,6 +54,8 @@ void ModelEditor::_updateMainMenu()
 
 			_gui->getOverlay()->openChoiceForm("deleteModel", "Delete Model", fvec2(-0.5f, 0.1f), modelIds);
 		}
+
+		screen->getButton("sky")->setTextContent(_fe3d->sky_getSelectedId().empty() ? "Select Sky" : "Unselect Sky");
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{

@@ -77,6 +77,8 @@ void ModelEditor::_updateMiscellaneous()
 			_fe3d->model_setOpacity(_currentModelId, partId, (opacity + speed));
 		}
 	}
+
+	_fe3d->captor_setExceptionId("@@captor", _currentModelId);
 }
 
 void ModelEditor::_updateModelCreating()
@@ -361,6 +363,28 @@ void ModelEditor::_updateAabbDeleting()
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAabbId = "";
+		}
+	}
+}
+
+void ModelEditor::_updateSkyChoosing()
+{
+	if(_gui->getOverlay()->getChoiceFormId() == "selectSky")
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+		if(selectedOptionId.empty())
+		{
+			_fe3d->sky_select("");
+		}
+		else
+		{
+			_fe3d->sky_select("@" + selectedOptionId);
+
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
+			{
+				_fe3d->captor_capture("@@captor");
+			}
 		}
 	}
 }

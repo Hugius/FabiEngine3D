@@ -16,3 +16,8 @@ void ModelEditor::deleteLoadedModels()
 
 	_loadedModelIds.clear();
 }
+
+void ModelEditor::inject(shared_ptr<SkyEditor> skyEditor)
+{
+	_skyEditor = skyEditor;
+}

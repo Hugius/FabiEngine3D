@@ -34,7 +34,7 @@ private:
 
 	const string _id;
 	const string _parentId;
-	const string _entityId;
+	const string _text2dId;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

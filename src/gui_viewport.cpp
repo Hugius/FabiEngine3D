@@ -4,7 +4,7 @@
 GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color)
 	:
 	_id(id),
-	_entityId("@" + id)
+	_quad2dId("@" + id)
 {
 	if(_id.empty())
 	{
@@ -13,15 +13,15 @@ GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, co
 
 	_fe3d = fe3d;
 
-	_fe3d->quad2d_create(_entityId, true);
-	_fe3d->quad2d_setPosition(_entityId, position);
-	_fe3d->quad2d_setSize(_entityId, size);
-	_fe3d->quad2d_setColor(_entityId, color);
+	_fe3d->quad2d_create(_quad2dId, true);
+	_fe3d->quad2d_setPosition(_quad2dId, position);
+	_fe3d->quad2d_setSize(_quad2dId, size);
+	_fe3d->quad2d_setColor(_quad2dId, color);
 }
 
 GuiViewport::~GuiViewport()
 {
-	_fe3d->quad2d_delete(_entityId);
+	_fe3d->quad2d_delete(_quad2dId);
 }
 
 void GuiViewport::update(bool isInteractable)
@@ -77,17 +77,17 @@ const string & GuiViewport::getId()
 
 const fvec3 & GuiViewport::getColor() const
 {
-	return _fe3d->quad2d_getColor(_entityId);
+	return _fe3d->quad2d_getColor(_quad2dId);
 }
 
 const fvec2 & GuiViewport::getPosition() const
 {
-	return _fe3d->quad2d_getPosition(_entityId);
+	return _fe3d->quad2d_getPosition(_quad2dId);
 }
 
 const fvec2 & GuiViewport::getSize() const
 {
-	return _fe3d->quad2d_getSize(_entityId);
+	return _fe3d->quad2d_getSize(_quad2dId);
 }
 
 void GuiViewport::createWindow(const string & windowId, const fvec2 & position, const fvec2 & size, const fvec3 & color)
@@ -97,8 +97,8 @@ void GuiViewport::createWindow(const string & windowId, const fvec2 & position, 
 		abort();
 	}
 
-	const auto viewportPosition = _fe3d->quad2d_getPosition(_entityId);
-	const auto viewportSize = _fe3d->quad2d_getSize(_entityId);
+	const auto viewportPosition = _fe3d->quad2d_getPosition(_quad2dId);
+	const auto viewportSize = _fe3d->quad2d_getSize(_quad2dId);
 	const auto windowPosition = (viewportPosition + (position * viewportSize));
 	const auto windowSize = ((size * 0.5f) * viewportSize);
 

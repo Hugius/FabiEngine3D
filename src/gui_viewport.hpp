@@ -32,7 +32,7 @@ private:
 	void _updateHovering(bool isInteractable);
 
 	const string _id;
-	const string _entityId;
+	const string _quad2dId;
 
 	unordered_map<string, shared_ptr<GuiWindow>> _windows = {};
 

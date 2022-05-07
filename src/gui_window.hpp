@@ -36,7 +36,7 @@ private:
 
 	const string _id;
 	const string _parentId;
-	const string _entityId;
+	const string _quad2dId;
 
 	unordered_map<string, shared_ptr<GuiScreen>> _screens = {};
 

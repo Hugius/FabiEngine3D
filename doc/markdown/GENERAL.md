@@ -79,6 +79,7 @@
             └── emission_map
             └── normal_map
             └── reflection_map
+            └── refraction_map
             └── specular_map
           └── quad2d
             └── diffuse_map

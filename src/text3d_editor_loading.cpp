@@ -95,6 +95,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 		bool isReflected;
+		bool isRefracted;
 		bool isShadowed;
 		bool isBright;
 		bool hasAabb;
@@ -114,6 +115,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 			>> isHorizontallyFlipped
 			>> isVerticallyFlipped
 			>> isReflected
+			>> isRefracted
 			>> isShadowed
 			>> lightness
 			>> isBright
@@ -148,6 +150,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 			_fe3d->text3d_setVerticallyFlipped(text3dId, isVerticallyFlipped);
 			_fe3d->text3d_setShadowed(text3dId, isShadowed);
 			_fe3d->text3d_setReflected(text3dId, isReflected);
+			_fe3d->text3d_setRefracted(text3dId, isRefracted);
 			_fe3d->text3d_setBright(text3dId, isBright);
 			_fe3d->text3d_setOpacity(text3dId, opacity);
 			_fe3d->text3d_setMinTextureAlpha(text3dId, minTextureAlpha);

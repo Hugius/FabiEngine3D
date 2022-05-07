@@ -10,6 +10,7 @@ void Text3dEditor::_updateLightingMenu()
 		const auto lightness = _fe3d->text3d_getLightness(_currentText3dId);
 		const auto isBright = _fe3d->text3d_isBright(_currentText3dId);
 		const auto isReflected = _fe3d->text3d_isReflected(_currentText3dId);
+		const auto isRefracted = _fe3d->text3d_isRefracted(_currentText3dId);
 		const auto isShadowed = _fe3d->text3d_isShadowed(_currentText3dId);
 		const auto color = _fe3d->text3d_getColor(_currentText3dId);
 
@@ -40,6 +41,10 @@ void Text3dEditor::_updateLightingMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
 			_fe3d->text3d_setReflected(_currentText3dId, !isReflected);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isRefracted")->isHovered())
+		{
+			_fe3d->text3d_setRefracted(_currentText3dId, !isRefracted);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
@@ -73,6 +78,7 @@ void Text3dEditor::_updateLightingMenu()
 
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
+		screen->getButton("isRefracted")->setTextContent(isRefracted ? "Refracted: ON" : "Refracted: OFF");
 		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 	}
 }

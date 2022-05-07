@@ -112,6 +112,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 		bool isReflected;
+		bool isRefracted;
 		bool isShadowed;
 		bool isBright;
 		bool hasAabb;
@@ -132,6 +133,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 			>> isHorizontallyFlipped
 			>> isVerticallyFlipped
 			>> isReflected
+			>> isRefracted
 			>> isShadowed
 			>> lightness
 			>> textureRepeat
@@ -162,6 +164,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		_fe3d->quad3d_setVerticallyFlipped(quad3dId, isVerticallyFlipped);
 		_fe3d->quad3d_setShadowed(quad3dId, isShadowed);
 		_fe3d->quad3d_setReflected(quad3dId, isReflected);
+		_fe3d->quad3d_setRefracted(quad3dId, isRefracted);
 		_fe3d->quad3d_setTextureRepeat(quad3dId, textureRepeat);
 		_fe3d->quad3d_setBright(quad3dId, isBright);
 		_fe3d->quad3d_setOpacity(quad3dId, opacity);

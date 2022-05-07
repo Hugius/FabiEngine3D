@@ -234,6 +234,7 @@ const bool ModelEditor::loadModelsFromFile()
 			int rotationOrder;
 			bool isShadowed;
 			bool isReflected;
+			bool isRefracted;
 
 			iss
 				>> modelId
@@ -245,7 +246,8 @@ const bool ModelEditor::loadModelsFromFile()
 				>> levelOfDetailDistance
 				>> rotationOrder
 				>> isShadowed
-				>> isReflected;
+				>> isReflected
+				>> isRefracted;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			levelOfDetailId = (levelOfDetailId == "?") ? "" : levelOfDetailId;
@@ -286,14 +288,17 @@ const bool ModelEditor::loadModelsFromFile()
 			float specularShininess;
 			float specularIntensity;
 			float reflectivity;
+			float refractivity;
 			float lightness;
 			float emissionIntensity;
 			float opacity;
 			float minTextureAlpha;
 			int reflectionType;
+			int refractionType;
 			int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
+			bool isRefractive;
 			bool isFaceCulled;
 			bool isBright;
 
@@ -307,11 +312,14 @@ const bool ModelEditor::loadModelsFromFile()
 				>> refractionMapPath
 				>> normalMapPath
 				>> reflectionType
+				>> refractionType
 				>> isSpecular
 				>> isReflective
+				>> isRefractive
 				>> specularShininess
 				>> specularIntensity
 				>> reflectivity
+				>> refractivity
 				>> lightness
 				>> color.r
 				>> color.g
@@ -353,10 +361,13 @@ const bool ModelEditor::loadModelsFromFile()
 			_fe3d->model_setSpecularShininess(modelId, partId, specularShininess);
 			_fe3d->model_setSpecularIntensity(modelId, partId, specularIntensity);
 			_fe3d->model_setReflectivity(modelId, partId, reflectivity);
+			_fe3d->model_setRefractivity(modelId, partId, refractivity);
 			_fe3d->model_setLightness(modelId, partId, lightness);
 			_fe3d->model_setTextureRepeat(modelId, partId, textureRepeat);
 			_fe3d->model_setReflective(modelId, partId, isReflective);
+			_fe3d->model_setRefractive(modelId, partId, isRefractive);
 			_fe3d->model_setReflectionType(modelId, partId, ReflectionType(reflectionType));
+			_fe3d->model_setRefractionType(modelId, partId, RefractionType(refractionType));
 			_fe3d->model_setFaceCulled(modelId, partId, isFaceCulled);
 			_fe3d->model_setBright(modelId, partId, isBright);
 			_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);

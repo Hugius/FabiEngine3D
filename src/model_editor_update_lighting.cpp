@@ -11,8 +11,11 @@ void ModelEditor::_updateLightingMenu()
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || _currentPartId.empty());
 		const auto isSpecular = (isPartSelected ? _fe3d->model_isSpecular(_currentModelId, _currentPartId) : false);
 		const auto isReflective = (isPartSelected ? _fe3d->model_isReflective(_currentModelId, _currentPartId) : false);
+		const auto isRefractive = (isPartSelected ? _fe3d->model_isRefractive(_currentModelId, _currentPartId) : false);
 		const auto reflectionType = (isPartSelected ? _fe3d->model_getReflectionType(_currentModelId, _currentPartId) : ReflectionType::CUBE);
+		const auto refractionType = (isPartSelected ? _fe3d->model_getRefractionType(_currentModelId, _currentPartId) : RefractionType::CUBE);
 		const auto reflectivity = (isPartSelected ? _fe3d->model_getReflectivity(_currentModelId, _currentPartId) : 0.0f);
+		const auto refractivity = (isPartSelected ? _fe3d->model_getRefractivity(_currentModelId, _currentPartId) : 0.0f);
 		const auto specularShininess = (isPartSelected ? _fe3d->model_getSpecularShininess(_currentModelId, _currentPartId) : 0.0f);
 		const auto specularIntensity = (isPartSelected ? _fe3d->model_getSpecularIntensity(_currentModelId, _currentPartId) : 0.0f);
 		const auto lightness = (isPartSelected ? _fe3d->model_getLightness(_currentModelId, _currentPartId) : 0.0f);
@@ -20,6 +23,7 @@ void ModelEditor::_updateLightingMenu()
 		const auto isBright = (isPartSelected ? _fe3d->model_isBright(_currentModelId, _currentPartId) : false);
 		const auto isShadowed = (isNoPartSelected ? _fe3d->model_isShadowed(_currentModelId) : false);
 		const auto isReflected = (isNoPartSelected ? _fe3d->model_isReflected(_currentModelId) : false);
+		const auto isRefracted = (isNoPartSelected ? _fe3d->model_isRefracted(_currentModelId) : false);
 		const auto emissionIntensity = (isPartSelected ? _fe3d->model_getEmissionIntensity(_currentModelId, _currentPartId) : 0.0f);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -54,6 +58,10 @@ void ModelEditor::_updateLightingMenu()
 		{
 			_fe3d->model_setReflective(_currentModelId, _currentPartId, !isReflective);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isRefractive")->isHovered())
+		{
+			_fe3d->model_setRefractive(_currentModelId, _currentPartId, !isRefractive);
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
 			_fe3d->model_setBright(_currentModelId, _currentPartId, !isBright);
@@ -65,6 +73,10 @@ void ModelEditor::_updateLightingMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
 			_fe3d->model_setReflected(_currentModelId, !isReflected);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isRefracted")->isHovered())
+		{
+			_fe3d->model_setRefracted(_currentModelId, !isRefracted);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
@@ -84,9 +96,31 @@ void ModelEditor::_updateLightingMenu()
 				}
 			}
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("refractionType")->isHovered())
+		{
+			switch(refractionType)
+			{
+				case RefractionType::CUBE:
+				{
+					_fe3d->model_setRefractionType(_currentModelId, _currentPartId, RefractionType::PLANAR);
+
+					break;
+				}
+				case RefractionType::PLANAR:
+				{
+					_fe3d->model_setRefractionType(_currentModelId, _currentPartId, RefractionType::CUBE);
+
+					break;
+				}
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("refractivity")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("refractivity", "Refractivity", (refractivity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionIntensity")->isHovered())
 		{
@@ -142,6 +176,13 @@ void ModelEditor::_updateLightingMenu()
 
 			_fe3d->model_setReflectivity(_currentModelId, _currentPartId, (value / 100.0f));
 		}
+		if((_gui->getOverlay()->getValueFormId() == "refractivity") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->model_setRefractivity(_currentModelId, _currentPartId, (value / 100.0f));
+		}
 		if((_gui->getOverlay()->getValueFormId() == "emissionIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
@@ -156,18 +197,24 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("specularShininess")->setHoverable(isPartSelected);
 		screen->getButton("specularIntensity")->setHoverable(isPartSelected);
 		screen->getButton("isReflective")->setHoverable(isPartSelected);
+		screen->getButton("isRefractive")->setHoverable(isPartSelected);
 		screen->getButton("reflectionType")->setHoverable(isPartSelected);
+		screen->getButton("refractionType")->setHoverable(isPartSelected);
 		screen->getButton("reflectivity")->setHoverable(isPartSelected);
+		screen->getButton("refractivity")->setHoverable(isPartSelected);
 		screen->getButton("isBright")->setHoverable(isPartSelected);
 		screen->getButton("isShadowed")->setHoverable(isNoPartSelected);
 		screen->getButton("isReflected")->setHoverable(isNoPartSelected);
+		screen->getButton("isRefracted")->setHoverable(isNoPartSelected);
 		screen->getButton("emissionIntensity")->setHoverable(isPartSelected);
 
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
+		screen->getButton("isRefracted")->setTextContent(isRefracted ? "Refracted: ON" : "Refracted: OFF");
 		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+		screen->getButton("isRefractive")->setTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
 
 		switch(reflectionType)
 		{
@@ -180,6 +227,22 @@ void ModelEditor::_updateLightingMenu()
 			case ReflectionType::PLANAR:
 			{
 				screen->getButton("reflectionType")->setTextContent("Type: PLANAR");
+
+				break;
+			}
+		}
+
+		switch(refractionType)
+		{
+			case RefractionType::CUBE:
+			{
+				screen->getButton("refractionType")->setTextContent("Type: CUBE");
+
+				break;
+			}
+			case RefractionType::PLANAR:
+			{
+				screen->getButton("refractionType")->setTextContent("Type: PLANAR");
 
 				break;
 			}

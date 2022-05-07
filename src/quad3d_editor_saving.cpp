@@ -33,6 +33,7 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 		auto isHorizontallyFlipped = _fe3d->quad3d_isHorizontallyFlipped(quad3dId);
 		auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(quad3dId);
 		auto isReflected = _fe3d->quad3d_isReflected(quad3dId);
+		auto isRefracted = _fe3d->quad3d_isRefracted(quad3dId);
 		auto isShadowed = _fe3d->quad3d_isShadowed(quad3dId);
 		auto lightness = _fe3d->quad3d_getLightness(quad3dId);
 		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quad3dId);
@@ -78,6 +79,8 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 			<< isVerticallyFlipped
 			<< " "
 			<< isReflected
+			<< " "
+			<< isRefracted
 			<< " "
 			<< isShadowed
 			<< " "

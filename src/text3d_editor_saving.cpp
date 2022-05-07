@@ -32,6 +32,7 @@ const bool Text3dEditor::saveText3dsToFile() const
 		auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(text3dId);
 		auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(text3dId);
 		auto isReflected = _fe3d->text3d_isReflected(text3dId);
+		auto isRefracted = _fe3d->text3d_isRefracted(text3dId);
 		auto isShadowed = _fe3d->text3d_isShadowed(text3dId);
 		auto lightness = _fe3d->text3d_getLightness(text3dId);
 		auto isBright = _fe3d->text3d_isBright(text3dId);
@@ -70,6 +71,8 @@ const bool Text3dEditor::saveText3dsToFile() const
 			<< isVerticallyFlipped
 			<< " "
 			<< isReflected
+			<< " "
+			<< isRefracted
 			<< " "
 			<< isShadowed
 			<< " "

@@ -35,6 +35,7 @@ const bool ModelEditor::saveModelsToFile() const
 		auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
 		auto isReflected = _fe3d->model_isReflected(modelId);
+		auto isRefracted = _fe3d->model_isRefracted(modelId);
 
 		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -65,6 +66,8 @@ const bool ModelEditor::saveModelsToFile() const
 			<< isShadowed
 			<< " "
 			<< isReflected
+			<< " "
+			<< isRefracted
 			<< endl;
 
 		for(auto partId : partIds)
@@ -79,11 +82,14 @@ const bool ModelEditor::saveModelsToFile() const
 			auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
 			auto specularIntensity = _fe3d->model_getSpecularIntensity(modelId, partId);
 			auto reflectivity = _fe3d->model_getReflectivity(modelId, partId);
+			auto refractivity = _fe3d->model_getRefractivity(modelId, partId);
 			auto lightness = _fe3d->model_getLightness(modelId, partId);
 			auto color = _fe3d->model_getColor(modelId, partId);
 			auto textureRepeat = _fe3d->model_getTextureRepeat(modelId, partId);
 			auto isReflective = _fe3d->model_isReflective(modelId, partId);
+			auto isRefractive = _fe3d->model_isRefractive(modelId, partId);
 			auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(modelId, partId));
+			auto refractionType = static_cast<int>(_fe3d->model_getRefractionType(modelId, partId));
 			auto isFaceCulled = _fe3d->model_isFaceCulled(modelId, partId);
 			auto isBright = _fe3d->model_isBright(modelId, partId);
 			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
@@ -132,15 +138,21 @@ const bool ModelEditor::saveModelsToFile() const
 				<< " "
 				<< reflectionType
 				<< " "
+				<< refractionType
+				<< " "
 				<< isSpecular
 				<< " "
 				<< isReflective
+				<< " "
+				<< isRefractive
 				<< " "
 				<< specularShininess
 				<< " "
 				<< specularIntensity
 				<< " "
 				<< reflectivity
+				<< " "
+				<< refractivity
 				<< " "
 				<< lightness
 				<< " "

@@ -100,16 +100,6 @@ void WorldEditor::_updateCaptorEditing()
 				return;
 			}
 
-			if((_gui->getOverlay()->getChoiceFormId() == "selectException") && _gui->getOverlay()->isChoiceFormConfirmed())
-			{
-				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-
-				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
-				{
-					_fe3d->captor_setExceptionId(_activeCaptorId, selectedOptionId);
-				}
-			}
-
 			auto position = _fe3d->captor_getPosition(_activeCaptorId);
 
 			_handleInputBox("captorPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / CAPTOR_POSITION_DIVIDER));

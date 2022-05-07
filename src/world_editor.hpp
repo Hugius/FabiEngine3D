@@ -104,6 +104,9 @@ private:
 	void _updateWorldCreating();
 	void _updateWorldChoosing();
 	void _updateWorldDeleting();
+	void _updateExceptionChoosing();
+	void _updateAnimation3dChoosing();
+	void _updateAnimation2dChoosing();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _updateModelHighlighting(const string & modelId, int & direction);

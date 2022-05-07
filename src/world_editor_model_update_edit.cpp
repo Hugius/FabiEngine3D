@@ -141,32 +141,6 @@ void WorldEditor::_updateModelEditing()
 				return;
 			}
 
-			if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
-			{
-				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-
-				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
-				{
-					if(!currentAnimation3dIds.empty())
-					{
-						_fe3d->model_stopAnimation(_activeModelId, currentAnimation3dIds[0]);
-
-						for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
-						{
-							if(!partId.empty())
-							{
-								_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
-								_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
-								_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
-								_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
-							}
-						}
-					}
-
-					_fe3d->model_startAnimation(_activeModelId, ("@" + selectedOptionId), -1);
-				}
-			}
-
 			auto position = _fe3d->model_getBasePosition(_activeModelId);
 			auto rotation = _fe3d->model_getBaseRotation(_activeModelId);
 			auto size = _fe3d->model_getBaseSize(_activeModelId);

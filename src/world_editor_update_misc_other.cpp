@@ -268,3 +268,65 @@ void WorldEditor::_updateWorldDeleting()
 		}
 	}
 }
+
+void WorldEditor::_updateExceptionChoosing()
+{
+	if((_gui->getOverlay()->getChoiceFormId() == "selectException") && _gui->getOverlay()->isChoiceFormConfirmed())
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			_fe3d->captor_setExceptionId(_activeCaptorId, selectedOptionId);
+		}
+	}
+}
+
+void WorldEditor::_updateAnimation3dChoosing()
+{
+	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+		const auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
+
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			if(!currentAnimation3dIds.empty())
+			{
+				_fe3d->model_stopAnimation(_activeModelId, currentAnimation3dIds[0]);
+
+				for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
+				{
+					if(!partId.empty())
+					{
+						_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
+					}
+				}
+			}
+
+			_fe3d->model_startAnimation(_activeModelId, ("@" + selectedOptionId), -1);
+		}
+	}
+}
+
+void WorldEditor::_updateAnimation2dChoosing()
+{
+	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+		const auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
+
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			if(!currentAnimation2dIds.empty())
+			{
+				_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
+			}
+
+			_fe3d->quad3d_startAnimation(_activeQuad3dId, ("@" + selectedOptionId), -1);
+		}
+	}
+}

@@ -133,21 +133,6 @@ void WorldEditor::_updateQuad3dEditing()
 				return;
 			}
 
-			if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
-			{
-				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-
-				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
-				{
-					if(!currentAnimation2dIds.empty())
-					{
-						_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
-					}
-
-					_fe3d->quad3d_startAnimation(_activeQuad3dId, ("@" + selectedOptionId), -1);
-				}
-			}
-
 			auto position = _fe3d->quad3d_getPosition(_activeQuad3dId);
 			auto rotation = _fe3d->quad3d_getRotation(_activeQuad3dId);
 			auto size = _fe3d->quad3d_getSize(_activeQuad3dId);

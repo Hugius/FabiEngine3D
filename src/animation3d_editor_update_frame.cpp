@@ -175,19 +175,19 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			case TransformationType::MOVEMENT:
 			{
-				screen->getButton("transformationType")->setTextContent("Trans Type: MOVE");
+				screen->getButton("transformationType")->setTextContent("Type: MOVE");
 
 				break;
 			}
 			case TransformationType::ROTATION:
 			{
-				screen->getButton("transformationType")->setTextContent("Trans Type: ROTATE");
+				screen->getButton("transformationType")->setTextContent("Type: ROTATE");
 
 				break;
 			}
 			case TransformationType::SCALING:
 			{
-				screen->getButton("transformationType")->setTextContent("Trans Type: SCALE");
+				screen->getButton("transformationType")->setTextContent("Type: SCALE");
 
 				break;
 			}
@@ -196,19 +196,19 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			case SpeedType::LINEAR:
 			{
-				screen->getButton("speedType")->setTextContent("Speed Type: LINEAR");
+				screen->getButton("speedType")->setTextContent("Type: LINEAR");
 
 				break;
 			}
 			case SpeedType::EXPONENTIAL:
 			{
-				screen->getButton("speedType")->setTextContent("Speed Type: EXPONENT");
+				screen->getButton("speedType")->setTextContent("Type: EXPONENT");
 
 				break;
 			}
 			case SpeedType::INSTANTLY:
 			{
-				screen->getButton("speedType")->setTextContent("Speed Type: INSTANT");
+				screen->getButton("speedType")->setTextContent("Type: INSTANT");
 
 				break;
 			}

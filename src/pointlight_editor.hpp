@@ -1,0 +1,47 @@
+#pragma once
+
+#include "base_editor.hpp"
+
+class PointlightEditor final : public BaseEditor
+{
+public:
+	using BaseEditor::inject;
+
+	void update();
+	void deleteLoadedPointlights();
+
+	const vector<string> & getLoadedPointlightIds() const;
+
+	const bool loadPointlightsFromFile();
+	const bool savePointlightsToFile() const;
+
+private:
+	void _load();
+	void _unload();
+	void _loadGUI();
+	void _unloadGUI();
+	void _updateMainMenu();
+	void _updateChoiceMenu();
+	void _updatePointlightCreating();
+	void _updatePointlightChoosing();
+	void _updatePointlightDeleting();
+	void _updateCamera();
+	void _updateMiscellaneous();
+
+	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
+	static inline constexpr float GRID_SIZE = 50.0f;
+	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
+	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
+	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
+
+	static inline constexpr int GRID_REPEAT = 10;
+
+	vector<string> _loadedPointlightIds = {};
+
+	string _hoveredPointlightId = "";
+	string _currentPointlightId = "";
+};

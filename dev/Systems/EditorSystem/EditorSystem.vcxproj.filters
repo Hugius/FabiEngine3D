@@ -253,6 +253,21 @@
     <Filter Include="World Editor\Update\AABB">
       <UniqueIdentifier>{bcfc1795-4e30-464e-b315-0660a8472034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pointlight Editor">
+      <UniqueIdentifier>{aadfd72b-f481-41ad-87c5-93a7f0ceac2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pointlight Editor\Main">
+      <UniqueIdentifier>{51879b16-1397-4670-9965-0ebee2b8daea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pointlight Editor\Miscellaneous">
+      <UniqueIdentifier>{382c9737-82bf-4b9e-9658-3ec13a61287e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pointlight Editor\Persistence">
+      <UniqueIdentifier>{4c202943-feee-43d0-995f-48774fe840d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pointlight Editor\Update">
+      <UniqueIdentifier>{e6bcf3c2-6a59-4cc4-a5ea-2057f1b35262}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -681,6 +696,24 @@
     <ClCompile Include="..\..\..\src\world_editor_aabb_update_menu.cpp">
       <Filter>World Editor\Update\AABB</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_lifecycle.cpp">
+      <Filter>Pointlight Editor\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_loading.cpp">
+      <Filter>Pointlight Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_saving.cpp">
+      <Filter>Pointlight Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_update_menu.cpp">
+      <Filter>Pointlight Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_update_misc.cpp">
+      <Filter>Pointlight Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_editor_misc.cpp">
+      <Filter>Pointlight Editor\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -727,6 +760,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_editor.hpp">
       <Filter>AABB Editor\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\pointlight_editor.hpp">
+      <Filter>Pointlight Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

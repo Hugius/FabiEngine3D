@@ -66,7 +66,6 @@ void WorldEditor::_load()
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
-	_fe3d->model_setShadowed("@@grid", false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);

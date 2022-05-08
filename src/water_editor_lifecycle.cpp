@@ -16,7 +16,6 @@ void WaterEditor::_load()
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
-	_fe3d->model_setShadowed("@@grid", false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
@@ -29,6 +28,11 @@ void WaterEditor::_load()
 	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
 	_fe3d->graphics_setPlanarReflectionQuality(1024);
 	_fe3d->graphics_setPlanarRefractionQuality(1024);
+	_fe3d->graphics_setShadowsEnabled(true);
+	_fe3d->graphics_setShadowLightness(0.25f);
+	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(5.0f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(5.0f)));
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -63,6 +67,7 @@ void WaterEditor::_unload()
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setPlanarReflectionQuality(0);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
+	_fe3d->graphics_setShadowsEnabled(false);
 
 	_fe3d->camera_reset();
 

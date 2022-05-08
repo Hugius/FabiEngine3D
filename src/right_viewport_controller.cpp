@@ -11,11 +11,12 @@ void RightViewportController::initialize()
 
 	window->createScreen("empty");
 	window->createScreen("main");
-	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("pointlightEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[5]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->setActiveScreen("main");
 }
 
@@ -25,7 +26,14 @@ void RightViewportController::update()
 
 	if(screen->getId() == "main")
 	{
-		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pointlightEditor")->isHovered())
+		{
+			if(_pointlightEditor->loadPointlightsFromFile())
+			{
+				_pointlightEditor->load();
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
 			if(_modelEditor->loadModelsFromFile() && _animation3dEditor->loadAnimation3dsFromFile())
 			{
@@ -59,11 +67,17 @@ void RightViewportController::update()
 		}
 	}
 
+	_pointlightEditor->update();
 	_animation3dEditor->update();
 	_animation2dEditor->update();
 	_sound2dEditor->update();
 	_worldEditor->update();
 	_scriptEditor->update();
+}
+
+void RightViewportController::inject(shared_ptr<PointlightEditor> pointlightEditor)
+{
+	_pointlightEditor = pointlightEditor;
 }
 
 void RightViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)

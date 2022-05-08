@@ -234,6 +234,7 @@ private:
 	static inline constexpr float DEFAULT_SOUND3D_MAX_VOLUME = 1.0f;
 	static inline constexpr float DEFAULT_SOUND3D_MAX_DISTANCE = 25.0f;
 	static inline constexpr float GRID_SIZE = 1024.0f;
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 

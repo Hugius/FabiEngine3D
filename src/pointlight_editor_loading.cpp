@@ -31,27 +31,33 @@ const bool PointlightEditor::loadPointlightsFromFile()
 	while(getline(file, line))
 	{
 		string pointlightId;
-		fvec3 size;
+		fvec3 radius;
 		fvec3 color;
+		float intensity;
+		int shape;
 
 		istringstream iss(line);
 
 		iss
 			>> pointlightId
-			>> size.x
-			>> size.y
-			>> size.z
+			>> radius.x
+			>> radius.y
+			>> radius.z
 			>> color.r
 			>> color.g
-			>> color.b;
+			>> color.b
+			>> intensity
+			>> shape;
 
 		_loadedPointlightIds.push_back(pointlightId);
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
-		_fe3d->pointlight_create(pointlightId, false);
+		_fe3d->pointlight_create(pointlightId);
 		_fe3d->pointlight_setVisible(pointlightId, false);
-		_fe3d->pointlight_setBaseSize(pointlightId, size);
+		_fe3d->pointlight_setRadius(pointlightId, radius);
 		_fe3d->pointlight_setColor(pointlightId, color);
+		_fe3d->pointlight_setIntensity(pointlightId, intensity);
+		_fe3d->pointlight_setShape(pointlightId, PointlightShapeType(shape));
 	}
 
 	file.close();

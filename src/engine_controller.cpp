@@ -18,6 +18,7 @@ EngineController::EngineController()
 	_aabbEditor = make_shared<AabbEditor>();
 	_quad2dEditor = make_shared<Quad2dEditor>();
 	_text2dEditor = make_shared<Text2dEditor>();
+	_pointlightEditor = make_shared<PointlightEditor>();
 	_animation3dEditor = make_shared<Animation3dEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
 	_sound2dEditor = make_shared<Sound2dEditor>();
@@ -40,6 +41,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_quad2dEditor);
 	_leftViewportController->inject(_text2dEditor);
 	_rightViewportController->inject(_guiManager);
+	_rightViewportController->inject(_pointlightEditor);
 	_rightViewportController->inject(_animation3dEditor);
 	_rightViewportController->inject(_animation2dEditor);
 	_rightViewportController->inject(_sound2dEditor);
@@ -78,6 +80,7 @@ EngineController::EngineController()
 	_aabbEditor->inject(_guiManager);
 	_quad2dEditor->inject(_guiManager);
 	_text2dEditor->inject(_guiManager);
+	_pointlightEditor->inject(_guiManager);
 	_animation3dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_modelEditor);
 	_animation2dEditor->inject(_guiManager);
@@ -133,6 +136,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_aabbEditor->inject(_fe3d);
 	_quad2dEditor->inject(_fe3d);
 	_text2dEditor->inject(_fe3d);
+	_pointlightEditor->inject(_fe3d);
 	_animation3dEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);
 	_sound2dEditor->inject(_fe3d);

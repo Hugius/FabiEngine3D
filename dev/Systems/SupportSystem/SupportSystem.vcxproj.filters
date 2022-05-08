@@ -72,7 +72,7 @@
     <ClInclude Include="..\..\..\src\reflection_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\pointlight_type.hpp">
+    <ClInclude Include="..\..\..\src\pointlight_shape_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\direction_order_type.hpp">

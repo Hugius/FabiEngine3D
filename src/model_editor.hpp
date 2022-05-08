@@ -52,6 +52,7 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;
 

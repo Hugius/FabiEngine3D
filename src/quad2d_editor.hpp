@@ -30,6 +30,8 @@ private:
 
 	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);
 
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+
 	vector<string> _loadedQuad2dIds = {};
 
 	string _currentQuad2dId = "";

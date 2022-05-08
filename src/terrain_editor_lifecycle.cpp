@@ -60,6 +60,10 @@ void TerrainEditor::_unload()
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setShadowsEnabled(false);
+	_fe3d->graphics_setShadowLightness(0.0f);
+	_fe3d->graphics_setShadowQuality(0);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
+	_fe3d->graphics_setShadowSize(0.0f);
 
 	_fe3d->camera_reset();
 

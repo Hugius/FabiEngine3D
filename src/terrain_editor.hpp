@@ -42,6 +42,7 @@ private:
 	static inline constexpr float GRID_SIZE = 1024.0f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 1.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 

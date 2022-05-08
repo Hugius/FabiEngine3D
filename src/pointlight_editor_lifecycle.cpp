@@ -62,6 +62,8 @@ void PointlightEditor::_unload()
 	_fe3d->graphics_setShadowsEnabled(false);
 	_fe3d->graphics_setShadowLightness(0.0f);
 	_fe3d->graphics_setShadowQuality(0);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
+	_fe3d->graphics_setShadowSize(0.0f);
 
 	_fe3d->camera_reset();
 
@@ -82,11 +84,13 @@ void PointlightEditor::_loadGUI()
 	leftWindow->getScreen("pointlightEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("pointlightEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("pointlightEditorMenuChoice");
-	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("size", fvec2(0.0f, positions[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("radius", fvec2(0.0f, positions[0]), TEXT_SIZE("Radius"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Radius", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("intensity", fvec2(0.0f, positions[2]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("shape", fvec2(0.0f, positions[3]), TEXT_SIZE("Shape"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shape", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("pointlightEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("pointlightEditorMenuMain");
 	rightWindow->setActiveScreen("empty");

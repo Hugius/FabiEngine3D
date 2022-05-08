@@ -12,7 +12,7 @@
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
 #include "refraction_type.hpp"
-#include "pointlight_type.hpp"
+#include "pointlight_shape_type.hpp"
 #include "ray.hpp"
 #include "speed_type.hpp"
 #include "transformation_type.hpp"
@@ -647,7 +647,7 @@ public:
 	void pointlight_setRadius(const string & pointlightId, const fvec3 & value);
 	void pointlight_setColor(const string & pointlightId, const fvec3 & value);
 	void pointlight_setIntensity(const string & pointlightId, float value);
-	void pointlight_setShape(const string & pointlightId, PointlightType value);
+	void pointlight_setShape(const string & pointlightId, PointlightShapeType value);
 
 	const vector<string> pointlight_getIds() const;
 	const fvec3 & pointlight_getPosition(const string & pointlightId) const;
@@ -657,7 +657,7 @@ public:
 	const int pointlight_getMaxCount() const;
 	const bool pointlight_isExisting(const string & pointlightId) const;
 	const bool pointlight_isVisible(const string & pointlightId) const;
-	const PointlightType pointlight_getShape(const string & pointlightId) const;
+	const PointlightShapeType pointlight_getShape(const string & pointlightId) const;
 
 	void spotlight_create(const string & spotlightId);
 	void spotlight_delete(const string & spotlightId);

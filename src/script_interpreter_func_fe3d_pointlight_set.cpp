@@ -175,13 +175,13 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 			{
 				if(args[1]->getString() == "CIRCLE")
 				{
-					_fe3d->pointlight_setShape(args[0]->getString(), PointlightType::CIRCLE);
+					_fe3d->pointlight_setShape(args[0]->getString(), PointlightShapeType::CIRCLE);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 				else if(args[1]->getString() == "SQUARE")
 				{
-					_fe3d->pointlight_setShape(args[0]->getString(), PointlightType::SQUARE);
+					_fe3d->pointlight_setShape(args[0]->getString(), PointlightShapeType::SQUARE);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}

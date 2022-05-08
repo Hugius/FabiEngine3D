@@ -35,7 +35,7 @@
     <ClInclude Include="..\..\..\src\direction_order_type.hpp" />
     <ClInclude Include="..\..\..\src\input_handler.hpp" />
     <ClInclude Include="..\..\..\src\keyboard_key_type.hpp" />
-    <ClInclude Include="..\..\..\src\pointlight_type.hpp" />
+    <ClInclude Include="..\..\..\src\pointlight_shape_type.hpp" />
     <ClInclude Include="..\..\..\src\logger.hpp" />
     <ClInclude Include="..\..\..\src\logger_message_type.hpp" />
     <ClInclude Include="..\..\..\src\networking_protocol_type.hpp" />

@@ -66,8 +66,10 @@ void PointlightEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "pointlightEditorMenuChoice")
 	{
-		const auto size = _fe3d->pointlight_getBaseSize(_currentPointlightId);
+		const auto radius = _fe3d->pointlight_getRadius(_currentPointlightId);
 		const auto color = _fe3d->pointlight_getColor(_currentPointlightId);
+		const auto intensity = _fe3d->pointlight_getIntensity(_currentPointlightId);
+		const auto shape = _fe3d->pointlight_getShape(_currentPointlightId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -78,11 +80,11 @@ void PointlightEditor::_updateChoiceMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("radius")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusX", "X", (radius.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusY", "Y", (radius.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusZ", "Z", (radius.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -90,27 +92,49 @@ void PointlightEditor::_updateChoiceMenu()
 			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-
-		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->pointlight_setBaseSize(_currentPointlightId, fvec3((value / 100.0f), size.y, size.z));
+			_gui->getOverlay()->openValueForm("intensity", "X", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+			switch(shape)
+			{
+				case PointlightShapeType::CIRCLE:
+				{
+					_fe3d->pointlight_setShape(_currentPointlightId, PointlightShapeType::SQUARE);
 
-			_fe3d->pointlight_setBaseSize(_currentPointlightId, fvec3(size.x, (value / 100.0f), size.z));
+					break;
+				}
+				case PointlightShapeType::SQUARE:
+				{
+					_fe3d->pointlight_setShape(_currentPointlightId, PointlightShapeType::CIRCLE);
+
+					break;
+				}
+			}
 		}
-		if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
+
+		if((_gui->getOverlay()->getValueFormId() == "radiusX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->pointlight_setBaseSize(_currentPointlightId, fvec3(size.x, size.y, (value / 100.0f)));
+			_fe3d->pointlight_setRadius(_currentPointlightId, fvec3((value / RADIUS_MULTIPLIER), radius.y, radius.z));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "radiusY") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->pointlight_setRadius(_currentPointlightId, fvec3(radius.x, (value / RADIUS_MULTIPLIER), radius.z));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "radiusZ") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->pointlight_setRadius(_currentPointlightId, fvec3(radius.x, radius.y, (value / RADIUS_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -132,6 +156,29 @@ void PointlightEditor::_updateChoiceMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->pointlight_setColor(_currentPointlightId, fvec3(color.r, color.g, (value / COLOR_MULTIPLIER)));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->pointlight_setIntensity(_currentPointlightId, (value / INTENSITY_MULTIPLIER));
+		}
+
+		switch(shape)
+		{
+			case PointlightShapeType::CIRCLE:
+			{
+				screen->getButton("shape")->setTextContent("Shape: CUBE");
+
+				break;
+			}
+			case PointlightShapeType::SQUARE:
+			{
+				screen->getButton("shape")->setTextContent("Shape: PLANAR");
+
+				break;
+			}
 		}
 	}
 }

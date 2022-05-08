@@ -70,7 +70,7 @@ void Pointlight::setIntensity(float value)
 	_intensity = max(0.0f, value);
 }
 
-void Pointlight::setShape(PointlightType value)
+void Pointlight::setShape(PointlightShapeType value)
 {
 	_shape = value;
 }
@@ -110,7 +110,7 @@ const bool Pointlight::isVisible() const
 	return _isVisible;
 }
 
-const PointlightType Pointlight::getShape() const
+const PointlightShapeType Pointlight::getShape() const
 {
 	return _shape;
 }

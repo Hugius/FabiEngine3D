@@ -1,7 +1,7 @@
 #pragma once
 
 #include "mathematics.hpp"
-#include "pointlight_type.hpp"
+#include "pointlight_shape_type.hpp"
 
 #include <string>
 
@@ -19,7 +19,7 @@ public:
 	void setRadius(const fvec3 & value);
 	void setColor(const fvec3 & value);
 	void setIntensity(float value);
-	void setShape(PointlightType value);
+	void setShape(PointlightShapeType value);
 	void setVisible(bool value);
 
 	const string & getId() const;
@@ -32,7 +32,7 @@ public:
 
 	const bool isVisible() const;
 
-	const PointlightType getShape() const;
+	const PointlightShapeType getShape() const;
 
 private:
 	const string _id;
@@ -47,5 +47,5 @@ private:
 
 	bool _isVisible = true;
 
-	PointlightType _shape = PointlightType::CIRCLE;
+	PointlightShapeType _shape = PointlightShapeType::CIRCLE;
 };

@@ -96,15 +96,15 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				switch(_fe3d->pointlight_getShape(_activePointlightId))
 				{
-					case PointlightType::CIRCLE:
+					case PointlightShapeType::CIRCLE:
 					{
-						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::SQUARE);
+						_fe3d->pointlight_setShape(_activePointlightId, PointlightShapeType::SQUARE);
 
 						break;
 					}
-					case PointlightType::SQUARE:
+					case PointlightShapeType::SQUARE:
 					{
-						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::CIRCLE);
+						_fe3d->pointlight_setShape(_activePointlightId, PointlightShapeType::CIRCLE);
 
 						break;
 					}
@@ -167,7 +167,7 @@ void WorldEditor::_updatePointlightEditing()
 			_fe3d->model_setBasePosition(("@@pointlight_" + _activePointlightId), position);
 			_fe3d->model_setColor(("@@pointlight_" + _activePointlightId), "", color);
 
-			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightType::CIRCLE)
+			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShapeType::CIRCLE)
 			{
 				screen->getButton("shape")->setDiffuseMap("engine\\assets\\image\\diffuse_map\\shape_circle.tga");
 			}

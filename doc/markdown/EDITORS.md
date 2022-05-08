@@ -9,6 +9,7 @@
 - [AABB Editor](AABB_EDITOR.md)
 - [Quad2D Editor](QUAD2D_EDITOR.md)
 - [Text2D Editor](TEXT2D_EDITOR.md)
+- [Pointlight Editor](POINTLIGHT_EDITOR.md)
 - [Animation3D Editor](ANIMATION3D_EDITOR.md)
 - [Animation2D Editor](ANIMATION2D_EDITOR.md)
 - [Sound2D Editor](SOUND2D_EDITOR.md)

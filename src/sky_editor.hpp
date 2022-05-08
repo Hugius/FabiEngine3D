@@ -32,6 +32,7 @@ private:
 	void _updateMiscellaneous();
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 
 	vector <string> _loadedSkyIds = {};
 

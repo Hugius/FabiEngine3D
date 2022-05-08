@@ -1,6 +1,7 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
+#include "pointlight_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound2d_editor.hpp"
@@ -12,6 +13,7 @@ class RightViewportController final : public BaseViewportController
 public:
 	using BaseViewportController::inject;
 
+	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
@@ -31,6 +33,7 @@ private:
 	static inline constexpr float CW = 0.11f;
 	static inline constexpr float CH = 0.085f;
 
+	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;

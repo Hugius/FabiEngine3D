@@ -86,7 +86,7 @@ void PointlightEditor::_updatePointlightCreating()
 		_loadedPointlightIds.push_back(newPointlightId);
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
-		_fe3d->pointlight_create(newPointlightId, false);
+		_fe3d->pointlight_create(newPointlightId);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 		_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + newPointlightId.substr(1));

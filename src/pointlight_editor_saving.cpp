@@ -23,23 +23,29 @@ const bool PointlightEditor::savePointlightsToFile() const
 
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		auto size = _fe3d->pointlight_getBaseSize(pointlightId);
+		auto radius = _fe3d->pointlight_getRadius(pointlightId);
 		auto color = _fe3d->pointlight_getColor(pointlightId);
+		auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
+		auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
 
 		file
 			<< pointlightId
 			<< " "
-			<< size.x
+			<< radius.x
 			<< " "
-			<< size.y
+			<< radius.y
 			<< " "
-			<< size.z
+			<< radius.z
 			<< " "
 			<< color.r
 			<< " "
 			<< color.g
 			<< " "
 			<< color.b
+			<< " "
+			<< intensity
+			<< " "
+			<< shape
 			<< endl;
 	}
 

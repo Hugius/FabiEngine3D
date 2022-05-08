@@ -69,6 +69,11 @@ void WorldEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
+		{
+			_isGridModeEnabled = !_isGridModeEnabled;
+		}
+
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 		{
 			_isWireframeModeEnabled = !_isWireframeModeEnabled;
@@ -78,12 +83,9 @@ void WorldEditor::_updateMiscellaneous()
 		{
 			_isAabbModeEnabled = !_isAabbModeEnabled;
 		}
-
-		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
-		{
-			_isGridModeEnabled = !_isGridModeEnabled;
-		}
 	}
+
+	_fe3d->model_setVisible("@@grid", _isGridModeEnabled);
 
 	if(!_fe3d->sky_getSelectedId().empty())
 	{
@@ -132,8 +134,6 @@ void WorldEditor::_updateMiscellaneous()
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
-
-	_fe3d->model_setVisible("@@grid", _isGridModeEnabled);
 
 	if(_fe3d->terrain_getSelectedId().empty())
 	{

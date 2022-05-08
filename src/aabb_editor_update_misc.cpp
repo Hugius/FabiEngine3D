@@ -34,6 +34,11 @@ void AabbEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
+		{
+			_fe3d->model_setVisible("@@grid", !_fe3d->model_isVisible("@@grid"));
+		}
+
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));

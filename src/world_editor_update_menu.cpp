@@ -163,9 +163,9 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingCaptor = false;
+			_isGridModeEnabled = false;
 			_isWireframeModeEnabled = false;
 			_isAabbModeEnabled = false;
-			_isGridModeEnabled = false;
 		}
 	}
 }

@@ -314,7 +314,7 @@ private:
 	bool _isPlacingPointlight = false;
 	bool _isPlacingSpotlight = false;
 	bool _isPlacingCaptor = false;
+	bool _isGridModeEnabled = true;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;
-	bool _isGridModeEnabled = false;
 };

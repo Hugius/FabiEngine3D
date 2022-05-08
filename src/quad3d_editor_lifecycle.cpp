@@ -53,6 +53,9 @@ void Quad3dEditor::_unload()
 		_fe3d->quad3d_delete(quad3dId);
 	}
 
+	_fe3d->model_delete("@@box");
+	_fe3d->model_delete("@@grid");
+
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
@@ -72,9 +75,6 @@ void Quad3dEditor::_unload()
 	_fe3d->graphics_setShadowQuality(0);
 
 	_fe3d->camera_reset();
-
-	_fe3d->model_delete("@@box");
-	_fe3d->model_delete("@@grid");
 
 	_gui->getOverlay()->deleteTextField("quad3dId");
 

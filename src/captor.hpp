@@ -16,26 +16,31 @@ public:
 
 	void updateTarget();
 	void capture();
-	void setCaptured();
+	void setReflectionsCaptured();
+	void setRefractionsCaptured();
 	void setPosition(const fvec3 & value);
 	void move(const fvec3 & change);
 	void moveTo(const fvec3 & target, float speed);
-	void setCubeMap(shared_ptr<TextureBuffer> value);
+	void setReflectionCubeMap(shared_ptr<TextureBuffer> value);
+	void setRefractionCubeMap(shared_ptr<TextureBuffer> value);
 	void setExceptionId(const string & id);
 
-	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getReflectionTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getRefractionTextureBuffer() const;
 
 	const string & getId() const;
 	const string & getExceptionId() const;
 
 	const fvec3 & getPosition() const;
 
-	const bool mustCapture() const;
+	const bool mustCaptureReflections() const;
+	const bool mustCaptureRefractions() const;
 
 private:
 	const string _id;
 
-	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _reflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _refractionTextureBuffer = nullptr;
 
 	string _exceptionId = "";
 
@@ -44,6 +49,6 @@ private:
 
 	float _positionTargetSpeed = 0.0f;
 
-	bool _mustCapture = false;
-	bool _isCaptured = false;
+	bool _mustCaptureReflections = false;
+	bool _mustCaptureRefractions = false;
 };

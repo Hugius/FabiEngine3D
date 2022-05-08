@@ -33,25 +33,33 @@ void ModelColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());
 	_shaderBuffer->uploadUniform("u_isShadowsEnabled", _renderStorage->isShadowsEnabled());
 	_shaderBuffer->uploadUniform("u_isShadowCircleEnabled", _renderStorage->isShadowCircleEnabled());
-	_shaderBuffer->uploadUniform("u_previousCubeReflectionMap", 0);
-	_shaderBuffer->uploadUniform("u_currentCubeReflectionMap", 1);
-	_shaderBuffer->uploadUniform("u_planarReflectionMap", 2);
-	_shaderBuffer->uploadUniform("u_shadowMap", 3);
-	_shaderBuffer->uploadUniform("u_diffuseMap", 4);
-	_shaderBuffer->uploadUniform("u_emissionMap", 5);
-	_shaderBuffer->uploadUniform("u_specularMap", 6);
-	_shaderBuffer->uploadUniform("u_reflectionMap", 7);
-	_shaderBuffer->uploadUniform("u_refractionMap", 8);
-	_shaderBuffer->uploadUniform("u_normalMap", 9);
+	_shaderBuffer->uploadUniform("u_previousReflectionCubeMap", 0);
+	_shaderBuffer->uploadUniform("u_previousRefractionCubeMap", 1);
+	_shaderBuffer->uploadUniform("u_currentReflectionCubeMap", 2);
+	_shaderBuffer->uploadUniform("u_currentRefractionCubeMap", 3);
+	_shaderBuffer->uploadUniform("u_planarReflectionMap", 4);
+	_shaderBuffer->uploadUniform("u_planarRefractionMap", 5);
+	_shaderBuffer->uploadUniform("u_shadowMap", 6);
+	_shaderBuffer->uploadUniform("u_diffuseMap", 7);
+	_shaderBuffer->uploadUniform("u_emissionMap", 8);
+	_shaderBuffer->uploadUniform("u_specularMap", 9);
+	_shaderBuffer->uploadUniform("u_reflectionMap", 10);
+	_shaderBuffer->uploadUniform("u_refractionMap", 11);
+	_shaderBuffer->uploadUniform("u_normalMap", 12);
 
 	if(_renderStorage->getPlanarReflectionTextureBuffer() != nullptr)
 	{
-		glActiveTexture(GL_TEXTURE2);
+		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getPlanarReflectionTextureBuffer()->getTboId());
+	}
+	if(_renderStorage->getPlanarRefractionTextureBuffer() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getPlanarRefractionTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
-		glActiveTexture(GL_TEXTURE3);
+		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getTboId());
 	}
 
@@ -78,12 +86,17 @@ void ModelColorRenderer::unbind()
 
 	if(_renderStorage->getPlanarReflectionTextureBuffer() != nullptr)
 	{
-		glActiveTexture(GL_TEXTURE2);
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(_renderStorage->getPlanarRefractionTextureBuffer() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
-		glActiveTexture(GL_TEXTURE3);
+		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -153,22 +166,33 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, model->getMaxClipPosition().y));
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, model->getMaxClipPosition().z));
 	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", model->getCubeReflectionMixValue());
+	_shaderBuffer->uploadUniform("u_cubeRefractionMixValue", model->getCubeRefractionMixValue());
 	_shaderBuffer->uploadUniform("u_cameraView", (model->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
 	if(!model->getPreviousCaptorId().empty())
 	{
-		if(captors.at(model->getPreviousCaptorId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(model->getPreviousCaptorId())->getReflectionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getReflectionTextureBuffer()->getTboId());
+		}
+		if(captors.at(model->getPreviousCaptorId())->getRefractionTextureBuffer() != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getRefractionTextureBuffer()->getTboId());
 		}
 	}
 	if(!model->getCurrentCaptorId().empty())
 	{
-		if(captors.at(model->getCurrentCaptorId())->getCubeTextureBuffer() != nullptr)
+		if(captors.at(model->getCurrentCaptorId())->getReflectionTextureBuffer() != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getCubeTextureBuffer()->getTboId());
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getReflectionTextureBuffer()->getTboId());
+		}
+		if(captors.at(model->getCurrentCaptorId())->getRefractionTextureBuffer() != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getRefractionTextureBuffer()->getTboId());
 		}
 	}
 
@@ -176,11 +200,13 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 	{
 		_shaderBuffer->uploadUniform("u_minTextureAlpha", model->getMinTextureAlpha(partId));
 		_shaderBuffer->uploadUniform("u_isReflective", model->isReflective(partId));
+		_shaderBuffer->uploadUniform("u_isRefractive", model->isRefractive(partId));
 		_shaderBuffer->uploadUniform("u_emissionIntensity", model->getEmissionIntensity(partId));
 		_shaderBuffer->uploadUniform("u_textureRepeat", model->getTextureRepeat(partId));
 		_shaderBuffer->uploadUniform("u_opacity", model->getOpacity(partId));
 		_shaderBuffer->uploadUniform("u_isSpecular", model->isSpecular(partId));
 		_shaderBuffer->uploadUniform("u_reflectivity", model->getReflectivity(partId));
+		_shaderBuffer->uploadUniform("u_refractivity", model->getRefractivity(partId));
 		_shaderBuffer->uploadUniform("u_lightness", model->getLightness(partId));
 		_shaderBuffer->uploadUniform("u_specularShininess", model->getSpecularShininess(partId));
 		_shaderBuffer->uploadUniform("u_specularIntensity", model->getSpecularIntensity(partId));
@@ -195,6 +221,7 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		_shaderBuffer->uploadUniform("u_transformation", model->getTransformation(partId));
 		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(model->getTransformation(partId)))));
 		_shaderBuffer->uploadUniform("u_reflectionType", static_cast<int>(model->getReflectionType(partId)));
+		_shaderBuffer->uploadUniform("u_refractionType", static_cast<int>(model->getRefractionType(partId)));
 		_shaderBuffer->uploadUniform("u_isWireframed", model->isWireframed(partId));
 		_shaderBuffer->uploadUniform("u_isBright", model->isBright(partId));
 
@@ -210,32 +237,32 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE4);
+			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
 		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE5);
+			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, model->getEmissionTextureBuffer(partId)->getTboId());
 		}
 		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE6);
+			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, model->getSpecularTextureBuffer(partId)->getTboId());
 		}
 		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE7);
+			glActiveTexture(GL_TEXTURE10);
 			glBindTexture(GL_TEXTURE_2D, model->getReflectionTextureBuffer(partId)->getTboId());
 		}
 		if(model->getRefractionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE8);
+			glActiveTexture(GL_TEXTURE11);
 			glBindTexture(GL_TEXTURE_2D, model->getRefractionTextureBuffer(partId)->getTboId());
 		}
 		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE9);
+			glActiveTexture(GL_TEXTURE12);
 			glBindTexture(GL_TEXTURE_2D, model->getNormalTextureBuffer(partId)->getTboId());
 		}
 
@@ -248,32 +275,32 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE4);
+			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE5);
+			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE6);
+			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE7);
+			glActiveTexture(GL_TEXTURE10);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getRefractionTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE8);
+			glActiveTexture(GL_TEXTURE11);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE9);
+			glActiveTexture(GL_TEXTURE12);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
@@ -292,10 +319,14 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 	if(model->getCurrentCaptorId().empty())
 	{
-		glActiveTexture(GL_TEXTURE1);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 }

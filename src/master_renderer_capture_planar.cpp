@@ -118,5 +118,101 @@ void MasterRenderer::capturePlanarReflections()
 
 void MasterRenderer::capturePlanarRefractions()
 {
+	vector<shared_ptr<Model>> refractiveModels;
 
+	for(const auto & [modelId, model] : _modelManager->getModels())
+	{
+		for(const auto & partId : model->getPartIds())
+		{
+			if(model->isRefractive(partId) && model->isVisible())
+			{
+				if(model->getRefractionType(partId) == RefractionType::PLANAR)
+				{
+					model->setVisible(false);
+					refractiveModels.push_back(model);
+
+					break;
+				}
+			}
+		}
+	}
+
+	if(refractiveModels.empty())
+	{
+		_renderStorage->setPlanarRefractionMap(nullptr);
+
+		return;
+	}
+
+	_planarRefractionCaptureBuffer->bind();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	vector<shared_ptr<Model>> savedModels;
+	savedModels.insert(savedModels.end(), refractiveModels.begin(), refractiveModels.end());
+	for(const auto & [modelId, model] : _modelManager->getModels())
+	{
+		if(!model->isRefracted() && model->isVisible())
+		{
+			model->setVisible(false);
+			savedModels.push_back(model);
+		}
+	}
+
+	vector<shared_ptr<Quad3d>> savedQuad3ds;
+	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
+	{
+		if(!quad3d->isRefracted() && quad3d->isVisible())
+		{
+			quad3d->setVisible(false);
+			savedQuad3ds.push_back(quad3d);
+		}
+	}
+
+	vector<shared_ptr<Text3d>> savedText3ds;
+	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
+	{
+		if(!text3d->isRefracted() && text3d->isVisible())
+		{
+			text3d->setVisible(false);
+			savedText3ds.push_back(text3d);
+		}
+	}
+
+	_renderStorage->setMaxClipPosition(fvec3(FLT_MAX, _renderStorage->getPlanarRefractionHeight(), FLT_MAX));
+	_renderStorage->setReflectionsEnabled(false);
+	_renderStorage->setRefractionsEnabled(false);
+
+	_renderSky();
+	_renderTerrain();
+	_renderWater();
+	_renderOpaqueModels();
+	_renderOpaqueQuad3ds();
+	_renderOpaqueText3ds();
+	_renderAabbs();
+	_renderTransparentModels();
+	_renderTransparentQuad3ds();
+	_renderTransparentText3ds();
+
+	for(const auto & model : savedModels)
+	{
+		model->setVisible(true);
+	}
+
+	for(const auto & quad3d : savedQuad3ds)
+	{
+		quad3d->setVisible(true);
+	}
+
+	for(const auto & text3d : savedText3ds)
+	{
+		text3d->setVisible(true);
+	}
+
+	_renderStorage->setPlanarRefractionMap(_planarRefractionCaptureBuffer->getTexture(0));
+	_renderStorage->setMaxClipPosition(fvec3(FLT_MAX));
+	_renderStorage->setReflectionsEnabled(true);
+	_renderStorage->setRefractionsEnabled(true);
+
+	_planarRefractionCaptureBuffer->unbind();
 }

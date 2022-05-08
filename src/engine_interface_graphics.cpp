@@ -64,6 +64,8 @@ void EngineInterface::graphics_setCubeRefractionInterval(int value)
 void EngineInterface::graphics_setCubeRefractionQuality(int value)
 {
 	_core->getRenderStorage()->setCubeRefractionQuality(value);
+
+	_core->getMasterRenderer()->loadCubeRefractionQuality();
 }
 
 void EngineInterface::graphics_setPlanarReflectionHeight(float value)
@@ -140,6 +142,7 @@ void EngineInterface::graphics_setPlanarRefractionQuality(int value)
 {
 	_core->getRenderStorage()->setPlanarRefractionQuality(value);
 
+	_core->getMasterRenderer()->loadPlanarRefractionQuality();
 	_core->getMasterRenderer()->loadWaterRefractionQuality();
 }
 

@@ -168,16 +168,19 @@ void ModelManager::update()
 		{
 			model->setPreviousCaptorId("");
 			model->setCubeReflectionMixValue(1.0f);
+			model->setCubeRefractionMixValue(1.0f);
 		}
 		if(_captorManager->getCaptors().find(model->getCurrentCaptorId()) == _captorManager->getCaptors().end())
 		{
 			model->setCurrentCaptorId("");
 			model->setCubeReflectionMixValue(1.0f);
+			model->setCubeRefractionMixValue(1.0f);
 		}
 		if(model->getPreviousCaptorId() == model->getCurrentCaptorId())
 		{
 			model->setPreviousCaptorId("");
 			model->setCubeReflectionMixValue(1.0f);
+			model->setCubeRefractionMixValue(1.0f);
 		}
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
@@ -208,6 +211,36 @@ void ModelManager::update()
 			}
 
 			model->setCubeReflectionMixValue(model->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
+		}
+
+		if((_renderStorage->getCubeRefractionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeRefractionInterval()) == 0)
+		{
+			map<float, shared_ptr<Captor>> orderedCaptors;
+
+			for(const auto & [captorId, captor] : _captorManager->getCaptors())
+			{
+				const auto absoluteDistance = Mathematics::calculateDistance(model->getBasePosition(), captor->getPosition());
+
+				orderedCaptors.insert({absoluteDistance, captor});
+			}
+
+			if(!orderedCaptors.empty())
+			{
+				const auto closestCaptorId = orderedCaptors.begin()->second->getId();
+
+				if(model->getCurrentCaptorId() != closestCaptorId)
+				{
+					model->setPreviousCaptorId(model->getCurrentCaptorId());
+					model->setCurrentCaptorId(closestCaptorId);
+
+					if(!model->getPreviousCaptorId().empty())
+					{
+						model->setCubeRefractionMixValue(0.0f);
+					}
+				}
+			}
+
+			model->setCubeRefractionMixValue(model->getCubeRefractionMixValue() + CUBE_REFRACTION_OVERLAP_SPEED);
 		}
 
 		model->updateTransformation();

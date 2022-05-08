@@ -12,16 +12,19 @@ in vec2 f_uv;
 in vec3 f_normal;
 in mat3 f_tbn;
 
-layout (location = 0) uniform samplerCube u_previousCubeReflectionMap;
-layout (location = 1) uniform samplerCube u_currentCubeReflectionMap;
-layout (location = 2) uniform sampler2D u_planarReflectionMap;
-layout (location = 3) uniform sampler2D u_shadowMap;
-layout (location = 4) uniform sampler2D u_diffuseMap;
-layout (location = 5) uniform sampler2D u_emissionMap;
-layout (location = 6) uniform sampler2D u_specularMap;
-layout (location = 7) uniform sampler2D u_reflectionMap;
-layout (location = 8) uniform sampler2D u_refractionMap;
-layout (location = 9) uniform sampler2D u_normalMap;
+layout (location = 0) uniform samplerCube u_previousReflectionCubeMap;
+layout (location = 1) uniform samplerCube u_previousRefractionCubeMap;
+layout (location = 2) uniform samplerCube u_currentReflectionCubeMap;
+layout (location = 3) uniform samplerCube u_currentRefractionCubeMap;
+layout (location = 4) uniform sampler2D u_planarReflectionMap;
+layout (location = 5) uniform sampler2D u_planarRefractionMap;
+layout (location = 6) uniform sampler2D u_shadowMap;
+layout (location = 7) uniform sampler2D u_diffuseMap;
+layout (location = 8) uniform sampler2D u_emissionMap;
+layout (location = 9) uniform sampler2D u_specularMap;
+layout (location = 10) uniform sampler2D u_reflectionMap;
+layout (location = 11) uniform sampler2D u_refractionMap;
+layout (location = 12) uniform sampler2D u_normalMap;
 
 uniform vec3 u_wireframeColor;
 uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
@@ -53,18 +56,22 @@ uniform float u_minFogDistance;
 uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 uniform float u_reflectivity;
+uniform float u_refractivity;
 uniform float u_lightness;
 uniform float u_shadowLightness;
 uniform float u_cubeReflectionMixValue;
+uniform float u_cubeRefractionMixValue;
 uniform float u_emissionIntensity;
 
 uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
 uniform int u_pointlightCount;
 uniform int u_spotlightCount;
 uniform int u_reflectionType;
+uniform int u_refractionType;
 
 uniform bool u_isWireframed;
 uniform bool u_isReflective;
+uniform bool u_isRefractive;
 uniform bool u_isSpecular;
 uniform bool u_isShadowCircleEnabled;
 uniform bool u_isAmbientLightingEnabled;
@@ -96,7 +103,9 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal);
 vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal);
 vec3 calculateFog(vec3 color);
 vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal);
+vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal);
 vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
+vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color);
 float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal);
 float calculateShadows();
 
@@ -128,7 +137,9 @@ void main()
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;
 	primaryColor  = calculateCubeReflection(reflectionMapping, primaryColor, normalMapping);
+	primaryColor  = calculateCubeRefraction(refractionMapping, primaryColor, normalMapping);
 	primaryColor  = calculatePlanarReflection(reflectionMapping, primaryColor);
+	primaryColor  = calculatePlanarRefraction(refractionMapping, primaryColor);
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
@@ -394,10 +405,34 @@ vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal)
 		{
 			vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
 			vec3 reflectionDirection = reflect(viewDirection, normal);
-			vec3 previousCubeReflectionMapColor = texture(u_previousCubeReflectionMap, reflectionDirection).rgb;
-			vec3 currentCubeReflectionMapColor = texture(u_currentCubeReflectionMap, reflectionDirection).rgb;
+			vec3 previousCubeReflectionMapColor = texture(u_previousReflectionCubeMap, reflectionDirection).rgb;
+			vec3 currentCubeReflectionMapColor = texture(u_currentReflectionCubeMap, reflectionDirection).rgb;
 			vec3 cubeReflectionMapColor = mix(previousCubeReflectionMapColor, currentCubeReflectionMapColor, u_cubeReflectionMixValue);
 			vec3 mixedColor = mix(color, cubeReflectionMapColor, u_reflectivity);
+
+			return mixedColor;
+		}
+
+		return color;
+	}
+	else
+	{
+		return color;
+	}
+}
+
+vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal)
+{
+	if(u_isRefractionsEnabled && u_isRefractive && (u_refractionType == 0))
+	{		
+		if(refractionMapColor != vec3(0.0f))
+		{
+			vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
+			vec3 refractionDirection = refract(viewDirection, normal, 0.5f);
+			vec3 previousCubeRefractionMapColor = texture(u_previousRefractionCubeMap, refractionDirection).rgb;
+			vec3 currentCubeRefractionMapColor = texture(u_currentRefractionCubeMap, refractionDirection).rgb;
+			vec3 cubeRefractionMapColor = mix(previousCubeRefractionMapColor, currentCubeRefractionMapColor, u_cubeRefractionMixValue);
+			vec3 mixedColor = mix(color, cubeRefractionMapColor, u_refractivity);
 
 			return mixedColor;
 		}
@@ -419,6 +454,27 @@ vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 			vec2 uvCoords = (((f_clipSpacePos.xy / f_clipSpacePos.w) * 0.5f) + 0.5f);
 			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(uvCoords.x, -uvCoords.y)).rgb;
 			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
+        
+			return mixedColor;
+		}
+
+		return color;
+	}
+	else
+	{
+		return color;
+	}
+}
+
+vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color)
+{
+	if(u_isRefractionsEnabled && u_isRefractive && (u_refractionType == 1))
+	{
+		if(refractionMapColor != vec3(0.0f))
+		{
+			vec2 uvCoords = (((f_clipSpacePos.xy / f_clipSpacePos.w) * 0.5f) + 0.5f);
+			vec3 refractionColor = texture(u_planarRefractionMap, uvCoords).rgb;
+			vec3 mixedColor = mix(color, refractionColor, u_refractivity);
         
 			return mixedColor;
 		}

@@ -15,9 +15,6 @@ void Animation3dEditor::_load()
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_fe3d->captor_create("@@captor");
-	_fe3d->captor_capture("@@captor");
-
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
@@ -87,8 +84,6 @@ void Animation3dEditor::_unload()
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
-
-	_fe3d->captor_delete("@@captor");
 
 	_gui->getOverlay()->deleteTextField("animation3dId");
 	_gui->getOverlay()->deleteTextField("animation3dFrame");

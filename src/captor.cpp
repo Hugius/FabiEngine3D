@@ -34,12 +34,18 @@ void Captor::updateTarget()
 
 void Captor::capture()
 {
-	_mustCapture = true;
+	_mustCaptureReflections = true;
+	_mustCaptureRefractions = true;
 }
 
-void Captor::setCaptured()
+void Captor::setReflectionsCaptured()
 {
-	_mustCapture = false;
+	_mustCaptureReflections = false;
+}
+
+void Captor::setRefractionsCaptured()
+{
+	_mustCaptureRefractions = false;
 }
 
 void Captor::setPosition(const fvec3 & value)
@@ -60,9 +66,14 @@ void Captor::moveTo(const fvec3 & target, float speed)
 	_positionTargetSpeed = speed;
 }
 
-void Captor::setCubeMap(shared_ptr<TextureBuffer> value)
+void Captor::setReflectionCubeMap(shared_ptr<TextureBuffer> value)
 {
-	_cubeTextureBuffer = value;
+	_reflectionTextureBuffer = value;
+}
+
+void Captor::setRefractionCubeMap(shared_ptr<TextureBuffer> value)
+{
+	_refractionTextureBuffer = value;
 }
 
 void Captor::setExceptionId(const string & id)
@@ -85,12 +96,22 @@ const fvec3 & Captor::getPosition() const
 	return _position;
 }
 
-const bool Captor::mustCapture() const
+const bool Captor::mustCaptureReflections() const
 {
-	return _mustCapture;
+	return _mustCaptureReflections;
 }
 
-const shared_ptr<TextureBuffer> Captor::getCubeTextureBuffer() const
+const bool Captor::mustCaptureRefractions() const
 {
-	return _cubeTextureBuffer;
+	return _mustCaptureRefractions;
+}
+
+const shared_ptr<TextureBuffer> Captor::getReflectionTextureBuffer() const
+{
+	return _reflectionTextureBuffer;
+}
+
+const shared_ptr<TextureBuffer> Captor::getRefractionTextureBuffer() const
+{
+	return _refractionTextureBuffer;
 }

@@ -12,6 +12,24 @@ void WaterEditor::_updateMainMenu()
 		{
 			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sky")->isHovered())
+		{
+			if(_fe3d->sky_getSelectedId().empty())
+			{
+				auto skyIds = _skyEditor->getLoadedSkyIds();
+
+				for(auto & skyId : skyIds)
+				{
+					skyId = skyId.substr(1);
+				}
+
+				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			}
+			else
+			{
+				_fe3d->sky_select("");
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", fvec2(0.0f, 0.1f), 10, true, true, false);

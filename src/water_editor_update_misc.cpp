@@ -160,3 +160,33 @@ void WaterEditor::_updateWaterDeleting()
 		}
 	}
 }
+
+void WaterEditor::_updateSkyChoosing()
+{
+	if(_isSkyHovered)
+	{
+		_fe3d->sky_select("");
+
+		_isSkyHovered = false;
+	}
+
+	if(_gui->getOverlay()->getChoiceFormId() == "selectSky")
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+		if(!selectedOptionId.empty())
+		{
+			if(!_isSkyHovered)
+			{
+				_isSkyHovered = true;
+
+				_fe3d->sky_select("@" + selectedOptionId);
+			}
+
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
+			{
+				_isSkyHovered = false;
+			}
+		}
+	}
+}

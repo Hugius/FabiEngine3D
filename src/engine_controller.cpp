@@ -70,6 +70,7 @@ EngineController::EngineController()
 	_skyEditor->inject(_guiManager);
 	_terrainEditor->inject(_guiManager);
 	_waterEditor->inject(_guiManager);
+	_waterEditor->inject(_skyEditor);
 	_modelEditor->inject(_guiManager);
 	_modelEditor->inject(_skyEditor);
 	_quad3dEditor->inject(_guiManager);

@@ -65,12 +65,12 @@ void ModelEditor::_load()
 
 void ModelEditor::_unload()
 {
-	_skyEditor->deleteLoadedSkies();
-
 	for(const auto & modelId : _loadedModelIds)
 	{
 		_fe3d->model_delete(modelId);
 	}
+
+	_skyEditor->deleteLoadedSkies();
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");

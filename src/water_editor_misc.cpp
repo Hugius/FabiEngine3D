@@ -16,3 +16,8 @@ void WaterEditor::deleteLoadedWaters()
 
 	_loadedWaterIds.clear();
 }
+
+void WaterEditor::inject(shared_ptr<SkyEditor> skyEditor)
+{
+	_skyEditor = skyEditor;
+}

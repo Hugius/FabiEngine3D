@@ -1,12 +1,14 @@
 #pragma once
 
 #include "base_editor.hpp"
+#include "sky_editor.hpp"
 
 class WaterEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;
 
+	void inject(shared_ptr<SkyEditor> skyEditor);
 	void update();
 	void deleteLoadedWaters();
 
@@ -29,6 +31,7 @@ private:
 	void _updateWaterCreating();
 	void _updateWaterChoosing();
 	void _updateWaterDeleting();
+	void _updateSkyChoosing();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -45,7 +48,10 @@ private:
 
 	vector <string> _loadedWaterIds = {};
 
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+
 	string _currentWaterId = "";
 
 	bool _isWaterHovered = false;
+	bool _isSkyHovered = false;
 };

@@ -6,6 +6,8 @@
 
 void WaterEditor::_load()
 {
+	_skyEditor->loadSkiesFromFile();
+
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
 	_fe3d->model_setFaceCulled("@@box", "", true);
@@ -45,6 +47,8 @@ void WaterEditor::_unload()
 		_fe3d->water_delete(waterId);
 	}
 
+	_skyEditor->deleteLoadedSkies();
+
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
@@ -72,12 +76,13 @@ void WaterEditor::_loadGUI()
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
+	auto positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("waterEditorMenuMain");
-	leftWindow->getScreen("waterEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuMain")->createButton("sky", fvec2(0.0f, positions[0]), TEXT_SIZE("Select Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuMain")->createButton("create", fvec2(0.0f, positions[1]), TEXT_SIZE("Create Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[2]), TEXT_SIZE("Edit Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuMain")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	leftWindow->createScreen("waterEditorMenuChoice");
@@ -167,6 +172,10 @@ void WaterEditor::update()
 	if(isLoaded())
 	{
 		_updateWaterDeleting();
+	}
+	if(isLoaded())
+	{
+		_updateSkyChoosing();
 	}
 	if(isLoaded())
 	{

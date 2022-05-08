@@ -163,6 +163,11 @@ const float Tools::getWindowAspectRatio()
 	return (static_cast<float>(Configuration::getInst().getWindowSize().x) / static_cast<float>(Configuration::getInst().getWindowSize().y));
 }
 
+const float Tools::getDisplayAspectRatio()
+{
+	return (static_cast<float>(Configuration::getInst().getDisplaySize().x) / static_cast<float>(Configuration::getInst().getDisplaySize().y));
+}
+
 const long long Tools::getTimeSinceEpochMS()
 {
 	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();

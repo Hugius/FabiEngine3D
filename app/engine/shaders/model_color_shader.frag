@@ -428,7 +428,7 @@ vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal)
 		if(refractionMapColor != vec3(0.0f))
 		{
 			vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
-			vec3 refractionDirection = refract(viewDirection, normal, 0.5f);
+			vec3 refractionDirection = refract(viewDirection, normal, 1.0f);
 			vec3 previousCubeRefractionMapColor = texture(u_previousRefractionCubeMap, refractionDirection).rgb;
 			vec3 currentCubeRefractionMapColor = texture(u_currentRefractionCubeMap, refractionDirection).rgb;
 			vec3 cubeRefractionMapColor = mix(previousCubeRefractionMapColor, currentCubeRefractionMapColor, u_cubeRefractionMixValue);

@@ -13,10 +13,11 @@ void ModelEditor::_load()
 	_skyEditor->loadSkiesFromFile();
 
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
+	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
 	_fe3d->model_setFaceCulled("@@box", "", true);
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -0.001f, 0.0f));
+	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
@@ -56,6 +57,7 @@ void ModelEditor::_load()
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
+	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -148,8 +150,8 @@ void ModelEditor::_loadGUI()
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("specularIntensity", fvec2(0.0f, positions[4]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isReflective", fvec2(0.0f, positions[5]), TEXT_SIZE("Reflective: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflective: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isRefractive", fvec2(0.0f, positions[6]), TEXT_SIZE("Refractive: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractive: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("reflectionType", fvec2(0.0f, positions[7]), TEXT_SIZE("Type: NONE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: NONE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("refractionType", fvec2(0.0f, positions[8]), TEXT_SIZE("Type: NONE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: NONE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuLighting")->createButton("reflectionType", fvec2(0.0f, positions[7]), TEXT_SIZE("Reflect Type: NONE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflect Type: NONE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuLighting")->createButton("refractionType", fvec2(0.0f, positions[8]), TEXT_SIZE("Refract Type: NONE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refract Type: NONE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("reflectivity", fvec2(0.0f, positions[9]), TEXT_SIZE("Reflectivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflectivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("refractivity", fvec2(0.0f, positions[10]), TEXT_SIZE("Refractivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isBright", fvec2(0.0f, positions[11]), TEXT_SIZE("Bright: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bright: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);

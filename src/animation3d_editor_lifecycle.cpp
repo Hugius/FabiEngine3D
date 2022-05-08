@@ -119,9 +119,9 @@ void Animation3dEditor::_loadGUI()
 	rightWindow->createScreen("animation3dEditorMenuFrame");
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("part", fvec2(0.0f, positions[0]), TEXT_SIZE("Select Part"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Part", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("transformation", fvec2(0.0f, positions[1]), TEXT_SIZE("Transformation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Transformation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("transformationType", fvec2(0.0f, positions[2]), TEXT_SIZE("Type: MOVE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: MOVE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("transformationType", fvec2(0.0f, positions[2]), TEXT_SIZE("Trans Type: MOVE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Trans Type: MOVE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("speed", fvec2(0.0f, positions[3]), TEXT_SIZE("Speed"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Speed", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("speedType", fvec2(0.0f, positions[4]), TEXT_SIZE("Type: LINEAR"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Type: LINEAR", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("speedType", fvec2(0.0f, positions[4]), TEXT_SIZE("Speed Type: LINEAR"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Speed Type: LINEAR", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("rotationOrigin", fvec2(0.0f, positions[5]), TEXT_SIZE("Rotation Origin"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation Origin", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation3dEditorMenuFrame")->createButton("back", fvec2(0.0f, positions[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 

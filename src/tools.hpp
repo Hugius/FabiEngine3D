@@ -38,6 +38,7 @@ public:
 	static const ivec2 getMonitorSize();
 
 	static const float getWindowAspectRatio();
+	static const float getDisplayAspectRatio();
 
 	static const long long getTimeSinceEpochMS();
 

@@ -42,12 +42,14 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
+	static inline const fvec3 GRID_POSITION = fvec3(0.0f, -0.1f, 0.0f);
+	static inline const fvec3 GRID_SIZE = fvec3(50.0f, 1.0f, 50.0f);
+
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
-	static inline constexpr float GRID_SIZE = 50.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;

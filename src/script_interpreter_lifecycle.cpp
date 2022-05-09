@@ -180,6 +180,7 @@ void ScriptInterpreter::load()
 	_aabbEditor->loadAabbsFromFile();
 	_quad2dEditor->loadQuad2dsFromFile();
 	_text2dEditor->loadText2dsFromFile();
+	_pointlightEditor->loadPointlightsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
 	_animation2dEditor->loadAnimation2dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
@@ -208,6 +209,7 @@ void ScriptInterpreter::unload()
 	_quad2dEditor->deleteLoadedQuad2ds();
 	_aabbEditor->deleteLoadedAabbs();
 	_text2dEditor->deleteLoadedText2ds();
+	_pointlightEditor->deleteLoadedPointlights();
 	_animation3dEditor->deleteLoadedAnimation3ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
 	_sound2dEditor->deleteLoadedSound2ds();

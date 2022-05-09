@@ -61,6 +61,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_aabbEditor);
 	_topViewportController->inject(_quad2dEditor);
 	_topViewportController->inject(_text2dEditor);
+	_topViewportController->inject(_pointlightEditor);
 	_topViewportController->inject(_animation3dEditor);
 	_topViewportController->inject(_animation2dEditor);
 	_topViewportController->inject(_sound2dEditor);

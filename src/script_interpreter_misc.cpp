@@ -222,6 +222,11 @@ void ScriptInterpreter::inject(shared_ptr<Text2dEditor> text2dEditor)
 	_text2dEditor = text2dEditor;
 }
 
+void ScriptInterpreter::inject(shared_ptr<PointlightEditor> pointlightEditor)
+{
+	_pointlightEditor = pointlightEditor;
+}
+
 void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)
 {
 	_worldEditor = worldEditor;

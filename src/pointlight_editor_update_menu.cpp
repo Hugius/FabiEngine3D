@@ -6,7 +6,7 @@
 
 void PointlightEditor::_updateMainMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "pointlightEditorMenuMain")
 	{
@@ -62,7 +62,7 @@ void PointlightEditor::_updateMainMenu()
 
 void PointlightEditor::_updateChoiceMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "pointlightEditorMenuChoice")
 	{
@@ -76,25 +76,25 @@ void PointlightEditor::_updateChoiceMenu()
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
 			_gui->getOverlay()->getTextField("pointlightId")->setVisible(false);
 			_currentPointlightId = "";
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuMain");
 
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("radius")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("radiusX", "X", (radius.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("radiusY", "Y", (radius.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("radiusZ", "Z", (radius.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusX", "X", (radius.x * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusY", "Y", (radius.y * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("radiusZ", "Z", (radius.z * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "X", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "X", (intensity * INTENSITY_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 		{
@@ -169,13 +169,13 @@ void PointlightEditor::_updateChoiceMenu()
 		{
 			case PointlightShapeType::CIRCLE:
 			{
-				screen->getButton("shape")->setTextContent("Shape: CUBE");
+				screen->getButton("shape")->setTextContent("Shape: CIRCLE");
 
 				break;
 			}
 			case PointlightShapeType::SQUARE:
 			{
-				screen->getButton("shape")->setTextContent("Shape: PLANAR");
+				screen->getButton("shape")->setTextContent("Shape: SQUARE");
 
 				break;
 			}

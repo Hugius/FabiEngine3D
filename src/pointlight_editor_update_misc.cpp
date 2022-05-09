@@ -87,8 +87,9 @@ void PointlightEditor::_updatePointlightCreating()
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
 		_fe3d->pointlight_create(newPointlightId);
+		_fe3d->pointlight_setPosition(newPointlightId, fvec3(0.0f, 2.0f, 0.0f));
 
-		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
+		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 		_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + newPointlightId.substr(1));
 		_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);
 	}
@@ -126,7 +127,7 @@ void PointlightEditor::_updatePointlightChoosing()
 				}
 				else
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
+					_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
 					_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);

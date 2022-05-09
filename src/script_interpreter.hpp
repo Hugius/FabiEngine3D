@@ -9,6 +9,7 @@
 #include "aabb_editor.hpp"
 #include "quad2d_editor.hpp"
 #include "text2d_editor.hpp"
+#include "pointlight_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound2d_editor.hpp"
@@ -34,6 +35,7 @@ public:
 	void inject(shared_ptr<AabbEditor> aabbEditor);
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
+	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
@@ -343,6 +345,7 @@ private:
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
+	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;

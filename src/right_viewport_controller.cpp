@@ -7,7 +7,7 @@ void RightViewportController::initialize()
 	_gui->getRightViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), FRAME_COLOR);
 
 	const auto window = _gui->getRightViewport()->getWindow("main");
-	const auto positions = Mathematics::calculateDistributedPositions(5, CH, false);
+	const auto positions = Mathematics::calculateDistributedPositions(6, CH, false);
 
 	window->createScreen("empty");
 	window->createScreen("main");

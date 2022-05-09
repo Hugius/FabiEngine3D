@@ -91,6 +91,7 @@ void TopViewportController::_updateMiscellaneous()
 	leftScreen->getButton("aabbEditor")->setHoverable(isHoverable);
 	leftScreen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	leftScreen->getButton("text2dEditor")->setHoverable(isHoverable);
+	rightScreen->getButton("pointlightEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("sound2dEditor")->setHoverable(isHoverable);
@@ -111,6 +112,7 @@ void TopViewportController::_setProject(const string & projectId)
 	_aabbEditor->setCurrentProjectId(_currentProjectId);
 	_quad2dEditor->setCurrentProjectId(_currentProjectId);
 	_text2dEditor->setCurrentProjectId(_currentProjectId);
+	_pointlightEditor->setCurrentProjectId(_currentProjectId);
 	_animation3dEditor->setCurrentProjectId(_currentProjectId);
 	_animation2dEditor->setCurrentProjectId(_currentProjectId);
 	_sound2dEditor->setCurrentProjectId(_currentProjectId);
@@ -170,6 +172,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	filePaths.push_back(projectDirectoryPath + "data\\animation2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\animation3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\pointlight.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
@@ -183,7 +186,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	{
 		if(!Tools::isDirectoryExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: directory `" + path + "` does not exist");
+			Logger::throwWarning("Project corrupted: directory `" + path.substr(Tools::getRootDirectoryPath().size()) + "` does not exist");
 
 			return true;
 		}
@@ -193,7 +196,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	{
 		if(!Tools::isFileExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: file `" + path + "` does not exist");
+			Logger::throwWarning("Project corrupted: file `" + path.substr(Tools::getRootDirectoryPath().size()) + "` does not exist");
 
 			return true;
 		}
@@ -240,6 +243,11 @@ void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)
 void TopViewportController::inject(shared_ptr<Text2dEditor> text2dEditor)
 {
 	_text2dEditor = text2dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<PointlightEditor> pointlightEditor)
+{
+	_pointlightEditor = pointlightEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)

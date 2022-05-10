@@ -323,7 +323,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			if(isLoaded())
 			{
 				const string newModelId = ("@@sound3d_" + sound3dId);
-				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
+				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
@@ -378,7 +378,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			if(isLoaded())
 			{
 				const string newModelId = ("@@pointlight_" + pointlightId);
-				_fe3d->model_create(newModelId, TEMPLATE_POINTLIGHT_MODEL_PATH);
+				_fe3d->model_create(newModelId, POINTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
 				_fe3d->model_setColor(newModelId, "", color);
@@ -431,7 +431,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			if(isLoaded())
 			{
 				const string newModelId = ("@@spotlight_" + spotlightId);
-				_fe3d->model_create(newModelId, TEMPLATE_SPOTLIGHT_MODEL_PATH);
+				_fe3d->model_create(newModelId, SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, -yaw, pitch));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
@@ -474,7 +474,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			if(isLoaded())
 			{
 				const string newModelId = ("@@captor_" + captorId);
-				_fe3d->model_create(newModelId, TEMPLATE_CAPTOR_MODEL_PATH);
+				_fe3d->model_create(newModelId, CAPTOR_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAPTOR_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);

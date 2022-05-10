@@ -13,7 +13,7 @@ void WorldEditor::_updateSound3dMenu()
 		{
 			if(!_currentTemplateSound3dId.empty())
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
@@ -77,7 +77,7 @@ void WorldEditor::_updateSound3dPlacingMenu()
 				_deactivateSound3d();
 
 				_currentTemplateSound3dId = hoveredOptionId;
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, true);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, true);
 				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 

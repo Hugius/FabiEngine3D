@@ -269,6 +269,11 @@ void WorldEditor::inject(shared_ptr<AabbEditor> aabbEditor)
 	_aabbEditor = aabbEditor;
 }
 
+void WorldEditor::inject(shared_ptr<PointlightEditor> pointlightEditor)
+{
+	_pointlightEditor = pointlightEditor;
+}
+
 void WorldEditor::inject(shared_ptr<WorldHelper> worldHelper)
 {
 	_worldHelper = worldHelper;

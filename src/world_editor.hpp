@@ -8,6 +8,7 @@
 #include "quad3d_editor.hpp"
 #include "text3d_editor.hpp"
 #include "aabb_editor.hpp"
+#include "pointlight_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound2d_editor.hpp"
@@ -26,6 +27,7 @@ public:
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
 	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<AabbEditor> aabbEditor);
+	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
@@ -154,14 +156,14 @@ private:
 
 	const vector<string> _getWorldIds() const;
 
-	static inline const string TEMPLATE_POINTLIGHT_ID = "@@template_pointlight";
-	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";
-	static inline const string TEMPLATE_CAPTOR_ID = "@@template_captor";
-	static inline const string TEMPLATE_SOUND3D_ID = "@@template_sound3d";
-	static inline const string TEMPLATE_POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
-	static inline const string TEMPLATE_SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
-	static inline const string TEMPLATE_CAPTOR_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
-	static inline const string TEMPLATE_SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
+	static inline const string POINTLIGHT_MODEL_ID = "@@template_pointlight";
+	static inline const string SPOTLIGHT_MODEL_ID = "@@template_spotlight";
+	static inline const string CAPTOR_MODEL_ID = "@@template_captor";
+	static inline const string SOUND3D_MODEL_ID = "@@template_sound3d";
+	static inline const string POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
+	static inline const string CAPTOR_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
+	static inline const string SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
 
 	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
@@ -255,6 +257,7 @@ private:
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
 	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
+	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;

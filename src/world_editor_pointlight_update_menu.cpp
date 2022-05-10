@@ -13,8 +13,8 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			if(_isPlacingPointlight)
 			{
-				_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
+				_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, false);
+				_fe3d->pointlight_setVisible(POINTLIGHT_MODEL_ID, false);
 				_isPlacingPointlight = false;
 			}
 
@@ -36,13 +36,13 @@ void WorldEditor::_updatePointlightMenu()
 			_deactivateSound3d();
 
 			_isPlacingPointlight = true;
-			_fe3d->model_setVisible(TEMPLATE_POINTLIGHT_ID, true);
-			_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, true);
+			_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, true);
+			_fe3d->pointlight_setVisible(POINTLIGHT_MODEL_ID, true);
 			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 			if(_fe3d->terrain_getSelectedId().empty())
 			{
-				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(0.0f));
+				_fe3d->pointlight_setPosition(POINTLIGHT_MODEL_ID, fvec3(0.0f));
 				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

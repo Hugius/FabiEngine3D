@@ -15,7 +15,7 @@ void WorldEditor::_updateSound3dPlacing()
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(value, newPosition.y, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(SOUND3D_MODEL_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
@@ -23,7 +23,7 @@ void WorldEditor::_updateSound3dPlacing()
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 				_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(newPosition.x, value, newPosition.z));
-				_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->model_setBasePosition(SOUND3D_MODEL_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
@@ -44,7 +44,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
-				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
+				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
@@ -58,7 +58,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SOUND3D_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 				_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 
 				_currentTemplateSound3dId = "";
@@ -66,7 +66,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 				_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 
 				_currentTemplateSound3dId = "";
@@ -76,7 +76,7 @@ void WorldEditor::_updateSound3dPlacing()
 		{
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
@@ -88,7 +88,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
@@ -100,7 +100,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
@@ -112,7 +112,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
-				_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, false);
+				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
@@ -130,8 +130,8 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
 			}
 			_fe3d->sound3d_setPosition(_currentTemplateSound3dId, newPosition);
-			_fe3d->model_setVisible(TEMPLATE_SOUND3D_ID, true);
-			_fe3d->model_setBasePosition(TEMPLATE_SOUND3D_ID, newPosition);
+			_fe3d->model_setVisible(SOUND3D_MODEL_ID, true);
+			_fe3d->model_setBasePosition(SOUND3D_MODEL_ID, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
@@ -150,7 +150,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
-				_fe3d->model_create(newModelId, TEMPLATE_SOUND3D_MODEL_PATH);
+				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);

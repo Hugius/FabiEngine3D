@@ -295,6 +295,36 @@ void WorldHelper::copyTemplateAabb(const string & newId, const string & template
 	_fe3d->aabb_setColor(newId, _fe3d->aabb_getColor(templateId));
 }
 
+void WorldHelper::copyTemplatePointlight(const string & newId, const string & templateId)
+{
+	if(!_fe3d->pointlight_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->pointlight_create(newId);
+	_fe3d->pointlight_setRadius(newId, _fe3d->pointlight_getRadius(templateId));
+	_fe3d->pointlight_setColor(newId, _fe3d->pointlight_getColor(templateId));
+	_fe3d->pointlight_setIntensity(newId, _fe3d->pointlight_getIntensity(templateId));
+	_fe3d->pointlight_setShape(newId, _fe3d->pointlight_getShape(templateId));
+}
+
+void WorldHelper::copyTemplateSpotlight(const string & newId, const string & templateId)
+{
+	if(!_fe3d->spotlight_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->spotlight_create(newId);
+	_fe3d->spotlight_setColor(newId, _fe3d->spotlight_getColor(templateId));
+	_fe3d->spotlight_setYaw(newId, _fe3d->spotlight_getYaw(templateId));
+	_fe3d->spotlight_setPitch(newId, _fe3d->spotlight_getPitch(templateId));
+	_fe3d->spotlight_setIntensity(newId, _fe3d->spotlight_getIntensity(templateId));
+	_fe3d->spotlight_setAngle(newId, _fe3d->spotlight_getAngle(templateId));
+	_fe3d->spotlight_setDistance(newId, _fe3d->spotlight_getDistance(templateId));
+}
+
 void WorldHelper::copyTemplateSound2d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))

@@ -13,6 +13,8 @@ public:
 	void copyTemplateQuad3d(const string & newId, const string & templateId);
 	void copyTemplateText3d(const string & newId, const string & templateId);
 	void copyTemplateAabb(const string & newId, const string & templateId);
+	void copyTemplatePointlight(const string & newId, const string & templateId);
+	void copyTemplateSpotlight(const string & newId, const string & templateId);
 	void copyTemplateSound2d(const string & newId, const string & templateId);
 
 private:

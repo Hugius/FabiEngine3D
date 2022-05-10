@@ -78,37 +78,11 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				screen->getButton("position")->setHoverable(false);
 				screen->getButton("radius")->setHoverable(true);
-				screen->getButton("color")->setHoverable(true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("radius")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(true);
 				screen->getButton("radius")->setHoverable(false);
-				screen->getButton("color")->setHoverable(true);
-			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
-			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("radius")->setHoverable(true);
-				screen->getButton("color")->setHoverable(false);
-			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shape")->isHovered())
-			{
-				switch(_fe3d->pointlight_getShape(_activePointlightId))
-				{
-					case PointlightShapeType::CIRCLE:
-					{
-						_fe3d->pointlight_setShape(_activePointlightId, PointlightShapeType::SQUARE);
-
-						break;
-					}
-					case PointlightShapeType::SQUARE:
-					{
-						_fe3d->pointlight_setShape(_activePointlightId, PointlightShapeType::CIRCLE);
-
-						break;
-					}
-				}
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
@@ -123,8 +97,6 @@ void WorldEditor::_updatePointlightEditing()
 
 			auto position = _fe3d->pointlight_getPosition(_activePointlightId);
 			auto radius = _fe3d->pointlight_getRadius(_activePointlightId);
-			auto color = _fe3d->pointlight_getColor(_activePointlightId);
-			auto intensity = _fe3d->pointlight_getIntensity(_activePointlightId);
 
 			if(!screen->getButton("position")->isHoverable())
 			{
@@ -146,35 +118,11 @@ void WorldEditor::_updatePointlightEditing()
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 			}
-			else if(!screen->getButton("color")->isHoverable())
-			{
-				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("R");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
-
-				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-			}
-
-			_handleInputBox("pointlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 
 			_fe3d->pointlight_setPosition(_activePointlightId, position);
 			_fe3d->pointlight_setRadius(_activePointlightId, radius);
-			_fe3d->pointlight_setColor(_activePointlightId, color);
-			_fe3d->pointlight_setIntensity(_activePointlightId, intensity);
 
 			_fe3d->model_setBasePosition(("@@pointlight_" + _activePointlightId), position);
-			_fe3d->model_setColor(("@@pointlight_" + _activePointlightId), "", color);
-
-			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShapeType::CIRCLE)
-			{
-				screen->getButton("shape")->setDiffuseMap("engine\\assets\\image\\diffuse_map\\shape_circle.tga");
-			}
-			else
-			{
-				screen->getButton("shape")->setDiffuseMap("engine\\assets\\image\\diffuse_map\\shape_square.tga");
-			}
 		}
 	}
 }

@@ -230,8 +230,6 @@ void EngineController::initialize()
 		imagePaths.push_back(diffuseMapDirectoryPath + "restart.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "rotation.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "settings.tga");
-		imagePaths.push_back(diffuseMapDirectoryPath + "shape_circle.tga");
-		imagePaths.push_back(diffuseMapDirectoryPath + "shape_square.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "size.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "start.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "stop.tga");

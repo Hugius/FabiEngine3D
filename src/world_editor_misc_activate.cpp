@@ -80,7 +80,6 @@ void WorldEditor::_activatePointlight(const string & pointlightId)
 
 	window->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	window->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
-	window->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 	window->getScreen("pointlightPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("pointlightPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));

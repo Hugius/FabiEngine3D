@@ -16,16 +16,21 @@ void PointlightEditor::_load()
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
 	_fe3d->model_setLightness("@@grid", "", 0.25f);
 	_fe3d->model_setShadowed("@@grid", false);
+	_fe3d->model_create(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_PATH);
+	_fe3d->model_setBasePosition(POINTLIGHT_MODEL_ID, POINTLIGHT_POSITION);
+	_fe3d->model_setBaseSize(POINTLIGHT_MODEL_ID, fvec3(0.5f));
+	_fe3d->model_setShadowed(POINTLIGHT_MODEL_ID, false);
+	_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
 	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setAmbientLightingIntensity(0.5f);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
 	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
+	_fe3d->graphics_setDirectionalLightingIntensity(1.0f);
 	_fe3d->graphics_setShadowsEnabled(true);
 	_fe3d->graphics_setShadowLightness(0.25f);
 	_fe3d->graphics_setShadowQuality(16384);
@@ -51,6 +56,7 @@ void PointlightEditor::_unload()
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
+	_fe3d->model_delete(POINTLIGHT_MODEL_ID);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);

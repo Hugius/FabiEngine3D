@@ -74,9 +74,12 @@ void PointlightEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
+			_fe3d->model_setVisible("@@pointlight", false);
 			_gui->getOverlay()->getTextField("pointlightId")->setVisible(false);
-			_currentPointlightId = "";
+
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuMain");
+
+			_currentPointlightId = "";
 
 			return;
 		}

@@ -44,6 +44,15 @@ void PointlightEditor::_updateMiscellaneous()
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 	}
+
+	if(!_currentPointlightId.empty())
+	{
+		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_currentPointlightId));
+	}
+	if(!_hoveredPointlightId.empty())
+	{
+		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_hoveredPointlightId));
+	}
 }
 
 void PointlightEditor::_updatePointlightCreating()
@@ -87,7 +96,10 @@ void PointlightEditor::_updatePointlightCreating()
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
 		_fe3d->pointlight_create(newPointlightId);
-		_fe3d->pointlight_setPosition(newPointlightId, fvec3(0.0f, 2.0f, 0.0f));
+		_fe3d->pointlight_setPosition(newPointlightId, POINTLIGHT_POSITION);
+
+		_fe3d->model_setVisible("@@pointlight", true);
+		_fe3d->model_setColor("@@pointlight", "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 		_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + newPointlightId.substr(1));
@@ -100,6 +112,7 @@ void PointlightEditor::_updatePointlightChoosing()
 	if(!_hoveredPointlightId.empty())
 	{
 		_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
+		_fe3d->model_setVisible("@@pointlight", false);
 
 		_hoveredPointlightId = "";
 	}
@@ -113,7 +126,9 @@ void PointlightEditor::_updatePointlightChoosing()
 			if(_hoveredPointlightId.empty())
 			{
 				_hoveredPointlightId = ("@" + selectedOptionId);
+
 				_fe3d->pointlight_setVisible(_hoveredPointlightId, true);
+				_fe3d->model_setVisible("@@pointlight", true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
@@ -132,8 +147,6 @@ void PointlightEditor::_updatePointlightChoosing()
 					_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
 					_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);
 				}
-
-				_fe3d->pointlight_setVisible(_currentPointlightId, true);
 			}
 		}
 	}
@@ -153,6 +166,7 @@ void PointlightEditor::_updatePointlightDeleting()
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
+			_fe3d->model_setVisible("@@pointlight", false);
 
 			_currentPointlightId = "";
 		}

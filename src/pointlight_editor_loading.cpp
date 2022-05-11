@@ -54,7 +54,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 
 		_fe3d->pointlight_create(pointlightId);
 		_fe3d->pointlight_setVisible(pointlightId, false);
-		_fe3d->pointlight_setPosition(pointlightId, fvec3(0.0f, 2.0f, 0.0f));
+		_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
 		_fe3d->pointlight_setRadius(pointlightId, radius);
 		_fe3d->pointlight_setColor(pointlightId, color);
 		_fe3d->pointlight_setIntensity(pointlightId, intensity);

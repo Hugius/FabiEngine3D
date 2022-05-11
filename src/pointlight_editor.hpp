@@ -28,6 +28,11 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
+	static inline const string POINTLIGHT_MODEL_ID = "@@pointlight";
+	static inline const string POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+
+	static inline const fvec3 POINTLIGHT_POSITION = fvec3(0.0f, 2.0f, 0.0f);
+
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;

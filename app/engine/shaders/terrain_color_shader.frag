@@ -3,6 +3,7 @@
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
+#define SHADOW_BIAS 0.000001f
 
 in vec4 f_shadowSpacePos;
 in vec3 f_worldSpacePos;
@@ -99,14 +100,14 @@ void main()
 		return;
 	}
 
-    vec3 normal = calculateNormalMapping();
+    vec3 normalMapping = calculateNormalMapping();
 
-    float shadowLighting	 = calculateShadows();
-	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
-	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
-	vec3 directionalLighting = (calculateDirectionalLighting(normal) * shadowOcclusion);
-	vec3 pointlights	     = calculatePointlights(normal);
-	vec3 spotlights		     = calculateSpotlights(normal);
+    float shadowLighting = calculateShadows();
+	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
+	vec3 directionalLighting = (calculateDirectionalLighting(normalMapping) * shadowOcclusion);
+	vec3 pointlights = calculatePointlights(normalMapping);
+	vec3 spotlights	= calculateSpotlights(normalMapping);
 
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += calculateDiffuseMapping();
@@ -422,8 +423,7 @@ float calculateShadows()
 					vec2 uvOffset = (vec2(x, y) * texelSize);
 
 					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
-
-					float lightness = ((uvCoords.z > depth) ? u_shadowLightness : 1.0f);
+					float lightness = (((uvCoords.z - SHADOW_BIAS) > depth) ? u_shadowLightness : 1.0f);
 
 					shadow += lightness;            
 				}    

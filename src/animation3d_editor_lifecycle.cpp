@@ -13,6 +13,8 @@ void Animation3dEditor::_load()
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
+	_fe3d->model_setLightness("@@grid", "", 0.25f);
+	_fe3d->model_setShadowed("@@grid", false);
 
 	_fe3d->model_setVisible("@@box", false);
 	_fe3d->captor_create("@@captor");

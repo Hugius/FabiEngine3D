@@ -7,7 +7,7 @@ void LeftViewportController::initialize()
 	_gui->getLeftViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), FRAME_COLOR);
 
 	const auto window = _gui->getLeftViewport()->getWindow("main");
-	const auto positions = Mathematics::calculateDistributedPositions(9, CH, false);
+	const auto positions = Mathematics::calculateDistributedPositions(8, CH, false);
 
 	window->createScreen("empty");
 	window->createScreen("main");
@@ -16,10 +16,9 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("Water"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("text3dEditor", fvec2(0.0f, positions[5]), TEXT_SIZE("Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("aabbEditor", fvec2(0.0f, positions[6]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Quad2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[8]), TEXT_SIZE("Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[5]), TEXT_SIZE("Quad2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("text3dEditor", fvec2(0.0f, positions[6]), TEXT_SIZE("Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Text2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->setActiveScreen("main");
 }
 
@@ -64,25 +63,18 @@ void LeftViewportController::update()
 				_quad3dEditor->load();
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
-		{
-			if(_text3dEditor->loadText3dsFromFile())
-			{
-				_text3dEditor->load();
-			}
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("aabbEditor")->isHovered())
-		{
-			if(_aabbEditor->loadAabbsFromFile())
-			{
-				_aabbEditor->load();
-			}
-		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
 		{
 			if(_quad2dEditor->loadQuad2dsFromFile())
 			{
 				_quad2dEditor->load();
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
+		{
+			if(_text3dEditor->loadText3dsFromFile())
+			{
+				_text3dEditor->load();
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("text2dEditor")->isHovered())
@@ -99,9 +91,8 @@ void LeftViewportController::update()
 	_waterEditor->update();
 	_modelEditor->update();
 	_quad3dEditor->update();
-	_text3dEditor->update();
-	_aabbEditor->update();
 	_quad2dEditor->update();
+	_text3dEditor->update();
 	_text2dEditor->update();
 }
 
@@ -133,11 +124,6 @@ void LeftViewportController::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 void LeftViewportController::inject(shared_ptr<Text3dEditor> text3dEditor)
 {
 	_text3dEditor = text3dEditor;
-}
-
-void LeftViewportController::inject(shared_ptr<AabbEditor> aabbEditor)
-{
-	_aabbEditor = aabbEditor;
 }
 
 void LeftViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)

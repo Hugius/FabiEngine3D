@@ -284,6 +284,8 @@ const bool WorldEditor::saveWorldToFile() const
 			<< "POINTLIGHT "
 			<< placedPointlightId
 			<< " "
+			<< templatePointlightId
+			<< " "
 			<< position.x
 			<< " "
 			<< position.y

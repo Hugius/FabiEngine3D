@@ -176,13 +176,15 @@ void ScriptInterpreter::load()
 	_waterEditor->loadWatersFromFile();
 	_modelEditor->loadModelsFromFile();
 	_quad3dEditor->loadQuad3dsFromFile();
-	_text3dEditor->loadText3dsFromFile();
-	_aabbEditor->loadAabbsFromFile();
 	_quad2dEditor->loadQuad2dsFromFile();
+	_text3dEditor->loadText3dsFromFile();
 	_text2dEditor->loadText2dsFromFile();
-	_pointlightEditor->loadPointlightsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
 	_animation2dEditor->loadAnimation2dsFromFile();
+	_aabbEditor->loadAabbsFromFile();
+	_pointlightEditor->loadPointlightsFromFile();
+	//_spotlightEditor->loadSpotlightsFromFile();
+	//_sound3dEditor->loadSound3dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->camera_reset();
@@ -207,11 +209,14 @@ void ScriptInterpreter::unload()
 	_modelEditor->deleteLoadedModels();
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_quad2dEditor->deleteLoadedQuad2ds();
-	_aabbEditor->deleteLoadedAabbs();
+	_text3dEditor->deleteLoadedText3ds();
 	_text2dEditor->deleteLoadedText2ds();
-	_pointlightEditor->deleteLoadedPointlights();
 	_animation3dEditor->deleteLoadedAnimation3ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
+	_aabbEditor->deleteLoadedAabbs();
+	_pointlightEditor->deleteLoadedPointlights();
+	//_spotlightEditor->deleteLoadedSpotlights();
+	//_sound3dEditor->deleteLoadedSound3ds();
 	_sound2dEditor->deleteLoadedSound2ds();
 
 	for(const auto & skyId : _fe3d->sky_getIds())
@@ -260,6 +265,16 @@ void ScriptInterpreter::unload()
 		}
 	}
 
+	for(const auto & animation3dId : _fe3d->animation3d_getIds())
+	{
+		_fe3d->animation3d_delete(animation3dId);
+	}
+
+	for(const auto & animation2dId : _fe3d->animation2d_getIds())
+	{
+		_fe3d->animation2d_delete(animation2dId);
+	}
+
 	for(const auto & aabbId : _fe3d->aabb_getIds())
 	{
 		_fe3d->aabb_delete(aabbId);
@@ -278,16 +293,6 @@ void ScriptInterpreter::unload()
 	for(const auto & captorId : _fe3d->captor_getIds())
 	{
 		_fe3d->captor_delete(captorId);
-	}
-
-	for(const auto & animation3dId : _fe3d->animation3d_getIds())
-	{
-		_fe3d->animation3d_delete(animation3dId);
-	}
-
-	for(const auto & animation2dId : _fe3d->animation2d_getIds())
-	{
-		_fe3d->animation2d_delete(animation2dId);
 	}
 
 	for(const auto & sound3dId : _fe3d->sound3d_getIds())

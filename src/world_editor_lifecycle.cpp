@@ -9,10 +9,11 @@ void WorldEditor::_load()
 	_modelEditor->loadModelsFromFile();
 	_quad3dEditor->loadQuad3dsFromFile();
 	_text3dEditor->loadText3dsFromFile();
-	_aabbEditor->loadAabbsFromFile();
-	_pointlightEditor->loadPointlightsFromFile();
 	_animation3dEditor->loadAnimation3dsFromFile();
 	_animation2dEditor->loadAnimation2dsFromFile();
+	_aabbEditor->loadAabbsFromFile();
+	_pointlightEditor->loadPointlightsFromFile();
+	//_spotlightEditor->loadSpotlightsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->model_create(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_PATH);
@@ -132,10 +133,11 @@ void WorldEditor::_unload()
 	_modelEditor->deleteLoadedModels();
 	_quad3dEditor->deleteLoadedQuad3ds();
 	_text3dEditor->deleteLoadedText3ds();
-	_aabbEditor->deleteLoadedAabbs();
-	_pointlightEditor->deleteLoadedPointlights();
 	_animation3dEditor->deleteLoadedAnimation3ds();
 	_animation2dEditor->deleteLoadedAnimation2ds();
+	_aabbEditor->deleteLoadedAabbs();
+	_pointlightEditor->deleteLoadedPointlights();
+	//_spotlightEditor->deleteLoadedSpotlights();
 	_sound2dEditor->deleteLoadedSound2ds();
 
 	_fe3d->model_delete(POINTLIGHT_MODEL_ID);

@@ -7,9 +7,9 @@ void WorldEditor::_updateQuad3dEditing()
 	   _currentTemplateQuad3dId.empty() &&
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
-	   _currentTemplateSound3dId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
 	   !_isPlacingSpotlight &&
+	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
 		if(!_dontResetSelectedQuad3d)

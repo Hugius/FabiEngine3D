@@ -26,10 +26,11 @@ public:
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
 	void inject(shared_ptr<Text3dEditor> text3dEditor);
-	void inject(shared_ptr<AabbEditor> aabbEditor);
-	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
+	void inject(shared_ptr<AabbEditor> aabbEditor);
+	void inject(shared_ptr<PointlightEditor> pointlightEditor);
+	//void inject(shared_ptr<SpotlightEditor> spotlightEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldHelper> worldHelper);
 	void update();

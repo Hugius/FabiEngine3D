@@ -31,13 +31,15 @@ public:
 	void inject(shared_ptr<WaterEditor> waterEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
-	void inject(shared_ptr<Text3dEditor> text3dEditor);
-	void inject(shared_ptr<AabbEditor> aabbEditor);
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
+	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
-	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
+	void inject(shared_ptr<AabbEditor> aabbEditor);
+	void inject(shared_ptr<PointlightEditor> pointlightEditor);
+	//void inject(shared_ptr<SpotlightEditor> spotlightEditor);
+	//void inject(shared_ptr<Sound3dEditor> sound3dEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);

@@ -69,15 +69,6 @@ void WorldEditor::_updatePointlightEditing()
 			}
 		}
 
-		if(_selectedPointlightId.empty())
-		{
-			_updatePointlightHighlighting(_activePointlightId, _activePointlightHighlightDirection);
-		}
-		else
-		{
-			_updatePointlightHighlighting(_selectedPointlightId, _selectedPointlightHighlightDirection);
-		}
-
 		if(!_activePointlightId.empty())
 		{
 			const auto screen = window->getScreen("pointlightPropertiesMenu");

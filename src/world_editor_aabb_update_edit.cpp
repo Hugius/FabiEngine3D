@@ -66,15 +66,6 @@ void WorldEditor::_updateAabbEditing()
 			}
 		}
 
-		if(_selectedAabbId.empty())
-		{
-			_updateAabbHighlighting(_activeAabbId, _activeAabbHighlightDirection);
-		}
-		else
-		{
-			_updateAabbHighlighting(_selectedAabbId, _selectedAabbHighlightDirection);
-		}
-
 		if(!_activeAabbId.empty())
 		{
 			const auto screen = window->getScreen("aabbPropertiesMenu");

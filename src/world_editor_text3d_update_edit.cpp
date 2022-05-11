@@ -66,15 +66,6 @@ void WorldEditor::_updateText3dEditing()
 			}
 		}
 
-		if(_selectedText3dId.empty())
-		{
-			_updateText3dHighlighting(_activeText3dId, _activeText3dHighlightDirection);
-		}
-		else
-		{
-			_updateText3dHighlighting(_selectedText3dId, _selectedText3dHighlightDirection);
-		}
-
 		if(!_activeText3dId.empty())
 		{
 			const auto screen = window->getScreen("text3dPropertiesMenu");

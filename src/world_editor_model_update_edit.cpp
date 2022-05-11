@@ -66,15 +66,6 @@ void WorldEditor::_updateModelEditing()
 			}
 		}
 
-		if(_selectedModelId.empty())
-		{
-			_updateModelHighlighting(_activeModelId, _activeModelHighlightDirection);
-		}
-		else
-		{
-			_updateModelHighlighting(_selectedModelId, _selectedModelHighlightDirection);
-		}
-
 		if(!_activeModelId.empty())
 		{
 			const auto screen = window->getScreen("modelPropertiesMenu");

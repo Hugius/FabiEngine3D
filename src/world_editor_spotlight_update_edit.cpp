@@ -66,15 +66,6 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 		}
 
-		if(_selectedSpotlightId.empty())
-		{
-			_updateSpotlightHighlighting(_activeSpotlightId, _activeSpotlightHighlightDirection);
-		}
-		else
-		{
-			_updateSpotlightHighlighting(_selectedSpotlightId, _selectedSpotlightHighlightDirection);
-		}
-
 		if(!_activeSpotlightId.empty())
 		{
 			const auto screen = window->getScreen("spotlightPropertiesMenu");

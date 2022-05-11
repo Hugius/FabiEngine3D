@@ -66,15 +66,6 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 		}
 
-		if(_selectedQuad3dId.empty())
-		{
-			_updateQuad3dHighlighting(_activeQuad3dId, _activeQuad3dHighlightDirection);
-		}
-		else
-		{
-			_updateQuad3dHighlighting(_selectedQuad3dId, _selectedQuad3dHighlightDirection);
-		}
-
 		if(!_activeQuad3dId.empty())
 		{
 			const auto screen = window->getScreen("quad3dPropertiesMenu");

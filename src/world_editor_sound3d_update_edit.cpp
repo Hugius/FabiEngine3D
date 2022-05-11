@@ -68,15 +68,6 @@ void WorldEditor::_updateSound3dEditing()
 			}
 		}
 
-		if(_selectedSound3dId.empty())
-		{
-			_updateSound3dHighlighting(_activeSound3dId, _activeSound3dHighlightDirection);
-		}
-		else
-		{
-			_updateSound3dHighlighting(_selectedSound3dId, _selectedSound3dHighlightDirection);
-		}
-
 		if(!_activeSound3dId.empty())
 		{
 			const auto screen = window->getScreen("sound3dPropertiesMenu");

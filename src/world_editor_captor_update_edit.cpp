@@ -66,15 +66,6 @@ void WorldEditor::_updateCaptorEditing()
 			}
 		}
 
-		if(_selectedCaptorId.empty())
-		{
-			_updateCaptorHighlighting(_activeCaptorId, _selectedCaptorHighlightDirection);
-		}
-		else
-		{
-			_updateCaptorHighlighting(_selectedCaptorId, _activeCaptorHighlightDirection);
-		}
-
 		if(!_activeCaptorId.empty())
 		{
 			const auto screen = window->getScreen("captorPropertiesMenu");

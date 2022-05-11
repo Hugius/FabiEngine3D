@@ -20,11 +20,11 @@ void WorldEditor::_load()
 	_fe3d->model_create(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_PATH);
 	_fe3d->model_create(CAPTOR_MODEL_ID, CAPTOR_MODEL_PATH);
 	_fe3d->model_create(SOUND3D_MODEL_ID, SOUND3D_MODEL_PATH);
-	_fe3d->model_setBaseSize(POINTLIGHT_MODEL_ID, DEFAULT_POINTLIGHT_SIZE);
-	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_SIZE);
-	_fe3d->model_setBaseSize(CAPTOR_MODEL_ID, DEFAULT_CAPTOR_SIZE);
-	_fe3d->model_setBaseSize(SOUND3D_MODEL_ID, DEFAULT_SOUND3D_SIZE);
-	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_ROTATION);
+	_fe3d->model_setBaseSize(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_SIZE);
+	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_SIZE);
+	_fe3d->model_setBaseSize(CAPTOR_MODEL_ID, CAPTOR_MODEL_SIZE);
+	_fe3d->model_setBaseSize(SOUND3D_MODEL_ID, SOUND3D_MODEL_SIZE);
+	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_ROTATION);
 	_fe3d->model_setShadowed(POINTLIGHT_MODEL_ID, false);
 	_fe3d->model_setShadowed(SPOTLIGHT_MODEL_ID, false);
 	_fe3d->model_setShadowed(CAPTOR_MODEL_ID, false);
@@ -43,15 +43,15 @@ void WorldEditor::_load()
 	_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 	_fe3d->pointlight_create(POINTLIGHT_MODEL_ID);
-	_fe3d->pointlight_setRadius(POINTLIGHT_MODEL_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-	_fe3d->pointlight_setIntensity(POINTLIGHT_MODEL_ID, DEFAULT_POINTLIGHT_INTENSITY);
+	_fe3d->pointlight_setRadius(POINTLIGHT_MODEL_ID, fvec3(POINTLIGHT_RADIUS));
+	_fe3d->pointlight_setIntensity(POINTLIGHT_MODEL_ID, POINTLIGHT_INTENSITY);
 	_fe3d->pointlight_setVisible(POINTLIGHT_MODEL_ID, false);
 
 	_fe3d->spotlight_create(SPOTLIGHT_MODEL_ID);
-	_fe3d->spotlight_setPitch(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_PITCH);
-	_fe3d->spotlight_setIntensity(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_INTENSITY);
-	_fe3d->spotlight_setAngle(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_ANGLE);
-	_fe3d->spotlight_setDistance(SPOTLIGHT_MODEL_ID, DEFAULT_SPOTLIGHT_DISTANCE);
+	_fe3d->spotlight_setPitch(SPOTLIGHT_MODEL_ID, SPOTLIGHT_PITCH);
+	_fe3d->spotlight_setIntensity(SPOTLIGHT_MODEL_ID, SPOTLIGHT_INTENSITY);
+	_fe3d->spotlight_setAngle(SPOTLIGHT_MODEL_ID, SPOTLIGHT_ANGLE);
+	_fe3d->spotlight_setDistance(SPOTLIGHT_MODEL_ID, SPOTLIGHT_DISTANCE);
 	_fe3d->spotlight_setVisible(SPOTLIGHT_MODEL_ID, false);
 
 	_fe3d->captor_create(CAPTOR_MODEL_ID);
@@ -59,8 +59,8 @@ void WorldEditor::_load()
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
 		_fe3d->sound3d_create(sound2dId, _fe3d->sound2d_getAudioPath(sound2dId));
-		_fe3d->sound3d_setMaxVolume(sound2dId, DEFAULT_SOUND3D_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(sound2dId, DEFAULT_SOUND3D_MAX_DISTANCE);
+		_fe3d->sound3d_setMaxVolume(sound2dId, SOUND3D_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(sound2dId, SOUND3D_MAX_DISTANCE);
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");

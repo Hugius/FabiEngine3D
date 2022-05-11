@@ -41,7 +41,7 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_fe3d->model_create(newModelId, CAPTOR_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAPTOR_SIZE);
+				_fe3d->model_setBaseSize(newModelId, CAPTOR_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -50,7 +50,7 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAPTOR_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, CAPTOR_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->model_setVisible(CAPTOR_MODEL_ID, false);
@@ -115,7 +115,7 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_fe3d->model_create(newModelId, CAPTOR_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAPTOR_SIZE);
+				_fe3d->model_setBaseSize(newModelId, CAPTOR_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -124,7 +124,7 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAPTOR_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, CAPTOR_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

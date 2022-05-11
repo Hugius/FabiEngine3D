@@ -58,20 +58,17 @@ void WorldEditor::_selectSound3d(const string & sound3dId)
 
 void WorldEditor::_deselectModel(const string & modelId)
 {
-	for(const auto & partId : _fe3d->model_getPartIds(modelId))
-	{
-		_fe3d->model_setOpacity(modelId, partId, 1.0f);
-	}
+
 }
 
 void WorldEditor::_deselectQuad3d(const string & quad3dId)
 {
-	_fe3d->quad3d_setOpacity(quad3dId, 1.0f);
+
 }
 
 void WorldEditor::_deselectText3d(const string & text3dId)
 {
-	_fe3d->text3d_setOpacity(text3dId, 1.0f);
+
 }
 
 void WorldEditor::_deselectAabb(const string & aabbId)
@@ -81,24 +78,20 @@ void WorldEditor::_deselectAabb(const string & aabbId)
 
 void WorldEditor::_deselectPointlight(const string & pointlightId)
 {
-	_fe3d->model_setBaseSize(("@@pointlight_" + pointlightId), DEFAULT_POINTLIGHT_SIZE);
-	_fe3d->aabb_setLocalSize(("@@pointlight_" + pointlightId), DEFAULT_POINTLIGHT_AABB_SIZE);
+
 }
 
 void WorldEditor::_deselectSpotlight(const string & spotlightId)
 {
-	_fe3d->model_setBaseSize(("@@spotlight_" + spotlightId), DEFAULT_SPOTLIGHT_SIZE);
-	_fe3d->aabb_setLocalSize(("@@spotlight_" + spotlightId), DEFAULT_SPOTLIGHT_AABB_SIZE);
+
 }
 
 void WorldEditor::_deselectCaptor(const string & captorId)
 {
-	_fe3d->model_setBaseSize(("@@captor_" + captorId), DEFAULT_CAPTOR_SIZE);
-	_fe3d->aabb_setLocalSize(("@@captor_" + captorId), DEFAULT_CAPTOR_AABB_SIZE);
+
 }
 
 void WorldEditor::_deselectSound3d(const string & sound3dId)
 {
-	_fe3d->model_setBaseSize(("@@sound3d_" + sound3dId), DEFAULT_SOUND3D_SIZE);
-	_fe3d->aabb_setLocalSize(("@@sound3d_" + sound3dId), DEFAULT_SOUND3D_AABB_SIZE);
+
 }

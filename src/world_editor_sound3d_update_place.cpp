@@ -40,13 +40,13 @@ void WorldEditor::_updateSound3dPlacing()
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
+				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
+				_fe3d->model_setBaseSize(newModelId, SOUND3D_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -55,7 +55,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SOUND3D_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, SOUND3D_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
@@ -146,13 +146,13 @@ void WorldEditor::_updateSound3dPlacing()
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);
-				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND3D_MAX_DISTANCE);
+				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_SOUND3D_SIZE);
+				_fe3d->model_setBaseSize(newModelId, SOUND3D_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -161,7 +161,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SOUND3D_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, SOUND3D_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

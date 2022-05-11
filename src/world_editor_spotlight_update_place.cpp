@@ -46,15 +46,15 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->spotlight_create(newId);
 				_fe3d->spotlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->spotlight_setPitch(newId, DEFAULT_SPOTLIGHT_PITCH);
-				_fe3d->spotlight_setIntensity(newId, DEFAULT_SPOTLIGHT_INTENSITY);
-				_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
-				_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
+				_fe3d->spotlight_setPitch(newId, SPOTLIGHT_PITCH);
+				_fe3d->spotlight_setIntensity(newId, SPOTLIGHT_INTENSITY);
+				_fe3d->spotlight_setAngle(newId, SPOTLIGHT_ANGLE);
+				_fe3d->spotlight_setDistance(newId, SPOTLIGHT_DISTANCE);
 
 				_fe3d->model_create(newModelId, SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
+				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, SPOTLIGHT_PITCH));
+				_fe3d->model_setBaseSize(newModelId, SPOTLIGHT_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -63,7 +63,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPOTLIGHT_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, SPOTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->spotlight_setVisible(SPOTLIGHT_MODEL_ID, false);
@@ -139,15 +139,15 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->spotlight_create(newId);
 				_fe3d->spotlight_setPosition(newId, newPosition);
-				_fe3d->spotlight_setPitch(newId, DEFAULT_SPOTLIGHT_PITCH);
-				_fe3d->spotlight_setIntensity(newId, DEFAULT_SPOTLIGHT_INTENSITY);
-				_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
-				_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
+				_fe3d->spotlight_setPitch(newId, SPOTLIGHT_PITCH);
+				_fe3d->spotlight_setIntensity(newId, SPOTLIGHT_INTENSITY);
+				_fe3d->spotlight_setAngle(newId, SPOTLIGHT_ANGLE);
+				_fe3d->spotlight_setDistance(newId, SPOTLIGHT_DISTANCE);
 
 				_fe3d->model_create(newModelId, SPOTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
-				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPOTLIGHT_SIZE);
+				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, SPOTLIGHT_PITCH));
+				_fe3d->model_setBaseSize(newModelId, SPOTLIGHT_MODEL_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -156,7 +156,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPOTLIGHT_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, SPOTLIGHT_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

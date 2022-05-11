@@ -597,9 +597,6 @@
     <ClCompile Include="..\..\..\src\quad2d_editor_update_menu.cpp">
       <Filter>Quad2D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp">
-      <Filter>World Editor\Update\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\base_editor.cpp">
       <Filter>Base</Filter>
     </ClCompile>

@@ -108,6 +108,11 @@ void WorldEditor::_load()
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbPlace")->getScrollingList("templateAabbs")->createOption(aabbId, aabbId.substr(1));
 	}
 
+	for(const auto & pointlightId : _pointlightEditor->getLoadedPointlightIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightPlace")->getScrollingList("templatePointlights")->createOption(pointlightId, pointlightId.substr(1));
+	}
+
 	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
 	{
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("templateSound3ds")->createOption(sound2dId, sound2dId.substr(1));
@@ -287,6 +292,10 @@ void WorldEditor::update()
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updatePointlightPlacingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

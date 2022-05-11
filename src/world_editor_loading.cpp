@@ -343,37 +343,31 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_loadedSound3dIds.insert({sound3dId, templateId});
-
 			_worldHelper->copyTemplateSound2d(sound3dId, templateId);
 
 			_fe3d->sound3d_setPosition(sound3dId, position);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
 			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
 			_fe3d->sound3d_start(sound3dId, -1);
+
+			_loadedSound3dIds.insert({sound3dId, templateId});
 		}
 		else if(lineType == "POINTLIGHT")
 		{
 			string pointlightId;
+			string templateId;
 			fvec3 position;
 			fvec3 radius;
-			fvec3 color;
-			float intensity;
-			int shape;
 
 			iss
 				>> pointlightId
+				>> templateId
 				>> position.x
 				>> position.y
 				>> position.z
 				>> radius.x
 				>> radius.y
-				>> radius.z
-				>> color.r
-				>> color.g
-				>> color.b
-				>> intensity
-				>> shape;
+				>> radius.z;
 
 			if(isLoaded())
 			{
@@ -381,7 +375,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->model_create(newModelId, POINTLIGHT_MODEL_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_POINTLIGHT_SIZE);
-				_fe3d->model_setColor(newModelId, "", color);
+				//_fe3d->model_setColor(newModelId, "", color);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
@@ -394,14 +388,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			_fe3d->pointlight_create(pointlightId);
+			_worldHelper->copyTemplatePointlight(pointlightId, templateId);
+
 			_fe3d->pointlight_setPosition(pointlightId, position);
 			_fe3d->pointlight_setRadius(pointlightId, radius);
-			_fe3d->pointlight_setColor(pointlightId, color);
-			_fe3d->pointlight_setIntensity(pointlightId, intensity);
-			_fe3d->pointlight_setShape(pointlightId, PointlightShapeType(shape));
 
-			_loadedPointlightIds.push_back(pointlightId);
+			_loadedPointlightIds.insert({pointlightId, templateId});
 		}
 		else if(lineType == "SPOTLIGHT")
 		{

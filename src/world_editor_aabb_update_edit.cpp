@@ -3,7 +3,14 @@
 
 void WorldEditor::_updateAabbEditing()
 {
-	if(_currentTemplateModelId.empty() && _currentTemplateAabbId.empty() && _currentTemplateSound3dId.empty() && !_isPlacingPointlight && !_isPlacingCaptor)
+	if(_currentTemplateModelId.empty() &&
+	   _currentTemplateQuad3dId.empty() &&
+	   _currentTemplateText3dId.empty() &&
+	   _currentTemplateAabbId.empty() &&
+	   _currentTemplateSound3dId.empty() &&
+	   _currentTemplatePointlightId.empty() &&
+	   !_isPlacingSpotlight &&
+	   !_isPlacingCaptor)
 	{
 		if(!_dontResetSelectedAabb)
 		{

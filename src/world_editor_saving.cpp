@@ -275,17 +275,14 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & pointlightId : _loadedPointlightIds)
+	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
 	{
-		auto position = _fe3d->pointlight_getPosition(pointlightId);
-		auto radius = _fe3d->pointlight_getRadius(pointlightId);
-		auto color = _fe3d->pointlight_getColor(pointlightId);
-		auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
-		auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
+		auto position = _fe3d->pointlight_getPosition(placedPointlightId);
+		auto radius = _fe3d->pointlight_getRadius(placedPointlightId);
 
 		file
 			<< "POINTLIGHT "
-			<< pointlightId
+			<< placedPointlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -298,16 +295,6 @@ const bool WorldEditor::saveWorldToFile() const
 			<< radius.y
 			<< " "
 			<< radius.z
-			<< " "
-			<< color.r
-			<< " "
-			<< color.g
-			<< " "
-			<< color.b
-			<< " "
-			<< intensity
-			<< " "
-			<< shape
 			<< endl;
 	}
 

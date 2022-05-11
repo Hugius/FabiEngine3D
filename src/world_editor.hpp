@@ -74,6 +74,7 @@ private:
 	void _updateAabbPlacing();
 	void _updateAabbEditing();
 	void _updatePointlightMenu();
+	void _updatePointlightPlacingMenu();
 	void _updatePointlightChoosingMenu();
 	void _updatePointlightPlacing();
 	void _updatePointlightEditing();
@@ -244,9 +245,9 @@ private:
 	unordered_map<string, string> _loadedQuad3dIds = {};
 	unordered_map<string, string> _loadedText3dIds = {};
 	unordered_map<string, string> _loadedAabbIds = {};
+	unordered_map<string, string> _loadedPointlightIds = {};
 	unordered_map<string, string> _loadedSound3dIds = {};
 
-	vector<string> _loadedPointlightIds = {};
 	vector<string> _loadedSpotlightIds = {};
 	vector<string> _loadedCaptorIds = {};
 
@@ -269,6 +270,7 @@ private:
 	string _currentTemplateQuad3dId = "";
 	string _currentTemplateText3dId = "";
 	string _currentTemplateAabbId = "";
+	string _currentTemplatePointlightId = "";
 	string _currentTemplateSound3dId = "";
 	string _selectedModelId = "";
 	string _selectedQuad3dId = "";
@@ -315,7 +317,6 @@ private:
 	bool _dontResetSelectedSpotlight = false;
 	bool _dontResetSelectedCaptor = false;
 	bool _dontResetSelectedSound3d = false;
-	bool _isPlacingPointlight = false;
 	bool _isPlacingSpotlight = false;
 	bool _isPlacingCaptor = false;
 	bool _isGridModeEnabled = true;

@@ -125,6 +125,10 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("worldEditorMenuPointlight")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuPointlight")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
+	rightWindow->createScreen("worldEditorMenuPointlightPlace");
+	rightWindow->getScreen("worldEditorMenuPointlightPlace")->createScrollingList("templatePointlights", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
+	rightWindow->getScreen("worldEditorMenuPointlightPlace")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
 	rightWindow->createScreen("worldEditorMenuPointlightChoice");
 	rightWindow->getScreen("worldEditorMenuPointlightChoice")->createScrollingList("placedPointlights", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
 	rightWindow->getScreen("worldEditorMenuPointlightChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -493,6 +497,7 @@ void WorldEditor::_unloadGUI()
 	rightWindow->deleteScreen("worldEditorMenuAabbPlace");
 	rightWindow->deleteScreen("worldEditorMenuAabbChoice");
 	rightWindow->deleteScreen("worldEditorMenuPointlight");
+	rightWindow->deleteScreen("worldEditorMenuPointlightPlace");
 	rightWindow->deleteScreen("worldEditorMenuPointlightChoice");
 	rightWindow->deleteScreen("worldEditorMenuSpotlight");
 	rightWindow->deleteScreen("worldEditorMenuSpotlightChoice");

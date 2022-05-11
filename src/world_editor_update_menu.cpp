@@ -117,6 +117,7 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateQuad3dId = "";
 			_currentTemplateText3dId = "";
 			_currentTemplateAabbId = "";
+			_currentTemplatePointlightId = "";
 			_currentTemplateSound3dId = "";
 			_selectedModelId = "";
 			_selectedQuad3dId = "";
@@ -160,7 +161,6 @@ void WorldEditor::_updateChoiceMenu()
 			_dontResetSelectedSpotlight = false;
 			_dontResetSelectedCaptor = false;
 			_dontResetSelectedSound3d = false;
-			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingCaptor = false;
 			_isGridModeEnabled = false;

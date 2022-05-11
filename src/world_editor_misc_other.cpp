@@ -95,13 +95,13 @@ void WorldEditor::clearLoadedWorld()
 		_fe3d->aabb_delete(placedAabbId);
 	}
 
-	for(const auto & pointlightId : _loadedPointlightIds)
+	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
 	{
-		_fe3d->pointlight_delete(pointlightId);
+		_fe3d->pointlight_delete(placedPointlightId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@pointlight_" + pointlightId);
+			_fe3d->model_delete("@@pointlight_" + placedPointlightId);
 		}
 	}
 

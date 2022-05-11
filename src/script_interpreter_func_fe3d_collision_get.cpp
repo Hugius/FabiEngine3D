@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString())))
+				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString()), false))
 				{
 					if(args[2]->getString().empty())
 					{
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(args[1]->getString().empty())
 				{

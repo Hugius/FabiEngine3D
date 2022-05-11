@@ -150,10 +150,10 @@ private:
 	const bool _validateFe3dModelPart(const string & modelId, const string & partId);
 	const bool _validateFe3dQuad3d(const string & quad3dId, bool isTemplate);
 	const bool _validateFe3dText3d(const string & text3dId, bool isTemplate);
-	const bool _validateFe3dAabb(const string & aabbId);
+	const bool _validateFe3dAabb(const string & aabbId, bool isTemplate);
 	const bool _validateFe3dQuad2d(const string & quad2dId, bool isTemplate);
 	const bool _validateFe3dText2d(const string & text2dId, bool isTemplate);
-	const bool _validateFe3dPointlight(const string & pointlightId);
+	const bool _validateFe3dPointlight(const string & pointlightId, bool isTemplate);
 	const bool _validateFe3dSpotlight(const string & spotlightId);
 	const bool _validateFe3dCaptor(const string & captorId);
 	const bool _validateFe3dSound3d(const string & sound3dId, bool isTemplate);

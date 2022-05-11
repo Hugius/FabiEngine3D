@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_isVisible(args[0]->getString());
 
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getPosition(args[0]->getString()).x;
 
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getPosition(args[0]->getString()).y;
 
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getPosition(args[0]->getString()).z;
 
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getRadius(args[0]->getString()).x;
 
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getRadius(args[0]->getString()).y;
 
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getRadius(args[0]->getString()).z;
 
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getColor(args[0]->getString()).r;
 
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getColor(args[0]->getString()).g;
 
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getColor(args[0]->getString()).b;
 
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->pointlight_getIntensity(args[0]->getString());
 
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0]->getString()))
+			if(_validateFe3dPointlight(args[0]->getString(), false))
 			{
 				const auto shape = _fe3d->pointlight_getShape(args[0]->getString());
 

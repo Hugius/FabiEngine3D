@@ -2,7 +2,7 @@
 
 ## Setters
 
-- `fe3d:pointlight_place` (`STR` new_id, `DEC` position_x, `DEC` position_y, `DEC` position_z, `DEC` radius_x, `DEC` radius_y, `DEC` radius_z, `DEC` color_r, `DEC` color_g, `DEC` color_b, `DEC` intensity) -----> `NONE`
+- `fe3d:pointlight_place` (`STR` new_id, `STR` editor_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:pointlight_delete` (`STR` id) -----> `NONE`
 - `fe3d:pointlight_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:pointlight_move_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`

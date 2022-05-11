@@ -1,17 +1,29 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateFe3dAabb(const string & aabbId)
+const bool ScriptInterpreter::_validateFe3dAabb(const string & aabbId, bool isTemplate)
 {
 	if(!_validateFe3dId(aabbId))
 	{
 		return false;
 	}
 
-	if(!_fe3d->aabb_isExisting(aabbId))
+	if(isTemplate)
 	{
-		_throwRuntimeError("AABB does not exist");
+		if(!_fe3d->aabb_isExisting("@" + aabbId))
+		{
+			_throwRuntimeError("template AABB does not exist");
 
-		return false;
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->aabb_isExisting(aabbId))
+		{
+			_throwRuntimeError("AABB does not exist");
+
+			return false;
+		}
 	}
 
 	return true;
@@ -133,18 +145,30 @@ const bool ScriptInterpreter::_validateFe3dText2d(const string & text2dId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightId)
+const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightId, bool isTemplate)
 {
 	if(!_validateFe3dId(pointlightId))
 	{
 		return false;
 	}
 
-	if(!_fe3d->pointlight_isExisting(pointlightId))
+	if(isTemplate)
 	{
-		_throwRuntimeError("pointlight does not exist");
+		if(!_fe3d->pointlight_isExisting("@" + pointlightId))
+		{
+			_throwRuntimeError("template pointlight does not exist");
 
-		return false;
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->pointlight_isExisting(pointlightId))
+		{
+			_throwRuntimeError("pointlight does not exist");
+
+			return false;
+		}
 	}
 
 	return true;

@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 {
 	if(functionName == "fe3d:aabb_place")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -22,11 +22,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 				return true;
 			}
 
-			_fe3d->aabb_create(args[0]->getString(), false);
-			_fe3d->aabb_setBasePosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
-			_fe3d->aabb_setBaseSize(args[0]->getString(), fvec3(args[4]->getDecimal(), args[5]->getDecimal(), args[6]->getDecimal()));
+			if(_validateFe3dAabb(args[1]->getString(), true))
+			{
+				_worldHelper->copyTemplateAabb(args[0]->getString(), ("@" + args[1]->getString()));
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				_fe3d->aabb_setBasePosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:aabb_delete")
@@ -35,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -74,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -95,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -116,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -137,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -158,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -179,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -200,7 +203,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -221,7 +224,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -242,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -263,7 +266,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -284,7 +287,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
@@ -305,7 +308,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString()))
+			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
 				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{

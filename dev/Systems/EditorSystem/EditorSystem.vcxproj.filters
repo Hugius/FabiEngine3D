@@ -268,6 +268,9 @@
     <Filter Include="Pointlight Editor\Update">
       <UniqueIdentifier>{e6bcf3c2-6a59-4cc4-a5ea-2057f1b35262}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Spotlight Editor">
+      <UniqueIdentifier>{fb96c27f-c8ec-4e77-a10a-e1ec28a72584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -711,6 +714,24 @@
     <ClCompile Include="..\..\..\src\pointlight_editor_misc.cpp">
       <Filter>Pointlight Editor\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_loading.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_misc.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_saving.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_update_menu.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_update_misc.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_lifecycle.cpp">
+      <Filter>Spotlight Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -760,6 +781,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\pointlight_editor.hpp">
       <Filter>Pointlight Editor\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spotlight_editor.hpp">
+      <Filter>Spotlight Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

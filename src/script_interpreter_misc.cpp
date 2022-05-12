@@ -227,6 +227,11 @@ void ScriptInterpreter::inject(shared_ptr<PointlightEditor> pointlightEditor)
 	_pointlightEditor = pointlightEditor;
 }
 
+void ScriptInterpreter::inject(shared_ptr<SpotlightEditor> spotlightEditor)
+{
+	_spotlightEditor = spotlightEditor;
+}
+
 void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)
 {
 	_worldEditor = worldEditor;

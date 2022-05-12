@@ -5,13 +5,14 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "quad3d_editor.hpp"
-#include "text3d_editor.hpp"
-#include "aabb_editor.hpp"
 #include "quad2d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "text2d_editor.hpp"
-#include "pointlight_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
+#include "aabb_editor.hpp"
+#include "pointlight_editor.hpp"
+#include "spotlight_editor.hpp"
 #include "sound2d_editor.hpp"
 #include "world_editor.hpp"
 #include "script.hpp"
@@ -38,7 +39,7 @@ public:
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<AabbEditor> aabbEditor);
 	void inject(shared_ptr<PointlightEditor> pointlightEditor);
-	//void inject(shared_ptr<SpotlightEditor> spotlightEditor);
+	void inject(shared_ptr<SpotlightEditor> spotlightEditor);
 	//void inject(shared_ptr<Sound3dEditor> sound3dEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
@@ -156,7 +157,7 @@ private:
 	const bool _validateFe3dQuad2d(const string & quad2dId, bool isTemplate);
 	const bool _validateFe3dText2d(const string & text2dId, bool isTemplate);
 	const bool _validateFe3dPointlight(const string & pointlightId, bool isTemplate);
-	const bool _validateFe3dSpotlight(const string & spotlightId);
+	const bool _validateFe3dSpotlight(const string & spotlightId, bool isTemplate);
 	const bool _validateFe3dCaptor(const string & captorId);
 	const bool _validateFe3dSound3d(const string & sound3dId, bool isTemplate);
 	const bool _validateFe3dSound2d(const string & sound2dId, bool isTemplate);
@@ -348,6 +349,7 @@ private:
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
 	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
+	shared_ptr<SpotlightEditor> _spotlightEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;

@@ -21,7 +21,7 @@ EngineController::EngineController()
 	_animation2dEditor = make_shared<Animation2dEditor>();
 	_aabbEditor = make_shared<AabbEditor>();
 	_pointlightEditor = make_shared<PointlightEditor>();
-	//_spotlightEditor = make_shared<SpotlightEditor>();
+	_spotlightEditor = make_shared<SpotlightEditor>();
 	//_sound3dEditor = make_shared<Sound3dEditor>();
 	_sound2dEditor = make_shared<Sound2dEditor>();
 	_worldEditor = make_shared<WorldEditor>();
@@ -46,7 +46,7 @@ EngineController::EngineController()
 	_rightViewportController->inject(_animation2dEditor);
 	_rightViewportController->inject(_aabbEditor);
 	_rightViewportController->inject(_pointlightEditor);
-	//_rightViewportController->inject(_spotlightEditor);
+	_rightViewportController->inject(_spotlightEditor);
 	//_rightViewportController->inject(_sound3dEditor);
 	_rightViewportController->inject(_sound2dEditor);
 	_rightViewportController->inject(_worldEditor);
@@ -68,7 +68,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_animation2dEditor);
 	_topViewportController->inject(_aabbEditor);
 	_topViewportController->inject(_pointlightEditor);
-	//_topViewportController->inject(_spotlightEditor);
+	_topViewportController->inject(_spotlightEditor);
 	//_topViewportController->inject(_sound3dEditor);
 	_topViewportController->inject(_sound2dEditor);
 	_topViewportController->inject(_worldEditor);
@@ -91,7 +91,7 @@ EngineController::EngineController()
 	_animation2dEditor->inject(_guiManager);
 	_aabbEditor->inject(_guiManager);
 	_pointlightEditor->inject(_guiManager);
-	//_spotlightEditor->inject(_guiManager);
+	_spotlightEditor->inject(_guiManager);
 	//_sound3dEditor->inject(_guiManager);
 	_sound2dEditor->inject(_guiManager);
 	_worldEditor->inject(_guiManager);
@@ -105,7 +105,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_animation2dEditor);
 	_worldEditor->inject(_aabbEditor);
 	_worldEditor->inject(_pointlightEditor);
-	//_worldEditor->inject(_spotlightEditor);
+	_worldEditor->inject(_spotlightEditor);
 	//_worldEditor->inject(_sound3dEditor);
 	_worldEditor->inject(_sound2dEditor);
 	_worldEditor->inject(_worldHelper);
@@ -124,7 +124,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_animation2dEditor);
 	_scriptInterpreter->inject(_aabbEditor);
 	_scriptInterpreter->inject(_pointlightEditor);
-	//_scriptInterpreter->inject(_spotlightEditor);
+	_scriptInterpreter->inject(_spotlightEditor);
 	//_scriptInterpreter->inject(_sound3dEditor);
 	_scriptInterpreter->inject(_sound2dEditor);
 	_scriptInterpreter->inject(_worldEditor);
@@ -154,7 +154,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_animation2dEditor->inject(_fe3d);
 	_aabbEditor->inject(_fe3d);
 	_pointlightEditor->inject(_fe3d);
-	//_spotlightEditor->inject(_fe3d);
+	_spotlightEditor->inject(_fe3d);
 	//_sound3dEditor->inject(_fe3d);
 	_sound2dEditor->inject(_fe3d);
 	_worldEditor->inject(_fe3d);

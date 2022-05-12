@@ -7,10 +7,11 @@
 #include "model_editor.hpp"
 #include "quad3d_editor.hpp"
 #include "text3d_editor.hpp"
-#include "aabb_editor.hpp"
-#include "pointlight_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
+#include "aabb_editor.hpp"
+#include "pointlight_editor.hpp"
+#include "spotlight_editor.hpp"
 #include "sound2d_editor.hpp"
 #include "transformation_type.hpp"
 #include "world_helper.hpp"
@@ -30,7 +31,7 @@ public:
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<AabbEditor> aabbEditor);
 	void inject(shared_ptr<PointlightEditor> pointlightEditor);
-	//void inject(shared_ptr<SpotlightEditor> spotlightEditor);
+	void inject(shared_ptr<SpotlightEditor> spotlightEditor);
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldHelper> worldHelper);
 	void update();
@@ -240,6 +241,7 @@ private:
 	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
+	shared_ptr<SpotlightEditor> _spotlightEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;

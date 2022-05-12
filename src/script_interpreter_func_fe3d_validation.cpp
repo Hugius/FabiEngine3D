@@ -174,18 +174,30 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightI
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSpotlight(const string & spotlightId)
+const bool ScriptInterpreter::_validateFe3dSpotlight(const string & spotlightId, bool isTemplate)
 {
 	if(!_validateFe3dId(spotlightId))
 	{
 		return false;
 	}
 
-	if(!_fe3d->spotlight_isExisting(spotlightId))
+	if(isTemplate)
 	{
-		_throwRuntimeError("spotlight does not exist");
+		if(!_fe3d->spotlight_isExisting("@" + spotlightId))
+		{
+			_throwRuntimeError("template spotlight does not exist");
 
-		return false;
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->spotlight_isExisting(spotlightId))
+		{
+			_throwRuntimeError("spotlight does not exist");
+
+			return false;
+		}
 	}
 
 	return true;

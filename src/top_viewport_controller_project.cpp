@@ -99,6 +99,7 @@ void TopViewportController::_updateProjectCreating()
 		auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
 		auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 		auto sound2dFile = ofstream(newProjectDirectoryPath + "data\\sound2d.fe3d");
+		auto spotlightFile = ofstream(newProjectDirectoryPath + "data\\spotlight.fe3d");
 		auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 		auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
 		auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
@@ -111,6 +112,7 @@ void TopViewportController::_updateProjectCreating()
 		quad3dFile.close();
 		skyFile.close();
 		sound2dFile.close();
+		spotlightFile.close();
 		terrainFile.close();
 		text2dFile.close();
 		text3dFile.close();

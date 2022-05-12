@@ -183,7 +183,7 @@ void ScriptInterpreter::load()
 	_animation2dEditor->loadAnimation2dsFromFile();
 	_aabbEditor->loadAabbsFromFile();
 	_pointlightEditor->loadPointlightsFromFile();
-	//_spotlightEditor->loadSpotlightsFromFile();
+	_spotlightEditor->loadSpotlightsFromFile();
 	//_sound3dEditor->loadSound3dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
@@ -215,7 +215,7 @@ void ScriptInterpreter::unload()
 	_animation2dEditor->deleteLoadedAnimation2ds();
 	_aabbEditor->deleteLoadedAabbs();
 	_pointlightEditor->deleteLoadedPointlights();
-	//_spotlightEditor->deleteLoadedSpotlights();
+	_spotlightEditor->deleteLoadedSpotlights();
 	//_sound3dEditor->deleteLoadedSound3ds();
 	_sound2dEditor->deleteLoadedSound2ds();
 

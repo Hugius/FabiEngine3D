@@ -117,7 +117,7 @@ void TopViewportController::_setProject(const string & projectId)
 	_animation2dEditor->setCurrentProjectId(_currentProjectId);
 	_aabbEditor->setCurrentProjectId(_currentProjectId);
 	_pointlightEditor->setCurrentProjectId(_currentProjectId);
-	//_spotlightEditor->setCurrentProjectId(_currentProjectId);
+	_spotlightEditor->setCurrentProjectId(_currentProjectId);
 	//_sound3dEditor->setCurrentProjectId(_currentProjectId);
 	_sound2dEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
@@ -181,6 +181,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sound2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\spotlight.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\text2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\text3d.fe3d");
@@ -252,6 +253,11 @@ void TopViewportController::inject(shared_ptr<Text2dEditor> text2dEditor)
 void TopViewportController::inject(shared_ptr<PointlightEditor> pointlightEditor)
 {
 	_pointlightEditor = pointlightEditor;
+}
+
+void TopViewportController::inject(shared_ptr<SpotlightEditor> spotlightEditor)
+{
+	_spotlightEditor = spotlightEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)

@@ -176,8 +176,6 @@ void Text3dEditor::_updateText3dChoosing()
 					_gui->getOverlay()->getTextField("text3dId")->setTextContent("Text3D: " + _currentText3dId.substr(1));
 					_gui->getOverlay()->getTextField("text3dId")->setVisible(true);
 				}
-
-				_fe3d->text3d_setVisible(_currentText3dId, true);
 			}
 		}
 	}

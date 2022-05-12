@@ -139,8 +139,6 @@ void Text2dEditor::_updateText2dChoosing()
 					_gui->getOverlay()->getTextField("text2dId")->setTextContent("Text2D: " + _currentText2dId.substr(1));
 					_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
 				}
-
-				_fe3d->text2d_setVisible(_currentText2dId, true);
 			}
 		}
 	}

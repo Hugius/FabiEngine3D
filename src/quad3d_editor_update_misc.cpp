@@ -141,8 +141,6 @@ void Quad3dEditor::_updateQuad3dChoosing()
 					_gui->getOverlay()->getTextField("quad3dId")->setTextContent("Quad3D: " + _currentQuad3dId.substr(1));
 					_gui->getOverlay()->getTextField("quad3dId")->setVisible(true);
 				}
-
-				_fe3d->quad3d_setVisible(_currentQuad3dId, true);
 			}
 		}
 	}

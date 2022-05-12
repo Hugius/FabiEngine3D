@@ -113,8 +113,6 @@ void Quad2dEditor::_updateQuad2dChoosing()
 					_gui->getOverlay()->getTextField("quad2dId")->setTextContent("Quad2D: " + _currentQuad2dId.substr(1));
 					_gui->getOverlay()->getTextField("quad2dId")->setVisible(true);
 				}
-
-				_fe3d->quad2d_setVisible(_currentQuad2dId, true);
 			}
 		}
 	}

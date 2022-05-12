@@ -131,8 +131,6 @@ void AabbEditor::_updateAabbChoosing()
 					_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId.substr(1));
 					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
 				}
-
-				_fe3d->aabb_setVisible(_currentAabbId, true);
 			}
 		}
 	}

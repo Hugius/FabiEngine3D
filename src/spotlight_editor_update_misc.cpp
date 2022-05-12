@@ -97,6 +97,7 @@ void SpotlightEditor::_updateSpotlightCreating()
 
 		_fe3d->spotlight_create(newSpotlightId);
 		_fe3d->spotlight_setPosition(newSpotlightId, SPOTLIGHT_POSITION);
+		_fe3d->spotlight_setPitch(newSpotlightId, -90.0f);
 
 		_fe3d->model_setVisible("@@spotlight", true);
 		_fe3d->model_setColor("@@spotlight", "", fvec3(1.0f));

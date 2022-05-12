@@ -18,6 +18,7 @@ void SpotlightEditor::_load()
 	_fe3d->model_setShadowed("@@grid", false);
 	_fe3d->model_create(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_PATH);
 	_fe3d->model_setBasePosition(SPOTLIGHT_MODEL_ID, SPOTLIGHT_POSITION);
+	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, fvec3(0.0f, 0.0f, -90.0f));
 	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, fvec3(0.5f));
 	_fe3d->model_setShadowed(SPOTLIGHT_MODEL_ID, false);
 	_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, false);

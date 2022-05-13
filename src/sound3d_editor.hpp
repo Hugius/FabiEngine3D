@@ -10,6 +10,7 @@ public:
 	void update();
 	void deleteLoadedSound3ds();
 
+	const vector<string> getAudioPathsFromFile() const;
 	const vector<string> & getLoadedSound3dIds() const;
 
 	const bool loadSound3dsFromFile();
@@ -42,6 +43,8 @@ private:
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
+	static inline constexpr float VOLUME_MULTIPLIER = 100.0f;
+	static inline constexpr float DISTANCE_MULTIPLIER = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;
 

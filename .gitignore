@@ -48,15 +48,16 @@ dev/Systems/SoundSystem.pdb
 dev/Systems/SupportSystem.pdb
 dev/Systems/WorldSystem.pdb
 
-dev/.vs/FabiEngine3D/project-colors.json
+dev/.vs/FabiEngine3D/FileContentIndex/
 dev/.vs/FabiEngine3D/v17/ipch/
 dev/.vs/FabiEngine3D/v17/Browse.VC.db
-dev/.vs/FabiEngine3D/v17/Solution.VC.db
-dev/.vs/FabiEngine3D/v17/fileList.bin
 dev/.vs/FabiEngine3D/v17/Browse.VC.db-shm
 dev/.vs/FabiEngine3D/v17/Browse.VC.db-wal
 dev/.vs/FabiEngine3D/v17/Browse.VC.opendb
+dev/.vs/FabiEngine3D/v17/fileList.bin
+dev/.vs/FabiEngine3D/v17/HierarchyCache.v1.txt
+dev/.vs/FabiEngine3D/v17/Solution.VC.db
 dev/.vs/FabiEngine3D/v17/Solution.VC.db-shm
 dev/.vs/FabiEngine3D/v17/Solution.VC.db-wal
-dev/.vs/FabiEngine3D/v17/HierarchyCache.v1.txt
 dev/.vs/FabiEngine3D/v17/workspaceFileList.bin
+dev/.vs/FabiEngine3D/project-colors.json

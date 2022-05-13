@@ -66,14 +66,12 @@ void Sound3dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "sound3dEditorMenuChoice")
 	{
-		const auto radius = _fe3d->sound3d_getRadius(_currentSound3dId);
-		const auto color = _fe3d->sound3d_getColor(_currentSound3dId);
-		const auto intensity = _fe3d->sound3d_getIntensity(_currentSound3dId);
-		const auto shape = _fe3d->sound3d_getShape(_currentSound3dId);
+		const auto maxVolume = _fe3d->sound3d_getMaxVolume(_currentSound3dId);
+		const auto maxDistance = _fe3d->sound3d_getMaxDistance(_currentSound3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->sound3d_setVisible(_currentSound3dId, false);
+			_fe3d->sound3d_stop(_currentSound3dId, false);
 			_fe3d->model_setVisible("@@sound3d", false);
 			_gui->getOverlay()->getTextField("sound3dId")->setVisible(false);
 
@@ -83,105 +81,28 @@ void Sound3dEditor::_updateChoiceMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("radius")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxVolume")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("radiusX", "X", (radius.x * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("radiusY", "Y", (radius.y * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("radiusZ", "Z", (radius.z * RADIUS_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxVolume", "Max Volume", (maxVolume * VOLUME_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("intensity", "X", (intensity * INTENSITY_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shape")->isHovered())
-		{
-			switch(shape)
-			{
-				case Sound3dShapeType::CIRCLE:
-				{
-					_fe3d->sound3d_setShape(_currentSound3dId, Sound3dShapeType::SQUARE);
-
-					break;
-				}
-				case Sound3dShapeType::SQUARE:
-				{
-					_fe3d->sound3d_setShape(_currentSound3dId, Sound3dShapeType::CIRCLE);
-
-					break;
-				}
-			}
+			_gui->getOverlay()->openValueForm("maxDistance", "Max Distance", (maxDistance * DISTANCE_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "radiusX") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "maxVolume") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->sound3d_setRadius(_currentSound3dId, fvec3((value / RADIUS_MULTIPLIER), radius.y, radius.z));
+			_fe3d->sound3d_setMaxVolume(_currentSound3dId, (value / VOLUME_MULTIPLIER));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "radiusY") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "maxDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->sound3d_setRadius(_currentSound3dId, fvec3(radius.x, (value / RADIUS_MULTIPLIER), radius.z));
-		}
-		if((_gui->getOverlay()->getValueFormId() == "radiusZ") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sound3d_setRadius(_currentSound3dId, fvec3(radius.x, radius.y, (value / RADIUS_MULTIPLIER)));
-		}
-		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sound3d_setColor(_currentSound3dId, fvec3((value / COLOR_MULTIPLIER), color.g, color.b));
-		}
-		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sound3d_setColor(_currentSound3dId, fvec3(color.r, (value / COLOR_MULTIPLIER), color.b));
-		}
-		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sound3d_setColor(_currentSound3dId, fvec3(color.r, color.g, (value / COLOR_MULTIPLIER)));
-		}
-		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sound3d_setIntensity(_currentSound3dId, (value / INTENSITY_MULTIPLIER));
-		}
-
-		switch(shape)
-		{
-			case Sound3dShapeType::CIRCLE:
-			{
-				screen->getButton("shape")->setTextContent("Shape: CIRCLE");
-
-				break;
-			}
-			case Sound3dShapeType::SQUARE:
-			{
-				screen->getButton("shape")->setTextContent("Shape: SQUARE");
-
-				break;
-			}
+			_fe3d->sound3d_setMaxDistance(_currentSound3dId, (value / DISTANCE_MULTIPLIER));
 		}
 	}
 }

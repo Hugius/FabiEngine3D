@@ -44,15 +44,6 @@ void Sound3dEditor::_updateMiscellaneous()
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 	}
-
-	if(!_currentSound3dId.empty())
-	{
-		_fe3d->model_setColor("@@sound3d", "", _fe3d->sound3d_getColor(_currentSound3dId));
-	}
-	if(!_hoveredSound3dId.empty())
-	{
-		_fe3d->model_setColor("@@sound3d", "", _fe3d->sound3d_getColor(_hoveredSound3dId));
-	}
 }
 
 void Sound3dEditor::_updateSound3dCreating()
@@ -91,19 +82,55 @@ void Sound3dEditor::_updateSound3dCreating()
 			return;
 		}
 
-		_currentSound3dId = newSound3dId;
-		_loadedSound3dIds.push_back(newSound3dId);
-		sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
+		if(getCurrentProjectId().empty())
+		{
+			abort();
+		}
 
-		_fe3d->sound3d_create(newSound3dId);
-		_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\audio\\");
 
-		_fe3d->model_setVisible("@@sound3d", true);
-		_fe3d->model_setColor("@@sound3d", "", fvec3(1.0f));
+		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+		{
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 
-		_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
-		_gui->getOverlay()->getTextField("sound3dId")->setTextContent("Sound3d: " + newSound3dId.substr(1));
-		_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
+			return;
+		}
+
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
+		if(filePath.empty())
+		{
+			return;
+		}
+
+		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
+			return;
+		}
+
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d->misc_clearAudioCache(finalFilePath);
+
+		_fe3d->sound3d_create(newSound3dId, finalFilePath);
+
+		if(_fe3d->sound3d_isExisting(newSound3dId))
+		{
+			_currentSound3dId = newSound3dId;
+			_loadedSound3dIds.push_back(newSound3dId);
+			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
+
+			_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
+			_fe3d->sound3d_start(newSound3dId, -1);
+
+			_fe3d->model_setVisible("@@sound3d", true);
+			_fe3d->model_setColor("@@sound3d", "", fvec3(1.0f));
+
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
+			_gui->getOverlay()->getTextField("sound3dId")->setTextContent("Sound3d: " + newSound3dId.substr(1));
+			_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
+		}
 	}
 }
 
@@ -111,7 +138,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 {
 	if(!_hoveredSound3dId.empty())
 	{
-		_fe3d->sound3d_setVisible(_hoveredSound3dId, false);
+		_fe3d->sound3d_stop(_hoveredSound3dId, false);
 		_fe3d->model_setVisible("@@sound3d", false);
 
 		_hoveredSound3dId = "";
@@ -127,7 +154,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 			{
 				_hoveredSound3dId = ("@" + selectedOptionId);
 
-				_fe3d->sound3d_setVisible(_hoveredSound3dId, true);
+				_fe3d->sound3d_start(_hoveredSound3dId, true);
 				_fe3d->model_setVisible("@@sound3d", true);
 			}
 
@@ -165,7 +192,7 @@ void Sound3dEditor::_updateSound3dDeleting()
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_fe3d->sound3d_setVisible(_currentSound3dId, false);
+			_fe3d->sound3d_stop(_currentSound3dId, false);
 			_fe3d->model_setVisible("@@sound3d", false);
 
 			_currentSound3dId = "";

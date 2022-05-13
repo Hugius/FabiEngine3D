@@ -95,6 +95,8 @@ void GuiOverlay::_updateForms()
 			_mustCloseAnswerForm = true;
 		}
 	}
+
+	_isFocused = (!_choiceFormId.empty() || !_valueFormId.empty() || !_answerFormId.empty());
 }
 
 const bool GuiOverlay::isChoiceFormConfirmed() const
@@ -172,8 +174,6 @@ void GuiOverlay::openValueForm(const string & valueFormId, const string & title,
 	createButton("value_form_cancel", (position + VF_CANCEL_OFFSET), VF_CANCEL_SIZE, "", VF_DEFAULT_CANCEL_QUAD_COLOR, VF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", VF_DEFAULT_CANCEL_TEXT_COLOR, VF_HOVERED_CANCEL_TEXT_COLOR, true);
 
 	_valueFormId = valueFormId;
-
-	_isFocused = true;
 }
 
 void GuiOverlay::openValueForm(const string & valueFormId, const string & title, float value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
@@ -211,8 +211,6 @@ void GuiOverlay::openChoiceForm(const string & choiceFormId, const string & titl
 	createButton("choice_form_cancel", (position + CF_CANCEL_OFFSET), CF_CANCEL_SIZE, "", CF_DEFAULT_CANCEL_QUAD_COLOR, CF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", CF_DEFAULT_CANCEL_TEXT_COLOR, CF_HOVERED_CANCEL_TEXT_COLOR, true);
 
 	_choiceFormId = choiceFormId;
-
-	_isFocused = true;
 }
 
 const string GuiOverlay::getChoiceFormId() const
@@ -283,8 +281,6 @@ void GuiOverlay::_closeChoiceForm()
 	deleteButton("choice_form_cancel");
 
 	_choiceFormId = "";
-
-	_isFocused = false;
 }
 
 void GuiOverlay::_closeValueForm()
@@ -301,8 +297,6 @@ void GuiOverlay::_closeValueForm()
 	deleteButton("value_form_cancel");
 
 	_valueFormId = "";
-
-	_isFocused = false;
 }
 
 void GuiOverlay::_closeAnswerForm()
@@ -319,8 +313,6 @@ void GuiOverlay::_closeAnswerForm()
 	deleteButton("answer_form_right");
 
 	_answerFormId = "";
-
-	_isFocused = false;
 }
 
 void GuiOverlay::openAnswerForm(const string & answerFormId, const string & title, const string & left, const string & right, const fvec2 & position)
@@ -342,6 +334,4 @@ void GuiOverlay::openAnswerForm(const string & answerFormId, const string & titl
 	createButton("answer_form_right", (position + fvec2(maxWidth, 0.0f)), fvec2(rightWidth, AF_RIGHT_CHAR_SIZE.y), "", AF_DEFAULT_RIGHT_QUAD_COLOR, AF_HOVERED_RIGHT_QUAD_COLOR, right, AF_DEFAULT_RIGHT_TEXT_COLOR, AF_HOVERED_RIGHT_TEXT_COLOR, true);
 
 	_answerFormId = answerFormId;
-
-	_isFocused = true;
 }

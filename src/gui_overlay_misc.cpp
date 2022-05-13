@@ -25,11 +25,6 @@ void GuiOverlay::update(bool isInteractable)
 	}
 }
 
-void GuiOverlay::setFocused(bool value)
-{
-	_isFocused = value;
-}
-
 const bool GuiOverlay::isFocused() const
 {
 	return _isFocused;

@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string & functionN
 
 			if(_validateFe3dSound2d(args[1]->getString(), true))
 			{
-				_fe3d->sound2d_create(args[0]->getString(), _fe3d->sound2d_getAudioPath("@" + args[1]->getString()));
+				_duplicator->copyTemplateSound2d(args[0]->getString(), ("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

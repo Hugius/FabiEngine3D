@@ -379,6 +379,9 @@ public:
 	void quad3d_setBright(const string & quad3dId, bool value);
 	void quad3d_setWireframed(const string & quad3dId, bool value);
 	void quad3d_setFrozen(const string & quad3dId, bool value);
+	void quad3d_setHorizontallyFlipped(const string & quad3dId, bool value);
+	void quad3d_setVerticallyFlipped(const string & quad3dId, bool value);
+	void quad3d_setRotationOrder(const string & quad3dId, DirectionOrderType value);
 	void quad3d_startAnimation(const string & quad3dId, const string & animation2dId, int playCount);
 	void quad3d_pauseAnimation(const string & quad3dId, const string & animation2dId);
 	void quad3d_autopauseAnimation(const string & quad3dId, const string & animation2dId);
@@ -388,9 +391,6 @@ public:
 	void quad3d_setAnimationColumnIndex(const string & quad3dId, const string & animation2dId, int value);
 	void quad3d_setAnimationIntervalMultiplier(const string & quad3dId, const string & animation2dId, int value);
 	void quad3d_setAnimationIntervalDivider(const string & quad3dId, const string & animation2dId, int value);
-	void quad3d_setHorizontallyFlipped(const string & quad3dId, bool value);
-	void quad3d_setVerticallyFlipped(const string & quad3dId, bool value);
-	void quad3d_setRotationOrder(const string & quad3dId, DirectionOrderType value);
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string & quad3dId) const;
@@ -458,6 +458,7 @@ public:
 	void quad2d_setWireframeColor(const string & quad2dId, const fvec3 & value);
 	void quad2d_setUvMultiplier(const string & quad2dId, const fvec2 & value);
 	void quad2d_setUvOffset(const string & quad2dId, const fvec2 & value);
+	void quad2d_setTextureRepeat(const string & quad2dId, int value);
 	void quad2d_startAnimation(const string & quad2dId, const string & animation2dId, int playCount);
 	void quad2d_pauseAnimation(const string & quad2dId, const string & animation2dId);
 	void quad2d_autopauseAnimation(const string & quad2dId, const string & animation2dId);
@@ -467,7 +468,6 @@ public:
 	void quad2d_setAnimationColumnIndex(const string & animation2dId, const string & quad2dId, int value);
 	void quad2d_setAnimationIntervalMultiplier(const string & animation2dId, const string & quad2dId, int value);
 	void quad2d_setAnimationIntervalDivider(const string & animation2dId, const string & quad2dId, int value);
-	void quad2d_setTextureRepeat(const string & quad2dId, int value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string & quad2dId) const;

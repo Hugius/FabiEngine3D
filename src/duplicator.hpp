@@ -11,11 +11,14 @@ public:
 	void copyTemplateWater(const string & newId, const string & templateId);
 	void copyTemplateModel(const string & newId, const string & templateId);
 	void copyTemplateQuad3d(const string & newId, const string & templateId);
+	void copyTemplateQuad2d(const string & newId, const string & templateId);
 	void copyTemplateText3d(const string & newId, const string & templateId);
+	void copyTemplateText2d(const string & newId, const string & templateId);
 	void copyTemplateAabb(const string & newId, const string & templateId);
 	void copyTemplatePointlight(const string & newId, const string & templateId);
 	void copyTemplateSpotlight(const string & newId, const string & templateId);
 	void copyTemplateSound3d(const string & newId, const string & templateId);
+	void copyTemplateSound2d(const string & newId, const string & templateId);
 
 private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

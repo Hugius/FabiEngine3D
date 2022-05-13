@@ -250,6 +250,27 @@ void Duplicator::copyTemplateQuad3d(const string & newId, const string & templat
 	}
 }
 
+void Duplicator::copyTemplateQuad2d(const string & newId, const string & templateId)
+{
+	if(!_fe3d->quad2d_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->quad2d_create(newId, true);
+	_fe3d->quad2d_setSize(newId, _fe3d->quad2d_getSize(templateId));
+	_fe3d->quad2d_setHorizontallyFlipped(newId, _fe3d->quad2d_isHorizontallyFlipped(templateId));
+	_fe3d->quad2d_setVerticallyFlipped(newId, _fe3d->quad2d_isVerticallyFlipped(templateId));
+	_fe3d->quad2d_setColor(newId, _fe3d->quad2d_getColor(templateId));
+	_fe3d->quad2d_setTextureRepeat(newId, _fe3d->quad2d_getTextureRepeat(templateId));
+	_fe3d->quad2d_setOpacity(newId, _fe3d->quad2d_getOpacity(templateId));
+
+	if(_fe3d->quad2d_hasDiffuseMap(templateId))
+	{
+		_fe3d->quad2d_setDiffuseMap(newId, _fe3d->quad2d_getDiffuseMapPath(templateId));
+	}
+}
+
 void Duplicator::copyTemplateText3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
@@ -281,6 +302,22 @@ void Duplicator::copyTemplateText3d(const string & newId, const string & templat
 		_fe3d->aabb_setParentId(newId, newId);
 		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 	}
+}
+
+void Duplicator::copyTemplateText2d(const string & newId, const string & templateId)
+{
+	if(!_fe3d->text2d_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->text2d_create(newId, _fe3d->text2d_getFontMapPath(templateId), true);
+	_fe3d->text2d_setSize(newId, _fe3d->text2d_getSize(templateId));
+	_fe3d->text2d_setHorizontallyFlipped(newId, _fe3d->text2d_isHorizontallyFlipped(templateId));
+	_fe3d->text2d_setVerticallyFlipped(newId, _fe3d->text2d_isVerticallyFlipped(templateId));
+	_fe3d->text2d_setColor(newId, _fe3d->text2d_getColor(templateId));
+	_fe3d->text2d_setOpacity(newId, _fe3d->text2d_getOpacity(templateId));
+	_fe3d->text2d_setContent(newId, _fe3d->text2d_getContent(templateId));
 }
 
 void Duplicator::copyTemplateAabb(const string & newId, const string & templateId)
@@ -335,4 +372,14 @@ void Duplicator::copyTemplateSound3d(const string & newId, const string & templa
 	_fe3d->sound3d_create(newId, _fe3d->sound3d_getAudioPath(templateId));
 	_fe3d->sound3d_setMaxVolume(newId, _fe3d->sound3d_getMaxVolume(templateId));
 	_fe3d->sound3d_setMaxDistance(newId, _fe3d->sound3d_getMaxDistance(templateId));
+}
+
+void Duplicator::copyTemplateSound2d(const string & newId, const string & templateId)
+{
+	if(!_fe3d->sound2d_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->sound2d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
 }

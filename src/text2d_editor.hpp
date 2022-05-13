@@ -28,8 +28,6 @@ private:
 	void _updateText2dDeleting();
 	void _updateMiscellaneous();
 
-	static inline const string TEXT_CONTENT = "Text123";
-
 	static inline const fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
 
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;

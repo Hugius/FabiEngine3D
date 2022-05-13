@@ -2,7 +2,7 @@
 
 ## Setters
 
-- `fe3d:model_place` (`STR` new_id, `STR` editor_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` position_z) -----> `NONE`
 - `fe3d:model_delete` (`STR` id) -----> `NONE`
 - `fe3d:model_delete_all` () -----> `NONE`
 - `fe3d:model_move_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`

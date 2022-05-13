@@ -15,7 +15,7 @@ public:
 	void copyTemplateAabb(const string & newId, const string & templateId);
 	void copyTemplatePointlight(const string & newId, const string & templateId);
 	void copyTemplateSpotlight(const string & newId, const string & templateId);
-	void copyTemplateSound2d(const string & newId, const string & templateId);
+	void copyTemplateSound3d(const string & newId, const string & templateId);
 
 private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

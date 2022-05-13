@@ -139,30 +139,34 @@ void TopViewportController::_updateProjectLoading()
 
 		_setProject(selectedOptionId);
 
-		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
-		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
-		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
-		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
-		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-		auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
-		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
-		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
-		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
-		auto audioPaths = _sound2dEditor->getAudioPathsFromFile();
+		const auto skyImagePaths = _skyEditor->getImagePathsFromFile();
+		const auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
+		const auto waterImagePaths = _waterEditor->getImagePathsFromFile();
+		const auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
+		const auto modelImagePaths = _modelEditor->getImagePathsFromFile();
+		const auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
+		const auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
+		const auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
+		const auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
+		const auto sound3dAudioPaths = _sound3dEditor->getAudioPathsFromFile();
+		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 
-		vector<string> imagePaths;
+		vector<string> imagePaths = {};
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
 		imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
-		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
 		_fe3d->misc_cacheImages(imagePaths, false);
 
+		vector<string> audioPaths = {};
+		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
+		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
 		_fe3d->misc_cacheAudios(audioPaths, false);
 
 		Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");

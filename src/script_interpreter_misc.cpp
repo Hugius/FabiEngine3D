@@ -167,6 +167,11 @@ void ScriptInterpreter::inject(shared_ptr<SkyEditor> skyEditor)
 	_skyEditor = skyEditor;
 }
 
+void ScriptInterpreter::inject(shared_ptr<Sound3dEditor> sound3dEditor)
+{
+	_sound3dEditor = sound3dEditor;
+}
+
 void ScriptInterpreter::inject(shared_ptr<TerrainEditor> terrainEditor)
 {
 	_terrainEditor = terrainEditor;

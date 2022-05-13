@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 {
 	if(functionName == "fe3d:sound3d_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -24,7 +24,9 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 			if(_validateFe3dSound3d(args[1]->getString(), true))
 			{
-				_fe3d->sound3d_create(args[0]->getString(), _fe3d->sound3d_getAudioPath("@" + args[1]->getString()));
+				_worldHelper->copyTemplateSound3d(args[0]->getString(), ("@" + args[1]->getString()));
+
+				_fe3d->sound3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

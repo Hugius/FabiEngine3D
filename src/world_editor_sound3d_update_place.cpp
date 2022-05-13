@@ -36,7 +36,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound2d(newId, _currentTemplateSound3dId);
+				_worldHelper->copyTemplateSound3d(newId, _currentTemplateSound3dId);
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
@@ -142,7 +142,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
-				_worldHelper->copyTemplateSound2d(newId, _currentTemplateSound3dId);
+				_worldHelper->copyTemplateSound3d(newId, _currentTemplateSound3dId);
 				_loadedSound3dIds.insert({newId, _currentTemplateSound3dId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);

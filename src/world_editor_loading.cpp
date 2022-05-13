@@ -458,12 +458,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> maxVolume
 				>> maxDistance;
 
-			if(!_fe3d->sound2d_isExisting(templateId))
+			if(!_fe3d->sound3d_isExisting(templateId))
 			{
 				continue;
 			}
 
-			_worldHelper->copyTemplateSound2d(sound3dId, templateId);
+			_worldHelper->copyTemplateSound3d(sound3dId, templateId);
 
 			_loadedSound3dIds.insert({sound3dId, templateId});
 

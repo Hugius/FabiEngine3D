@@ -325,12 +325,14 @@ void WorldHelper::copyTemplateSpotlight(const string & newId, const string & tem
 	_fe3d->spotlight_setDistance(newId, _fe3d->spotlight_getDistance(templateId));
 }
 
-void WorldHelper::copyTemplateSound2d(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateSound3d(const string & newId, const string & templateId)
 {
-	if(!_fe3d->sound2d_isExisting(templateId))
+	if(!_fe3d->sound3d_isExisting(templateId))
 	{
 		abort();
 	}
 
-	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
+	_fe3d->sound3d_create(newId, _fe3d->sound3d_getAudioPath(templateId));
+	_fe3d->sound3d_setMaxVolume(newId, _fe3d->sound3d_getMaxVolume(templateId));
+	_fe3d->sound3d_setMaxDistance(newId, _fe3d->sound3d_getMaxDistance(templateId));
 }

@@ -22,7 +22,7 @@ EngineController::EngineController()
 	_aabbEditor = make_shared<AabbEditor>();
 	_pointlightEditor = make_shared<PointlightEditor>();
 	_spotlightEditor = make_shared<SpotlightEditor>();
-	//_sound3dEditor = make_shared<Sound3dEditor>();
+	_sound3dEditor = make_shared<Sound3dEditor>();
 	_sound2dEditor = make_shared<Sound2dEditor>();
 	_worldEditor = make_shared<WorldEditor>();
 	_scriptEditor = make_shared<ScriptEditor>();
@@ -47,7 +47,7 @@ EngineController::EngineController()
 	_rightViewportController->inject(_aabbEditor);
 	_rightViewportController->inject(_pointlightEditor);
 	_rightViewportController->inject(_spotlightEditor);
-	//_rightViewportController->inject(_sound3dEditor);
+	_rightViewportController->inject(_sound3dEditor);
 	_rightViewportController->inject(_sound2dEditor);
 	_rightViewportController->inject(_worldEditor);
 	_rightViewportController->inject(_scriptEditor);
@@ -69,7 +69,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_aabbEditor);
 	_topViewportController->inject(_pointlightEditor);
 	_topViewportController->inject(_spotlightEditor);
-	//_topViewportController->inject(_sound3dEditor);
+	_topViewportController->inject(_sound3dEditor);
 	_topViewportController->inject(_sound2dEditor);
 	_topViewportController->inject(_worldEditor);
 	_topViewportController->inject(_scriptEditor);
@@ -92,7 +92,7 @@ EngineController::EngineController()
 	_aabbEditor->inject(_guiManager);
 	_pointlightEditor->inject(_guiManager);
 	_spotlightEditor->inject(_guiManager);
-	//_sound3dEditor->inject(_guiManager);
+	_sound3dEditor->inject(_guiManager);
 	_sound2dEditor->inject(_guiManager);
 	_worldEditor->inject(_guiManager);
 	_worldEditor->inject(_skyEditor);
@@ -106,8 +106,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_aabbEditor);
 	_worldEditor->inject(_pointlightEditor);
 	_worldEditor->inject(_spotlightEditor);
-	//_worldEditor->inject(_sound3dEditor);
-	_worldEditor->inject(_sound2dEditor);
+	_worldEditor->inject(_sound3dEditor);
 	_worldEditor->inject(_worldHelper);
 	_scriptEditor->inject(_guiManager);
 	_scriptEditor->inject(_script);
@@ -125,7 +124,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_aabbEditor);
 	_scriptInterpreter->inject(_pointlightEditor);
 	_scriptInterpreter->inject(_spotlightEditor);
-	//_scriptInterpreter->inject(_sound3dEditor);
+	_scriptInterpreter->inject(_sound3dEditor);
 	_scriptInterpreter->inject(_sound2dEditor);
 	_scriptInterpreter->inject(_worldEditor);
 	_scriptInterpreter->inject(_customWorldBuilder);
@@ -155,7 +154,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_aabbEditor->inject(_fe3d);
 	_pointlightEditor->inject(_fe3d);
 	_spotlightEditor->inject(_fe3d);
-	//_sound3dEditor->inject(_fe3d);
+	_sound3dEditor->inject(_fe3d);
 	_sound2dEditor->inject(_fe3d);
 	_worldEditor->inject(_fe3d);
 	_scriptEditor->inject(_fe3d);
@@ -181,23 +180,21 @@ void EngineController::initialize()
 			return;
 		}
 
-		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
-		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
-		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
-		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
-		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-		auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
-		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
-		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
-		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
-		auto sound3dAudioPaths = _sound3dEditor->getAudioPathsFromFile();
-		auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
+		const auto skyImagePaths = _skyEditor->getImagePathsFromFile();
+		const auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
+		const auto waterImagePaths = _waterEditor->getImagePathsFromFile();
+		const auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
+		const auto modelImagePaths = _modelEditor->getImagePathsFromFile();
+		const auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
+		const auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
+		const auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
+		const auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
+		const auto sound3dAudioPaths = _sound3dEditor->getAudioPathsFromFile();
+		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 
-		_fe3d->misc_cacheImages(terrainImagePaths, false);
-
-		vector<string> imagePaths;
+		vector<string> imagePaths = {};
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
@@ -208,7 +205,7 @@ void EngineController::initialize()
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
 		_fe3d->misc_cacheImages(imagePaths, false);
 
-		vector<string> audioPaths;
+		vector<string> audioPaths = {};
 		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
 		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
 		_fe3d->misc_cacheAudios(audioPaths, false);

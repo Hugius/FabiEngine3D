@@ -14,7 +14,7 @@ void WorldEditor::_load()
 	_aabbEditor->loadAabbsFromFile();
 	_pointlightEditor->loadPointlightsFromFile();
 	_spotlightEditor->loadSpotlightsFromFile();
-	_sound2dEditor->loadSound2dsFromFile();
+	_sound3dEditor->loadSound3dsFromFile();
 
 	_fe3d->model_create(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_PATH);
 	_fe3d->model_create(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_PATH);
@@ -56,11 +56,11 @@ void WorldEditor::_load()
 
 	_fe3d->captor_create(CAPTOR_MODEL_ID);
 
-	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
+	for(const auto & sound3dId : _sound3dEditor->getLoadedSound3dIds())
 	{
-		_fe3d->sound3d_create(sound2dId, _fe3d->sound2d_getAudioPath(sound2dId));
-		_fe3d->sound3d_setMaxVolume(sound2dId, SOUND3D_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(sound2dId, SOUND3D_MAX_DISTANCE);
+		_fe3d->sound3d_create(sound3dId, _fe3d->sound3d_getAudioPath(sound3dId));
+		_fe3d->sound3d_setMaxVolume(sound3dId, SOUND3D_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(sound3dId, SOUND3D_MAX_DISTANCE);
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
@@ -116,9 +116,9 @@ void WorldEditor::_load()
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightPlace")->getScrollingList("templatePointlights")->createOption(pointlightId, pointlightId.substr(1));
 	}
 
-	for(const auto & sound2dId : _sound2dEditor->getLoadedSound2dIds())
+	for(const auto & sound3dId : _sound3dEditor->getLoadedSound3dIds())
 	{
-		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("templateSound3ds")->createOption(sound2dId, sound2dId.substr(1));
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("templateSound3ds")->createOption(sound3dId, sound3dId.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -127,7 +127,7 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
-	const auto sound2dIds = _sound2dEditor->getLoadedSound2dIds();
+	const auto sound3dIds = _sound3dEditor->getLoadedSound3dIds();
 
 	_skyEditor->deleteLoadedSkies();
 	_terrainEditor->deleteLoadedTerrains();
@@ -140,7 +140,7 @@ void WorldEditor::_unload()
 	_aabbEditor->deleteLoadedAabbs();
 	_pointlightEditor->deleteLoadedPointlights();
 	_spotlightEditor->deleteLoadedSpotlights();
-	_sound2dEditor->deleteLoadedSound2ds();
+	_sound3dEditor->deleteLoadedSound3ds();
 
 	_fe3d->model_delete(POINTLIGHT_MODEL_ID);
 	_fe3d->model_delete(SPOTLIGHT_MODEL_ID);
@@ -153,9 +153,9 @@ void WorldEditor::_unload()
 
 	_fe3d->captor_delete(CAPTOR_MODEL_ID);
 
-	for(const auto & sound2dId : sound2dIds)
+	for(const auto & sound3dId : sound3dIds)
 	{
-		_fe3d->sound3d_delete(sound2dId);
+		_fe3d->sound3d_delete(sound3dId);
 	}
 
 	_fe3d->model_delete("@@grid");

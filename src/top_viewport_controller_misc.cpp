@@ -118,7 +118,7 @@ void TopViewportController::_setProject(const string & projectId)
 	_aabbEditor->setCurrentProjectId(_currentProjectId);
 	_pointlightEditor->setCurrentProjectId(_currentProjectId);
 	_spotlightEditor->setCurrentProjectId(_currentProjectId);
-	//_sound3dEditor->setCurrentProjectId(_currentProjectId);
+	_sound3dEditor->setCurrentProjectId(_currentProjectId);
 	_sound2dEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
 	_customWorldBuilder->setCurrentProjectId(_currentProjectId);
@@ -238,6 +238,11 @@ void TopViewportController::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 void TopViewportController::inject(shared_ptr<Text3dEditor> text3dEditor)
 {
 	_text3dEditor = text3dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<Sound3dEditor> sound3dEditor)
+{
+	_sound3dEditor = sound3dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)

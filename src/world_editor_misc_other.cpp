@@ -259,9 +259,9 @@ void WorldEditor::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 	_animation3dEditor = animation3dEditor;
 }
 
-void WorldEditor::inject(shared_ptr<Sound2dEditor> sound2dEditor)
+void WorldEditor::inject(shared_ptr<Sound3dEditor> sound3dEditor)
 {
-	_sound2dEditor = sound2dEditor;
+	_sound3dEditor = sound3dEditor;
 }
 
 void WorldEditor::inject(shared_ptr<AabbEditor> aabbEditor)

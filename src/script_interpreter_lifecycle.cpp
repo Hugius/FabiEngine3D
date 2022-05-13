@@ -184,7 +184,7 @@ void ScriptInterpreter::load()
 	_aabbEditor->loadAabbsFromFile();
 	_pointlightEditor->loadPointlightsFromFile();
 	_spotlightEditor->loadSpotlightsFromFile();
-	//_sound3dEditor->loadSound3dsFromFile();
+	_sound3dEditor->loadSound3dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->camera_reset();
@@ -216,7 +216,7 @@ void ScriptInterpreter::unload()
 	_aabbEditor->deleteLoadedAabbs();
 	_pointlightEditor->deleteLoadedPointlights();
 	_spotlightEditor->deleteLoadedSpotlights();
-	//_sound3dEditor->deleteLoadedSound3ds();
+	_sound3dEditor->deleteLoadedSound3ds();
 	_sound2dEditor->deleteLoadedSound2ds();
 
 	for(const auto & skyId : _fe3d->sky_getIds())

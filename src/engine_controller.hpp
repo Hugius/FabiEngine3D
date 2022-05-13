@@ -41,7 +41,7 @@ private:
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
 	shared_ptr<SpotlightEditor> _spotlightEditor = nullptr;
-	//shared_ptr<Sound3dEditor> _sound3dEditor = nullptr;
+	shared_ptr<Sound3dEditor> _sound3dEditor = nullptr;
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;

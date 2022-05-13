@@ -65,6 +65,13 @@ void RightViewportController::update()
 				_spotlightEditor->load();
 			}
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound3dEditor")->isHovered())
+		{
+			if(_sound3dEditor->loadSound3dsFromFile())
+			{
+				_sound3dEditor->load();
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound2dEditor")->isHovered())
 		{
 			if(_sound2dEditor->loadSound2dsFromFile())
@@ -90,7 +97,7 @@ void RightViewportController::update()
 	_aabbEditor->update();
 	_pointlightEditor->update();
 	_spotlightEditor->update();
-	//_sound3dEditor->update();
+	_sound3dEditor->update();
 	_sound2dEditor->update();
 	_worldEditor->update();
 	_scriptEditor->update();
@@ -99,6 +106,11 @@ void RightViewportController::update()
 void RightViewportController::inject(shared_ptr<PointlightEditor> pointlightEditor)
 {
 	_pointlightEditor = pointlightEditor;
+}
+
+void RightViewportController::inject(shared_ptr<Sound3dEditor> sound3dEditor)
+{
+	_sound3dEditor = sound3dEditor;
 }
 
 void RightViewportController::inject(shared_ptr<SpotlightEditor> spotlightEditor)

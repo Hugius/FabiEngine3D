@@ -20,6 +20,7 @@ void Sound3dEditor::_load()
 	_fe3d->model_setBasePosition(SOUND3D_MODEL_ID, SOUND3D_POSITION);
 	_fe3d->model_setBaseSize(SOUND3D_MODEL_ID, fvec3(0.5f));
 	_fe3d->model_setShadowed(SOUND3D_MODEL_ID, false);
+	_fe3d->model_setBright(SOUND3D_MODEL_ID, "", true);
 	_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);

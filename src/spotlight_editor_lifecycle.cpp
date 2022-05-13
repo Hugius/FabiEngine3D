@@ -21,13 +21,14 @@ void SpotlightEditor::_load()
 	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, fvec3(0.0f, 0.0f, -90.0f));
 	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, fvec3(0.5f));
 	_fe3d->model_setShadowed(SPOTLIGHT_MODEL_ID, false);
+	_fe3d->model_setBright(SPOTLIGHT_MODEL_ID, "", true);
 	_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
 	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(0.5f);
+	_fe3d->graphics_setAmbientLightingIntensity(0.25f);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
 	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));

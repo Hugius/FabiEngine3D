@@ -31,7 +31,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
+				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
 				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
@@ -89,7 +89,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
+				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
 				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setPosition(newId, newPosition);

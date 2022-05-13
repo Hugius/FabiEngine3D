@@ -27,7 +27,7 @@ EngineController::EngineController()
 	_worldEditor = make_shared<WorldEditor>();
 	_scriptEditor = make_shared<ScriptEditor>();
 	_customWorldBuilder = make_shared<CustomWorldBuilder>();
-	_worldHelper = make_shared<WorldHelper>();
+	_duplicator = make_shared<Duplicator>();
 	_script = make_shared<Script>();
 	_scriptExecutor = make_shared<ScriptExecutor>();
 	_scriptInterpreter = make_shared<ScriptInterpreter>();
@@ -107,7 +107,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_pointlightEditor);
 	_worldEditor->inject(_spotlightEditor);
 	_worldEditor->inject(_sound3dEditor);
-	_worldEditor->inject(_worldHelper);
+	_worldEditor->inject(_duplicator);
 	_scriptEditor->inject(_guiManager);
 	_scriptEditor->inject(_script);
 	_scriptExecutor->inject(_scriptInterpreter);
@@ -128,7 +128,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_sound2dEditor);
 	_scriptInterpreter->inject(_worldEditor);
 	_scriptInterpreter->inject(_customWorldBuilder);
-	_scriptInterpreter->inject(_worldHelper);
+	_scriptInterpreter->inject(_duplicator);
 	_scriptInterpreter->inject(_script);
 }
 
@@ -159,7 +159,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_worldEditor->inject(_fe3d);
 	_scriptEditor->inject(_fe3d);
 	_customWorldBuilder->inject(_fe3d);
-	_worldHelper->inject(_fe3d);
+	_duplicator->inject(_fe3d);
 	_scriptExecutor->inject(_fe3d);
 	_scriptInterpreter->inject(_fe3d);
 }

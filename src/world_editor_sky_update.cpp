@@ -44,7 +44,7 @@ void WorldEditor::_updateSkyPlacingMenu()
 
 			if(!hoveredOptionId.empty())
 			{
-				_worldHelper->copyTemplateSky(hoveredOptionId.substr(1), hoveredOptionId);
+				_duplicator->copyTemplateSky(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->sky_select(hoveredOptionId.substr(1));
 

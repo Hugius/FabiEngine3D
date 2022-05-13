@@ -247,7 +247,7 @@ void ScriptInterpreter::inject(shared_ptr<CustomWorldBuilder> customWorldBuilder
 	_customWorldBuilder = customWorldBuilder;
 }
 
-void ScriptInterpreter::inject(shared_ptr<WorldHelper> worldHelper)
+void ScriptInterpreter::inject(shared_ptr<Duplicator> duplicator)
 {
-	_worldHelper = worldHelper;
+	_duplicator = duplicator;
 }

@@ -54,7 +54,7 @@ void WorldEditor::_updateWaterPlacingMenu()
 
 			if(!hoveredOptionId.empty())
 			{
-				_worldHelper->copyTemplateWater(hoveredOptionId.substr(1), hoveredOptionId);
+				_duplicator->copyTemplateWater(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->water_select(hoveredOptionId.substr(1));
 

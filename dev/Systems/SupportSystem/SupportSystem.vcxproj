@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_parent_type.hpp" />
+    <ClInclude Include="..\..\..\src\custom_world_builder.hpp" />
     <ClInclude Include="..\..\..\src\logger_message.hpp" />
     <ClInclude Include="..\..\..\src\mouse_button_type.hpp" />
     <ClInclude Include="..\..\..\src\clock.hpp" />
@@ -48,13 +49,18 @@
     <ClInclude Include="..\..\..\src\timer.hpp" />
     <ClInclude Include="..\..\..\src\tools.hpp" />
     <ClInclude Include="..\..\..\src\transformation_type.hpp" />
+    <ClInclude Include="..\..\..\src\duplicator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_builder_misc.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_builder_saving.cpp" />
     <ClCompile Include="..\..\..\src\input_handler.cpp" />
     <ClCompile Include="..\..\..\src\logger_message.cpp" />
     <ClCompile Include="..\..\..\src\timer.cpp" />
     <ClCompile Include="..\..\..\src\tools.cpp" />
+    <ClCompile Include="..\..\..\src\duplicator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

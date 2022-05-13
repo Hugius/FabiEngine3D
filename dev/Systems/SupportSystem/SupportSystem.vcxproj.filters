@@ -7,6 +7,9 @@
     <Filter Include="Enumeration">
       <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{58f807e0-6eeb-492c-b9ac-742ecb041dcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_parent_type.hpp">
@@ -96,6 +99,12 @@
     <ClInclude Include="..\..\..\src\refraction_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\duplicator.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\custom_world_builder.hpp">
+      <Filter>World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">
@@ -112,6 +121,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\logger_message.cpp">
       <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\duplicator.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\custom_world_builder_misc.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\custom_world_builder_saving.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp">
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

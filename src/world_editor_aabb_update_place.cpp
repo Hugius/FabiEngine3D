@@ -31,7 +31,7 @@ void WorldEditor::_updateAabbPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateAabb(newId, _currentTemplateAabbId);
+				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
 				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 
 				_fe3d->aabb_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
@@ -89,7 +89,7 @@ void WorldEditor::_updateAabbPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateAabb(newId, _currentTemplateAabbId);
+				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
 				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 
 				_fe3d->aabb_setBasePosition(newId, newPosition);

@@ -102,7 +102,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateSky(skyId, templateId);
+			_duplicator->copyTemplateSky(skyId, templateId);
 
 			_fe3d->sky_select(skyId);
 		}
@@ -120,7 +120,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateTerrain(terrainId, templateId);
+			_duplicator->copyTemplateTerrain(terrainId, templateId);
 
 			_fe3d->terrain_select(terrainId);
 		}
@@ -140,7 +140,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateWater(waterId, templateId);
+			_duplicator->copyTemplateWater(waterId, templateId);
 
 			_fe3d->water_setHeight(waterId, height);
 			_fe3d->water_select(waterId);
@@ -179,7 +179,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateModel(modelId, templateId);
+			_duplicator->copyTemplateModel(modelId, templateId);
 
 			_loadedModelIds.insert({modelId, templateId});
 
@@ -224,7 +224,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateQuad3d(quad3dId, templateId);
+			_duplicator->copyTemplateQuad3d(quad3dId, templateId);
 
 			_loadedQuad3dIds.insert({quad3dId, templateId});
 
@@ -264,7 +264,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateText3d(text3dId, templateId);
+			_duplicator->copyTemplateText3d(text3dId, templateId);
 
 			_loadedText3dIds.insert({text3dId, templateId});
 
@@ -295,7 +295,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateAabb(aabbId, templateId);
+			_duplicator->copyTemplateAabb(aabbId, templateId);
 
 			_loadedAabbIds.insert({aabbId, templateId});
 
@@ -319,7 +319,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> radius.y
 				>> radius.z;
 
-			_worldHelper->copyTemplatePointlight(pointlightId, templateId);
+			_duplicator->copyTemplatePointlight(pointlightId, templateId);
 
 			_loadedPointlightIds.insert({pointlightId, templateId});
 
@@ -463,7 +463,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldHelper->copyTemplateSound3d(sound3dId, templateId);
+			_duplicator->copyTemplateSound3d(sound3dId, templateId);
 
 			_loadedSound3dIds.insert({sound3dId, templateId});
 

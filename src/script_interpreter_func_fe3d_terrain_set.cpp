@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 
 			if(_validateFe3dTerrain(args[0]->getString(), true))
 			{
-				_worldHelper->copyTemplateTerrain(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyTemplateTerrain(args[0]->getString(), ("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

@@ -46,7 +46,7 @@ private:
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
-	shared_ptr<WorldHelper> _worldHelper = nullptr;
+	shared_ptr<Duplicator> _duplicator = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;

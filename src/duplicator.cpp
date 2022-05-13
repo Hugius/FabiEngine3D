@@ -1,11 +1,11 @@
-#include "world_helper.hpp"
+#include "duplicator.hpp"
 
-void WorldHelper::inject(shared_ptr<EngineInterface> fe3d)
+void Duplicator::inject(shared_ptr<EngineInterface> fe3d)
 {
 	_fe3d = fe3d;
 }
 
-void WorldHelper::copyTemplateSky(const string & newId, const string & templateId)
+void Duplicator::copyTemplateSky(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sky_isExisting(templateId))
 	{
@@ -21,7 +21,7 @@ void WorldHelper::copyTemplateSky(const string & newId, const string & templateI
 	_fe3d->sky_setRotationOrder(newId, _fe3d->sky_getRotationOrder(templateId));
 }
 
-void WorldHelper::copyTemplateTerrain(const string & newId, const string & templateId)
+void Duplicator::copyTemplateTerrain(const string & newId, const string & templateId)
 {
 	if(!_fe3d->terrain_isExisting(templateId))
 	{
@@ -87,7 +87,7 @@ void WorldHelper::copyTemplateTerrain(const string & newId, const string & templ
 	}
 }
 
-void WorldHelper::copyTemplateWater(const string & newId, const string & templateId)
+void Duplicator::copyTemplateWater(const string & newId, const string & templateId)
 {
 	if(!_fe3d->water_isExisting(templateId))
 	{
@@ -127,7 +127,7 @@ void WorldHelper::copyTemplateWater(const string & newId, const string & templat
 	}
 }
 
-void WorldHelper::copyTemplateModel(const string & newId, const string & templateId)
+void Duplicator::copyTemplateModel(const string & newId, const string & templateId)
 {
 	if(!_fe3d->model_isExisting(templateId))
 	{
@@ -206,7 +206,7 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 	}
 }
 
-void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templateId)
+void Duplicator::copyTemplateQuad3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
@@ -250,7 +250,7 @@ void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templa
 	}
 }
 
-void WorldHelper::copyTemplateText3d(const string & newId, const string & templateId)
+void Duplicator::copyTemplateText3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
@@ -283,7 +283,7 @@ void WorldHelper::copyTemplateText3d(const string & newId, const string & templa
 	}
 }
 
-void WorldHelper::copyTemplateAabb(const string & newId, const string & templateId)
+void Duplicator::copyTemplateAabb(const string & newId, const string & templateId)
 {
 	if(!_fe3d->aabb_isExisting(templateId))
 	{
@@ -295,7 +295,7 @@ void WorldHelper::copyTemplateAabb(const string & newId, const string & template
 	_fe3d->aabb_setColor(newId, _fe3d->aabb_getColor(templateId));
 }
 
-void WorldHelper::copyTemplatePointlight(const string & newId, const string & templateId)
+void Duplicator::copyTemplatePointlight(const string & newId, const string & templateId)
 {
 	if(!_fe3d->pointlight_isExisting(templateId))
 	{
@@ -309,7 +309,7 @@ void WorldHelper::copyTemplatePointlight(const string & newId, const string & te
 	_fe3d->pointlight_setShape(newId, _fe3d->pointlight_getShape(templateId));
 }
 
-void WorldHelper::copyTemplateSpotlight(const string & newId, const string & templateId)
+void Duplicator::copyTemplateSpotlight(const string & newId, const string & templateId)
 {
 	if(!_fe3d->spotlight_isExisting(templateId))
 	{
@@ -325,7 +325,7 @@ void WorldHelper::copyTemplateSpotlight(const string & newId, const string & tem
 	_fe3d->spotlight_setDistance(newId, _fe3d->spotlight_getDistance(templateId));
 }
 
-void WorldHelper::copyTemplateSound3d(const string & newId, const string & templateId)
+void Duplicator::copyTemplateSound3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound3d_isExisting(templateId))
 	{

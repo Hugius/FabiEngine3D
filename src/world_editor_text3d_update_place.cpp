@@ -31,7 +31,7 @@ void WorldEditor::_updateText3dPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateText3d(newId, _currentTemplateText3dId);
+				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
 				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 
 				_fe3d->text3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
@@ -89,7 +89,7 @@ void WorldEditor::_updateText3dPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplateText3d(newId, _currentTemplateText3dId);
+				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
 				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 
 				_fe3d->text3d_setPosition(newId, newPosition);

@@ -44,7 +44,7 @@ void WorldEditor::_updateTerrainPlacingMenu()
 
 			if(!hoveredOptionId.empty())
 			{
-				_worldHelper->copyTemplateTerrain(hoveredOptionId.substr(1), hoveredOptionId);
+				_duplicator->copyTemplateTerrain(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->terrain_select(hoveredOptionId.substr(1));
 

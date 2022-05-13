@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 			if(_validateFe3dSound3d(args[1]->getString(), true))
 			{
-				_worldHelper->copyTemplateSound3d(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyTemplateSound3d(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->sound3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 

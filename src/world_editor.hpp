@@ -14,7 +14,7 @@
 #include "spotlight_editor.hpp"
 #include "sound3d_editor.hpp"
 #include "transformation_type.hpp"
-#include "world_helper.hpp"
+#include "duplicator.hpp"
 
 class WorldEditor final : public BaseEditor
 {
@@ -33,7 +33,7 @@ public:
 	void inject(shared_ptr<PointlightEditor> pointlightEditor);
 	void inject(shared_ptr<SpotlightEditor> spotlightEditor);
 	void inject(shared_ptr<Sound3dEditor> sound3dEditor);
-	void inject(shared_ptr<WorldHelper> worldHelper);
+	void inject(shared_ptr<Duplicator> duplicator);
 	void update();
 	void clearLoadedWorld();
 
@@ -245,7 +245,7 @@ private:
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound3dEditor> _sound3dEditor = nullptr;
-	shared_ptr<WorldHelper> _worldHelper = nullptr;
+	shared_ptr<Duplicator> _duplicator = nullptr;
 
 	string _loadedWorldId = "";
 	string _currentWorldId = "";

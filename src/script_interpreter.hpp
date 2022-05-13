@@ -45,7 +45,7 @@ public:
 	void inject(shared_ptr<Sound2dEditor> sound2dEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);
-	void inject(shared_ptr<WorldHelper> worldHelper);
+	void inject(shared_ptr<Duplicator> duplicator);
 	void setCurrentProjectId(const string & projectId);
 	void load();
 	void executeInitializeScripts();
@@ -357,7 +357,7 @@ private:
 	shared_ptr<Sound2dEditor> _sound2dEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
-	shared_ptr<WorldHelper> _worldHelper = nullptr;
+	shared_ptr<Duplicator> _duplicator = nullptr;
 
 	string _currentProjectId = "";
 	string _initEntryId = "";

@@ -37,7 +37,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_loadedPointlightIds.insert({newId, _currentTemplatePointlightId});
 
-				_worldHelper->copyTemplatePointlight(newId, _currentTemplatePointlightId);
+				_duplicator->copyTemplatePointlight(newId, _currentTemplatePointlightId);
 				_loadedPointlightIds.insert({newId, _currentTemplatePointlightId});
 
 				_fe3d->pointlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
@@ -119,7 +119,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_idCounter++;
 
-				_worldHelper->copyTemplatePointlight(newId, _currentTemplatePointlightId);
+				_duplicator->copyTemplatePointlight(newId, _currentTemplatePointlightId);
 
 				_loadedPointlightIds.insert({newId, _currentTemplatePointlightId});
 

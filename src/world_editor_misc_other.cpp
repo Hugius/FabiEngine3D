@@ -279,7 +279,7 @@ void WorldEditor::inject(shared_ptr<SpotlightEditor> spotlightEditor)
 	_spotlightEditor = spotlightEditor;
 }
 
-void WorldEditor::inject(shared_ptr<WorldHelper> worldHelper)
+void WorldEditor::inject(shared_ptr<Duplicator> duplicator)
 {
-	_worldHelper = worldHelper;
+	_duplicator = duplicator;
 }

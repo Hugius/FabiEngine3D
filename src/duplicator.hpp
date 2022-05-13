@@ -2,7 +2,7 @@
 
 #include "engine_interface.hpp"
 
-class WorldHelper final
+class Duplicator final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);

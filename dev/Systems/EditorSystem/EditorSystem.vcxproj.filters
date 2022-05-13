@@ -759,6 +759,24 @@
     <ClCompile Include="..\..\..\src\spotlight_editor_update_misc.cpp">
       <Filter>Spotlight Editor\Update</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_lifecycle.cpp">
+      <Filter>Sound3d Editor\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_loading.cpp">
+      <Filter>Sound3d Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_saving.cpp">
+      <Filter>Sound3d Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_misc.cpp">
+      <Filter>Sound3d Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_update_menu.cpp">
+      <Filter>Sound3d Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_editor_update_misc.cpp">
+      <Filter>Sound3d Editor\Update</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -811,6 +829,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\spotlight_editor.hpp">
       <Filter>Spotlight Editor\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_editor.hpp">
+      <Filter>Sound3d Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

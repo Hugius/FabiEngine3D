@@ -138,7 +138,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 {
 	if(!_hoveredSound3dId.empty())
 	{
-		_fe3d->sound3d_stop(_hoveredSound3dId, false);
+		_fe3d->sound3d_pause(_hoveredSound3dId, 0);
 		_fe3d->model_setVisible("@@sound3d", false);
 
 		_hoveredSound3dId = "";
@@ -154,7 +154,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 			{
 				_hoveredSound3dId = ("@" + selectedOptionId);
 
-				_fe3d->sound3d_start(_hoveredSound3dId, true);
+				_fe3d->sound3d_resume(_hoveredSound3dId, 0);
 				_fe3d->model_setVisible("@@sound3d", true);
 			}
 
@@ -192,7 +192,7 @@ void Sound3dEditor::_updateSound3dDeleting()
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_fe3d->sound3d_stop(_currentSound3dId, false);
+			_fe3d->sound3d_pause(_currentSound3dId, 0);
 			_fe3d->model_setVisible("@@sound3d", false);
 
 			_currentSound3dId = "";

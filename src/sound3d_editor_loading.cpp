@@ -110,6 +110,8 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 			_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
 			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
+			_fe3d->sound3d_start(sound3dId, -1);
+			_fe3d->sound3d_pause(sound3dId, 0);
 		}
 	}
 

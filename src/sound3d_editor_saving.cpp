@@ -23,11 +23,20 @@ const bool Sound3dEditor::saveSound3dsToFile() const
 
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
+		auto audioPath = _fe3d->sound3d_getAudioPath(sound3dId);
 		auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
 		auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
 
+		audioPath = (audioPath.empty() ? "" : audioPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+
+		audioPath = (audioPath.empty()) ? "?" : audioPath;
+
+		replace(audioPath.begin(), audioPath.end(), ' ', '?');
+
 		file
 			<< sound3dId
+			<< " "
+			<< audioPath
 			<< " "
 			<< maxVolume
 			<< " "

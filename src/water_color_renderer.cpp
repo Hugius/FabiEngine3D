@@ -92,51 +92,12 @@ void WaterColorRenderer::unbind()
 
 void WaterColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
-	vector<shared_ptr<Pointlight>> visiblePointlights;
 
-	for(const auto & [pointlightId, pointlight] : pointlights)
-	{
-		if(pointlight->isVisible())
-		{
-			visiblePointlights.push_back(pointlight);
-		}
-	}
-
-	for(int index = 0; index < static_cast<int>(visiblePointlights.size()); index++)
-	{
-		//_shader->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visiblePointlights[index]->getPosition());
-		//_shader->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visiblePointlights[index]->getColor());
-		//_shader->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visiblePointlights[index]->getIntensity());
-		//_shader->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visiblePointlights[index]->getRadius());
-		//_shader->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visiblePointlights[index]->getShape()));
-	}
-
-	//_shader->uploadUniform("u_pointlightCount", static_cast<int>(visiblePointlights.size()));
 }
 
 void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
-	vector<shared_ptr<Spotlight>> visibleSpotlights;
 
-	for(const auto & [spotlightId, spotlight] : spotlights)
-	{
-		if(spotlight->isVisible())
-		{
-			visibleSpotlights.push_back(spotlight);
-		}
-	}
-
-	for(int index = 0; index < static_cast<int>(visibleSpotlights.size()); index++)
-	{
-		//_shader->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleSpotlights[index]->getPosition());
-		//_shader->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleSpotlights[index]->getFront());
-		//_shader->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleSpotlights[index]->getColor());
-		//_shader->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleSpotlights[index]->getIntensity());
-		//_shader->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Math::convertToRadians(visibleSpotlights[index]->getAngle())));
-		//_shader->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleSpotlights[index]->getDistance());
-	}
-
-	//_shader->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
 void WaterColorRenderer::render(const shared_ptr<Water> water)

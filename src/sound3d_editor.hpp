@@ -30,7 +30,7 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string SOUND3D_MODEL_ID = "@@sound3d";
-	static inline const string SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
 
 	static inline const fvec3 SOUND3D_POSITION = fvec3(0.0f, 2.0f, 0.0f);
 

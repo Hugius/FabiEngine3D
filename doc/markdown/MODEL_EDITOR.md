@@ -18,6 +18,7 @@
 - Hold `SPACE` to move camera upwards
 - Hold `SHIFT` to move camera downwards
 - Press `RMB` to toggle camera
+- Press `G` to toggle editor grid
 - Press `R` to toggle reference box
 - Press `F` to toggle wireframe rendering
 - Press `ESC` to go back

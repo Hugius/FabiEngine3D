@@ -4,7 +4,7 @@
 
 - The text3D is a composition of quad3Ds.
 - Every quad3D represents a text character.
-- The text is generated using a font map.
+- The text itself is generated using a font map.
 
 ## 2. Assets
 

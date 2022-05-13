@@ -15,9 +15,9 @@
 - Press `LMB` to place
 - Press `RMB` to toggle camera
 - Press `MMB` to cancel placement
-- Press `B` to toggle AABB rendering
+- Press `G` to toggle editor grid
 - Press `F` to toggle wireframe rendering
-- Press `R` to toggle debug rendering
+- Press `B` to toggle AABB rendering
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards
 - Use `WASD` to move around
@@ -34,7 +34,7 @@
 ## 5. Water
 
 - You can select/delete up to 1 water from the water editor.
-- The water height can be moved upwards and downwards
+- The water height can be moved upwards and downwards.
 
 ## 6. Models
 
@@ -43,45 +43,58 @@
 - If no terrain is selected, you must specify the position of the model.
 - You can attach an (endless) animation3D to a placed model.
 
-## 7. Quad3D
+## 7. Quad3Ds
 
 - You can place/edit/delete quad3Ds in the world.
-- If a terrain is selected, you can place the model on top of the terrain with your mouse.
+- If a terrain is selected, you can place the quad3D on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the sound.
 - You can attach an (endless) animation2D to a placed quad3D.
 
-## 8. Sounds
+## 8. Text3Ds
 
-- You can place/edit/delete sounds in the world.
-- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the model.
+- You can place/edit/delete text3Ds in the world.
+- If a terrain is selected, you can place the text3D on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the sound.
+- You can attach an (endless) animation2D to a placed text3D.
 
-## 9. Pointlights
+## 9. AABBs
+
+- You can place/edit/delete AABBs in the world.
+- If a terrain is selected, you can place the AABB on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the AABB.
+
+## 10. Pointlights
 
 - You can place/edit/delete pointlights in the world.
 - If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the pointlight.
 
-## 10. Spotlights
+## 11. Spotlights
 
 - You can place/edit/delete spotlights in the world.
 - If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the spotlight.
 
-## 11. Captors
+## 12. Captors
 
 - You can place/edit/delete captors in the world.
 - If a terrain is selected, you can place the captor on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the captor.
 
-## 12. Settings
+## 13. Sound3Ds
 
-### 12.1 Lighting
+- You can place/edit/delete sound3Ds in the world.
+- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the sound3D.
+
+## 14. Settings
+
+### 14.1 Lighting
 
 - You can configure ambient lighting in the world.
 - You can configure directional lighting in the world.
 
-### 12.2 Graphics
+### 14.2 Graphics
 
 - You can configure shadows in the world.
 - You can configure reflections in the world.
@@ -92,7 +105,7 @@
 - You can configure sky exposure in the world.
 - You can configure bloom in the world.
 
-### 12.3 Properties
+### 14.3 Properties
 
 - **Editor Speed**: the speed with which the camera moves and the XYZ fields change
   - Type: `decimal`

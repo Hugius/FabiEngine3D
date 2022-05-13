@@ -271,6 +271,33 @@
     <Filter Include="Spotlight Editor">
       <UniqueIdentifier>{fb96c27f-c8ec-4e77-a10a-e1ec28a72584}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound3d Editor">
+      <UniqueIdentifier>{5050e079-aad3-406d-81bf-48a9ccf5aa7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound3d Editor\Main">
+      <UniqueIdentifier>{7736885b-2b00-4cc9-bbeb-f22a9c36df1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound3d Editor\Miscellaneous">
+      <UniqueIdentifier>{53c001c6-0fec-4fdf-a365-11ace8712c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound3d Editor\Persistence">
+      <UniqueIdentifier>{7ea6d459-b79f-4914-afa1-de156caf645b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound3d Editor\Update">
+      <UniqueIdentifier>{a676e7ec-656b-4f8a-8666-d3867f9b699f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spotlight Editor\Main">
+      <UniqueIdentifier>{cd1e347f-09de-48dd-ae24-c132c007082f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spotlight Editor\Miscellaneous">
+      <UniqueIdentifier>{eb7ec473-90fd-49b6-9946-1c1a270570fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spotlight Editor\Persistence">
+      <UniqueIdentifier>{26f0b2e7-d0e9-43ab-ab09-667c50176fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spotlight Editor\Update">
+      <UniqueIdentifier>{11ea5eb4-1cc6-4515-a746-6a9c3df3c2bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -714,23 +741,23 @@
     <ClCompile Include="..\..\..\src\pointlight_editor_misc.cpp">
       <Filter>Pointlight Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\spotlight_editor_loading.cpp">
-      <Filter>Spotlight Editor</Filter>
+    <ClCompile Include="..\..\..\src\spotlight_editor_lifecycle.cpp">
+      <Filter>Spotlight Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\spotlight_editor_misc.cpp">
-      <Filter>Spotlight Editor</Filter>
+      <Filter>Spotlight Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_editor_loading.cpp">
+      <Filter>Spotlight Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\spotlight_editor_saving.cpp">
-      <Filter>Spotlight Editor</Filter>
+      <Filter>Spotlight Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\spotlight_editor_update_menu.cpp">
-      <Filter>Spotlight Editor</Filter>
+      <Filter>Spotlight Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\spotlight_editor_update_misc.cpp">
-      <Filter>Spotlight Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\spotlight_editor_lifecycle.cpp">
-      <Filter>Spotlight Editor</Filter>
+      <Filter>Spotlight Editor\Update</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -783,7 +810,7 @@
       <Filter>Pointlight Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\spotlight_editor.hpp">
-      <Filter>Spotlight Editor</Filter>
+      <Filter>Spotlight Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

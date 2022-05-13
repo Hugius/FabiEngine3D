@@ -192,8 +192,6 @@ void EngineController::initialize()
 		const auto sound3dAudioPaths = _sound3dEditor->getAudioPathsFromFile();
 		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
-		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
-
 		vector<string> imagePaths = {};
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
@@ -203,11 +201,13 @@ void EngineController::initialize()
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
-		_fe3d->misc_cacheImages(imagePaths, false);
 
 		vector<string> audioPaths = {};
 		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
 		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
+
+		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
+		_fe3d->misc_cacheImages(imagePaths, false);
 		_fe3d->misc_cacheAudios(audioPaths, false);
 
 		_scriptEditor->loadScriptFiles(true);
@@ -228,7 +228,6 @@ void EngineController::initialize()
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
-		_fe3d->misc_cacheMeshes(meshPaths, true);
 
 		vector<string> imagePaths;
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
@@ -251,13 +250,15 @@ void EngineController::initialize()
 		imagePaths.push_back(diffuseMapDirectoryPath + "start.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "stop.tga");
 		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
+
+		_fe3d->misc_cacheMeshes(meshPaths, true);
 		_fe3d->misc_cacheImages(imagePaths, true);
+
+		Tools::setCursorVisible(false);
 
 		_fe3d->quad2d_create("@@cursor", true);
 		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
-		_fe3d->quad2d_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
 		_fe3d->misc_setCursorId("@@cursor");
-		Tools::setCursorVisible(false);
 
 		_guiManager->initialize();
 		_leftViewportController->initialize();

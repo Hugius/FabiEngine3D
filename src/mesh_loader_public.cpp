@@ -72,8 +72,8 @@ void MeshLoader::cacheMeshes(const vector<string> & filePaths, bool isCrucial)
 	vector<bool> threadStatuses;
 	int finishedThreadCount = 0;
 
-	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
-	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+	const auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
+	const auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	for(const auto & filePath : uniqueFilePaths)
 	{
@@ -96,7 +96,7 @@ void MeshLoader::cacheMeshes(const vector<string> & filePaths, bool isCrucial)
 					threadStatuses[index] = true;
 					finishedThreadCount++;
 
-					auto loadedMesh = threads[index].get();
+					const auto loadedMesh = threads[index].get();
 
 					if(loadedMesh == nullptr)
 					{

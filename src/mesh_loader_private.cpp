@@ -21,13 +21,16 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto fullFilePath = (rootPath + filePath);
+
 	auto file = ifstream(fullFilePath);
+
 	if(!file)
 	{
 		return nullptr;
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string lineType;

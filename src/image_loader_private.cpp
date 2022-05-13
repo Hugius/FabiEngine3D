@@ -18,7 +18,7 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 		return nullptr;
 	}
 
-	auto header = new unsigned char[HEADER_SIZE];
+	auto header = new unsigned char[18];
 
 	for(int index = 0; index < 18; index++)
 	{

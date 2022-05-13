@@ -28,6 +28,9 @@ public:
 	const bool isAutopaused() const;
 
 private:
+	static inline constexpr int MIN_INTERVAL_MULTIPLIER = 1;
+	static inline constexpr int MIN_INTERVAL_DIVIDER = 1;
+
 	int _rowIndex = 0;
 	int _columnIndex = 0;
 	int _updateCount = 0;

@@ -31,6 +31,7 @@ void Image::flipX()
 {
 	const auto byteFormat = (_bitsPerPixel / 8);
 	const auto size = (_width * _height * byteFormat);
+
 	auto newPixels = new unsigned char[size];
 
 	for(int y = 0; y < _height; y++)
@@ -57,6 +58,7 @@ void Image::flipX()
 	}
 
 	delete[] _pixels;
+
 	_pixels = newPixels;
 }
 
@@ -64,6 +66,7 @@ void Image::flipY()
 {
 	const auto byteFormat = (_bitsPerPixel / 8);
 	const auto size = (_width * _height * byteFormat);
+
 	auto newPixels = new unsigned char[size];
 
 	for(int y = 0; y < _height; y++)
@@ -90,6 +93,7 @@ void Image::flipY()
 	}
 
 	delete[] _pixels;
+
 	_pixels = newPixels;
 }
 

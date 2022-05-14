@@ -45,7 +45,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		string greenDiffuseMapPath;
 		string blueDiffuseMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> terrainId
@@ -232,7 +232,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 		int blueTextureRepeat;
 		bool isSpecular;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> terrainId

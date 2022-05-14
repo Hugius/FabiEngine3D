@@ -42,17 +42,24 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 
 	bool isConstant = false;
 
-	if(scope == ScriptScopeType::GLOBAL)
+	switch(scope)
 	{
-		const auto possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
+		case ScriptScopeType::GLOBAL:
+		{
+			const auto possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
 
-		isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
-	}
-	else
-	{
-		const auto possibleConstKeyword = scriptLine.substr(0, CONST_KEYWORD.size() + 1);
+			isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
 
-		isConstant = (possibleConstKeyword == (CONST_KEYWORD + " "));
+			break;
+		}
+		case ScriptScopeType::LOCAL:
+		{
+			const auto possibleConstKeyword = scriptLine.substr(0, CONST_KEYWORD.size() + 1);
+
+			isConstant = (possibleConstKeyword == (CONST_KEYWORD + " "));
+
+			break;
+		}
 	}
 
 	string words[3] = {"", "", ""};
@@ -155,8 +162,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 
 	auto & variableList = ((scope == ScriptScopeType::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
 
-	if((scope == ScriptScopeType::LOCAL && _isLocalVariableExisting(nameString)) ||
-	   (scope == ScriptScopeType::GLOBAL && _isGlobalVariableExisting(nameString)))
+	if((scope == ScriptScopeType::LOCAL && _isLocalVariableExisting(nameString)) || (scope == ScriptScopeType::GLOBAL && _isGlobalVariableExisting(nameString)))
 	{
 		_throwRuntimeError("variable \"" + nameString + "\" already defined");
 

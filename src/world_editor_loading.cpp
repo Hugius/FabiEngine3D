@@ -32,7 +32,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 	{
 		string lineType;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss >> lineType;
 

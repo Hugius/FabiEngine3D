@@ -34,7 +34,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 		string text2dId;
 		string fontMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> text2dId
@@ -89,7 +89,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> text2dId

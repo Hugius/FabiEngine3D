@@ -56,7 +56,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 		getline(file, line);
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> cursorLineIndex

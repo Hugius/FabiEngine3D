@@ -34,7 +34,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 		string sound2dId;
 		string audioPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> sound2dId
@@ -83,7 +83,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 	{
 		string sound2dId, audioPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> sound2dId

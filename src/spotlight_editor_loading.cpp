@@ -36,7 +36,7 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 		float angle;
 		float distance;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> spotlightId

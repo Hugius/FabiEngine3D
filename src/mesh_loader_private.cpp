@@ -37,7 +37,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 		replace(line.begin(), line.end(), '/', ' ');
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss >> lineType;
 

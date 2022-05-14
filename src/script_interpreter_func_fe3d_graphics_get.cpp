@@ -530,19 +530,24 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto bloomType = _fe3d->graphics_getBloomType();
-
-			if(bloomType == BloomType::EVERYTHING)
+			switch(_fe3d->graphics_getBloomType())
 			{
-				const auto result = "EVERYTHING";
+				case BloomType::EVERYTHING:
+				{
+					const auto result = "EVERYTHING";
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
-			}
-			if(bloomType == BloomType::PARTS)
-			{
-				const auto result = "PARTS";
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					break;
+				}
+				case BloomType::PARTS:
+				{
+					const auto result = "PARTS";
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+					break;
+				}
 			}
 		}
 	}

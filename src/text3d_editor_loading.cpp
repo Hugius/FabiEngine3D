@@ -35,7 +35,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 		string text3dId;
 		string fontMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> text3dId
@@ -101,7 +101,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 		bool isBright;
 		bool hasAabb;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> text3dId

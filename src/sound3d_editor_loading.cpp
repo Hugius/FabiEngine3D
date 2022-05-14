@@ -34,7 +34,7 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 		string sound3dId;
 		string audioPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> sound3dId
@@ -84,7 +84,7 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 		float maxVolume;
 		float maxDistance;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> sound3dId

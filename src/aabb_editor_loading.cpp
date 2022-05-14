@@ -34,7 +34,7 @@ const bool AabbEditor::loadAabbsFromFile()
 		fvec3 size;
 		fvec3 color;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> aabbId

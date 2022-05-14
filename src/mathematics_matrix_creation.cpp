@@ -80,41 +80,56 @@ const mat44 Mathematics::createRotationMatrix(float x, float y, float z, Directi
 {
 	mat44 result = {};
 
-	if(order == DirectionOrderType::XYZ)
+	switch(order)
 	{
-		result = (result * createRotationMatrixX(x));
-		result = (result * createRotationMatrixY(y));
-		result = (result * createRotationMatrixZ(z));
-	}
-	else if(order == DirectionOrderType::XZY)
-	{
-		result = (result * createRotationMatrixX(x));
-		result = (result * createRotationMatrixZ(z));
-		result = (result * createRotationMatrixY(y));
-	}
-	else if(order == DirectionOrderType::YXZ)
-	{
-		result = (result * createRotationMatrixY(y));
-		result = (result * createRotationMatrixX(x));
-		result = (result * createRotationMatrixZ(z));
-	}
-	else if(order == DirectionOrderType::YZX)
-	{
-		result = (result * createRotationMatrixY(y));
-		result = (result * createRotationMatrixZ(z));
-		result = (result * createRotationMatrixX(x));
-	}
-	else if(order == DirectionOrderType::ZXY)
-	{
-		result = (result * createRotationMatrixZ(z));
-		result = (result * createRotationMatrixX(x));
-		result = (result * createRotationMatrixY(y));
-	}
-	else if(order == DirectionOrderType::ZYX)
-	{
-		result = (result * createRotationMatrixZ(z));
-		result = (result * createRotationMatrixY(y));
-		result = (result * createRotationMatrixX(x));
+		case DirectionOrderType::XYZ:
+		{
+			result = (result * createRotationMatrixX(x));
+			result = (result * createRotationMatrixY(y));
+			result = (result * createRotationMatrixZ(z));
+
+			break;
+		}
+		case DirectionOrderType::XZY:
+		{
+			result = (result * createRotationMatrixX(x));
+			result = (result * createRotationMatrixZ(z));
+			result = (result * createRotationMatrixY(y));
+
+			break;
+		}
+		case DirectionOrderType::YXZ:
+		{
+			result = (result * createRotationMatrixY(y));
+			result = (result * createRotationMatrixX(x));
+			result = (result * createRotationMatrixZ(z));
+
+			break;
+		}
+		case DirectionOrderType::YZX:
+		{
+			result = (result * createRotationMatrixY(y));
+			result = (result * createRotationMatrixZ(z));
+			result = (result * createRotationMatrixX(x));
+
+			break;
+		}
+		case DirectionOrderType::ZXY:
+		{
+			result = (result * createRotationMatrixZ(z));
+			result = (result * createRotationMatrixX(x));
+			result = (result * createRotationMatrixY(y));
+
+			break;
+		}
+		case DirectionOrderType::ZYX:
+		{
+			result = (result * createRotationMatrixZ(z));
+			result = (result * createRotationMatrixY(y));
+			result = (result * createRotationMatrixX(x));
+
+			break;
+		}
 	}
 
 	return result;

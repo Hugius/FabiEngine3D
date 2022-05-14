@@ -34,7 +34,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 		string quad2dId;
 		string diffuseMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> quad2dId
@@ -90,7 +90,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> quad2dId

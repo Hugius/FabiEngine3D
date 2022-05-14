@@ -1161,19 +1161,24 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			{
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					const auto reflectionType = _fe3d->model_getReflectionType(args[0]->getString(), args[1]->getString());
-
-					if(reflectionType == ReflectionType::CUBE)
+					switch(_fe3d->model_getReflectionType(args[0]->getString(), args[1]->getString()))
 					{
-						const auto result = "CUBE";
+						case ReflectionType::CUBE:
+						{
+							const auto result = "CUBE";
 
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
-					}
-					if(reflectionType == ReflectionType::PLANAR)
-					{
-						const auto result = "PLANAR";
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+							break;
+						}
+						case ReflectionType::PLANAR:
+						{
+							const auto result = "PLANAR";
+
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+							break;
+						}
 					}
 				}
 			}
@@ -1189,19 +1194,24 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			{
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					const auto refractionType = _fe3d->model_getRefractionType(args[0]->getString(), args[1]->getString());
-
-					if(refractionType == RefractionType::CUBE)
+					switch(_fe3d->model_getRefractionType(args[0]->getString(), args[1]->getString()))
 					{
-						const auto result = "CUBE";
+						case RefractionType::CUBE:
+						{
+							const auto result = "CUBE";
 
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
-					}
-					if(refractionType == RefractionType::PLANAR)
-					{
-						const auto result = "PLANAR";
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+							break;
+						}
+						case RefractionType::PLANAR:
+						{
+							const auto result = "PLANAR";
+
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+							break;
+						}
 					}
 				}
 			}

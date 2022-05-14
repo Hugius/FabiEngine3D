@@ -272,62 +272,74 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{
-		if(firstValue->getType() == ScriptValueType::STRING)
+		switch(firstValue->getType())
 		{
-			return (firstValue->getString() == secondValue->getString());
-		}
-		else if(firstValue->getType() == ScriptValueType::DECIMAL)
-		{
-			return (firstValue->getDecimal() == secondValue->getDecimal());
-		}
-		else if(firstValue->getType() == ScriptValueType::INTEGER)
-		{
-			return (firstValue->getInteger() == secondValue->getInteger());
-		}
-		else if(firstValue->getType() == ScriptValueType::BOOLEAN)
-		{
-			return (firstValue->getBoolean() == secondValue->getBoolean());
+			case ScriptValueType::STRING:
+			{
+				return (firstValue->getString() == secondValue->getString());
+			}
+			case ScriptValueType::DECIMAL:
+			{
+				return (firstValue->getDecimal() == secondValue->getDecimal());
+			}
+			case ScriptValueType::INTEGER:
+			{
+				return (firstValue->getInteger() == secondValue->getInteger());
+			}
+			case ScriptValueType::BOOLEAN:
+			{
+				return (firstValue->getBoolean() == secondValue->getBoolean());
+			}
 		}
 	}
 	else if(comparisonOperator == NOT_KEYWORD)
 	{
-		if(firstValue->getType() == ScriptValueType::STRING)
+		switch(firstValue->getType())
 		{
-			return (firstValue->getString() != secondValue->getString());
-		}
-		else if(firstValue->getType() == ScriptValueType::DECIMAL)
-		{
-			return (firstValue->getDecimal() != secondValue->getDecimal());
-		}
-		else if(firstValue->getType() == ScriptValueType::INTEGER)
-		{
-			return (firstValue->getInteger() != secondValue->getInteger());
-		}
-		else if(firstValue->getType() == ScriptValueType::BOOLEAN)
-		{
-			return (firstValue->getBoolean() != secondValue->getBoolean());
+			case ScriptValueType::STRING:
+			{
+				return (firstValue->getString() != secondValue->getString());
+			}
+			case ScriptValueType::DECIMAL:
+			{
+				return (firstValue->getDecimal() != secondValue->getDecimal());
+			}
+			case ScriptValueType::INTEGER:
+			{
+				return (firstValue->getInteger() != secondValue->getInteger());
+			}
+			case ScriptValueType::BOOLEAN:
+			{
+				return (firstValue->getBoolean() != secondValue->getBoolean());
+			}
 		}
 	}
 	else if(comparisonOperator == MORE_KEYWORD)
 	{
-		if(firstValue->getType() == ScriptValueType::DECIMAL)
+		switch(firstValue->getType())
 		{
-			return (firstValue->getDecimal() > secondValue->getDecimal());
-		}
-		else if(firstValue->getType() == ScriptValueType::INTEGER)
-		{
-			return (firstValue->getInteger() > secondValue->getInteger());
+			case ScriptValueType::DECIMAL:
+			{
+				return (firstValue->getDecimal() > secondValue->getDecimal());
+			}
+			case ScriptValueType::INTEGER:
+			{
+				return (firstValue->getInteger() > secondValue->getInteger());
+			}
 		}
 	}
 	else if(comparisonOperator == LESS_KEYWORD)
 	{
-		if(firstValue->getType() == ScriptValueType::DECIMAL)
+		switch(firstValue->getType())
 		{
-			return (firstValue->getDecimal() < secondValue->getDecimal());
-		}
-		else if(firstValue->getType() == ScriptValueType::INTEGER)
-		{
-			return (firstValue->getInteger() < secondValue->getInteger());
+			case ScriptValueType::DECIMAL:
+			{
+				return (firstValue->getDecimal() < secondValue->getDecimal());
+			}
+			case ScriptValueType::INTEGER:
+			{
+				return (firstValue->getInteger() < secondValue->getInteger());
+			}
 		}
 	}
 	else

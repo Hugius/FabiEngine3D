@@ -34,7 +34,7 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 		int columnCount;
 		int interval;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> animation2dId

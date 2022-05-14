@@ -68,32 +68,41 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				{
 					float finalSpeed = speed.x;
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(speedType == SpeedType::INSTANTLY)
+						case TransformationType::MOVEMENT:
 						{
-							finalSpeed = (targetTransformation.x - totalMovement.x);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.x - totalMovement.x);
+							}
 
-						totalMovement.x += finalSpeed;
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalMovement.x += finalSpeed;
+
+							break;
+						}
+						case TransformationType::ROTATION:
 						{
-							finalSpeed = (targetTransformation.x - totalRotation.x);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.x - totalRotation.x);
+							}
 
-						totalRotation.x += finalSpeed;
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalRotation.x += finalSpeed;
+
+							break;
+						}
+						case TransformationType::SCALING:
 						{
-							finalSpeed = (targetTransformation.x - totalScaling.x);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.x - totalScaling.x);
+							}
 
-						totalScaling.x += finalSpeed;
+							totalScaling.x += finalSpeed;
+
+							break;
+						}
 					}
 
 					if(speedType == SpeedType::EXPONENTIAL)
@@ -106,56 +115,74 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					   (isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
 					   (isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
 					{
-						if(transformationType == TransformationType::MOVEMENT)
+						switch(transformationType)
 						{
-							difference = (totalMovement.x - targetTransformation.x);
-							totalMovement.x -= difference;
-						}
-						else if(transformationType == TransformationType::ROTATION)
-						{
-							difference = (totalRotation.x - targetTransformation.x);
-							totalRotation.x -= difference;
-						}
-						else if(transformationType == TransformationType::SCALING)
-						{
-							difference = (totalScaling.x - targetTransformation.x);
-							totalScaling.x -= difference;
+							case TransformationType::MOVEMENT:
+							{
+								difference = (totalMovement.x - targetTransformation.x);
+								totalMovement.x -= difference;
+
+								break;
+							}
+							case TransformationType::ROTATION:
+							{
+								difference = (totalRotation.x - targetTransformation.x);
+								totalRotation.x -= difference;
+
+								break;
+							}
+							case TransformationType::SCALING:
+							{
+								difference = (totalScaling.x - targetTransformation.x);
+								totalScaling.x -= difference;
+
+								break;
+							}
 						}
 					}
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(partId.empty())
+						case TransformationType::MOVEMENT:
 						{
-							model->moveBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							if(partId.empty())
+							{
+								model->moveBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+							else
+							{
+								model->movePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+
+							break;
 						}
-						else
+						case TransformationType::ROTATION:
 						{
-							model->movePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							if(partId.empty())
+							{
+								model->setBaseRotationOrigin(currentModelSize * rotationOrigin);
+								model->rotateBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+							else
+							{
+								model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
+								model->rotatePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+
+							break;
 						}
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(partId.empty())
+						case TransformationType::SCALING:
 						{
-							model->setBaseRotationOrigin(currentModelSize * rotationOrigin);
-							model->rotateBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
-						}
-						else
-						{
-							model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
-							model->rotatePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
-						}
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(partId.empty())
-						{
-							model->scaleBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
-						}
-						else
-						{
-							model->scalePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							if(partId.empty())
+							{
+								model->scaleBase(fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+							else
+							{
+								model->scalePart(partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							}
+
+							break;
 						}
 					}
 				}
@@ -166,32 +193,41 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				{
 					float finalSpeed = speed.y;
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(speedType == SpeedType::INSTANTLY)
+						case TransformationType::MOVEMENT:
 						{
-							finalSpeed = (targetTransformation.y - totalMovement.y);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.y - totalMovement.y);
+							}
 
-						totalMovement.y += finalSpeed;
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalMovement.y += finalSpeed;
+
+							break;
+						}
+						case TransformationType::ROTATION:
 						{
-							finalSpeed = (targetTransformation.y - totalRotation.y);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.y - totalRotation.y);
+							}
 
-						totalRotation.y += finalSpeed;
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalRotation.y += finalSpeed;
+
+							break;
+						}
+						case TransformationType::SCALING:
 						{
-							finalSpeed = (targetTransformation.y - totalScaling.y);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.y - totalScaling.y);
+							}
 
-						totalScaling.y += finalSpeed;
+							totalScaling.y += finalSpeed;
+
+							break;
+						}
 					}
 
 					if(speedType == SpeedType::EXPONENTIAL)
@@ -204,56 +240,74 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
 					   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
 					{
-						if(transformationType == TransformationType::MOVEMENT)
+						switch(transformationType)
 						{
-							difference = (totalMovement.y - targetTransformation.y);
-							totalMovement.y -= difference;
-						}
-						else if(transformationType == TransformationType::ROTATION)
-						{
-							difference = (totalRotation.y - targetTransformation.y);
-							totalRotation.y -= difference;
-						}
-						else if(transformationType == TransformationType::SCALING)
-						{
-							difference = (totalScaling.y - targetTransformation.y);
-							totalScaling.y -= difference;
+							case TransformationType::MOVEMENT:
+							{
+								difference = (totalMovement.y - targetTransformation.y);
+								totalMovement.y -= difference;
+
+								break;
+							}
+							case TransformationType::ROTATION:
+							{
+								difference = (totalRotation.y - targetTransformation.y);
+								totalRotation.y -= difference;
+
+								break;
+							}
+							case TransformationType::SCALING:
+							{
+								difference = (totalScaling.y - targetTransformation.y);
+								totalScaling.y -= difference;
+
+								break;
+							}
 						}
 					}
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(partId.empty())
+						case TransformationType::MOVEMENT:
 						{
-							model->moveBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							if(partId.empty())
+							{
+								model->moveBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+							else
+							{
+								model->movePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+
+							break;
 						}
-						else
+						case TransformationType::ROTATION:
 						{
-							model->movePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							if(partId.empty())
+							{
+								model->setBaseRotationOrigin((currentModelSize * rotationOrigin));
+								model->rotateBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+							else
+							{
+								model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
+								model->rotatePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+
+							break;
 						}
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(partId.empty())
+						case TransformationType::SCALING:
 						{
-							model->setBaseRotationOrigin((currentModelSize * rotationOrigin));
-							model->rotateBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
-						}
-						else
-						{
-							model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
-							model->rotatePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
-						}
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(partId.empty())
-						{
-							model->scaleBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
-						}
-						else
-						{
-							model->scalePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							if(partId.empty())
+							{
+								model->scaleBase(fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+							else
+							{
+								model->scalePart(partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							}
+
+							break;
 						}
 					}
 				}
@@ -264,32 +318,41 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				{
 					float finalSpeed = speed.z;
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(speedType == SpeedType::INSTANTLY)
+						case TransformationType::MOVEMENT:
 						{
-							finalSpeed = (targetTransformation.z - totalMovement.z);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.z - totalMovement.z);
+							}
 
-						totalMovement.z += finalSpeed;
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalMovement.z += finalSpeed;
+
+							break;
+						}
+						case TransformationType::ROTATION:
 						{
-							finalSpeed = (targetTransformation.z - totalRotation.z);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.z - totalRotation.z);
+							}
 
-						totalRotation.z += finalSpeed;
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(speedType == SpeedType::INSTANTLY)
+							totalRotation.z += finalSpeed;
+
+							break;
+						}
+						case TransformationType::SCALING:
 						{
-							finalSpeed = (targetTransformation.z - totalScaling.z);
-						}
+							if(speedType == SpeedType::INSTANTLY)
+							{
+								finalSpeed = (targetTransformation.z - totalScaling.z);
+							}
 
-						totalScaling.z += finalSpeed;
+							totalScaling.z += finalSpeed;
+
+							break;
+						}
 					}
 
 					if(speedType == SpeedType::EXPONENTIAL)
@@ -298,62 +361,80 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					}
 
 					float difference = 0.0f;
+
 					if((isMovement && _hasReachedTarget(totalMovement.z, targetTransformation.z, finalSpeed)) ||
 					   (isRotation && _hasReachedTarget(totalRotation.z, targetTransformation.z, finalSpeed)) ||
 					   (isScaling && _hasReachedTarget(totalScaling.z, targetTransformation.z, finalSpeed)))
 					{
-						if(transformationType == TransformationType::MOVEMENT)
+						switch(transformationType)
 						{
-							difference = (totalMovement.z - targetTransformation.z);
-							totalMovement.z -= difference;
-						}
-						else if(transformationType == TransformationType::ROTATION)
-						{
-							difference = (totalRotation.z - targetTransformation.z);
-							totalRotation.z -= difference;
-						}
-						else if(transformationType == TransformationType::SCALING)
-						{
-							difference = (totalScaling.z - targetTransformation.z);
-							totalScaling.z -= difference;
+							case TransformationType::MOVEMENT:
+							{
+								difference = (totalMovement.z - targetTransformation.z);
+								totalMovement.z -= difference;
+
+								break;
+							}
+							case TransformationType::ROTATION:
+							{
+								difference = (totalRotation.z - targetTransformation.z);
+								totalRotation.z -= difference;
+
+								break;
+							}
+							case TransformationType::SCALING:
+							{
+								difference = (totalScaling.z - targetTransformation.z);
+								totalScaling.z -= difference;
+
+								break;
+							}
 						}
 					}
 
-					if(transformationType == TransformationType::MOVEMENT)
+					switch(transformationType)
 					{
-						if(partId.empty())
+						case TransformationType::MOVEMENT:
 						{
-							model->moveBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
-						else
-						{
-							model->movePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
-					}
-					else if(transformationType == TransformationType::ROTATION)
-					{
-						if(partId.empty())
-						{
-							model->setBaseRotationOrigin((currentModelSize * rotationOrigin));
-							model->rotateBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
-						else
-						{
-							model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
-							model->rotatePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
-					}
-					else if(transformationType == TransformationType::SCALING)
-					{
-						if(partId.empty())
-						{
-							model->scaleBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
-						else
-						{
-							model->scalePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
-						}
+							if(partId.empty())
+							{
+								model->moveBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
+							else
+							{
+								model->movePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
 
+							break;
+						}
+						case TransformationType::ROTATION:
+						{
+							if(partId.empty())
+							{
+								model->setBaseRotationOrigin((currentModelSize * rotationOrigin));
+								model->rotateBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
+							else
+							{
+								model->setPartRotationOrigin(partId, (currentModelSize * rotationOrigin));
+								model->rotatePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
+
+							break;
+						}
+						case TransformationType::SCALING:
+						{
+							if(partId.empty())
+							{
+								model->scaleBase(fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
+							else
+							{
+								model->scalePart(partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							}
+
+							break;
+						}
 					}
 				}
 			}

@@ -35,7 +35,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	{
 		string lineType;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss >> lineType;
 
@@ -91,7 +91,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	{
 		string lineType;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss >> lineType;
 
@@ -222,7 +222,7 @@ const bool ModelEditor::loadModelsFromFile()
 	{
 		string lineType;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss >> lineType;
 

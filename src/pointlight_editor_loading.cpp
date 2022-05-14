@@ -36,7 +36,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 		float intensity;
 		int shape;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> pointlightId

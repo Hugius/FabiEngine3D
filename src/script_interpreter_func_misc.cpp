@@ -296,35 +296,44 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				}
 			}
 
-			if(type == ScriptValueType::INTEGER)
+			switch(type)
 			{
-				vector<int> rawValues;
-				for(int index = 0; index < listVariable->getValueCount(); index++)
+				case ScriptValueType::INTEGER:
 				{
-					rawValues.push_back(listVariable->getValue(index)->getInteger());
+					vector<int> rawValues = {};
+
+					for(int index = 0; index < listVariable->getValueCount(); index++)
+					{
+						rawValues.push_back(listVariable->getValue(index)->getInteger());
+					}
+
+					const auto result = *min_element(begin(rawValues), end(rawValues));
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+
+					break;
 				}
-
-				const auto result = *min_element(begin(rawValues), end(rawValues));
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-			}
-			else if(type == ScriptValueType::DECIMAL)
-			{
-				vector<float> rawValues;
-				for(int index = 0; index < listVariable->getValueCount(); index++)
+				case ScriptValueType::DECIMAL:
 				{
-					rawValues.push_back(listVariable->getValue(index)->getDecimal());
+					vector<float> rawValues = {};
+
+					for(int index = 0; index < listVariable->getValueCount(); index++)
+					{
+						rawValues.push_back(listVariable->getValue(index)->getDecimal());
+					}
+
+					const auto result = *min_element(begin(rawValues), end(rawValues));
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+
+					break;
 				}
+				default:
+				{
+					_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
 
-				const auto result = *min_element(begin(rawValues), end(rawValues));
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-			else
-			{
-				_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
-
-				return {};
+					return {};
+				}
 			}
 		}
 	}
@@ -369,35 +378,42 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				}
 			}
 
-			if(type == ScriptValueType::INTEGER)
+			switch(type)
 			{
-				vector<int> rawValues;
-				for(int index = 0; index < listVariable->getValueCount(); index++)
+				case ScriptValueType::INTEGER:
 				{
-					rawValues.push_back(listVariable->getValue(index)->getInteger());
+					vector<int> rawValues;
+					for(int index = 0; index < listVariable->getValueCount(); index++)
+					{
+						rawValues.push_back(listVariable->getValue(index)->getInteger());
+					}
+
+					const auto result = *max_element(begin(rawValues), end(rawValues));
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+
+					break;
 				}
-
-				const auto result = *max_element(begin(rawValues), end(rawValues));
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-			}
-			else if(type == ScriptValueType::DECIMAL)
-			{
-				vector<float> rawValues;
-				for(int index = 0; index < listVariable->getValueCount(); index++)
+				case ScriptValueType::DECIMAL:
 				{
-					rawValues.push_back(listVariable->getValue(index)->getDecimal());
+					vector<float> rawValues;
+					for(int index = 0; index < listVariable->getValueCount(); index++)
+					{
+						rawValues.push_back(listVariable->getValue(index)->getDecimal());
+					}
+
+					const auto result = *max_element(begin(rawValues), end(rawValues));
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+
+					break;
 				}
+				default:
+				{
+					_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
 
-				const auto result = *max_element(begin(rawValues), end(rawValues));
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-			else
-			{
-				_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
-
-				return {};
+					return {};
+				}
 			}
 		}
 	}

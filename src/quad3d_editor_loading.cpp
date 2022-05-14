@@ -36,7 +36,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		string diffuseMapPath;
 		string emissionMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> quad3dId
@@ -118,7 +118,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		bool isBright;
 		bool hasAabb;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> quad3dId

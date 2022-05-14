@@ -34,7 +34,7 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 		int partCount;
 		int frameCount;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> animation3dId

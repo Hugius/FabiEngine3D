@@ -37,7 +37,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		string normalMapPath;
 		string heightMapPath;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> waterId
@@ -129,7 +129,7 @@ const bool WaterEditor::loadWatersFromFile()
 		bool isRefractive;
 		bool isEdged;
 
-		istringstream iss(line);
+		auto iss = istringstream(line);
 
 		iss
 			>> waterId

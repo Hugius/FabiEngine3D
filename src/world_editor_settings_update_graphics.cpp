@@ -639,6 +639,21 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("type")->setTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
+
+		switch(type)
+		{
+			case BloomType::EVERYTHING:
+			{
+				screen->getButton("type")->setTextContent("Type: EVERYTHING");
+
+				break;
+			}
+			case BloomType::PARTS:
+			{
+				screen->getButton("type")->setTextContent("Type: PARTS");
+
+				break;
+			}
+		}
 	}
 }

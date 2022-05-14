@@ -220,13 +220,20 @@ void MasterRenderer::captureBloom()
 {
 	if(_renderStorage->isBloomEnabled())
 	{
-		if(_renderStorage->getBloomType() == BloomType::EVERYTHING)
+		switch(_renderStorage->getBloomType())
 		{
-			_renderStorage->setBloomMap(_renderStorage->getPrimarySceneTextureBuffer());
-		}
-		else
-		{
-			_renderStorage->setBloomMap(_renderStorage->getSecondarySceneTextureBuffer());
+			case BloomType::EVERYTHING:
+			{
+				_renderStorage->setBloomMap(_renderStorage->getPrimarySceneTextureBuffer());
+
+				break;
+			}
+			case BloomType::PARTS:
+			{
+				_renderStorage->setBloomMap(_renderStorage->getSecondarySceneTextureBuffer());
+
+				break;
+			}
 		}
 
 		_bloomBlurRendererHighQuality->bind();

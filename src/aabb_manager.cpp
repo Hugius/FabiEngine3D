@@ -151,17 +151,26 @@ void AabbManager::update()
 
 					if(is90Degrees || is270Degrees)
 					{
-						if(rotationDirection == DirectionType::X)
+						switch(rotationDirection)
 						{
-							aabb->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
-						}
-						else if(rotationDirection == DirectionType::Y)
-						{
-							aabb->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
-						}
-						else if(rotationDirection == DirectionType::Z)
-						{
-							aabb->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+							case DirectionType::X:
+							{
+								aabb->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+
+								break;
+							}
+							case DirectionType::Y:
+							{
+								aabb->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+
+								break;
+							}
+							case DirectionType::Z:
+							{
+								aabb->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+
+								break;
+							}
 						}
 					}
 					else

@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_isGlobalVariableExisting(const string & variableI
 
 const shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string & variableId)
 {
-	auto iterator = _localVariables.at(_executionDepth).find(variableId);
+	const auto iterator = _localVariables.at(_executionDepth).find(variableId);
 
 	if(iterator != _localVariables.at(_executionDepth).end())
 	{
@@ -146,7 +146,7 @@ const shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const stri
 
 const shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string & variableId) const
 {
-	auto iterator = _globalVariables.find(variableId);
+	const auto iterator = _globalVariables.find(variableId);
 
 	if(iterator != _globalVariables.end())
 	{

@@ -4,7 +4,7 @@ using std::make_shared;
 
 const shared_ptr<Pointlight> PointlightManager::getPointlight(const string & pointlightId) const
 {
-	auto iterator = _pointlights.find(pointlightId);
+	const auto iterator = _pointlights.find(pointlightId);
 
 	if(iterator == _pointlights.end())
 	{
@@ -31,7 +31,7 @@ void PointlightManager::createPointlight(const string & pointlightId)
 		abort();
 	}
 
-	auto pointlight = make_shared<Pointlight>(pointlightId);
+	const auto pointlight = make_shared<Pointlight>(pointlightId);
 
 	_pointlights.insert({pointlightId, pointlight});
 }

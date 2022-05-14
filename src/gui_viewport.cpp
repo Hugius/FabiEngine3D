@@ -127,7 +127,7 @@ const unordered_map<string, shared_ptr<GuiWindow>> & GuiViewport::getWindows() c
 
 const shared_ptr<GuiWindow> GuiViewport::getWindow(const string & windowId) const
 {
-	auto iterator = _windows.find(windowId);
+	const auto iterator = _windows.find(windowId);
 
 	if(iterator == _windows.end())
 	{

@@ -12,7 +12,7 @@ Text2dManager::Text2dManager()
 
 const shared_ptr<Text2d> Text2dManager::getText2d(const string & text2dId) const
 {
-	auto iterator = _text2ds.find(text2dId);
+	const auto iterator = _text2ds.find(text2dId);
 
 	if(iterator == _text2ds.end())
 	{
@@ -38,7 +38,7 @@ void Text2dManager::createText2d(const string & text2dId, const string & fontMap
 
 	if(texture == nullptr)
 	{
-		auto image = _imageLoader->loadImage(fontMapPath);
+		const auto image = _imageLoader->loadImage(fontMapPath);
 
 		if(image == nullptr)
 		{
@@ -50,7 +50,7 @@ void Text2dManager::createText2d(const string & text2dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto text2d = make_shared<Text2d>(text2dId);
+	const auto text2d = make_shared<Text2d>(text2dId);
 
 	text2d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	text2d->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));

@@ -4,7 +4,7 @@ using std::make_shared;
 
 const shared_ptr<Spotlight> SpotlightManager::getSpotlight(const string & spotlightId) const
 {
-	auto iterator = _spotlights.find(spotlightId);
+	const auto iterator = _spotlights.find(spotlightId);
 
 	if(iterator == _spotlights.end())
 	{
@@ -31,7 +31,7 @@ void SpotlightManager::createSpotlight(const string & spotlightId)
 		abort();
 	}
 
-	auto spotlight = make_shared<Spotlight>(spotlightId);
+	const auto spotlight = make_shared<Spotlight>(spotlightId);
 
 	_spotlights.insert({spotlightId, spotlight});
 }

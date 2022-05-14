@@ -5,7 +5,7 @@ using std::make_shared;
 
 const shared_ptr<Water> WaterManager::getWater(const string & waterId) const
 {
-	auto iterator = _waters.find(waterId);
+	const auto iterator = _waters.find(waterId);
 
 	if(iterator == _waters.end())
 	{
@@ -47,7 +47,7 @@ void WaterManager::createWater(const string & waterId)
 		abort();
 	}
 
-	auto water = make_shared<Water>(waterId);
+	const auto water = make_shared<Water>(waterId);
 
 	_waters.insert({waterId, water});
 
@@ -93,9 +93,9 @@ const bool WaterManager::isWatersExisting() const
 
 void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 {
-	const float halfSize = (size * 0.5f);
+	const auto halfSize = (size * 0.5f);
 
-	const float lowQualityBufferData[] =
+	const float lowQualityBufferData[30] =
 	{
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
 		-halfSize, 0.0f, -halfSize, 0.0f, 0.0f,
@@ -105,7 +105,7 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
 	};
 
-	vector<float> highQualityBufferData;
+	vector<float> highQualityBufferData = {};
 	for(float x = -halfSize; x < halfSize; x++)
 	{
 		for(float z = -halfSize; z < halfSize; z++)
@@ -115,19 +115,16 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 			const float firstPositionZ = (z + 1);
 			const float firstUvX = ((x + halfSize) / size);
 			const float firstUvY = (((z + halfSize) / size) + (1.0f / size));
-
 			const float secondPositionX = (x + 1.0f);
 			const float secondPositionY = 0.0f;
 			const float secondPositionZ = (z + 1.0f);
 			const float secondUvX = (((x + halfSize) / size) + (1.0f / size));
 			const float secondUvY = (((z + halfSize) / size) + (1.0f / size));
-
 			const float thirdPositionX = (x + 1.0f);
 			const float thirdPositionY = 0.0f;
 			const float thirdPositionZ = z;
 			const float thirdUvX = (((x + halfSize) / size) + (1.0f / size));
 			const float thirdUvY = ((z + halfSize) / size);
-
 			const float fourthPositionX = x;
 			const float fourthPositionY = 0.0f;
 			const float fourthPositionZ = z;
@@ -139,31 +136,26 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 			highQualityBufferData.push_back(firstPositionZ);
 			highQualityBufferData.push_back(firstUvX);
 			highQualityBufferData.push_back(firstUvY);
-
 			highQualityBufferData.push_back(secondPositionX);
 			highQualityBufferData.push_back(secondPositionY);
 			highQualityBufferData.push_back(secondPositionZ);
 			highQualityBufferData.push_back(secondUvX);
 			highQualityBufferData.push_back(secondUvY);
-
 			highQualityBufferData.push_back(thirdPositionX);
 			highQualityBufferData.push_back(thirdPositionY);
 			highQualityBufferData.push_back(thirdPositionZ);
 			highQualityBufferData.push_back(thirdUvX);
 			highQualityBufferData.push_back(thirdUvY);
-
 			highQualityBufferData.push_back(thirdPositionX);
 			highQualityBufferData.push_back(thirdPositionY);
 			highQualityBufferData.push_back(thirdPositionZ);
 			highQualityBufferData.push_back(thirdUvX);
 			highQualityBufferData.push_back(thirdUvY);
-
 			highQualityBufferData.push_back(fourthPositionX);
 			highQualityBufferData.push_back(fourthPositionY);
 			highQualityBufferData.push_back(fourthPositionZ);
 			highQualityBufferData.push_back(fourthUvX);
 			highQualityBufferData.push_back(fourthUvY);
-
 			highQualityBufferData.push_back(firstPositionX);
 			highQualityBufferData.push_back(firstPositionY);
 			highQualityBufferData.push_back(firstPositionZ);
@@ -181,7 +173,7 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 
 void WaterManager::update()
 {
-	auto water = getSelectedWater();
+	const auto water = getSelectedWater();
 
 	if(water == nullptr)
 	{

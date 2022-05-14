@@ -12,7 +12,7 @@ Quad2dManager::Quad2dManager()
 
 const shared_ptr<Quad2d> Quad2dManager::getQuad2d(const string & quad2dId) const
 {
-	auto iterator = _quad2ds.find(quad2dId);
+	const auto iterator = _quad2ds.find(quad2dId);
 
 	if(iterator == _quad2ds.end())
 	{
@@ -34,7 +34,7 @@ void Quad2dManager::createQuad2d(const string & quad2dId, bool isCentered)
 		abort();
 	}
 
-	auto quad2d = make_shared<Quad2d>(quad2dId);
+	const auto quad2d = make_shared<Quad2d>(quad2dId);
 
 	quad2d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	quad2d->setCentered(isCentered);

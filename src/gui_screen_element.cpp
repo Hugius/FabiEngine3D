@@ -127,7 +127,7 @@ const bool GuiScreen::hasTextField(const string & textFieldId) const
 
 const shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string & scrollingListId) const
 {
-	auto iterator = _scrollingLists.find(scrollingListId);
+	const auto iterator = _scrollingLists.find(scrollingListId);
 
 	if(iterator == _scrollingLists.end())
 	{
@@ -139,7 +139,7 @@ const shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string & sc
 
 const shared_ptr<GuiInputBox> GuiScreen::getInputBox(const string & inputBoxId) const
 {
-	auto iterator = _inputBoxes.find(inputBoxId);
+	const auto iterator = _inputBoxes.find(inputBoxId);
 
 	if(iterator == _inputBoxes.end())
 	{
@@ -151,7 +151,7 @@ const shared_ptr<GuiInputBox> GuiScreen::getInputBox(const string & inputBoxId) 
 
 const shared_ptr<GuiButton> GuiScreen::getButton(const string & buttonId) const
 {
-	auto iterator = _buttons.find(buttonId);
+	const auto iterator = _buttons.find(buttonId);
 
 	if(iterator == _buttons.end())
 	{
@@ -163,7 +163,7 @@ const shared_ptr<GuiButton> GuiScreen::getButton(const string & buttonId) const
 
 const shared_ptr<GuiQuadField> GuiScreen::getQuadField(const string & quadFieldId) const
 {
-	auto iterator = _quadFields.find(quadFieldId);
+	const auto iterator = _quadFields.find(quadFieldId);
 
 	if(iterator == _quadFields.end())
 	{
@@ -175,7 +175,7 @@ const shared_ptr<GuiQuadField> GuiScreen::getQuadField(const string & quadFieldI
 
 const shared_ptr<GuiTextField> GuiScreen::getTextField(const string & textFieldId) const
 {
-	auto iterator = _textFields.find(textFieldId);
+	const auto iterator = _textFields.find(textFieldId);
 
 	if(iterator == _textFields.end())
 	{

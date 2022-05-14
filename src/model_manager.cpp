@@ -8,7 +8,7 @@ using std::map;
 
 const shared_ptr<Model> ModelManager::getModel(const string & modelId) const
 {
-	auto iterator = _models.find(modelId);
+	const auto iterator = _models.find(modelId);
 
 	if(iterator == _models.end())
 	{
@@ -60,14 +60,14 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 		abort();
 	}
 
-	auto mesh = _meshLoader->loadMesh(meshPath);
+	const auto mesh = _meshLoader->loadMesh(meshPath);
 
 	if(mesh == nullptr)
 	{
 		return;
 	}
 
-	auto model = make_shared<Model>(modelId);
+	const auto model = make_shared<Model>(modelId);
 
 	for(const auto & part : mesh->getParts())
 	{
@@ -185,7 +185,7 @@ void ModelManager::update()
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
-			map<float, shared_ptr<Captor>> orderedCaptors;
+			map<float, shared_ptr<Captor>> orderedCaptors = {};
 
 			for(const auto & [captorId, captor] : _captorManager->getCaptors())
 			{
@@ -215,7 +215,7 @@ void ModelManager::update()
 
 		if((_renderStorage->getCubeRefractionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeRefractionInterval()) == 0)
 		{
-			map<float, shared_ptr<Captor>> orderedCaptors;
+			map<float, shared_ptr<Captor>> orderedCaptors = {};
 
 			for(const auto & [captorId, captor] : _captorManager->getCaptors())
 			{

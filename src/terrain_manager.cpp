@@ -5,7 +5,7 @@ using std::min;
 
 const shared_ptr<Terrain> TerrainManager::getTerrain(const string & terrainId) const
 {
-	auto iterator = _terrains.find(terrainId);
+	const auto iterator = _terrains.find(terrainId);
 
 	if(iterator == _terrains.end())
 	{
@@ -37,15 +37,14 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 		abort();
 	}
 
-	auto image = _imageLoader->loadImage(heightMapPath);
+	const auto image = _imageLoader->loadImage(heightMapPath);
 
 	if(image == nullptr)
 	{
 		return;
 	}
 
-	auto terrain = make_shared<Terrain>(terrainId);
-
+	const auto terrain = make_shared<Terrain>(terrainId);
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_TERRAIN_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
 
@@ -126,21 +125,19 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 {
 	const auto halfSize = (size * 0.5f);
 
-	vector<fvec3> tempPositions;
-	vector<fvec2> tempUvs;
-	vector<fvec3> tempNormals;
+	vector<fvec3> tempPositions = {};
+	vector<fvec2> tempUvs = {};
+	vector<fvec3> tempNormals = {};
 	for(float z = 0.0f; z < size; z += 1.0f)
 	{
 		for(float x = 0.0f; x < size; x += 1.0f)
 		{
 			const auto flippedZ = (size - z);
-
 			const auto height = _getTerrainPixelHeight(x, flippedZ, size, maxHeight, pixels);
 			const auto leftHeight = _getTerrainPixelHeight((x - 1), flippedZ, size, maxHeight, pixels);
 			const auto rightHeight = _getTerrainPixelHeight((x + 1), flippedZ, size, maxHeight, pixels);
 			const auto upHeight = _getTerrainPixelHeight(x, (flippedZ + 1), size, maxHeight, pixels);
 			const auto downHeight = _getTerrainPixelHeight(x, (flippedZ - 1), size, maxHeight, pixels);
-
 			const auto position = fvec3((x - halfSize), height, (z - halfSize));
 			const auto uv = fvec2((x / size), (flippedZ / size));
 			const auto normal = Mathematics::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
@@ -151,63 +148,55 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 		}
 	}
 
-	vector<fvec3> positions;
-	vector<fvec2> uvs;
-	vector<fvec3> normals;
+	vector<fvec3> positions = {};
+	vector<fvec2> uvs = {};
+	vector<fvec3> normals = {};
 	for(int z = 0; z < (static_cast<int>(size) - 1); z++)
 	{
 		for(int x = 0; x < (static_cast<int>(size) - 1); x++)
 		{
-			auto topLeftIndex = ((z * static_cast<int>(size)) + x);
-			auto topRightIndex = (topLeftIndex + 1);
-			auto bottomLeftIndex = (((z + 1) * static_cast<int>(size)) + x);
-			auto bottomRightIndex = (bottomLeftIndex + 1);
+			const auto topLeftIndex = ((z * static_cast<int>(size)) + x);
+			const auto topRightIndex = (topLeftIndex + 1);
+			const auto bottomLeftIndex = (((z + 1) * static_cast<int>(size)) + x);
+			const auto bottomRightIndex = (bottomLeftIndex + 1);
 
 			positions.push_back(tempPositions[topLeftIndex]);
-			uvs.push_back(tempUvs[topLeftIndex]);
-			normals.push_back(tempNormals[topLeftIndex]);
-
 			positions.push_back(tempPositions[bottomLeftIndex]);
-			uvs.push_back(tempUvs[bottomLeftIndex]);
-			normals.push_back(tempNormals[bottomLeftIndex]);
-
 			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
-
 			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
-
 			positions.push_back(tempPositions[topRightIndex]);
-			uvs.push_back(tempUvs[topRightIndex]);
-			normals.push_back(tempNormals[topRightIndex]);
-
 			positions.push_back(tempPositions[topLeftIndex]);
+
 			uvs.push_back(tempUvs[topLeftIndex]);
+			uvs.push_back(tempUvs[bottomLeftIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			uvs.push_back(tempUvs[topRightIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
+
+			normals.push_back(tempNormals[topLeftIndex]);
+			normals.push_back(tempNormals[bottomLeftIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
+			normals.push_back(tempNormals[topRightIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
 
-	vector<fvec3> tangents;
+	vector<fvec3> tangents = {};
 	for(int index = 0; index < static_cast<int>(positions.size()); index += 3)
 	{
 		const auto pos1 = positions[index + 0];
 		const auto pos2 = positions[index + 1];
 		const auto pos3 = positions[index + 2];
-
 		const auto deltaPos1 = (pos2 - pos1);
 		const auto deltaPos2 = (pos3 - pos1);
-
 		const auto uv1 = uvs[index + 0];
 		const auto uv2 = uvs[index + 1];
 		const auto uv3 = uvs[index + 2];
-
 		const auto deltaUv1 = (uv2 - uv1);
 		const auto deltaUv2 = (uv3 - uv1);
-
 		const auto r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
-
 		const auto tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
 
 		tangents.push_back(tangent);
@@ -215,26 +204,23 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 		tangents.push_back(tangent);
 	}
 
-	vector<float> bufferData;
+	vector<float> bufferData = {};
 	for(int index = 0; index < static_cast<int>(positions.size()); index++)
 	{
 		bufferData.push_back(positions[index].x);
 		bufferData.push_back(positions[index].y);
 		bufferData.push_back(positions[index].z);
-
 		bufferData.push_back(uvs[index].x);
 		bufferData.push_back(uvs[index].y);
-
 		bufferData.push_back(normals[index].x);
 		bufferData.push_back(normals[index].y);
 		bufferData.push_back(normals[index].z);
-
 		bufferData.push_back(tangents[index].x);
 		bufferData.push_back(tangents[index].y);
 		bufferData.push_back(tangents[index].z);
 	}
 
-	auto bufferDataCount = static_cast<int>(bufferData.size());
+	const auto bufferDataCount = static_cast<int>(bufferData.size());
 
 	terrain->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }

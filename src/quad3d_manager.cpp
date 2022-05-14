@@ -46,7 +46,7 @@ void Quad3dManager::inject(shared_ptr<Camera> camera)
 
 const shared_ptr<Quad3d> Quad3dManager::getQuad3d(const string & quad3dId) const
 {
-	auto iterator = _quad3ds.find(quad3dId);
+	const auto iterator = _quad3ds.find(quad3dId);
 
 	if(iterator == _quad3ds.end())
 	{
@@ -68,7 +68,7 @@ void Quad3dManager::createQuad3d(const string & quad3dId, bool isCentered)
 		abort();
 	}
 
-	auto quad3d = make_shared<Quad3d>(quad3dId);
+	const auto quad3d = make_shared<Quad3d>(quad3dId);
 
 	quad3d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	quad3d->setCentered(isCentered);

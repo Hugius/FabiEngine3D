@@ -9,7 +9,7 @@ void Animation2dManager::createAnimation2d(const string & animation2dId)
 		abort();
 	}
 
-	auto animation2d = make_shared<Animation2d>(animation2dId);
+	const auto animation2d = make_shared<Animation2d>(animation2dId);
 
 	_animation2ds.insert({animation2dId, animation2d});
 }
@@ -41,7 +41,7 @@ const bool Animation2dManager::isAnimation2dsExisting() const
 
 const shared_ptr<Animation2d> Animation2dManager::getAnimation2d(const string & animation2dId) const
 {
-	auto iterator = _animation2ds.find(animation2dId);
+	const auto iterator = _animation2ds.find(animation2dId);
 
 	if(iterator == _animation2ds.end())
 	{

@@ -73,7 +73,7 @@ void AabbManager::inject(shared_ptr<Text3dManager> text3dManager)
 
 const shared_ptr<Aabb> AabbManager::getAabb(const string & aabbId) const
 {
-	auto iterator = _aabbs.find(aabbId);
+	const auto iterator = _aabbs.find(aabbId);
 
 	if(iterator == _aabbs.end())
 	{
@@ -95,7 +95,7 @@ void AabbManager::createAabb(const string & aabbId, bool isCentered)
 		abort();
 	}
 
-	auto aabb = make_shared<Aabb>(aabbId);
+	const auto aabb = make_shared<Aabb>(aabbId);
 
 	aabb->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	aabb->setCentered(isCentered);
@@ -122,8 +122,7 @@ void AabbManager::update()
 						abort();
 					}
 
-					auto parentModel = foundPair->second;
-
+					const auto parentModel = foundPair->second;
 					const auto newAabbSize = (aabb->getLocalSize() * parentModel->getBaseSize());
 					const auto parentRotation = parentModel->getBaseRotation();
 
@@ -145,10 +144,10 @@ void AabbManager::update()
 						rotation = parentRotation.z;
 					}
 
-					const bool is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
-					const bool is180Degrees = ((rotation >= 135.0f) && (rotation <= 225.0f));
-					const bool is270Degrees = ((rotation > 225.0f) && (rotation < 315.0f));
-					const float roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);
+					const auto is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
+					const auto is180Degrees = ((rotation >= 135.0f) && (rotation <= 225.0f));
+					const auto is270Degrees = ((rotation > 225.0f) && (rotation < 315.0f));
+					const auto roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);
 
 					if(is90Degrees || is270Degrees)
 					{
@@ -172,7 +171,8 @@ void AabbManager::update()
 
 					if((roundedRotation == 0.0f) || aabb->isCentered())
 					{
-						const fvec3 localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
+						const auto localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
+
 						aabb->setBasePosition(parentModel->getBasePosition() + localPosition);
 					}
 					else
@@ -184,7 +184,8 @@ void AabbManager::update()
 						}
 						else
 						{
-							const fvec3 offset = fvec3(0.0f, (aabb->getLocalSize().y * 0.5f), 0.0f);
+							const auto offset = fvec3(0.0f, (aabb->getLocalSize().y * 0.5f), 0.0f);
+
 							localPosition = (aabb->getLocalPosition() + offset) * parentModel->getBaseSize();
 						}
 
@@ -207,7 +208,9 @@ void AabbManager::update()
 						}
 
 						auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
+
 						rotatedLocalPosition += rotationOffset;
+
 						aabb->setBasePosition(parentModel->getBasePosition() + rotatedLocalPosition);
 					}
 
@@ -229,15 +232,14 @@ void AabbManager::update()
 						abort();
 					}
 
-					auto parentQuad3d = foundPair->second;
-
+					const auto parentQuad3d = foundPair->second;
 					const auto parentPosition = parentQuad3d->getPosition();
 					const auto parentRotation = parentQuad3d->getRotation();
 					const auto parentSize = parentQuad3d->getSize();
 
-					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
+					auto refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
+					auto refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
+					auto refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
 					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
 					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
@@ -247,6 +249,7 @@ void AabbManager::update()
 					{
 						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
 						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
+
 						newAabbSize.x = max(MIN_SIZE, parentSize.x);
 						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
 						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
@@ -255,6 +258,7 @@ void AabbManager::update()
 					{
 						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
 						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
+
 						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
 						newAabbSize.y = max(MIN_SIZE, parentSize.y);
 						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
@@ -263,6 +267,7 @@ void AabbManager::update()
 					{
 						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
 						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
+
 						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
 						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
 						newAabbSize.z = MIN_SIZE;
@@ -275,6 +280,7 @@ void AabbManager::update()
 					}
 
 					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
+
 					if(!aabb->isCentered())
 					{
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
@@ -301,8 +307,7 @@ void AabbManager::update()
 						abort();
 					}
 
-					auto parentText3d = foundPair->second;
-
+					const auto parentText3d = foundPair->second;
 					const auto parentPosition = parentText3d->getPosition();
 					const auto parentRotation = parentText3d->getRotation();
 					const auto parentSize = parentText3d->getSize();
@@ -319,6 +324,7 @@ void AabbManager::update()
 					{
 						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
 						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
+
 						newAabbSize.x = max(MIN_SIZE, parentSize.x);
 						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
 						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
@@ -327,6 +333,7 @@ void AabbManager::update()
 					{
 						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
 						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
+
 						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
 						newAabbSize.y = max(MIN_SIZE, parentSize.y);
 						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
@@ -335,6 +342,7 @@ void AabbManager::update()
 					{
 						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
 						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
+
 						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
 						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
 						newAabbSize.z = MIN_SIZE;
@@ -347,6 +355,7 @@ void AabbManager::update()
 					}
 
 					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
+
 					if(!aabb->isCentered())
 					{
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);

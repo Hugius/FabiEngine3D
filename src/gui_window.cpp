@@ -150,7 +150,7 @@ const shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 
 const shared_ptr<GuiScreen> GuiWindow::getScreen(const string & screenId) const
 {
-	auto iterator = _screens.find(screenId);
+	const auto iterator = _screens.find(screenId);
 
 	if(iterator == _screens.end())
 	{

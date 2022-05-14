@@ -34,20 +34,20 @@ void Sound3dManager::createSound3d(const string & sound3dId, const string & audi
 		abort();
 	}
 
-	auto audio = _audioLoader->loadAudio(audioPath);
+	const auto audio = _audioLoader->loadAudio(audioPath);
 
 	if(audio == nullptr)
 	{
 		return;
 	}
 
-	auto sound3d = make_shared<Sound3d>(sound3dId);
+	const auto sound3d = make_shared<Sound3d>(sound3dId);
 
 	auto waveBuffer = _waveBufferCache->getBuffer(audioPath);
 
 	if(waveBuffer == nullptr)
 	{
-		auto audio = _audioLoader->loadAudio(audioPath);
+		const auto audio = _audioLoader->loadAudio(audioPath);
 
 		if(audio == nullptr)
 		{
@@ -82,7 +82,7 @@ const unordered_map<string, shared_ptr<Sound3d>> & Sound3dManager::getSound3ds()
 
 const shared_ptr<Sound3d> Sound3dManager::getSound3d(const string & sound3dId) const
 {
-	auto iterator = _sound3ds.find(sound3dId);
+	const auto iterator = _sound3ds.find(sound3dId);
 
 	if(iterator == _sound3ds.end())
 	{

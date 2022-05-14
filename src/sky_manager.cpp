@@ -65,7 +65,7 @@ void SkyManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 const shared_ptr<Sky> SkyManager::getSky(const string & skyId) const
 {
-	auto iterator = _skies.find(skyId);
+	const auto iterator = _skies.find(skyId);
 
 	if(iterator == _skies.end())
 	{
@@ -107,7 +107,7 @@ void SkyManager::createSky(const string & skyId)
 		abort();
 	}
 
-	auto sky = make_shared<Sky>(skyId);
+	const auto sky = make_shared<Sky>(skyId);
 
 	sky->setVertexBuffer(_vertexBuffer);
 
@@ -116,7 +116,7 @@ void SkyManager::createSky(const string & skyId)
 
 void SkyManager::update()
 {
-	auto sky = getSelectedSky();
+	const auto sky = getSelectedSky();
 
 	if(sky != nullptr)
 	{

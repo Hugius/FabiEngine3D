@@ -56,7 +56,7 @@ void Text3dManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
 
 const shared_ptr<Text3d> Text3dManager::getText3d(const string & text3dId) const
 {
-	auto iterator = _text3ds.find(text3dId);
+	const auto iterator = _text3ds.find(text3dId);
 
 	if(iterator == _text3ds.end())
 	{
@@ -82,7 +82,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 
 	if(texture == nullptr)
 	{
-		auto image = _imageLoader->loadImage(fontMapPath);
+		const auto image = _imageLoader->loadImage(fontMapPath);
 
 		if(image == nullptr)
 		{
@@ -96,7 +96,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
 
-	auto text3d = make_shared<Text3d>(text3dId);
+	const auto text3d = make_shared<Text3d>(text3dId);
 
 	text3d->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	text3d->setCentered(isCentered);
@@ -115,13 +115,13 @@ void Text3dManager::update()
 
 		if(text3d->isFacingCameraHorizontally() || text3d->isFacingCameraVertically())
 		{
-			auto position = (text3d->getPosition() + fvec3(0.0f, (text3d->getSize().y * 0.5f), 0.0f));
-			auto direction = (position - _camera->getPosition());
-
-			auto degreesX = Mathematics::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
-			auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
+			const auto position = (text3d->getPosition() + fvec3(0.0f, (text3d->getSize().y * 0.5f), 0.0f));
+			const auto direction = (position - _camera->getPosition());
+			const auto degreesX = Mathematics::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
+			const auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
 
 			auto rotation = text3d->getRotation();
+
 			rotation.x = (degreesX * static_cast<float>(text3d->isFacingCameraHorizontally()));
 			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(text3d->isFacingCameraVertically()));
 

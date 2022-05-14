@@ -34,20 +34,20 @@ void Sound2dManager::createSound2d(const string & sound2dId, const string & audi
 		abort();
 	}
 
-	auto audio = _audioLoader->loadAudio(audioPath);
+	const auto audio = _audioLoader->loadAudio(audioPath);
 
 	if(audio == nullptr)
 	{
 		return;
 	}
 
-	auto sound2d = make_shared<Sound2d>(sound2dId);
+	const auto sound2d = make_shared<Sound2d>(sound2dId);
 
 	auto waveBuffer = _waveBufferCache->getBuffer(audioPath);
 
 	if(waveBuffer == nullptr)
 	{
-		auto audio = _audioLoader->loadAudio(audioPath);
+		const auto audio = _audioLoader->loadAudio(audioPath);
 
 		if(audio == nullptr)
 		{
@@ -82,7 +82,7 @@ const unordered_map<string, shared_ptr<Sound2d>> & Sound2dManager::getSound2ds()
 
 const shared_ptr<Sound2d> Sound2dManager::getSound2d(const string & sound2dId) const
 {
-	auto iterator = _sound2ds.find(sound2dId);
+	const auto iterator = _sound2ds.find(sound2dId);
 
 	if(iterator == _sound2ds.end())
 	{

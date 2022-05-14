@@ -9,7 +9,7 @@ void Animation3dManager::createAnimation3d(const string & animation3dId)
 		abort();
 	}
 
-	auto animation3d = make_shared<Animation3d>(animation3dId);
+	const auto animation3d = make_shared<Animation3d>(animation3dId);
 
 	_animation3ds.insert({animation3dId, animation3d});
 }
@@ -41,7 +41,7 @@ const bool Animation3dManager::isAnimation3dsExisting() const
 
 const shared_ptr<Animation3d> Animation3dManager::getAnimation3d(const string & animation3dId) const
 {
-	auto iterator = _animation3ds.find(animation3dId);
+	const auto iterator = _animation3ds.find(animation3dId);
 
 	if(iterator == _animation3ds.end())
 	{

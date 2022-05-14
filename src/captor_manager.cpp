@@ -4,7 +4,7 @@ using std::make_shared;
 
 const shared_ptr<Captor> CaptorManager::getCaptor(const string & captorId) const
 {
-	auto iterator = _captors.find(captorId);
+	const auto iterator = _captors.find(captorId);
 
 	if(iterator == _captors.end())
 	{
@@ -26,7 +26,7 @@ void CaptorManager::createCaptor(const string & captorId)
 		abort();
 	}
 
-	auto captor = make_shared<Captor>(captorId);
+	const auto captor = make_shared<Captor>(captorId);
 
 	_captors.insert({captorId, captor});
 }

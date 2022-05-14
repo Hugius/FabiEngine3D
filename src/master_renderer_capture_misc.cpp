@@ -164,27 +164,20 @@ void MasterRenderer::captureMotionBlur()
 	{
 		const auto difference = (_renderStorage->getMotionBlurDifference() * _renderStorage->getMotionBlurIntensity());
 
-		bool hasMoved = false;
-		BlurDirectionType direction;
-
 		if(difference.x != 0.0f || difference.y != 0.0f)
 		{
+			BlurDirectionType direction;
 			if(difference.x >= difference.y)
 			{
-				hasMoved = true;
 				direction = BlurDirectionType::HORIZONTAL;
 				_renderStorage->setMotionBlurMixValue(difference.x);
 			}
 			else
 			{
-				hasMoved = true;
 				direction = BlurDirectionType::VERTICAL;
 				_renderStorage->setMotionBlurMixValue(difference.y);
 			}
-		}
 
-		if(hasMoved)
-		{
 			_motionBlurBlurRenderer->bind();
 			_renderStorage->setMotionBlurMap(_motionBlurBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneTextureBuffer(), 5, 1.0f, direction));
 			_motionBlurBlurRenderer->unbind();

@@ -40,6 +40,7 @@ MasterRenderer::MasterRenderer()
 	_motionBlurBlurRenderer = make_unique<BlurRenderer>();
 
 	_renderSurface = make_shared<Quad2d>("renderQuad");
+
 	_renderSurface->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	_renderSurface->setCentered(true);
 
@@ -115,6 +116,7 @@ void MasterRenderer::_updateSkyExposure()
 	{
 		const auto pitch = max(0.0f, _camera->getPitch());
 		const auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderStorage->getSkyExposureIntensity());
+
 		auto lightness = _renderStorage->getSkyExposureLightness();
 
 		if(lightness > targetLightness)
@@ -178,7 +180,6 @@ void MasterRenderer::_updateShadows()
 			const auto topY = (_renderStorage->getShadowSize() * 0.5f);
 			const auto nearZ = 0.01f;
 			const auto farZ = Mathematics::calculateDistance(fvec3(_renderStorage->getShadowSize()), fvec3(0.0f));
-
 			const auto viewMatrix = Mathematics::createViewMatrix(_renderStorage->getShadowPosition(), _renderStorage->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
 			const auto projectionMatrix = Mathematics::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
 
@@ -198,6 +199,7 @@ void MasterRenderer::_updateMotionBlur()
 		fvec2 difference;
 		difference.x = fabsf(Mathematics::calculateReferenceAngle(_camera->getYaw()) - Mathematics::calculateReferenceAngle(lastYaw));
 		difference.y = fabsf(Mathematics::calculateReferenceAngle(_camera->getPitch()) - Mathematics::calculateReferenceAngle(lastPitch));
+
 		_renderStorage->setMotionBlurDifference(difference);
 
 		lastYaw = _camera->getYaw();
@@ -219,7 +221,7 @@ void MasterRenderer::_updateLensFlare()
 			return;
 		}
 
-		float opacity = 0.0f;
+		float opacity;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
 			const auto distance = (Mathematics::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderStorage->getLensFlareSensitivity());

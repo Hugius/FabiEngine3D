@@ -16,9 +16,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	_quad2dColorRenderer->bind();
-
 	_quad2dColorRenderer->render(quad2d);
-
 	_quad2dColorRenderer->unbind();
 
 	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
@@ -27,8 +25,11 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size)
 void MasterRenderer::render3d()
 {
 	_worldColorCaptureBuffer->bind();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	_renderStorage->setTriangleCountingEnabled(true);
+
 	_renderSky();
 	_renderTerrain();
 	_renderWater();
@@ -39,8 +40,11 @@ void MasterRenderer::render3d()
 	_renderTransparentModels();
 	_renderTransparentQuad3ds();
 	_renderTransparentText3ds();
+
 	_renderStorage->setTriangleCountingEnabled(false);
+
 	_worldColorCaptureBuffer->unbind();
+
 	_renderStorage->setPrimarySceneMap(_worldColorCaptureBuffer->getTexture(0));
 	_renderStorage->setSecondarySceneMap(_worldColorCaptureBuffer->getTexture(1));
 	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneTextureBuffer());
@@ -49,12 +53,17 @@ void MasterRenderer::render3d()
 void MasterRenderer::render2d()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	glViewport(Configuration::getInst().getDisplayPosition().x, Configuration::getInst().getDisplayPosition().y, Configuration::getInst().getDisplaySize().x, Configuration::getInst().getDisplaySize().y);
+
 	_renderFinalScene();
+
 	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
 
 	_renderStorage->setTriangleCountingEnabled(true);
+
 	_renderGUI();
+
 	_renderStorage->setTriangleCountingEnabled(false);
 }
 
@@ -63,9 +72,7 @@ void MasterRenderer::_renderSky()
 	if(_skyManager->getSelectedSky() != nullptr)
 	{
 		_skyColorRenderer->bind();
-
 		_skyColorRenderer->render(_skyManager->getSelectedSky());
-
 		_skyColorRenderer->unbind();
 	}
 }
@@ -75,13 +82,9 @@ void MasterRenderer::_renderTerrain()
 	if(_terrainManager->getSelectedTerrain() != nullptr)
 	{
 		_terrainColorRenderer->bind();
-
 		_terrainColorRenderer->processPointlights(_pointlightManager->getPointlights());
-
 		_terrainColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
-
 		_terrainColorRenderer->render(_terrainManager->getSelectedTerrain());
-
 		_terrainColorRenderer->unbind();
 	}
 }
@@ -91,13 +94,9 @@ void MasterRenderer::_renderWater()
 	if(_waterManager->getSelectedWater() != nullptr)
 	{
 		_waterColorRenderer->bind();
-
 		_waterColorRenderer->processPointlights(_pointlightManager->getPointlights());
-
 		_waterColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
-
 		_waterColorRenderer->render(_waterManager->getSelectedWater());
-
 		_waterColorRenderer->unbind();
 	}
 }
@@ -107,9 +106,7 @@ void MasterRenderer::_renderOpaqueModels()
 	if(!_modelManager->getModels().empty())
 	{
 		_modelColorRenderer->bind();
-
 		_modelColorRenderer->processPointlights(_pointlightManager->getPointlights());
-
 		_modelColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
 		for(const auto & [modelId, model] : _modelManager->getModels())
@@ -166,9 +163,7 @@ void MasterRenderer::_renderTransparentModels()
 	if(!_modelManager->getModels().empty())
 	{
 		_modelColorRenderer->bind();
-
 		_modelColorRenderer->processPointlights(_pointlightManager->getPointlights());
-
 		_modelColorRenderer->processSpotlights(_spotlightManager->getSpotlights());
 
 		for(const auto & [modelId, model] : _modelManager->getModels())

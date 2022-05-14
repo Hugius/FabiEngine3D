@@ -37,6 +37,8 @@ public:
 	const bool isVsyncEnabled() const;
 
 private:
+	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+
 	static inline constexpr int MAX_TITLE_LENGTH = 100;
 
 	shared_ptr<InputHandler> _inputHandler = nullptr;

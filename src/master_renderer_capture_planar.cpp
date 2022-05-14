@@ -2,7 +2,7 @@
 
 void MasterRenderer::capturePlanarReflections()
 {
-	vector<shared_ptr<Model>> reflectiveModels;
+	vector<shared_ptr<Model>> reflectiveModels = {};
 
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
@@ -13,6 +13,7 @@ void MasterRenderer::capturePlanarReflections()
 				if(model->getReflectionType(partId) == ReflectionType::PLANAR)
 				{
 					model->setVisible(false);
+
 					reflectiveModels.push_back(model);
 
 					break;
@@ -32,33 +33,40 @@ void MasterRenderer::capturePlanarReflections()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<shared_ptr<Model>> savedModels;
+	vector<shared_ptr<Model>> savedModels = {};
+
 	savedModels.insert(savedModels.end(), reflectiveModels.begin(), reflectiveModels.end());
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
 			model->setVisible(false);
+
 			savedModels.push_back(model);
 		}
 	}
 
-	vector<shared_ptr<Quad3d>> savedQuad3ds;
+	vector<shared_ptr<Quad3d>> savedQuad3ds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3ds.push_back(quad3d);
 		}
 	}
 
-	vector<shared_ptr<Text3d>> savedText3ds;
+	vector<shared_ptr<Text3d>> savedText3ds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3ds.push_back(text3d);
 		}
 	}
@@ -118,7 +126,7 @@ void MasterRenderer::capturePlanarReflections()
 
 void MasterRenderer::capturePlanarRefractions()
 {
-	vector<shared_ptr<Model>> refractiveModels;
+	vector<shared_ptr<Model>> refractiveModels = {};
 
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
@@ -129,6 +137,7 @@ void MasterRenderer::capturePlanarRefractions()
 				if(model->getRefractionType(partId) == RefractionType::PLANAR)
 				{
 					model->setVisible(false);
+
 					refractiveModels.push_back(model);
 
 					break;
@@ -148,33 +157,40 @@ void MasterRenderer::capturePlanarRefractions()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<shared_ptr<Model>> savedModels;
+	vector<shared_ptr<Model>> savedModels = {};
+
 	savedModels.insert(savedModels.end(), refractiveModels.begin(), refractiveModels.end());
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isRefracted() && model->isVisible())
 		{
 			model->setVisible(false);
+
 			savedModels.push_back(model);
 		}
 	}
 
-	vector<shared_ptr<Quad3d>> savedQuad3ds;
+	vector<shared_ptr<Quad3d>> savedQuad3ds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isRefracted() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3ds.push_back(quad3d);
 		}
 	}
 
-	vector<shared_ptr<Text3d>> savedText3ds;
+	vector<shared_ptr<Text3d>> savedText3ds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isRefracted() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3ds.push_back(text3d);
 		}
 	}

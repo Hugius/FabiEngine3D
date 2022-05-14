@@ -18,7 +18,7 @@ void Animation2dPlayer::inject(shared_ptr<Quad2dManager> quad2dManager)
 
 const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimation2dIds() const
 {
-	vector<pair<string, string>> result;
+	vector<pair<string, string>> result = {};
 
 	for(const auto & [mergedId, startedAnimation2d] : _startedQuad3dAnimation2ds)
 	{
@@ -32,7 +32,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimation2
 
 const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimation2dIds() const
 {
-	vector<pair<string, string>> result;
+	vector<pair<string, string>> result = {};
 
 	for(const auto & [mergedId, startedAnimation2d] : _startedQuad2dAnimation2ds)
 	{

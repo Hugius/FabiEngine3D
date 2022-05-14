@@ -22,7 +22,8 @@ void MasterRenderer::captureWaterReflections()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<string> savedModelIds;
+	vector<string> savedModelIds = {};
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isVisible())
@@ -33,7 +34,9 @@ void MasterRenderer::captureWaterReflections()
 		if(!model->isReflected())
 		{
 			model->setVisible(false);
+
 			savedModelIds.push_back(model->getId());
+
 			continue;
 		}
 
@@ -42,6 +45,7 @@ void MasterRenderer::captureWaterReflections()
 			if(model->isReflective(partId) && (model->getReflectionType(partId) == ReflectionType::PLANAR))
 			{
 				model->setVisible(false);
+
 				savedModelIds.push_back(model->getId());
 
 				break;
@@ -49,22 +53,26 @@ void MasterRenderer::captureWaterReflections()
 		}
 	}
 
-	vector<string> savedQuad3dIds;
+	vector<string> savedQuad3dIds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3dIds.push_back(quad3d->getId());
 		}
 	}
 
-	vector<string> savedText3dIds;
+	vector<string> savedText3dIds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3dIds.push_back(text3d->getId());
 		}
 	}
@@ -161,7 +169,8 @@ void MasterRenderer::captureWaterRefractions()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<string> savedModelIds;
+	vector<string> savedModelIds = {};
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isVisible())
@@ -172,6 +181,7 @@ void MasterRenderer::captureWaterRefractions()
 		if(!model->isRefracted())
 		{
 			model->setVisible(false);
+
 			savedModelIds.push_back(model->getId());
 
 			continue;
@@ -182,6 +192,7 @@ void MasterRenderer::captureWaterRefractions()
 			if(model->isRefractive(partId) && (model->getRefractionType(partId) == RefractionType::PLANAR))
 			{
 				model->setVisible(false);
+
 				savedModelIds.push_back(model->getId());
 
 				break;
@@ -189,22 +200,26 @@ void MasterRenderer::captureWaterRefractions()
 		}
 	}
 
-	vector<string> savedQuad3dIds;
+	vector<string> savedQuad3dIds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isRefracted() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3dIds.push_back(quad3d->getId());
 		}
 	}
 
-	vector<string> savedText3dIds;
+	vector<string> savedText3dIds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isRefracted() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3dIds.push_back(text3d->getId());
 		}
 	}
@@ -281,9 +296,7 @@ void MasterRenderer::captureWaterEdges()
 		if(_terrainManager->getSelectedTerrain() != nullptr)
 		{
 			_terrainDepthRenderer->bind();
-
 			_terrainDepthRenderer->render(_terrainManager->getSelectedTerrain());
-
 			_terrainDepthRenderer->unbind();
 		}
 

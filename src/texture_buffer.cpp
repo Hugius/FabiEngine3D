@@ -12,6 +12,7 @@ TextureBuffer::TextureBuffer(unsigned int tboId)
 TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 {
 	glGenTextures(1, &_tboId);
+
 	glBindTexture(GL_TEXTURE_2D, _tboId);
 
 	if(image->getBitsPerPixel() == 24)
@@ -38,6 +39,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, _tboId);
 
 	int imageSize = 1;
+
 	for(const auto & image : images)
 	{
 		if(image != nullptr)

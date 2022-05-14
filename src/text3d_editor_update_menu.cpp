@@ -34,7 +34,7 @@ void Text3dEditor::_updateMainMenu()
 				text3dId = text3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteText3d", "Delete Text3D", fvec2(-0.5f, 0.1f), text3dIds);;
+			_gui->getOverlay()->openChoiceForm("deleteText3d", "Delete Text3D", fvec2(-0.5f, 0.1f), text3dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

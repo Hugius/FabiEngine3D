@@ -9,9 +9,10 @@ void MasterRenderer::setBackgroundColor(const fvec3 & color)
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
-/* https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine */
 const string MasterRenderer::getCpuName() const
 {
+	/* https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine */
+
 	int CPUInfo[4];
 	char model[48];
 
@@ -22,14 +23,15 @@ const string MasterRenderer::getCpuName() const
 	__cpuid(CPUInfo, 0x80000004);
 	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
 
-	string nameString;
+	string nameString = "";
 	for(int index = 0; index < 48; index++)
 	{
 		nameString.push_back(model[index]);
 	}
 
-	string result;
 	reverse(nameString.begin(), nameString.end());
+
+	string result;
 	for(int index = 0; index < static_cast<int>(nameString.size()); index++)
 	{
 		if(nameString[index] != 0)
@@ -41,6 +43,7 @@ const string MasterRenderer::getCpuName() const
 	}
 
 	reverse(result.begin(), result.end());
+
 	return result;
 }
 

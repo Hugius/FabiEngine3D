@@ -2,7 +2,7 @@
 
 const fvec3 Mathematics::calculateCrossProduct(const fvec3 & firstVector, const fvec3 & secondVector)
 {
-	fvec3 result;
+	fvec3 result = {};
 
 	result.x = ((firstVector.y * secondVector.z) - (firstVector.z * secondVector.y));
 	result.y = ((firstVector.z * secondVector.x) - (firstVector.x * secondVector.z));

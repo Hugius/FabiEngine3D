@@ -85,6 +85,7 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 RenderWindow::RenderWindow()
 {
 	WNDCLASS windowClass = {};
+
 	windowClass.lpfnWndProc = processWindowMessage;
 	windowClass.hInstance = GetModuleHandle(NULL);
 	windowClass.lpszClassName = "RenderWindow";
@@ -104,7 +105,7 @@ RenderWindow::RenderWindow()
 
 	SetCursor(LoadCursor(nullptr, IDC_ARROW));
 
-	auto glewStatus = glewInit();
+	const auto glewStatus = glewInit();
 
 	if(glewStatus != GLEW_OK)
 	{
@@ -247,7 +248,7 @@ void RenderWindow::setKeyingColor(const fvec3 & value)
 		abort();
 	}
 
-	SetLayeredWindowAttributes(_windowHandle, RGB(static_cast<int>(value.r * 255.0f), static_cast<int>(value.g * 255.0f), static_cast<int>(value.b * 255.0f)), 0, LWA_COLORKEY);
+	SetLayeredWindowAttributes(_windowHandle, RGB(static_cast<int>(value.r * COLOR_MULTIPLIER), static_cast<int>(value.g * COLOR_MULTIPLIER), static_cast<int>(value.b * COLOR_MULTIPLIER)), 0, LWA_COLORKEY);
 }
 
 void RenderWindow::setTitle(const string & value)
@@ -338,7 +339,7 @@ const ivec2 RenderWindow::getPosition() const
 		abort();
 	}
 
-	RECT rectangle;
+	RECT rectangle = {};
 
 	GetWindowRect(GetDesktopWindow(), &rectangle);
 
@@ -352,7 +353,7 @@ const ivec2 RenderWindow::getSize() const
 		abort();
 	}
 
-	RECT rectangle;
+	RECT rectangle = {};
 
 	GetWindowRect(GetDesktopWindow(), &rectangle);
 

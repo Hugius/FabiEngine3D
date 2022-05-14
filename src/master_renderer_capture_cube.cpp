@@ -9,32 +9,38 @@ void MasterRenderer::captureCubeReflections()
 		return;
 	}
 
-	vector<shared_ptr<Model>> savedModels;
+	vector<shared_ptr<Model>> savedModels = {};
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isReflected() && model->isVisible())
 		{
 			model->setVisible(false);
+
 			savedModels.push_back(model);
 		}
 	}
 
-	vector<shared_ptr<Quad3d>> savedQuad3ds;
+	vector<shared_ptr<Quad3d>> savedQuad3ds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3ds.push_back(quad3d);
 		}
 	}
 
-	vector<shared_ptr<Text3d>> savedText3ds;
+	vector<shared_ptr<Text3d>> savedText3ds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isReflected() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3ds.push_back(text3d);
 		}
 	}
@@ -61,6 +67,7 @@ void MasterRenderer::captureCubeReflections()
 		if(captor->mustCaptureReflections())
 		{
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
+
 			if(!captor->getExceptionId().empty())
 			{
 				_modelManager->getModel(captor->getExceptionId())->setVisible(false);
@@ -69,13 +76,17 @@ void MasterRenderer::captureCubeReflections()
 			_camera->setPosition(captor->getPosition());
 
 			unsigned int textureId;
+
 			glGenTextures(1, &textureId);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 			for(int index = 0; index < 6; index++)
@@ -134,7 +145,9 @@ void MasterRenderer::captureCubeReflections()
 				captureWaterEdges();
 
 				_cubeReflectionCaptureBuffer->bind();
+
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 				_renderSky();
 				_renderTerrain();
 				_renderWater();
@@ -145,17 +158,24 @@ void MasterRenderer::captureCubeReflections()
 				_renderTransparentModels();
 				_renderTransparentQuad3ds();
 				_renderTransparentText3ds();
+
 				_cubeReflectionCaptureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
-				auto data = new unsigned char[dataSize];
+				const auto data = new unsigned char[dataSize];
+
 				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getTboId());
+
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;
@@ -209,32 +229,38 @@ void MasterRenderer::captureCubeRefractions()
 		return;
 	}
 
-	vector<shared_ptr<Model>> savedModels;
+	vector<shared_ptr<Model>> savedModels = {};
+
 	for(const auto & [modelId, model] : _modelManager->getModels())
 	{
 		if(!model->isRefracted() && model->isVisible())
 		{
 			model->setVisible(false);
+
 			savedModels.push_back(model);
 		}
 	}
 
-	vector<shared_ptr<Quad3d>> savedQuad3ds;
+	vector<shared_ptr<Quad3d>> savedQuad3ds = {};
+
 	for(const auto & [quad3dId, quad3d] : _quad3dManager->getQuad3ds())
 	{
 		if(!quad3d->isRefracted() && quad3d->isVisible())
 		{
 			quad3d->setVisible(false);
+
 			savedQuad3ds.push_back(quad3d);
 		}
 	}
 
-	vector<shared_ptr<Text3d>> savedText3ds;
+	vector<shared_ptr<Text3d>> savedText3ds = {};
+
 	for(const auto & [text3dId, text3d] : _text3dManager->getText3ds())
 	{
 		if(!text3d->isRefracted() && text3d->isVisible())
 		{
 			text3d->setVisible(false);
+
 			savedText3ds.push_back(text3d);
 		}
 	}
@@ -261,6 +287,7 @@ void MasterRenderer::captureCubeRefractions()
 		if(captor->mustCaptureRefractions())
 		{
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
+
 			if(!captor->getExceptionId().empty())
 			{
 				_modelManager->getModel(captor->getExceptionId())->setVisible(false);
@@ -269,13 +296,17 @@ void MasterRenderer::captureCubeRefractions()
 			_camera->setPosition(captor->getPosition());
 
 			unsigned int textureId;
+
 			glGenTextures(1, &textureId);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 			for(int index = 0; index < 6; index++)
@@ -334,7 +365,9 @@ void MasterRenderer::captureCubeRefractions()
 				captureWaterEdges();
 
 				_cubeRefractionCaptureBuffer->bind();
+
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 				_renderSky();
 				_renderTerrain();
 				_renderWater();
@@ -345,17 +378,24 @@ void MasterRenderer::captureCubeRefractions()
 				_renderTransparentModels();
 				_renderTransparentQuad3ds();
 				_renderTransparentText3ds();
+
 				_cubeRefractionCaptureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeRefractionQuality() * _renderStorage->getCubeRefractionQuality() * 3);
-				auto data = new unsigned char[dataSize];
+				const auto data = new unsigned char[dataSize];
+
 				glBindTexture(GL_TEXTURE_2D, _cubeRefractionCaptureBuffer->getTexture(0)->getTboId());
+
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeRefractionQuality(), _renderStorage->getCubeRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;

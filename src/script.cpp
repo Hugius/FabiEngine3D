@@ -95,7 +95,7 @@ const vector<string> Script::getScriptFileIds() const
 
 const unordered_map<string, int> Script::findKeyword(const string & keyword) const
 {
-	unordered_map<string, int> result;
+	unordered_map<string, int> result = {};
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{

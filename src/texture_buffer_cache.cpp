@@ -16,7 +16,6 @@ void TextureBufferCache::store2dBuffer(const string & filePath, shared_ptr<Textu
 void TextureBufferCache::store3dBuffer(const array<string, 6> & filePaths, shared_ptr<TextureBuffer> buffer)
 {
 	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
-
 	const auto cacheIterator = _3dBuffers.find(mergedId);
 
 	if(cacheIterator != _3dBuffers.end())
@@ -74,7 +73,6 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string & f
 const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<string, 6> & filePaths) const
 {
 	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
-
 	const auto cacheIterator = _3dBuffers.find(mergedId);
 
 	if(cacheIterator != _3dBuffers.end())
@@ -109,7 +107,7 @@ const vector<string> TextureBufferCache::get2dFilePaths() const
 
 const vector<array<string, 6>> TextureBufferCache::get3dFilePaths() const
 {
-	vector<array<string, 6>> result;
+	vector<array<string, 6>> result = {};
 
 	for(const auto & [mergedId, buffer] : _3dBuffers)
 	{

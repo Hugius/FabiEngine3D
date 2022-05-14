@@ -26,21 +26,25 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	const auto shaderName = vertexFileName.substr(0, vertexFileName.size() - 5);
 
 	auto vertexFile = ifstream(rootPath + vertexPath);
+
 	if(!vertexFile)
 	{
 		Logger::throwError("Cannot load shader: \"" + vertexPath + "\"");
 	}
 
 	auto fragmentFile = ifstream(rootPath + fragmentPath);
+
 	if(!fragmentFile)
 	{
 		Logger::throwError("Cannot load shader: \"" + fragmentPath + "\"");
 	}
 
-	ostringstream vertexStream;
-	ostringstream fragmentStream;
+	ostringstream vertexStream = {};
+	ostringstream fragmentStream = {};
+
 	vertexStream << vertexFile.rdbuf();
 	fragmentStream << fragmentFile.rdbuf();
+
 	vertexFile.close();
 	fragmentFile.close();
 
@@ -52,13 +56,17 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	const auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
 	glShaderSource(vertexId, 1, &vertexCode, nullptr);
+
 	glCompileShader(vertexId);
 
 	int vertexStatus;
+
 	glGetShaderiv(vertexId, GL_COMPILE_STATUS, &vertexStatus);
+
 	if(!vertexStatus)
 	{
 		char log[512];
+
 		glGetShaderInfoLog(vertexId, 512, nullptr, log);
 
 		Logger::throwDebug(shaderName);
@@ -68,13 +76,17 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	}
 
 	glShaderSource(fragmentId, 1, &fragmentCode, nullptr);
+
 	glCompileShader(fragmentId);
 
 	int fragmentStatus;
+
 	glGetShaderiv(fragmentId, GL_COMPILE_STATUS, &fragmentStatus);
+
 	if(!fragmentStatus)
 	{
 		char log[512];
+
 		glGetShaderInfoLog(fragmentId, 512, nullptr, log);
 
 		Logger::throwDebug(shaderName);
@@ -84,15 +96,20 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	}
 
 	_programId = glCreateProgram();
+
 	glAttachShader(_programId, vertexId);
 	glAttachShader(_programId, fragmentId);
+
 	glLinkProgram(_programId);
 
 	int programStatus;
+
 	glGetProgramiv(_programId, GL_LINK_STATUS, &programStatus);
+
 	if(!programStatus)
 	{
 		char log[512];
+
 		glGetProgramInfoLog(_programId, 512, nullptr, log);
 
 		Logger::throwDebug(shaderName);
@@ -122,7 +139,7 @@ const int ShaderBuffer::getUniformId(const string & name)
 		return cacheIterator->second;
 	}
 
-	auto uniformId = glGetUniformLocation(_programId, name.c_str());
+	const auto uniformId = glGetUniformLocation(_programId, name.c_str());
 
 	if(uniformId == -1)
 	{

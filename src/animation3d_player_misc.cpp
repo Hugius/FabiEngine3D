@@ -13,7 +13,7 @@ void Animation3dPlayer::inject(shared_ptr<ModelManager> modelManager)
 
 const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimation3dIds() const
 {
-	vector<pair<string, string>> result;
+	vector<pair<string, string>> result = {};
 
 	for(const auto & [mergedId, startedAnimation3d] : _startedModelAnimation3ds)
 	{

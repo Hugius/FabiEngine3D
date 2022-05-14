@@ -83,7 +83,7 @@ const shared_ptr<ScriptFile> Script::getScriptFile(const string & scriptId) cons
 
 const vector<string> Script::getScriptFileIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{

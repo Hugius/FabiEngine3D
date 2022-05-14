@@ -289,7 +289,7 @@ const pair<string, string> Tools::splitStringIntoTwo(const string & mergedString
 
 const vector<string> Tools::splitStringIntoMultiple(const string & mergedString, char delimiter)
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	string tempString = "";
 

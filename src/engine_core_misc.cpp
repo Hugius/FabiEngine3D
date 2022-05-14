@@ -236,6 +236,7 @@ void EngineCore::_initialize()
 	_imageLoader->cacheImage(logoPath, true);
 
 	shared_ptr<Quad2d> logo = make_shared<Quad2d>("logo");
+
 	logo->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage(logoPath)));
 	logo->setCentered(true);

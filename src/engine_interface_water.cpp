@@ -265,7 +265,7 @@ const fvec3 & EngineInterface::water_getWireframeColor(const string & waterId) c
 
 const vector<string> EngineInterface::water_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [waterId, water] : _core->getWaterManager()->getWaters())
 	{

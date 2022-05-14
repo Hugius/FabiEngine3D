@@ -62,7 +62,7 @@ const vector<NetworkingClientMessage> & NetworkingServer::getPendingMessages() c
 
 const vector<string> NetworkingServer::getClientIps() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(int index = 0; index < static_cast<int>(_clientIps.size()); index++)
 	{

@@ -76,7 +76,7 @@ void EngineInterface::animation3d_setTransformationType(const string & animation
 
 const vector<string> EngineInterface::animation3d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [animation3dId, animation3d] : _core->getAnimation3dManager()->getAnimation3ds())
 	{

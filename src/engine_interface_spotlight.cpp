@@ -63,7 +63,7 @@ void EngineInterface::spotlight_setDistance(const string & spotlightId, float va
 
 const vector<string> EngineInterface::spotlight_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [spotlightId, spotlight] : _core->getSpotlightManager()->getSpotlights())
 	{

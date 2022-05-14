@@ -481,7 +481,7 @@ const string EngineInterface::terrain_getSelectedId() const
 
 const vector<string> EngineInterface::terrain_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [terrainId, terrain] : _core->getTerrainManager()->getTerrains())
 	{

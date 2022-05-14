@@ -53,7 +53,7 @@ const unordered_map<string, shared_ptr<VertexBuffer>> & VertexBufferCache::getBu
 
 const vector<string> VertexBufferCache::getFilePaths() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [mergedId, buffer] : _buffers)
 	{
@@ -67,7 +67,7 @@ const vector<string> VertexBufferCache::getFilePaths() const
 
 const vector<string> VertexBufferCache::getPartIds(const string & filePath) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [mergedId, buffer] : _buffers)
 	{

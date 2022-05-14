@@ -180,7 +180,7 @@ const bool EngineInterface::aabb_hasParent(const string & aabbId) const
 
 const vector<string> EngineInterface::aabb_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{

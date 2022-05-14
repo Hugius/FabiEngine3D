@@ -11,8 +11,8 @@ void TopViewportController::_updateProjectCreating()
 	{
 		const auto newProjectId = _gui->getOverlay()->getValueFormContent();
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const string projectDirectoryPath = (rootPath + "projects\\");
-		const string newProjectDirectoryPath = (projectDirectoryPath + newProjectId + "\\");
+		const auto projectDirectoryPath = (rootPath + "projects\\");
+		const auto newProjectDirectoryPath = (projectDirectoryPath + newProjectId + "\\");
 
 		if(!Tools::isDirectoryExisting(projectDirectoryPath))
 		{
@@ -104,6 +104,7 @@ void TopViewportController::_updateProjectCreating()
 		auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
 		auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
 		auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
+
 		animation2dFile.close();
 		animation3dFile.close();
 		modelFile.close();
@@ -151,8 +152,6 @@ void TopViewportController::_updateProjectLoading()
 		const auto sound3dAudioPaths = _sound3dEditor->getAudioPathsFromFile();
 		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
-		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
-
 		vector<string> imagePaths = {};
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
@@ -162,11 +161,13 @@ void TopViewportController::_updateProjectLoading()
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
-		_fe3d->misc_cacheImages(imagePaths, false);
 
 		vector<string> audioPaths = {};
 		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
 		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
+
+		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
+		_fe3d->misc_cacheImages(imagePaths, false);
 		_fe3d->misc_cacheAudios(audioPaths, false);
 
 		Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");

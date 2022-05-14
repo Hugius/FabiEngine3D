@@ -34,8 +34,8 @@ void Text3dEditor::_load()
 	_fe3d->graphics_setShadowsEnabled(true);
 	_fe3d->graphics_setShadowLightness(0.25f);
 	_fe3d->graphics_setShadowQuality(16384);
-	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE / 2.0f));
-	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE / 2.0f)));
+	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);

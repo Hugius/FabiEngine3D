@@ -254,7 +254,7 @@ const int EngineInterface::quad2d_getAnimationIntervalDivider(const string & qua
 
 const vector<string> EngineInterface::quad2d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [quad2dId, quad2d] : _core->getQuad2dManager()->getQuad2ds())
 	{
@@ -266,7 +266,7 @@ const vector<string> EngineInterface::quad2d_getIds() const
 
 const vector<string> EngineInterface::quad2d_getAnimationIds(const string & quad2dId) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{

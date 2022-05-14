@@ -53,7 +53,7 @@ void EngineInterface::sound2d_setRightIntensity(const string & sound2dId, int in
 
 const vector<string> EngineInterface::sound2d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [sound2dId, sound2d] : _core->getSound2dManager()->getSound2ds())
 	{

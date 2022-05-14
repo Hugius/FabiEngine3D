@@ -811,7 +811,7 @@ const vector<string> EngineInterface::model_getPartIds(const string & modelId) c
 
 const vector<string> EngineInterface::model_getAnimationIds(const string & modelId) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
 	{
@@ -826,7 +826,7 @@ const vector<string> EngineInterface::model_getAnimationIds(const string & model
 
 const vector<string> EngineInterface::model_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [modelId, model] : _core->getModelManager()->getModels())
 	{
@@ -838,7 +838,7 @@ const vector<string> EngineInterface::model_getIds() const
 
 const vector<string> EngineInterface::model_getChildAabbIds(const string & modelId)
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{

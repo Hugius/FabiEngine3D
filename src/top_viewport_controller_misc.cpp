@@ -20,6 +20,7 @@ void TopViewportController::initialize()
 	auto miscellaneousWindow = _gui->getTopViewport()->getWindow("miscellaneousWindow");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, LEFT_TEXT_SIZE("CREATE").x, true);
+
 	projectWindow->createScreen("main");
 	projectWindow->getScreen("main")->createButton("createProject", fvec2(positions[0], 0.0f), LEFT_TEXT_SIZE("CREATE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CREATE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->getScreen("main")->createButton("loadProject", fvec2(positions[1], 0.0f), LEFT_TEXT_SIZE("LOAD"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -28,6 +29,7 @@ void TopViewportController::initialize()
 	projectWindow->setActiveScreen("main");
 
 	positions = Mathematics::calculateDistributedPositions(5, 0.2f, true);
+
 	executionWindow->createScreen("main");
 	executionWindow->getScreen("main")->createButton("start", fvec2(positions[0], 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
 	executionWindow->getScreen("main")->createButton("pause", fvec2(positions[1], 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
@@ -37,6 +39,7 @@ void TopViewportController::initialize()
 	executionWindow->setActiveScreen("main");
 
 	positions = Mathematics::calculateDistributedPositions(3, RIGHT_TEXT_SIZE("UNCACHE").x, true);
+
 	miscellaneousWindow->createScreen("main");
 	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(positions[0], 0.0f), RIGHT_TEXT_SIZE("UNCACHE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "UNCACHE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	miscellaneousWindow->getScreen("main")->createButton("export", fvec2(positions[1], 0.0f), RIGHT_TEXT_SIZE("EXPORT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "EXPORT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -90,6 +93,7 @@ void TopViewportController::_updateMiscellaneous()
 	leftScreen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	leftScreen->getButton("text3dEditor")->setHoverable(isHoverable);
 	leftScreen->getButton("text2dEditor")->setHoverable(isHoverable);
+
 	rightScreen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("aabbEditor")->setHoverable(isHoverable);
@@ -128,8 +132,8 @@ void TopViewportController::_setProject(const string & projectId)
 
 const bool TopViewportController::isProjectCorrupted(const string & projectDirectoryPath) const
 {
-	vector<string> directoryPaths;
-	vector<string> filePaths;
+	vector<string> directoryPaths = {};
+	vector<string> filePaths = {};
 
 	directoryPaths.push_back(projectDirectoryPath);
 	directoryPaths.push_back(projectDirectoryPath + "assets\\");

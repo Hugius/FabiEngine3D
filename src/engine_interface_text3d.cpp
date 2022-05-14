@@ -232,7 +232,7 @@ const fvec3 & EngineInterface::text3d_getMaxClipPosition(const string & text3dId
 
 const vector<string> EngineInterface::text3d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [text3dId, text3d] : _core->getText3dManager()->getText3ds())
 	{
@@ -244,7 +244,7 @@ const vector<string> EngineInterface::text3d_getIds() const
 
 const vector<string> EngineInterface::text3d_getChildAabbIds(const string & text3dId) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{

@@ -405,7 +405,7 @@ const fvec3 & EngineInterface::quad3d_getMaxClipPosition(const string & quad3dId
 
 const vector<string> EngineInterface::quad3d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [quad3dId, quad3d] : _core->getQuad3dManager()->getQuad3ds())
 	{
@@ -417,7 +417,7 @@ const vector<string> EngineInterface::quad3d_getIds() const
 
 const vector<string> EngineInterface::quad3d_getAnimationIds(const string & quad3dId) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [animation2dId, quad3dId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimation2dIds())
 	{
@@ -432,7 +432,7 @@ const vector<string> EngineInterface::quad3d_getAnimationIds(const string & quad
 
 const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & quad3dId) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{

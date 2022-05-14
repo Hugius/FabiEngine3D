@@ -63,7 +63,7 @@ void EngineInterface::sound3d_stop(const string & sound3dId, int index)
 
 const vector<string> EngineInterface::sound3d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [sound3dId, sound3d] : _core->getSound3dManager()->getSound3ds())
 	{

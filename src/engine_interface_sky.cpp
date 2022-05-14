@@ -170,7 +170,7 @@ const fvec3 & EngineInterface::sky_getWireframeColor(const string & skyId) const
 
 const vector<string> EngineInterface::sky_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [skyId, sky] : _core->getSkyManager()->getSkies())
 	{

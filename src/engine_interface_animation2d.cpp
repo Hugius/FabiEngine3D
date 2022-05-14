@@ -44,7 +44,7 @@ void EngineInterface::animation2d_setInterval(const string & animation2dId, int 
 
 const vector<string> EngineInterface::animation2d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [animation2dId, animation2d] : _core->getAnimation2dManager()->getAnimation2ds())
 	{

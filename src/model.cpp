@@ -739,7 +739,7 @@ const string & Model::getCurrentCaptorId() const
 
 const vector<string> Model::getPartIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [partId, part] : _parts)
 	{

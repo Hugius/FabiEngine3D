@@ -93,7 +93,7 @@ const int EngineInterface::pointlight_getMaxCount() const
 
 const vector<string> EngineInterface::pointlight_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [pointlightId, pointlight] : _core->getPointlightManager()->getPointlights())
 	{

@@ -158,7 +158,7 @@ void Timer::increasePassedUpdateCount()
 
 const vector<string> Timer::getClockIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [clockId, clock] : _clocks)
 	{

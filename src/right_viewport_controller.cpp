@@ -11,7 +11,6 @@ void RightViewportController::initialize()
 
 	window->createScreen("empty");
 	window->createScreen("main");
-
 	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("aabbEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);

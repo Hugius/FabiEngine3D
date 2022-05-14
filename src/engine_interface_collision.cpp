@@ -28,7 +28,7 @@ void EngineInterface::collision_setCameraTerrainResponseSpeed(float value)
 
 const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
@@ -43,7 +43,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 
 const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionType direction) const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{

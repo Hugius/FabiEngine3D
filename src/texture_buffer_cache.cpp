@@ -97,7 +97,7 @@ const unordered_map<string, shared_ptr<TextureBuffer>> & TextureBufferCache::get
 
 const vector<string> TextureBufferCache::get2dFilePaths() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [mergedId, buffer] : _2dBuffers)
 	{

@@ -183,7 +183,7 @@ const string & EngineInterface::text2d_getContent(const string & text2dId) const
 
 const vector<string> EngineInterface::text2d_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [text2dId, text2d] : _core->getText2dManager()->getText2ds())
 	{

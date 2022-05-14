@@ -63,7 +63,7 @@ void EngineInterface::clock_stop(const string & clockId)
 
 const vector<string> EngineInterface::clock_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & clockId : _core->getTimer()->getClockIds())
 	{

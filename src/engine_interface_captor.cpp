@@ -38,7 +38,7 @@ void EngineInterface::captor_setExceptionId(const string & captorId, const strin
 
 const vector<string> EngineInterface::captor_getIds() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [captorId, captor] : _core->getCaptorManager()->getCaptors())
 	{

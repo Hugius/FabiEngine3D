@@ -46,7 +46,7 @@ const unordered_map<string, shared_ptr<WaveBuffer>> & WaveBufferCache::getBuffer
 
 const vector<string> WaveBufferCache::getFilePaths() const
 {
-	vector<string> result;
+	vector<string> result = {};
 
 	for(const auto & [filePath, buffer] : _buffers)
 	{

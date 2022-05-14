@@ -111,7 +111,7 @@ mat44::mat44(const mat44 & other)
 
 const fvec4 mat44::operator*(const fvec4 & other) const
 {
-	fvec4 result;
+	fvec4 result = {};
 
 	result.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y) + (this->m[2][0] * other.z) + (this->m[3][0] * other.w));
 	result.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y) + (this->m[2][1] * other.z) + (this->m[3][1] * other.w));
@@ -123,7 +123,7 @@ const fvec4 mat44::operator*(const fvec4 & other) const
 
 const mat44 mat44::operator+(const mat44 & other) const
 {
-	mat44 result;
+	mat44 result = {};
 
 	for(int index = 0; index < 16; index++)
 	{
@@ -135,7 +135,7 @@ const mat44 mat44::operator+(const mat44 & other) const
 
 const mat44 mat44::operator-(const mat44 & other) const
 {
-	mat44 result;
+	mat44 result = {};
 
 	for(int index = 0; index < 16; index++)
 	{
@@ -147,12 +147,14 @@ const mat44 mat44::operator-(const mat44 & other) const
 
 const mat44 mat44::operator*(const mat44 & other) const
 {
-	mat44 result(0.0f);
+	mat44 result = {};
 
 	for(int column = 0; column < 4; column++)
 	{
 		for(int row = 0; row < 4; row++)
 		{
+			result.m[row][column] = 0.0f;
+
 			for(int inner = 0; inner < 4; inner++)
 			{
 				result.m[row][column] += (this->m[inner][column] * other.m[row][inner]);

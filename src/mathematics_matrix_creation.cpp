@@ -2,7 +2,7 @@
 
 const mat44 Mathematics::createTranslationMatrixX(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[3][0] = value;
 
@@ -11,7 +11,7 @@ const mat44 Mathematics::createTranslationMatrixX(float value)
 
 const mat44 Mathematics::createTranslationMatrixY(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[3][1] = value;
 
@@ -20,7 +20,7 @@ const mat44 Mathematics::createTranslationMatrixY(float value)
 
 const mat44 Mathematics::createTranslationMatrixZ(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[3][2] = value;
 
@@ -29,7 +29,7 @@ const mat44 Mathematics::createTranslationMatrixZ(float value)
 
 const mat44 Mathematics::createTranslationMatrix(float x, float y, float z)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[3][0] = x;
 	result.m[3][1] = y;
@@ -40,7 +40,7 @@ const mat44 Mathematics::createTranslationMatrix(float x, float y, float z)
 
 const mat44 Mathematics::createScalingMatrix(float x, float y, float z)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[0][0] = x;
 	result.m[1][1] = y;
@@ -51,7 +51,7 @@ const mat44 Mathematics::createScalingMatrix(float x, float y, float z)
 
 const mat44 Mathematics::createScalingMatrixX(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[0][0] = value;
 
@@ -60,7 +60,7 @@ const mat44 Mathematics::createScalingMatrixX(float value)
 
 const mat44 Mathematics::createScalingMatrixY(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[1][1] = value;
 
@@ -69,7 +69,7 @@ const mat44 Mathematics::createScalingMatrixY(float value)
 
 const mat44 Mathematics::createScalingMatrixZ(float value)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[2][2] = value;
 
@@ -78,7 +78,7 @@ const mat44 Mathematics::createScalingMatrixZ(float value)
 
 const mat44 Mathematics::createRotationMatrix(float x, float y, float z, DirectionOrderType order)
 {
-	mat44 result;
+	mat44 result = {};
 
 	if(order == DirectionOrderType::XYZ)
 	{
@@ -122,7 +122,7 @@ const mat44 Mathematics::createRotationMatrix(float x, float y, float z, Directi
 
 const mat44 Mathematics::createRotationMatrixX(float angle)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[1][1] = cos(angle);
 	result.m[1][2] = sin(angle);
@@ -134,7 +134,7 @@ const mat44 Mathematics::createRotationMatrixX(float angle)
 
 const mat44 Mathematics::createRotationMatrixY(float angle)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[0][0] = cos(angle);
 	result.m[0][2] = -sin(angle);
@@ -146,7 +146,7 @@ const mat44 Mathematics::createRotationMatrixY(float angle)
 
 const mat44 Mathematics::createRotationMatrixZ(float angle)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[0][0] = cos(angle);
 	result.m[1][0] = -sin(angle);
@@ -158,7 +158,7 @@ const mat44 Mathematics::createRotationMatrixZ(float angle)
 
 const mat44 Mathematics::createOrthographicProjectionMatrix(float leftX, float rightX, float bottomY, float topY, float nearZ, float farZ)
 {
-	mat44 result;
+	mat44 result = {};
 
 	result.m[0][0] = 2.0f / (rightX - leftX);
 	result.m[1][1] = 2.0f / (topY - bottomY);
@@ -172,11 +172,12 @@ const mat44 Mathematics::createOrthographicProjectionMatrix(float leftX, float r
 
 const mat44 Mathematics::createViewMatrix(const fvec3 & eye, const fvec3 & center, const fvec3 & up)
 {
-	fvec3 finalFront = normalize(center - eye);
-	fvec3 finalRight = normalize(calculateCrossProduct(finalFront, up));
-	fvec3 finalUp = calculateCrossProduct(finalRight, finalFront);
+	const auto finalFront = normalize(center - eye);
+	const auto finalRight = normalize(calculateCrossProduct(finalFront, up));
+	const auto finalUp = calculateCrossProduct(finalRight, finalFront);
 
-	mat44 result(1.0f);
+	mat44 result = {};
+
 	result.m[0][0] = finalRight.x;
 	result.m[1][0] = finalRight.y;
 	result.m[2][0] = finalRight.z;
@@ -197,7 +198,8 @@ const mat44 Mathematics::createPerspectiveProjectionMatrix(float fov, float aspe
 {
 	const float tanHalfFovY = tan(fov * 0.5f);
 
-	mat44 result(0.0f);
+	mat44 result = {};
+
 	result.m[0][0] = 1.0f / (aspect * tanHalfFovY);
 	result.m[1][1] = 1.0f / tanHalfFovY;
 	result.m[2][2] = -((far + near) / (far - near));

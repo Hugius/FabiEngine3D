@@ -18,6 +18,8 @@ public:
 	void terminate();
 
 private:
+	static inline const string DEFAULT_CURSOR_PATH = "engine\\assets\\image\\diffuse_map\\cursor_default.tga";
+
 	static inline const fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
 
 	static inline const fvec2 CURSOR_SIZE = fvec2(0.075f);

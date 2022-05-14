@@ -284,7 +284,7 @@ void EngineController::update()
 	else
 	{
 		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorId(), Tools::convertToNdc(Tools::getCursorPosition()));
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), DEFAULT_CURSOR_PATH);
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
 		_guiManager->updateOverlay();

@@ -543,7 +543,7 @@ void GuiInputBox::_updateTyping()
 			}
 		}
 
-		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / BAR_UPDATE_DIVIDER)) == 0)
 		{
 			_isBarVisible = !_isBarVisible;
 		}
@@ -696,7 +696,7 @@ void GuiInputBox::_updateHovering(bool isInteractable)
 
 			if(_isHovered)
 			{
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), POINTING_CURSOR_PATH);
 			}
 		}
 		else

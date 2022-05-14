@@ -5,7 +5,7 @@ using std::uniform_real_distribution;
 
 const float Mathematics::calculateAngleDifference(float firstAngle, float secondAngle)
 {
-	float difference = fabsf(firstAngle - secondAngle);
+	const auto difference = fabsf(firstAngle - secondAngle);
 
 	if(difference > 180.0f)
 	{
@@ -53,7 +53,7 @@ const float Mathematics::calculateReferenceAngle(float angle)
 
 const fvec2 Mathematics::calculateAverage(const vector<fvec2> & values)
 {
-	fvec2 total = fvec2(0.0f);
+	fvec2 total = {};
 
 	for(const auto & value : values)
 	{
@@ -65,7 +65,7 @@ const fvec2 Mathematics::calculateAverage(const vector<fvec2> & values)
 
 const fvec3 Mathematics::calculateAverage(const vector<fvec3> & values)
 {
-	fvec3 total = fvec3(0.0f);
+	fvec3 total = {};
 
 	for(const auto & value : values)
 	{
@@ -77,7 +77,7 @@ const fvec3 Mathematics::calculateAverage(const vector<fvec3> & values)
 
 const fvec4 Mathematics::calculateAverage(const vector<fvec4> & values)
 {
-	fvec4 total = fvec4(0.0f);
+	fvec4 total = {};
 
 	for(const auto & value : values)
 	{
@@ -157,7 +157,7 @@ const bool Mathematics::isNormalized(const fvec4 & vector)
 
 const vector<float> Mathematics::calculateDistributedPositions(int count, float size, bool isAscending)
 {
-	vector<float> result;
+	vector<float> result = {};
 
 	const auto freeSpace = (2.0f - (static_cast<float>(count) * size));
 	const auto gapSpace = (freeSpace / static_cast<float>(count + 1));

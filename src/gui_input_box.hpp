@@ -39,8 +39,12 @@ private:
 	void _updateHovering(bool isInteractable);
 	void _updateTyping();
 
+	static inline const string POINTING_CURSOR_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
+
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
+
+	static inline constexpr int BAR_UPDATE_DIVIDER = 2;
 
 	const string _id;
 	const string _parentId;

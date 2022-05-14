@@ -2,7 +2,7 @@
 
 const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 {
-	auto determinant = calculateDeterminant(matrix);
+	const auto determinant = calculateDeterminant(matrix);
 
 	if(determinant == 0.0f)
 	{
@@ -10,14 +10,12 @@ const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 	}
 
 	mat22 tempMatrix;
-
 	tempMatrix.f[0] = matrix.f[3];
 	tempMatrix.f[1] = -matrix.f[1];
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
 	mat22 result;
-
 	for(int index = 0; index < 4; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
@@ -28,7 +26,7 @@ const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 
 const mat22 Mathematics::transposeMatrix(const mat22 & matrix)
 {
-	mat22 result;
+	mat22 result = {};
 
 	for(int rowIndex = 0; rowIndex < 2; rowIndex++)
 	{
@@ -43,7 +41,7 @@ const mat22 Mathematics::transposeMatrix(const mat22 & matrix)
 
 const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 {
-	auto determinant = calculateDeterminant(matrix);
+	const auto determinant = calculateDeterminant(matrix);
 
 	if(determinant == 0.0f)
 	{
@@ -51,7 +49,6 @@ const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 	}
 
 	mat33 tempMatrix;
-
 	tempMatrix.f[0] = ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2]));
 	tempMatrix.f[1] = ((matrix.m[0][2] * matrix.m[2][1]) - (matrix.m[0][1] * matrix.m[2][2]));
 	tempMatrix.f[2] = ((matrix.m[0][1] * matrix.m[1][2]) - (matrix.m[0][2] * matrix.m[1][1]));
@@ -63,7 +60,6 @@ const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 	tempMatrix.f[8] = ((matrix.m[0][0] * matrix.m[1][1]) - (matrix.m[1][0] * matrix.m[0][1]));
 
 	mat33 result;
-
 	for(int index = 0; index < 9; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
@@ -74,7 +70,7 @@ const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 
 const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 {
-	auto determinant = calculateDeterminant(matrix);
+	const auto determinant = calculateDeterminant(matrix);
 
 	if(determinant == 0.0f)
 	{
@@ -82,7 +78,6 @@ const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 	}
 
 	mat44 tempMatrix;
-
 	tempMatrix.f[0] =
 		matrix.f[5] * matrix.f[10] * matrix.f[15] -
 		matrix.f[5] * matrix.f[11] * matrix.f[14] -
@@ -197,7 +192,6 @@ const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
 	mat44 result;
-
 	for(int index = 0; index < 16; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
@@ -208,7 +202,7 @@ const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 
 const mat33 Mathematics::transposeMatrix(const mat33 & matrix)
 {
-	mat33 result;
+	mat33 result = {};
 
 	for(int rowIndex = 0; rowIndex < 3; rowIndex++)
 	{
@@ -223,7 +217,7 @@ const mat33 Mathematics::transposeMatrix(const mat33 & matrix)
 
 const mat44 Mathematics::transposeMatrix(const mat44 & matrix)
 {
-	mat44 result;
+	mat44 result = {};
 
 	for(int rowIndex = 0; rowIndex < 4; rowIndex++)
 	{

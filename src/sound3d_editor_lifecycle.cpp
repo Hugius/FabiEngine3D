@@ -6,16 +6,16 @@
 
 void Sound3dEditor::_load()
 {
-	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
-	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
-	_fe3d->model_setFaceCulled("@@box", "", true);
-	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
-	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
-	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
-	_fe3d->model_setLightness("@@grid", "", 0.25f);
-	_fe3d->model_setShadowed("@@grid", false);
+	_fe3d->model_create(GRID_ID, GRID_MESH_PATH);
+	_fe3d->model_setBaseSize(GRID_ID, fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d->model_setDiffuseMap(GRID_ID, "", GRID_TEXTURE_PATH);
+	_fe3d->model_setTextureRepeat(GRID_ID, "", GRID_REPEAT);
+	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
+	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
+	_fe3d->model_setShadowed(GRID_ID, false);
+	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
+	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
+	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 	_fe3d->model_create(SOUND3D_MODEL_ID, SOUND3D_MODEL_PATH);
 	_fe3d->model_setBasePosition(SOUND3D_MODEL_ID, SOUND3D_POSITION);
 	_fe3d->model_setBaseSize(SOUND3D_MODEL_ID, fvec3(0.5f));
@@ -55,8 +55,8 @@ void Sound3dEditor::_unload()
 		_fe3d->sound3d_delete(sound3dId);
 	}
 
-	_fe3d->model_delete("@@box");
-	_fe3d->model_delete("@@grid");
+	_fe3d->model_delete(GRID_ID);
+	_fe3d->model_delete(BOX_ID);
 	_fe3d->model_delete(SOUND3D_MODEL_ID);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);

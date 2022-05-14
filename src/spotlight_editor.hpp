@@ -28,6 +28,12 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
+	static inline const string GRID_ID = "@@grid";
+	static inline const string GRID_MESH_PATH = "engine\\assets\\mesh\\plane.obj";
+	static inline const string GRID_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\grid.tga";
+	static inline const string BOX_ID = "@@box";
+	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
+	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
 	static inline const string SPOTLIGHT_MODEL_ID = "@@spotlight";
 	static inline const string SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 

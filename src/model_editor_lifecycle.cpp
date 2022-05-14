@@ -12,22 +12,22 @@ void ModelEditor::_load()
 {
 	_skyEditor->loadSkiesFromFile();
 
-	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
-	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
-	_fe3d->model_setFaceCulled("@@box", "", true);
-	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
-	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
-	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
-	_fe3d->model_setLightness("@@grid", "", 0.25f);
-	_fe3d->model_setShadowed("@@grid", false);
+	_fe3d->model_create(GRID_ID, GRID_MESH_PATH);
+	_fe3d->model_setBaseSize(GRID_ID, fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d->model_setDiffuseMap(GRID_ID, "", GRID_TEXTURE_PATH);
+	_fe3d->model_setTextureRepeat(GRID_ID, "", GRID_REPEAT);
+	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
+	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
+	_fe3d->model_setShadowed(GRID_ID, false);
+	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
+	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
+	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
-	_fe3d->model_setVisible("@@box", false);
+	_fe3d->model_setVisible(BOX_ID, false);
 	_fe3d->captor_create("@@captor");
 	_fe3d->captor_setPosition("@@captor", fvec3(0.0f, 0.5f, 0.0f));
 	_fe3d->captor_capture("@@captor");
-	_fe3d->model_setVisible("@@box", true);
+	_fe3d->model_setVisible(BOX_ID, true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
@@ -73,8 +73,8 @@ void ModelEditor::_unload()
 
 	_skyEditor->deleteLoadedSkies();
 
-	_fe3d->model_delete("@@box");
-	_fe3d->model_delete("@@grid");
+	_fe3d->model_delete(GRID_ID);
+	_fe3d->model_delete(BOX_ID);
 
 	_fe3d->captor_delete("@@captor");
 

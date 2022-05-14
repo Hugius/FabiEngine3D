@@ -88,7 +88,7 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	_fe3d->model_setVisible("@@grid", _isGridModeEnabled);
+	_fe3d->model_setVisible(GRID_ID, _isGridModeEnabled);
 
 	if(!_fe3d->sky_getSelectedId().empty())
 	{

@@ -151,6 +151,7 @@ private:
 
 	const vector<string> _getWorldIds() const;
 
+	static inline const string GRID_ID = "@@grid";
 	static inline const string POINTLIGHT_MODEL_ID = "@@template_pointlight";
 	static inline const string SPOTLIGHT_MODEL_ID = "@@template_spotlight";
 	static inline const string CAPTOR_MODEL_ID = "@@template_captor";

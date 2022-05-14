@@ -36,12 +36,12 @@ void Sound3dEditor::_updateMiscellaneous()
 	{
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
 		{
-			_fe3d->model_setVisible("@@grid", !_fe3d->model_isVisible("@@grid"));
+			_fe3d->model_setVisible(GRID_ID, !_fe3d->model_isVisible(GRID_ID));
 		}
 
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_R))
 		{
-			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
+			_fe3d->model_setVisible(BOX_ID, !_fe3d->model_isVisible(BOX_ID));
 		}
 	}
 }

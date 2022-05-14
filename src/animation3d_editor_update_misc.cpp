@@ -318,18 +318,20 @@ void Animation3dEditor::_updateModelChoosing()
 
 void Animation3dEditor::_updatePartChoosing()
 {
-	if(!_hoveredPartId.empty())
-	{
-		_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
-
-		_hoveredPartId = "";
-	}
-
 	if(_gui->getOverlay()->getChoiceFormId() == "selectPart")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredPartId.empty())
+			{
+				_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
+
+				_hoveredPartId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredPartId.empty())
 			{
@@ -342,6 +344,15 @@ void Animation3dEditor::_updatePartChoosing()
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredPartId.empty())
+		{
+			_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
+
+			_hoveredPartId = "";
 		}
 	}
 }

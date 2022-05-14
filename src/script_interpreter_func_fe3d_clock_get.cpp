@@ -34,6 +34,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
@@ -58,12 +59,14 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
@@ -88,12 +91,14 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is still started");

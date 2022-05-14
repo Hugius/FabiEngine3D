@@ -11,14 +11,17 @@ void Animation3dPlayer::startModelAnimation3d(const string & animation3dId, cons
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
+
 	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
@@ -40,15 +43,18 @@ void Animation3dPlayer::pauseModelAnimation3d(const string & animation3dId, cons
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 
 	}
+
 	if(isModelAnimation3dPaused(animation3dId, modelId))
 	{
 		abort();
@@ -65,15 +71,18 @@ void Animation3dPlayer::autopauseModelAnimation3d(const string & animation3dId, 
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 
 	}
+
 	if(isModelAnimation3dPaused(animation3dId, modelId))
 	{
 		abort();
@@ -90,14 +99,17 @@ void Animation3dPlayer::resumeModelAnimation3d(const string & animation3dId, con
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dPaused(animation3dId, modelId))
 	{
 		abort();
@@ -114,10 +126,12 @@ void Animation3dPlayer::stopModelAnimation3d(const string & animation3dId, const
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -134,10 +148,12 @@ void Animation3dPlayer::setModelAnimation3dSpeedMultiplier(const string & animat
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -154,10 +170,12 @@ void Animation3dPlayer::setModelAnimation3dFrameIndex(const string & animation3d
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();

@@ -186,6 +186,7 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getReflectionTextureBuffer()->getTboId());
 		}
+
 		if(captors.at(model->getPreviousCaptorId())->getRefractionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
@@ -202,6 +203,7 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getReflectionTextureBuffer()->getTboId());
 		}
+
 		if(captors.at(model->getCurrentCaptorId())->getRefractionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);

@@ -1070,6 +1070,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 					return true;
 				}
+
 				if((args[2]->getInteger() == 0) || (args[2]->getInteger() < -1))
 				{
 					_throwRuntimeError("play count is invalid");
@@ -1110,6 +1111,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 					return true;
 				}
+
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is already paused");
@@ -1137,6 +1139,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 					return true;
 				}
+
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is already paused");
@@ -1164,6 +1167,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 					return true;
 				}
+
 				if(!_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not paused");

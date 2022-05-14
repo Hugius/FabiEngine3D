@@ -33,10 +33,12 @@ const float Animation3dPlayer::getModelAnimation3dSpeedMultiplier(const string &
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -53,10 +55,12 @@ const int Animation3dPlayer::getModelAnimation3dPlayCount(const string & animati
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -73,10 +77,12 @@ const int Animation3dPlayer::getModelAnimation3dFrameIndex(const string & animat
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -93,6 +99,7 @@ const bool Animation3dPlayer::isModelAnimation3dStarted(const string & animation
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
@@ -109,10 +116,12 @@ const bool Animation3dPlayer::isModelAnimation3dPaused(const string & animation3
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();
@@ -129,10 +138,12 @@ const bool Animation3dPlayer::isModelAnimation3dAutopaused(const string & animat
 	{
 		abort();
 	}
+
 	if(!_modelManager->isModelExisting(modelId))
 	{
 		abort();
 	}
+
 	if(!isModelAnimation3dStarted(animation3dId, modelId))
 	{
 		abort();

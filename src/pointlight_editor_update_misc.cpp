@@ -49,6 +49,7 @@ void PointlightEditor::_updateMiscellaneous()
 	{
 		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_currentPointlightId));
 	}
+
 	if(!_hoveredPointlightId.empty())
 	{
 		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_hoveredPointlightId));

@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already existing");
@@ -46,6 +47,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
@@ -70,12 +72,14 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already started");
@@ -100,18 +104,21 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
 
 				return true;
 			}
+
 			if(_fe3d->clock_isPaused(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already paused");
@@ -136,18 +143,21 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isPaused(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not paused");
@@ -172,12 +182,14 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
 
 				return true;
 			}
+
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");

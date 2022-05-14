@@ -160,11 +160,13 @@ void MasterRenderer::_updateShadows()
 				position.x += cameraPosition.x;
 				lookat.x += cameraPosition.x;
 			}
+
 			if(_renderStorage->isShadowsFollowingCameraY())
 			{
 				position.y += cameraPosition.y;
 				lookat.y += cameraPosition.y;
 			}
+
 			if(_renderStorage->isShadowsFollowingCameraZ())
 			{
 				position.z += cameraPosition.z;

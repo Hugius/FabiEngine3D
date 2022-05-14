@@ -197,30 +197,37 @@ void TopViewportController::_updateMiscScreenManagement()
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::createDirectory(exportDirectoryPath + "logo\\"))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::createDirectory(exportDirectoryPath + "shaders\\"))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\")))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\")))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga")))
 				{
 					hasFailed = true;
 				}
+
 				if(!Tools::renameFile((exportDirectoryPath + "binaries\\fe3d.exe"), (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe")))
 				{
 					hasFailed = true;

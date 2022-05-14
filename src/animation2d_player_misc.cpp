@@ -52,10 +52,12 @@ const int Animation2dPlayer::getQuad3dAnimation2dPlayCount(const string & animat
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -72,10 +74,12 @@ const int Animation2dPlayer::getQuad2dAnimation2dPlayCount(const string & animat
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -92,10 +96,12 @@ const int Animation2dPlayer::getQuad3dAnimation2dRowIndex(const string & animati
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -112,10 +118,12 @@ const int Animation2dPlayer::getQuad2dAnimation2dRowIndex(const string & animati
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -132,10 +140,12 @@ const int Animation2dPlayer::getQuad3dAnimation2dColumnIndex(const string & anim
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -152,10 +162,12 @@ const int Animation2dPlayer::getQuad2dAnimation2dColumnIndex(const string & anim
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -172,10 +184,12 @@ const int Animation2dPlayer::getQuad3dAnimation2dIntervalMultiplier(const string
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -192,10 +206,12 @@ const int Animation2dPlayer::getQuad2dAnimation2dIntervalMultiplier(const string
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -212,10 +228,12 @@ const int Animation2dPlayer::getQuad3dAnimation2dIntervalDivider(const string & 
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -232,10 +250,12 @@ const int Animation2dPlayer::getQuad2dAnimation2dIntervalDivider(const string & 
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -252,6 +272,7 @@ const bool Animation2dPlayer::isQuad3dAnimation2dStarted(const string & animatio
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
@@ -268,10 +289,12 @@ const bool Animation2dPlayer::isQuad3dAnimation2dPaused(const string & animation
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -288,10 +311,12 @@ const bool Animation2dPlayer::isQuad3dAnimation2dAutopaused(const string & anima
 	{
 		abort();
 	}
+
 	if(!_quad3dManager->isQuad3dExisting(quad3dId))
 	{
 		abort();
 	}
+
 	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
 	{
 		abort();
@@ -308,6 +333,7 @@ const bool Animation2dPlayer::isQuad2dAnimation2dStarted(const string & animatio
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
@@ -324,10 +350,12 @@ const bool Animation2dPlayer::isQuad2dAnimation2dPaused(const string & animation
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();
@@ -344,10 +372,12 @@ const bool Animation2dPlayer::isQuad2dAnimation2dAutopaused(const string & anima
 	{
 		abort();
 	}
+
 	if(!_quad2dManager->isQuad2dExisting(quad2dId))
 	{
 		abort();
 	}
+
 	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
 	{
 		abort();

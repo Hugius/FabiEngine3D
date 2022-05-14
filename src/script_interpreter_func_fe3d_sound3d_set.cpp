@@ -73,6 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 				return true;
 			}
+
 			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
 			{
 				_throwRuntimeError("play count is invalid");
@@ -102,6 +103,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 					return true;
 				}
+
 				if(_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is already paused");
@@ -129,6 +131,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 					return true;
 				}
+
 				if(!_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not paused");

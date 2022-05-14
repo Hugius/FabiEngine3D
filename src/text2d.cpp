@@ -28,6 +28,7 @@ void Text2d::updateTarget()
 		{
 			_position.x = _positionTarget.x;
 		}
+
 		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
@@ -60,6 +61,7 @@ void Text2d::updateTarget()
 		{
 			_size.x = _positionTarget.x;
 		}
+
 		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
 		{
 			_size.y = _positionTarget.y;

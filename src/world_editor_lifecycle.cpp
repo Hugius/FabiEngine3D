@@ -177,254 +177,317 @@ void WorldEditor::update()
 	{
 		_updateMainMenu();
 	}
+
 	if(isLoaded())
 	{
 		_updateWorldCreating();
 	}
+
 	if(isLoaded())
 	{
 		_updateWorldChoosing();
 	}
+
 	if(isLoaded())
 	{
 		_updateWorldDeleting();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateChoiceMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateModelPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateQuad3dPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSpotlightPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateCaptorPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dPlacing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSkyMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateTerrainMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateWaterMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateModelMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateQuad3dMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSpotlightMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateCaptorMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSkyPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateTerrainPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateWaterPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateModelPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateQuad3dPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dPlacingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateModelChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateQuad3dChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSpotlightChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateCaptorChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dChoosingMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateModelEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateQuad3dEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateText3dEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAabbEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSpotlightEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateCaptorEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSound3dEditing();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateLightingSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateAmbientLightingSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateDirectionalLightingSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateShadowsGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateReflectionsGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateRefractionsGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateDofGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateFogGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateLensFlareGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateSkyExposureGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateBloomGraphicsSettingsMenu();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateCamera();
 	}
+
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updateMiscellaneous();

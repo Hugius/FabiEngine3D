@@ -390,6 +390,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 					return true;
 				}
+
 				if(args[2]->getInteger() < -1)
 				{
 					_throwRuntimeError("play count is invalid");
@@ -418,6 +419,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 					return true;
 
 				}
+
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D already paused");
@@ -445,6 +447,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 					return true;
 				}
+
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D already paused");
@@ -472,6 +475,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 					return true;
 				}
+
 				if(!_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D not paused");

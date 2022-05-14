@@ -32,10 +32,12 @@ void Quad3d::updateTarget()
 		{
 			_position.x = _positionTarget.x;
 		}
+
 		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
 		}
+
 		if(fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
 		{
 			_position.z = _positionTarget.z;
@@ -58,10 +60,12 @@ void Quad3d::updateTarget()
 		{
 			_rotation.x = _rotationTarget.x;
 		}
+
 		if(Mathematics::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
 		{
 			_rotation.y = _rotationTarget.y;
 		}
+
 		if(Mathematics::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
 		{
 			_rotation.z = _rotationTarget.z;
@@ -79,6 +83,7 @@ void Quad3d::updateTarget()
 		{
 			_size.x = _positionTarget.x;
 		}
+
 		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
 		{
 			_size.y = _positionTarget.y;

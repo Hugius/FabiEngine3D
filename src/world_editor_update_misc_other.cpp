@@ -34,6 +34,7 @@ void WorldEditor::_updateCamera()
 			{
 				_fe3d->camera_followRightXZ(-_editorSpeed / 100.0f);
 			}
+
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_D))
 			{
 				_fe3d->camera_followRightXZ(_editorSpeed / 100.0f);
@@ -43,6 +44,7 @@ void WorldEditor::_updateCamera()
 			{
 				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / 75.0f, 0.0f));
 			}
+
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
 			{
 				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
@@ -52,6 +54,7 @@ void WorldEditor::_updateCamera()
 			{
 				_fe3d->camera_followFrontXZ(_editorSpeed / 100.0f);
 			}
+
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_S))
 			{
 				_fe3d->camera_followFrontXZ(-_editorSpeed / 100.0f);

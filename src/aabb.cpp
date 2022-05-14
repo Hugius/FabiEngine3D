@@ -34,10 +34,12 @@ void Aabb::updateTarget()
 			{
 				_localPosition.x = _localPositionTarget.x;
 			}
+
 			if(fabsf(_localPositionTarget.y - _localPosition.y) <= _localPositionTargetSpeed)
 			{
 				_localPosition.y = _localPositionTarget.y;
 			}
+
 			if(fabsf(_localPositionTarget.z - _localPosition.z) <= _localPositionTargetSpeed)
 			{
 				_localPosition.z = _localPositionTarget.z;
@@ -55,10 +57,12 @@ void Aabb::updateTarget()
 			{
 				_localSize.x = _localPositionTarget.x;
 			}
+
 			if(fabsf(_localSizeTarget.y - _localSize.y) <= _localSizeTargetSpeed)
 			{
 				_localSize.y = _localPositionTarget.y;
 			}
+
 			if(fabsf(_localSizeTarget.z - _localSize.z) <= _localSizeTargetSpeed)
 			{
 				_localSize.z = _localPositionTarget.z;
@@ -77,10 +81,12 @@ void Aabb::updateTarget()
 			{
 				_basePosition.x = _basePositionTarget.x;
 			}
+
 			if(fabsf(_basePositionTarget.y - _basePosition.y) <= _basePositionTargetSpeed)
 			{
 				_basePosition.y = _basePositionTarget.y;
 			}
+
 			if(fabsf(_basePositionTarget.z - _basePosition.z) <= _basePositionTargetSpeed)
 			{
 				_basePosition.z = _basePositionTarget.z;
@@ -98,10 +104,12 @@ void Aabb::updateTarget()
 			{
 				_baseSize.x = _basePositionTarget.x;
 			}
+
 			if(fabsf(_baseSizeTarget.y - _baseSize.y) <= _baseSizeTargetSpeed)
 			{
 				_baseSize.y = _basePositionTarget.y;
 			}
+
 			if(fabsf(_baseSizeTarget.z - _baseSize.z) <= _baseSizeTargetSpeed)
 			{
 				_baseSize.z = _basePositionTarget.z;

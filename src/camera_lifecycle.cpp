@@ -67,10 +67,12 @@ void Camera::update()
 		{
 			_position.x = _positionTarget.x;
 		}
+
 		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
 		}
+
 		if(fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
 		{
 			_position.z = _positionTarget.z;

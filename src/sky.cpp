@@ -38,10 +38,12 @@ void Sky::updateTarget()
 		{
 			_rotation.x = _rotationTarget.x;
 		}
+
 		if(Mathematics::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
 		{
 			_rotation.y = _rotationTarget.y;
 		}
+
 		if(Mathematics::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
 		{
 			_rotation.z = _rotationTarget.z;

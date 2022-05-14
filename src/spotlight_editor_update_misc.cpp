@@ -49,6 +49,7 @@ void SpotlightEditor::_updateMiscellaneous()
 	{
 		_fe3d->model_setColor("@@spotlight", "", _fe3d->spotlight_getColor(_currentSpotlightId));
 	}
+
 	if(!_hoveredSpotlightId.empty())
 	{
 		_fe3d->model_setColor("@@spotlight", "", _fe3d->spotlight_getColor(_hoveredSpotlightId));

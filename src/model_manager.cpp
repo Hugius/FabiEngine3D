@@ -170,12 +170,14 @@ void ModelManager::update()
 			model->setCubeReflectionMixValue(1.0f);
 			model->setCubeRefractionMixValue(1.0f);
 		}
+
 		if(_captorManager->getCaptors().find(model->getCurrentCaptorId()) == _captorManager->getCaptors().end())
 		{
 			model->setCurrentCaptorId("");
 			model->setCubeReflectionMixValue(1.0f);
 			model->setCubeRefractionMixValue(1.0f);
 		}
+
 		if(model->getPreviousCaptorId() == model->getCurrentCaptorId())
 		{
 			model->setPreviousCaptorId("");

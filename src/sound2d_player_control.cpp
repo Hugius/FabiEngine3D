@@ -143,10 +143,12 @@ void Sound2dPlayer::pauseSound2d(const string & sound2dId, int index)
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
+
 	if(isSound2dPaused(sound2dId, index))
 	{
 		abort();
@@ -179,10 +181,12 @@ void Sound2dPlayer::resumeSound2d(const string & sound2dId, int index)
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
 	}
+
 	if(!isSound2dPaused(sound2dId, index))
 	{
 		abort();
@@ -215,6 +219,7 @@ void Sound2dPlayer::stopSound2d(const string & sound2dId, int index)
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -283,6 +288,7 @@ void Sound2dPlayer::setSound2dVolume(const string & sound2dId, int index, float 
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -297,6 +303,7 @@ void Sound2dPlayer::setSound2dLeftIntensity(const string & sound2dId, int index,
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -311,6 +318,7 @@ void Sound2dPlayer::setSound2dRightIntensity(const string & sound2dId, int index
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();

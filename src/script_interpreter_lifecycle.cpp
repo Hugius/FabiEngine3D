@@ -70,7 +70,7 @@ void ScriptInterpreter::load()
 					return;
 				}
 			}
-			if(scriptType == "script_type_update")
+			else if(scriptType == "script_type_update")
 			{
 				if(_updateEntryId.empty())
 				{
@@ -83,7 +83,7 @@ void ScriptInterpreter::load()
 					return;
 				}
 			}
-			if(scriptType == "script_type_terminate")
+			else if(scriptType == "script_type_terminate")
 			{
 				if(_terminateEntryId.empty())
 				{

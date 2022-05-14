@@ -77,27 +77,34 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 		{
 			const auto index = ((y * width * bytesPerPixel) + (x * bytesPerPixel));
 
-			if(bytesPerPixel == 3)
+			switch(bitsPerPixel)
 			{
-				const auto blue = static_cast<unsigned char>(getc(file));
-				const auto green = static_cast<unsigned char>(getc(file));
-				const auto red = static_cast<unsigned char>(getc(file));
+				case 24:
+				{
+					const auto blue = static_cast<unsigned char>(getc(file));
+					const auto green = static_cast<unsigned char>(getc(file));
+					const auto red = static_cast<unsigned char>(getc(file));
 
-				pixels[index + 0] = red;
-				pixels[index + 1] = green;
-				pixels[index + 2] = blue;
-			}
-			if(bytesPerPixel == 4)
-			{
-				const auto blue = static_cast<unsigned char>(getc(file));
-				const auto green = static_cast<unsigned char>(getc(file));
-				const auto red = static_cast<unsigned char>(getc(file));
-				const auto alpha = static_cast<unsigned char>(getc(file));
+					pixels[index + 0] = red;
+					pixels[index + 1] = green;
+					pixels[index + 2] = blue;
 
-				pixels[index + 0] = red;
-				pixels[index + 1] = green;
-				pixels[index + 2] = blue;
-				pixels[index + 3] = alpha;
+					break;
+				}
+				case 32:
+				{
+					const auto blue = static_cast<unsigned char>(getc(file));
+					const auto green = static_cast<unsigned char>(getc(file));
+					const auto red = static_cast<unsigned char>(getc(file));
+					const auto alpha = static_cast<unsigned char>(getc(file));
+
+					pixels[index + 0] = red;
+					pixels[index + 1] = green;
+					pixels[index + 2] = blue;
+					pixels[index + 3] = alpha;
+
+					break;
+				}
 			}
 		}
 	}

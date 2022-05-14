@@ -126,19 +126,20 @@ void AabbManager::update()
 					const auto newAabbSize = (aabb->getLocalSize() * parentModel->getBaseSize());
 					const auto parentRotation = parentModel->getBaseRotation();
 
-					DirectionType rotationDirection;
 					float rotation = 0.0f;
+
+					DirectionType rotationDirection;
 					if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 					{
 						rotationDirection = DirectionType::X;
 						rotation = parentRotation.x;
 					}
-					if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
+					else if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 					{
 						rotationDirection = DirectionType::Y;
 						rotation = parentRotation.y;
 					}
-					if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
+					else if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 					{
 						rotationDirection = DirectionType::Z;
 						rotation = parentRotation.z;

@@ -210,7 +210,7 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 		{
 			value = clamp((value - delta), minimum, maximum);
 		}
-		if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
+		else if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value + delta), minimum, maximum);
 		}

@@ -103,23 +103,23 @@ void CameraCollisionResponder::update()
 		{
 			_responseDirectionOrder = DirectionOrderType::XYZ;
 		}
-		if((xPriority > yPriority) && (xPriority > zPriority) && (zPriority >= yPriority))
+		else if((xPriority > yPriority) && (xPriority > zPriority) && (zPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrderType::XZY;
 		}
-		if((yPriority > xPriority) && (yPriority > zPriority) && (xPriority >= zPriority))
+		else if((yPriority > xPriority) && (yPriority > zPriority) && (xPriority >= zPriority))
 		{
 			_responseDirectionOrder = DirectionOrderType::YXZ;
 		}
-		if((yPriority > xPriority) && (yPriority > zPriority) && (zPriority >= xPriority))
+		else if((yPriority > xPriority) && (yPriority > zPriority) && (zPriority >= xPriority))
 		{
 			_responseDirectionOrder = DirectionOrderType::YZX;
 		}
-		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
+		else if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrderType::ZYX;
 		}
-		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
+		else if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrderType::ZXY;
 		}

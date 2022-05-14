@@ -20,7 +20,7 @@ void ScriptExecutor::start()
 
 		return;
 	}
-	if(_scriptInterpreter->mustStopApplication())
+	else if(_scriptInterpreter->mustStopApplication())
 	{
 		_stop(true);
 
@@ -53,7 +53,7 @@ void ScriptExecutor::update(bool isDebugging)
 
 					return;
 				}
-				if(_scriptInterpreter->mustStopApplication())
+				else if(_scriptInterpreter->mustStopApplication())
 				{
 					_stop(true);
 

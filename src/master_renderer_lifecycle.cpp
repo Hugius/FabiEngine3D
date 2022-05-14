@@ -128,7 +128,7 @@ void MasterRenderer::_updateSkyExposure()
 				lightness = targetLightness;
 			}
 		}
-		if(lightness < targetLightness)
+		else if(lightness < targetLightness)
 		{
 			lightness += _renderStorage->getSkyExposureSpeed();
 

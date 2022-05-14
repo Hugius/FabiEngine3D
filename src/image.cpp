@@ -31,8 +31,7 @@ void Image::flipX()
 {
 	const auto byteFormat = (_bitsPerPixel / 8);
 	const auto size = (_width * _height * byteFormat);
-
-	auto newPixels = new unsigned char[size];
+	const auto newPixels = new unsigned char[size];
 
 	for(int y = 0; y < _height; y++)
 	{
@@ -41,18 +40,25 @@ void Image::flipX()
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = (((_width - x - 1) * byteFormat) + (y * _width * byteFormat));
 
-			if(byteFormat == 3)
+			switch(_bitsPerPixel)
 			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-				newPixels[index1 + 1] = _pixels[index2 + 1];
-				newPixels[index1 + 2] = _pixels[index2 + 2];
-			}
-			if(byteFormat == 4)
-			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-				newPixels[index1 + 1] = _pixels[index2 + 1];
-				newPixels[index1 + 2] = _pixels[index2 + 2];
-				newPixels[index1 + 3] = _pixels[index2 + 3];
+				case 24:
+				{
+					newPixels[index1 + 0] = _pixels[index2 + 0];
+					newPixels[index1 + 1] = _pixels[index2 + 1];
+					newPixels[index1 + 2] = _pixels[index2 + 2];
+
+					break;
+				}
+				case 32:
+				{
+					newPixels[index1 + 0] = _pixels[index2 + 0];
+					newPixels[index1 + 1] = _pixels[index2 + 1];
+					newPixels[index1 + 2] = _pixels[index2 + 2];
+					newPixels[index1 + 3] = _pixels[index2 + 3];
+
+					break;
+				}
 			}
 		}
 	}
@@ -66,8 +72,7 @@ void Image::flipY()
 {
 	const auto byteFormat = (_bitsPerPixel / 8);
 	const auto size = (_width * _height * byteFormat);
-
-	auto newPixels = new unsigned char[size];
+	const auto newPixels = new unsigned char[size];
 
 	for(int y = 0; y < _height; y++)
 	{
@@ -76,18 +81,25 @@ void Image::flipY()
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = ((x * byteFormat) + ((_height - y - 1) * _width * byteFormat));
 
-			if(byteFormat == 3)
+			switch(_bitsPerPixel)
 			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-				newPixels[index1 + 1] = _pixels[index2 + 1];
-				newPixels[index1 + 2] = _pixels[index2 + 2];
-			}
-			if(byteFormat == 4)
-			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-				newPixels[index1 + 1] = _pixels[index2 + 1];
-				newPixels[index1 + 2] = _pixels[index2 + 2];
-				newPixels[index1 + 3] = _pixels[index2 + 3];
+				case 24:
+				{
+					newPixels[index1 + 0] = _pixels[index2 + 0];
+					newPixels[index1 + 1] = _pixels[index2 + 1];
+					newPixels[index1 + 2] = _pixels[index2 + 2];
+
+					break;
+				}
+				case 32:
+				{
+					newPixels[index1 + 0] = _pixels[index2 + 0];
+					newPixels[index1 + 1] = _pixels[index2 + 1];
+					newPixels[index1 + 2] = _pixels[index2 + 2];
+					newPixels[index1 + 3] = _pixels[index2 + 3];
+
+					break;
+				}
 			}
 		}
 	}

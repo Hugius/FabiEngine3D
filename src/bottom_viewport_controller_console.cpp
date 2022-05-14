@@ -40,7 +40,7 @@ void BottomViewportController::_updateConsole()
 			_clearConsole();
 			_fillConsole();
 		}
-		if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD))
+		else if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD))
 		{
 			_scrollingOffset += CHAR_SIZE.y;
 			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);

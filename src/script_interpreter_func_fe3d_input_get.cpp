@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 			}
 		}
 	}
-	if(functionName == "fe3d:input_is_keyboard_held")
+	else if(functionName == "fe3d:input_is_keyboard_held")
 	{
 		const auto types = {SVT::STRING};
 

@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	}
 	else if(functionName == "fe3d:cursor_set_visible")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	}
 	else if(functionName == "fe3d:cursor_set_position")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	}
 	else if(functionName == "fe3d:vsync_set_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

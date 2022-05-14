@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 {
 	if(functionName == "fe3d:input_is_mouse_scrolled")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:input_is_mouse_held")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:input_is_mouse_pressed")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:input_is_mouse_toggled")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	if(functionName == "fe3d:input_is_keyboard_held")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:input_is_keyboard_pressed")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:input_is_keyboard_toggled")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

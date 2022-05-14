@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 {
 	if(functionName == "fe3d:terrain_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_select")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_min_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_max_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_lightness")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_max_height")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_normal_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_blend_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -173,7 +173,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_red_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_green_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_blue_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_red_normal_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -229,7 +229,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_green_normal_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_blue_normal_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -257,7 +257,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_wireframe_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -271,7 +271,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -285,7 +285,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_specular_shininess")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -299,7 +299,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_specular_intensity")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -313,7 +313,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -327,7 +327,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_red_repeat")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -341,7 +341,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_green_repeat")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -355,7 +355,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_blue_repeat")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -369,7 +369,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_specular")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -383,7 +383,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:terrain_set_wireframed")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

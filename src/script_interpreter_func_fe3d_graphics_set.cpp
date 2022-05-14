@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 {
 	if(functionName == "fe3d:graphics_set_ambient_lighting_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_ambient_lighting_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_ambient_lighting_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_directional_lighting_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_directional_lighting_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_directional_lighting_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_cube_reflection_interval")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_cube_reflection_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_cube_refraction_interval")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_cube_refraction_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_planar_reflection_height")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -129,7 +129,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_planar_reflection_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_planar_refraction_height")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -151,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_planar_refraction_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -162,7 +162,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadows_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_position")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_lookat")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_size")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_lightness")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -229,7 +229,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_interval")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -240,7 +240,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_following_camera_x")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -251,7 +251,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_following_camera_y")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -262,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_shadow_following_camera_z")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -273,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_fog_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -284,7 +284,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_fog_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -295,7 +295,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_fog_thickness")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -306,7 +306,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_min_fog_distance")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -317,7 +317,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_max_fog_distance")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_dof_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -339,7 +339,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_dof_dynamic_distance")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_dof_blur_distance")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -361,7 +361,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_dof_dynamic")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -372,7 +372,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_dof_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -383,7 +383,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_motion_blur_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -394,7 +394,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_motion_blur_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -404,7 +404,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_motion_blur_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -415,7 +415,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_lens_flare_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -426,7 +426,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_lens_flare_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -447,7 +447,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_lens_flare_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -458,7 +458,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_lens_flare_sensitivity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -469,7 +469,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_bloom_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -480,7 +480,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_bloom_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -491,7 +491,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_bloom_blur_count")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -502,7 +502,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_bloom_type")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -528,7 +528,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_bloom_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -539,7 +539,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_sky_exposure_speed")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -550,7 +550,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_sky_exposure_intensity")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -561,7 +561,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_sky_exposure_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -572,7 +572,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_anti_aliasing_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -583,7 +583,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	}
 	else if(functionName == "fe3d:graphics_set_anisotropic_filtering_quality")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

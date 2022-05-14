@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 {
 	if(functionName == "fe3d:client_start")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:client_connect")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:client_send_tcp_message")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:client_send_udp_message")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

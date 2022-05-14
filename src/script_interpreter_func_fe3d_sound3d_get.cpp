@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 {
 	if(functionName == "fe3d:sound3d_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_audio_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_is_started")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_is_paused")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_volume")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_left_intensity")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_right_intensity")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_time")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_started_count")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -214,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -228,7 +228,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -256,7 +256,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_max_volume")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_get_max_distance")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 {
 	if(functionName == "fe3d:raycast_set_terrain_intersection_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_set_terrain_intersection_distance")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_set_terrain_intersection_precision")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_set_aabb_intersection_enabled")
 	{
-		auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

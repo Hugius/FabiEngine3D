@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 {
 	if(functionName == "fe3d:pointlight_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_radius")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_intensity")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	}
 	else if(functionName == "fe3d:pointlight_set_shape")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

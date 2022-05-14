@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_min_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_min_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_min_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_max_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_max_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_max_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_dudv_map_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_height_map_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_normal_map_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_has_dudv_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_has_height_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -205,7 +205,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_has_normal_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -219,7 +219,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_max_depth")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -233,7 +233,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_ripple_speed_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -247,7 +247,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_ripple_speed_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -261,7 +261,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wave_speed_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -275,7 +275,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wave_speed_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -289,7 +289,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_height")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -303,7 +303,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -317,7 +317,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -331,7 +331,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -345,7 +345,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -359,7 +359,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -373,7 +373,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -387,7 +387,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_size")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -401,7 +401,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_texture_repeat")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -415,7 +415,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_wave_height")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -429,7 +429,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_specular_shininess")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -443,7 +443,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_get_specular_intensity")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -457,7 +457,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_is_reflective")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -471,7 +471,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_is_refractive")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -485,7 +485,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_is_specular")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -499,7 +499,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_is_edged")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -513,7 +513,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:water_is_wireframed")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 {
 	if(functionName == "fe3d:sky_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_select")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_lightness")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_wireframe_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_rotate")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_rotate_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_wireframed")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -173,7 +173,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_left_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_right_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_bottom_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_top_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -229,7 +229,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_back_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_front_cube_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -257,7 +257,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_rotation_order")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

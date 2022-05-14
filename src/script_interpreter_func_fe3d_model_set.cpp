@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 {
 	if(functionName == "fe3d:model_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_face_culled")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_base_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_base_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_base_rotation_origin")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_base_size")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_part_position")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_part_rotation")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_part_rotation_origin")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_part_size")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_move_base")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_rotate_base")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_scale_base")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -259,7 +259,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_move_part")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -276,7 +276,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_rotate_part")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -293,7 +293,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_scale_part")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -310,7 +310,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_move_base_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -324,7 +324,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_rotate_base_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -338,7 +338,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_scale_base_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -352,7 +352,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_move_part_to")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -369,7 +369,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_rotate_part_to")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -386,7 +386,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_scale_part_to")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -403,7 +403,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_min_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -417,7 +417,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_max_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -431,7 +431,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_aabb_raycast_responsive")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -457,7 +457,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_aabb_collision_responsive")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -483,7 +483,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -500,7 +500,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -517,7 +517,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_emission_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -534,7 +534,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_specular_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -551,7 +551,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_reflection_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -568,7 +568,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_refraction_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -585,7 +585,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_normal_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -602,7 +602,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_color")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -619,7 +619,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_wireframe_color")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -636,7 +636,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_lod_id")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -650,7 +650,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_lightness")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -667,7 +667,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_specular_shininess")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -684,7 +684,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_specular_intensity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -701,7 +701,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_reflectivity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -718,7 +718,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_refractivity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -735,7 +735,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_lod_distance")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -749,7 +749,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_opacity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -766,7 +766,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_specular")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -783,7 +783,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_reflected")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -797,7 +797,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_refracted")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -811,7 +811,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_reflective")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -828,7 +828,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_refractive")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -845,7 +845,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_shadowed")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -859,7 +859,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_frozen")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -873,7 +873,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_wireframed")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -890,7 +890,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_bright")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -907,7 +907,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_emission_intensity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -924,7 +924,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_min_texture_alpha")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -941,7 +941,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_reflection_type")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -973,7 +973,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_refraction_type")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1005,7 +1005,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_rotation_order")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1058,7 +1058,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_start_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1098,7 +1098,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_pause_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1125,7 +1125,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_autopause_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1152,7 +1152,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_resume_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1179,7 +1179,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_stop_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1200,7 +1200,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_animation_speed_multiplier")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1221,7 +1221,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:model_set_animation_frame_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 {
 	if(functionName == "fe3d:sound3d_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_start")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_pause")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_resume")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_stop")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_set_max_volume")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_set_max_distance")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

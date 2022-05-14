@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 	}
 	else if(functionName == "fe3d:time_is_passed")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 {
 	if(functionName == "fe3d:directory_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_read")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

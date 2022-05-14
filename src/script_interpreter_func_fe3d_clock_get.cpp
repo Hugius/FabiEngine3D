@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 {
 	if(functionName == "fe3d:clock_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_is_started")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_is_paused")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_get_delta")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -9,11 +9,11 @@ using std::istringstream;
 
 void ScriptInterpreter::load()
 {
-	auto lastLoggerMessageCount = Logger::getMessageCount();
+	const auto lastLoggerMessageCount = Logger::getMessageCount();
 
 	for(const auto & scriptId : _script->getScriptFileIds())
 	{
-		auto scriptFile = _script->getScriptFile(scriptId);
+		const auto scriptFile = _script->getScriptFile(scriptId);
 
 		if(scriptFile->getLineCount() == 0)
 		{
@@ -29,20 +29,23 @@ void ScriptInterpreter::load()
 			return;
 		}
 
-		string scriptType = "";
+		string scriptType;
 		if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_initialize"))
 		{
 			_initializeScriptIds.push_back(scriptId);
+
 			scriptType = "script_type_initialize";
 		}
 		else if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_update"))
 		{
 			_updateScriptIds.push_back(scriptId);
+
 			scriptType = "script_type_update";
 		}
 		else if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_terminate"))
 		{
 			_terminateScriptIds.push_back(scriptId);
+
 			scriptType = "script_type_terminate";
 		}
 		else
@@ -112,12 +115,14 @@ void ScriptInterpreter::load()
 
 		return;
 	}
+
 	if(_updateScriptIds.empty())
 	{
 		_throwStartupError("no`script_type_update` scripts found");
 
 		return;
 	}
+
 	if(_terminateScriptIds.empty())
 	{
 		_throwStartupError("no`script_type_terminate` scripts found");
@@ -131,12 +136,14 @@ void ScriptInterpreter::load()
 
 		return;
 	}
+
 	if(_updateEntryId.empty())
 	{
 		_throwStartupError("no`script_state_entry` found for `script_type_update` scripts");
 
 		return;
 	}
+
 	if(_terminateEntryId.empty())
 	{
 		_throwStartupError("no`script_state_entry` found for `script_type_terminate` scripts");
@@ -146,27 +153,30 @@ void ScriptInterpreter::load()
 
 	for(const auto & scriptId : _script->getScriptFileIds())
 	{
-		auto scriptFile = _script->getScriptFile(scriptId);
+		const auto scriptFile = _script->getScriptFile(scriptId);
 
 		for(int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
-			auto scriptLineText = scriptFile->getLine(lineIndex);
+			const auto scriptLineText = scriptFile->getLine(lineIndex);
+
 			auto scriptLineTextStream = istringstream(scriptLineText);
+
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
 
 			if(noWhiteSpace.substr(0, 3) == "///")
 			{
-				int charIndex;
-				for(charIndex = 0; charIndex < static_cast<int>(scriptLineText.size()); charIndex++)
+				int characterIndex = 0;
+
+				for(characterIndex; characterIndex < static_cast<int>(scriptLineText.size()); characterIndex++)
 				{
-					if(scriptLineText[charIndex] != ' ')
+					if(scriptLineText[characterIndex] != ' ')
 					{
 						break;
 					}
 				}
 
-				scriptFile->editLine(lineIndex, scriptLineText.substr(charIndex));
+				scriptFile->editLine(lineIndex, scriptLineText.substr(characterIndex));
 			}
 		}
 	}

@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 {
 	if(functionName == "fe3d:world_load_editor")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_sky")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_terrain")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_water")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_model")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_quad3d")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_text3d")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -164,7 +164,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_aabb")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_pointlight")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_spotlight")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_captor")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -236,7 +236,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_add_custom_sound3d")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_save_custom")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -281,7 +281,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_load_custom")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -320,7 +320,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_delete_custom")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_get_closest_model")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_get_distance_to_model")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -229,7 +229,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_get_distance_to_quad3d")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:raycast_get_distance_to_text3d")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

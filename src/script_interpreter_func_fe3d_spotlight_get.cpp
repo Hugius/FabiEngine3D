@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 {
 	if(functionName == "fe3d:spotlight_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_is_visible")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_front_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_front_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_front_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -198,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_yaw")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_pitch")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_intensity")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -240,7 +240,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_angle")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	}
 	else if(functionName == "fe3d:spotlight_get_distance")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

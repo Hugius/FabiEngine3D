@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 {
 	if(functionName == "fe3d:quad2d_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_min_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_max_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_diffuse_map")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -138,7 +138,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_rotate")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_rotate_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -209,7 +209,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_size")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -223,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_scale")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -237,7 +237,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_scale_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -252,7 +252,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -266,7 +266,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_wireframe_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -280,7 +280,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_opacity")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -294,7 +294,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -308,7 +308,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_wireframed")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -322,7 +322,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_horizontally_flipped")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -336,7 +336,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_vertically_flipped")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_uv_multiplier")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -364,7 +364,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_uv_offset")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -378,7 +378,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_start_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -405,7 +405,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_pause_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -433,7 +433,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_autopause_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -460,7 +460,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_resume_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -487,7 +487,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_stop_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -508,7 +508,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_animation_row_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -529,7 +529,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_animation_column_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -550,7 +550,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_animation_interval_multiplier")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -571,7 +571,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad2d_set_animation_interval_divider")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

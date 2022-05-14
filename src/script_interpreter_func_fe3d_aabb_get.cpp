@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 {
 	if(functionName == "fe3d:aabb_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_min_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_min_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_min_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_max_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_max_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_max_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_is_visible")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -223,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -244,7 +244,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -265,7 +265,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_size_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -286,7 +286,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_size_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -307,7 +307,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_size_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -344,7 +344,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_is_collision_responsive")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -365,7 +365,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_is_raycast_responsive")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -386,7 +386,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -407,7 +407,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -428,7 +428,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 	}
 	else if(functionName == "fe3d:aabb_get_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

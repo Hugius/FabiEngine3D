@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 {
 	if(functionName == "fe3d:captor_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_get_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_get_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_get_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_get_exception_id")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

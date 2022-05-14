@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 {
 	if(functionName == "fe3d:server_start")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_send_tcp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_send_udp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_broadcast_tcp_message")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_broadcast_udp_message")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -227,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_disconnect_client")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

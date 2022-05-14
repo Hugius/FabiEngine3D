@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 {
 	if(functionName == "fe3d:directory_create")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:directory_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_create")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, 2))
 		{
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_write")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, 2))
 		{
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_add_new_line")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_clear")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

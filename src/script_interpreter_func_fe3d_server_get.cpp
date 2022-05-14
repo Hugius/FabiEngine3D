@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:server_is_client_connected")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

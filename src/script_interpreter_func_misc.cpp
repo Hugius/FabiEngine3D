@@ -5,37 +5,38 @@ using SVT = ScriptValueType;
 
 const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCall(const string & scriptLine)
 {
-	vector<shared_ptr<ScriptValue>> returnValues;
-	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
-	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
+	const auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
+	const auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	if((openingParanthesisFound == scriptLine.end()) || (closingParanthesisFound == scriptLine.end()))
 	{
 		_throwRuntimeError("invalid syntax");
+
 		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
 		_throwRuntimeError("invalid syntax");
+
 		return {};
 	}
 
-	auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
-	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
-	argumentString.pop_back();
-	auto args = _extractValuesFromListString(argumentString);
+	const auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
+	const auto functionName = scriptLine.substr(0, parenthesisIndex);
+	const auto argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1), (scriptLine.size() - static_cast<size_t>(parenthesisIndex + 1) - 1));
+	const auto args = _extractValuesFromListString(argumentString);
+
+	vector<shared_ptr<ScriptValue>> returnValues = {};
 
 	if(_hasThrownError)
 	{
 		return {};
 	}
 
-	auto functionName = scriptLine.substr(0, parenthesisIndex);
-
 	if(functionName == "misc:list_concat")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -80,7 +81,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_size")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -106,7 +107,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_contains")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, 2))
 		{
@@ -175,7 +176,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_index")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, 2))
 		{
@@ -244,7 +245,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_min")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -312,7 +313,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_max")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -380,7 +381,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_reverse")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -407,7 +408,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_concat")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -418,7 +419,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_size")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -429,7 +430,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_contains")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -440,7 +441,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_part")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -459,7 +460,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_split")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -494,7 +495,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:string_reverse")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -511,7 +512,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:random_integer")
 	{
-		auto types = {SVT::INTEGER, SVT::INTEGER};
+		const auto types = {SVT::INTEGER, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -522,7 +523,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:random_decimal")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

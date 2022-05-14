@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 {
 	if(functionName == "fe3d:sound2d_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_audio_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_is_started")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_is_paused")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_volume")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_left_intensity")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_right_intensity")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_time")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound2d_get_started_count")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

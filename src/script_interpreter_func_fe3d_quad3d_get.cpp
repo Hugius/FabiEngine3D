@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 {
 	if(functionName == "fe3d:quad3d_is_visible")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_rotation_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_rotation_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_rotation_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_size_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_size_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_wireframe_color_r")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_wireframe_color_g")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_wireframe_color_b")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_horizontally_flipped")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -230,7 +230,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_vertically_flipped")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -244,7 +244,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_min_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_min_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -272,7 +272,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_min_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -286,7 +286,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_max_clip_position_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -300,7 +300,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_max_clip_position_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -314,7 +314,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_max_clip_position_z")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_opacity")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -342,7 +342,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_emission_intensity")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -356,7 +356,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_texture_repeat")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -370,7 +370,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_lightness")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -384,7 +384,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_facing_camera_horizontally")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -398,7 +398,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_facing_camera_vertically")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -412,7 +412,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_shadowed")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -426,7 +426,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_reflected")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -440,7 +440,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_refracted")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -454,7 +454,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_bright")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -468,7 +468,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_wireframed")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -482,7 +482,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_frozen")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -496,7 +496,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -512,7 +512,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_find_ids")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -548,7 +548,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_diffuse_map_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -562,7 +562,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_emission_map_path")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -576,7 +576,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_has_diffuse_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -590,7 +590,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_has_emission_map")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -604,7 +604,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_uv_multiplier_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -617,7 +617,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_uv_multiplier_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -631,7 +631,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_uv_offset_x")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -645,7 +645,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_uv_offset_y")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -659,7 +659,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_min_texture_alpha")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -673,7 +673,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_animation_started")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -687,7 +687,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_animation_paused")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -708,7 +708,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_is_animation_autopaused")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -729,7 +729,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_animation_row_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -750,7 +750,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_animation_column_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -771,7 +771,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_animation_play_count")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -792,7 +792,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_animation_interval_multiplier")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -813,7 +813,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_animation_interval_divider")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -834,7 +834,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:quad3d_get_rotation_order")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

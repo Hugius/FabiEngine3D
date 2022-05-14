@@ -8,37 +8,38 @@ using SVT = ScriptValueType;
 
 const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCall(const string & scriptLine)
 {
-	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
-	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
+	const auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
+	const auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	if((openingParanthesisFound == scriptLine.end()) || (closingParanthesisFound == scriptLine.end()))
 	{
 		_throwRuntimeError("invalid syntax");
+
 		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
 		_throwRuntimeError("invalid syntax");
+
 		return {};
 	}
 
-	auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
-	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
-	argumentString.pop_back();
-	vector<shared_ptr<ScriptValue>> returnValues;
-	auto args = _extractValuesFromListString(argumentString);
+	const auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
+	const auto functionName = scriptLine.substr(0, parenthesisIndex);
+	const auto argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1), (scriptLine.size() - static_cast<size_t>(parenthesisIndex + 1) - 1));
+	const auto args = _extractValuesFromListString(argumentString);
+
+	vector<shared_ptr<ScriptValue>> returnValues = {};
 
 	if(_hasThrownError)
 	{
 		return {};
 	}
 
-	auto functionName = scriptLine.substr(0, parenthesisIndex);
-
 	if(functionName == "math:tan")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -49,7 +50,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:sin")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -60,7 +61,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:cos")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -71,7 +72,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:atan")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -82,7 +83,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:asin")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -93,7 +94,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:acos")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -104,7 +105,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:atan2")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -184,7 +185,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:round")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -195,7 +196,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:floor")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -206,7 +207,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:ceil")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -240,7 +241,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:sqrt")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -283,7 +284,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:even")
 	{
-		auto types = {SVT::INTEGER};
+		const auto types = {SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -294,7 +295,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:angle_difference")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -305,7 +306,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:reference_angle")
 	{
-		auto types = {SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -316,7 +317,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else if(functionName == "math:vector_distance")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -330,6 +331,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	else
 	{
 		_throwRuntimeError("math function does not exist");
+
 		return {};
 	}
 

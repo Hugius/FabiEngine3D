@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_is_editor_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:world_is_custom_existing")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

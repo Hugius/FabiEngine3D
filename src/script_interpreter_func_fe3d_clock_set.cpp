@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 {
 	if(functionName == "fe3d:clock_create")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_start")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_pause")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_resume")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -162,7 +162,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 	}
 	else if(functionName == "fe3d:clock_stop")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

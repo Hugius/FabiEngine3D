@@ -51,14 +51,14 @@ const int Script::getScriptFileCount() const
 
 const int Script::getTotalLineCount() const
 {
-	int total = 0;
+	int result = 0;
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
-		total += scriptFile->getLineCount();
+		result += scriptFile->getLineCount();
 	}
 
-	return total;
+	return result;
 }
 
 const bool Script::isScriptFileExisting(const string & scriptId) const

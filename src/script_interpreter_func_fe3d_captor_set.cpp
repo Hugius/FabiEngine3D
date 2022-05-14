@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 {
 	if(functionName == "fe3d:captor_place")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_delete")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_capture")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	}
 	else if(functionName == "fe3d:captor_set_exception_id")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_model")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -113,7 +113,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_quad3d")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_text3d")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_aabb")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -236,7 +236,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_models")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -293,7 +293,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_quad3ds")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -333,7 +333,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_text3ds")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -373,7 +373,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_check_camera_aabbs")
 	{
-		auto types = {SVT::STRING};
+		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{

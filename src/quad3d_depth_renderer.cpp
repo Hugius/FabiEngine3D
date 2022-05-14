@@ -6,7 +6,6 @@ using std::max;
 void Quad3dDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
@@ -58,6 +57,7 @@ void Quad3dDepthRenderer::render(const shared_ptr<Quad3d> quad3d)
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, quad3d->getDiffuseTextureBuffer()->getTboId());
 	}
 
@@ -70,6 +70,7 @@ void Quad3dDepthRenderer::render(const shared_ptr<Quad3d> quad3d)
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

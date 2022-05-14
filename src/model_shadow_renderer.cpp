@@ -7,7 +7,6 @@ using std::max;
 void ModelShadowRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_shadowView", _renderStorage->getShadowView());
 	_shaderBuffer->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
 	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
@@ -62,6 +61,7 @@ void ModelShadowRenderer::render(const shared_ptr<Model> model)
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
+
 			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
 
@@ -74,6 +74,7 @@ void ModelShadowRenderer::render(const shared_ptr<Model> model)
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

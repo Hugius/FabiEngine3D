@@ -9,7 +9,6 @@ using std::max;
 void ModelColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_shadowView", _renderStorage->getShadowView());
 	_shaderBuffer->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
@@ -50,16 +49,21 @@ void ModelColorRenderer::bind()
 	if(_renderStorage->getPlanarReflectionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getPlanarReflectionTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getPlanarRefractionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getPlanarRefractionTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getTboId());
 	}
 
@@ -87,16 +91,21 @@ void ModelColorRenderer::unbind()
 	if(_renderStorage->getPlanarReflectionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getPlanarRefractionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -105,7 +114,7 @@ void ModelColorRenderer::unbind()
 
 void ModelColorRenderer::processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights)
 {
-	vector<shared_ptr<Pointlight>> visiblePointlights;
+	vector<shared_ptr<Pointlight>> visiblePointlights = {};
 
 	for(const auto & [pointlightId, pointlight] : pointlights)
 	{
@@ -129,7 +138,7 @@ void ModelColorRenderer::processPointlights(const unordered_map<string, shared_p
 
 void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights)
 {
-	vector<shared_ptr<Spotlight>> visibleSpotlights;
+	vector<shared_ptr<Spotlight>> visibleSpotlights = {};
 
 	for(const auto & [spotlightId, spotlight] : spotlights)
 	{
@@ -174,24 +183,29 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		if(captors.at(model->getPreviousCaptorId())->getReflectionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getReflectionTextureBuffer()->getTboId());
 		}
 		if(captors.at(model->getPreviousCaptorId())->getRefractionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getPreviousCaptorId())->getRefractionTextureBuffer()->getTboId());
 		}
 	}
+
 	if(!model->getCurrentCaptorId().empty())
 	{
 		if(captors.at(model->getCurrentCaptorId())->getReflectionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE2);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getReflectionTextureBuffer()->getTboId());
 		}
 		if(captors.at(model->getCurrentCaptorId())->getRefractionTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);
+
 			glBindTexture(GL_TEXTURE_CUBE_MAP, captors.at(model->getCurrentCaptorId())->getRefractionTextureBuffer()->getTboId());
 		}
 	}
@@ -238,69 +252,90 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
+
 			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
+
 		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
+
 			glBindTexture(GL_TEXTURE_2D, model->getEmissionTextureBuffer(partId)->getTboId());
 		}
+
 		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE9);
+
 			glBindTexture(GL_TEXTURE_2D, model->getSpecularTextureBuffer(partId)->getTboId());
 		}
+
 		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE10);
+
 			glBindTexture(GL_TEXTURE_2D, model->getReflectionTextureBuffer(partId)->getTboId());
 		}
+
 		if(model->getRefractionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE11);
+
 			glBindTexture(GL_TEXTURE_2D, model->getRefractionTextureBuffer(partId)->getTboId());
 		}
+
 		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE12);
+
 			glBindTexture(GL_TEXTURE_2D, model->getNormalTextureBuffer(partId)->getTboId());
 		}
 
 		glBindVertexArray(model->getVertexBuffer(partId)->getVaoId());
 
 		glDrawArrays(GL_TRIANGLES, 0, model->getVertexBuffer(partId)->getVertexCount());
-		_renderStorage->increaseTriangleCount(model->getVertexBuffer(partId)->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
+
 		if(model->getEmissionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
+
 		if(model->getSpecularTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE9);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
+
 		if(model->getReflectionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE10);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
+
 		if(model->getRefractionTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE11);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
+
 		if(model->getNormalTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE12);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
@@ -313,20 +348,29 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 		{
 			glDisable(GL_CULL_FACE);
 		}
+
+		_renderStorage->increaseTriangleCount(model->getVertexBuffer(partId)->getVertexCount() / 3);
 	}
 
 	if(model->getPreviousCaptorId().empty())
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
+
 	if(model->getCurrentCaptorId().empty())
 	{
 		glActiveTexture(GL_TEXTURE2);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
 		glActiveTexture(GL_TEXTURE3);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 }

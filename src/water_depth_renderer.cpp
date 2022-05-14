@@ -6,7 +6,6 @@ using std::max;
 void WaterDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 
@@ -50,7 +49,6 @@ void WaterDepthRenderer::render(const shared_ptr<Water> water)
 	glBindVertexArray(water->getLowQualityVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, water->getLowQualityVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(water->getLowQualityVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

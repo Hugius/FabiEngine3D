@@ -6,7 +6,6 @@ using std::max;
 void AabbDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 
@@ -50,7 +49,6 @@ void AabbDepthRenderer::render(const shared_ptr<Aabb> aabb)
 	glBindVertexArray(aabb->getVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_LINE_STRIP, 0, aabb->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(aabb->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

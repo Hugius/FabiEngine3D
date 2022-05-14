@@ -5,7 +5,6 @@
 void Quad2dColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -73,19 +72,22 @@ void Quad2dColorRenderer::render(const shared_ptr<Quad2d> quad2d)
 	if(quad2d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, quad2d->getDiffuseTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(quad2d->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
 	if(quad2d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
+	_renderStorage->increaseTriangleCount(quad2d->getVertexBuffer()->getVertexCount() / 3);
 }

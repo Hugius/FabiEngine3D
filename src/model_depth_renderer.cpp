@@ -6,7 +6,6 @@ using std::max;
 void ModelDepthRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
@@ -62,6 +61,7 @@ void ModelDepthRenderer::render(const shared_ptr<Model> model)
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
+
 			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
 
@@ -74,6 +74,7 @@ void ModelDepthRenderer::render(const shared_ptr<Model> model)
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
+
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

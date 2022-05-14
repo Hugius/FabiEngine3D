@@ -6,7 +6,6 @@ using std::max;
 void AabbColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_cameraPosition", _camera->getPosition());
@@ -57,7 +56,8 @@ void AabbColorRenderer::render(const shared_ptr<Aabb> aabb)
 	glBindVertexArray(aabb->getVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_LINE_STRIP, 0, aabb->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(aabb->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
+
+	_renderStorage->increaseTriangleCount(aabb->getVertexBuffer()->getVertexCount() / 3);
 }

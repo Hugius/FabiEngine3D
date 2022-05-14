@@ -12,7 +12,6 @@ void BlurRenderer::inject(shared_ptr<CaptureBuffer> captureBuffer)
 void BlurRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
 }
 
@@ -32,8 +31,11 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 		for(int index = 0; index < blurCount; index++)
 		{
 			_captureBuffer->bind();
+
 			_render(quad2d, texture);
+
 			_captureBuffer->unbind();
+
 			texture = _captureBuffer->getTexture(0);
 		}
 	}
@@ -45,8 +47,11 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 		for(int index = 0; index < blurCount; index++)
 		{
 			_captureBuffer->bind();
+
 			_render(quad2d, texture);
+
 			_captureBuffer->unbind();
+
 			texture = _captureBuffer->getTexture(0);
 		}
 	}
@@ -57,6 +62,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 void BlurRenderer::_render(const shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture)
 {
 	glActiveTexture(GL_TEXTURE0);
+
 	glBindTexture(GL_TEXTURE_2D, texture->getTboId());
 
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
@@ -66,5 +72,6 @@ void BlurRenderer::_render(const shared_ptr<Quad2d> quad2d, shared_ptr<TextureBu
 	glBindVertexArray(0);
 
 	glActiveTexture(GL_TEXTURE0);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

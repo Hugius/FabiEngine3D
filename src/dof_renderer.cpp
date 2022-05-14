@@ -4,7 +4,6 @@
 void DofRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_depthMap", 0);
 	_shaderBuffer->uploadUniform("u_sceneMap", 1);
 	_shaderBuffer->uploadUniform("u_dofMap", 2);
@@ -18,16 +17,21 @@ void DofRenderer::bind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getDofTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDofTextureBuffer()->getTboId());
 	}
 }
@@ -37,16 +41,21 @@ void DofRenderer::unbind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getDofTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

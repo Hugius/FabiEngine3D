@@ -3,7 +3,6 @@
 void SkyColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", mat44(mat33(_camera->getView())));
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_cubeMap", 0);
@@ -36,19 +35,20 @@ void SkyColorRenderer::render(const shared_ptr<Sky> sky)
 	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, sky->getCubeTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(sky->getVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, sky->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(sky->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
 	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 
@@ -56,4 +56,6 @@ void SkyColorRenderer::render(const shared_ptr<Sky> sky)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
+
+	_renderStorage->increaseTriangleCount(sky->getVertexBuffer()->getVertexCount() / 3);
 }

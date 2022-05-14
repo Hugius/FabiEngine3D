@@ -8,7 +8,6 @@ using std::max;
 void WaterColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());
@@ -37,16 +36,21 @@ void WaterColorRenderer::bind()
 	if(_renderStorage->getWaterReflectionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterReflectionTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getWaterRefractionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterRefractionTextureBuffer()->getTboId());
 	}
+
 	if(_renderStorage->getWaterEdgeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
+
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterEdgeTextureBuffer()->getTboId());
 	}
 
@@ -74,16 +78,21 @@ void WaterColorRenderer::unbind()
 	if(_renderStorage->getWaterReflectionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getWaterRefractionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(_renderStorage->getWaterEdgeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -140,16 +149,21 @@ void WaterColorRenderer::render(const shared_ptr<Water> water)
 	if(water->getDudvTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
+
 		glBindTexture(GL_TEXTURE_2D, water->getDudvTextureBuffer()->getTboId());
 	}
+
 	if(water->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
+
 		glBindTexture(GL_TEXTURE_2D, water->getNormalTextureBuffer()->getTboId());
 	}
+
 	if(water->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
+
 		glBindTexture(GL_TEXTURE_2D, water->getHeightTextureBuffer()->getTboId());
 	}
 
@@ -165,12 +179,10 @@ void WaterColorRenderer::render(const shared_ptr<Water> water)
 	if(water->getHeightTextureBuffer() != nullptr)
 	{
 		glDrawArrays(GL_TRIANGLES, 0, water->getHighQualityVertexBuffer()->getVertexCount());
-		_renderStorage->increaseTriangleCount(water->getHighQualityVertexBuffer()->getVertexCount() / 3);
 	}
 	else
 	{
 		glDrawArrays(GL_TRIANGLES, 0, water->getLowQualityVertexBuffer()->getVertexCount());
-		_renderStorage->increaseTriangleCount(water->getLowQualityVertexBuffer()->getVertexCount() / 3);
 	}
 
 	glBindVertexArray(0);
@@ -178,21 +190,35 @@ void WaterColorRenderer::render(const shared_ptr<Water> water)
 	if(water->getDudvTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(water->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(water->getHeightTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(water->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
+	if(water->getHeightTextureBuffer() != nullptr)
+	{
+		_renderStorage->increaseTriangleCount(water->getHighQualityVertexBuffer()->getVertexCount() / 3);
+	}
+	else
+	{
+		_renderStorage->increaseTriangleCount(water->getLowQualityVertexBuffer()->getVertexCount() / 3);
 	}
 }

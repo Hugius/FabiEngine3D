@@ -7,7 +7,6 @@ using std::max;
 void Quad3dColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shaderBuffer->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
@@ -81,29 +80,34 @@ void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, quad3d->getDiffuseTextureBuffer()->getTboId());
 	}
+
 	if(quad3d->getEmissionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, quad3d->getEmissionTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(quad3d->getVertexBuffer()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, quad3d->getVertexBuffer()->getVertexCount());
-	_renderStorage->increaseTriangleCount(quad3d->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	if(quad3d->getEmissionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
+
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -111,4 +115,6 @@ void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
+
+	_renderStorage->increaseTriangleCount(quad3d->getVertexBuffer()->getVertexCount() / 3);
 }

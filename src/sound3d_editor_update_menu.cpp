@@ -97,7 +97,7 @@ void Sound3dEditor::_updateChoiceMenu()
 
 			_fe3d->sound3d_setMaxVolume(_currentSound3dId, (value / VOLUME_MULTIPLIER));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "maxDistance") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "maxDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

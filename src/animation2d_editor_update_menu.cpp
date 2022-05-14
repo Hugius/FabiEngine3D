@@ -119,14 +119,14 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			_fe3d->animation2d_setRowCount(_currentAnimation2dId, value);
 		}
-		if((_gui->getOverlay()->getValueFormId() == "columnCount") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "columnCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
 			_fe3d->animation2d_setColumnCount(_currentAnimation2dId, value);
 		}
-		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);

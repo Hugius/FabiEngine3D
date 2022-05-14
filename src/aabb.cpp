@@ -49,8 +49,8 @@ void Aabb::updateTarget()
 			const auto speedMultiplier = Mathematics::normalize(_localSizeTarget - _localSize);
 
 			_localSize += (speedMultiplier * _localSizeTargetSpeed);
-
 			_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
+
 			if(fabsf(_localSizeTarget.x - _localSize.x) <= _localSizeTargetSpeed)
 			{
 				_localSize.x = _localPositionTarget.x;
@@ -92,8 +92,8 @@ void Aabb::updateTarget()
 			const auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
 
 			_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
-
 			_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+
 			if(fabsf(_baseSizeTarget.x - _baseSize.x) <= _baseSizeTargetSpeed)
 			{
 				_baseSize.x = _basePositionTarget.x;

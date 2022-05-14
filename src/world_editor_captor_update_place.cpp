@@ -17,7 +17,7 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->captor_setPosition(CAPTOR_MODEL_ID, fvec3(value, newPosition.y, newPosition.z));
 				_fe3d->model_setBasePosition(CAPTOR_MODEL_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
-			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			else if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
@@ -25,7 +25,7 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->captor_setPosition(CAPTOR_MODEL_ID, fvec3(newPosition.x, value, newPosition.z));
 				_fe3d->model_setBasePosition(CAPTOR_MODEL_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
-			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			else if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

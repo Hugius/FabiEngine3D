@@ -73,7 +73,6 @@ void Quad3d::updateTarget()
 		const auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 
 		_size += (speedMultiplier * _sizeTargetSpeed);
-
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)

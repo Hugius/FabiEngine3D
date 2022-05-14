@@ -113,56 +113,56 @@ void Animation3dEditor::_updateFrameMenu()
 
 			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3((value * multiplier), targetTransformation.y, targetTransformation.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "targetTransformationY") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "targetTransformationY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, (value * multiplier), targetTransformation.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "targetTransformationZ") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "targetTransformationZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, targetTransformation.y, (value * multiplier)));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "speedX") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "speedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setSpeed(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3((value / 1000.0f), speed.y, speed.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "speedY") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "speedY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setSpeed(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(speed.x, (value / 1000.0f), speed.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "speedZ") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "speedZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setSpeed(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(speed.x, speed.y, (value / 1000.0f)));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "rotationOriginX") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "rotationOriginX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setRotationOrigin(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3((value / 1000.0f), rotationOrigin.y, rotationOrigin.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "rotationOriginY") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "rotationOriginY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->animation3d_setRotationOrigin(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(rotationOrigin.x, (value / 1000.0f), rotationOrigin.z));
 		}
-		if((_gui->getOverlay()->getValueFormId() == "rotationOriginZ") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "rotationOriginZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

@@ -16,14 +16,14 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_fe3d->quad3d_setPosition(_currentTemplateQuad3dId, fvec3(value, newPosition.y, newPosition.z));
 			}
-			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			else if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 				_fe3d->quad3d_setPosition(_currentTemplateQuad3dId, fvec3(newPosition.x, value, newPosition.z));
 			}
-			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			else if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

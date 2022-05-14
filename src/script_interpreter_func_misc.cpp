@@ -57,7 +57,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
+			const auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
+
 			if(firstListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + firstName + "\" is not of type LST");
@@ -65,7 +66,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
+			const auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
+
 			if(secondListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + secondName + "\" is not of type LST");
@@ -77,6 +79,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				returnValues.push_back(firstListVariable->getValue(index));
 			}
+
 			for(int index = 0; index < secondListVariable->getValueCount(); index++)
 			{
 				returnValues.push_back(secondListVariable->getValue(index));
@@ -89,7 +92,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -98,7 +101,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -124,7 +128,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
+
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
@@ -132,7 +137,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -141,6 +147,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			bool result = false;
+
 			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
@@ -196,7 +203,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
+
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
@@ -204,7 +212,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -213,6 +222,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			int result = -1;
+
 			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
@@ -261,7 +271,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -270,7 +280,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -285,7 +296,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto type = listVariable->getValue(0)->getType();
+			const auto type = listVariable->getValue(0)->getType();
+
 			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if(listVariable->getValue(index)->getType() != type)
@@ -343,7 +355,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -352,7 +364,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -367,7 +380,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto type = listVariable->getValue(0)->getType();
+			const auto type = listVariable->getValue(0)->getType();
+
 			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if(listVariable->getValue(index)->getType() != type)
@@ -382,7 +396,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				case ScriptValueType::INTEGER:
 				{
-					vector<int> rawValues;
+					vector<int> rawValues = {};
+
 					for(int index = 0; index < listVariable->getValueCount(); index++)
 					{
 						rawValues.push_back(listVariable->getValue(index)->getInteger());
@@ -396,7 +411,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				}
 				case ScriptValueType::DECIMAL:
 				{
-					vector<float> rawValues;
+					vector<float> rawValues = {};
+
 					for(int index = 0; index < listVariable->getValueCount(); index++)
 					{
 						rawValues.push_back(listVariable->getValue(index)->getDecimal());
@@ -423,7 +439,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto listName = args[0]->getString();
+			const auto listName = args[0]->getString();
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -432,7 +448,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
@@ -516,16 +533,19 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto delimiter = args[1]->getString();
 
 			string result = "";
+
 			for(int index = 0; index < static_cast<int>(fullString.size()); index++)
 			{
-				if(fullString[index] == delimiter.back())
+				if(fullString[index] == delimiter[0])
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
 					result = "";
 				}
 				else if(index == (fullString.size() - 1))
 				{
 					result += fullString[index];
+
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}
 				else
@@ -542,8 +562,11 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			string result = "";
-			string content = args[0]->getString();
+
+			auto content = args[0]->getString();
+
 			reverse(content.begin(), content.end());
+
 			for(const auto & character : content)
 			{
 				result += character;

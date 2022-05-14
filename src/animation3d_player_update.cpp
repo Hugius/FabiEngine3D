@@ -26,6 +26,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 		const auto model = _modelManager->getModel(splitKey.second);
 
 		int finishedPartCount = 0;
+
 		for(const auto & partId : startedAnimation->getPartIds())
 		{
 			auto totalMovement = startedAnimation->getTotalMovement(partId);
@@ -66,7 +67,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
 				{
-					float finalSpeed = speed.x;
+					auto finalSpeed = speed.x;
 
 					switch(transformationType)
 					{
@@ -111,6 +112,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					}
 
 					float difference = 0.0f;
+
 					if((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) ||
 					   (isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
 					   (isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
@@ -191,7 +193,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
 				{
-					float finalSpeed = speed.y;
+					auto finalSpeed = speed.y;
 
 					switch(transformationType)
 					{
@@ -236,6 +238,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					}
 
 					float difference = 0.0f;
+
 					if((isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, speed.y)) ||
 					   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
 					   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
@@ -316,7 +319,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.z, targetTransformation.z, speed.z)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.z, targetTransformation.z, speed.z)))
 				{
-					float finalSpeed = speed.z;
+					auto finalSpeed = speed.z;
 
 					switch(transformationType)
 					{

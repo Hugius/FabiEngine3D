@@ -41,22 +41,28 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	};
 
 	bool isConstant = false;
+
 	if(scope == ScriptScopeType::GLOBAL)
 	{
-		string possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
+		const auto possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
+
 		isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
 	}
 	else
 	{
-		string possibleConstKeyword = scriptLine.substr(0, CONST_KEYWORD.size() + 1);
+		const auto possibleConstKeyword = scriptLine.substr(0, CONST_KEYWORD.size() + 1);
+
 		isConstant = (possibleConstKeyword == (CONST_KEYWORD + " "));
 	}
 
 	string words[3] = {"", "", ""};
+
 	int typeIndex = 0;
 	int wordIndex = 0;
+
 	typeIndex += ((scope == ScriptScopeType::GLOBAL) ? static_cast<int>(GLOBAL_KEYWORD.size() + 1) : 0);
 	typeIndex += (isConstant ? static_cast<int>(CONST_KEYWORD.size() + 1) : 0);
+
 	for(const auto & character : scriptLine.substr(typeIndex))
 	{
 		if(character == ' ')
@@ -73,9 +79,10 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 			words[wordIndex] += character;
 		}
 	}
-	string typeString = words[0];
-	string nameString = words[1];
-	string equalSignString = words[2];
+
+	const auto typeString = words[0];
+	const auto nameString = words[1];
+	const auto equalSignString = words[2];
 
 	if(typeString.empty())
 	{
@@ -102,12 +109,15 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		return;
 	}
 
-	bool isValidName = !nameString.empty() &&
+	auto isValidName =
+		(
+		!nameString.empty() &&
 		nameString.substr(0, 5) != "fe3d:" &&
 		nameString.substr(0, 5) != "math:" &&
 		nameString.substr(0, 5) != "misc:" &&
 		!isdigit(nameString[0]) &&
-		(isalnum(nameString[0]) || nameString[0] == '_');
+		(isalnum(nameString[0]) || nameString[0] == '_')
+		);
 
 	for(const auto & word : forbiddenVariableNames)
 	{
@@ -160,7 +170,8 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		return;
 	}
 
-	auto minLineSize = (scriptLine.find('=') + 3);
+	const auto minLineSize = (scriptLine.find('=') + 3);
+
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
@@ -168,14 +179,12 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		return;
 	}
 
-	string valueString = scriptLine.substr(minLineSize - 1);
+	auto valueString = scriptLine.substr(minLineSize - 1);
 
 	if((typeString == LIST_KEYWORD) && _isListValue(valueString))
 	{
-		string listString = valueString.substr(1);
-		listString.pop_back();
-
-		auto values = _extractValuesFromListString(listString);
+		const auto listString = valueString.substr(1, (valueString.size() - 2));
+		const auto values = _extractValuesFromListString(listString);
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)});
 	}
@@ -184,25 +193,25 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		auto value = make_shared<ScriptValue>(ScriptValueType::STRING, valueString);
+		const auto value = make_shared<ScriptValue>(ScriptValueType::STRING, valueString);
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 	}
 	else if((typeString == DECIMAL_KEYWORD) && _isDecimalValue(valueString))
 	{
-		auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 	}
 	else if((typeString == INTEGER_KEYWORD) && _isIntegerValue(valueString))
 	{
-		auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 	}
 	else if((typeString == BOOLEAN_KEYWORD) && _isBooleanValue(valueString))
 	{
-		auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, (valueString == "<true>"));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, (valueString == "<true>"));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 	}
@@ -211,14 +220,13 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, _checkConditionString(valueString));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 	}
 	else if((valueString.substr(0, 5) == "fe3d:") || (valueString.substr(0, 5) == "math:") || (valueString.substr(0, 5) == "misc:"))
 	{
 		const auto loggerMessageCount = Logger::getMessageCount();
-
 		const auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processFe3dFunctionCall(valueString) :
 			(valueString.substr(0, 5) == "math:") ? _processMathFunctionCall(valueString) :
@@ -289,7 +297,8 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	else
 	{
 		bool isAccessingList = false;
-		auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
+
+		const auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
 
 		if(_hasThrownError)
 		{
@@ -298,8 +307,9 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 
 		if(isAccessingList)
 		{
-			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
@@ -313,6 +323,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		int valueIndex = 0;
+
 		if(isAccessingList)
 		{
 			if(!_validateListIndex(rightVariable, listIndex))
@@ -326,6 +337,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		if((typeString == LIST_KEYWORD) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
+
 			for(int index = 0; index < rightVariable->getValueCount(); index++)
 			{
 				values.push_back(rightVariable->getValue(index));
@@ -335,25 +347,25 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		}
 		else if((typeString == STRING_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::STRING))
 		{
-			auto value = rightVariable->getValue(valueIndex);
+			const auto value = rightVariable->getValue(valueIndex);
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 		}
 		else if((typeString == DECIMAL_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::DECIMAL))
 		{
-			auto value = rightVariable->getValue(valueIndex);
+			const auto value = rightVariable->getValue(valueIndex);
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 		}
 		else if((typeString == INTEGER_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::INTEGER))
 		{
-			auto value = rightVariable->getValue(valueIndex);
+			const auto value = rightVariable->getValue(valueIndex);
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 		}
 		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::BOOLEAN))
 		{
-			auto value = rightVariable->getValue(valueIndex);
+			const auto value = rightVariable->getValue(valueIndex);
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})});
 		}

@@ -23,6 +23,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text2d.fe3d` does not exist");
+
 		return {};
 	}
 

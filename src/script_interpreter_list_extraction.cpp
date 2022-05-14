@@ -2,14 +2,16 @@
 
 const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListString(const string & listString)
 {
-	vector<shared_ptr<ScriptValue>> valueList;
+	vector<shared_ptr<ScriptValue>> valueList = {};
+
+	string currentValueString = "";
+
 	bool isBuildingString = false;
 	bool isBuildingNumber = false;
 	bool isBuildingDecimal = false;
 	bool isBuildingBoolean = false;
 	bool isBuildingVariable = false;
 	bool hasFinishedValue = false;
-	string currentValueString = "";
 
 	if(listString.empty())
 	{
@@ -19,10 +21,12 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 	if(listString[0] == ',')
 	{
 		_throwRuntimeError("cannot start value with ','");
+
 		return {};
 	}
 
 	int index = 0;
+
 	for(const auto & character : listString)
 	{
 		if(hasFinishedValue)
@@ -34,6 +38,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 			else if(character != ' ')
 			{
 				_throwRuntimeError("values must be separated by ','");
+
 				return {};
 			}
 		}
@@ -48,14 +53,12 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(isdigit(character) || character == '-')
 				{
-					currentValueString = "";
-					currentValueString.push_back(character);
+					currentValueString = {character};
 					isBuildingNumber = true;
 				}
 				else if(character == '<')
 				{
-					currentValueString = "";
-					currentValueString.push_back(character);
+					currentValueString = {character};
 					isBuildingBoolean = true;
 				}
 				else if(character == ' ')
@@ -64,8 +67,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else
 				{
-					currentValueString = "";
-					currentValueString.push_back(character);
+					currentValueString = {character};
 					isBuildingVariable = true;
 				}
 
@@ -86,6 +88,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				if(character == '"')
 				{
 					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::STRING, currentValueString));
+
 					isBuildingString = false;
 					hasFinishedValue = true;
 				}
@@ -101,6 +104,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					if(!currentValueString.empty())
 					{
 						_throwRuntimeError("invalid syntax");
+
 						return {};
 					}
 
@@ -113,11 +117,13 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				else if(character == '.' && !isBuildingDecimal)
 				{
 					currentValueString += character;
+
 					isBuildingDecimal = true;
 				}
 				else if(character != ',' && character != ' ')
 				{
 					_throwRuntimeError("invalid syntax");
+
 					return {};
 				}
 
@@ -128,10 +134,12 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 						if(currentValueString.back() == '.')
 						{
 							_throwRuntimeError("invalid syntax");
+
 							return {};
 						}
 
 						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
+
 						isBuildingNumber = false;
 						isBuildingDecimal = false;
 
@@ -143,6 +151,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					else
 					{
 						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
+
 						isBuildingNumber = false;
 
 						if(character != ',')
@@ -159,18 +168,21 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				if(currentValueString == "<true>")
 				{
 					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, true));
+
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
 				else if(currentValueString == "<false>")
 				{
 					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, false));
+
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
 				else if(currentValueString.size() >= string("<false>").size())
 				{
 					_throwRuntimeError("invalid syntax");
+
 					return {};
 				}
 			}
@@ -184,7 +196,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				if(character == ',' || (index == listString.size() - 1) || character == ' ')
 				{
 					bool isAccessingList = false;
-					auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
+
+					const auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
 
 					if(_hasThrownError)
 					{
@@ -193,20 +206,23 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(isAccessingList)
 					{
-						auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
-						auto bracketIndex = static_cast<int>(distance(currentValueString.begin(), isOpeningBracketFound));
+						const auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
+						const auto bracketIndex = static_cast<int>(distance(currentValueString.begin(), isOpeningBracketFound));
+
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
 						_throwRuntimeError("variable \"" + currentValueString + "\" does not exist");
+
 						return {};
 					}
 
 					const auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
 					int valueIndex = 0;
+
 					if(isAccessingList)
 					{
 						if(!_validateListIndex(variable, listIndex))
@@ -220,10 +236,12 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 					{
 						_throwRuntimeError("LST cannot be used inside LST");
+
 						return {};
 					}
 
 					valueList.push_back(variable->getValue(valueIndex));
+
 					isBuildingVariable = false;
 
 					if(character != ',')
@@ -240,6 +258,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
 		_throwRuntimeError("invalid syntax");
+
 		return {};
 	}
 

@@ -75,7 +75,8 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 	}
 	else if((variable->getValue()->getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
 	{
-		string newValue = variable->getValue()->getBoolean() ? "<true>" : "<false>";
+		const auto newValue = variable->getValue()->getBoolean() ? "<true>" : "<false>";
+
 		variable->setValue(make_shared<ScriptValue>(ScriptValueType::STRING, newValue));
 	}
 	else if((variable->getValue()->getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
@@ -87,7 +88,8 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 			return;
 		}
 
-		bool newValue = (variable->getValue()->getString() == "<true>") ? true : false;
+		const auto newValue = ((variable->getValue()->getString() == "<true>") ? true : false);
+
 		variable->setValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, newValue));
 	}
 	else if((variable->getValue()->getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))

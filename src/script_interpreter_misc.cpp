@@ -31,6 +31,7 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 			if(index == (scriptLineText.size() - 1))
 			{
 				_throwRuntimeError("unnecessary indentation");
+
 				return 0;
 			}
 			else
@@ -49,8 +50,8 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 
 const bool ScriptInterpreter::_validateScopeChange(int countedSpaces, const string & scriptLineText, int & scopeDepth)
 {
-	const int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
-	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
+	const auto currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
+	const auto isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
 	if(_hasPassedLoopStatement && isScopeDepthInvalid)
 	{
@@ -138,7 +139,7 @@ void ScriptInterpreter::_throwRuntimeError(const string & message)
 
 void ScriptInterpreter::_checkEngineWarnings(int lastLoggerMessageCount)
 {
-	auto messageCount = Logger::getMessageCount();
+	const auto messageCount = Logger::getMessageCount();
 
 	if(messageCount > lastLoggerMessageCount)
 	{

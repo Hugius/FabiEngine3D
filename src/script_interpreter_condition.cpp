@@ -2,13 +2,16 @@
 
 const bool ScriptInterpreter::_checkConditionString(const string & conditionString)
 {
-	vector<shared_ptr<ScriptValue>> comparisonValues;
-	vector<string> elements;
-	vector<string> logicOperators;
-	vector<bool> conditions;
+	vector<shared_ptr<ScriptValue>> comparisonValues = {};
+	vector<string> elements = {};
+	vector<string> logicOperators = {};
+	vector<bool> conditions = {};
+
 	string elementBuild = "";
 	string comparisonOperator = "";
+
 	int characterIndex = 0;
+
 	bool isBuildingString = false;
 	bool mustBeValue = true;
 	bool mustBeComparisonOperator = false;
@@ -94,7 +97,8 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			else
 			{
 				bool isAccessingList = false;
-				auto listIndex = _extractListIndexFromString(elementString, isAccessingList);
+
+				const auto listIndex = _extractListIndexFromString(elementString, isAccessingList);
 
 				if(_hasThrownError)
 				{
@@ -103,8 +107,9 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(isAccessingList)
 				{
-					auto isOpeningBracketFound = find(elementString.begin(), elementString.end(), '[');
-					auto bracketIndex = static_cast<int>(distance(elementString.begin(), isOpeningBracketFound));
+					const auto isOpeningBracketFound = find(elementString.begin(), elementString.end(), '[');
+					const auto bracketIndex = static_cast<int>(distance(elementString.begin(), isOpeningBracketFound));
+
 					elementString = elementString.substr(0, bracketIndex);
 				}
 
@@ -118,6 +123,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 				const auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
 				int valueIndex = 0;
+
 				if(isAccessingList)
 				{
 					if(!_validateListIndex(variable, listIndex))
@@ -143,7 +149,9 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 				if(_validateCondition(comparisonValues.front(), comparisonOperator, comparisonValues.back()))
 				{
 					conditions.push_back(_compareValues(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
+
 					comparisonValues.clear();
+
 					mustBeValue = false;
 					mustBeLogicOperator = true;
 				}
@@ -178,6 +186,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			if(elementString == AND_KEYWORD || elementString == OR_KEYWORD)
 			{
 				logicOperators.push_back(elementString);
+
 				mustBeLogicOperator = false;
 				mustBeValue = true;
 			}
@@ -202,26 +211,29 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		return conditions[0];
 	}
 
-	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
+	bool finalCondition = conditions[0];
+
 	for(int index = 1; index < static_cast<int>(conditions.size()); index++)
 	{
+		const auto previousIndex = (index - 1);
+
 		if(currentLogicOperator.empty())
 		{
-			currentLogicOperator = logicOperators[index - 1];
+			currentLogicOperator = logicOperators[previousIndex];
 		}
-		else if(currentLogicOperator != logicOperators[index - 1])
+		else if(currentLogicOperator != logicOperators[previousIndex])
 		{
 			_throwRuntimeError("cannot use different logic operators");
 
 			return false;
 		}
 
-		if(logicOperators[index - 1] == AND_KEYWORD)
+		if(logicOperators[previousIndex] == AND_KEYWORD)
 		{
 			finalCondition = finalCondition && conditions[index];
 		}
-		else if(logicOperators[index - 1] == OR_KEYWORD)
+		else if(logicOperators[previousIndex] == OR_KEYWORD)
 		{
 			finalCondition = finalCondition || conditions[index];
 		}
@@ -328,7 +340,7 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 
 const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, int scopeDepth) const
 {
-	int index = static_cast<int>(statements.size());
+	auto index = static_cast<int>(statements.size());
 
 	while(index--)
 	{

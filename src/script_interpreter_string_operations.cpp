@@ -34,12 +34,14 @@ const bool ScriptInterpreter::_isDecimalValue(const string & valueString) const
 	}
 
 	int startingIndex = 0;
+
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
-	unsigned dots = 0;
+	unsigned dotCount = 0;
+
 	for(int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]) && valueString[index] != '.')
@@ -49,11 +51,11 @@ const bool ScriptInterpreter::_isDecimalValue(const string & valueString) const
 
 		if(valueString[index] == '.')
 		{
-			dots++;
+			dotCount++;
 		}
 	}
 
-	return (valueString.size() >= 3) && (isdigit(valueString[startingIndex]) && isdigit(valueString.back())) && (dots == 1);
+	return (valueString.size() >= 3) && (isdigit(valueString[startingIndex]) && isdigit(valueString.back())) && (dotCount == 1);
 }
 
 const bool ScriptInterpreter::_isIntegerValue(const string & valueString) const
@@ -68,25 +70,28 @@ const bool ScriptInterpreter::_isBooleanValue(const string & valueString) const
 
 const int ScriptInterpreter::_extractListIndexFromString(const string & valueString, bool & isAccessingList)
 {
-	auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
+	const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+	const auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
+
 	if(isOpeningBracketFound == valueString.end() || closingBracketFound == valueString.end())
 	{
 		return -1;
 	}
 
-	auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
-	auto closingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+	const auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+	const auto closingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+
 	if((openingBracketIndex == 0) || (closingBracketIndex == 0) || (openingBracketIndex > closingBracketIndex))
 	{
 		return -1;
 	}
 
-	string indexString = valueString.substr(static_cast<size_t>(openingBracketIndex + 1));
-	indexString.pop_back();
+	const auto indexString = valueString.substr(static_cast<size_t>(openingBracketIndex + 1), (valueString.size() - static_cast<size_t>(openingBracketIndex + 1) - 1));
+
 	if(_isIntegerValue(indexString))
 	{
 		isAccessingList = true;
+
 		return stoi(_limitIntegerString(indexString));
 	}
 	else
@@ -94,6 +99,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 		{
 			_throwRuntimeError("variable \"" + indexString + "\" does not exist");
+
 			return -1;
 		}
 
@@ -102,10 +108,12 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
 			_throwRuntimeError("LST index must be of type INT");
+
 			return -1;
 		}
 
 		isAccessingList = true;
+
 		return variable->getValue()->getInteger();
 	}
 }
@@ -156,8 +164,8 @@ const string ScriptInterpreter::_limitIntegerString(const string & valueString) 
 
 const string ScriptInterpreter::_limitDecimalString(const string & valueString) const
 {
-	auto dotIndex = static_cast<int>(valueString.find('.'));
-	string intString = valueString.substr(0, dotIndex);
+	const auto dotIndex = static_cast<int>(valueString.find('.'));
+	const auto intString = valueString.substr(0, dotIndex);
 
 	if(valueString[0] == '-')
 	{

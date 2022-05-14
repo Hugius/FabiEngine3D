@@ -4,7 +4,9 @@
 void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 {
 	string words[2] = {"", ""};
+
 	int wordIndex = 0;
+
 	for(const auto & character : scriptLine.substr(EDIT_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
@@ -21,8 +23,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 			words[wordIndex] += character;
 		}
 	}
-	string nameString = words[0];
-	string equalSignString = words[1];
+
+	auto nameString = words[0];
+
+	const auto equalSignString = words[1];
 
 	if(nameString.empty())
 	{
@@ -39,6 +43,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	}
 
 	auto minLineSize = (scriptLine.find('=') + 3);
+
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
@@ -46,10 +51,11 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		return;
 	}
 
-	string valueString = scriptLine.substr(minLineSize - 1);
+	auto valueString = scriptLine.substr(minLineSize - 1);
 
 	bool isAccessingLeftList = false;
-	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
+
+	const auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
 
 	if(_hasThrownError)
 	{
@@ -58,8 +64,9 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(isAccessingLeftList)
 	{
-		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
-		auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
+		const auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
+		const auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
+
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
@@ -80,6 +87,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	}
 
 	int leftValueIndex = 0;
+
 	if(isAccessingLeftList)
 	{
 		if(_validateListIndex(leftVariable, leftListIndex))
@@ -92,18 +100,17 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		}
 	}
 
-	bool isSingleVariable = (leftVariable->getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
-	bool isStringVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING);
-	bool isDecimalVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::DECIMAL);
-	bool isIntegerVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER);
-	bool isBooleanVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN);
+	const auto isSingleVariable = (leftVariable->getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
+	const auto isStringVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING);
+	const auto isDecimalVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::DECIMAL);
+	const auto isIntegerVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER);
+	const auto isBooleanVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN);
 
 	if(leftVariable->getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
-		string listString = valueString.substr(1);
-		listString.pop_back();
+		const auto listString = valueString.substr(1, (valueString.size() - 2));
+		const auto values = _extractValuesFromListString(listString);
 
-		auto values = _extractValuesFromListString(listString);
 		leftVariable->setValues(values);
 	}
 	else if(isSingleVariable && isStringVariable && _isStringValue(valueString))
@@ -134,9 +141,8 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	}
 	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 	{
-		auto loggerMessageCount = Logger::getMessageCount();
-
-		auto returnValues =
+		const auto loggerMessageCount = Logger::getMessageCount();
+		const auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processFe3dFunctionCall(valueString) :
 			(valueString.substr(0, 5) == "math:") ? _processMathFunctionCall(valueString) :
 			_processMiscFunctionCall(valueString);
@@ -206,7 +212,8 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	else
 	{
 		bool isAccessingRightList = false;
-		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
+
+		const auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
 
 		if(_hasThrownError)
 		{
@@ -215,8 +222,9 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 		if(isAccessingRightList)
 		{
-			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
@@ -230,6 +238,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		int rightValueIndex = 0;
+
 		if(isAccessingRightList)
 		{
 			if(!_validateListIndex(rightVariable, rightListIndex))
@@ -243,6 +252,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		if((leftVariable->getType() == ScriptVariableType::MULTIPLE) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
+
 			for(int index = 0; index < rightVariable->getValueCount(); index++)
 			{
 				values.push_back(rightVariable->getValue(index));

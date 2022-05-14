@@ -24,6 +24,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text3d.fe3d` does not exist");
+
 		return {};
 	}
 

@@ -18,8 +18,8 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 	if(!_updateEntryId.empty())
 	{
 		_isExecutingUpdate = true;
-
 		_isDebugging = isDebugging;
+
 		_debuggingTimes.clear();
 
 		_executeScript(_updateEntryId, ScriptType::UPDATE);
@@ -75,15 +75,17 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		_fe3d->clock_start("scriptDebug");
 	}
 
-	vector<int> loopScopeDepths;
-	vector<int> loopLineIndices;
-	vector<int> loopIterationCounts;
-	vector<ScriptConditionStatement> conditionStatements;
+	vector<int> loopScopeDepths = {};
+	vector<int> loopLineIndices = {};
+	vector<int> loopIterationCounts = {};
+	vector<ScriptConditionStatement> conditionStatements = {};
 	int scopeDepth = 0;
 
 	_executionDepth++;
+
 	_currentScriptIdsStack.push_back(scriptId);
 	_currentLineIndexStack.push_back(0);
+
 	_localVariables[_executionDepth] = {};
 
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
@@ -98,15 +100,15 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		return;
 	}
 
-	auto scriptFile = _script->getScriptFile(scriptId);
+	const auto scriptFile = _script->getScriptFile(scriptId);
 
 	for(int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
-		auto lastLoggerMessageCount = Logger::getMessageCount();
-
 		_currentLineIndexStack.back() = lineIndex;
 
-		string scriptLineText = scriptFile->getLine(lineIndex);
+		const auto lastLoggerMessageCount = Logger::getMessageCount();
+
+		auto scriptLineText = scriptFile->getLine(lineIndex);
 
 		if(lineIndex == 0 || lineIndex == 1)
 		{
@@ -118,7 +120,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		int countedSpaces = _countLeadingSpaces(scriptLineText);
+		const auto countedSpaces = _countLeadingSpaces(scriptLineText);
 
 		if(_hasThrownError)
 		{
@@ -136,9 +138,10 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			return;
 		}
 
-		int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
+		const auto currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
 
 		bool isEndOfLoop = false;
+
 		if(!loopLineIndices.empty())
 		{
 			if(currentLineScopeDepth <= loopScopeDepths.back())
@@ -173,7 +176,8 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			}
 		}
 
-		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText, scopeDepth);
+		const auto isScopeChangeValid = _validateScopeChange(countedSpaces, scriptLineText, scopeDepth);
+
 		_hasPassedLoopStatement = false;
 		_hasPassedIfStatement = false;
 		_hasPassedElifStatement = false;
@@ -184,7 +188,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			return;
 		}
 
-		if(!scopeChangeValidation)
+		if(!isScopeChangeValid)
 		{
 			continue;
 		}
@@ -227,7 +231,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else if(scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ")
 		{
-			string scriptToExecuteId = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
+			const auto scriptToExecuteId = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
 
 			if
 				(
@@ -295,7 +299,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(scriptLineText.back() == ':')
 			{
-				string conditionString = scriptLineText.substr((IF_KEYWORD.size() + 1), scriptLineText.size() - (IF_KEYWORD.size() + 2));
+				const auto conditionString = scriptLineText.substr((IF_KEYWORD.size() + 1), scriptLineText.size() - (IF_KEYWORD.size() + 2));
 
 				if(_checkConditionString(conditionString))
 				{
@@ -321,7 +325,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(scriptLineText.back() == ':')
 			{
-				auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+				const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
 
 				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
 				{
@@ -331,16 +335,17 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 					if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
 					{
-						_hasPassedElifStatement = true;
 						conditionStatements[lastIndex].setTrue();
+
 						scopeDepth++;
+
+						_hasPassedElifStatement = true;
 					}
 					else
 					{
 						_hasPassedElifStatement = true;
 						_mustIgnoreDeeperScope = true;
 					}
-
 				}
 				else
 				{
@@ -360,7 +365,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(scriptLineText.back() == ':')
 			{
-				auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+				const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
 
 				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
 				{
@@ -371,6 +376,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 						if(conditionStatements[lastIndex].isFalse())
 						{
 							scopeDepth++;
+
 							_hasPassedElseStatement = true;
 						}
 						else
@@ -456,6 +462,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				lineIndex = loopLineIndices.back();
 				scopeDepth = (loopScopeDepths.back() + 1);
+
 				loopIterationCounts.back()++;
 
 				continue;
@@ -464,9 +471,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		else if(scriptLineText == BREAK_KEYWORD)
 		{
 			scopeDepth = loopScopeDepths.back();
+
 			loopScopeDepths.pop_back();
 			loopLineIndices.pop_back();
 			loopIterationCounts.pop_back();
+
 			_mustIgnoreDeeperScope = true;
 		}
 		else if(scriptLineText == PASS_KEYWORD)
@@ -491,13 +500,16 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			lineIndex = loopLineIndices.back();
 			scopeDepth = (loopScopeDepths.back() + 1);
+
 			loopIterationCounts.back()++;
 		}
 	}
 
 	_currentScriptIdsStack.pop_back();
 	_currentLineIndexStack.pop_back();
+
 	_localVariables.erase(_executionDepth);
+
 	_executionDepth--;
 
 	if(_isDebugging)

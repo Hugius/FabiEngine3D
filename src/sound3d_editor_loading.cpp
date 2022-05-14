@@ -23,6 +23,7 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound3d.fe3d` does not exist");
+
 		return {};
 	}
 

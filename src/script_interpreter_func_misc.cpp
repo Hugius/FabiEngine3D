@@ -46,12 +46,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 			{
 				_throwRuntimeError("variable \"" + firstName + "\" does not exist");
+
 				return {};
 			}
 
 			if(!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 			{
 				_throwRuntimeError("variable \"" + secondName + "\" does not exist");
+
 				return {};
 			}
 
@@ -59,6 +61,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(firstListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + firstName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -66,6 +69,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(secondListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + secondName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -90,6 +94,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -97,6 +102,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -114,6 +120,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(args[0]->getType() != SVT::STRING)
 			{
 				_throwRuntimeError("incorrect argument type");
+
 				return {};
 			}
 
@@ -121,6 +128,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -128,6 +136,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -183,6 +192,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(args[0]->getType() != SVT::STRING)
 			{
 				_throwRuntimeError("incorrect argument type");
+
 				return {};
 			}
 
@@ -190,6 +200,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -197,6 +208,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -254,6 +266,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -261,12 +274,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
 			if(listVariable->getValueCount() == 0)
 			{
 				_throwRuntimeError("LST \"" + listName + "\" is empty");
+
 				return {};
 			}
 
@@ -276,6 +291,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				if(listVariable->getValue(index)->getType() != type)
 				{
 					_throwRuntimeError("values inside LST \"" + listName + "\" not of same type");
+
 					return {};
 				}
 			}
@@ -307,6 +323,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else
 			{
 				_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
+
 				return {};
 			}
 		}
@@ -322,6 +339,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -329,12 +347,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
 			if(listVariable->getValueCount() == 0)
 			{
 				_throwRuntimeError("LST \"" + listName + "\" is empty");
+
 				return {};
 			}
 
@@ -344,6 +364,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				if(listVariable->getValue(index)->getType() != type)
 				{
 					_throwRuntimeError("values inside LST \"" + listName + "\" not of same type");
+
 					return {};
 				}
 			}
@@ -375,6 +396,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else
 			{
 				_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
+
 				return {};
 			}
 		}
@@ -390,6 +412,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
 				return {};
 			}
 
@@ -397,6 +420,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+
 				return {};
 			}
 
@@ -450,6 +474,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			   (args[2]->getInteger() < 0))
 			{
 				_throwRuntimeError("incorrect string part index/indices");
+
 				return {};
 			}
 
@@ -467,6 +492,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if((args[1]->getString().size() > 1) || (args[0]->getString().find(args[1]->getString()) == string::npos))
 			{
 				_throwRuntimeError("string delimiter not found");
+
 				return {};
 			}
 
@@ -535,6 +561,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	else
 	{
 		_throwRuntimeError("misc function does not exist");
+
 		return {};
 	}
 

@@ -24,6 +24,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
+
 		return {};
 	}
 

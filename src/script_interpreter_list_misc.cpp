@@ -64,6 +64,7 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<Scr
 void ScriptInterpreter::_processListPush(const string & scriptLine)
 {
 	string nameString = "";
+
 	for(const auto & character : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
@@ -84,6 +85,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 	}
 
 	auto minLineSize = (PUSHING_KEYWORD.size() + nameString.size() + 3);
+
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
@@ -91,7 +93,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 		return;
 	}
 
-	string valueString = scriptLine.substr(minLineSize - 1);
+	auto valueString = scriptLine.substr(minLineSize - 1);
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
@@ -100,7 +102,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 		return;
 	}
 
-	auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	const auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	if(listVariable->isConstant())
 	{
@@ -159,6 +161,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 void ScriptInterpreter::_processListPull(const string & scriptLine)
 {
 	string nameString = "";
+
 	for(const auto & character : scriptLine.substr(PULLING_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
@@ -185,7 +188,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 		return;
 	}
 
-	string indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
+	auto indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
 
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
@@ -201,7 +204,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 		return;
 	}
 
-	auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	const auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	if(listVariable->isConstant())
 	{

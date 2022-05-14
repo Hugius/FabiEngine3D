@@ -24,6 +24,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
+
 		return {};
 	}
 

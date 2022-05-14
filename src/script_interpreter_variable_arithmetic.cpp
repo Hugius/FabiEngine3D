@@ -3,7 +3,9 @@
 void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 {
 	string words[2] = {"", ""};
+
 	int wordIndex = 0;
+
 	for(const auto & character : scriptLine)
 	{
 		if(character == ' ')
@@ -21,7 +23,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		}
 	}
 
-	string operatorString = words[0];
+	const auto operatorString = words[0];
+
 	if(operatorString != ADDITION_KEYWORD &&
 	   operatorString != SUBTRACTION_KEYWORD &&
 	   operatorString != MULTIPLICATION_KEYWORD &&
@@ -34,7 +37,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		return;
 	}
 
-	string nameString = words[1];
+	auto nameString = words[1];
+
 	if(nameString.empty())
 	{
 		_throwRuntimeError("variable name missing");
@@ -43,7 +47,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 
 	bool isAccessingLeftList = false;
-	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
+
+	const auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
 
 	if(_hasThrownError)
 	{
@@ -52,8 +57,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(isAccessingLeftList)
 	{
-		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
-		auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
+		const auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
+		const auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
+
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
@@ -67,6 +73,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	const auto leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	int leftValueIndex = 0;
+
 	if(isAccessingLeftList)
 	{
 		if(!_validateListIndex(leftVariable, leftListIndex))
@@ -108,7 +115,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER)
 		{
 			auto integer = leftVariable->getValue(leftValueIndex)->getInteger();
+
 			integer *= -1;
+
 			leftVariable->getValue(leftValueIndex)->setInteger(integer);
 
 			return;
@@ -116,14 +125,17 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		else
 		{
 			auto decimal = leftVariable->getValue(leftValueIndex)->getDecimal();
+
 			decimal *= -1.0f;
+
 			leftVariable->getValue(leftValueIndex)->setDecimal(decimal);
 
 			return;
 		}
 	}
 
-	auto minLineSize = (operatorString.size() + nameString.size() + (isAccessingLeftList ? (to_string(leftListIndex).size() + 2) : 0) + 3);
+	const auto minLineSize = (operatorString.size() + nameString.size() + (isAccessingLeftList ? (to_string(leftListIndex).size() + 2) : 0) + 3);
+
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
@@ -131,7 +143,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		return;
 	}
 
-	string valueString = scriptLine.substr(minLineSize - 1);
+	auto valueString = scriptLine.substr(minLineSize - 1);
 
 	if(_isListValue(valueString))
 	{
@@ -147,12 +159,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isBooleanValue(valueString))
@@ -164,7 +178,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	else
 	{
 		bool isAccessingRightList = false;
-		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
+
+		const auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
 
 		if(_hasThrownError)
 		{
@@ -173,8 +188,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		if(isAccessingRightList)
 		{
-			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
@@ -188,6 +204,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		int rightValueIndex = 0;
+
 		if(isAccessingRightList)
 		{
 			if(!_validateListIndex(rightVariable, rightListIndex))

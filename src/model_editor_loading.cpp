@@ -25,6 +25,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
+
 		return {};
 	}
 
@@ -80,6 +81,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
+
 		return {};
 	}
 

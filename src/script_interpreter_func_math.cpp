@@ -133,6 +133,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwRuntimeError("wrong argument type(s)");
+
 				return {};
 			}
 		}
@@ -156,6 +157,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwRuntimeError("wrong argument type(s)");
+
 				return {};
 			}
 		}
@@ -179,6 +181,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwRuntimeError("wrong argument type(s)");
+
 				return {};
 			}
 		}
@@ -235,6 +238,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwRuntimeError("wrong argument type(s)");
+
 				return {};
 			}
 		}
@@ -269,6 +273,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwRuntimeError("wrong argument type(s)");
+
 				return {};
 			}
 		}

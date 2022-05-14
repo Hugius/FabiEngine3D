@@ -24,6 +24,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
+
 		return {};
 	}
 

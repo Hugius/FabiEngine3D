@@ -77,7 +77,7 @@ const vector<string> NetworkingServer::getClientIps() const
 
 const vector<string> NetworkingServer::getClientUsernames() const
 {
-	vector<string> clientUsernames;
+	vector<string> clientUsernames = {};
 
 	for(int index = 0; index < static_cast<int>(_clientUsernames.size()); index++)
 	{
@@ -96,14 +96,17 @@ void NetworkingServer::sendTcpMessageToClient(const string & username, const str
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
@@ -131,14 +134,17 @@ void NetworkingServer::sendUdpMessageToClient(const string & username, const str
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
@@ -166,14 +172,17 @@ void NetworkingServer::broadcastTcpMessageToClients(const string & content)
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
@@ -194,14 +203,17 @@ void NetworkingServer::broadcastUdpMessageToClients(const string & content)
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();

@@ -14,7 +14,8 @@ void Camera::followRightXZ(float speed)
 
 void Camera::followFrontXZ(float speed)
 {
-	fvec3 tempFront = _front;
+	auto tempFront = _front;
+
 	tempFront.x = cos(Mathematics::convertToRadians(_yaw));
 	tempFront.z = sin(Mathematics::convertToRadians(_yaw));
 
@@ -295,11 +296,8 @@ void Camera::updateMatrices()
 	_front.y = sin(Mathematics::convertToRadians(_pitch));
 	_front.z = (sin(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
 	_front = Mathematics::normalize(_front);
-
 	_right = Mathematics::calculateCrossProduct(_front, _up);
 	_right = Mathematics::normalize(_right);
-
 	_view = Mathematics::createViewMatrix(_position, (_position + _front), _up);
-
 	_projection = Mathematics::createPerspectiveProjectionMatrix(Mathematics::convertToRadians(_fov), _aspectRatio, _near, _far);
 }

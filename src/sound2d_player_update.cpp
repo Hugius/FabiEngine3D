@@ -113,16 +113,19 @@ void Sound2dPlayer::update()
 		if(!_sound2dManager->isSound2dExisting(sound2dId))
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 		if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 		if(index >= _startedSound2ds.at(sound2dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 

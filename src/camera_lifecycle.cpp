@@ -22,13 +22,11 @@ void Camera::reset()
 {
 	_view = mat44(1.0f);
 	_projection = mat44(1.0f);
-
 	_up = fvec3(0.0f);
 	_front = fvec3(0.0f);
 	_right = fvec3(0.0f);
 	_position = fvec3(0.0f);
 	_thirdPersonLookat = fvec3(0.0f);
-
 	_aspectRatio = Tools::getDisplayAspectRatio();
 	_fov = DEFAULT_FOV;
 	_cursorSensitivity = DEFAULT_CURSOR_SENSITIVITY;
@@ -49,7 +47,6 @@ void Camera::reset()
 	_thirdPersonYawAcceleration = 0.0f;
 	_thirdPersonPitchAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
-
 	_isFirstPersonEnabled = false;
 	_isThirdPersonEnabled = false;
 	_mustCenterCursor = false;
@@ -63,6 +60,7 @@ void Camera::update()
 	if(_position != _positionTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -91,15 +89,12 @@ void Camera::update()
 		_firstPersonYawAcceleration = clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonYaw += _firstPersonYawAcceleration;
 		_firstPersonYawAcceleration *= ACCELERATION_RESISTANCE;
-
 		_firstPersonPitchAcceleration += yOffset;
 		_firstPersonPitchAcceleration = clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonPitch += _firstPersonPitchAcceleration;
 		_firstPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
-
 		_firstPersonYaw = Mathematics::limitAngle(_firstPersonYaw);
 		_firstPersonPitch = clamp(clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH, MAX_PITCH);
-
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
@@ -123,12 +118,10 @@ void Camera::update()
 		_thirdPersonYawAcceleration = clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
 		_thirdPersonYawAcceleration *= ACCELERATION_RESISTANCE;
-
 		_thirdPersonPitchAcceleration += yOffset;
 		_thirdPersonPitchAcceleration = clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
 		_thirdPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
-
 		_thirdPersonYaw = Mathematics::limitAngle(_thirdPersonYaw);
 		_thirdPersonPitch = clamp(clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH, MAX_PITCH);
 

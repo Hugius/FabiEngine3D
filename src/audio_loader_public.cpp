@@ -12,7 +12,7 @@ using std::chrono::seconds;
 
 const shared_ptr<Audio> AudioLoader::loadAudio(const string & filePath)
 {
-	auto cacheIterator = _cache.find(filePath);
+	const auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{
@@ -37,7 +37,7 @@ const shared_ptr<Audio> AudioLoader::loadAudio(const string & filePath)
 
 void AudioLoader::cacheAudio(const string & filePath, bool isCrucial)
 {
-	auto cacheIterator = _cache.find(filePath);
+	const auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{

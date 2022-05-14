@@ -26,6 +26,7 @@ void NetworkingServer::update()
 	{
 		_oldClientIps.erase(_oldClientIps.begin());
 	}
+
 	if(!_oldClientUsernames.empty())
 	{
 		_oldClientUsernames.erase(_oldClientUsernames.begin());
@@ -110,21 +111,18 @@ void NetworkingServer::update()
 								}
 
 								_udpClientPorts[index] = newUdpPort;
-
 								_clientUsernames[index] = newUsername;
-
+								_tcpMessageBuilds[index] = "";
 								_newClientIp = _clientIps[index];
 								_newClientUsername = _clientUsernames[index];
-								_tcpMessageBuilds[index] = "";
 
 								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server");
 							}
 						}
 						else if(_tcpMessageBuilds[index] == "PING")
 						{
-							auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
-
-							auto pingMessage = ("PING" + to_string(receiveDelay));
+							const auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
+							const auto pingMessage = ("PING" + to_string(receiveDelay));
 
 							if(!_sendTcpMessageToClient(_clientSockets[index], pingMessage, true))
 							{
@@ -136,6 +134,7 @@ void NetworkingServer::update()
 						else
 						{
 							_pendingMessages.push_back(NetworkingClientMessage(_clientUsernames[index], _tcpMessageBuilds[index], NetworkingProtocolType::TCP));
+
 							_tcpMessageBuilds[index] = "";
 						}
 					}
@@ -150,6 +149,7 @@ void NetworkingServer::update()
 			else if(messageStatusCode == 0)
 			{
 				_disconnectClient(_clientSockets[index]);
+
 				index--;
 			}
 			else
@@ -157,6 +157,7 @@ void NetworkingServer::update()
 				if((messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAETIMEDOUT))
 				{
 					_disconnectClient(_clientSockets[index]);
+
 					index--;
 				}
 				else

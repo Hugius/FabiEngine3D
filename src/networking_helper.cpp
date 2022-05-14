@@ -12,7 +12,7 @@ NetworkingHelper::NetworkingHelper()
 {
 	WSADATA winsockData;
 
-	auto winsockStatus = WSAStartup(MAKEWORD(2, 2), &winsockData);
+	auto winsockStatus = WSAStartup(MAKEWORD(WINSOCK_MAJOR_VERSION, WINSOCK_MINOR_VERSION), &winsockData);
 
 	if(winsockStatus != 0)
 	{
@@ -42,8 +42,9 @@ const bool NetworkingHelper::isMessageReserved(const string & message) const
 
 const string NetworkingHelper::_extractSocketIp(SOCKET socket)
 {
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
+	sockaddr_in socketAddress = {};
+
+	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressIp(socketAddress);
@@ -51,8 +52,9 @@ const string NetworkingHelper::_extractSocketIp(SOCKET socket)
 
 const string NetworkingHelper::_extractSocketPort(SOCKET socket)
 {
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
+	sockaddr_in socketAddress = {};
+
+	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressPort(socketAddress);
@@ -60,8 +62,9 @@ const string NetworkingHelper::_extractSocketPort(SOCKET socket)
 
 const string NetworkingHelper::_extractPeerIp(SOCKET socket)
 {
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
+	sockaddr_in socketAddress = {};
+
+	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressIp(socketAddress);
@@ -69,8 +72,9 @@ const string NetworkingHelper::_extractPeerIp(SOCKET socket)
 
 const string NetworkingHelper::_extractPeerPort(SOCKET socket)
 {
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
+	sockaddr_in socketAddress = {};
+
+	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressPort(socketAddress);
@@ -78,7 +82,8 @@ const string NetworkingHelper::_extractPeerPort(SOCKET socket)
 
 const sockaddr_in NetworkingHelper::_composeSocketAddress(const string & ip, const string & port)
 {
-	sockaddr_in socketAddress = sockaddr_in();
+	sockaddr_in socketAddress = {};
+
 	socketAddress.sin_family = AF_INET;
 	InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
 	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
@@ -102,8 +107,9 @@ const string NetworkingHelper::_extractAddressPort(sockaddr_in address)
 
 const bool NetworkingHelper::_isUdpMessageReady(SOCKET socket)
 {
-	fd_set socketSet = fd_set();
+	fd_set socketSet = {};
 	timeval timeInterval = {0, 1};
+
 	FD_ZERO(&socketSet);
 	FD_SET(socket, &socketSet);
 

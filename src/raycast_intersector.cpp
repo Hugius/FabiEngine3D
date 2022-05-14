@@ -27,6 +27,7 @@ void RaycastIntersector::update()
 		if(!_isAabbIntersectionEnabled || !aabb->isRaycastResponsive())
 		{
 			_aabbIntersections.insert({aabb->getId(), -1.0f});
+
 			continue;
 		}
 
@@ -159,10 +160,11 @@ const fvec3 & RaycastIntersector::getPointOnTerrain() const
 	return _pointOnTerrain;
 }
 
-/* https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms */
 const float RaycastIntersector::_calculateRayBoxIntersectionDistance(const shared_ptr<Ray> ray, const shared_ptr<Box> box) const
 {
 	/*
+		https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
+
 		Initial formula: point = (origin + distance) * direction
 		Rearranged formula: distance = (point - origin) / direction
 		Final formula: distance = (point - origin) * (1 / direction)
@@ -174,21 +176,18 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(const share
 	}
 
 	const auto invertedRayDirection = (fvec3(1.0f) / ray->getDirection());
-
 	const auto minX = (box->getPosition().x - box->getLeft());
 	const auto maxX = (box->getPosition().x + box->getRight());
 	const auto minY = (box->getPosition().y - box->getBottom());
 	const auto maxY = (box->getPosition().y + box->getTop());
 	const auto minZ = (box->getPosition().z - box->getBack());
 	const auto maxZ = (box->getPosition().z + box->getFront());
-
 	const auto minDistanceX = ((minX - ray->getPosition().x) * invertedRayDirection.x);
 	const auto maxDistanceX = ((maxX - ray->getPosition().x) * invertedRayDirection.x);
 	const auto minDistanceY = ((minY - ray->getPosition().y) * invertedRayDirection.y);
 	const auto maxDistanceY = ((maxY - ray->getPosition().y) * invertedRayDirection.y);
 	const auto minDistanceZ = ((minZ - ray->getPosition().z) * invertedRayDirection.z);
 	const auto maxDistanceZ = ((maxZ - ray->getPosition().z) * invertedRayDirection.z);
-
 	const auto minIntersectionDistance = max(max(min(minDistanceX, maxDistanceX), min(minDistanceY, maxDistanceY)), min(minDistanceZ, maxDistanceZ));
 	const auto maxIntersectionDistance = min(min(max(minDistanceX, maxDistanceX), max(minDistanceY, maxDistanceY)), max(minDistanceZ, maxDistanceZ));
 
@@ -224,9 +223,8 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
 		{
 			distance -= (_terrainIntersectionPrecision * 0.5f);
 
-			fvec3 endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
-
-			auto selectedTerrain = _terrainManager->getSelectedTerrain();
+			const auto endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
+			const auto selectedTerrain = _terrainManager->getSelectedTerrain();
 
 			if(_terrainManager->isInside(selectedTerrain->getId(), (endPoint.x + (selectedTerrain->getSize() * 0.5f)), (endPoint.z + (selectedTerrain->getSize() * 0.5f))))
 			{

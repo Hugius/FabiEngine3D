@@ -31,14 +31,17 @@ void NetworkingClient::start(const string & username)
 	{
 		abort();
 	}
+
 	if(username.size() > NetworkingHelper::MAX_USERNAME_SIZE)
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(username))
 	{
 		abort();
 	}
+
 	if(find(username.begin(), username.end(), ';') != username.end())
 	{
 		abort();
@@ -74,6 +77,7 @@ void NetworkingClient::connectToServer(const string & ip)
 	{
 		return;
 	}
+
 	if(!_setupUdp())
 	{
 		return;

@@ -115,7 +115,7 @@ ShaderBuffer::~ShaderBuffer()
 
 const int ShaderBuffer::getUniformId(const string & name)
 {
-	auto cacheIterator = _uniformCache.find(name);
+	const auto cacheIterator = _uniformCache.find(name);
 
 	if(cacheIterator != _uniformCache.end())
 	{

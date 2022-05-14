@@ -37,13 +37,13 @@ void NetworkingServer::start(int maxClientCount)
 	{
 		return;
 	}
+
 	if(!_setupUdp())
 	{
 		return;
 	}
 
 	_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
-
 	_maxClientCount = maxClientCount;
 	_isRunning = true;
 
@@ -58,7 +58,6 @@ void NetworkingServer::stop()
 	}
 
 	closesocket(_tcpSocket);
-
 	closesocket(_udpSocket);
 
 	while(!_clientSockets.empty())

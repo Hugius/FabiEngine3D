@@ -12,11 +12,11 @@ const bool NetworkingClient::isValidIp(const string & ip) const
 		return false;
 	}
 
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	const auto result = InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
+	sockaddr_in socketAddress = {};
 
-	return (result > 0);
+	socketAddress.sin_family = AF_INET;
+
+	return (InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr) > 0);
 }
 
 const bool NetworkingClient::isRunning() const
@@ -70,18 +70,22 @@ void NetworkingClient::sendTcpMessageToServer(const string & content)
 	{
 		abort();
 	}
+
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
@@ -96,18 +100,22 @@ void NetworkingClient::sendUdpMessageToServer(const string & content)
 	{
 		abort();
 	}
+
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();

@@ -101,22 +101,23 @@ void NetworkingClient::update()
 					{
 						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
 
-						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
-						auto clientReceiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
-						latency -= serverReceiveDelay;
-						latency -= clientReceiveDelay;
+						latency -= stoll(_tcpMessageBuild.substr(4));
+						latency -= (Tools::getTimeSinceEpochMS() - messageTimestamp);
 
 						if(_pingLatencies.size() == MAX_PING_COUNT)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}
+
 						_pingLatencies.push_back(static_cast<int>(llabs(latency)));
+
 						_isWaitingForPing = false;
 						_tcpMessageBuild = "";
 					}
 					else if(_tcpMessageBuild == "SERVER_FULL")
 					{
 						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
+
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -125,6 +126,7 @@ void NetworkingClient::update()
 					else if(_tcpMessageBuild == "ALREADY_CONNECTED")
 					{
 						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
+
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -133,6 +135,7 @@ void NetworkingClient::update()
 					else if(_tcpMessageBuild == "DISCONNECTED")
 					{
 						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
+
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -141,6 +144,7 @@ void NetworkingClient::update()
 					else
 					{
 						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
+
 						_tcpMessageBuild = "";
 					}
 				}

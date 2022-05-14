@@ -154,6 +154,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 					lineIndex = loopLineIndices.back();
 					scopeDepth = (loopScopeDepths.back() + 1);
 					loopIterationCounts.back()++;
+
 					continue;
 				}
 			}
@@ -456,6 +457,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				lineIndex = loopLineIndices.back();
 				scopeDepth = (loopScopeDepths.back() + 1);
 				loopIterationCounts.back()++;
+
 				continue;
 			}
 		}

@@ -12,7 +12,7 @@ using std::chrono::seconds;
 
 const shared_ptr<Image> ImageLoader::loadImage(const string & filePath)
 {
-	auto cacheIterator = _cache.find(filePath);
+	const auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{
@@ -37,7 +37,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string & filePath)
 
 void ImageLoader::cacheImage(const string & filePath, bool isCrucial)
 {
-	auto cacheIterator = _cache.find(filePath);
+	const auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{

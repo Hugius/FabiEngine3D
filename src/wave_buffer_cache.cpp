@@ -2,7 +2,7 @@
 
 void WaveBufferCache::storeBuffer(const string & filePath, shared_ptr<WaveBuffer> buffer)
 {
-	auto cacheIterator = _buffers.find(filePath);
+	const auto cacheIterator = _buffers.find(filePath);
 
 	if(cacheIterator != _buffers.end())
 	{
@@ -29,7 +29,7 @@ void WaveBufferCache::clearBuffers()
 
 const shared_ptr<WaveBuffer> WaveBufferCache::getBuffer(const string & filePath) const
 {
-	auto cacheIterator = _buffers.find(filePath);
+	const auto cacheIterator = _buffers.find(filePath);
 
 	if(cacheIterator != _buffers.end())
 	{

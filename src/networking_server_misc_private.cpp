@@ -14,22 +14,24 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
 
-	string message = (content + ';');
-
-	auto sendStatusCode = send(socket, message.c_str(), static_cast<int>(message.size()), 0);
+	const auto message = (content + ';');
+	const auto sendStatusCode = send(socket, message.c_str(), static_cast<int>(message.size()), 0);
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
@@ -60,14 +62,17 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 	{
 		abort();
 	}
+
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
+
 	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
+
 	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
@@ -75,7 +80,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 
 	auto socketAddress = NetworkingHelper::_composeSocketAddress(clientIp, clientPort);
 
-	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
+	const auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
@@ -96,14 +101,18 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 
 const bool NetworkingServer::_setupTcp()
 {
-	addrinfo tcpHints = addrinfo();
+	addrinfo tcpHints = {};
+
 	ZeroMemory(&tcpHints, sizeof(tcpHints));
+
 	tcpHints.ai_family = AF_INET;
 	tcpHints.ai_socktype = SOCK_STREAM;
 	tcpHints.ai_protocol = IPPROTO_TCP;
 
 	addrinfo * tcpAddressInfo = nullptr;
-	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
+
+	const auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
+
 	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(tcpInfoStatusCode);
@@ -112,6 +121,7 @@ const bool NetworkingServer::_setupTcp()
 	}
 
 	_tcpSocket = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
+
 	if(_tcpSocket == INVALID_SOCKET)
 	{
 		Logger::throwDebug(WSAGetLastError());
@@ -121,10 +131,12 @@ const bool NetworkingServer::_setupTcp()
 
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
+
 	setsockopt(_tcpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char *>(&trueValue), sizeof(trueValue));
 	setsockopt(_tcpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char *>(&falseValue), sizeof(falseValue));
 
-	auto tcpBindStatusCode = bind(_tcpSocket, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
+	const auto tcpBindStatusCode = bind(_tcpSocket, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
+
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE)
@@ -143,7 +155,8 @@ const bool NetworkingServer::_setupTcp()
 		}
 	}
 
-	auto listenStatusCode = listen(_tcpSocket, SOMAXCONN);
+	const auto listenStatusCode = listen(_tcpSocket, SOMAXCONN);
+
 	if(listenStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwDebug(WSAGetLastError());
@@ -158,14 +171,18 @@ const bool NetworkingServer::_setupTcp()
 
 const bool NetworkingServer::_setupUdp()
 {
-	addrinfo udpHints = addrinfo();
+	addrinfo udpHints = {};
+
 	ZeroMemory(&udpHints, sizeof(udpHints));
+
 	udpHints.ai_family = AF_INET;
 	udpHints.ai_socktype = SOCK_DGRAM;
 	udpHints.ai_protocol = IPPROTO_UDP;
 
 	addrinfo * udpAddressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
+
+	const auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
+
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(udpInfoStatusCode);
@@ -174,6 +191,7 @@ const bool NetworkingServer::_setupUdp()
 	}
 
 	_udpSocket = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
+
 	if(_udpSocket == INVALID_SOCKET)
 	{
 		Logger::throwDebug(WSAGetLastError());
@@ -183,10 +201,12 @@ const bool NetworkingServer::_setupUdp()
 
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
+
 	setsockopt(_udpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char *>(&trueValue), sizeof(trueValue));
 	setsockopt(_udpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char *>(&falseValue), sizeof(falseValue));
 
-	auto udpBindStatusCode = bind(_udpSocket, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
+	const auto udpBindStatusCode = bind(_udpSocket, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
+
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE)
@@ -216,7 +236,7 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 	{
 		if(socket == _clientSockets[index])
 		{
-			auto clientUsername = _clientUsernames[index];
+			const auto clientUsername = _clientUsernames[index];
 
 			closesocket(socket);
 
@@ -266,6 +286,7 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 {
 	sockaddr_in sourceAddress = {};
 	char buffer[NetworkingHelper::MAX_UDP_BUFFER_SIZE] = {};
+
 	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
 	const auto receiveResult = recvfrom(socket, buffer, NetworkingHelper::MAX_UDP_BUFFER_SIZE, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);

@@ -37,6 +37,8 @@ private:
 
 	static inline const string SERVER_PORT = "61295";
 
+	static inline constexpr int WINSOCK_MAJOR_VERSION = 2;
+	static inline constexpr int WINSOCK_MINOR_VERSION = 2;
 	static inline constexpr int IP_ADDRESS_SIZE = 16;
 	static inline constexpr int MAX_USERNAME_SIZE = 16;
 	static inline constexpr int MAX_MESSAGE_SIZE = 128;

@@ -72,6 +72,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				if(index != (listString.size() - 1) || (isBuildingString || isBuildingBoolean))
 				{
 					index++;
+
 					continue;
 				}
 				else

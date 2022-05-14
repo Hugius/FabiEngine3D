@@ -173,6 +173,7 @@ void MasterRenderer::captureWaterRefractions()
 		{
 			model->setVisible(false);
 			savedModelIds.push_back(model->getId());
+
 			continue;
 		}
 

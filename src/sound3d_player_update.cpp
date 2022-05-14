@@ -131,16 +131,19 @@ void Sound3dPlayer::update()
 		if(!_sound3dManager->isSound3dExisting(sound3dId))
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 		if(_startedSound3ds.find(sound3dId) == _startedSound3ds.end())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 		if(index >= _startedSound3ds.at(sound3dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+
 			continue;
 		}
 

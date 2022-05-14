@@ -99,9 +99,9 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 			{
 				if(aabb->isCollisionResponsive())
 				{
-					const fvec3 middle = _camera->getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkX(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto middle = _camera->getPosition();
+					const auto middleChange = (middle - _lastCameraPosition);
+					const auto hasCollided = _cameraCollisionDetector->checkX(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -123,9 +123,9 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 			{
 				if(aabb->isCollisionResponsive())
 				{
-					const fvec3 middle = _camera->getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkY(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto middle = _camera->getPosition();
+					const auto middleChange = (middle - _lastCameraPosition);
+					const auto hasCollided = _cameraCollisionDetector->checkY(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -150,9 +150,9 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 			{
 				if(aabb->isCollisionResponsive())
 				{
-					const fvec3 middle = _camera->getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkZ(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto middle = _camera->getPosition();
+					const auto middleChange = (middle - _lastCameraPosition);
+					const auto hasCollided = _cameraCollisionDetector->checkZ(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{

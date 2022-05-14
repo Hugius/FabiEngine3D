@@ -37,7 +37,6 @@ const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay() const
 const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4 & clipCoords) const
 {
 	const auto invertedProjection = Mathematics::invertMatrix(_camera->getProjection());
-
 	const auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
@@ -46,7 +45,6 @@ const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4 & clipCoords) con
 const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4 & viewCoords) const
 {
 	const auto invertedView = Mathematics::invertMatrix(_camera->getView());
-
 	const auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);

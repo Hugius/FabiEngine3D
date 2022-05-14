@@ -26,6 +26,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		if(character == ' ' && elementBuild.empty() && !isBuildingString)
 		{
 			characterIndex++;
+
 			continue;
 		}
 		else if(characterIndex == conditionString.size() - 1)

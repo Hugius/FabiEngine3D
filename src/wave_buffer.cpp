@@ -3,6 +3,7 @@
 WaveBuffer::WaveBuffer(shared_ptr<Audio> audio)
 {
 	_format = new WAVEFORMATEX();
+
 	_format->wFormatTag = WAVE_FORMAT_PCM;
 	_format->nChannels = audio->getChannelCount();
 	_format->nSamplesPerSec = audio->getSampleRate();
@@ -11,6 +12,7 @@ WaveBuffer::WaveBuffer(shared_ptr<Audio> audio)
 	_format->wBitsPerSample = audio->getBitsPerSample();
 
 	_header = new WAVEHDR();
+
 	_header->lpData = const_cast<char *>(reinterpret_cast<const char *>(audio->getSamples()));
 	_header->dwBufferLength = audio->getSampleCount();
 }
@@ -18,7 +20,6 @@ WaveBuffer::WaveBuffer(shared_ptr<Audio> audio)
 WaveBuffer::~WaveBuffer()
 {
 	delete _format;
-
 	delete _header;
 }
 

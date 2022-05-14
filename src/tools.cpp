@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <shlobj_core.h>
 #include <iostream>
+
 using std::max;
 using std::to_string;
 using std::filesystem::copy;
@@ -62,6 +63,7 @@ const bool Tools::isCursorInsideWindow()
 void Tools::setCursorPosition(const ivec2 & value)
 {
 	POINT point = {};
+
 	point.x = value.x;
 	point.y = value.y;
 
@@ -84,6 +86,7 @@ void Tools::setCursorVisible(bool value)
 const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 {
 	error_code error = {};
+
 	const auto iterator = directory_iterator(path, error);
 
 	if(error.value() != 0)
@@ -91,7 +94,8 @@ const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 		return {};
 	}
 
-	vector<string> fileNames;
+	vector<string> fileNames = {};
+
 	for(const auto & entry : iterator)
 	{
 		auto entryPath = entry.path().string();
@@ -99,6 +103,7 @@ const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 		if(!isDirectoryExisting(entryPath))
 		{
 			entryPath.erase(0, path.size());
+
 			fileNames.push_back(entryPath);
 		}
 	}
@@ -109,6 +114,7 @@ const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 const vector<string> Tools::getDirectoryNamesFromDirectory(const string & path)
 {
 	error_code error = {};
+
 	const auto iterator = directory_iterator(path, error);
 
 	if(error.value() != 0)
@@ -116,7 +122,8 @@ const vector<string> Tools::getDirectoryNamesFromDirectory(const string & path)
 		return {};
 	}
 
-	vector<string> directoryNames;
+	vector<string> directoryNames = {};
+
 	for(const auto & entry : iterator)
 	{
 		auto entryPath = entry.path().string();
@@ -124,6 +131,7 @@ const vector<string> Tools::getDirectoryNamesFromDirectory(const string & path)
 		if(isDirectoryExisting(entryPath))
 		{
 			entryPath.erase(0, path.size());
+
 			directoryNames.push_back(entryPath);
 		}
 	}
@@ -134,6 +142,7 @@ const vector<string> Tools::getDirectoryNamesFromDirectory(const string & path)
 const string Tools::getRootDirectoryPath()
 {
 	char buffer[256];
+
 	size_t len = sizeof(buffer);
 
 	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
@@ -149,6 +158,7 @@ const string Tools::getRootDirectoryPath()
 		if(rootPath[index] == '\\')
 		{
 			rootPath = rootPath.substr(index + string("binaries\\").size());
+
 			break;
 		}
 	}
@@ -192,10 +202,12 @@ const string Tools::chooseExplorerFile(const string & startingDirectory, const s
 	char titleBuffer[100] = {};
 
 	string filter = fileType;
+
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
 
 	ZeroMemory(&ofn, sizeof(ofn));
+
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = nullptr;
 	ofn.lpstrFile = pathBuffer;
@@ -210,7 +222,9 @@ const string Tools::chooseExplorerFile(const string & startingDirectory, const s
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
 	setCursorVisible(true);
+
 	GetOpenFileName(&ofn);
+
 	setCursorVisible(wasCursorVisible);
 
 	return ofn.lpstrFile;
@@ -221,20 +235,25 @@ const string Tools::chooseExplorerDirectory(const string & startingDirectory)
 	const auto wasCursorVisible = isCursorVisible();
 
 	BROWSEINFO browseInfo = {};
+
 	browseInfo.ulFlags = (BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE);
 	browseInfo.lpfn = nullptr;
 	browseInfo.lParam = LPARAM(startingDirectory.c_str());
 
 	setCursorVisible(true);
+
 	LPITEMIDLIST pidl = SHBrowseForFolder(&browseInfo);
+
 	setCursorVisible(wasCursorVisible);
 
 	if(pidl != 0)
 	{
 		char directoryPath[MAX_PATH];
+
 		SHGetPathFromIDList(pidl, directoryPath);
 
 		IMalloc * imalloc = 0;
+
 		if(SUCCEEDED(SHGetMalloc(&imalloc)))
 		{
 			imalloc->Free(pidl);
@@ -290,7 +309,6 @@ const pair<string, string> Tools::splitStringIntoTwo(const string & mergedString
 const vector<string> Tools::splitStringIntoMultiple(const string & mergedString, char delimiter)
 {
 	vector<string> result = {};
-
 	string tempString = "";
 
 	for(int index = 0; index < static_cast<int>(mergedString.size()); index++)
@@ -304,12 +322,14 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 			else
 			{
 				result.push_back(tempString);
+
 				tempString = "";
 			}
 		}
 		else if(index == (mergedString.size() - 1))
 		{
 			tempString += mergedString[index];
+
 			result.push_back(tempString);
 		}
 		else
@@ -324,6 +344,7 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 const bool Tools::isCursorVisible()
 {
 	CURSORINFO ci = {};
+
 	ci.cbSize = sizeof(CURSORINFO);
 
 	if(!GetCursorInfo(&ci))
@@ -445,12 +466,12 @@ const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2 & position)
 	const auto windowSize = Configuration::getInst().getWindowSize();
 	const auto displaySize = Configuration::getInst().getDisplaySize();
 	const auto displayPosition = Configuration::getInst().getDisplayPosition();
-
 	const auto sizeMultiplier = (fvec2(displaySize) / fvec2(windowSize));
 	const auto positionMultiplier = (fvec2(displayPosition) / fvec2(windowSize));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
+
 	result *= sizeMultiplier;
 	result += fvec2(fabsf(offset.x), fabsf(offset.y));
 
@@ -467,7 +488,6 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2 & position)
 	const auto windowSize = Configuration::getInst().getWindowSize();
 	const auto displaySize = Configuration::getInst().getDisplaySize();
 	const auto displayPosition = Configuration::getInst().getDisplayPosition();
-
 	const auto sizeMultiplier = (fvec2(displaySize) / fvec2(windowSize));
 	const auto positionMultiplier = (fvec2(displayPosition) / fvec2(windowSize));
 	const auto invertedSizeMultiplier = fvec2(windowSize) / fvec2(displaySize);
@@ -475,6 +495,7 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2 & position)
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
+
 	result -= fvec2(fabsf(offset.x), fabsf(offset.y));
 	result *= invertedSizeMultiplier;
 
@@ -491,6 +512,7 @@ const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2 & size)
 	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
 
 	fvec2 result = size;
+
 	result *= sizeMultiplier;
 
 	return result;
@@ -506,6 +528,7 @@ const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2 & size)
 	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
 
 	fvec2 result = size;
+
 	result /= sizeMultiplier;
 
 	return result;
@@ -546,6 +569,7 @@ const ivec2 Tools::convertFromNdc(const fvec2 & position)
 const ivec2 Tools::getCursorPosition()
 {
 	POINT point = {};
+
 	GetCursorPos(&point);
 
 	return ivec2(point.x, (Configuration::getInst().getWindowSize().y - point.y));
@@ -553,7 +577,8 @@ const ivec2 Tools::getCursorPosition()
 
 const ivec2 Tools::getMonitorSize()
 {
-	RECT rectangle;
+	RECT rectangle = {};
+
 	GetWindowRect(GetDesktopWindow(), &rectangle);
 
 	return ivec2(rectangle.right, rectangle.bottom);

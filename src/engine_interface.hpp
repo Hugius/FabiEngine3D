@@ -783,6 +783,20 @@ public:
 	const bool sound2d_isPaused(const string & sound2dId, int index) const;
 	const bool sound2d_isDeviceConnected() const;
 
+	void clock_create(const string & clockId);
+	void clock_delete(const string & clockId);
+	void clock_start(const string & clockId);
+	void clock_pause(const string & clockId);
+	void clock_resume(const string & clockId);
+	void clock_stop(const string & clockId);
+
+	const vector<string> clock_getIds() const;
+	const float clock_getDeltaTime(const string & clockId) const;
+	const bool clock_isExisting(const string & clockId) const;
+	const bool clock_isStarted(const string & clockId) const;
+	const bool clock_isPaused(const string & clockId) const;
+	const bool clock_isIdReserved(const string & clockId) const;
+
 	void graphics_setAmbientLightingEnabled(bool value);
 	void graphics_setDirectionalLightingEnabled(bool value);
 	void graphics_setFogEnabled(bool value);
@@ -1024,20 +1038,6 @@ public:
 	const bool client_isConnectedToServer() const;
 	const bool client_isAcceptedByServer() const;
 	const bool client_isMessageReserved(const string & message);
-
-	void clock_create(const string & clockId);
-	void clock_delete(const string & clockId);
-	void clock_start(const string & clockId);
-	void clock_pause(const string & clockId);
-	void clock_resume(const string & clockId);
-	void clock_stop(const string & clockId);
-
-	const vector<string> clock_getIds() const;
-	const float clock_getDeltaTime(const string & clockId) const;
-	const bool clock_isExisting(const string & clockId) const;
-	const bool clock_isStarted(const string & clockId) const;
-	const bool clock_isPaused(const string & clockId) const;
-	const bool clock_isIdReserved(const string & clockId) const;
 
 	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorId(const string & value);

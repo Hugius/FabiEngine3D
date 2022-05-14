@@ -13,7 +13,7 @@ void Animation2dPlayer::update()
 
 void Animation2dPlayer::_updateQuad3dAnimation2dExecution()
 {
-	vector<string> quad3dAnimationsToStop;
+	vector<string> quad3dAnimationsToStop = {};
 
 	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimation2ds)
 	{
@@ -84,7 +84,7 @@ void Animation2dPlayer::_updateQuad3dAnimation2dExecution()
 
 void Animation2dPlayer::_updateQuad2dAnimation2dExecution()
 {
-	vector<string> quad2dAnimationsToStop;
+	vector<string> quad2dAnimationsToStop = {};
 
 	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimation2ds)
 	{

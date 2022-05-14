@@ -87,6 +87,7 @@ const bool Sound2dPlayer::isSound2dPaused(const string & sound2dId, int index) c
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -101,6 +102,7 @@ const float Sound2dPlayer::getSound2dVolume(const string & sound2dId, int index)
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -115,6 +117,7 @@ const float Sound2dPlayer::getSound2dLeftIntensity(const string & sound2dId, int
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -129,6 +132,7 @@ const float Sound2dPlayer::getSound2dRightIntensity(const string & sound2dId, in
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -143,6 +147,7 @@ const int Sound2dPlayer::getPlayCount(const string & sound2dId, int index) const
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();
@@ -172,6 +177,7 @@ const int Sound2dPlayer::getSound2dTime(const string & sound2dId, int index) con
 	{
 		abort();
 	}
+
 	if(!isSound2dStarted(sound2dId, index))
 	{
 		abort();

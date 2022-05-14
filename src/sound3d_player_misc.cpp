@@ -39,6 +39,7 @@ const bool Sound3dPlayer::isSound3dPaused(const string & sound3dId, int index) c
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
@@ -53,6 +54,7 @@ const float Sound3dPlayer::getSound3dVolume(const string & sound3dId, int index)
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
@@ -67,6 +69,7 @@ const float Sound3dPlayer::getSound3dLeftIntensity(const string & sound3dId, int
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
@@ -81,6 +84,7 @@ const float Sound3dPlayer::getSound3dRightIntensity(const string & sound3dId, in
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
@@ -95,6 +99,7 @@ const int Sound3dPlayer::getPlayCount(const string & sound3dId, int index) const
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();
@@ -178,6 +183,7 @@ const int Sound3dPlayer::getSound3dTime(const string & sound3dId, int index) con
 	{
 		abort();
 	}
+
 	if(!isSound3dStarted(sound3dId, index))
 	{
 		abort();

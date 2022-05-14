@@ -66,30 +66,45 @@ private:
 		auto rawTimestamp = new char[9];
 		auto current = time(nullptr);
 		auto format = tm();
+
 		localtime_s(&format, &current);
+
 		strftime(rawTimestamp, 9, "%H:%M:%S", &format);
-		auto timestamp = string(rawTimestamp);
+
+		const auto timestamp = string(rawTimestamp);
+
 		delete[] rawTimestamp;
 
 		SetConsoleTextAttribute(console, static_cast<DWORD>(TIMESTAMP_COLOR));
 
 		cout << "[" << timestamp << "] ";
 
-		if(type == LoggerMessageType::INFO)
+		switch(type)
 		{
-			SetConsoleTextAttribute(console, static_cast<DWORD>(INFO_COLOR));
-		}
-		if(type == LoggerMessageType::DEBUG)
-		{
-			SetConsoleTextAttribute(console, static_cast<DWORD>(DEBUG_COLOR));
-		}
-		if(type == LoggerMessageType::WARNING)
-		{
-			SetConsoleTextAttribute(console, static_cast<DWORD>(WARNING_COLOR));
-		}
-		if(type == LoggerMessageType::ERR)
-		{
-			SetConsoleTextAttribute(console, static_cast<DWORD>(ERROR_COLOR));
+			case LoggerMessageType::INFO:
+			{
+				SetConsoleTextAttribute(console, static_cast<DWORD>(INFO_COLOR));
+
+				break;
+			}
+			case LoggerMessageType::DEBUG:
+			{
+				SetConsoleTextAttribute(console, static_cast<DWORD>(DEBUG_COLOR));
+
+				break;
+			}
+			case LoggerMessageType::WARNING:
+			{
+				SetConsoleTextAttribute(console, static_cast<DWORD>(WARNING_COLOR));
+
+				break;
+			}
+			case LoggerMessageType::ERR:
+			{
+				SetConsoleTextAttribute(console, static_cast<DWORD>(ERROR_COLOR));
+
+				break;
+			}
 		}
 
 		cout << "[" + TYPE_STRINGS[static_cast<int>(type)] + "]";
@@ -106,14 +121,19 @@ private:
 		}
 
 		cout << first;
+
 		(cout << ... << rest);
+
 		cout << endl;
 
 		ostringstream oss = {};
+
 		oss << first;
+
 		(oss << ... << rest);
 
 		_messageList.push_back(make_shared<LoggerMessage>(type, timestamp, oss.str()));
+
 		_messageCount++;
 	}
 

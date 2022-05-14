@@ -320,16 +320,6 @@ void ScriptInterpreter::unload()
 		_fe3d->clock_delete(clockId);
 	}
 
-	_fe3d->misc_setVsyncEnabled(true);
-
-	_fe3d->camera_reset();
-
-	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
-	_fe3d->collision_setCameraTerrainResponseEnabled(false);
-
-	_fe3d->raycast_setTerrainIntersectionEnabled(false);
-
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
@@ -381,6 +371,14 @@ void ScriptInterpreter::unload()
 	_fe3d->graphics_setPlanarRefractionQuality(0);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 
+	_fe3d->camera_reset();
+
+	_fe3d->raycast_setTerrainIntersectionEnabled(false);
+
+	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
+	_fe3d->collision_setCameraTerrainResponseEnabled(false);
+
 	if(_fe3d->server_isRunning())
 	{
 		_fe3d->server_stop();
@@ -390,6 +388,8 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d->client_stop();
 	}
+
+	_fe3d->misc_setVsyncEnabled(true);
 
 	_debuggingTimes.clear();
 	_localVariables.clear();

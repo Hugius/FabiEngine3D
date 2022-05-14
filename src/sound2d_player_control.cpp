@@ -9,18 +9,19 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 	{
 		abort();
 	}
+
 	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
 	}
 
 	const auto newSound2d = make_shared<StartedSound2D>();
-
 	const auto waveBuffer = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
 
 	const auto openResult = waveOutOpen(&handle, WAVE_MAPPER, waveBuffer->getFormat(), 0, 0, CALLBACK_NULL);
+
 	if(openResult != MMSYSERR_NOERROR)
 	{
 		if(openResult == MMSYSERR_BADDEVICEID)
@@ -38,6 +39,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 	}
 
 	auto header = new WAVEHDR();
+
 	header->dwBufferLength = waveBuffer->getHeader()->dwBufferLength;
 	header->lpData = new char[header->dwBufferLength];
 	header->dwFlags = 0;
@@ -48,6 +50,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 	}
 
 	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));
+
 	if(prepareResult != MMSYSERR_NOERROR)
 	{
 		if(prepareResult == MMSYSERR_NODRIVER)
@@ -65,6 +68,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 	}
 
 	const auto writeResult = waveOutWrite(handle, header, sizeof(WAVEHDR));
+
 	if(writeResult != MMSYSERR_NOERROR)
 	{
 		if(writeResult == MMSYSERR_NODRIVER)
@@ -76,6 +80,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 		else if(writeResult == MMSYSERR_NOMEM)
 		{
 			const auto unprepareResult = waveOutUnprepareHeader(handle, header, sizeof(WAVEHDR));
+
 			if(unprepareResult != MMSYSERR_NOERROR)
 			{
 				if(unprepareResult == MMSYSERR_NODRIVER)
@@ -93,6 +98,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 			}
 
 			const auto closeResult = waveOutClose(handle);
+
 			if(closeResult != MMSYSERR_NOERROR)
 			{
 				if(closeResult == MMSYSERR_NODRIVER)
@@ -215,6 +221,7 @@ void Sound2dPlayer::stopSound2d(const string & sound2dId, int index)
 	}
 
 	const auto resetResult = waveOutReset(_startedSound2ds.at(sound2dId)[index]->getHandle());
+
 	if(resetResult != MMSYSERR_NOERROR)
 	{
 		if(resetResult == MMSYSERR_NODRIVER)
@@ -232,6 +239,7 @@ void Sound2dPlayer::stopSound2d(const string & sound2dId, int index)
 	}
 
 	const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
+
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		if(unprepareResult == MMSYSERR_NODRIVER)
@@ -249,6 +257,7 @@ void Sound2dPlayer::stopSound2d(const string & sound2dId, int index)
 	}
 
 	const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
+
 	if(closeResult != MMSYSERR_NOERROR)
 	{
 		if(closeResult == MMSYSERR_NODRIVER)

@@ -7,7 +7,7 @@ using std::chrono::seconds;
 
 void Sound2dPlayer::update()
 {
-	vector<pair<string, int>> sound2dsToStop;
+	vector<pair<string, int>> sound2dsToStop = {};
 
 	for(auto & [sound2dId, startedSound2ds] : _startedSound2ds)
 	{
@@ -29,6 +29,7 @@ void Sound2dPlayer::update()
 					startedSound2ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
 					const auto writeResult = waveOutWrite(startedSound2ds[index]->getHandle(), startedSound2ds[index]->getHeader(), sizeof(WAVEHDR));
+
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -52,6 +53,7 @@ void Sound2dPlayer::update()
 	for(const auto & [sound2dId, index] : sound2dsToStop)
 	{
 		const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
+
 		if(unprepareResult != MMSYSERR_NOERROR)
 		{
 			if(unprepareResult == MMSYSERR_NODRIVER)
@@ -69,6 +71,7 @@ void Sound2dPlayer::update()
 		}
 
 		const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
+
 		if(closeResult != MMSYSERR_NOERROR)
 		{
 			if(closeResult == MMSYSERR_NODRIVER)
@@ -116,12 +119,14 @@ void Sound2dPlayer::update()
 
 			continue;
 		}
+
 		if(_startedSound2ds.find(sound2dId) == _startedSound2ds.end())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 
 			continue;
 		}
+
 		if(index >= _startedSound2ds.at(sound2dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
@@ -131,11 +136,9 @@ void Sound2dPlayer::update()
 
 		const auto startedSound2d = _startedSound2ds.at(sound2dId)[index];
 		const auto originalSound2d = _sound2dManager->getSound2d(sound2dId);
-
 		const auto sampleCount = (originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound2d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound2d->getHeader()->lpData); // short = 2 bytes
-
 		const auto volume = startedSound2d->getVolume();
 		const auto leftIntensity = startedSound2d->getLeftIntensity();
 		const auto rightIntensity = startedSound2d->getRightIntensity();

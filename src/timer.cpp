@@ -33,6 +33,7 @@ void Timer::startClock(const string & clockId)
 	{
 		abort();
 	}
+
 	if(isClockStarted(clockId))
 	{
 		abort();
@@ -50,10 +51,12 @@ void Timer::pauseClock(const string & clockId)
 	{
 		abort();
 	}
+
 	if(!isClockStarted(clockId))
 	{
 		abort();
 	}
+
 	if(isClockPaused(clockId))
 	{
 		abort();
@@ -71,17 +74,18 @@ void Timer::resumeClock(const string & clockId)
 	{
 		abort();
 	}
+
 	if(!isClockStarted(clockId))
 	{
 		abort();
 	}
+
 	if(!isClockPaused(clockId))
 	{
 		abort();
 	}
 
 	const auto epoch = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
-
 	const auto difference = (epoch - _clocks.at(clockId)->pauseEpoch);
 
 	_clocks.at(clockId)->startEpoch += difference;
@@ -94,6 +98,7 @@ void Timer::stopClock(const string & clockId)
 	{
 		abort();
 	}
+
 	if(!isClockStarted(clockId))
 	{
 		abort();
@@ -111,6 +116,7 @@ const float Timer::getClockDeltaTime(const string & clockId) const
 	{
 		abort();
 	}
+
 	if(isClockStarted(clockId))
 	{
 		abort();
@@ -143,6 +149,7 @@ const bool Timer::isClockPaused(const string & clockId) const
 	{
 		abort();
 	}
+
 	if(!isClockStarted(clockId))
 	{
 		abort();

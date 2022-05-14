@@ -255,6 +255,7 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedSpotlightIds.clear();
 	_loadedCaptorIds.clear();
 	_loadedSound3dIds.clear();
+
 	_loadedWorldId = "";
 	_isGraphicsLoaded = false;
 }
@@ -337,5 +338,6 @@ void CustomWorldBuilder::resetWorldBuild()
 	_addedSpotlightIds.clear();
 	_addedCaptorIds.clear();
 	_addedSound3dIds.clear();
+
 	_isGraphicsAdded = false;
 }

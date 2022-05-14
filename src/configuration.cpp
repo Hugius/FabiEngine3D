@@ -22,6 +22,7 @@ Configuration::Configuration()
 	if(file)
 	{
 		string title = "";
+
 		int width = 0;
 		int height = 0;
 
@@ -32,14 +33,12 @@ Configuration::Configuration()
 		_windowTitle = title;
 		_windowSizeMultiplier.x = (static_cast<float>(width) / 100.0f);
 		_windowSizeMultiplier.y = (static_cast<float>(height) / 100.0f);
-
 		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
 		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
 		_displaySize.x = _windowSize.x;
 		_displaySize.y = _windowSize.y;
 		_displayPosition.x = 0;
 		_displayPosition.y = 0;
-
 		_isApplicationExported = true;
 	}
 	else
@@ -52,7 +51,6 @@ Configuration::Configuration()
 		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_SIZE_MULTIPLIER.y);
 		_displayPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_POSITION_MULTIPLIER.x);
 		_displayPosition.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_POSITION_MULTIPLIER.y);
-
 		_isApplicationExported = false;
 	}
 }
@@ -67,18 +65,22 @@ void Configuration::_processOption(ifstream & file, const string & name, string 
 	{
 		Logger::throwError("Configuration file option `" + name + "` is corrupted");
 	}
+
 	if(line.substr(0, name.size()) != name)
 	{
 		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
+
 	if(line[name.size()] != '=')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
 	}
+
 	if(line[name.size() + 1] != '"')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
 	}
+
 	if(line.back() != '"')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
@@ -98,14 +100,17 @@ void Configuration::_processOption(ifstream & file, const string & name, int & o
 	{
 		Logger::throwError("Configuration file option `" + name + "` is corrupted");
 	}
+
 	if(line.substr(0, name.size()) != name)
 	{
 		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
+
 	if(line[name.size()] != '=')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
 	}
+
 	if(!Tools::isInteger(line.substr(name.size() + 1)))
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
@@ -117,6 +122,7 @@ void Configuration::_processOption(ifstream & file, const string & name, int & o
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is too low");
 	}
+
 	if(option > maxValue)
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is too high");

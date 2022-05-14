@@ -8,7 +8,7 @@ using std::clamp;
 
 void Sound3dPlayer::update()
 {
-	vector<pair<string, int>> sound3dsToStop;
+	vector<pair<string, int>> sound3dsToStop = {};
 
 	for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 	{
@@ -43,6 +43,7 @@ void Sound3dPlayer::update()
 					startedSound3ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
 					const auto writeResult = waveOutWrite(startedSound3ds[index]->getHandle(), startedSound3ds[index]->getHeader(), sizeof(WAVEHDR));
+
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -70,6 +71,7 @@ void Sound3dPlayer::update()
 	for(const auto & [sound3dId, index] : sound3dsToStop)
 	{
 		const auto unprepareResult = waveOutUnprepareHeader(_startedSound3ds.at(sound3dId)[index]->getHandle(), _startedSound3ds.at(sound3dId)[index]->getHeader(), sizeof(WAVEHDR));
+
 		if(unprepareResult != MMSYSERR_NOERROR)
 		{
 			if(unprepareResult == MMSYSERR_NODRIVER)
@@ -87,6 +89,7 @@ void Sound3dPlayer::update()
 		}
 
 		const auto closeResult = waveOutClose(_startedSound3ds.at(sound3dId)[index]->getHandle());
+
 		if(closeResult != MMSYSERR_NOERROR)
 		{
 			if(closeResult == MMSYSERR_NODRIVER)
@@ -134,12 +137,14 @@ void Sound3dPlayer::update()
 
 			continue;
 		}
+
 		if(_startedSound3ds.find(sound3dId) == _startedSound3ds.end())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
 
 			continue;
 		}
+
 		if(index >= _startedSound3ds.at(sound3dId).size())
 		{
 			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
@@ -149,11 +154,9 @@ void Sound3dPlayer::update()
 
 		const auto startedSound3d = _startedSound3ds.at(sound3dId)[index];
 		const auto originalSound3d = _sound3dManager->getSound3d(sound3dId);
-
 		const auto sampleCount = (originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound3d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound3d->getHeader()->lpData); // short = 2 bytes
-
 		const auto volume = startedSound3d->getVolume();
 		const auto leftIntensity = startedSound3d->getLeftIntensity();
 		const auto rightIntensity = startedSound3d->getRightIntensity();

@@ -12,7 +12,7 @@ void Animation3dPlayer::update()
 
 void Animation3dPlayer::_updateModelAnimation3dExecution()
 {
-	vector<string> modelAnimationsToStop;
+	vector<string> modelAnimationsToStop = {};
 
 	for(auto & [mergedId, startedAnimation] : _startedModelAnimation3ds)
 	{

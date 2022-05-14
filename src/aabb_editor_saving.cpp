@@ -19,12 +19,13 @@ const bool AabbEditor::saveAabbsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\aabb.fe3d");
 
 	for(const auto & aabbId : _loadedAabbIds)
 	{
-		auto size = _fe3d->aabb_getBaseSize(aabbId);
-		auto color = _fe3d->aabb_getColor(aabbId);
+		const auto size = _fe3d->aabb_getBaseSize(aabbId);
+		const auto color = _fe3d->aabb_getColor(aabbId);
 
 		file
 			<< aabbId

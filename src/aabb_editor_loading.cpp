@@ -20,6 +20,7 @@ const bool AabbEditor::loadAabbsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\aabb.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `aabb.fe3d` does not exist");
@@ -28,6 +29,7 @@ const bool AabbEditor::loadAabbsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string aabbId;
@@ -45,13 +47,14 @@ const bool AabbEditor::loadAabbsFromFile()
 			>> color.g
 			>> color.b;
 
-		_loadedAabbIds.push_back(aabbId);
-		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
-
 		_fe3d->aabb_create(aabbId, false);
 		_fe3d->aabb_setVisible(aabbId, false);
 		_fe3d->aabb_setBaseSize(aabbId, size);
 		_fe3d->aabb_setColor(aabbId, color);
+
+		_loadedAabbIds.push_back(aabbId);
+
+		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 	}
 
 	file.close();

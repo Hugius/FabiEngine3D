@@ -61,7 +61,7 @@ void ModelEditor::_load()
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(AABB_TEXT_ID, fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void ModelEditor::_unload()
@@ -105,7 +105,7 @@ void ModelEditor::_unload()
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("modelId");
-	_gui->getOverlay()->deleteTextField("aabbId");
+	_gui->getOverlay()->deleteTextField(AABB_TEXT_ID);
 
 	_loadedModelIds.clear();
 }

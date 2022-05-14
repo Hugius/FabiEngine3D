@@ -5,15 +5,15 @@
 
 void Animation2dEditor::_load()
 {
-	_fe3d->quad3d_create(PREVIEW_QUAD2D_ID, true);
-	_fe3d->quad3d_setPosition(PREVIEW_QUAD2D_ID, PREVIEW_QUAD2D_POSITION);
-	_fe3d->quad3d_setVisible(PREVIEW_QUAD2D_ID, false);
+	_fe3d->quad3d_create(PREVIEW_QUAD3D_ID, true);
+	_fe3d->quad3d_setPosition(PREVIEW_QUAD3D_ID, PREVIEW_QUAD3D_POSITION);
+	_fe3d->quad3d_setVisible(PREVIEW_QUAD3D_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 
-	_fe3d->camera_setYaw(270.0f);
+	_fe3d->camera_setYaw(CAMERA_YAW);
 
-	_gui->getOverlay()->createTextField("animation2dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(ANIMATION2D_TEXT_ID, ANIMATION2D_TEXT_POSITION, ANIMATION2D_TEXT_SIZE, "", fvec3(1.0f), true);
 }
 
 void Animation2dEditor::_unload()
@@ -23,13 +23,13 @@ void Animation2dEditor::_unload()
 		_fe3d->animation2d_delete(aabb2dId);
 	}
 
+	_fe3d->quad3d_delete(PREVIEW_QUAD3D_ID);
+
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 
 	_fe3d->camera_reset();
 
-	_fe3d->quad3d_delete(PREVIEW_QUAD2D_ID);
-
-	_gui->getOverlay()->deleteTextField("animation2dId");
+	_gui->getOverlay()->deleteTextField(ANIMATION2D_TEXT_ID);
 
 	_loadedAnimation2dIds.clear();
 }
@@ -40,6 +40,7 @@ void Animation2dEditor::_loadGUI()
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
+
 	rightWindow->createScreen("animation2dEditorMenuMain");
 	rightWindow->getScreen("animation2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -47,6 +48,7 @@ void Animation2dEditor::_loadGUI()
 	rightWindow->getScreen("animation2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(6, CH, false);
+
 	rightWindow->createScreen("animation2dEditorMenuChoice");
 	rightWindow->getScreen("animation2dEditorMenuChoice")->createButton("preview", fvec2(0.0f, positions[0]), TEXT_SIZE("Preview Texture"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Preview Texture", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("animation2dEditorMenuChoice")->createButton("rowCount", fvec2(0.0f, positions[1]), TEXT_SIZE("Rows"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rows", TEXT_COLOR, TEXT_HOVER_COLOR, true);

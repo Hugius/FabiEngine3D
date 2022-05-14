@@ -152,6 +152,8 @@ private:
 	const vector<string> _getWorldIds() const;
 
 	static inline const string GRID_ID = "@@grid";
+	static inline const string GRID_MESH_PATH = "engine\\assets\\mesh\\plane.obj";
+	static inline const string GRID_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\grid.tga";
 	static inline const string POINTLIGHT_MODEL_ID = "@@template_pointlight";
 	static inline const string SPOTLIGHT_MODEL_ID = "@@template_spotlight";
 	static inline const string CAPTOR_MODEL_ID = "@@template_captor";
@@ -221,6 +223,8 @@ private:
 	static inline constexpr float SOUND3D_MAX_VOLUME = 1.0f;
 	static inline constexpr float SOUND3D_MAX_DISTANCE = 25.0f;
 	static inline constexpr float GRID_SIZE = 1024.0f;
+	static inline constexpr float GRID_MIN_TEXTURE_ALPHA = 0.1f;
+	static inline constexpr float GRID_LIGHTNESS = 0.25f;
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;

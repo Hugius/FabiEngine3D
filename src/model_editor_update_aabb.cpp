@@ -61,7 +61,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 		{
 			_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
-			_gui->getOverlay()->getTextField("aabbId")->setVisible(false);
+			_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(false);
 			_currentAabbId = "";
 
 			return;

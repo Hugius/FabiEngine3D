@@ -303,8 +303,8 @@ void ModelEditor::_updateAabbCreating()
 		_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-		_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
-		_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId);
+		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
 	}
 }
 
@@ -343,8 +343,8 @@ void ModelEditor::_updateAabbChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-					_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
-					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId);
+					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
 				}
 			}
 		}

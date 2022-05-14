@@ -82,15 +82,18 @@ void AabbEditor::_updateAabbCreating()
 			return;
 		}
 
-		_currentAabbId = newAabbId;
-		_loadedAabbIds.push_back(newAabbId);
-		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
-
 		_fe3d->aabb_create(newAabbId, false);
 
+		_currentAabbId = newAabbId;
+
+		_loadedAabbIds.push_back(newAabbId);
+
+		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
+
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
-		_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + newAabbId.substr(1));
-		_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+
+		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + newAabbId.substr(1));
+		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
 	}
 }
 
@@ -112,6 +115,7 @@ void AabbEditor::_updateAabbChoosing()
 			if(_hoveredAabbId.empty())
 			{
 				_hoveredAabbId = ("@" + selectedOptionId);
+
 				_fe3d->aabb_setVisible(_hoveredAabbId, true);
 			}
 
@@ -128,8 +132,8 @@ void AabbEditor::_updateAabbChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId.substr(1));
-					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId.substr(1));
+					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -145,6 +149,7 @@ void AabbEditor::_updateAabbDeleting()
 			_fe3d->aabb_delete(_currentAabbId);
 
 			_loadedAabbIds.erase(remove(_loadedAabbIds.begin(), _loadedAabbIds.end(), _currentAabbId), _loadedAabbIds.end());
+
 			_currentAabbId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

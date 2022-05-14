@@ -19,6 +19,7 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` does not exist");
@@ -27,6 +28,7 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string animation2dId;
@@ -42,13 +44,14 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 			>> columnCount
 			>> interval;
 
-		_loadedAnimation2dIds.push_back(animation2dId);
-		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
-
 		_fe3d->animation2d_create(animation2dId);
 		_fe3d->animation2d_setRowCount(animation2dId, rowCount);
 		_fe3d->animation2d_setColumnCount(animation2dId, columnCount);
 		_fe3d->animation2d_setInterval(animation2dId, interval);
+
+		_loadedAnimation2dIds.push_back(animation2dId);
+
+		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
 	}
 
 	file.close();

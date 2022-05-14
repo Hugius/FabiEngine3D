@@ -70,9 +70,6 @@ void WorldEditor::_load()
 	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
 	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
 	_fe3d->model_setShadowed(GRID_ID, false);
-	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
-	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
-	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
@@ -162,7 +159,6 @@ void WorldEditor::_unload()
 	}
 
 	_fe3d->model_delete(GRID_ID);
-	_fe3d->model_delete(BOX_ID);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);

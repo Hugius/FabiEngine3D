@@ -18,17 +18,15 @@ void AabbEditor::_load()
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
+	_fe3d->graphics_setDirectionalLightingPosition(DIRECTIONAL_LIGHTING_POSITION);
+	_fe3d->graphics_setDirectionalLightingIntensity(DIRECTIONAL_LIGHTING_INTENSITY);
 	_fe3d->graphics_setShadowsEnabled(true);
-	_fe3d->graphics_setShadowLightness(0.25f);
-	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
+	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
 
@@ -39,7 +37,7 @@ void AabbEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(AABB_TEXT_ID, AABB_TEXT_POSITION, AABB_TEXT_SIZE, "", fvec3(1.0f), true);
 }
 
 void AabbEditor::_unload()
@@ -69,7 +67,7 @@ void AabbEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("aabbId");
+	_gui->getOverlay()->deleteTextField(AABB_TEXT_ID);
 
 	_loadedAabbIds.clear();
 }
@@ -80,6 +78,7 @@ void AabbEditor::_loadGUI()
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
+
 	leftWindow->createScreen("aabbEditorMenuMain");
 	leftWindow->getScreen("aabbEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("aabbEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -87,6 +86,7 @@ void AabbEditor::_loadGUI()
 	leftWindow->getScreen("aabbEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+
 	leftWindow->createScreen("aabbEditorMenuChoice");
 	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("size", fvec2(0.0f, positions[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);

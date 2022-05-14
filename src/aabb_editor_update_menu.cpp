@@ -72,9 +72,11 @@ void AabbEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->aabb_setVisible(_currentAabbId, false);
-			_gui->getOverlay()->getTextField("aabbId")->setVisible(false);
-			_currentAabbId = "";
+
+			_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuMain");
+
+			_currentAabbId = "";
 
 			return;
 		}

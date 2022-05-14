@@ -48,6 +48,7 @@ private:
 	static inline const string BOX_ID = "@@box";
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
+	static inline const string AABB_TEXT_ID = "@@aabb";
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
@@ -55,6 +56,8 @@ private:
 	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
 	static inline constexpr float GRID_SIZE = 50.0f;
+	static inline constexpr float GRID_MIN_TEXTURE_ALPHA = 0.1f;
+	static inline constexpr float GRID_LIGHTNESS = 0.25f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;

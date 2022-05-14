@@ -103,7 +103,7 @@ void Animation2dEditor::_updateAnimation2dDeleting()
 			_loadedAnimation2dIds.erase(remove(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), _currentAnimation2dId), _loadedAnimation2dIds.end());
 			_currentAnimation2dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAnimation2dId = "";
 		}

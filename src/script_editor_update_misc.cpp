@@ -58,7 +58,7 @@ void ScriptEditor::_updateMenu()
 
 				return;
 			}
-			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+			else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
 

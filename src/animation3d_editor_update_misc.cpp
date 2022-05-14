@@ -247,7 +247,7 @@ void Animation3dEditor::_updateAnimation3dDeleting()
 			_loadedAnimation3dIds.erase(remove(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), _currentAnimation3dId), _loadedAnimation3dIds.end());
 			_currentAnimation3dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAnimation3dId = "";
 		}

@@ -163,7 +163,7 @@ void PointlightEditor::_updatePointlightDeleting()
 			_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _currentPointlightId), _loadedPointlightIds.end());
 			_currentPointlightId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
 			_fe3d->model_setVisible("@@pointlight", false);

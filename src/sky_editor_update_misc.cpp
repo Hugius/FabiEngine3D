@@ -144,7 +144,7 @@ void SkyEditor::_updateSkyDeleting()
 			_currentSkyId = "";
 
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->sky_select("");
 

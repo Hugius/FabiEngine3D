@@ -47,7 +47,7 @@ void TerrainEditor::_updateMainMenu()
 
 				return;
 			}
-			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+			else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
 

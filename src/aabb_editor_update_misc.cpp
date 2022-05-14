@@ -147,7 +147,7 @@ void AabbEditor::_updateAabbDeleting()
 			_loadedAabbIds.erase(remove(_loadedAabbIds.begin(), _loadedAabbIds.end(), _currentAabbId), _loadedAabbIds.end());
 			_currentAabbId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->aabb_setVisible(_currentAabbId, false);
 

@@ -223,7 +223,7 @@ void ModelEditor::_updateModelDeleting()
 			_currentModelId = "";
 
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->model_setVisible(_currentModelId, false);
 
@@ -360,7 +360,7 @@ void ModelEditor::_updateAabbDeleting()
 			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
 			_currentAabbId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAabbId = "";
 		}

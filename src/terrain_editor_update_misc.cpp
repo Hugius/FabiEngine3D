@@ -191,7 +191,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			_loadedTerrainIds.erase(remove(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), _currentTerrainId), _loadedTerrainIds.end());
 			_currentTerrainId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentTerrainId = "";
 		}

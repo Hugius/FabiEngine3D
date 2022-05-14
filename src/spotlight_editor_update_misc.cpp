@@ -164,7 +164,7 @@ void SpotlightEditor::_updateSpotlightDeleting()
 			_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _currentSpotlightId), _loadedSpotlightIds.end());
 			_currentSpotlightId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
 			_fe3d->model_setVisible("@@spotlight", false);

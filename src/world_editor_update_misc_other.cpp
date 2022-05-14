@@ -262,7 +262,7 @@ void WorldEditor::_updateWorldDeleting()
 			_deleteWorldFile(_currentWorldId);
 			_currentWorldId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentWorldId = "";
 		}

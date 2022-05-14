@@ -155,7 +155,7 @@ void Text2dEditor::_updateText2dDeleting()
 			_loadedText2dIds.erase(remove(_loadedText2dIds.begin(), _loadedText2dIds.end(), _currentText2dId), _loadedText2dIds.end());
 			_currentText2dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentText2dId = "";
 		}

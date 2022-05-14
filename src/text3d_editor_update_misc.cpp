@@ -192,7 +192,7 @@ void Text3dEditor::_updateText3dDeleting()
 			_loadedText3dIds.erase(remove(_loadedText3dIds.begin(), _loadedText3dIds.end(), _currentText3dId), _loadedText3dIds.end());
 			_currentText3dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->text3d_setVisible(_currentText3dId, false);
 

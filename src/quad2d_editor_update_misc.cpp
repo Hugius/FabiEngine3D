@@ -129,7 +129,7 @@ void Quad2dEditor::_updateQuad2dDeleting()
 			_loadedQuad2dIds.erase(remove(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), _currentQuad2dId), _loadedQuad2dIds.end());
 			_currentQuad2dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentQuad2dId = "";
 		}

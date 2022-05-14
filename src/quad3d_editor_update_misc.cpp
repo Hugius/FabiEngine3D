@@ -157,7 +157,7 @@ void Quad3dEditor::_updateQuad3dDeleting()
 			_loadedQuad3dIds.erase(remove(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end(), _currentQuad3dId), _loadedQuad3dIds.end());
 			_currentQuad3dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->quad3d_setVisible(_currentQuad3dId, false);
 

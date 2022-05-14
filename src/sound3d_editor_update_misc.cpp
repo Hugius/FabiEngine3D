@@ -190,7 +190,7 @@ void Sound3dEditor::_updateSound3dDeleting()
 			_loadedSound3dIds.erase(remove(_loadedSound3dIds.begin(), _loadedSound3dIds.end(), _currentSound3dId), _loadedSound3dIds.end());
 			_currentSound3dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->sound3d_pause(_currentSound3dId, 0);
 			_fe3d->model_setVisible("@@sound3d", false);

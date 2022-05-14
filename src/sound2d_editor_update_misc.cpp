@@ -145,7 +145,7 @@ void Sound2dEditor::_updateSound2dDeleting()
 			_loadedSound2dIds.erase(remove(_loadedSound2dIds.begin(), _loadedSound2dIds.end(), _currentSound2dId), _loadedSound2dIds.end());
 			_currentSound2dId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentSound2dId = "";
 		}

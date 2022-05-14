@@ -154,7 +154,7 @@ void WaterEditor::_updateWaterDeleting()
 			_loadedWaterIds.erase(remove(_loadedWaterIds.begin(), _loadedWaterIds.end(), _currentWaterId), _loadedWaterIds.end());
 			_currentWaterId = "";
 		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentWaterId = "";
 		}

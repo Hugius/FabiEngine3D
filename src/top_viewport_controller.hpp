@@ -55,7 +55,7 @@ public:
 private:
 	void _updateProjectScreenManagement();
 	void _updateApplicationScreenManagement();
-	void _updateMiscScreenManagement();
+	void _updateExtraScreenManagement();
 	void _updateMiscellaneous();
 	void _updateProjectCreating();
 	void _updateProjectLoading();
@@ -68,10 +68,15 @@ private:
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
+	static inline const fvec3 ROUND_BUTTON_COLOR = fvec3(1.0f);
+	static inline const fvec3 ROUND_BUTTON_HOVER_COLOR = fvec3(0.25f);
+
+	static inline const fvec2 ROUND_BUTTON_SIZE = fvec2(0.2f, 1.75f);
 
 	static inline constexpr float LCW = 0.05f;
+	static inline constexpr float LCH = 1.5f;
 	static inline constexpr float RCW = 0.075f;
-	static inline constexpr float CH = 1.5f;
+	static inline constexpr float RCH = 1.5f;
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;

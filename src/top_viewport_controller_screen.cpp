@@ -137,9 +137,9 @@ void TopViewportController::_updateApplicationScreenManagement()
 	}
 }
 
-void TopViewportController::_updateMiscScreenManagement()
+void TopViewportController::_updateExtraScreenManagement()
 {
-	const auto screen = _gui->getTopViewport()->getWindow("miscellaneousWindow")->getActiveScreen();
+	const auto screen = _gui->getTopViewport()->getWindow("extraWindow")->getActiveScreen();
 
 	if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{

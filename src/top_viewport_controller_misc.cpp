@@ -1,5 +1,5 @@
-#define LEFT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * LCW), CH)
-#define RIGHT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * RCW), CH)
+#define LEFT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * LCW), LCH)
+#define RIGHT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * RCW), RCH)
 
 #include "top_viewport_controller.hpp"
 #include "logger.hpp"
@@ -13,45 +13,42 @@ void TopViewportController::initialize()
 {
 	_gui->getTopViewport()->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), FRAME_COLOR);
 	_gui->getTopViewport()->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);
-	_gui->getTopViewport()->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);
+	_gui->getTopViewport()->createWindow("extraWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);
 
-	auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");
-	auto executionWindow = _gui->getTopViewport()->getWindow("executionWindow");
-	auto miscellaneousWindow = _gui->getTopViewport()->getWindow("miscellaneousWindow");
-
-	auto positions = Mathematics::calculateDistributedPositions(4, LEFT_TEXT_SIZE("CREATE").x, true);
+	const auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");
+	const auto executionWindow = _gui->getTopViewport()->getWindow("executionWindow");
+	const auto extraWindow = _gui->getTopViewport()->getWindow("extraWindow");
+	const auto projectPositions = Mathematics::calculateDistributedPositions(4, LEFT_TEXT_SIZE("CREATE").x, true);
+	const auto executionPositions = Mathematics::calculateDistributedPositions(5, ROUND_BUTTON_SIZE.x, true);
+	const auto extraPositions = Mathematics::calculateDistributedPositions(3, RIGHT_TEXT_SIZE("UNCACHE").x, true);
 
 	projectWindow->createScreen("main");
-	projectWindow->getScreen("main")->createButton("createProject", fvec2(positions[0], 0.0f), LEFT_TEXT_SIZE("CREATE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CREATE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("loadProject", fvec2(positions[1], 0.0f), LEFT_TEXT_SIZE("LOAD"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(positions[2], 0.0f), LEFT_TEXT_SIZE("DELETE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DELETE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("closeWindow", fvec2(positions[3], 0.0f), LEFT_TEXT_SIZE("CLOSE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CLOSE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("createProject", fvec2(projectPositions[0], 0.0f), LEFT_TEXT_SIZE("CREATE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CREATE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("loadProject", fvec2(projectPositions[1], 0.0f), LEFT_TEXT_SIZE("LOAD"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(projectPositions[2], 0.0f), LEFT_TEXT_SIZE("DELETE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DELETE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("closeWindow", fvec2(projectPositions[3], 0.0f), LEFT_TEXT_SIZE("CLOSE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CLOSE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->setActiveScreen("main");
 
-	positions = Mathematics::calculateDistributedPositions(5, 0.2f, true);
-
 	executionWindow->createScreen("main");
-	executionWindow->getScreen("main")->createButton("start", fvec2(positions[0], 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("pause", fvec2(positions[1], 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("restart", fvec2(positions[2], 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("stop", fvec2(positions[3], 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("debug", fvec2(positions[4], 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("start", fvec2(executionPositions[0], 0.0f), ROUND_BUTTON_SIZE, "start.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("pause", fvec2(executionPositions[1], 0.0f), ROUND_BUTTON_SIZE, "pause.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(executionPositions[2], 0.0f), ROUND_BUTTON_SIZE, "restart.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(executionPositions[3], 0.0f), ROUND_BUTTON_SIZE, "stop.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(executionPositions[4], 0.0f), ROUND_BUTTON_SIZE, "debug.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
 	executionWindow->setActiveScreen("main");
 
-	positions = Mathematics::calculateDistributedPositions(3, RIGHT_TEXT_SIZE("UNCACHE").x, true);
-
-	miscellaneousWindow->createScreen("main");
-	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(positions[0], 0.0f), RIGHT_TEXT_SIZE("UNCACHE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "UNCACHE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	miscellaneousWindow->getScreen("main")->createButton("export", fvec2(positions[1], 0.0f), RIGHT_TEXT_SIZE("EXPORT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "EXPORT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	miscellaneousWindow->getScreen("main")->createButton("documentation", fvec2(positions[2], 0.0f), RIGHT_TEXT_SIZE("DOCS"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOCS", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	miscellaneousWindow->setActiveScreen("main");
+	extraWindow->createScreen("main");
+	extraWindow->getScreen("main")->createButton("uncache", fvec2(extraPositions[0], 0.0f), RIGHT_TEXT_SIZE("UNCACHE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "UNCACHE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	extraWindow->getScreen("main")->createButton("export", fvec2(extraPositions[1], 0.0f), RIGHT_TEXT_SIZE("EXPORT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "EXPORT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	extraWindow->getScreen("main")->createButton("documentation", fvec2(extraPositions[2], 0.0f), RIGHT_TEXT_SIZE("DOCS"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOCS", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	extraWindow->setActiveScreen("main");
 }
 
 void TopViewportController::update()
 {
 	_updateProjectScreenManagement();
 	_updateApplicationScreenManagement();
-	_updateMiscScreenManagement();
+	_updateExtraScreenManagement();
 	_updateMiscellaneous();
 }
 

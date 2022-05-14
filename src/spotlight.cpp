@@ -20,6 +20,7 @@ void Spotlight::updateTarget()
 	if(_position != _positionTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)

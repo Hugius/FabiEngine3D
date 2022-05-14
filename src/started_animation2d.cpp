@@ -74,10 +74,10 @@ void StartedAnimation2d::setUpdateCount(int value)
 
 void StartedAnimation2d::setIntervalMultiplier(int value)
 {
-	_intervalMultiplier = max(MIN_INTERVAL_MULTIPLIER, value);
+	_intervalMultiplier = max(1, value);
 }
 
 void StartedAnimation2d::setIntervalDivider(int value)
 {
-	_intervalDivider = max(MIN_INTERVAL_DIVIDER, value);
+	_intervalDivider = max(1, value);
 }

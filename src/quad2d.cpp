@@ -25,6 +25,7 @@ void Quad2d::updateTarget()
 	if(_position != _positionTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -39,12 +40,13 @@ void Quad2d::updateTarget()
 
 	if(_rotation != _rotationTarget)
 	{
-		auto difference = fabsf(_rotation - _rotationTarget);
-		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
-		float speed = (_rotationTargetSpeed * multiplier);
-		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
+		const auto difference = fabsf(_rotation - _rotationTarget);
+		const auto  multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
+		const auto  speed = (_rotationTargetSpeed * multiplier);
 
+		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 		_rotation = Mathematics::limitAngle(_rotation);
+
 		if(Mathematics::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
 			_rotation = _rotationTarget;
@@ -54,9 +56,10 @@ void Quad2d::updateTarget()
 	if(_size != _sizeTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
-		_size += (speedMultiplier * _sizeTargetSpeed);
 
+		_size += (speedMultiplier * _sizeTargetSpeed);
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
@@ -70,9 +73,9 @@ void Quad2d::updateTarget()
 
 void Quad2d::updateTransformation()
 {
-	auto translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	auto rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
-	auto scalingMatrix = Mathematics::createScalingMatrix(_size.x, _size.y, 1.0f);
+	const auto  translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	const auto  rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
+	const auto  scalingMatrix = Mathematics::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformation = (translationMatrix * rotationMatrix * scalingMatrix);
 }

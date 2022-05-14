@@ -13,6 +13,7 @@ void EngineInterface::sky_setCubeMaps(const string & skyId, const array<string, 
 	if(texture == nullptr)
 	{
 		array<shared_ptr<Image>, 6> images;
+
 		for(int index = 0; index < 6; index++)
 		{
 			if(value[index].empty())
@@ -53,6 +54,7 @@ void EngineInterface::sky_setCubeMaps(const string & skyId, const array<string, 
 void EngineInterface::sky_setRightCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[0] = value;
 
 	sky_setCubeMaps(skyId, paths);
@@ -61,6 +63,7 @@ void EngineInterface::sky_setRightCubeMap(const string & skyId, const string & v
 void EngineInterface::sky_setLeftCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[1] = value;
 
 	sky_setCubeMaps(skyId, paths);
@@ -69,6 +72,7 @@ void EngineInterface::sky_setLeftCubeMap(const string & skyId, const string & va
 void EngineInterface::sky_setTopCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[2] = value;
 
 	sky_setCubeMaps(skyId, paths);
@@ -77,6 +81,7 @@ void EngineInterface::sky_setTopCubeMap(const string & skyId, const string & val
 void EngineInterface::sky_setBottomCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[3] = value;
 
 	sky_setCubeMaps(skyId, paths);
@@ -85,6 +90,7 @@ void EngineInterface::sky_setBottomCubeMap(const string & skyId, const string & 
 void EngineInterface::sky_setBackCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[4] = value;
 
 	sky_setCubeMaps(skyId, paths);
@@ -93,6 +99,7 @@ void EngineInterface::sky_setBackCubeMap(const string & skyId, const string & va
 void EngineInterface::sky_setFrontCubeMap(const string & skyId, const string & value)
 {
 	auto paths = _core->getSkyManager()->getSky(skyId)->getCubeMapPaths();
+
 	paths[5] = value;
 
 	sky_setCubeMaps(skyId, paths);

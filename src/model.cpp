@@ -36,18 +36,21 @@ void Model::updateTarget()
 	if(_basePosition != _basePositionTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
+
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
+
 		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
 
 	if(_baseRotation != _baseRotationTarget)
 	{
-		auto difference = Mathematics::calculateDifference(_baseRotation, _baseRotationTarget);
-		fvec3 multiplier = fvec3(
+		const auto difference = Mathematics::calculateDifference(_baseRotation, _baseRotationTarget);
+		const auto multiplier = fvec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
 			((difference.z < 180.0f) ? 1.0f : -1.0f));
-		fvec3 speed = (fvec3(_baseRotationTargetSpeed) * multiplier);
+		const auto speed = (fvec3(_baseRotationTargetSpeed) * multiplier);
+
 		_baseRotation.x += ((_baseRotation.x < _baseRotationTarget.x) ? speed.x : (_baseRotation.x > _baseRotationTarget.x) ? -speed.x : 0.0f);
 		_baseRotation.y += ((_baseRotation.y < _baseRotationTarget.y) ? speed.y : (_baseRotation.y > _baseRotationTarget.y) ? -speed.y : 0.0f);
 		_baseRotation.z += ((_baseRotation.z < _baseRotationTarget.z) ? speed.z : (_baseRotation.z > _baseRotationTarget.z) ? -speed.z : 0.0f);
@@ -57,7 +60,9 @@ void Model::updateTarget()
 	if(_baseSize != _baseSizeTarget)
 	{
 		const auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
+
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
+
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
 
@@ -66,30 +71,36 @@ void Model::updateTarget()
 		if(part->position != part->positionTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(part->positionTarget - part->position);
+
 			part->position += (speedMultiplier * part->positionTargetSpeed);
+
 			_correctPositionTarget(part->position, part->positionTarget, part->positionTargetSpeed);
 		}
 
 		if(part->rotation != part->rotationTarget)
 		{
-			auto difference = Mathematics::calculateDifference(part->rotation, part->rotationTarget);
-			fvec3 multiplier = fvec3(
+			const auto difference = Mathematics::calculateDifference(part->rotation, part->rotationTarget);
+			const auto multiplier = fvec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
 				((difference.z < 180.0f) ? 1.0f : -1.0f));
-			fvec3 speed = (fvec3(part->rotationTargetSpeed) * multiplier);
-			fvec3 rotation = part->rotation;
-			fvec3 target = part->rotationTarget;
+			const auto speed = (fvec3(part->rotationTargetSpeed) * multiplier);
+			const auto rotation = part->rotation;
+			const auto target = part->rotationTarget;
+
 			part->rotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
 			part->rotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
 			part->rotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
+
 			_correctRotationTarget(part->rotation, part->rotationTarget, part->rotationTargetSpeed);
 		}
 
 		if(part->size != part->sizeTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(part->sizeTarget - part->size);
+
 			part->size += (speedMultiplier * part->sizeTargetSpeed);
+
 			_correctSizeTarget(part->size, part->sizeTarget, part->sizeTargetSpeed);
 		}
 	}
@@ -101,41 +112,29 @@ void Model::updateTransformation()
 	{
 		part->transformation = mat44(1.0f);
 
-		auto baseTranslationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+		const auto baseRotationRadians = fvec3(Mathematics::convertToRadians(_baseRotation.x), Mathematics::convertToRadians(_baseRotation.y), Mathematics::convertToRadians(_baseRotation.z));
+		const auto partRotationRadians = fvec3(Mathematics::convertToRadians(part->rotation.x), Mathematics::convertToRadians(part->rotation.y), Mathematics::convertToRadians(part->rotation.z));
+		const auto baseTranslationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+		const auto baseRotationMatrix = Mathematics::createRotationMatrix(baseRotationRadians.x, baseRotationRadians.y, baseRotationRadians.z, _rotationOrder);
+		const auto baseScalingMatrix = Mathematics::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+		const auto partTranslationMatrix = Mathematics::createTranslationMatrix(part->position.x, part->position.y, part->position.z);
+		const auto partRotationMatrix = Mathematics::createRotationMatrix(partRotationRadians.x, partRotationRadians.y, partRotationRadians.z, _rotationOrder);
+		const auto partScalingMatrix = Mathematics::createScalingMatrix(part->size.x, part->size.y, part->size.z);
+		const auto positiveBaseRotationOriginMatrix = Mathematics::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
+		const auto negativeBaseRotationOriginMatrix = Mathematics::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
+		const auto positivePartRotationOriginMatrix = Mathematics::createTranslationMatrix(part->rotationOrigin.x, part->rotationOrigin.y, part->rotationOrigin.z);
+		const auto negativePartRotationOriginMatrix = Mathematics::createTranslationMatrix(-part->rotationOrigin.x, -part->rotationOrigin.y, -part->rotationOrigin.z);
+
 		part->transformation = (part->transformation * baseTranslationMatrix);
-
-		auto translationMatrix = Mathematics::createTranslationMatrix(part->position.x, part->position.y, part->position.z);
-		part->transformation = (part->transformation * translationMatrix);
-
-		auto baseRotationOriginMatrix = Mathematics::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
-		part->transformation = (part->transformation * baseRotationOriginMatrix);
-
-		auto baseRotationMatrix = Mathematics::createRotationMatrix(
-			Mathematics::convertToRadians(_baseRotation.x),
-			Mathematics::convertToRadians(_baseRotation.y),
-			Mathematics::convertToRadians(_baseRotation.z), _rotationOrder);
+		part->transformation = (part->transformation * partTranslationMatrix);
+		part->transformation = (part->transformation * positiveBaseRotationOriginMatrix);
 		part->transformation = (part->transformation * baseRotationMatrix);
-
-		baseRotationOriginMatrix = Mathematics::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
-		part->transformation = (part->transformation * baseRotationOriginMatrix);
-
-		auto rotationOriginMatrix = Mathematics::createTranslationMatrix(part->rotationOrigin.x, part->rotationOrigin.y, part->rotationOrigin.z);
-		part->transformation = (part->transformation * rotationOriginMatrix);
-
-		auto rotationMatrix = Mathematics::createRotationMatrix(
-			Mathematics::convertToRadians(part->rotation.x),
-			Mathematics::convertToRadians(part->rotation.y),
-			Mathematics::convertToRadians(part->rotation.z), _rotationOrder);
-		part->transformation = (part->transformation * rotationMatrix);
-
-		rotationOriginMatrix = Mathematics::createTranslationMatrix(-part->rotationOrigin.x, -part->rotationOrigin.y, -part->rotationOrigin.z);
-		part->transformation = (part->transformation * rotationOriginMatrix);
-
-		auto baseScalingMatrix = Mathematics::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+		part->transformation = (part->transformation * negativeBaseRotationOriginMatrix);
+		part->transformation = (part->transformation * positivePartRotationOriginMatrix);
+		part->transformation = (part->transformation * partRotationMatrix);
+		part->transformation = (part->transformation * negativePartRotationOriginMatrix);
 		part->transformation = (part->transformation * baseScalingMatrix);
-
-		auto scalingMatrix = Mathematics::createScalingMatrix(part->size.x, part->size.y, part->size.z);
-		part->transformation = (part->transformation * scalingMatrix);
+		part->transformation = (part->transformation * partScalingMatrix);
 	}
 }
 
@@ -250,8 +249,9 @@ void Model::movePart(const string & partId, const fvec3 & value)
 
 void Model::rotatePart(const string & partId, const fvec3 & value)
 {
-	fvec3 & rotation = _parts.at(partId)->rotation;
-	fvec3 & rotationTarget = _parts.at(partId)->rotationTarget;
+	auto & rotation = _parts.at(partId)->rotation;
+	auto & rotationTarget = _parts.at(partId)->rotationTarget;
+
 	rotation += value;
 	rotationTarget += value;
 	rotation = fvec3(Mathematics::limitAngle(rotation.x), Mathematics::limitAngle(rotation.y), Mathematics::limitAngle(rotation.z));
@@ -260,8 +260,9 @@ void Model::rotatePart(const string & partId, const fvec3 & value)
 
 void Model::scalePart(const string & partId, const fvec3 & value)
 {
-	fvec3 & size = _parts.at(partId)->size;
-	fvec3 & sizeTarget = _parts.at(partId)->sizeTarget;
+	auto & size = _parts.at(partId)->size;
+	auto & sizeTarget = _parts.at(partId)->sizeTarget;
+
 	size += value;
 	sizeTarget += value;
 	size = fvec3(max(0.0f, size.x), max(0.0f, size.y), max(0.0f, size.z));

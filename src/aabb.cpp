@@ -27,6 +27,7 @@ void Aabb::updateTarget()
 		if(_localPosition != _localPositionTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(_localPositionTarget - _localPosition);
+
 			_localPosition += (speedMultiplier * _localPositionTargetSpeed);
 
 			if(fabsf(_localPositionTarget.x - _localPosition.x) <= _localPositionTargetSpeed)
@@ -46,6 +47,7 @@ void Aabb::updateTarget()
 		if(_localSize != _localSizeTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(_localSizeTarget - _localSize);
+
 			_localSize += (speedMultiplier * _localSizeTargetSpeed);
 
 			_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
@@ -68,6 +70,7 @@ void Aabb::updateTarget()
 		if(_basePosition != _basePositionTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
+
 			_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 
 			if(fabsf(_basePositionTarget.x - _basePosition.x) <= _basePositionTargetSpeed)
@@ -87,6 +90,7 @@ void Aabb::updateTarget()
 		if(_baseSize != _baseSizeTarget)
 		{
 			const auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
+
 			_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 
 			_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
@@ -109,7 +113,6 @@ void Aabb::updateTarget()
 void Aabb::updateTransformation()
 {
 	auto translationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
-
 	auto scalingMatrix = Mathematics::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 
 	_transformation = (translationMatrix * scalingMatrix);

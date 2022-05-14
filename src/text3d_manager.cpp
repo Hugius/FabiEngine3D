@@ -90,6 +90,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 		}
 
 		texture = make_shared<TextureBuffer>(image);
+
 		texture->loadAnisotropicFiltering(_renderStorage->getAnisotropicFilteringQuality());
 
 		_textureBufferCache->store2dBuffer(fontMapPath, texture);

@@ -91,6 +91,7 @@ void EngineInterface::water_setDudvMap(const string & waterId, const string & va
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -121,6 +122,7 @@ void EngineInterface::water_setNormalMap(const string & waterId, const string & 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -151,6 +153,7 @@ void EngineInterface::water_setHeightMap(const string & waterId, const string & 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 

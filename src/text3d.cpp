@@ -40,14 +40,13 @@ void Text3d::updateTarget()
 
 	if(_rotation != _rotationTarget)
 	{
-		auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
-		auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
-		auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
+		const auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
+		const auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
+		const auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
 
 		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
-
 		_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
 
 		if(Mathematics::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
@@ -69,7 +68,6 @@ void Text3d::updateTarget()
 		const auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 
 		_size += (speedMultiplier * _sizeTargetSpeed);
-
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
@@ -90,6 +88,7 @@ void Text3d::updateQuad3ds()
 		Mathematics::convertToRadians(_rotation.y),
 		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 	const auto quad3dSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
+
 	int index = 0;
 
 	for(const auto & quad3d : _quad3ds)
@@ -124,8 +123,7 @@ void Text3d::setContent(const string & value)
 			const auto yIndex = _fontMapIndices.at(character).y;
 			const auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
 			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
-
-			auto quad3d = make_shared<Quad3d>("dummy");
+			const auto quad3d = make_shared<Quad3d>("dummy");
 
 			quad3d->setVertexBuffer(_vertexBuffer);
 			quad3d->setDiffuseMapPath(_fontMapPath);

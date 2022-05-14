@@ -57,6 +57,7 @@ void EngineInterface::terrain_setDiffuseMap(const string & terrainId, const stri
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -87,6 +88,7 @@ void EngineInterface::terrain_setNormalMap(const string & terrainId, const strin
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -117,6 +119,7 @@ void EngineInterface::terrain_setBlendMap(const string & terrainId, const string
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -147,6 +150,7 @@ void EngineInterface::terrain_setRedDiffuseMap(const string & terrainId, const s
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -177,6 +181,7 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string & terrainId, const
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -207,6 +212,7 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string & terrainId, const 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -237,6 +243,7 @@ void EngineInterface::terrain_setRedNormalMap(const string & terrainId, const st
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -267,6 +274,7 @@ void EngineInterface::terrain_setGreenNormalMap(const string & terrainId, const 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -297,6 +305,7 @@ void EngineInterface::terrain_setBlueNormalMap(const string & terrainId, const s
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 

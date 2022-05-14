@@ -24,9 +24,9 @@ void Sky::updateTarget()
 {
 	if(_rotation != _rotationTarget)
 	{
-		auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
-		auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
-		auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
+		const auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
+		const auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
+		const auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
 
 		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);

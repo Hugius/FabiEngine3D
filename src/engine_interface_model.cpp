@@ -64,6 +64,7 @@ void EngineInterface::model_setDiffuseMap(const string & modelId, const string &
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -94,6 +95,7 @@ void EngineInterface::model_setEmissionMap(const string & modelId, const string 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -124,6 +126,7 @@ void EngineInterface::model_setSpecularMap(const string & modelId, const string 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -154,6 +157,7 @@ void EngineInterface::model_setNormalMap(const string & modelId, const string & 
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -184,6 +188,7 @@ void EngineInterface::model_setReflectionMap(const string & modelId, const strin
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
@@ -214,6 +219,7 @@ void EngineInterface::model_setRefractionMap(const string & modelId, const strin
 			if(image != nullptr)
 			{
 				texture = make_shared<TextureBuffer>(image);
+
 				texture->loadMipMapping();
 				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 

@@ -62,6 +62,7 @@ void ModelEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveModelsToFile();
+
 				unload();
 
 				return;

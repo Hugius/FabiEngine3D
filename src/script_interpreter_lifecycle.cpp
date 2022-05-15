@@ -256,7 +256,7 @@ void ScriptInterpreter::unload()
 
 	for(const auto & quad2dId : _fe3d->quad2d_getIds())
 	{
-		if(quad2dId[0] != '@')
+		if(quad2dId.substr(0, 2) != "@@")
 		{
 			_fe3d->quad2d_delete(quad2dId);
 		}
@@ -269,7 +269,7 @@ void ScriptInterpreter::unload()
 
 	for(const auto & text2dId : _fe3d->text2d_getIds())
 	{
-		if(text2dId[0] != '@')
+		if(text2dId.substr(0, 2) != "@@")
 		{
 			_fe3d->text2d_delete(text2dId);
 		}

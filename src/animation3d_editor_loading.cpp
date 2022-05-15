@@ -20,6 +20,7 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` does not exist");
@@ -28,6 +29,7 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string animation3dId;
@@ -41,10 +43,11 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 			>> partCount
 			>> frameCount;
 
-		_loadedAnimation3dIds.push_back(animation3dId);
-		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
-
 		_fe3d->animation3d_create(animation3dId);
+
+		_loadedAnimation3dIds.push_back(animation3dId);
+
+		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
 		for(int partIndex = 0; partIndex < partCount; partIndex++)
 		{

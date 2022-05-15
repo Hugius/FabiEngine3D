@@ -54,10 +54,8 @@ void AabbEditor::_unload()
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setShadowsEnabled(false);

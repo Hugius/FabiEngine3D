@@ -43,6 +43,7 @@ void TerrainEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveTerrainsToFile();
+
 				unload();
 
 				return;

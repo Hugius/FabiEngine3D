@@ -46,6 +46,7 @@ void AabbEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveAabbsToFile();
+
 				unload();
 
 				return;

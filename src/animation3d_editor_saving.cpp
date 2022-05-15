@@ -20,6 +20,7 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation3d.fe3d");
 
 	for(const auto & animation3dId : _loadedAnimation3dIds)
@@ -52,11 +53,11 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 		{
 			for(int partIndex = 0; partIndex < partCount; partIndex++)
 			{
-				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animation3dId, frameIndex, partIds[partIndex]);
-				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animation3dId, frameIndex, partIds[partIndex]);
-				auto speed = _fe3d->animation3d_getSpeed(animation3dId, frameIndex, partIds[partIndex]);
-				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animation3dId, frameIndex, partIds[partIndex]));
-				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animation3dId, frameIndex, partIds[partIndex]));
+				const auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animation3dId, frameIndex, partIds[partIndex]);
+				const auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animation3dId, frameIndex, partIds[partIndex]);
+				const auto speed = _fe3d->animation3d_getSpeed(animation3dId, frameIndex, partIds[partIndex]);
+				const auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animation3dId, frameIndex, partIds[partIndex]));
+				const auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animation3dId, frameIndex, partIds[partIndex]));
 
 				file
 					<< targetTransformation.x

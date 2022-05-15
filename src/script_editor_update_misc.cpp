@@ -54,6 +54,7 @@ void ScriptEditor::_updateMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveScriptFiles();
+
 				unload();
 
 				return;

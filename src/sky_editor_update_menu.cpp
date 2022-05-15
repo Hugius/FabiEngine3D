@@ -42,6 +42,7 @@ void SkyEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveSkiesToFile();
+
 				unload();
 
 				return;

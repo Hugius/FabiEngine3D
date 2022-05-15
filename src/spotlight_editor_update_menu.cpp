@@ -46,6 +46,7 @@ void SpotlightEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveSpotlightsToFile();
+
 				unload();
 
 				return;

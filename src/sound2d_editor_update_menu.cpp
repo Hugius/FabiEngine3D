@@ -42,6 +42,7 @@ void Sound2dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveSound2dsToFile();
+
 				unload();
 
 				return;

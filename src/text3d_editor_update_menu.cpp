@@ -42,6 +42,7 @@ void Text3dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveText3dsToFile();
+
 				unload();
 
 				return;

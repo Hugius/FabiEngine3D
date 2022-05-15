@@ -44,6 +44,7 @@ void Animation3dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveAnimation3dsToFile();
+
 				unload();
 
 				return;
@@ -94,13 +95,15 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
+			_gui->getOverlay()->getTextField(ANIMATION3D_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(FRAME_TEXT_ID)->setVisible(false);
+
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
+
 			_previewModelId = "";
 			_currentAnimation3dId = "";
 			_initialModelSize = fvec3(0.0f);
 			_currentFrameIndex = 0;
-			_gui->getOverlay()->getTextField("animation3dId")->setVisible(false);
-			_gui->getOverlay()->getTextField("animation3dFrame")->setVisible(false);
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
 			return;
 		}
@@ -204,7 +207,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentFrameIndex++;
 		}
 
-		auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimationStarted(_previewModelId, _currentAnimation3dId));
+		const auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimationStarted(_previewModelId, _currentAnimation3dId));
 
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("start")->setHoverable(!isStarted && !_previewModelId.empty() && (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1));
@@ -217,7 +220,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		if(!isStarted)
 		{
-			_gui->getOverlay()->getTextField("animation3dFrame")->setTextContent("Frame: " + to_string(_currentFrameIndex + 1));
+			_gui->getOverlay()->getTextField(FRAME_TEXT_ID)->setTextContent("Frame: " + to_string(_currentFrameIndex + 1));
 		}
 	}
 }

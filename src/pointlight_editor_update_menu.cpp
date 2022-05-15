@@ -46,6 +46,7 @@ void PointlightEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				savePointlightsToFile();
+
 				unload();
 
 				return;

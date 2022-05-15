@@ -42,6 +42,7 @@ void Quad3dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveQuad3dsToFile();
+
 				unload();
 
 				return;

@@ -5,7 +5,7 @@ GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	:
 	_id(id),
 	_parentId(parentId),
-	_quad2dId("@" + parentId + "_" + id)
+	_quad2dId("@@" + parentId + "_" + id)
 {
 	if(_id.empty())
 	{

@@ -62,6 +62,7 @@ void WaterEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveWatersToFile();
+
 				unload();
 
 				return;

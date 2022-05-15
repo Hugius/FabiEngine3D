@@ -43,6 +43,7 @@ void Text2dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveText2dsToFile();
+
 				unload();
 
 				return;

@@ -44,6 +44,7 @@ void Quad2dEditor::_updateMainMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveQuad2dsToFile();
+
 				unload();
 
 				return;

@@ -30,7 +30,6 @@ const bool Sound3dEditor::saveSound3dsToFile() const
 		auto audioPath = _fe3d->sound3d_getAudioPath(sound3dId);
 
 		audioPath = (audioPath.empty() ? "" : audioPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');

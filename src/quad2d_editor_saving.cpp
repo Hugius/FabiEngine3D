@@ -33,7 +33,6 @@ const bool Quad2dEditor::saveQuad2dsToFile() const
 		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quad2dId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');

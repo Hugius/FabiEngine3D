@@ -67,9 +67,12 @@ void TerrainEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-			_gui->getOverlay()->getTextField("terrainId")->setVisible(false);
+
+			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setVisible(false);
+
 			_fe3d->terrain_setWireframed(_currentTerrainId, false);
 			_fe3d->terrain_select("");
+
 			_currentTerrainId = "";
 
 			return;

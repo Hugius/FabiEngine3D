@@ -135,8 +135,9 @@ void TerrainEditor::_updateTerrainCreating()
 			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-			_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + newTerrainId.substr(1));
-			_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
+
+			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setTextContent("Terrain: " + newTerrainId.substr(1));
+			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -158,7 +159,6 @@ void TerrainEditor::_updateTerrainChoosing()
 		}
 		else
 		{
-
 			if(!_isTerrainHovered)
 			{
 				_isTerrainHovered = true;
@@ -179,8 +179,8 @@ void TerrainEditor::_updateTerrainChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + _currentTerrainId.substr(1));
-					_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
+					_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setTextContent("Terrain: " + _currentTerrainId.substr(1));
+					_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setVisible(true);
 				}
 			}
 		}
@@ -205,6 +205,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			_fe3d->terrain_delete(_currentTerrainId);
 
 			_loadedTerrainIds.erase(remove(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), _currentTerrainId), _loadedTerrainIds.end());
+
 			_currentTerrainId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

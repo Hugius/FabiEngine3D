@@ -27,7 +27,6 @@ const bool Sound2dEditor::saveSound2dsToFile() const
 		auto audioPath = _fe3d->sound2d_getAudioPath(sound2dId);
 
 		audioPath = (audioPath.empty() ? "" : audioPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');

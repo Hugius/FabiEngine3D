@@ -21,6 +21,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `terrain.fe3d` does not exist");
@@ -31,6 +32,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string terrainId;
@@ -200,6 +202,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `terrain.fe3d` does not exist");
@@ -208,6 +211,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string terrainId;

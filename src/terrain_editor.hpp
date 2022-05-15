@@ -40,6 +40,12 @@ private:
 	static inline const string BOX_ID = "@@box";
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
+	static inline const string TERRAIN_TITLE_ID = "terrain_title";
+
+	static inline const fvec3 DIRECTIONAL_LIGHTING_POSITION = fvec3(1000.0f);
+
+	static inline const fvec2 TERRAIN_TITLE_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 TERRAIN_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
@@ -52,8 +58,13 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 1.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 1.0f;
+	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 3.0f;
+	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
 
 	static inline constexpr int GRID_REPEAT = 205;
+	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;
+	static inline constexpr int SHADOW_QUALITY = 16384;
 
 	vector <string> _loadedTerrainIds = {};
 

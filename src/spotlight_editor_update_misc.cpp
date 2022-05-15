@@ -47,12 +47,12 @@ void SpotlightEditor::_updateMiscellaneous()
 
 	if(!_currentSpotlightId.empty())
 	{
-		_fe3d->model_setColor("@@spotlight", "", _fe3d->spotlight_getColor(_currentSpotlightId));
+		_fe3d->model_setColor(TORCH_ID, "", _fe3d->spotlight_getColor(_currentSpotlightId));
 	}
 
 	if(!_hoveredSpotlightId.empty())
 	{
-		_fe3d->model_setColor("@@spotlight", "", _fe3d->spotlight_getColor(_hoveredSpotlightId));
+		_fe3d->model_setColor(TORCH_ID, "", _fe3d->spotlight_getColor(_hoveredSpotlightId));
 	}
 }
 
@@ -102,8 +102,8 @@ void SpotlightEditor::_updateSpotlightCreating()
 
 		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 
-		_fe3d->model_setVisible("@@spotlight", true);
-		_fe3d->model_setColor("@@spotlight", "", fvec3(1.0f));
+		_fe3d->model_setVisible(TORCH_ID, true);
+		_fe3d->model_setColor(TORCH_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
 
@@ -124,7 +124,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 			{
 				_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
 
-				_fe3d->model_setVisible("@@spotlight", false);
+				_fe3d->model_setVisible(TORCH_ID, false);
 
 				_hoveredSpotlightId = "";
 			}
@@ -137,7 +137,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 
 				_fe3d->spotlight_setVisible(_hoveredSpotlightId, true);
 
-				_fe3d->model_setVisible("@@spotlight", true);
+				_fe3d->model_setVisible(TORCH_ID, true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
@@ -165,7 +165,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 		{
 			_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
 
-			_fe3d->model_setVisible("@@spotlight", false);
+			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_hoveredSpotlightId = "";
 		}
@@ -188,7 +188,7 @@ void SpotlightEditor::_updateSpotlightDeleting()
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
 
-			_fe3d->model_setVisible("@@spotlight", false);
+			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_currentSpotlightId = "";
 		}

@@ -48,6 +48,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->terrain_setNormalMap(_currentTerrainId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
@@ -84,6 +85,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
@@ -120,6 +122,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
@@ -156,6 +159,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

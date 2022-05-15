@@ -76,7 +76,7 @@ void SpotlightEditor::_updateChoiceMenu()
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
 
-			_fe3d->model_setVisible("@@spotlight", false);
+			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(false);
 

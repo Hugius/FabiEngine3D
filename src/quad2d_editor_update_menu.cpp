@@ -114,7 +114,7 @@ void Quad2dEditor::_updateChoiceMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->quad2d_setDiffuseMap(_currentQuad2dId, finalFilePath);

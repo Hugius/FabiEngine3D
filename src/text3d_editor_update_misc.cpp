@@ -121,7 +121,7 @@ void Text3dEditor::_updateText3dCreating()
 			return;
 		}
 
-		const string finalFilePath = filePath.substr(rootPath.size());
+		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
 

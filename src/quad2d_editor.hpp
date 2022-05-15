@@ -28,7 +28,7 @@ private:
 	void _updateQuad2dDeleting();
 	void _updateMiscellaneous();
 
-	static inline const string QUAD2D_TITLE_ID = "quad2d_id";
+	static inline const string QUAD2D_TITLE_ID = "quad2d_title";
 
 	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);
 	static inline const fvec2 QUAD2D_TITLE_POSITION = fvec2(0.0f, 0.85f);

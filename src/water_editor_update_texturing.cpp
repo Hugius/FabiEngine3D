@@ -47,7 +47,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setDudvMap(_currentWaterId, finalFilePath);
@@ -83,7 +83,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setNormalMap(_currentWaterId, finalFilePath);
@@ -119,7 +119,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setHeightMap(_currentWaterId, finalFilePath);

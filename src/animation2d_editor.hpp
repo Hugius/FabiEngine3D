@@ -30,7 +30,7 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string PREVIEW_QUAD3D_ID = "@@preview_quad3d";
-	static inline const string ANIMATION2D_TITLE_ID = "animation2d_id";
+	static inline const string ANIMATION2D_TITLE_ID = "animation2d_title";
 
 	static inline const fvec3 PREVIEW_QUAD3D_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 

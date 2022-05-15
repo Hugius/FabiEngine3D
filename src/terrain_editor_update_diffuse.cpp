@@ -45,7 +45,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setDiffuseMap(_currentTerrainId, finalFilePath);
@@ -81,7 +81,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setRedDiffuseMap(_currentTerrainId, finalFilePath);
@@ -117,7 +117,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainId, finalFilePath);
@@ -153,7 +153,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, finalFilePath);

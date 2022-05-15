@@ -92,7 +92,7 @@ void Sound2dEditor::_updateSound2dCreating()
 			return;
 		}
 
-		const string finalFilePath = filePath.substr(rootPath.size());
+		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearAudioCache(finalFilePath);
 

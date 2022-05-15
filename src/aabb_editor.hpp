@@ -34,7 +34,7 @@ private:
 	static inline const string BOX_ID = "@@box";
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
-	static inline const string AABB_TITLE_ID = "aabb_id";
+	static inline const string AABB_TITLE_ID = "aabb_title";
 
 	static inline const fvec3 DIRECTIONAL_LIGHTING_POSITION = fvec3(1000.0f);
 

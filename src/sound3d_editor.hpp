@@ -35,9 +35,9 @@ private:
 	static inline const string BOX_ID = "@@box";
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
-	static inline const string SPEAKER_ID = "@@sound3d";
+	static inline const string SPEAKER_ID = "@@speaker";
 	static inline const string SPEAKER_MESH_PATH = "engine\\assets\\mesh\\speaker.obj";
-	static inline const string SOUND3D_TITLE_ID = "sound3d_id";
+	static inline const string SOUND3D_TITLE_ID = "sound3d_title";
 
 	static inline const fvec3 SOUND3D_POSITION = fvec3(0.0f, 2.0f, 0.0f);
 	static inline const fvec3 SPEAKER_POSITION = fvec3(0.0f, 2.0f, 0.0f);

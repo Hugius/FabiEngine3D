@@ -148,7 +148,7 @@ void Animation2dEditor::_updateImageChoosing()
 			return;
 		}
 
-		const string finalFilePath = filePath.substr(rootPath.size());
+		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
 

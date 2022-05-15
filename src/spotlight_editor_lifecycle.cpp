@@ -17,26 +17,26 @@ void SpotlightEditor::_load()
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
 	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
-	_fe3d->model_create(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_PATH);
-	_fe3d->model_setBasePosition(SPOTLIGHT_MODEL_ID, SPOTLIGHT_POSITION);
-	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, fvec3(0.0f, 0.0f, -90.0f));
-	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, fvec3(0.5f));
-	_fe3d->model_setShadowed(SPOTLIGHT_MODEL_ID, false);
-	_fe3d->model_setBright(SPOTLIGHT_MODEL_ID, "", true);
-	_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, false);
+	_fe3d->model_create(TORCH_ID, TORCH_MESH_PATH);
+	_fe3d->model_setBasePosition(TORCH_ID, TORCH_POSITION);
+	_fe3d->model_setBaseRotation(TORCH_ID, TORCH_ROTATION);
+	_fe3d->model_setBaseSize(TORCH_ID, TORCH_SIZE);
+	_fe3d->model_setShadowed(TORCH_ID, false);
+	_fe3d->model_setBright(TORCH_ID, "", true);
+	_fe3d->model_setVisible(TORCH_ID, false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingIntensity(0.25f);
+	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(1.0f);
+	_fe3d->graphics_setDirectionalLightingPosition(DIRECTIONAL_LIGHTING_POSITION);
+	_fe3d->graphics_setDirectionalLightingIntensity(DIRECTIONAL_LIGHTING_INTENSITY);
 	_fe3d->graphics_setShadowsEnabled(true);
-	_fe3d->graphics_setShadowLightness(0.25f);
-	_fe3d->graphics_setShadowQuality(16384);
-	_fe3d->graphics_setShadowPositionOffset(fvec3(5.0f));
-	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(5.0f)));
+	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
+	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -45,7 +45,7 @@ void SpotlightEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("spotlightId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(SPOTLIGHT_TITLE_ID, SPOTLIGHT_TITLE_POSITION, SPOTLIGHT_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void SpotlightEditor::_unload()
@@ -57,15 +57,13 @@ void SpotlightEditor::_unload()
 
 	_fe3d->model_delete(GRID_ID);
 	_fe3d->model_delete(BOX_ID);
-	_fe3d->model_delete(SPOTLIGHT_MODEL_ID);
+	_fe3d->model_delete(TORCH_ID);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setShadowsEnabled(false);
@@ -76,7 +74,7 @@ void SpotlightEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("spotlightId");
+	_gui->getOverlay()->deleteTextField(SPOTLIGHT_TITLE_ID);
 
 	_loadedSpotlightIds.clear();
 }

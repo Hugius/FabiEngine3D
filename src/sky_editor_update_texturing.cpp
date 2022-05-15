@@ -45,7 +45,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setLeftCubeMap(_currentSkyId, finalFilePath);
@@ -81,7 +81,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setRightCubeMap(_currentSkyId, finalFilePath);
@@ -117,7 +117,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBottomCubeMap(_currentSkyId, finalFilePath);
@@ -153,7 +153,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setTopCubeMap(_currentSkyId, finalFilePath);
@@ -189,7 +189,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBackCubeMap(_currentSkyId, finalFilePath);
@@ -225,7 +225,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setFrontCubeMap(_currentSkyId, finalFilePath);

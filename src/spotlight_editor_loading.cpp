@@ -20,6 +20,7 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\spotlight.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `spotlight.fe3d` does not exist");

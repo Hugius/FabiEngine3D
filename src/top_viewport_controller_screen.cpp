@@ -167,7 +167,7 @@ void TopViewportController::_updateExtraScreenManagement()
 				}
 				else
 				{
-					const string finalFilePath = filePath.substr(rootPath.size());
+					const auto finalFilePath = filePath.substr(rootPath.size());
 
 					_fe3d->misc_clearMeshCache(finalFilePath);
 					_fe3d->misc_clearImageCache(finalFilePath);

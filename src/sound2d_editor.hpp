@@ -32,7 +32,7 @@ private:
 	static inline const string STATUS_START_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\start.tga";
 	static inline const string STATUS_PAUSE_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\pause.tga";
 	static inline const string STATUS_STOP_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\stop.tga";
-	static inline const string SOUND2D_TITLE_ID = "sound2d_id";
+	static inline const string SOUND2D_TITLE_ID = "sound2d_title";
 
 	static inline const fvec3 STATUS_QUAD3D_POSITION = fvec3(0.0f, 0.0f, -1.5f);
 

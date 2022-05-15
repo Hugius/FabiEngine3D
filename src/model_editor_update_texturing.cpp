@@ -56,7 +56,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, finalFilePath);
@@ -92,7 +92,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, finalFilePath);
@@ -128,7 +128,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, finalFilePath);
@@ -164,7 +164,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, finalFilePath);
@@ -200,7 +200,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setRefractionMap(_currentModelId, _currentPartId, finalFilePath);
@@ -236,7 +236,7 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, finalFilePath);

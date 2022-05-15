@@ -25,7 +25,6 @@ void WorldEditor::clearLoadedWorld()
 	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setFogColor(fvec3(0.0f));
 	_fe3d->graphics_setFogThickness(0.0f);

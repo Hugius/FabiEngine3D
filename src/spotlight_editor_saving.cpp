@@ -19,14 +19,15 @@ const bool SpotlightEditor::saveSpotlightsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\spotlight.fe3d");
 
 	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		auto color = _fe3d->spotlight_getColor(spotlightId);
-		auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
-		auto angle = _fe3d->spotlight_getAngle(spotlightId);
-		auto distance = _fe3d->spotlight_getDistance(spotlightId);
+		const auto color = _fe3d->spotlight_getColor(spotlightId);
+		const auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
+		const auto angle = _fe3d->spotlight_getAngle(spotlightId);
+		const auto distance = _fe3d->spotlight_getDistance(spotlightId);
 
 		file
 			<< spotlightId

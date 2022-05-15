@@ -106,8 +106,9 @@ void SpotlightEditor::_updateSpotlightCreating()
 		_fe3d->model_setColor("@@spotlight", "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
-		_gui->getOverlay()->getTextField("spotlightId")->setTextContent("Spotlight: " + newSpotlightId.substr(1));
-		_gui->getOverlay()->getTextField("spotlightId")->setVisible(true);
+
+		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + newSpotlightId.substr(1));
+		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -122,6 +123,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 			if(!_hoveredSpotlightId.empty())
 			{
 				_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
+
 				_fe3d->model_setVisible("@@spotlight", false);
 
 				_hoveredSpotlightId = "";
@@ -134,6 +136,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 				_hoveredSpotlightId = ("@" + selectedOptionId);
 
 				_fe3d->spotlight_setVisible(_hoveredSpotlightId, true);
+
 				_fe3d->model_setVisible("@@spotlight", true);
 			}
 
@@ -150,8 +153,8 @@ void SpotlightEditor::_updateSpotlightChoosing()
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("spotlightId")->setTextContent("Spotlight: " + _currentSpotlightId.substr(1));
-					_gui->getOverlay()->getTextField("spotlightId")->setVisible(true);
+					_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + _currentSpotlightId.substr(1));
+					_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(true);
 				}
 			}
 		}
@@ -161,6 +164,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 		if(!_hoveredSpotlightId.empty())
 		{
 			_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
+
 			_fe3d->model_setVisible("@@spotlight", false);
 
 			_hoveredSpotlightId = "";
@@ -177,11 +181,13 @@ void SpotlightEditor::_updateSpotlightDeleting()
 			_fe3d->spotlight_delete(_currentSpotlightId);
 
 			_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _currentSpotlightId), _loadedSpotlightIds.end());
+
 			_currentSpotlightId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
+
 			_fe3d->model_setVisible("@@spotlight", false);
 
 			_currentSpotlightId = "";

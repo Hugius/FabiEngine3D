@@ -36,7 +36,7 @@ private:
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
 	static inline const string LAMP_ID = "@@lamp";
 	static inline const string LAMP_MESH_PATH = "engine\\assets\\mesh\\lamp.obj";
-	static inline const string POINTLIGHT_TITLE_ID = "pointlight_id";
+	static inline const string POINTLIGHT_TITLE_ID = "pointlight_title";
 
 	static inline const fvec3 POINTLIGHT_POSITION = fvec3(0.0f, 2.0f, 0.0f);
 	static inline const fvec3 LAMP_POSITION = fvec3(0.0f, 2.0f, 0.0f);

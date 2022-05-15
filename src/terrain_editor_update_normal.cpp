@@ -45,7 +45,7 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setNormalMap(_currentTerrainId, finalFilePath);
@@ -81,7 +81,7 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, finalFilePath);
@@ -117,7 +117,7 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, finalFilePath);
@@ -153,7 +153,7 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
+			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);

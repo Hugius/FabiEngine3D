@@ -20,6 +20,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text2d.fe3d` does not exist");
@@ -29,6 +30,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string text2dId;
@@ -72,6 +74,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text2d.fe3d` does not exist");
@@ -80,6 +83,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string text2dId;

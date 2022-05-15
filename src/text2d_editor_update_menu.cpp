@@ -72,8 +72,11 @@ void Text2dEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->text2d_setVisible(_currentText2dId, false);
-			_gui->getOverlay()->getTextField("text2dId")->setVisible(false);
+
+			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setVisible(false);
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuMain");
+
 			_currentText2dId = "";
 
 			return;

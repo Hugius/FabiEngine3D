@@ -100,8 +100,8 @@ void Text2dEditor::_updateText2dCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-			_gui->getOverlay()->getTextField("text2dId")->setTextContent("Text2D: " + newText2dId.substr(1));
-			_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
+			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setTextContent("Text2D: " + newText2dId.substr(1));
+			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -143,8 +143,8 @@ void Text2dEditor::_updateText2dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("text2dId")->setTextContent("Text2D: " + _currentText2dId.substr(1));
-					_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
+					_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setTextContent("Text2D: " + _currentText2dId.substr(1));
+					_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setVisible(true);
 				}
 			}
 		}
@@ -169,6 +169,7 @@ void Text2dEditor::_updateText2dDeleting()
 			_fe3d->text2d_delete(_currentText2dId);
 
 			_loadedText2dIds.erase(remove(_loadedText2dIds.begin(), _loadedText2dIds.end(), _currentText2dId), _loadedText2dIds.end());
+
 			_currentText2dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

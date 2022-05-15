@@ -162,7 +162,7 @@ private:
 	static inline const string SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 	static inline const string CAPTOR_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
-	static inline const string POINTING_CURSOR_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
+	static inline const string POINTING_CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
 
 	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);

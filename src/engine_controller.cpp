@@ -232,9 +232,9 @@ void EngineController::initialize()
 		vector<string> imagePaths = {};
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "color.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_caret.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_default.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_pointing.tga");
-		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_text.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "debug.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "grid.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "light_source.tga");
@@ -284,7 +284,7 @@ void EngineController::update()
 	else
 	{
 		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorId(), Tools::convertToNdc(Tools::getCursorPosition()));
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), DEFAULT_CURSOR_PATH);
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), DEFAULT_CURSOR_TEXTURE_PATH);
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
 		_guiManager->updateOverlay();

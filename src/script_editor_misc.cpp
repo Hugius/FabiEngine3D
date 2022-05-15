@@ -7,7 +7,6 @@ using std::istringstream;
 void ScriptEditor::_createDisplayContent()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
-
 	const auto separatorId = "separator";
 	const auto separatorPosition = (ROOT_TEXT_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
 	const auto separatorSize = fvec2((CHAR_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
@@ -45,8 +44,11 @@ void ScriptEditor::_createDisplayContent()
 		const auto lineTextSize = fvec2(lineTextString.size() * CHAR_SIZE.x, CHAR_SIZE.y);
 
 		istringstream iss(lineTextString);
+
 		string noWhiteSpace;
+
 		iss >> noWhiteSpace;
+
 		const auto isComment = (noWhiteSpace.substr(0, 3) == "///");
 
 		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, true);
@@ -115,17 +117,20 @@ void ScriptEditor::_deleteDisplayContent()
 void ScriptEditor::_clearDisplay()
 {
 	_deleteDisplayContent();
-	_fe3d->quad3d_setVisible("selection", false);
-	_fe3d->text3d_setVisible("cursor", false);
+
+	_fe3d->quad3d_setVisible(SELECTION_ID, false);
+
+	_fe3d->text3d_setVisible(CARET_ID, false);
+
 	_isWritingScript = false;
 	_currentScriptFileId = "";
 }
 
 void ScriptEditor::_clearSelection()
 {
-	_fe3d->quad3d_setVisible("selection", false);
-	_fe3d->quad3d_setPosition("selection", fvec3(0.0f));
-	_fe3d->quad3d_setSize("selection", fvec2(0.0f));
+	_fe3d->quad3d_setVisible(SELECTION_ID, false);
+	_fe3d->quad3d_setPosition(SELECTION_ID, fvec3(0.0f));
+	_fe3d->quad3d_setSize(SELECTION_ID, fvec2(0.0f));
 
 	_firstSelectionAabbId = "";
 	_secondSelectionAabbId = "";

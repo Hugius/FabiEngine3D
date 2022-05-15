@@ -40,7 +40,7 @@ void WorldEditor::_updateText3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), POINTING_CURSOR_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), POINTING_CURSOR_TEXTURE_PATH);
 			}
 			else
 			{

@@ -126,23 +126,27 @@ void AabbManager::update()
 					const auto newAabbSize = (aabb->getLocalSize() * parentModel->getBaseSize());
 					const auto parentRotation = parentModel->getBaseRotation();
 
-					float rotation = 0.0f;
-
+					float rotation;
 					DirectionType rotationDirection;
+
 					if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 					{
-						rotationDirection = DirectionType::X;
 						rotation = parentRotation.x;
+						rotationDirection = DirectionType::X;
 					}
 					else if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 					{
-						rotationDirection = DirectionType::Y;
 						rotation = parentRotation.y;
+						rotationDirection = DirectionType::Y;
 					}
 					else if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 					{
-						rotationDirection = DirectionType::Z;
 						rotation = parentRotation.z;
+						rotationDirection = DirectionType::Z;
+					}
+					else
+					{
+						rotation = 0.0f;
 					}
 
 					const auto is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
@@ -188,6 +192,7 @@ void AabbManager::update()
 					else
 					{
 						fvec3 localPosition;
+
 						if(rotationDirection == DirectionType::Y)
 						{
 							localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
@@ -201,6 +206,7 @@ void AabbManager::update()
 
 						mat44 rotationMatrix;
 						fvec3 rotationOffset;
+
 						if(rotationDirection == DirectionType::X)
 						{
 							rotationMatrix = Mathematics::createRotationMatrixX(Mathematics::convertToRadians(roundedRotation));
@@ -250,11 +256,13 @@ void AabbManager::update()
 					auto refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
 					auto refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
 					auto refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
+
 					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
 					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
 
 					fvec3 newAabbSize;
+
 					if(refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
 						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
@@ -325,11 +333,13 @@ void AabbManager::update()
 					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
 					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
 					float refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
+
 					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
 					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
 
 					fvec3 newAabbSize;
+
 					if(refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
 						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));

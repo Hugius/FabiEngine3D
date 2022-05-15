@@ -30,7 +30,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line = "";
+	string line;
 
 	while(getline(file, line))
 	{
@@ -97,7 +97,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 
 	while(getline(file, line))
 	{

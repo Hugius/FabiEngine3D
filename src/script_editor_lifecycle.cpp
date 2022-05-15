@@ -7,20 +7,20 @@
 
 void ScriptEditor::_load()
 {
-	_fe3d->quad3d_create("selection", true);
-	_fe3d->quad3d_setVisible("selection", false);
-	_fe3d->quad3d_setColor("selection", SELECTION_COLOR);
+	_fe3d->quad3d_create(SELECTION_ID, true);
+	_fe3d->quad3d_setVisible(SELECTION_ID, false);
+	_fe3d->quad3d_setColor(SELECTION_ID, SELECTION_COLOR);
 
-	_fe3d->text3d_create("cursor", FONT_MAP_PATH, true);
-	_fe3d->text3d_setVisible("cursor", false);
-	_fe3d->text3d_setContent("cursor", "|");
-	_fe3d->text3d_setSize("cursor", CHAR_SIZE);
-	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
+	_fe3d->text3d_create(CARET_ID, FONT_MAP_PATH, true);
+	_fe3d->text3d_setVisible(CARET_ID, false);
+	_fe3d->text3d_setContent(CARET_ID, "|");
+	_fe3d->text3d_setSize(CARET_ID, CARET_SIZE);
+	_fe3d->text3d_setMinTextureAlpha(CARET_ID, CARET_MIN_TEXTURE_ALPHA);
 
 	_fe3d->graphics_setBloomEnabled(true);
-	_fe3d->graphics_setBloomType(BloomType::PARTS);
-	_fe3d->graphics_setBloomIntensity(0.95f);
-	_fe3d->graphics_setBloomBlurCount(2);
+	_fe3d->graphics_setBloomType(BLOOM_TYPE);
+	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);
+	_fe3d->graphics_setBloomBlurCount(BLOOM_BLUR_COUNT);
 	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
 
 	_fe3d->camera_setFov(CAMERA_FOV);
@@ -48,9 +48,9 @@ void ScriptEditor::_unload()
 		_fe3d->aabb_delete(aabbId);
 	}
 
-	_fe3d->quad3d_delete("selection");
+	_fe3d->quad3d_delete(SELECTION_ID);
 
-	_fe3d->text3d_delete("cursor");
+	_fe3d->text3d_delete(CARET_ID);
 
 	_fe3d->graphics_setBloomEnabled(false);
 	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
@@ -67,6 +67,7 @@ void ScriptEditor::_unload()
 	_loadedQuad3dIds.clear();
 	_loadedText3dIds.clear();
 	_loadedAabbIds.clear();
+
 	_currentScriptFileId = "";
 	_firstSelectionAabbId = "";
 	_secondSelectionAabbId = "";

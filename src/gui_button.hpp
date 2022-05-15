@@ -49,7 +49,7 @@ private:
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
 
-	static inline const string POINTING_CURSOR_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
+	static inline const string POINTING_CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
 
 	const string _id;
 	const string _parentId;

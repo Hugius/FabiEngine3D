@@ -27,7 +27,7 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 
 	while(getline(file, line))
 	{

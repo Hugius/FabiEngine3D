@@ -29,7 +29,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		array<string, 6> cubeMapPaths{};
@@ -88,7 +88,7 @@ const bool SkyEditor::loadSkiesFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		array<string, 6> cubeMapPaths{};

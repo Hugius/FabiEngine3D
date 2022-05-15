@@ -28,7 +28,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 
 	while(getline(file, line))
 	{

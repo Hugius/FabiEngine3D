@@ -17,6 +17,7 @@ void ScriptEditor::_updateTextSelector()
 	{
 		auto cursorLineIndex = scriptFile->getCursorLineIndex();
 		auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
+
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 
@@ -49,14 +50,14 @@ void ScriptEditor::_updateTextSelector()
 	const auto cursorLineIndex = scriptFile->getCursorLineIndex();
 	const auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
 
-	_fe3d->text3d_setVisible("cursor", true);
+	_fe3d->text3d_setVisible(CARET_ID, true);
 
 	if(isControlDown && _fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_A) && !scriptFile->getLine(cursorLineIndex).empty())
 	{
-		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART)))
+		if(!(_fe3d->quad3d_isVisible(SELECTION_ID) && (_selectionType == ScriptSelectionType::PART)))
 		{
-			_fe3d->quad3d_setVisible("selection", true);
-			_fe3d->text3d_setVisible("cursor", false);
+			_fe3d->quad3d_setVisible(SELECTION_ID, true);
+			_fe3d->text3d_setVisible(CARET_ID, false);
 
 			_selectionType = ScriptSelectionType::FULL;
 			_firstSelectionAabbId = (to_string(cursorLineIndex) + "_0");
@@ -69,13 +70,13 @@ void ScriptEditor::_updateTextSelector()
 			const auto selectionX = ((firstAabbPosition.x + secondAabbPosition.x) * 0.5f);
 			const auto selectionY = firstAabbPosition.y;
 
-			_fe3d->quad3d_setPosition("selection", fvec3(selectionX, selectionY, 0.0f));
-			_fe3d->quad3d_setSize("selection", fvec2(selectionWidth, selectionHeight));
+			_fe3d->quad3d_setPosition(SELECTION_ID, fvec3(selectionX, selectionY, 0.0f));
+			_fe3d->quad3d_setSize(SELECTION_ID, fvec2(selectionWidth, selectionHeight));
 		}
 	}
 	else
 	{
-		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL))
+		if(_fe3d->quad3d_isVisible(SELECTION_ID) && (_selectionType == ScriptSelectionType::FULL))
 		{
 			_clearSelection();
 		}
@@ -83,10 +84,10 @@ void ScriptEditor::_updateTextSelector()
 
 	if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT) && hoveredAabbId.find('_') != string::npos)
 	{
-		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL)))
+		if(!(_fe3d->quad3d_isVisible(SELECTION_ID) && (_selectionType == ScriptSelectionType::FULL)))
 		{
-			_fe3d->quad3d_setVisible("selection", true);
-			_fe3d->text3d_setVisible("cursor", false);
+			_fe3d->quad3d_setVisible(SELECTION_ID, true);
+			_fe3d->text3d_setVisible(CARET_ID, false);
 
 			_selectionType = ScriptSelectionType::PART;
 			_firstSelectionAabbId = (_firstSelectionAabbId.empty() ? hoveredAabbId : _firstSelectionAabbId);
@@ -99,6 +100,7 @@ void ScriptEditor::_updateTextSelector()
 
 			float selectionX;
 			float selectionY;
+
 			if(secondAabbPosition.x < firstAabbPosition.x)
 			{
 				selectionX = (firstAabbPosition.x - (selectionWidth * 0.5f) + (CHAR_SIZE.x * 0.5f));
@@ -110,19 +112,19 @@ void ScriptEditor::_updateTextSelector()
 				selectionY = firstAabbPosition.y;
 			}
 
-			_fe3d->quad3d_setPosition("selection", fvec3(selectionX, selectionY, 0.0f));
-			_fe3d->quad3d_setSize("selection", fvec2(selectionWidth, selectionHeight));
+			_fe3d->quad3d_setPosition(SELECTION_ID, fvec3(selectionX, selectionY, 0.0f));
+			_fe3d->quad3d_setSize(SELECTION_ID, fvec2(selectionWidth, selectionHeight));
 		}
 	}
 	else
 	{
-		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART))
+		if(_fe3d->quad3d_isVisible(SELECTION_ID) && (_selectionType == ScriptSelectionType::PART))
 		{
 			_clearSelection();
 		}
 	}
 
-	if(_fe3d->quad3d_isVisible("selection"))
+	if(_fe3d->quad3d_isVisible(SELECTION_ID))
 	{
 		const auto selectionLineIndex = stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_')));
 		const auto firstSelectionCharacterIndex = stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1));

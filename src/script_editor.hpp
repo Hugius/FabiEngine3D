@@ -37,8 +37,10 @@ private:
 	void _clearDisplay();
 	void _clearSelection();
 
+	static inline const string SELECTION_ID = "@@selection";
+	static inline const string CARET_ID = "@@caret";
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
-	static inline const string TEXT_CURSOR_PATH = "engine\\assets\\image\\diffuse_map\\cursor_text.tga";
+	static inline const string CARET_CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_caret.tga";
 
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
@@ -47,6 +49,7 @@ private:
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-12.0f, 6.0, 0.0f);
 
+	static inline const fvec2 CARET_SIZE = fvec2(0.25f, 0.75f);
 	static inline const fvec2 CHAR_SIZE = fvec2(0.25f, 0.75f);
 
 	static inline constexpr float CHAR_OFFSET = 0.25f;
@@ -57,9 +60,14 @@ private:
 	static inline constexpr float CAMERA_PITCH = 0.0f;
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
+	static inline constexpr float BLOOM_INTENSITY = 0.95f;
+	static inline constexpr float CARET_MIN_TEXTURE_ALPHA = 0.05f;
 
 	static inline constexpr int MAX_LINE_COUNT = 99;
+	static inline constexpr int BLOOM_BLUR_COUNT = 3;
 	static inline constexpr int BLOOM_QUALITY = 1;
+
+	static inline const BloomType BLOOM_TYPE = BloomType::PARTS;
 
 	vector<string> _loadedQuad3dIds = {};
 	vector<string> _loadedText3dIds = {};

@@ -25,6 +25,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
 		const auto extension = fileName.substr((fileName.size() - 5), 5);
+
 		if(extension != ".fe3d")
 		{
 			continue;

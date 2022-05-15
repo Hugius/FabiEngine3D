@@ -30,7 +30,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		string terrainId;
@@ -207,7 +207,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		string terrainId;

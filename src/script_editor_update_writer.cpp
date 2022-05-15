@@ -2,7 +2,7 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused() || _fe3d->quad3d_isVisible("selection"))
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || _fe3d->quad3d_isVisible(SELECTION_ID))
 	{
 		return;
 	}
@@ -94,9 +94,13 @@ void ScriptEditor::_updateTextWriter()
 			auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
 			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText.substr(0, cursorCharacterIndex));
+
 			cursorLineIndex++;
+
 			_script->getScriptFile(_currentScriptFileId)->createLine(cursorLineIndex, currentLineText.substr(cursorCharacterIndex));
+
 			cursorCharacterIndex = 0;
+
 			_hasTextChanged = true;
 
 			_script->getScriptFile(_currentScriptFileId)->setCursorLineIndex(cursorLineIndex);
@@ -119,13 +123,16 @@ void ScriptEditor::_updateTextWriter()
 
 				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, (currentLineText + nextLineText));
 				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex + 1);
+
 				_hasTextChanged = true;
 			}
 		}
 		else
 		{
 			currentLineText.erase(currentLineText.begin() + cursorCharacterIndex);
+
 			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText);
+
 			_hasTextChanged = true;
 		}
 
@@ -145,17 +152,24 @@ void ScriptEditor::_updateTextWriter()
 				const auto previousLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex - 1);
 
 				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
+
 				cursorLineIndex--;
+
 				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, previousLineText + currentLineText);
+
 				cursorCharacterIndex = static_cast<int>(previousLineText.size());
+
 				_hasTextChanged = true;
 			}
 		}
 		else
 		{
 			cursorCharacterIndex--;
+
 			currentLineText.erase(currentLineText.begin() + cursorCharacterIndex);
+
 			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText);
+
 			_hasTextChanged = true;
 		}
 

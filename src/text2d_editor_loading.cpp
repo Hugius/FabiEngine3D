@@ -28,7 +28,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		string text2dId;
@@ -79,7 +79,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 		return false;
 	}
 
-	string line = "";
+	string line;
 	while(getline(file, line))
 	{
 		string text2dId;

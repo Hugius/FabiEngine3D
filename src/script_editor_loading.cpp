@@ -36,23 +36,28 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
 		const auto extension = fileName.substr(fileName.size() - 5, 5);
+
 		if(extension != ".fe3d")
 		{
 			continue;
 		}
 
 		const auto filePath = (directoryPath + fileName);
+
 		auto file = ifstream(filePath);
+
 		if(!file)
 		{
 			continue;
 		}
 
 		const auto scriptFileId = fileName.substr(0, fileName.size() - 5);
+
 		_script->createScriptFile(scriptFileId);
 
-		string line = "";
-		int cursorLineIndex, cursorCharIndex;
+		string line;
+		int cursorLineIndex;
+		int cursorCharIndex;
 
 		getline(file, line);
 
@@ -66,9 +71,11 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		_script->getScriptFile(scriptFileId)->setCursorCharacterIndex(cursorCharIndex);
 
 		int lineIndex = 0;
+
 		while(getline(file, line))
 		{
 			_script->getScriptFile(scriptFileId)->createLine(lineIndex, line);
+
 			lineIndex++;
 		}
 

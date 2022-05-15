@@ -118,7 +118,8 @@ void ScriptEditor::_updateScriptFileCreating()
 
 		_deleteDisplayContent();
 		_createDisplayContent();
-		_fe3d->text3d_setVisible("cursor", true);
+
+		_fe3d->text3d_setVisible(CARET_ID, true);
 	}
 }
 
@@ -132,7 +133,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 		_deleteDisplayContent();
 		_createDisplayContent();
 
-		_fe3d->text3d_setVisible("cursor", true);
+		_fe3d->text3d_setVisible(CARET_ID, true);
 	}
 }
 
@@ -163,13 +164,15 @@ void ScriptEditor::_updateScriptFileRenaming()
 			return;
 		}
 
-		auto existingScriptFileIds = _script->getScriptFileIds();
+		const auto existingScriptFileIds = _script->getScriptFileIds();
+
 		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 		{
 			Logger::throwWarning("Script already exists");
 		}
 
 		_script->renameScriptFile(_currentScriptFileId, newScriptFileId);
+
 		_currentScriptFileId = newScriptFileId;
 	}
 }
@@ -245,25 +248,25 @@ void ScriptEditor::_updateCursor()
 {
 	if(!_isWritingScript || _gui->getOverlay()->isFocused())
 	{
-		_fe3d->text3d_setVisible("cursor", false);
+		_fe3d->text3d_setVisible(CARET_ID, false);
 
 		return;
 	}
 
 	if(Tools::isCursorInsideDisplay())
 	{
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), TEXT_CURSOR_PATH);
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CARET_CURSOR_TEXTURE_PATH);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 	{
-		if(_fe3d->text3d_getContent("cursor") == "|")
+		if(_fe3d->text3d_getContent(CARET_ID) == "|")
 		{
-			_fe3d->text3d_setContent("cursor", " ");
+			_fe3d->text3d_setContent(CARET_ID, " ");
 		}
 		else
 		{
-			_fe3d->text3d_setContent("cursor", "|");
+			_fe3d->text3d_setContent(CARET_ID, "|");
 		}
 	}
 
@@ -275,14 +278,14 @@ void ScriptEditor::_updateCursor()
 		const auto linePosition = _fe3d->aabb_getBasePosition(to_string(_script->getScriptFile(_currentScriptFileId)->getCursorLineIndex()));
 		const auto cursorPosition = fvec3((ROOT_TEXT_POSITION.x + HORIZONTAL_LINE_OFFSET - (CHAR_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
 
-		_fe3d->text3d_setPosition("cursor", cursorPosition);
+		_fe3d->text3d_setPosition(CARET_ID, cursorPosition);
 	}
 	else
 	{
 		const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
 		const auto cursorPosition = fvec3((characterPosition.x + (CHAR_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
 
-		_fe3d->text3d_setPosition("cursor", cursorPosition);
+		_fe3d->text3d_setPosition(CARET_ID, cursorPosition);
 	}
 }
 

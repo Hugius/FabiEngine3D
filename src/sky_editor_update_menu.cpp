@@ -66,9 +66,12 @@ void SkyEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-			_gui->getOverlay()->getTextField("skyId")->setVisible(false);
+
+			_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(false);
+
 			_fe3d->sky_setWireframed(_currentSkyId, false);
 			_fe3d->sky_select("");
+
 			_currentSkyId = "";
 
 			return;

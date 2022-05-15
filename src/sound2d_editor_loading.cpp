@@ -27,7 +27,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 		return {};
 	}
 
-	vector<string> audioPaths;
+	vector<string> audioPaths = {};
 	string line;
 	while(getline(file, line))
 	{

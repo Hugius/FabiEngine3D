@@ -29,7 +29,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> imagePaths;
+	vector<string> imagePaths = {};
 	string line;
 	while(getline(file, line))
 	{

@@ -28,7 +28,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> imagePaths;
+	vector<string> imagePaths = {};
 	string line;
 	while(getline(file, line))
 	{

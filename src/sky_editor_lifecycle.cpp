@@ -8,12 +8,12 @@
 void SkyEditor::_load()
 {
 	_fe3d->graphics_setMotionBlurEnabled(true);
-	_fe3d->graphics_setMotionBlurIntensity(0.1f);
-	_fe3d->graphics_setMotionBlurQuality(5);
+	_fe3d->graphics_setMotionBlurIntensity(0.5f);
+	_fe3d->graphics_setMotionBlurQuality(MOTION_BLUR_QUALITY);
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
-	_gui->getOverlay()->createTextField("skyId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(SKY_TEXT_ID, SKY_TEXT_POSITION, SKY_TEXT_SIZE, "", fvec3(1.0f), true);
 }
 
 void SkyEditor::_unload()
@@ -25,11 +25,11 @@ void SkyEditor::_unload()
 
 	_fe3d->graphics_setMotionBlurEnabled(false);
 	_fe3d->graphics_setMotionBlurIntensity(0.0f);
-	_fe3d->graphics_setMotionBlurQuality(5);
+	_fe3d->graphics_setMotionBlurQuality(0);
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("skyId");
+	_gui->getOverlay()->deleteTextField(SKY_TEXT_ID);
 
 	_loadedSkyIds.clear();
 }

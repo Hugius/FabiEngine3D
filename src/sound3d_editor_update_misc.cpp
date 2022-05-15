@@ -98,6 +98,7 @@ void Sound3dEditor::_updateSound3dCreating()
 		}
 
 		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
+
 		if(filePath.empty())
 		{
 			return;
@@ -111,6 +112,7 @@ void Sound3dEditor::_updateSound3dCreating()
 		}
 
 		const string finalFilePath = filePath.substr(rootPath.size());
+
 		_fe3d->misc_clearAudioCache(finalFilePath);
 
 		_fe3d->sound3d_create(newSound3dId, finalFilePath);

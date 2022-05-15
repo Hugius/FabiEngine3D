@@ -34,6 +34,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -47,6 +48,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setDudvMap(_currentWaterId, finalFilePath);
 		}
@@ -68,6 +70,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -81,6 +84,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setNormalMap(_currentWaterId, finalFilePath);
 		}
@@ -102,6 +106,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -115,6 +120,7 @@ void WaterEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setHeightMap(_currentWaterId, finalFilePath);
 		}

@@ -71,6 +71,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;

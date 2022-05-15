@@ -32,6 +32,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -45,6 +46,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlendMap(_currentTerrainId, finalFilePath);
 		}

@@ -105,6 +105,7 @@ void TerrainEditor::_updateTerrainCreating()
 		}
 
 		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 		if(filePath.empty())
 		{
 			return;
@@ -118,6 +119,7 @@ void TerrainEditor::_updateTerrainCreating()
 		}
 
 		const string finalFilePath = filePath.substr(rootPath.size());
+
 		_fe3d->misc_clearImageCache(finalFilePath);
 
 		_fe3d->terrain_create(newTerrainId, finalFilePath);

@@ -68,6 +68,7 @@ void Text2dEditor::_updateText2dCreating()
 		}
 
 		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 		if(filePath.empty())
 		{
 			return;
@@ -81,6 +82,7 @@ void Text2dEditor::_updateText2dCreating()
 		}
 
 		const string finalFilePath = filePath.substr(rootPath.size());
+
 		_fe3d->misc_clearImageCache(finalFilePath);
 
 		_fe3d->text2d_create(newText2dId, finalFilePath, true);

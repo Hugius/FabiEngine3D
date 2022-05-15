@@ -32,6 +32,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -45,6 +46,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setLeftCubeMap(_currentSkyId, finalFilePath);
 		}
@@ -66,6 +68,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -79,6 +82,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setRightCubeMap(_currentSkyId, finalFilePath);
 		}
@@ -100,6 +104,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -113,6 +118,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBottomCubeMap(_currentSkyId, finalFilePath);
 		}
@@ -134,13 +140,13 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 
@@ -148,6 +154,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setTopCubeMap(_currentSkyId, finalFilePath);
 		}
@@ -169,6 +176,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -182,6 +190,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBackCubeMap(_currentSkyId, finalFilePath);
 		}
@@ -203,6 +212,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -216,6 +226,7 @@ void SkyEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setFrontCubeMap(_currentSkyId, finalFilePath);
 		}

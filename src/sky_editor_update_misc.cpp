@@ -76,16 +76,19 @@ void SkyEditor::_updateSkyCreating()
 			return;
 		}
 
-		_currentSkyId = newSkyId;
-		_loadedSkyIds.push_back(newSkyId);
-		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
-
 		_fe3d->sky_create(newSkyId);
 		_fe3d->sky_select(newSkyId);
 
+		_currentSkyId = newSkyId;
+
+		_loadedSkyIds.push_back(newSkyId);
+
+		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
+
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-		_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + newSkyId.substr(1));
-		_gui->getOverlay()->getTextField("skyId")->setVisible(true);
+
+		_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setTextContent("Sky: " + newSkyId.substr(1));
+		_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(true);
 	}
 }
 
@@ -126,8 +129,8 @@ void SkyEditor::_updateSkyChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + _currentSkyId.substr(1));
-					_gui->getOverlay()->getTextField("skyId")->setVisible(true);
+					_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setTextContent("Sky: " + _currentSkyId.substr(1));
+					_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -152,6 +155,7 @@ void SkyEditor::_updateSkyDeleting()
 			_fe3d->sky_delete(_currentSkyId);
 
 			_loadedSkyIds.erase(remove(_loadedSkyIds.begin(), _loadedSkyIds.end(), _currentSkyId), _loadedSkyIds.end());
+
 			_currentSkyId = "";
 
 		}

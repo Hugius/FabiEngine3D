@@ -32,6 +32,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -45,6 +46,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setNormalMap(_currentTerrainId, finalFilePath);
 		}
@@ -66,6 +68,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -79,6 +82,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, finalFilePath);
 		}
@@ -100,6 +104,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -113,6 +118,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, finalFilePath);
 		}
@@ -134,6 +140,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -147,6 +154,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);
 		}

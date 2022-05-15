@@ -20,15 +20,17 @@ const bool SkyEditor::saveSkiesToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sky.fe3d");
 
 	for(const auto & skyId : _loadedSkyIds)
 	{
+		const auto rotation = _fe3d->sky_getRotation(skyId);
+		const auto lightness = _fe3d->sky_getLightness(skyId);
+		const auto color = _fe3d->sky_getColor(skyId);
+		const auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(skyId));
+
 		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
-		auto rotation = _fe3d->sky_getRotation(skyId);
-		auto lightness = _fe3d->sky_getLightness(skyId);
-		auto color = _fe3d->sky_getColor(skyId);
-		auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(skyId));
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{

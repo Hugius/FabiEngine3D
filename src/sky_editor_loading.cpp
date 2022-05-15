@@ -21,6 +21,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
@@ -28,8 +29,9 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> imagePaths;
+	vector<string> imagePaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		array<string, 6> cubeMapPaths{};
@@ -81,6 +83,7 @@ const bool SkyEditor::loadSkiesFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
@@ -89,6 +92,7 @@ const bool SkyEditor::loadSkiesFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		array<string, 6> cubeMapPaths{};
@@ -132,15 +136,16 @@ const bool SkyEditor::loadSkiesFromFile()
 			}
 		}
 
-		_loadedSkyIds.push_back(skyId);
-		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
-
 		_fe3d->sky_create(skyId);
 		_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
 		_fe3d->sky_setLightness(skyId, lightness);
 		_fe3d->sky_setRotation(skyId, rotation);
 		_fe3d->sky_setColor(skyId, color);
 		_fe3d->sky_setRotationOrder(skyId, DirectionOrderType(rotationOrder));
+
+		_loadedSkyIds.push_back(skyId);
+
+		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
 	}
 
 	file.close();

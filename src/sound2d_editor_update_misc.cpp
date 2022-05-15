@@ -79,6 +79,7 @@ void Sound2dEditor::_updateSound2dCreating()
 		}
 
 		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
+
 		if(filePath.empty())
 		{
 			return;
@@ -92,6 +93,7 @@ void Sound2dEditor::_updateSound2dCreating()
 		}
 
 		const string finalFilePath = filePath.substr(rootPath.size());
+
 		_fe3d->misc_clearAudioCache(finalFilePath);
 
 		_fe3d->sound2d_create(newSound2dId, finalFilePath);

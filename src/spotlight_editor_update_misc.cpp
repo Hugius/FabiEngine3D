@@ -111,19 +111,21 @@ void SpotlightEditor::_updateSpotlightCreating()
 
 void SpotlightEditor::_updateSpotlightChoosing()
 {
-	if(!_hoveredSpotlightId.empty())
-	{
-		_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
-		_fe3d->model_setVisible("@@spotlight", false);
-
-		_hoveredSpotlightId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editSpotlight") || (_gui->getOverlay()->getChoiceFormId() == "deleteSpotlight"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredSpotlightId.empty())
+			{
+				_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
+				_fe3d->model_setVisible("@@spotlight", false);
+
+				_hoveredSpotlightId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredSpotlightId.empty())
 			{
@@ -150,6 +152,16 @@ void SpotlightEditor::_updateSpotlightChoosing()
 					_gui->getOverlay()->getTextField("spotlightId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredSpotlightId.empty())
+		{
+			_fe3d->spotlight_setVisible(_hoveredSpotlightId, false);
+			_fe3d->model_setVisible("@@spotlight", false);
+
+			_hoveredSpotlightId = "";
 		}
 	}
 }

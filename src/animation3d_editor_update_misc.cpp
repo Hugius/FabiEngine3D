@@ -256,19 +256,22 @@ void Animation3dEditor::_updateAnimation3dDeleting()
 
 void Animation3dEditor::_updateModelChoosing()
 {
-	if(!_hoveredModelId.empty())
-	{
-		_fe3d->model_setVisible(_hoveredModelId, false);
-
-		_hoveredModelId = "";
-	}
-
 	if(_gui->getOverlay()->getChoiceFormId() == "selectModel")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
 		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+
+				_hoveredModelId = "";
+			}
+		}
+		else
+		{
+
 			if(_hoveredModelId.empty())
 			{
 				_hoveredModelId = ("@" + selectedOptionId);
@@ -312,6 +315,15 @@ void Animation3dEditor::_updateModelChoosing()
 
 				_hoveredModelId = "";
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredModelId.empty())
+		{
+			_fe3d->model_setVisible(_hoveredModelId, false);
+
+			_hoveredModelId = "";
 		}
 	}
 }

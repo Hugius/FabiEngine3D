@@ -136,19 +136,21 @@ void Sound3dEditor::_updateSound3dCreating()
 
 void Sound3dEditor::_updateSound3dChoosing()
 {
-	if(!_hoveredSound3dId.empty())
-	{
-		_fe3d->sound3d_pause(_hoveredSound3dId, 0);
-		_fe3d->model_setVisible("@@sound3d", false);
-
-		_hoveredSound3dId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editSound3d") || (_gui->getOverlay()->getChoiceFormId() == "deleteSound3d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredSound3dId.empty())
+			{
+				_fe3d->sound3d_pause(_hoveredSound3dId, 0);
+				_fe3d->model_setVisible("@@sound3d", false);
+
+				_hoveredSound3dId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredSound3dId.empty())
 			{
@@ -175,6 +177,16 @@ void Sound3dEditor::_updateSound3dChoosing()
 					_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredSound3dId.empty())
+		{
+			_fe3d->sound3d_pause(_hoveredSound3dId, 0);
+			_fe3d->model_setVisible("@@sound3d", false);
+
+			_hoveredSound3dId = "";
 		}
 	}
 }

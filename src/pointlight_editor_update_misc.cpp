@@ -110,19 +110,21 @@ void PointlightEditor::_updatePointlightCreating()
 
 void PointlightEditor::_updatePointlightChoosing()
 {
-	if(!_hoveredPointlightId.empty())
-	{
-		_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
-		_fe3d->model_setVisible("@@pointlight", false);
-
-		_hoveredPointlightId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editPointlight") || (_gui->getOverlay()->getChoiceFormId() == "deletePointlight"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredPointlightId.empty())
+			{
+				_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
+				_fe3d->model_setVisible("@@pointlight", false);
+
+				_hoveredPointlightId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredPointlightId.empty())
 			{
@@ -149,6 +151,16 @@ void PointlightEditor::_updatePointlightChoosing()
 					_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredPointlightId.empty())
+		{
+			_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
+			_fe3d->model_setVisible("@@pointlight", false);
+
+			_hoveredPointlightId = "";
 		}
 	}
 }

@@ -91,18 +91,20 @@ void SkyEditor::_updateSkyCreating()
 
 void SkyEditor::_updateSkyChoosing()
 {
-	if(_isSkyHovered)
-	{
-		_fe3d->sky_select("");
-
-		_isSkyHovered = false;
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editSky") || (_gui->getOverlay()->getChoiceFormId() == "deleteSky"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(_isSkyHovered)
+			{
+				_fe3d->sky_select("");
+
+				_isSkyHovered = false;
+			}
+		}
+		else
 		{
 			if(!_isSkyHovered)
 			{
@@ -128,6 +130,15 @@ void SkyEditor::_updateSkyChoosing()
 					_gui->getOverlay()->getTextField("skyId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(_isSkyHovered)
+		{
+			_fe3d->sky_select("");
+
+			_isSkyHovered = false;
 		}
 	}
 }

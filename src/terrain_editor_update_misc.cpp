@@ -139,19 +139,22 @@ void TerrainEditor::_updateTerrainCreating()
 
 void TerrainEditor::_updateTerrainChoosing()
 {
-	if(_isTerrainHovered)
-	{
-		_fe3d->terrain_select("");
-
-		_isTerrainHovered = false;
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editTerrain") || (_gui->getOverlay()->getChoiceFormId() == "deleteTerrain"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
 		{
+			if(_isTerrainHovered)
+			{
+				_fe3d->terrain_select("");
+
+				_isTerrainHovered = false;
+			}
+		}
+		else
+		{
+
 			if(!_isTerrainHovered)
 			{
 				_isTerrainHovered = true;
@@ -176,6 +179,15 @@ void TerrainEditor::_updateTerrainChoosing()
 					_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(_isTerrainHovered)
+		{
+			_fe3d->terrain_select("");
+
+			_isTerrainHovered = false;
 		}
 	}
 }

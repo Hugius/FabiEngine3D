@@ -102,18 +102,20 @@ void WaterEditor::_updateWaterCreating()
 
 void WaterEditor::_updateWaterChoosing()
 {
-	if(_isWaterHovered)
-	{
-		_fe3d->water_select("");
-
-		_isWaterHovered = false;
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editWater") || (_gui->getOverlay()->getChoiceFormId() == "deleteWater"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(_isWaterHovered)
+			{
+				_fe3d->water_select("");
+
+				_isWaterHovered = false;
+			}
+		}
+		else
 		{
 			if(!_isWaterHovered)
 			{
@@ -141,6 +143,15 @@ void WaterEditor::_updateWaterChoosing()
 			}
 		}
 	}
+	else
+	{
+		if(_isWaterHovered)
+		{
+			_fe3d->water_select("");
+
+			_isWaterHovered = false;
+		}
+	}
 }
 
 void WaterEditor::_updateWaterDeleting()
@@ -163,18 +174,20 @@ void WaterEditor::_updateWaterDeleting()
 
 void WaterEditor::_updateSkyChoosing()
 {
-	if(_isSkyHovered)
-	{
-		_fe3d->sky_select("");
-
-		_isSkyHovered = false;
-	}
-
 	if(_gui->getOverlay()->getChoiceFormId() == "selectSky")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(_isSkyHovered)
+			{
+				_fe3d->sky_select("");
+
+				_isSkyHovered = false;
+			}
+		}
+		else
 		{
 			if(!_isSkyHovered)
 			{
@@ -187,6 +200,15 @@ void WaterEditor::_updateSkyChoosing()
 			{
 				_isSkyHovered = false;
 			}
+		}
+	}
+	else
+	{
+		if(_isSkyHovered)
+		{
+			_fe3d->sky_select("");
+
+			_isSkyHovered = false;
 		}
 	}
 }

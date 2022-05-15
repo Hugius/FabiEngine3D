@@ -170,18 +170,20 @@ void ModelEditor::_updateModelCreating()
 
 void ModelEditor::_updateModelChoosing()
 {
-	if(!_hoveredModelId.empty())
-	{
-		_fe3d->model_setVisible(_hoveredModelId, false);
-
-		_hoveredModelId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editModel") || (_gui->getOverlay()->getChoiceFormId() == "deleteModel"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+
+				_hoveredModelId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredModelId.empty())
 			{
@@ -207,6 +209,15 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredModelId.empty())
+		{
+			_fe3d->model_setVisible(_hoveredModelId, false);
+
+			_hoveredModelId = "";
 		}
 	}
 }
@@ -321,18 +332,20 @@ void ModelEditor::_updateAabbCreating()
 
 void ModelEditor::_updateAabbChoosing()
 {
-	if(!_hoveredAabbId.empty())
-	{
-		_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
-
-		_hoveredAabbId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editAabb") || (_gui->getOverlay()->getChoiceFormId() == "deleteAabb"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredAabbId.empty())
+			{
+				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+
+				_hoveredAabbId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredAabbId.empty())
 			{
@@ -360,6 +373,15 @@ void ModelEditor::_updateAabbChoosing()
 			}
 		}
 	}
+	else
+	{
+		if(!_hoveredAabbId.empty())
+		{
+			_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+
+			_hoveredAabbId = "";
+		}
+	}
 }
 
 void ModelEditor::_updateAabbDeleting()
@@ -380,18 +402,20 @@ void ModelEditor::_updateAabbDeleting()
 
 void ModelEditor::_updateSkyChoosing()
 {
-	if(_isSkyHovered)
-	{
-		_fe3d->sky_select("");
-
-		_isSkyHovered = false;
-	}
-
 	if(_gui->getOverlay()->getChoiceFormId() == "selectSky")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(_isSkyHovered)
+			{
+				_fe3d->sky_select("");
+
+				_isSkyHovered = false;
+			}
+		}
+		else
 		{
 			if(!_isSkyHovered)
 			{
@@ -406,6 +430,15 @@ void ModelEditor::_updateSkyChoosing()
 
 				_isSkyHovered = false;
 			}
+		}
+	}
+	else
+	{
+		if(_isSkyHovered)
+		{
+			_fe3d->sky_select("");
+
+			_isSkyHovered = false;
 		}
 	}
 }

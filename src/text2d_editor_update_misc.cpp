@@ -103,18 +103,20 @@ void Text2dEditor::_updateText2dCreating()
 
 void Text2dEditor::_updateText2dChoosing()
 {
-	if(!_hoveredText2dId.empty())
-	{
-		_fe3d->text2d_setVisible(_hoveredText2dId, false);
-
-		_hoveredText2dId = "";
-	}
-
 	if((_gui->getOverlay()->getChoiceFormId() == "editText2d") || (_gui->getOverlay()->getChoiceFormId() == "deleteText2d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredText2dId.empty())
+			{
+				_fe3d->text2d_setVisible(_hoveredText2dId, false);
+
+				_hoveredText2dId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredText2dId.empty())
 			{
@@ -140,6 +142,15 @@ void Text2dEditor::_updateText2dChoosing()
 					_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
 				}
 			}
+		}
+	}
+	else
+	{
+		if(!_hoveredText2dId.empty())
+		{
+			_fe3d->text2d_setVisible(_hoveredText2dId, false);
+
+			_hoveredText2dId = "";
 		}
 	}
 }

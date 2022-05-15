@@ -76,7 +76,7 @@ void Sound3dEditor::_updateChoiceMenu()
 
 			_fe3d->model_setVisible("@@sound3d", false);
 
-			_gui->getOverlay()->getTextField("sound3dId")->setVisible(false);
+			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuMain");
 

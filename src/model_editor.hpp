@@ -49,16 +49,16 @@ private:
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
 	static inline const string CAPTOR_ID = "@@captor";
-	static inline const string MODEL_TEXT_ID = "model_id";
-	static inline const string AABB_TEXT_ID = "aabb_id";
+	static inline const string MODEL_TITLE_ID = "model_id";
+	static inline const string AABB_TITLE_ID = "aabb_id";
 
 	static inline const fvec3 CAPTOR_POSITION = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 DIRECTIONAL_LIGHTING_POSITION = fvec3(1000.0f);
 
-	static inline const fvec2 MODEL_TEXT_POSITION = fvec2(0.0f, 0.85f);
-	static inline const fvec2 MODEL_TEXT_SIZE = fvec2(0.025f, 0.1f);
-	static inline const fvec2 AABB_TEXT_POSITION = fvec2(0.0f, 0.75f);
-	static inline const fvec2 AABB_TEXT_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 MODEL_TITLE_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 MODEL_TITLE_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 AABB_TITLE_POSITION = fvec2(0.0f, 0.75f);
+	static inline const fvec2 AABB_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;

@@ -63,7 +63,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 
-			_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(false);
 
 			_currentAabbId = "";
 

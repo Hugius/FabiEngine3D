@@ -78,7 +78,7 @@ void PointlightEditor::_updateChoiceMenu()
 
 			_fe3d->model_setVisible(LAMP_ID, false);
 
-			_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuMain");
 

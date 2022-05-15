@@ -72,8 +72,8 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setTextContent("Quad2D: " + newQuad2dId.substr(1));
-			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(true);
+			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setTextContent("Quad2D: " + newQuad2dId.substr(1));
+			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -115,8 +115,8 @@ void Quad2dEditor::_updateQuad2dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setTextContent("Quad2D: " + _currentQuad2dId.substr(1));
-					_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setTextContent("Quad2D: " + _currentQuad2dId.substr(1));
+					_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

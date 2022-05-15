@@ -95,8 +95,8 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			_gui->getOverlay()->getTextField(ANIMATION3D_TEXT_ID)->setVisible(false);
-			_gui->getOverlay()->getTextField(FRAME_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
@@ -220,7 +220,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		if(!isStarted)
 		{
-			_gui->getOverlay()->getTextField(FRAME_TEXT_ID)->setTextContent("Frame: " + to_string(_currentFrameIndex + 1));
+			_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setTextContent("Frame: " + to_string(_currentFrameIndex + 1));
 		}
 	}
 }

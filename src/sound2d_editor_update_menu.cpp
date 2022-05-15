@@ -70,7 +70,7 @@ void Sound2dEditor::_updateChoiceMenu()
 				_fe3d->sound2d_stop(_currentSound2dId, 0);
 			}
 
-			_gui->getOverlay()->getTextField(SOUND2D_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuMain");
 

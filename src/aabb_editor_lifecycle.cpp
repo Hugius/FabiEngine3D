@@ -38,7 +38,7 @@ void AabbEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField(AABB_TEXT_ID, AABB_TEXT_POSITION, AABB_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(AABB_TITLE_ID, AABB_TITLE_POSITION, AABB_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void AabbEditor::_unload()
@@ -66,7 +66,7 @@ void AabbEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(AABB_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(AABB_TITLE_ID);
 
 	_loadedAabbIds.clear();
 }

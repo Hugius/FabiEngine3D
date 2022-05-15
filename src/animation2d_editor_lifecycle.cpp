@@ -14,7 +14,7 @@ void Animation2dEditor::_load()
 
 	_fe3d->camera_setYaw(CAMERA_YAW);
 
-	_gui->getOverlay()->createTextField(ANIMATION2D_TEXT_ID, ANIMATION2D_TEXT_POSITION, ANIMATION2D_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(ANIMATION2D_TITLE_ID, ANIMATION2D_TITLE_POSITION, ANIMATION2D_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void Animation2dEditor::_unload()
@@ -30,7 +30,7 @@ void Animation2dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(ANIMATION2D_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(ANIMATION2D_TITLE_ID);
 
 	_loadedAnimation2dIds.clear();
 }

@@ -99,7 +99,7 @@ void ModelEditor::_updateChoiceMenu()
 
 			_fe3d->model_setVisible(_currentModelId, false);
 
-			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setVisible(false);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 

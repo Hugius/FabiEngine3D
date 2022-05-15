@@ -43,7 +43,7 @@ void Quad3dEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField(QUAD3D_TEXT_ID, QUAD3D_TEXT_POSITION, QUAD3D_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(QUAD3D_TITLE_ID, QUAD3D_TITLE_POSITION, QUAD3D_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void Quad3dEditor::_unload()
@@ -76,7 +76,7 @@ void Quad3dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(QUAD3D_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(QUAD3D_TITLE_ID);
 
 	_loadedQuad3dIds.clear();
 }

@@ -51,8 +51,8 @@ void Animation3dEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField(ANIMATION3D_TEXT_ID, ANIMATION3D_TEXT_POSITION, ANIMATION3D_TEXT_SIZE, "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField(FRAME_TEXT_ID, FRAME_TEXT_POSITION, FRAME_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(ANIMATION3D_TITLE_ID, ANIMATION3D_TITLE_POSITION, ANIMATION3D_TITLE_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(FRAME_TITLE_ID, FRAME_TITLE_POSITION, FRAME_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void Animation3dEditor::_unload()
@@ -93,8 +93,8 @@ void Animation3dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(ANIMATION3D_TEXT_ID);
-	_gui->getOverlay()->deleteTextField(FRAME_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(ANIMATION3D_TITLE_ID);
+	_gui->getOverlay()->deleteTextField(FRAME_TITLE_ID);
 
 	_loadedAnimation3dIds.clear();
 }

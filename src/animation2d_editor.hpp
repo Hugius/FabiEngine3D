@@ -30,12 +30,12 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string PREVIEW_QUAD3D_ID = "@@preview_quad3d";
-	static inline const string ANIMATION2D_TEXT_ID = "animation2d_id";
+	static inline const string ANIMATION2D_TITLE_ID = "animation2d_id";
 
 	static inline const fvec3 PREVIEW_QUAD3D_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
-	static inline const fvec2 ANIMATION2D_TEXT_POSITION = fvec2(0.0f, 0.85f);
-	static inline const fvec2 ANIMATION2D_TEXT_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 ANIMATION2D_TITLE_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 ANIMATION2D_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CAMERA_YAW = 270.0f;
 

@@ -28,10 +28,8 @@ void SpotlightEditor::_load()
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.25f);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(1.0f);
 	_fe3d->graphics_setShadowsEnabled(true);

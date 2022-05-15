@@ -22,7 +22,7 @@ void Sound2dEditor::_load()
 
 	_fe3d->camera_setYaw(CAMERA_YAW);
 
-	_gui->getOverlay()->createTextField(SOUND2D_TEXT_ID, SOUND2D_TEXT_POSITION, SOUND2D_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(SOUND2D_TITLE_ID, SOUND2D_TITLE_POSITION, SOUND2D_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void Sound2dEditor::_unload()
@@ -44,7 +44,7 @@ void Sound2dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(SOUND2D_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(SOUND2D_TITLE_ID);
 
 	_loadedSound2dIds.clear();
 }

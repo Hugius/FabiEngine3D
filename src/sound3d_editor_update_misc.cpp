@@ -133,8 +133,8 @@ void Sound3dEditor::_updateSound3dCreating()
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
 
-			_gui->getOverlay()->getTextField("sound3dId")->setTextContent("Sound3d: " + newSound3dId.substr(1));
-			_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
+			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + newSound3dId.substr(1));
+			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -180,8 +180,8 @@ void Sound3dEditor::_updateSound3dChoosing()
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("sound3dId")->setTextContent("Sound3d: " + _currentSound3dId.substr(1));
-					_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
+					_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + _currentSound3dId.substr(1));
+					_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

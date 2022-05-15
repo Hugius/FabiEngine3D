@@ -31,10 +31,10 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	static inline const string SKY_TEXT_ID = "sky_id";
+	static inline const string SKY_TITLE_ID = "sky_id";
 
-	static inline const fvec2 SKY_TEXT_POSITION = fvec2(0.0f, 0.85f);
-	static inline const fvec2 SKY_TEXT_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 SKY_TITLE_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 SKY_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;

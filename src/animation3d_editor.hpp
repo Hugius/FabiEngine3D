@@ -42,16 +42,16 @@ private:
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
 	static inline const string CAPTOR_ID = "@@captor";
-	static inline const string ANIMATION3D_TEXT_ID = "animation3d_id";
-	static inline const string FRAME_TEXT_ID = "frame_id";
+	static inline const string ANIMATION3D_TITLE_ID = "animation3d_id";
+	static inline const string FRAME_TITLE_ID = "frame_id";
 
 	static inline const fvec3 CAPTOR_POSITION = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 DIRECTIONAL_LIGHTING_POSITION = fvec3(1000.0f);
 
-	static inline const fvec2 ANIMATION3D_TEXT_POSITION = fvec2(0.0f, 0.85f);
-	static inline const fvec2 ANIMATION3D_TEXT_SIZE = fvec2(0.025f, 0.1f);
-	static inline const fvec2 FRAME_TEXT_POSITION = fvec2(0.0f, 0.75f);
-	static inline const fvec2 FRAME_TEXT_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 ANIMATION3D_TITLE_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 ANIMATION3D_TITLE_SIZE = fvec2(0.025f, 0.1f);
+	static inline const fvec2 FRAME_TITLE_POSITION = fvec2(0.0f, 0.75f);
+	static inline const fvec2 FRAME_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;

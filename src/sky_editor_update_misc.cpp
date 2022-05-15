@@ -87,8 +87,8 @@ void SkyEditor::_updateSkyCreating()
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-		_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setTextContent("Sky: " + newSkyId.substr(1));
-		_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(true);
+		_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setTextContent("Sky: " + newSkyId.substr(1));
+		_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -129,8 +129,8 @@ void SkyEditor::_updateSkyChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setTextContent("Sky: " + _currentSkyId.substr(1));
-					_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setTextContent("Sky: " + _currentSkyId.substr(1));
+					_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

@@ -67,7 +67,7 @@ void SkyEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 
-			_gui->getOverlay()->getTextField(SKY_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setVisible(false);
 
 			_fe3d->sky_setWireframed(_currentSkyId, false);
 			_fe3d->sky_select("");

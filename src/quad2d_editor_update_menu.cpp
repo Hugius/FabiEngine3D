@@ -75,7 +75,7 @@ void Quad2dEditor::_updateChoiceMenu()
 		{
 			_fe3d->quad2d_setVisible(_currentQuad2dId, false);
 
-			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setVisible(false);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuMain");
 

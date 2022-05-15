@@ -9,7 +9,7 @@ void Quad2dEditor::_load()
 {
 	_fe3d->camera_setYaw(CAMERA_YAW);
 
-	_gui->getOverlay()->createTextField(QUAD2D_TEXT_ID, QUAD2D_TEXT_POSITION, QUAD2D_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(QUAD2D_TITLE_ID, QUAD2D_TITLE_POSITION, QUAD2D_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void Quad2dEditor::_unload()
@@ -21,7 +21,7 @@ void Quad2dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(QUAD2D_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(QUAD2D_TITLE_ID);
 
 	_loadedQuad2dIds.clear();
 }

@@ -168,8 +168,8 @@ void ModelEditor::_updateModelCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setTextContent("Model: " + newModelId.substr(1));
-			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(true);
+			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setTextContent("Model: " + newModelId.substr(1));
+			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -211,8 +211,8 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setTextContent("Model: " + _currentModelId.substr(1));
-					_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setTextContent("Model: " + _currentModelId.substr(1));
+					_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setVisible(true);
 				}
 			}
 		}
@@ -333,8 +333,8 @@ void ModelEditor::_updateAabbCreating()
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId);
-		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
+		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + _currentAabbId);
+		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -375,8 +375,8 @@ void ModelEditor::_updateAabbChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId);
-					_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + _currentAabbId);
+					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

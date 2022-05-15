@@ -13,7 +13,7 @@ void SkyEditor::_load()
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
-	_gui->getOverlay()->createTextField(SKY_TEXT_ID, SKY_TEXT_POSITION, SKY_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(SKY_TITLE_ID, SKY_TITLE_POSITION, SKY_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void SkyEditor::_unload()
@@ -29,7 +29,7 @@ void SkyEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(SKY_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(SKY_TITLE_ID);
 
 	_loadedSkyIds.clear();
 }

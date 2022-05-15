@@ -116,7 +116,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 		{
 			_fe3d->text2d_setVisible(text2dId, false);
 			_fe3d->text2d_setPosition(text2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(text2dId, color);
 			_fe3d->text2d_setOpacity(text2dId, opacity);
 			_fe3d->text2d_setHorizontallyFlipped(text2dId, isHorizontallyFlipped);

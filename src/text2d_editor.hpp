@@ -28,7 +28,7 @@ private:
 	void _updateText2dDeleting();
 	void _updateMiscellaneous();
 
-	static inline const fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
+	static inline const fvec2 TEXT2D_SIZE = fvec2(1.0f, 0.2f);
 
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 

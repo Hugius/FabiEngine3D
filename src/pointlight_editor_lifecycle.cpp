@@ -44,7 +44,7 @@ void PointlightEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField(POINTLIGHT_TEXT_ID, POINTLIGHT_TEXT_POSITION, POINTLIGHT_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(POINTLIGHT_TITLE_ID, POINTLIGHT_TITLE_POSITION, POINTLIGHT_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void PointlightEditor::_unload()
@@ -73,7 +73,7 @@ void PointlightEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(POINTLIGHT_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(POINTLIGHT_TITLE_ID);
 
 	_loadedPointlightIds.clear();
 }

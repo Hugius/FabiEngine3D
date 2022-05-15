@@ -59,8 +59,8 @@ void ModelEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField(MODEL_TEXT_ID, MODEL_TEXT_POSITION, MODEL_TEXT_SIZE, "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField(AABB_TEXT_ID, AABB_TEXT_POSITION, AABB_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(MODEL_TITLE_ID, MODEL_TITLE_POSITION, MODEL_TITLE_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(AABB_TITLE_ID, AABB_TITLE_POSITION, AABB_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void ModelEditor::_unload()
@@ -101,8 +101,8 @@ void ModelEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField(MODEL_TEXT_ID);
-	_gui->getOverlay()->deleteTextField(AABB_TEXT_ID);
+	_gui->getOverlay()->deleteTextField(MODEL_TITLE_ID);
+	_gui->getOverlay()->deleteTextField(AABB_TITLE_ID);
 
 	_loadedModelIds.clear();
 }

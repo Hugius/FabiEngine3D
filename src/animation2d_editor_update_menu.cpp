@@ -81,7 +81,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD3D_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD3D_ID, false);
 
-			_gui->getOverlay()->getTextField(ANIMATION2D_TEXT_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 

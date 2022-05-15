@@ -90,7 +90,7 @@ void Text2dEditor::_updateText2dCreating()
 		if(_fe3d->text2d_isExisting(newText2dId))
 		{
 			_fe3d->text2d_setPosition(newText2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(newText2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setSize(newText2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
 			_currentText2dId = newText2dId;
 

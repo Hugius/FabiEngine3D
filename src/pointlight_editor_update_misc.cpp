@@ -106,8 +106,8 @@ void PointlightEditor::_updatePointlightCreating()
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 
-		_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setTextContent("Pointlight: " + newPointlightId.substr(1));
-		_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setVisible(true);
+		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + newPointlightId.substr(1));
+		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -152,8 +152,8 @@ void PointlightEditor::_updatePointlightChoosing()
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
-					_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
+					_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

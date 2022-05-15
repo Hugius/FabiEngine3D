@@ -102,8 +102,8 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-		_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setTextContent("Quad3D: " + newQuad3dId.substr(1));
-		_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setVisible(true);
+		_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setTextContent("Quad3D: " + newQuad3dId.substr(1));
+		_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -144,8 +144,8 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setTextContent("Quad3D: " + _currentQuad3dId.substr(1));
-					_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setVisible(true);
+					_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setTextContent("Quad3D: " + _currentQuad3dId.substr(1));
+					_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

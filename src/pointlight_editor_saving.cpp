@@ -19,14 +19,15 @@ const bool PointlightEditor::savePointlightsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\pointlight.fe3d");
 
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		auto radius = _fe3d->pointlight_getRadius(pointlightId);
-		auto color = _fe3d->pointlight_getColor(pointlightId);
-		auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
-		auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
+		const auto radius = _fe3d->pointlight_getRadius(pointlightId);
+		const auto color = _fe3d->pointlight_getColor(pointlightId);
+		const auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
+		const auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
 
 		file
 			<< pointlightId

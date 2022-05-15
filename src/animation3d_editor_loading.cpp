@@ -45,10 +45,6 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 
 		_fe3d->animation3d_create(animation3dId);
 
-		_loadedAnimation3dIds.push_back(animation3dId);
-
-		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
-
 		for(int partIndex = 0; partIndex < partCount; partIndex++)
 		{
 			string partId;
@@ -97,6 +93,10 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 				_fe3d->animation3d_setTransformationType(animation3dId, frameIndex, partIds[partIndex], TransformationType(transformationType));
 			}
 		}
+
+		_loadedAnimation3dIds.push_back(animation3dId);
+
+		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 	}
 
 	file.close();

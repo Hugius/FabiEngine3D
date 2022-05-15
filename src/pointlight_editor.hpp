@@ -34,10 +34,17 @@ private:
 	static inline const string BOX_ID = "@@box";
 	static inline const string BOX_MESH_PATH = "engine\\assets\\mesh\\box.obj";
 	static inline const string BOX_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\box.tga";
-	static inline const string POINTLIGHT_MODEL_ID = "@@pointlight";
-	static inline const string POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string LAMP_ID = "@@lamp";
+	static inline const string LAMP_MESH_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string POINTLIGHT_TEXT_ID = "pointlight_id";
 
 	static inline const fvec3 POINTLIGHT_POSITION = fvec3(0.0f, 2.0f, 0.0f);
+	static inline const fvec3 LAMP_POSITION = fvec3(0.0f, 2.0f, 0.0f);
+	static inline const fvec3 LAMP_SIZE = fvec3(0.5f);
+	static inline const fvec3 DIRECTIONAL_LIGHTING_POSITION = fvec3(1000.0f);
+
+	static inline const fvec2 POINTLIGHT_TEXT_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 POINTLIGHT_TEXT_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
@@ -53,8 +60,13 @@ private:
 	static inline constexpr float RADIUS_MULTIPLIER = 100.0f;
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
 	static inline constexpr float INTENSITY_MULTIPLIER = 100.0f;
+	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.25f;
+	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 0.5f;
+	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
 
 	static inline constexpr int GRID_REPEAT = 10;
+	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;
+	static inline constexpr int SHADOW_QUALITY = 16384;
 
 	vector<string> _loadedPointlightIds = {};
 

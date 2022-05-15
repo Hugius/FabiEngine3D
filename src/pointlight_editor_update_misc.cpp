@@ -47,12 +47,12 @@ void PointlightEditor::_updateMiscellaneous()
 
 	if(!_currentPointlightId.empty())
 	{
-		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_currentPointlightId));
+		_fe3d->model_setColor(LAMP_ID, "", _fe3d->pointlight_getColor(_currentPointlightId));
 	}
 
 	if(!_hoveredPointlightId.empty())
 	{
-		_fe3d->model_setColor("@@pointlight", "", _fe3d->pointlight_getColor(_hoveredPointlightId));
+		_fe3d->model_setColor(LAMP_ID, "", _fe3d->pointlight_getColor(_hoveredPointlightId));
 	}
 }
 
@@ -92,19 +92,22 @@ void PointlightEditor::_updatePointlightCreating()
 			return;
 		}
 
-		_currentPointlightId = newPointlightId;
-		_loadedPointlightIds.push_back(newPointlightId);
-		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
-
 		_fe3d->pointlight_create(newPointlightId);
 		_fe3d->pointlight_setPosition(newPointlightId, POINTLIGHT_POSITION);
 
-		_fe3d->model_setVisible("@@pointlight", true);
-		_fe3d->model_setColor("@@pointlight", "", fvec3(1.0f));
+		_currentPointlightId = newPointlightId;
+
+		_loadedPointlightIds.push_back(newPointlightId);
+
+		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
+
+		_fe3d->model_setVisible(LAMP_ID, true);
+		_fe3d->model_setColor(LAMP_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
-		_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + newPointlightId.substr(1));
-		_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);
+
+		_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setTextContent("Pointlight: " + newPointlightId.substr(1));
+		_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setVisible(true);
 	}
 }
 
@@ -119,7 +122,8 @@ void PointlightEditor::_updatePointlightChoosing()
 			if(!_hoveredPointlightId.empty())
 			{
 				_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
-				_fe3d->model_setVisible("@@pointlight", false);
+
+				_fe3d->model_setVisible(LAMP_ID, false);
 
 				_hoveredPointlightId = "";
 			}
@@ -131,7 +135,8 @@ void PointlightEditor::_updatePointlightChoosing()
 				_hoveredPointlightId = ("@" + selectedOptionId);
 
 				_fe3d->pointlight_setVisible(_hoveredPointlightId, true);
-				_fe3d->model_setVisible("@@pointlight", true);
+
+				_fe3d->model_setVisible(LAMP_ID, true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
@@ -147,8 +152,8 @@ void PointlightEditor::_updatePointlightChoosing()
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("pointlightId")->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
-					_gui->getOverlay()->getTextField("pointlightId")->setVisible(true);
+					_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
+					_gui->getOverlay()->getTextField(POINTLIGHT_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -158,7 +163,8 @@ void PointlightEditor::_updatePointlightChoosing()
 		if(!_hoveredPointlightId.empty())
 		{
 			_fe3d->pointlight_setVisible(_hoveredPointlightId, false);
-			_fe3d->model_setVisible("@@pointlight", false);
+
+			_fe3d->model_setVisible(LAMP_ID, false);
 
 			_hoveredPointlightId = "";
 		}
@@ -174,12 +180,14 @@ void PointlightEditor::_updatePointlightDeleting()
 			_fe3d->pointlight_delete(_currentPointlightId);
 
 			_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _currentPointlightId), _loadedPointlightIds.end());
+
 			_currentPointlightId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
-			_fe3d->model_setVisible("@@pointlight", false);
+
+			_fe3d->model_setVisible(LAMP_ID, false);
 
 			_currentPointlightId = "";
 		}

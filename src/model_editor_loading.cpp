@@ -272,14 +272,15 @@ const bool ModelEditor::loadModelsFromFile()
 
 			if(_fe3d->model_isExisting(modelId))
 			{
-				_loadedModelIds.push_back(modelId);
-				sort(_loadedModelIds.begin(), _loadedModelIds.end());
-
 				_fe3d->model_setVisible(modelId, false);
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setLevelOfDetailId(modelId, levelOfDetailId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
+
+				_loadedModelIds.push_back(modelId);
+
+				sort(_loadedModelIds.begin(), _loadedModelIds.end());
 			}
 		}
 		else if(lineType == "PART")

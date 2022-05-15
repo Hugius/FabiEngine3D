@@ -20,6 +20,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\pointlight.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `pointlight.fe3d` does not exist");
@@ -28,6 +29,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 	}
 
 	string line = "";
+
 	while(getline(file, line))
 	{
 		string pointlightId;
@@ -49,9 +51,6 @@ const bool PointlightEditor::loadPointlightsFromFile()
 			>> intensity
 			>> shape;
 
-		_loadedPointlightIds.push_back(pointlightId);
-		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
-
 		_fe3d->pointlight_create(pointlightId);
 		_fe3d->pointlight_setVisible(pointlightId, false);
 		_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
@@ -59,6 +58,10 @@ const bool PointlightEditor::loadPointlightsFromFile()
 		_fe3d->pointlight_setColor(pointlightId, color);
 		_fe3d->pointlight_setIntensity(pointlightId, intensity);
 		_fe3d->pointlight_setShape(pointlightId, PointlightShapeType(shape));
+
+		_loadedPointlightIds.push_back(pointlightId);
+
+		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 	}
 
 	file.close();

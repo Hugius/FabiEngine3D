@@ -434,6 +434,7 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.45f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
+
 	rightWindow->setActiveScreen("worldEditorMenuMain");
 }
 

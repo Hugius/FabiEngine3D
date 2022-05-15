@@ -74,8 +74,11 @@ void Quad2dEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->quad2d_setVisible(_currentQuad2dId, false);
-			_gui->getOverlay()->getTextField("quad2dId")->setVisible(false);
+
+			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(false);
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuMain");
+
 			_currentQuad2dId = "";
 
 			return;
@@ -98,6 +101,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -111,6 +115,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->quad2d_setDiffuseMap(_currentQuad2dId, finalFilePath);
 		}

@@ -97,6 +97,7 @@ void PointlightEditor::_loadGUI()
 	rightWindow->getScreen("pointlightEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
+
 	rightWindow->setActiveScreen("pointlightEditorMenuMain");
 }
 

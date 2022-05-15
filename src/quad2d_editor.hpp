@@ -28,9 +28,14 @@ private:
 	void _updateQuad2dDeleting();
 	void _updateMiscellaneous();
 
+	static inline const string QUAD2D_TEXT_ID = "quad2d_id";
+
 	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);
+	static inline const fvec2 QUAD2D_TEXT_POSITION = fvec2(0.0f, 0.85f);
+	static inline const fvec2 QUAD2D_TEXT_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float CAMERA_YAW = 270.0f;
 
 	vector<string> _loadedQuad2dIds = {};
 

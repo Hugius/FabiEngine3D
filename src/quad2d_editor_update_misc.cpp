@@ -61,16 +61,19 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 		if(_fe3d->quad2d_isExisting(newQuad2dId))
 		{
-			_currentQuad2dId = newQuad2dId;
-			_loadedQuad2dIds.push_back(newQuad2dId);
-			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
-
 			_fe3d->quad2d_setPosition(newQuad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->quad2d_setSize(newQuad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
+			_currentQuad2dId = newQuad2dId;
+
+			_loadedQuad2dIds.push_back(newQuad2dId);
+
+			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("quad2dId")->setTextContent("Quad2D: " + newQuad2dId.substr(1));
-			_gui->getOverlay()->getTextField("quad2dId")->setVisible(true);
+
+			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setTextContent("Quad2D: " + newQuad2dId.substr(1));
+			_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(true);
 		}
 	}
 }
@@ -112,8 +115,8 @@ void Quad2dEditor::_updateQuad2dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("quad2dId")->setTextContent("Quad2D: " + _currentQuad2dId.substr(1));
-					_gui->getOverlay()->getTextField("quad2dId")->setVisible(true);
+					_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setTextContent("Quad2D: " + _currentQuad2dId.substr(1));
+					_gui->getOverlay()->getTextField(QUAD2D_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -138,6 +141,7 @@ void Quad2dEditor::_updateQuad2dDeleting()
 			_fe3d->quad2d_delete(_currentQuad2dId);
 
 			_loadedQuad2dIds.erase(remove(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), _currentQuad2dId), _loadedQuad2dIds.end());
+
 			_currentQuad2dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

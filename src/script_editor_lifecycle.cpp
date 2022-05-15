@@ -91,6 +91,7 @@ void ScriptEditor::_loadGUI()
 	rightWindow->getScreen("scriptEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(8)[7]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
+
 	rightWindow->setActiveScreen("scriptEditorMenuMain");
 }
 

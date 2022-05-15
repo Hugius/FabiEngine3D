@@ -19,16 +19,18 @@ const bool Quad2dEditor::saveQuad2dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
 
 	for(const auto & quad2dId : _loadedQuad2dIds)
 	{
+		const auto color = _fe3d->quad2d_getColor(quad2dId);
+		const auto opacity = _fe3d->quad2d_getOpacity(quad2dId);
+		const auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quad2dId);
+		const auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quad2dId);
+		const auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quad2dId);
+
 		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quad2dId);
-		auto color = _fe3d->quad2d_getColor(quad2dId);
-		auto opacity = _fe3d->quad2d_getOpacity(quad2dId);
-		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quad2dId);
-		auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quad2dId);
-		auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quad2dId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 

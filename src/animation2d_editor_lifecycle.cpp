@@ -56,6 +56,7 @@ void Animation2dEditor::_loadGUI()
 	rightWindow->getScreen("animation2dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
+
 	rightWindow->setActiveScreen("animation2dEditorMenuMain");
 }
 

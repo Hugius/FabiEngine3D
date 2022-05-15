@@ -20,6 +20,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` does not exist");
@@ -29,6 +30,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths;
 	string line = "";
+
 	while(getline(file, line))
 	{
 		string quad2dId;
@@ -72,6 +74,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` does not exist");
@@ -80,6 +83,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 	}
 
 	string line = "";
+
 	while(getline(file, line))
 	{
 		string quad2dId;
@@ -111,9 +115,6 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 
 		if(_fe3d->quad2d_isExisting(quad2dId))
 		{
-			_loadedQuad2dIds.push_back(quad2dId);
-			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
-
 			_fe3d->quad2d_setVisible(quad2dId, false);
 			_fe3d->quad2d_setPosition(quad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
@@ -132,6 +133,10 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 
 				_fe3d->quad2d_setDiffuseMap(quad2dId, diffuseMapPath);
 			}
+
+			_loadedQuad2dIds.push_back(quad2dId);
+
+			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
 		}
 	}
 

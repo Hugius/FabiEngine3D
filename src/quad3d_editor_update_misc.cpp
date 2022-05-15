@@ -92,15 +92,18 @@ void Quad3dEditor::_updateQuad3dCreating()
 			return;
 		}
 
-		_currentQuad3dId = newQuad3dId;
-		_loadedQuad3dIds.push_back(newQuad3dId);
-		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
-
 		_fe3d->quad3d_create(newQuad3dId, false);
 
+		_currentQuad3dId = newQuad3dId;
+
+		_loadedQuad3dIds.push_back(newQuad3dId);
+
+		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
+
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-		_gui->getOverlay()->getTextField("quad3dId")->setTextContent("Quad3D: " + newQuad3dId.substr(1));
-		_gui->getOverlay()->getTextField("quad3dId")->setVisible(true);
+
+		_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setTextContent("Quad3D: " + newQuad3dId.substr(1));
+		_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setVisible(true);
 	}
 }
 
@@ -124,6 +127,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 			if(_hoveredQuad3dId.empty())
 			{
 				_hoveredQuad3dId = ("@" + selectedOptionId);
+
 				_fe3d->quad3d_setVisible(_hoveredQuad3dId, true);
 			}
 
@@ -140,8 +144,8 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("quad3dId")->setTextContent("Quad3D: " + _currentQuad3dId.substr(1));
-					_gui->getOverlay()->getTextField("quad3dId")->setVisible(true);
+					_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setTextContent("Quad3D: " + _currentQuad3dId.substr(1));
+					_gui->getOverlay()->getTextField(QUAD3D_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -166,6 +170,7 @@ void Quad3dEditor::_updateQuad3dDeleting()
 			_fe3d->quad3d_delete(_currentQuad3dId);
 
 			_loadedQuad3dIds.erase(remove(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end(), _currentQuad3dId), _loadedQuad3dIds.end());
+
 			_currentQuad3dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

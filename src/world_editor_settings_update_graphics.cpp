@@ -472,6 +472,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;

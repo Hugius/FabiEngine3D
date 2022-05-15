@@ -21,6 +21,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
@@ -30,6 +31,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths;
 	string line = "";
+
 	while(getline(file, line))
 	{
 		string quad3dId;
@@ -87,6 +89,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
@@ -95,6 +98,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 	}
 
 	string line = "";
+
 	while(getline(file, line))
 	{
 		string quad3dId;
@@ -151,9 +155,6 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_loadedQuad3dIds.push_back(quad3dId);
-		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
-
 		_fe3d->quad3d_create(quad3dId, false);
 		_fe3d->quad3d_setVisible(quad3dId, false);
 		_fe3d->quad3d_setSize(quad3dId, size);
@@ -200,6 +201,10 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 
 			_fe3d->quad3d_setEmissionMap(quad3dId, emissionMapPath);
 		}
+
+		_loadedQuad3dIds.push_back(quad3dId);
+
+		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 	}
 
 	file.close();

@@ -34,6 +34,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			}
 
 			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+
 			if(filePath.empty())
 			{
 				return;
@@ -47,7 +48,9 @@ void Quad3dEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->quad3d_setDiffuseMap(_currentQuad3dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
@@ -81,7 +84,9 @@ void Quad3dEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
+
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->quad3d_setEmissionMap(_currentQuad3dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

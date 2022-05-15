@@ -19,22 +19,20 @@ void Quad3dEditor::_load()
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
+	_fe3d->graphics_setDirectionalLightingPosition(DIRECTIONAL_LIGHTING_POSITION);
+	_fe3d->graphics_setDirectionalLightingIntensity(DIRECTIONAL_LIGHTING_INTENSITY);
 	_fe3d->graphics_setBloomEnabled(true);
-	_fe3d->graphics_setBloomType(BloomType::PARTS);
-	_fe3d->graphics_setBloomIntensity(1.0f);
-	_fe3d->graphics_setBloomBlurCount(5);
-	_fe3d->graphics_setBloomQuality(5);
+	_fe3d->graphics_setBloomType(BLOOM_TYPE);
+	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);
+	_fe3d->graphics_setBloomBlurCount(BLOOM_BLUR_COUNT);
+	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
 	_fe3d->graphics_setShadowsEnabled(true);
-	_fe3d->graphics_setShadowLightness(0.25f);
-	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
+	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
 
@@ -45,7 +43,7 @@ void Quad3dEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("quad3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(QUAD3D_TEXT_ID, QUAD3D_TEXT_POSITION, QUAD3D_TEXT_SIZE, "", fvec3(1.0f), true);
 }
 
 void Quad3dEditor::_unload()
@@ -61,10 +59,8 @@ void Quad3dEditor::_unload()
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setBloomEnabled(false);
@@ -80,7 +76,7 @@ void Quad3dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("quad3dId");
+	_gui->getOverlay()->deleteTextField(QUAD3D_TEXT_ID);
 
 	_loadedQuad3dIds.clear();
 }

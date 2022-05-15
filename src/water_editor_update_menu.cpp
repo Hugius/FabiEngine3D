@@ -87,7 +87,7 @@ void WaterEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 
-			_gui->getOverlay()->getTextField("waterId")->setVisible(false);
+			_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setVisible(false);
 
 			_fe3d->water_setWireframed(_currentWaterId, false);
 			_fe3d->water_select("");

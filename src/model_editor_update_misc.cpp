@@ -84,7 +84,7 @@ void ModelEditor::_updateMiscellaneous()
 		}
 	}
 
-	_fe3d->captor_setExceptionId("@@captor", _currentModelId);
+	_fe3d->captor_setExceptionId(CAPTOR_ID, _currentModelId);
 }
 
 void ModelEditor::_updateModelCreating()
@@ -435,7 +435,7 @@ void ModelEditor::_updateSkyChoosing()
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
-				_fe3d->captor_capture("@@captor");
+				_fe3d->captor_capture(CAPTOR_ID);
 
 				_isSkyHovered = false;
 			}

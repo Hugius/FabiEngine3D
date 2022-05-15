@@ -98,8 +98,8 @@ void WaterEditor::_updateWaterCreating()
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
-		_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + newWaterId.substr(1));
-		_gui->getOverlay()->getTextField("waterId")->setVisible(true);
+		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setTextContent("Water: " + newWaterId.substr(1));
+		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setVisible(true);
 	}
 }
 
@@ -140,8 +140,8 @@ void WaterEditor::_updateWaterChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + _currentWaterId.substr(1));
-					_gui->getOverlay()->getTextField("waterId")->setVisible(true);
+					_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setTextContent("Water: " + _currentWaterId.substr(1));
+					_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setVisible(true);
 				}
 			}
 		}

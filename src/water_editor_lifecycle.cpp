@@ -21,19 +21,19 @@ void WaterEditor::_load()
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
-	_fe3d->graphics_setPlanarReflectionQuality(1024);
-	_fe3d->graphics_setPlanarRefractionQuality(1024);
+	_fe3d->graphics_setDirectionalLightingPosition(DIRECTIONAL_LIGHTING_POSITION);
+	_fe3d->graphics_setDirectionalLightingIntensity(DIRECTIONAL_LIGHTING_INTENSITY);
 	_fe3d->graphics_setShadowsEnabled(true);
-	_fe3d->graphics_setShadowLightness(0.25f);
-	_fe3d->graphics_setShadowQuality(16384);
-	_fe3d->graphics_setShadowPositionOffset(fvec3(5.0f));
-	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(5.0f)));
+	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
+	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
+	_fe3d->graphics_setPlanarReflectionQuality(PLANAR_REFLECTION_QUALITY);
+	_fe3d->graphics_setPlanarRefractionQuality(PLANAR_REFRACTION_QUALITY);
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -42,7 +42,7 @@ void WaterEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("waterId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(WATER_TITLE_ID, WATER_TITLE_POSITION, WATER_TITLE_SIZE, "", fvec3(1.0f), true);
 }
 
 void WaterEditor::_unload()
@@ -74,7 +74,7 @@ void WaterEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("waterId");
+	_gui->getOverlay()->deleteTextField(WATER_TITLE_ID);
 
 	_loadedWaterIds.clear();
 }

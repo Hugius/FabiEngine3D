@@ -256,9 +256,10 @@ void EngineController::initialize()
 
 		Tools::setCursorVisible(false);
 
-		_fe3d->quad2d_create("@@cursor", true);
-		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
-		_fe3d->misc_setCursorId("@@cursor");
+		_fe3d->quad2d_create(CURSOR_ID, true);
+		_fe3d->quad2d_setSize(CURSOR_ID, fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
+
+		_fe3d->misc_setCursorId(CURSOR_ID);
 
 		_guiManager->initialize();
 		_leftViewportController->initialize();

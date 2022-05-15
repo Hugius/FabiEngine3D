@@ -86,9 +86,12 @@ void WaterEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+
 			_gui->getOverlay()->getTextField("waterId")->setVisible(false);
+
 			_fe3d->water_setWireframed(_currentWaterId, false);
 			_fe3d->water_select("");
+
 			_currentWaterId = "";
 
 			return;

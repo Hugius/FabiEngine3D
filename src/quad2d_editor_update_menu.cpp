@@ -117,6 +117,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->quad2d_setDiffuseMap(_currentQuad2dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())

@@ -166,6 +166,7 @@ void WaterEditor::_updateWaterDeleting()
 			_fe3d->water_delete(_currentWaterId);
 
 			_loadedWaterIds.erase(remove(_loadedWaterIds.begin(), _loadedWaterIds.end(), _currentWaterId), _loadedWaterIds.end());
+
 			_currentWaterId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

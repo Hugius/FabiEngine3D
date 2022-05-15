@@ -48,6 +48,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setLeftCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
@@ -84,6 +85,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setRightCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
@@ -120,6 +122,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setBottomCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
@@ -156,6 +159,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setTopCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
@@ -192,6 +196,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setBackCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
@@ -228,6 +233,7 @@ void SkyEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->sky_setFrontCubeMap(_currentSkyId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

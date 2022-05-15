@@ -21,6 +21,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\water.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
@@ -30,6 +31,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string waterId;
@@ -101,6 +103,7 @@ const bool WaterEditor::loadWatersFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\water.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
@@ -109,6 +112,7 @@ const bool WaterEditor::loadWatersFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string waterId;

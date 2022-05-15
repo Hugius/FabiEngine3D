@@ -50,6 +50,7 @@ void WaterEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->water_setDudvMap(_currentWaterId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
@@ -86,6 +87,7 @@ void WaterEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->water_setNormalMap(_currentWaterId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("heightMap")->isHovered())
@@ -122,6 +124,7 @@ void WaterEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->water_setHeightMap(_currentWaterId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

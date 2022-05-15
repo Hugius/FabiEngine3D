@@ -137,8 +137,8 @@ void Text3dEditor::_updateText3dCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
-			_gui->getOverlay()->getTextField("text3dId")->setTextContent("Text3D: " + newText3dId.substr(1));
-			_gui->getOverlay()->getTextField("text3dId")->setVisible(true);
+			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setTextContent("Text3D: " + newText3dId.substr(1));
+			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setVisible(true);
 		}
 	}
 }
@@ -180,8 +180,8 @@ void Text3dEditor::_updateText3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("text3dId")->setTextContent("Text3D: " + _currentText3dId.substr(1));
-					_gui->getOverlay()->getTextField("text3dId")->setVisible(true);
+					_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setTextContent("Text3D: " + _currentText3dId.substr(1));
+					_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setVisible(true);
 				}
 			}
 		}
@@ -206,6 +206,7 @@ void Text3dEditor::_updateText3dDeleting()
 			_fe3d->text3d_delete(_currentText3dId);
 
 			_loadedText3dIds.erase(remove(_loadedText3dIds.begin(), _loadedText3dIds.end(), _currentText3dId), _loadedText3dIds.end());
+
 			_currentText3dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

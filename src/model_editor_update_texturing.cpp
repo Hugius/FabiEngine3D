@@ -59,6 +59,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
@@ -95,6 +96,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
@@ -131,6 +133,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
@@ -167,6 +170,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("refractionMap")->isHovered())
@@ -203,6 +207,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setRefractionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
@@ -239,6 +244,7 @@ void ModelEditor::_updateTexturingMenu()
 			const auto finalFilePath = filePath.substr(rootPath.size());
 
 			_fe3d->misc_clearImageCache(finalFilePath);
+
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

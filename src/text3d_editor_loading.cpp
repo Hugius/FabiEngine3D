@@ -21,6 +21,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text3d.fe3d` does not exist");
@@ -30,6 +31,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 	vector<string> imagePaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string text3dId;
@@ -73,6 +75,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text3d.fe3d` does not exist");
@@ -81,6 +84,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string text3dId;

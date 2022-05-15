@@ -12,7 +12,7 @@ void Animation3dEditor::_updateFrameMenu()
 		const auto speed = _fe3d->animation3d_getSpeed(_currentAnimation3dId, _currentFrameIndex, _currentPartId);
 		const auto speedType = _fe3d->animation3d_getSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId);
 		const auto transformationType = _fe3d->animation3d_getTransformationType(_currentAnimation3dId, _currentFrameIndex, _currentPartId);
-		const auto multiplier = (transformationType == TransformationType::MOVEMENT) ? MOVEMENT_MULTIPLIER : (transformationType == TransformationType::SCALING) ? SCALING_MULTIPLIER : 1.0f;
+		const auto transformationMultiplier = (transformationType == TransformationType::MOVEMENT) ? MOVEMENT_MULTIPLIER : (transformationType == TransformationType::ROTATION) ? ROTATION_MULTIPLIER : SCALING_MULTIPLIER;
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -46,9 +46,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("targetTransformationX", "X", (targetTransformation.x * multiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("targetTransformationY", "Y", (targetTransformation.y * multiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("targetTransformationZ", "Z", (targetTransformation.z * multiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationX", "X", (targetTransformation.x * transformationMultiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationY", "Y", (targetTransformation.y * transformationMultiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationZ", "Z", (targetTransformation.z * transformationMultiplier), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
@@ -57,18 +57,21 @@ void Animation3dEditor::_updateFrameMenu()
 				case TransformationType::MOVEMENT:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, TransformationType::ROTATION);
+					_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(0.0f));
 
 					break;
 				}
 				case TransformationType::ROTATION:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, TransformationType::SCALING);
+					_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(0.0f));
 
 					break;
 				}
 				case TransformationType::SCALING:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, TransformationType::MOVEMENT);
+					_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(0.0f));
 
 					break;
 				}
@@ -115,21 +118,21 @@ void Animation3dEditor::_updateFrameMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3((value * multiplier), targetTransformation.y, targetTransformation.z));
+			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3((value / transformationMultiplier), targetTransformation.y, targetTransformation.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "targetTransformationY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, (value * multiplier), targetTransformation.z));
+			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, (value / transformationMultiplier), targetTransformation.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "targetTransformationZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, targetTransformation.y, (value * multiplier)));
+			_fe3d->animation3d_setTargetTransformation(_currentAnimation3dId, _currentFrameIndex, _currentPartId, fvec3(targetTransformation.x, targetTransformation.y, (value / transformationMultiplier)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "speedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{

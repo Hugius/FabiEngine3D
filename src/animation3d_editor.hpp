@@ -71,7 +71,8 @@ private:
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
 	static inline constexpr float SPEED_MULTIPLIER = 1000.0f;
 	static inline constexpr float ROTATION_ORIGIN_MULTIPLIER = 1000.0f;
-	static inline constexpr float MOVEMENT_MULTIPLIER = 1000.0f;
+	static inline constexpr float MOVEMENT_MULTIPLIER = 100.0f;
+	static inline constexpr float ROTATION_MULTIPLIER = 1.0f;
 	static inline constexpr float SCALING_MULTIPLIER = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;

@@ -335,6 +335,11 @@ void Animation3dEditor::_updateModelChoosing()
 
 			_hoveredModelId = "";
 		}
+
+		if(!_previewModelId.empty())
+		{
+			_fe3d->model_setVisible(_previewModelId, true);
+		}
 	}
 }
 

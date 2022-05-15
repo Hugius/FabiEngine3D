@@ -35,20 +35,16 @@ void SkyColorRenderer::render(const shared_ptr<Sky> sky)
 	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_CUBE_MAP, sky->getCubeTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(sky->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, sky->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 
 	if(sky->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 

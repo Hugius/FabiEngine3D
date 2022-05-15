@@ -29,7 +29,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line;
+	string line = "";
 	while(getline(file, line))
 	{
 		string waterId;
@@ -108,7 +108,7 @@ const bool WaterEditor::loadWatersFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 	while(getline(file, line))
 	{
 		string waterId;

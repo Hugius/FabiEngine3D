@@ -12,7 +12,6 @@ TextureBuffer::TextureBuffer(unsigned int tboId)
 TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 {
 	glGenTextures(1, &_tboId);
-
 	glBindTexture(GL_TEXTURE_2D, _tboId);
 
 	switch(image->getBitsPerPixel())
@@ -35,14 +34,12 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 {
 	glGenTextures(1, &_tboId);
-
 	glBindTexture(GL_TEXTURE_CUBE_MAP, _tboId);
 
 	int imageSize = 1;
@@ -85,7 +82,6 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
@@ -112,11 +108,8 @@ const bool TextureBuffer::isAnisotropicallyFiltered() const
 void TextureBuffer::loadMipMapping()
 {
 	glBindTexture(GL_TEXTURE_2D, _tboId);
-
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-
 	glGenerateMipmap(GL_TEXTURE_2D);
-
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	_isMipMapped = true;
@@ -125,9 +118,7 @@ void TextureBuffer::loadMipMapping()
 void TextureBuffer::loadAnisotropicFiltering(int quality)
 {
 	glBindTexture(GL_TEXTURE_2D, _tboId);
-
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, quality);
-
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	_isAnisotropicallyFiltered = true;

@@ -21,24 +21,25 @@ const bool ModelEditor::saveModelsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
 
 	for(const auto & modelId : _loadedModelIds)
 	{
-		auto partIds = _fe3d->model_getPartIds(modelId);
-		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
-		auto isMultiParted = _fe3d->model_isMultiParted(modelId);
+		const auto partIds = _fe3d->model_getPartIds(modelId);
+		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
+		const auto isMultiParted = _fe3d->model_isMultiParted(modelId);
+		const auto modelSize = _fe3d->model_getBaseSize(modelId);
+		const auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
+		const auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
+		const auto isShadowed = _fe3d->model_isShadowed(modelId);
+		const auto isReflected = _fe3d->model_isReflected(modelId);
+		const auto isRefracted = _fe3d->model_isRefracted(modelId);
+
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
-		auto modelSize = _fe3d->model_getBaseSize(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
-		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
-		auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
-		auto isShadowed = _fe3d->model_isShadowed(modelId);
-		auto isReflected = _fe3d->model_isReflected(modelId);
-		auto isRefracted = _fe3d->model_isRefracted(modelId);
 
 		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
 
@@ -72,29 +73,30 @@ const bool ModelEditor::saveModelsToFile() const
 
 		for(auto partId : partIds)
 		{
+			const auto isSpecular = _fe3d->model_isSpecular(modelId, partId);
+			const auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
+			const auto specularIntensity = _fe3d->model_getSpecularIntensity(modelId, partId);
+			const auto reflectivity = _fe3d->model_getReflectivity(modelId, partId);
+			const auto refractivity = _fe3d->model_getRefractivity(modelId, partId);
+			const auto lightness = _fe3d->model_getLightness(modelId, partId);
+			const auto color = _fe3d->model_getColor(modelId, partId);
+			const auto textureRepeat = _fe3d->model_getTextureRepeat(modelId, partId);
+			const auto isReflective = _fe3d->model_isReflective(modelId, partId);
+			const auto isRefractive = _fe3d->model_isRefractive(modelId, partId);
+			const auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(modelId, partId));
+			const auto refractionType = static_cast<int>(_fe3d->model_getRefractionType(modelId, partId));
+			const auto isFaceCulled = _fe3d->model_isFaceCulled(modelId, partId);
+			const auto isBright = _fe3d->model_isBright(modelId, partId);
+			const auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
+			const auto opacity = _fe3d->model_getOpacity(modelId, partId);
+			const auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
+
 			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
 			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelId, partId);
 			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(modelId, partId);
 			auto refractionMapPath = _fe3d->model_getRefractionMapPath(modelId, partId);
 			auto normalMapPath = _fe3d->model_getNormalMapPath(modelId, partId);
-			auto isSpecular = _fe3d->model_isSpecular(modelId, partId);
-			auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
-			auto specularIntensity = _fe3d->model_getSpecularIntensity(modelId, partId);
-			auto reflectivity = _fe3d->model_getReflectivity(modelId, partId);
-			auto refractivity = _fe3d->model_getRefractivity(modelId, partId);
-			auto lightness = _fe3d->model_getLightness(modelId, partId);
-			auto color = _fe3d->model_getColor(modelId, partId);
-			auto textureRepeat = _fe3d->model_getTextureRepeat(modelId, partId);
-			auto isReflective = _fe3d->model_isReflective(modelId, partId);
-			auto isRefractive = _fe3d->model_isRefractive(modelId, partId);
-			auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(modelId, partId));
-			auto refractionType = static_cast<int>(_fe3d->model_getRefractionType(modelId, partId));
-			auto isFaceCulled = _fe3d->model_isFaceCulled(modelId, partId);
-			auto isBright = _fe3d->model_isBright(modelId, partId);
-			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
-			auto opacity = _fe3d->model_getOpacity(modelId, partId);
-			auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
 
 			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
@@ -178,8 +180,8 @@ const bool ModelEditor::saveModelsToFile() const
 
 		for(const auto & aabbId : aabbIds)
 		{
-			auto position = _fe3d->aabb_getLocalPosition(aabbId);
-			auto size = _fe3d->aabb_getLocalSize(aabbId);
+			const auto position = _fe3d->aabb_getLocalPosition(aabbId);
+			const auto size = _fe3d->aabb_getLocalSize(aabbId);
 
 			file
 				<< "AABB "

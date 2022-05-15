@@ -54,9 +54,7 @@ void AabbColorRenderer::render(const shared_ptr<Aabb> aabb)
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, aabb->getMaxClipPosition().z));
 
 	glBindVertexArray(aabb->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_LINE_STRIP, 0, aabb->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 
 	_renderStorage->increaseTriangleCount(aabb->getVertexBuffer()->getVertexCount() / 3);

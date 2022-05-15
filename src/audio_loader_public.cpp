@@ -67,9 +67,9 @@ void AudioLoader::cacheAudio(const string & filePath, bool isCrucial)
 
 void AudioLoader::cacheAudios(const vector<string> & filePaths, bool isCrucial)
 {
-	vector<future<shared_ptr<Audio>>> threads;
-	vector<string> threadFilePaths;
-	vector<bool> threadStatuses;
+	vector<future<shared_ptr<Audio>>> threads = {};
+	vector<string> threadFilePaths = {};
+	vector<bool> threadStatuses = {};
 	int finishedThreadCount = 0;
 
 	const auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());

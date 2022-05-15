@@ -25,34 +25,32 @@ void ModelEditor::_load()
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 
 	_fe3d->model_setVisible(BOX_ID, false);
-	_fe3d->captor_create("@@captor");
-	_fe3d->captor_setPosition("@@captor", fvec3(0.0f, 0.5f, 0.0f));
-	_fe3d->captor_capture("@@captor");
+	_fe3d->captor_create(CAPTOR_ID);
+	_fe3d->captor_setPosition(CAPTOR_ID, CAPTOR_POSITION);
+	_fe3d->captor_capture(CAPTOR_ID);
 	_fe3d->model_setVisible(BOX_ID, true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);
 	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
+	_fe3d->graphics_setDirectionalLightingPosition(DIRECTIONAL_LIGHTING_POSITION);
+	_fe3d->graphics_setDirectionalLightingIntensity(DIRECTIONAL_LIGHTING_INTENSITY);
 	_fe3d->graphics_setBloomEnabled(true);
-	_fe3d->graphics_setBloomType(BloomType::PARTS);
-	_fe3d->graphics_setBloomIntensity(1.0f);
-	_fe3d->graphics_setBloomBlurCount(5);
-	_fe3d->graphics_setBloomQuality(5);
+	_fe3d->graphics_setBloomType(BLOOM_TYPE);
+	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);
+	_fe3d->graphics_setBloomBlurCount(BLOOM_BLUR_COUNT);
+	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
 	_fe3d->graphics_setShadowsEnabled(true);
-	_fe3d->graphics_setShadowLightness(0.25f);
-	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
+	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
-	_fe3d->graphics_setCubeReflectionQuality(1024);
-	_fe3d->graphics_setCubeRefractionQuality(1024);
-	_fe3d->graphics_setPlanarReflectionQuality(1024);
-	_fe3d->graphics_setPlanarRefractionQuality(1024);
+	_fe3d->graphics_setCubeReflectionQuality(CUBE_REFLECTION_QUALITY);
+	_fe3d->graphics_setCubeRefractionQuality(CUBE_REFRACTION_QUALITY);
+	_fe3d->graphics_setPlanarReflectionQuality(PLANAR_REFLECTION_QUALITY);
+	_fe3d->graphics_setPlanarRefractionQuality(PLANAR_REFRACTION_QUALITY);
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -61,8 +59,8 @@ void ModelEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField(AABB_TEXT_ID, fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(MODEL_TEXT_ID, MODEL_TEXT_POSITION, MODEL_TEXT_SIZE, "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(AABB_TEXT_ID, AABB_TEXT_POSITION, AABB_TEXT_SIZE, "", fvec3(1.0f), true);
 }
 
 void ModelEditor::_unload()
@@ -77,15 +75,13 @@ void ModelEditor::_unload()
 	_fe3d->model_delete(GRID_ID);
 	_fe3d->model_delete(BOX_ID);
 
-	_fe3d->captor_delete("@@captor");
+	_fe3d->captor_delete(CAPTOR_ID);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 	_fe3d->graphics_setBloomEnabled(false);
@@ -105,7 +101,7 @@ void ModelEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("modelId");
+	_gui->getOverlay()->deleteTextField(MODEL_TEXT_ID);
 	_gui->getOverlay()->deleteTextField(AABB_TEXT_ID);
 
 	_loadedModelIds.clear();

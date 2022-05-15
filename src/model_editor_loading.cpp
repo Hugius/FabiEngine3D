@@ -22,6 +22,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
@@ -29,8 +30,9 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 		return {};
 	}
 
-	vector<string> meshPaths;
-	string line;
+	vector<string> meshPaths = {};
+	string line = "";
+
 	while(getline(file, line))
 	{
 		string lineType;
@@ -78,6 +80,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
@@ -85,8 +88,9 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> imagePaths;
-	string line;
+	vector<string> imagePaths = {};
+	string line = "";
+
 	while(getline(file, line))
 	{
 		string lineType;
@@ -210,6 +214,7 @@ const bool ModelEditor::loadModelsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
@@ -217,7 +222,8 @@ const bool ModelEditor::loadModelsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
+
 	while(getline(file, line))
 	{
 		string lineType;

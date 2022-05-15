@@ -17,21 +17,18 @@ void DofRenderer::bind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getDofTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDofTextureBuffer()->getTboId());
 	}
 }
@@ -41,21 +38,18 @@ void DofRenderer::unbind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getDofTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -65,8 +59,6 @@ void DofRenderer::unbind()
 void DofRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 }

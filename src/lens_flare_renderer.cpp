@@ -19,21 +19,18 @@ void LensFlareRenderer::bind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getLensFlareTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getLensFlareTextureBuffer()->getTboId());
 	}
 }
@@ -43,21 +40,18 @@ void LensFlareRenderer::unbind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getLensFlareTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -67,8 +61,6 @@ void LensFlareRenderer::unbind()
 void LensFlareRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 }

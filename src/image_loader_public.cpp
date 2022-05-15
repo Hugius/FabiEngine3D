@@ -67,9 +67,9 @@ void ImageLoader::cacheImage(const string & filePath, bool isCrucial)
 
 void ImageLoader::cacheImages(const vector<string> & filePaths, bool isCrucial)
 {
-	vector<future<shared_ptr<Image>>> threads;
-	vector<string> threadFilePaths;
-	vector<bool> threadStatuses;
+	vector<future<shared_ptr<Image>>> threads = {};
+	vector<string> threadFilePaths = {};
+	vector<bool> threadStatuses = {};
 	int finishedThreadCount = 0;
 
 	const auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());

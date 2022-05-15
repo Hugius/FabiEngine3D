@@ -61,20 +61,16 @@ void ModelDepthRenderer::render(const shared_ptr<Model> model)
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-
 			glBindTexture(GL_TEXTURE_2D, model->getDiffuseTextureBuffer(partId)->getTboId());
 		}
 
 		glBindVertexArray(model->getVertexBuffer(partId)->getVaoId());
-
 		glDrawArrays(GL_TRIANGLES, 0, model->getVertexBuffer(partId)->getVertexCount());
-
 		glBindVertexArray(0);
 
 		if(model->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

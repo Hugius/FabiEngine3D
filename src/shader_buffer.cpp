@@ -56,7 +56,6 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	const auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
 	glShaderSource(vertexId, 1, &vertexCode, nullptr);
-
 	glCompileShader(vertexId);
 
 	int vertexStatus;
@@ -76,7 +75,6 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	}
 
 	glShaderSource(fragmentId, 1, &fragmentCode, nullptr);
-
 	glCompileShader(fragmentId);
 
 	int fragmentStatus;
@@ -99,7 +97,6 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 
 	glAttachShader(_programId, vertexId);
 	glAttachShader(_programId, fragmentId);
-
 	glLinkProgram(_programId);
 
 	int programStatus;

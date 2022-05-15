@@ -11,14 +11,12 @@ void BloomRenderer::bind()
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getBloomTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getBloomTextureBuffer()->getTboId());
 	}
 }
@@ -28,14 +26,12 @@ void BloomRenderer::unbind()
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getBloomTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -45,8 +41,6 @@ void BloomRenderer::unbind()
 void BloomRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 }

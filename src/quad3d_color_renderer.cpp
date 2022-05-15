@@ -80,34 +80,28 @@ void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, quad3d->getDiffuseTextureBuffer()->getTboId());
 	}
 
 	if(quad3d->getEmissionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, quad3d->getEmissionTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(quad3d->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, quad3d->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 
 	if(quad3d->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(quad3d->getEmissionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

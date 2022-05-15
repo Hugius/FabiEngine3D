@@ -79,6 +79,7 @@ void ModelEditor::_updateMiscellaneous()
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
+
 			_fe3d->model_setOpacity(_currentModelId, partId, (opacity + speed));
 		}
 	}
@@ -138,6 +139,7 @@ void ModelEditor::_updateModelCreating()
 		}
 
 		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
+
 		if(filePath.empty())
 		{
 			return;
@@ -151,6 +153,7 @@ void ModelEditor::_updateModelCreating()
 		}
 
 		const string finalFilePath = filePath.substr(rootPath.size());
+
 		_fe3d->misc_clearMeshCache(finalFilePath);
 
 		_fe3d->model_create(newModelId, finalFilePath);
@@ -158,12 +161,15 @@ void ModelEditor::_updateModelCreating()
 		if(_fe3d->model_isExisting(newModelId))
 		{
 			_currentModelId = newModelId;
+
 			_loadedModelIds.push_back(newModelId);
+
 			sort(_loadedModelIds.begin(), _loadedModelIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-			_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
-			_gui->getOverlay()->getTextField("modelId")->setVisible(true);
+
+			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setTextContent("Model: " + newModelId.substr(1));
+			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(true);
 		}
 	}
 }
@@ -205,8 +211,8 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + _currentModelId.substr(1));
-					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
+					_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setTextContent("Model: " + _currentModelId.substr(1));
+					_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(true);
 				}
 			}
 		}
@@ -231,6 +237,7 @@ void ModelEditor::_updateModelDeleting()
 			_fe3d->model_delete(_currentModelId);
 
 			_loadedModelIds.erase(remove(_loadedModelIds.begin(), _loadedModelIds.end(), _currentModelId), _loadedModelIds.end());
+
 			_currentModelId = "";
 
 		}
@@ -325,6 +332,7 @@ void ModelEditor::_updateAabbCreating()
 		_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+
 		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setTextContent("AABB: " + _currentAabbId);
 		_gui->getOverlay()->getTextField(AABB_TEXT_ID)->setVisible(true);
 	}
@@ -391,6 +399,7 @@ void ModelEditor::_updateAabbDeleting()
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
+
 			_currentAabbId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

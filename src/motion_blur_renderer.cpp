@@ -12,14 +12,12 @@ void MotionBlurRenderer::bind()
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 
 	if(_renderStorage->getMotionBlurTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurTextureBuffer()->getTboId());
 	}
 }
@@ -29,14 +27,12 @@ void MotionBlurRenderer::unbind()
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(_renderStorage->getMotionBlurTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -46,8 +42,6 @@ void MotionBlurRenderer::unbind()
 void MotionBlurRenderer::render(const shared_ptr<Quad2d> quad2d)
 {
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 }

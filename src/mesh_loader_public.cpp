@@ -67,9 +67,9 @@ void MeshLoader::cacheMesh(const string & filePath, bool isCrucial)
 
 void MeshLoader::cacheMeshes(const vector<string> & filePaths, bool isCrucial)
 {
-	vector<future<shared_ptr<Mesh>>> threads;
-	vector<string> threadFilePaths;
-	vector<bool> threadStatuses;
+	vector<future<shared_ptr<Mesh>>> threads = {};
+	vector<string> threadFilePaths = {};
+	vector<bool> threadStatuses = {};
 	int finishedThreadCount = 0;
 
 	const auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());

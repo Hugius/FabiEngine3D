@@ -45,7 +45,6 @@ void TerrainColorRenderer::bind()
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getTboId());
 	}
 
@@ -71,7 +70,6 @@ void TerrainColorRenderer::unbind()
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -171,132 +169,112 @@ void TerrainColorRenderer::render(const shared_ptr<Terrain> terrain)
 	if(terrain->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getDiffuseTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getNormalTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getBlendTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getBlendTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getRedDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getRedDiffuseTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getGreenDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getGreenDiffuseTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getBlueDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getBlueDiffuseTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getRedNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE7);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getRedNormalTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getGreenNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE8);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getGreenNormalTextureBuffer()->getTboId());
 	}
 
 	if(terrain->getBlueNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE9);
-
 		glBindTexture(GL_TEXTURE_2D, terrain->getBlueNormalTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(terrain->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, terrain->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 
 	if(terrain->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getBlendTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getRedDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getGreenDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getBlueDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getRedNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE7);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getGreenNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE8);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	if(terrain->getBlueNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE9);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

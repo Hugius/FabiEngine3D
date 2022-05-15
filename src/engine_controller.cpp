@@ -221,7 +221,7 @@ void EngineController::initialize()
 	}
 	else
 	{
-		vector<string> meshPaths;
+		vector<string> meshPaths = {};
 		meshPaths.push_back(meshDirectoryPath + "box.obj");
 		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
@@ -229,7 +229,7 @@ void EngineController::initialize()
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
 
-		vector<string> imagePaths;
+		vector<string> imagePaths = {};
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "color.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_default.tga");

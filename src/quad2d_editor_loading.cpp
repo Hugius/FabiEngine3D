@@ -28,7 +28,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths;
-	string line;
+	string line = "";
 	while(getline(file, line))
 	{
 		string quad2dId;
@@ -79,7 +79,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 	while(getline(file, line))
 	{
 		string quad2dId;

@@ -46,7 +46,7 @@ void Sound3dEditor::_load()
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 
-	_gui->getOverlay()->createTextField("sound3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("sound3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
 }
 
 void Sound3dEditor::_unload()

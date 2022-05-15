@@ -47,12 +47,8 @@ void TerrainDepthRenderer::render(const shared_ptr<Terrain> terrain)
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, terrain->getMaxClipPosition().z));
 
 	glEnable(GL_CULL_FACE);
-
 	glBindVertexArray(terrain->getVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, terrain->getVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
-
 	glDisable(GL_CULL_FACE);
 }

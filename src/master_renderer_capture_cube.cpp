@@ -78,15 +78,12 @@ void MasterRenderer::captureCubeReflections()
 			unsigned int textureId;
 
 			glGenTextures(1, &textureId);
-
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 			for(int index = 0; index < 6; index++)
@@ -165,17 +162,13 @@ void MasterRenderer::captureCubeReflections()
 				const auto data = new unsigned char[dataSize];
 
 				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getTboId());
-
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;
@@ -298,15 +291,12 @@ void MasterRenderer::captureCubeRefractions()
 			unsigned int textureId;
 
 			glGenTextures(1, &textureId);
-
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 			for(int index = 0; index < 6; index++)
@@ -385,17 +375,13 @@ void MasterRenderer::captureCubeRefractions()
 				const auto data = new unsigned char[dataSize];
 
 				glBindTexture(GL_TEXTURE_2D, _cubeRefractionCaptureBuffer->getTexture(0)->getTboId());
-
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeRefractionQuality(), _renderStorage->getCubeRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;

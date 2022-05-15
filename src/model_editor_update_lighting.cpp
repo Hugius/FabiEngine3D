@@ -207,7 +207,6 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isReflected")->setHoverable(isNoPartSelected);
 		screen->getButton("isRefracted")->setHoverable(isNoPartSelected);
 		screen->getButton("emissionIntensity")->setHoverable(isPartSelected);
-
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");

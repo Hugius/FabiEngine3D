@@ -47,8 +47,6 @@ void WaterDepthRenderer::render(const shared_ptr<Water> water)
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, water->getMaxClipPosition().z));
 
 	glBindVertexArray(water->getLowQualityVertexBuffer()->getVaoId());
-
 	glDrawArrays(GL_TRIANGLES, 0, water->getLowQualityVertexBuffer()->getVertexCount());
-
 	glBindVertexArray(0);
 }

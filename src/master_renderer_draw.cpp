@@ -12,7 +12,6 @@ using std::map;
 void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size)
 {
 	glViewport(0, 0, size.x, size.y);
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	_quad2dColorRenderer->bind();
@@ -53,7 +52,6 @@ void MasterRenderer::render3d()
 void MasterRenderer::render2d()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glViewport(Configuration::getInst().getDisplayPosition().x, Configuration::getInst().getDisplayPosition().y, Configuration::getInst().getDisplaySize().x, Configuration::getInst().getDisplaySize().y);
 
 	_renderFinalScene();

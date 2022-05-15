@@ -51,7 +51,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		const auto scriptFileId = fileName.substr(0, fileName.size() - 5);
 		_script->createScriptFile(scriptFileId);
 
-		string line;
+		string line = "";
 		int cursorLineIndex, cursorCharIndex;
 
 		getline(file, line);

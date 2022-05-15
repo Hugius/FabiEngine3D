@@ -93,12 +93,16 @@ void ModelEditor::_updateChoiceMenu()
 			if(!_currentPartId.empty())
 			{
 				_fe3d->model_setOpacity(_currentModelId, _currentPartId, _originalPartOpacity);
+
 				_currentPartId = "";
 			}
 
 			_fe3d->model_setVisible(_currentModelId, false);
-			_gui->getOverlay()->getTextField("modelId")->setVisible(false);
+
+			_gui->getOverlay()->getTextField(MODEL_TEXT_ID)->setVisible(false);
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
+
 			_currentModelId = "";
 
 			return;
@@ -108,12 +112,15 @@ void ModelEditor::_updateChoiceMenu()
 			if(_currentPartId.empty())
 			{
 				auto partIds = _fe3d->model_getPartIds(_currentModelId);
+
 				sort(partIds.begin(), partIds.end());
+
 				_gui->getOverlay()->openChoiceForm("selectPart", "Select Part", fvec2(-0.5f, 0.1f), partIds);
 			}
 			else
 			{
 				_fe3d->model_setOpacity(_currentModelId, _currentPartId, _originalPartOpacity);
+
 				_currentPartId = "";
 			}
 		}
@@ -135,7 +142,6 @@ void ModelEditor::_updateChoiceMenu()
 		}
 
 		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId));
-
 		screen->getButton("part")->setTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
 	}
 }

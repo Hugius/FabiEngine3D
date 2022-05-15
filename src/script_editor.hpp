@@ -40,7 +40,7 @@ private:
 	static inline const string SELECTION_ID = "@@selection";
 	static inline const string CARET_ID = "@@caret";
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
-	static inline const string CARET_CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_caret.tga";
+	static inline const string CURSOR_CARET_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_caret.tga";
 
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);

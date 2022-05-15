@@ -8,7 +8,7 @@
 void SkyEditor::_load()
 {
 	_fe3d->graphics_setMotionBlurEnabled(true);
-	_fe3d->graphics_setMotionBlurIntensity(0.5f);
+	_fe3d->graphics_setMotionBlurIntensity(MOTION_BLUR_INTENSITY);
 	_fe3d->graphics_setMotionBlurQuality(MOTION_BLUR_QUALITY);
 
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);

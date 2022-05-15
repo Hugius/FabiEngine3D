@@ -138,9 +138,6 @@ const bool Text3dEditor::loadText3dsFromFile()
 
 		if(_fe3d->text3d_isExisting(text3dId))
 		{
-			_loadedText3dIds.push_back(text3dId);
-			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
-
 			_fe3d->text3d_setVisible(text3dId, false);
 			_fe3d->text3d_setSize(text3dId, size);
 			_fe3d->text3d_setColor(text3dId, color);
@@ -164,6 +161,10 @@ const bool Text3dEditor::loadText3dsFromFile()
 				_fe3d->aabb_setParentId(text3dId, text3dId);
 				_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
 			}
+
+			_loadedText3dIds.push_back(text3dId);
+
+			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 		}
 	}
 

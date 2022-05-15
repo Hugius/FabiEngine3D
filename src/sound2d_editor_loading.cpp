@@ -20,6 +20,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
@@ -29,6 +30,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 
 	vector<string> audioPaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string sound2dId;
@@ -71,6 +73,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
@@ -79,6 +82,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string sound2dId, audioPath;

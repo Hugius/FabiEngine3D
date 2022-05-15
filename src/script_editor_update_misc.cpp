@@ -255,7 +255,7 @@ void ScriptEditor::_updateCursor()
 
 	if(Tools::isCursorInsideDisplay())
 	{
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CARET_CURSOR_TEXTURE_PATH);
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_CARET_TEXTURE_PATH);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)

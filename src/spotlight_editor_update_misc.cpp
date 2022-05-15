@@ -92,13 +92,15 @@ void SpotlightEditor::_updateSpotlightCreating()
 			return;
 		}
 
-		_currentSpotlightId = newSpotlightId;
-		_loadedSpotlightIds.push_back(newSpotlightId);
-		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
-
 		_fe3d->spotlight_create(newSpotlightId);
 		_fe3d->spotlight_setPosition(newSpotlightId, SPOTLIGHT_POSITION);
 		_fe3d->spotlight_setPitch(newSpotlightId, -90.0f);
+
+		_currentSpotlightId = newSpotlightId;
+
+		_loadedSpotlightIds.push_back(newSpotlightId);
+
+		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 
 		_fe3d->model_setVisible("@@spotlight", true);
 		_fe3d->model_setColor("@@spotlight", "", fvec3(1.0f));

@@ -20,6 +20,7 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound3d.fe3d` does not exist");
@@ -29,6 +30,7 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 
 	vector<string> audioPaths = {};
 	string line;
+
 	while(getline(file, line))
 	{
 		string sound3dId;
@@ -69,6 +71,7 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound3d.fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound3d.fe3d` does not exist");
@@ -77,6 +80,7 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string sound3dId;
@@ -105,14 +109,15 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 
 		if(_fe3d->sound3d_isExisting(sound3dId))
 		{
-			_loadedSound3dIds.push_back(sound3dId);
-			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
-
 			_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
 			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
 			_fe3d->sound3d_start(sound3dId, -1);
 			_fe3d->sound3d_pause(sound3dId, 0);
+
+			_loadedSound3dIds.push_back(sound3dId);
+
+			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
 		}
 	}
 

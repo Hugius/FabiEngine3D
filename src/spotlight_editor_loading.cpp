@@ -47,9 +47,6 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 			>> angle
 			>> distance;
 
-		_loadedSpotlightIds.push_back(spotlightId);
-		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
-
 		_fe3d->spotlight_create(spotlightId);
 		_fe3d->spotlight_setVisible(spotlightId, false);
 		_fe3d->spotlight_setPosition(spotlightId, SPOTLIGHT_POSITION);
@@ -58,6 +55,10 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 		_fe3d->spotlight_setIntensity(spotlightId, intensity);
 		_fe3d->spotlight_setAngle(spotlightId, angle);
 		_fe3d->spotlight_setDistance(spotlightId, distance);
+
+		_loadedSpotlightIds.push_back(spotlightId);
+
+		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 	}
 
 	file.close();

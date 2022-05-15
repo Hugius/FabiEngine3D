@@ -10,21 +10,21 @@ void Sound2dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->sound2d_isPaused(_currentSound2dId, 0))
 			{
-				_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\pause.tga");
+				_fe3d->quad3d_setDiffuseMap(STATUS_ID, STATUS_PAUSE_TEXTURE_PATH);
 			}
 			else
 			{
-				_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\start.tga");
+				_fe3d->quad3d_setDiffuseMap(STATUS_ID, STATUS_START_TEXTURE_PATH);
 			}
 		}
 		else
 		{
-			_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\stop.tga");
+			_fe3d->quad3d_setDiffuseMap(STATUS_ID, STATUS_STOP_TEXTURE_PATH);
 		}
 	}
 
-	_fe3d->quad3d_setVisible("@@status", _fe3d->sound2d_isExisting(_currentSound2dId));
-	_fe3d->quad3d_rotate("@@status", fvec3(0.0f, 0.5f, 0.0f));
+	_fe3d->quad3d_setVisible(STATUS_ID, _fe3d->sound2d_isExisting(_currentSound2dId));
+	_fe3d->quad3d_rotate(STATUS_ID, fvec3(0.0f, 0.5f, 0.0f));
 }
 
 void Sound2dEditor::_updateSound2dCreating()
@@ -101,12 +101,15 @@ void Sound2dEditor::_updateSound2dCreating()
 		if(_fe3d->sound2d_isExisting(newSound2dId))
 		{
 			_currentSound2dId = newSound2dId;
+
 			_loadedSound2dIds.push_back(newSound2dId);
+
 			sort(_loadedSound2dIds.begin(), _loadedSound2dIds.end());
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("sound2dId")->setTextContent("Sound2D: " + newSound2dId.substr(1));
-			_gui->getOverlay()->getTextField("sound2dId")->setVisible(true);
+
+			_gui->getOverlay()->getTextField(SOUND2D_TEXT_ID)->setTextContent("Sound2D: " + newSound2dId.substr(1));
+			_gui->getOverlay()->getTextField(SOUND2D_TEXT_ID)->setVisible(true);
 		}
 	}
 }
@@ -129,8 +132,8 @@ void Sound2dEditor::_updateSound2dChoosing()
 			{
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
 
-				_gui->getOverlay()->getTextField("sound2dId")->setTextContent("Sound2D: " + _currentSound2dId.substr(1));
-				_gui->getOverlay()->getTextField("sound2dId")->setVisible(true);
+				_gui->getOverlay()->getTextField(SOUND2D_TEXT_ID)->setTextContent("Sound2D: " + _currentSound2dId.substr(1));
+				_gui->getOverlay()->getTextField(SOUND2D_TEXT_ID)->setVisible(true);
 			}
 		}
 	}
@@ -145,6 +148,7 @@ void Sound2dEditor::_updateSound2dDeleting()
 			_fe3d->sound2d_delete(_currentSound2dId);
 
 			_loadedSound2dIds.erase(remove(_loadedSound2dIds.begin(), _loadedSound2dIds.end(), _currentSound2dId), _loadedSound2dIds.end());
+
 			_currentSound2dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")

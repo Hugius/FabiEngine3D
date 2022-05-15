@@ -162,9 +162,6 @@ const bool WaterEditor::loadWatersFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
-		_loadedWaterIds.push_back(waterId);
-		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
-
 		_fe3d->water_create(waterId);
 		_fe3d->water_setSize(waterId, size);
 		_fe3d->water_setSpecular(waterId, isSpecular);
@@ -209,6 +206,10 @@ const bool WaterEditor::loadWatersFromFile()
 
 			_fe3d->water_setHeightMap(waterId, heightMapPath);
 		}
+
+		_loadedWaterIds.push_back(waterId);
+
+		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
 	}
 
 	file.close();

@@ -290,9 +290,6 @@ const bool TerrainEditor::loadTerrainsFromFile()
 
 		if(_fe3d->terrain_isExisting(terrainId))
 		{
-			_loadedTerrainIds.push_back(terrainId);
-			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
-
 			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
 			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);
 			_fe3d->terrain_setLightness(terrainId, lightness);
@@ -393,6 +390,10 @@ const bool TerrainEditor::loadTerrainsFromFile()
 
 				_fe3d->terrain_setBlueDiffuseMap(terrainId, blueDiffuseMapPath);
 			}
+
+			_loadedTerrainIds.push_back(terrainId);
+
+			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 		}
 	}
 

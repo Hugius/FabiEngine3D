@@ -73,7 +73,9 @@ void Sound3dEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->sound3d_pause(_currentSound3dId, 0);
+
 			_fe3d->model_setVisible("@@sound3d", false);
+
 			_gui->getOverlay()->getTextField("sound3dId")->setVisible(false);
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuMain");

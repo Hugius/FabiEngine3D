@@ -114,9 +114,6 @@ const bool Text2dEditor::loadText2dsFromFile()
 
 		if(_fe3d->text2d_isExisting(text2dId))
 		{
-			_loadedText2dIds.push_back(text2dId);
-			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
-
 			_fe3d->text2d_setVisible(text2dId, false);
 			_fe3d->text2d_setPosition(text2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
@@ -124,6 +121,10 @@ const bool Text2dEditor::loadText2dsFromFile()
 			_fe3d->text2d_setOpacity(text2dId, opacity);
 			_fe3d->text2d_setHorizontallyFlipped(text2dId, isHorizontallyFlipped);
 			_fe3d->text2d_setVerticallyFlipped(text2dId, isVerticallyFlipped);
+
+			_loadedText2dIds.push_back(text2dId);
+
+			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 		}
 	}
 

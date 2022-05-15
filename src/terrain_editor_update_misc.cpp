@@ -129,7 +129,9 @@ void TerrainEditor::_updateTerrainCreating()
 			_fe3d->terrain_select(newTerrainId);
 
 			_currentTerrainId = newTerrainId;
+
 			_loadedTerrainIds.push_back(newTerrainId);
+
 			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");

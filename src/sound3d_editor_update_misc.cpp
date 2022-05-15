@@ -119,17 +119,20 @@ void Sound3dEditor::_updateSound3dCreating()
 
 		if(_fe3d->sound3d_isExisting(newSound3dId))
 		{
-			_currentSound3dId = newSound3dId;
-			_loadedSound3dIds.push_back(newSound3dId);
-			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
-
 			_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
 			_fe3d->sound3d_start(newSound3dId, -1);
+
+			_currentSound3dId = newSound3dId;
+
+			_loadedSound3dIds.push_back(newSound3dId);
+
+			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
 
 			_fe3d->model_setVisible("@@sound3d", true);
 			_fe3d->model_setColor("@@sound3d", "", fvec3(1.0f));
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
+
 			_gui->getOverlay()->getTextField("sound3dId")->setTextContent("Sound3d: " + newSound3dId.substr(1));
 			_gui->getOverlay()->getTextField("sound3dId")->setVisible(true);
 		}
@@ -147,6 +150,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 			if(!_hoveredSound3dId.empty())
 			{
 				_fe3d->sound3d_pause(_hoveredSound3dId, 0);
+
 				_fe3d->model_setVisible("@@sound3d", false);
 
 				_hoveredSound3dId = "";
@@ -159,6 +163,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 				_hoveredSound3dId = ("@" + selectedOptionId);
 
 				_fe3d->sound3d_resume(_hoveredSound3dId, 0);
+
 				_fe3d->model_setVisible("@@sound3d", true);
 			}
 
@@ -186,6 +191,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 		if(!_hoveredSound3dId.empty())
 		{
 			_fe3d->sound3d_pause(_hoveredSound3dId, 0);
+
 			_fe3d->model_setVisible("@@sound3d", false);
 
 			_hoveredSound3dId = "";
@@ -202,11 +208,13 @@ void Sound3dEditor::_updateSound3dDeleting()
 			_fe3d->sound3d_delete(_currentSound3dId);
 
 			_loadedSound3dIds.erase(remove(_loadedSound3dIds.begin(), _loadedSound3dIds.end(), _currentSound3dId), _loadedSound3dIds.end());
+
 			_currentSound3dId = "";
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->sound3d_pause(_currentSound3dId, 0);
+
 			_fe3d->model_setVisible("@@sound3d", false);
 
 			_currentSound3dId = "";

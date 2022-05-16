@@ -1,5 +1,7 @@
 #version 460 core
 
+#define GAMMA_VALUE 2.2f
+
 in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;
@@ -30,14 +32,14 @@ void main()
 		vec4 diffuseMapping = calculateDiffuseMapping();
 
 		diffuseMapping.rgb *= u_color;
-		diffuseMapping.rgb = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
+		diffuseMapping.rgb = pow(diffuseMapping.rgb, vec3(1.0f / GAMMA_VALUE));
 		diffuseMapping.a *= u_opacity;
 
 		o_finalColor = diffuseMapping;
 	}
 	else
 	{
-		vec3 color = pow(u_color, vec3(1.0f / 2.2f));
+		vec3 color = pow(u_color, vec3(1.0f / GAMMA_VALUE));
 
 		o_finalColor = vec4(color, u_opacity);
 	}
@@ -49,7 +51,7 @@ vec4 calculateDiffuseMapping()
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
-		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(GAMMA_VALUE));
 
 		return diffuseMapColor;
 	}

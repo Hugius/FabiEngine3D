@@ -4,6 +4,7 @@
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 #define SHADOW_BIAS 0.000001f
+#define GAMMA_VALUE 2.2f
 
 in vec4 f_clipSpacePos;
 in vec4 f_shadowSpacePos;
@@ -159,7 +160,7 @@ void main()
 	}
 
 	primaryColor = calculateFog(primaryColor);
-    primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
+    primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
 
 	o_primaryColor = vec4(primaryColor, u_opacity);
 	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
@@ -171,7 +172,7 @@ vec3 calculateDiffuseMapping()
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		
-		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(GAMMA_VALUE));
 
 		if(diffuseMapColor.a < u_minTextureAlpha)
 		{

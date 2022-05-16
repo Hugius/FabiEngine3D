@@ -1,5 +1,7 @@
 #version 460 core
 
+#define GAMMA_VALUE 2.2f
+
 in vec4 f_clipSpacePos;
 in vec3 f_worldSpacePos;
 in vec2 f_uv;
@@ -69,7 +71,7 @@ void main()
 	primaryColor += waterColor.rgb;
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
 
 	o_primaryColor = vec4(primaryColor, waterColor.a);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);

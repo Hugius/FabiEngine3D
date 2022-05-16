@@ -1,5 +1,7 @@
 #version 460 core
 
+#define GAMMA_VALUE 2.2f
+
 in vec2 f_uv;
 in vec3 f_worldSpacePos;
 
@@ -52,7 +54,7 @@ void main()
 	primaryColor *= u_lightness;
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = calculateFog(primaryColor);
-	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
 
 	o_primaryColor = vec4(primaryColor, u_opacity);
 	o_secondaryColor = vec4((((emissionMapping != vec3(0.0f)) || u_isBright) ? primaryColor : vec3(0.0f)), 1.0f);
@@ -64,7 +66,7 @@ vec3 calculateDiffuseMapping()
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
-		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(GAMMA_VALUE));
 
 		if(diffuseMapColor.a < u_minTextureAlpha)
 		{

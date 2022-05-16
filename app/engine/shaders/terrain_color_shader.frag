@@ -4,6 +4,7 @@
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 #define SHADOW_BIAS 0.000001f
+#define GAMMA_VALUE 2.2f
 
 in vec4 f_shadowSpacePos;
 in vec3 f_worldSpacePos;
@@ -125,7 +126,7 @@ void main()
 
 	primaryColor *= lighting;
 	primaryColor = calculateFog(primaryColor);
-	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
 
 	o_primaryColor = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
@@ -145,23 +146,23 @@ vec3 calculateDiffuseMapping()
 			float blendMultiplier = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 
 			diffuseMapColor = (texture(u_diffuseMap, f_uv).rgb * blendMultiplier);
-			diffuseMapColor = pow(diffuseMapColor, vec3(2.2f));
+			diffuseMapColor = pow(diffuseMapColor, vec3(GAMMA_VALUE));
 		}
 
 		vec3 rColor = (u_hasRedDiffuseMap ? (texture(u_redDiffuseMap, (blendUv * float(u_redTextureRepeat))).rgb * blendMapColor.r) : vec3(0.0f));
 		vec3 gColor = (u_hasGreenDiffuseMap ? (texture(u_greenDiffuseMap, (blendUv * float(u_greenTextureRepeat))).rgb * blendMapColor.g) : vec3(0.0f));
 		vec3 bColor = (u_hasBlueDiffuseMap ? (texture(u_blueDiffuseMap, (blendUv * float(u_blueTextureRepeat))).rgb * blendMapColor.b) : vec3(0.0f));
 
-		rColor = pow(rColor, vec3(2.2f));
-		gColor = pow(gColor, vec3(2.2f));
-		bColor = pow(bColor, vec3(2.2f));
+		rColor = pow(rColor, vec3(GAMMA_VALUE));
+		gColor = pow(gColor, vec3(GAMMA_VALUE));
+		bColor = pow(bColor, vec3(GAMMA_VALUE));
         
 		return (diffuseMapColor + rColor + gColor + bColor);
 	}
 	else if(u_hasDiffuseMap)
 	{
 		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
-		newColor = pow(newColor, vec3(2.2f));
+		newColor = pow(newColor, vec3(GAMMA_VALUE));
 
 		return newColor;
 	}

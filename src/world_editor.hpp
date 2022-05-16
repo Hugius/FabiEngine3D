@@ -229,6 +229,14 @@ private:
 	static inline constexpr float GRID_MIN_TEXTURE_ALPHA = 0.1f;
 	static inline constexpr float GRID_LIGHTNESS = 0.25f;
 	static inline constexpr float COLOR_FACTOR = 255.0f;
+	static inline constexpr float INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float SHADOW_LIGHTNESS_FACTOR = 100.0f;
+	static inline constexpr float FOG_THICKNESS_FACTOR = 100.0f;
+	static inline constexpr float LENS_FLARE_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float LENS_FLARE_SENSITIVITY_FACTOR = 100.0f;
+	static inline constexpr float SKY_EXPOSURE_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float SKY_EXPOSURE_SPEED_FACTOR = 10000.0f;
+	static inline constexpr float BLOOM_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float CAMERA_POSITION_SPEED_DIVIDER = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;

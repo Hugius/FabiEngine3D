@@ -29,11 +29,11 @@ void Quad3dEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionIntensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * EMISSION_INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
@@ -78,14 +78,14 @@ void Quad3dEditor::_updateLightingMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->quad3d_setLightness(_currentQuad3dId, (value / 100.0f));
+			_fe3d->quad3d_setLightness(_currentQuad3dId, (value / LIGHTNESS_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "emissionIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->quad3d_setEmissionIntensity(_currentQuad3dId, (value / 100.0f));
+			_fe3d->quad3d_setEmissionIntensity(_currentQuad3dId, (value / EMISSION_INTENSITY_FACTOR));
 		}
 
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");

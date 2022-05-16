@@ -26,24 +26,24 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			if(_currentPartId.empty())
 			{
-				_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 			else
 			{
-				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * OPACITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -112,21 +112,21 @@ void ModelEditor::_updateMiscellaneousMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3((value / 100.0f), size.y, size.z));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3((value / SIZE_FACTOR), size.y, size.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, (value / 100.0f), size.z));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, (value / SIZE_FACTOR), size.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, size.y, (value / 100.0f)));
+			_fe3d->model_setBaseSize(_currentModelId, fvec3(size.x, size.y, (value / SIZE_FACTOR)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -135,7 +135,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 			if(_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelId, _currentPartId, (value / 100.0f));
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, (value / OPACITY_FACTOR));
 			}
 			else
 			{
@@ -147,7 +147,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (value / 100.0f));
+			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (value / MIN_TEXTURE_ALPHA_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "levelOfDetailId") && _gui->getOverlay()->isValueFormConfirmed())
 		{

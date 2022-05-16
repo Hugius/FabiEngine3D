@@ -79,6 +79,13 @@ private:
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
 	static inline constexpr float POSITION_FACTOR = 100.0f;
 	static inline constexpr float SIZE_FACTOR = 100.0f;
+	static inline constexpr float SPECULAR_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float REFLECTIVITY_FACTOR = 100.0f;
+	static inline constexpr float REFRACTIVITY_FACTOR = 100.0f;
+	static inline constexpr float EMISSION_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float LIGHTNESS_FACTOR = 100.0f;
+	static inline constexpr float OPACITY_FACTOR = 100.0f;
+	static inline constexpr float MIN_TEXTURE_ALPHA_FACTOR = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;
 	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;

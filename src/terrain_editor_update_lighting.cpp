@@ -33,17 +33,17 @@ void TerrainEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * SPECULAR_INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "specularShininess") && _gui->getOverlay()->isValueFormConfirmed())
@@ -58,14 +58,14 @@ void TerrainEditor::_updateLightingMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setSpecularIntensity(_currentTerrainId, (value / 100.0f));
+			_fe3d->terrain_setSpecularIntensity(_currentTerrainId, (value / SPECULAR_INTENSITY_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setLightness(_currentTerrainId, (value / 100.0f));
+			_fe3d->terrain_setLightness(_currentTerrainId, (value / LIGHTNESS_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{

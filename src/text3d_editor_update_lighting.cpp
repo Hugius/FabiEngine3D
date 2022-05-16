@@ -28,7 +28,7 @@ void Text3dEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
@@ -73,7 +73,7 @@ void Text3dEditor::_updateLightingMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->text3d_setLightness(_currentText3dId, (value / 100.0f));
+			_fe3d->text3d_setLightness(_currentText3dId, (value / LIGHTNESS_FACTOR));
 		}
 
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");

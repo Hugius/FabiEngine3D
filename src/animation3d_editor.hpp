@@ -69,8 +69,8 @@ private:
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 3.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
-	static inline constexpr float SPEED_FACTOR = 1000.0f;
-	static inline constexpr float ROTATION_ORIGIN_FACTOR = 1000.0f;
+	static inline constexpr float SPEED_FACTOR = 100.0f;
+	static inline constexpr float ROTATION_ORIGIN_FACTOR = 100.0f;
 	static inline constexpr float MOVEMENT_FACTOR = 100.0f;
 	static inline constexpr float ROTATION_FACTOR = 1.0f;
 	static inline constexpr float SCALING_FACTOR = 100.0f;

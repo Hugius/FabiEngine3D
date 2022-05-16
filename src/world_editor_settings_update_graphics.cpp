@@ -60,7 +60,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * SHADOW_LIGHTNESS_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
@@ -125,7 +125,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setShadowLightness(value / 100.0f);
+			_fe3d->graphics_setShadowLightness(value / SHADOW_LIGHTNESS_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -377,7 +377,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("thickness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("thickness", "Thickness", (thickness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("thickness", "Thickness", (thickness * FOG_THICKNESS_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -405,7 +405,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setFogThickness(value / 100.0f);
+			_fe3d->graphics_setFogThickness(value / FOG_THICKNESS_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -490,11 +490,11 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * LENS_FLARE_INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sensitivity", "Sensitivity", (sensitivity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sensitivity", "Sensitivity", (sensitivity * LENS_FLARE_SENSITIVITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
@@ -502,14 +502,14 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setLensFlareIntensity(value / 100.0f);
+			_fe3d->graphics_setLensFlareIntensity(value / LENS_FLARE_INTENSITY_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sensitivity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setLensFlareSensitivity(value / 100.0f);
+			_fe3d->graphics_setLensFlareSensitivity(value / LENS_FLARE_SENSITIVITY_FACTOR);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -538,11 +538,11 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * SKY_EXPOSURE_INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("speed", "Speed", (speed * 10000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("speed", "Speed", (speed * SKY_EXPOSURE_SPEED_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
@@ -550,14 +550,14 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setSkyExposureIntensity(value / 100.0f);
+			_fe3d->graphics_setSkyExposureIntensity(value / SKY_EXPOSURE_INTENSITY_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "speed") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setSkyExposureSpeed(value / 100.0f);
+			_fe3d->graphics_setSkyExposureSpeed(value / SKY_EXPOSURE_SPEED_FACTOR);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -606,7 +606,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * BLOOM_INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blurCount")->isHovered())
 		{
@@ -622,7 +622,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setBloomIntensity(value / 100.0f);
+			_fe3d->graphics_setBloomIntensity(value / BLOOM_INTENSITY_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "blurCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{

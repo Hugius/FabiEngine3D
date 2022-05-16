@@ -34,8 +34,9 @@ private:
 	static inline const fvec2 TEXT2D_TITLE_POSITION = fvec2(0.0f, 0.85f);
 	static inline const fvec2 TEXT2D_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
-	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float CAMERA_YAW = 270.0f;
+	static inline constexpr float COLOR_FACTOR = 255.0f;
+	static inline constexpr float OPACITY_FACTOR = 100.0f;
 
 	vector<string> _loadedText2dIds = {};
 

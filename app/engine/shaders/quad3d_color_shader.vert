@@ -28,8 +28,8 @@ out vec2 f_uv;
 void main()
 {
     vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
-	vec4 viewSpacePosition  = (u_cameraView * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
+	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
     f_worldSpacePos = worldSpacePosition.xyz;
 	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);

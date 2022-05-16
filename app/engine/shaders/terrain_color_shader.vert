@@ -27,7 +27,7 @@ out vec2 f_uv;
 out vec3 f_normal;
 out mat3 f_tbn;
 
-mat3 calculateTBN();
+mat3 calculateTbn();
 
 void main()
 {
@@ -39,7 +39,7 @@ void main()
 	f_shadowSpacePos = (u_shadowProjection * u_shadowView * worldSpacePosition);
 	f_uv = (v_uv * float(u_textureRepeat));
 	f_normal = normalize(v_normal);
-	f_tbn = calculateTBN();
+	f_tbn = calculateTbn();
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
@@ -50,7 +50,7 @@ void main()
 	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
 }
 
-mat3 calculateTBN()
+mat3 calculateTbn()
 {
     if(u_hasNormalMap)
     {

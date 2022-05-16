@@ -22,27 +22,27 @@ void main()
 	float luminosityMM = dot(LUMINOSITY_VECTOR, texture(u_sceneMap, f_uv).rgb);
 
 	vec2 direction;
+
 	direction.x = -((luminosityTL + luminosityTR) - (luminosityBL + luminosityBR));
 	direction.y =  ((luminosityTL + luminosityBL) - (luminosityTR + luminosityBR));
 	
 	float directionAdder = max((luminosityTL + luminosityTR + luminosityBL + luminosityBR) * LUMINOSITY_MULTIPLIER, MIN_DIRECTION_ADDER);
-
 	float directionMultiplier = (1.0f / (min(abs(direction.x), abs(direction.y)) + directionAdder));
 	
 	direction = (clamp((direction * directionMultiplier), -MAX_DIRECTION_TEXELS, MAX_DIRECTION_TEXELS) * texelSize);
 
 	vec3 closeBlur = vec3(0.0f);
+
 	closeBlur += (texture(u_sceneMap, f_uv + (direction * vec2((1.0f / 3.0f) - 0.5f))).rgb * 0.5f);
 	closeBlur += (texture(u_sceneMap, f_uv + (direction * vec2((2.0f / 3.0f) - 0.5f))).rgb * 0.5f);
 
 	vec3 farBlur = (closeBlur * 0.5f);
+
 	farBlur += (texture(u_sceneMap, f_uv + (direction * vec2(-0.5f))).rgb * 0.25f);
 	farBlur += (texture(u_sceneMap, f_uv + (direction * vec2(0.5f))).rgb * 0.25f);
 
 	float minLuminosity = min(luminosityMM, min(min(luminosityTL, luminosityTR), min(luminosityBL, luminosityBR)));
-
 	float maxLuminosity = max(luminosityMM, max(max(luminosityTL, luminosityTR), max(luminosityBL, luminosityBR)));
-
 	float blurLuminosity = dot(LUMINOSITY_VECTOR, farBlur);
 	
 	if((blurLuminosity < minLuminosity) || (blurLuminosity > maxLuminosity))

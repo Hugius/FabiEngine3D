@@ -16,12 +16,10 @@ uniform float u_height;
 
 void main()
 {
-	vec3 newPosition = v_position;
-	newPosition.y = u_height;
-
-	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
+	vec3 position = vec3(v_position.x, u_height, v_position.z);
+	vec4 worldSpacePosition = vec4(position, 1.0f);
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
+	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

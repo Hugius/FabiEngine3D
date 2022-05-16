@@ -49,6 +49,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 vec4 calculateWaterColor();
 vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateFog(vec3 color);
+
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float convertDepthToPerspective(float depth);
 
@@ -63,8 +64,8 @@ void main()
 	}
 
 	vec4 waterColor = calculateWaterColor();
-
 	vec3 primaryColor = vec3(0.0f);
+
 	primaryColor += waterColor.rgb;
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
@@ -77,6 +78,7 @@ void main()
 vec4 calculateWaterColor()
 {
 	vec2 ndc = (f_clipSpacePos.xy / f_clipSpacePos.w);
+
 	ndc /= 2.0f;
 	ndc += 0.5f;
 
@@ -84,6 +86,7 @@ vec4 calculateWaterColor()
 	vec2 reflectionUv = vec2(ndc.x, -ndc.y);
 	vec2 refractionUv = vec2(ndc.x, ndc.y);
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
+
 	float opacity = 1.0f;
 
 	if(u_isEdged)
@@ -99,10 +102,12 @@ vec4 calculateWaterColor()
 	if(u_hasDudvMap)
 	{
 		vec2 distortedMapUv = texture(u_dudvMap, (defaultUv + u_rippleOffset)).rg;
+
 		distortedMapUv *= 0.1f;
 		defaultUv += distortedMapUv;
 
 		vec2 distortedNdcUv = texture(u_dudvMap, defaultUv).rg;
+
 		distortedNdcUv *= 2.0f;
 		distortedNdcUv -= 1.0f;
 		distortedNdcUv *= 0.025f;
@@ -119,15 +124,18 @@ vec4 calculateWaterColor()
 	if(u_hasNormalMap)
 	{
 		vec3 normalMapColor = texture(u_normalMap, defaultUv).rgb;
+
 		normal = vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f));
 		normal = normalize(normal);
 	}
 
 	vec3 finalColor;
+
 	if(u_isReflectionsEnabled && u_hasReflectionMap && u_isReflective)
 	{
 		vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
 		vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+
 		float fresnelMixValue = dot(viewDirection, normal);
 
 		finalColor = mix(reflectionColor, (reflectionColor * 0.05f), fresnelMixValue);
@@ -158,12 +166,13 @@ vec3 calculateDirectionalLighting(vec3 normal)
 		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
 		vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
 		vec3 reflectDirection = reflect(normalize(lightDirection), normal);
+
 		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess);
+
 		specular *= u_directionalLightingIntensity;
 		specular *= u_specularIntensity;
-		vec3 result = vec3(specular);
-		result *= u_directionalLightingColor;
-		return result;
+
+		return (specular * u_directionalLightingColor);
 	}
 	else
 	{
@@ -175,12 +184,13 @@ float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
     if(u_isSpecular)
     {
-        vec3 lightDirection   = normalize(lightPosition - f_worldSpacePos);
-        vec3 viewDirection    = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 lightDirection = normalize(lightPosition - f_worldSpacePos);
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
-        return (result * u_specularIntensity);
+        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+        return (lighting * u_specularIntensity);
     }
     else
     {
@@ -210,5 +220,6 @@ vec3 calculateFog(vec3 color)
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
+
     return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

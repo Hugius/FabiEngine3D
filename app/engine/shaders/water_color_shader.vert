@@ -40,7 +40,7 @@ void main()
 
 	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
+	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
 	f_clipSpacePos = clipSpacePosition;
 	f_worldSpacePos = worldSpacePosition.xyz;

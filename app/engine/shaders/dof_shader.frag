@@ -33,10 +33,8 @@ void main()
 
 	float currentDepth = texture(u_depthMap, f_uv).r;
     float middleDepth = texture(u_depthMap, vec2(0.5f)).r;
-
     float currentFragmentDistance = convertDepthToPerspective(currentDepth);
     float middleFragmentDistance = convertDepthToPerspective(middleDepth);
-
     float middleSmoothingDistance = (u_dofDynamicDistance * MIDDLE_SMOOTHING_MULTIPLIER);
     float fragmentSmoothingDistance = (u_dofBlurDistance * FRAGMENT_SMOOTHING_MULTIPLIER);
 
@@ -45,7 +43,6 @@ void main()
     if(isCloseToFragment || !u_isDofDynamic)
     {
         float blurMixValue = (currentFragmentDistance - (u_dofBlurDistance - fragmentSmoothingDistance)) / fragmentSmoothingDistance;
-
         float distanceMixValue = ((u_dofDynamicDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
 
         blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 
@@ -69,5 +66,6 @@ void main()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
+
     return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

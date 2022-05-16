@@ -44,16 +44,14 @@ void main()
 
 	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 emissionMapping = calculateEmissionMapping();
-
 	vec3 primaryColor = vec3(0.0f);
+
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
-	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = calculateFog(primaryColor);
-
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	o_primaryColor = vec4(primaryColor, u_opacity);
@@ -65,6 +63,7 @@ vec3 calculateDiffuseMapping()
 	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		if(diffuseMapColor.a < u_minTextureAlpha)
@@ -104,7 +103,6 @@ vec3 calculateFog(vec3 color)
 	if(u_isFogEnabled)
 	{
         float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
-
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float mixValue = (distancePart * u_fogThickness);

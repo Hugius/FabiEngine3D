@@ -28,9 +28,10 @@ void main()
 	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapping = calculateDiffuseMapping();
+
 		diffuseMapping.rgb *= u_color;
-		diffuseMapping.rgb  = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
-		diffuseMapping.a   *= u_opacity;
+		diffuseMapping.rgb = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
+		diffuseMapping.a *= u_opacity;
 
 		o_finalColor = diffuseMapping;
 	}
@@ -47,6 +48,7 @@ vec4 calculateDiffuseMapping()
 	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		return diffuseMapColor;

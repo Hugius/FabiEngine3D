@@ -46,9 +46,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("targetTransformationX", "X", (targetTransformation.x * transformationMultiplier), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("targetTransformationY", "Y", (targetTransformation.y * transformationMultiplier), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("targetTransformationZ", "Z", (targetTransformation.z * transformationMultiplier), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationX", "X", (targetTransformation.x * transformationMultiplier), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationY", "Y", (targetTransformation.y * transformationMultiplier), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("targetTransformationZ", "Z", (targetTransformation.z * transformationMultiplier), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
@@ -79,9 +79,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("speedX", "X", (speed.x * SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("speedY", "Y", (speed.y * SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("speedZ", "Z", (speed.z * SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("speedX", "X", (speed.x * SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("speedY", "Y", (speed.y * SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("speedZ", "Z", (speed.z * SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
@@ -108,9 +108,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rotationOriginX", "X", (rotationOrigin.x * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("rotationOriginY", "Y", (rotationOrigin.y * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("rotationOriginZ", "Z", (rotationOrigin.z * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationOriginX", "X", (rotationOrigin.x * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationOriginY", "Y", (rotationOrigin.y * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationOriginZ", "Z", (rotationOrigin.z * ROTATION_ORIGIN_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "targetTransformationX") && _gui->getOverlay()->isValueFormConfirmed())

@@ -32,19 +32,19 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("size", "Size", size, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("size", "Size", size, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("positionX", "X", position.x, VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionY", "Y", position.y, VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionZ", "Z", position.z, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionX", "X", position.x, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("positionY", "Y", position.y, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("positionZ", "Z", position.z, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lookat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lookatX", "X", lookat.x, VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("lookatY", "Y", lookat.y, VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lookatX", "X", lookat.x, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("lookatY", "Y", lookat.y, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraX")->isHovered())
 		{
@@ -60,15 +60,15 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * SHADOW_LIGHTNESS_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * SHADOW_LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("interval", "Interval", interval, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("interval", "Interval", interval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())
@@ -168,19 +168,19 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeInterval")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeQuality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("planarHeight", "Planar Height", planarHeight, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("planarHeight", "Planar Height", planarHeight, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarQuality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "cubeQuality") && _gui->getOverlay()->isValueFormConfirmed())
@@ -233,19 +233,19 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeInterval")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeQuality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("planarHeight", "Planar Height", planarHeight, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("planarHeight", "Planar Height", planarHeight, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarQuality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "cubeInterval") && _gui->getOverlay()->isValueFormConfirmed())
@@ -307,15 +307,15 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("dynamicDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("dynamicDistance", "Dynamic Distance", dynamicDistance, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("dynamicDistance", "Dynamic Distance", dynamicDistance, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blurDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("blurDistance", "Blur Distance", blurDistance, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("blurDistance", "Blur Distance", blurDistance, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "dynamicDistance") && _gui->getOverlay()->isValueFormConfirmed())
@@ -369,21 +369,21 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minDistance", "Min Distance", minDistance, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("minDistance", "Min Distance", minDistance, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("maxDistance", "Max Distance", maxDistance, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxDistance", "Max Distance", maxDistance, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("thickness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("thickness", "Thickness", (thickness * FOG_THICKNESS_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("thickness", "Thickness", (thickness * FOG_THICKNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "minDistance") && _gui->getOverlay()->isValueFormConfirmed())
@@ -490,11 +490,11 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * LENS_FLARE_INTENSITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * LENS_FLARE_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sensitivity", "Sensitivity", (sensitivity * LENS_FLARE_SENSITIVITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sensitivity", "Sensitivity", (sensitivity * LENS_FLARE_SENSITIVITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
@@ -538,11 +538,11 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * SKY_EXPOSURE_INTENSITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * SKY_EXPOSURE_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("speed", "Speed", (speed * SKY_EXPOSURE_SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("speed", "Speed", (speed * SKY_EXPOSURE_SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
@@ -606,15 +606,15 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * BLOOM_INTENSITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * BLOOM_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blurCount")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("blurCount", "Blur Count", blurCount, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("blurCount", "Blur Count", blurCount, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())

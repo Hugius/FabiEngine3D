@@ -14,7 +14,7 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createAnimation2d", "Create Animation2D", "", VALUE_FORM_POSITION, 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createAnimation2d", "Create Animation2D", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -96,15 +96,15 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rowCount", "Row Count", to_string(rowCount), VALUE_FORM_POSITION, 2, false, true, false);
+			_gui->getOverlay()->openValueForm("rowCount", "Row Count", to_string(rowCount), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("columnCount")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("columnCount", "Column Count", to_string(columnCount), VALUE_FORM_POSITION, 2, false, true, false);
+			_gui->getOverlay()->openValueForm("columnCount", "Column Count", to_string(columnCount), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("interval", "Interval", to_string(interval), VALUE_FORM_POSITION, 3, false, true, false);
+			_gui->getOverlay()->openValueForm("interval", "Interval", to_string(interval), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{

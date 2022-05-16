@@ -32,7 +32,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", CENTER_CHOICE_FORM_POSITION, 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{

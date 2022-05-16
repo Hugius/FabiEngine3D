@@ -45,9 +45,9 @@ void WorldEditor::_updateCaptorMenu()
 			{
 				_fe3d->captor_setPosition(LENS_ID, fvec3(0.0f));
 
-				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
-				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
-				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
+				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())

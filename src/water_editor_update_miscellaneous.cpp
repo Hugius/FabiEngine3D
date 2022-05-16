@@ -21,25 +21,25 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("size", "Size", size, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("size", "Size", size, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("waveHeight")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("waveHeight", "Wave Height", (waveHeight * WAVE_HEIGHT_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("waveHeight", "Wave Height", (waveHeight * WAVE_HEIGHT_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxDepth")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("maxDepth", "Max Depth", maxDepth, VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxDepth", "Max Depth", maxDepth, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rippleSpeed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rippleSpeedX", "X", (rippleSpeed.x * RIPPLE_SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("rippleSpeedY", "Y", (rippleSpeed.y * RIPPLE_SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rippleSpeedX", "X", (rippleSpeed.x * RIPPLE_SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("rippleSpeedY", "Y", (rippleSpeed.y * RIPPLE_SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("waveSpeed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("waveSpeedX", "X", (waveSpeed.x * WAVE_SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
-			_gui->getOverlay()->openValueForm("waveSpeedY", "Y", (waveSpeed.y * WAVE_SPEED_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("waveSpeedX", "X", (waveSpeed.x * WAVE_SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("waveSpeedY", "Y", (waveSpeed.y * WAVE_SPEED_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())

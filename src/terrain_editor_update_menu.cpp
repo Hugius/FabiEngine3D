@@ -13,7 +13,7 @@ void TerrainEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createTerrain", "Create Terrain", "", VALUE_FORM_POSITION, 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createTerrain", "Create Terrain", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{

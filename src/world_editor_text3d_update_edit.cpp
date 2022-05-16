@@ -93,7 +93,7 @@ void WorldEditor::_updateText3dEditing()
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("content")->isHovered())
 			{
-				_gui->getOverlay()->openValueForm("content", "Content", "", VALUE_FORM_POSITION, 10, true, true, true);
+				_gui->getOverlay()->openValueForm("content", "Content", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 			{

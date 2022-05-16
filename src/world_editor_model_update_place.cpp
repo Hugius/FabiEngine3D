@@ -33,9 +33,9 @@ void WorldEditor::_updateModelPlacing()
 
 				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
 
-				_loadedModelIds.insert({newId, _currentTemplateModelId});
-
 				_fe3d->model_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
+
+				_loadedModelIds.insert({newId, _currentTemplateModelId});
 
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 
@@ -75,25 +75,28 @@ void WorldEditor::_updateModelPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
+
 				_currentTemplateModelId = "";
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + MODEL_TERRAIN_OFFSET);
+
 			_fe3d->model_setVisible(_currentTemplateModelId, true);
 			_fe3d->model_setBasePosition(_currentTemplateModelId, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
-				_loadedModelIds.insert({newId, _currentTemplateModelId});
 
 				_fe3d->model_setBasePosition(newId, newPosition);
+
+				_loadedModelIds.insert({newId, _currentTemplateModelId});
 			}
 		}
 	}

@@ -104,13 +104,13 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto & spotlightId : _loadedSpotlightIds)
+	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
 	{
-		_fe3d->spotlight_delete(spotlightId);
+		_fe3d->spotlight_delete(placedSpotlightId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@spotlight_" + spotlightId);
+			_fe3d->model_delete("@@spotlight_" + placedSpotlightId);
 		}
 	}
 
@@ -142,6 +142,7 @@ void WorldEditor::clearLoadedWorld()
 	_loadedSpotlightIds.clear();
 	_loadedCaptorIds.clear();
 	_loadedSound3dIds.clear();
+
 	_loadedWorldId = "";
 	_idCounter = 0;
 }
@@ -153,7 +154,7 @@ const string & WorldEditor::getLoadedWorldId() const
 
 const vector<string> WorldEditor::_getWorldIds() const
 {
-	vector<string> worldIds;
+	vector<string> worldIds = {};
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

@@ -4,56 +4,56 @@ void WorldEditor::_selectModel(const string & modelId)
 {
 	_selectedModelId = modelId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Model: " + _selectedModelId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Model: " + _selectedModelId);
 }
 
 void WorldEditor::_selectQuad3d(const string & quad3dId)
 {
 	_selectedQuad3dId = quad3dId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Quad3D: " + _selectedQuad3dId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Quad3D: " + _selectedQuad3dId);
 }
 
 void WorldEditor::_selectText3d(const string & text3dId)
 {
 	_selectedText3dId = text3dId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Text3D: " + _selectedText3dId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Text3D: " + _selectedText3dId);
 }
 
 void WorldEditor::_selectAabb(const string & aabbId)
 {
 	_selectedAabbId = aabbId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected AABB: " + _selectedAabbId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected AABB: " + _selectedAabbId);
 }
 
 void WorldEditor::_selectPointlight(const string & pointlightId)
 {
 	_selectedPointlightId = pointlightId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Pointlight: " + _selectedPointlightId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Pointlight: " + _selectedPointlightId);
 }
 
 void WorldEditor::_selectSpotlight(const string & spotlightId)
 {
 	_selectedSpotlightId = spotlightId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Spotlight: " + _selectedSpotlightId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Spotlight: " + _selectedSpotlightId);
 }
 
 void WorldEditor::_selectCaptor(const string & captorId)
 {
 	_selectedCaptorId = captorId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Captor: " + _selectedCaptorId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Captor: " + _selectedCaptorId);
 }
 
 void WorldEditor::_selectSound3d(const string & sound3dId)
 {
 	_selectedSound3dId = sound3dId;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Sound3D: " + _selectedSound3dId);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setTextContent("Selected Sound3D: " + _selectedSound3dId);
 }
 
 void WorldEditor::_deselectModel(const string & modelId)

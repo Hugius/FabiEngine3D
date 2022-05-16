@@ -16,13 +16,11 @@ void Animation3dEditor::_load()
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
 	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
-
 	_fe3d->model_setVisible(BOX_ID, false);
 	_fe3d->captor_create(CAPTOR_ID);
 	_fe3d->captor_setPosition(CAPTOR_ID, CAPTOR_POSITION);
 	_fe3d->captor_capture(CAPTOR_ID);
 	_fe3d->model_setVisible(BOX_ID, true);
-
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
@@ -44,7 +42,6 @@ void Animation3dEditor::_load()
 	_fe3d->graphics_setCubeRefractionQuality(CUBE_REFRACTION_QUALITY);
 	_fe3d->graphics_setPlanarReflectionQuality(PLANAR_REFLECTION_QUALITY);
 	_fe3d->graphics_setPlanarRefractionQuality(PLANAR_REFRACTION_QUALITY);
-
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setThirdPersonEnabled(true);
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
@@ -66,9 +63,7 @@ void Animation3dEditor::_unload()
 
 	_fe3d->model_delete(GRID_ID);
 	_fe3d->model_delete(BOX_ID);
-
 	_fe3d->captor_delete(CAPTOR_ID);
-
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
@@ -90,7 +85,6 @@ void Animation3dEditor::_unload()
 	_fe3d->graphics_setCubeRefractionQuality(0);
 	_fe3d->graphics_setPlanarReflectionQuality(0);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
-
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField(ANIMATION3D_TITLE_ID);

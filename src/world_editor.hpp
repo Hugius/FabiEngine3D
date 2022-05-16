@@ -81,6 +81,7 @@ private:
 	void _updatePointlightPlacing();
 	void _updatePointlightEditing();
 	void _updateSpotlightMenu();
+	void _updateSpotlightPlacingMenu();
 	void _updateSpotlightChoosingMenu();
 	void _updateSpotlightPlacing();
 	void _updateSpotlightEditing();
@@ -154,33 +155,35 @@ private:
 	static inline const string GRID_ID = "@@grid";
 	static inline const string GRID_MESH_PATH = "engine\\assets\\mesh\\plane.obj";
 	static inline const string GRID_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\grid.tga";
-	static inline const string POINTLIGHT_MODEL_ID = "@@template_pointlight";
-	static inline const string SPOTLIGHT_MODEL_ID = "@@template_spotlight";
-	static inline const string CAPTOR_MODEL_ID = "@@template_captor";
-	static inline const string SOUND3D_MODEL_ID = "@@template_sound3d";
-	static inline const string POINTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
-	static inline const string SPOTLIGHT_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
-	static inline const string CAPTOR_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
-	static inline const string SOUND3D_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
-	static inline const string CURSOR_POINTING_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
+	static inline const string LAMP_ID = "@@lamp";
+	static inline const string LAMP_MESH_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string TORCH_ID = "@@torch";
+	static inline const string TORCH_MESH_PATH = "engine\\assets\\mesh\\torch.obj";
+	static inline const string LENS_ID = "@@lens";
+	static inline const string LENS_MESH_PATH = "engine\\assets\\mesh\\lens.obj";
+	static inline const string SPEAKER_ID = "@@speaker";
+	static inline const string SPEAKER_MESH_PATH = "engine\\assets\\mesh\\speaker.obj";
+	static inline const string ACTIVE_TITLE_ID = "active_title";
+	static inline const string SELECTED_TITLE_ID = "selected_title";
+	static inline const string CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
 
 	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 TEXT3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 AABB_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
-	static inline const fvec3 POINTLIGHT_MODEL_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 POINTLIGHT_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
-	static inline const fvec3 SPOTLIGHT_MODEL_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
-	static inline const fvec3 SPOTLIGHT_MODEL_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 SPOTLIGHT_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
 	static inline const fvec3 CAPTOR_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-	static inline const fvec3 CAPTOR_MODEL_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 CAPTOR_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-	static inline const fvec3 SOUND3D_MODEL_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 SOUND3D_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
+	static inline const fvec3 LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
+	static inline const fvec3 TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
+	static inline const fvec3 TORCH_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 TORCH_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
+	static inline const fvec3 LENS_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 LENS_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 SPEAKER_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 
 	static inline constexpr float MODEL_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;
@@ -226,6 +229,7 @@ private:
 	static inline constexpr float GRID_MIN_TEXTURE_ALPHA = 0.1f;
 	static inline constexpr float GRID_LIGHTNESS = 0.25f;
 	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float EDITOR_SPEED_MOVEMENT_MULTIPLIER = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 
@@ -234,9 +238,9 @@ private:
 	unordered_map<string, string> _loadedText3dIds = {};
 	unordered_map<string, string> _loadedAabbIds = {};
 	unordered_map<string, string> _loadedPointlightIds = {};
+	unordered_map<string, string> _loadedSpotlightIds = {};
 	unordered_map<string, string> _loadedSound3dIds = {};
 
-	vector<string> _loadedSpotlightIds = {};
 	vector<string> _loadedCaptorIds = {};
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
@@ -260,6 +264,7 @@ private:
 	string _currentTemplateText3dId = "";
 	string _currentTemplateAabbId = "";
 	string _currentTemplatePointlightId = "";
+	string _currentTemplateSpotlightId = "";
 	string _currentTemplateSound3dId = "";
 	string _selectedModelId = "";
 	string _selectedQuad3dId = "";
@@ -290,7 +295,6 @@ private:
 	bool _dontResetSelectedSpotlight = false;
 	bool _dontResetSelectedCaptor = false;
 	bool _dontResetSelectedSound3d = false;
-	bool _isPlacingSpotlight = false;
 	bool _isPlacingCaptor = false;
 	bool _isGridModeEnabled = true;
 	bool _isWireframeModeEnabled = false;

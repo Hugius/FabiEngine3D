@@ -196,7 +196,8 @@ void Duplicator::copyTemplateModel(const string & newId, const string & template
 
 	for(const auto & templateAabbId : _fe3d->model_getChildAabbIds(templateId))
 	{
-		const string newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
+		const auto newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
+
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setVisible(newAabbId, false);
 		_fe3d->aabb_setParentId(newAabbId, newId);

@@ -13,8 +13,8 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			if(!_currentTemplatePointlightId.empty())
 			{
-				_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, false);
 				_fe3d->pointlight_setVisible(_currentTemplatePointlightId, false);
+				_fe3d->model_setVisible(LAMP_ID, false);
 
 				_currentTemplatePointlightId = "";
 			}
@@ -30,7 +30,6 @@ void WorldEditor::_updatePointlightMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->deleteOptions();
 
 			for(auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
@@ -70,11 +69,14 @@ void WorldEditor::_updatePointlightPlacingMenu()
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
-				_deactivatePointlight();
+				_deactivateSound3d();
 
 				_currentTemplatePointlightId = hoveredOptionId;
-				_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, true);
+
 				_fe3d->pointlight_setVisible(_currentTemplatePointlightId, true);
+				_fe3d->model_setVisible(LAMP_ID, true);
+				_fe3d->model_setColor(LAMP_ID, "", _fe3d->pointlight_getColor(_currentTemplatePointlightId));
+
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
@@ -119,7 +121,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
-				_deactivatePointlight();
+				_deactivateSound3d();
 
 				_activatePointlight(hoveredOptionId);
 			}

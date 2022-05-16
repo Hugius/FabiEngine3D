@@ -14,6 +14,7 @@ void WorldEditor::_updateText3dMenu()
 			if(!_currentTemplateText3dId.empty())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
+
 				_currentTemplateText3dId = "";
 			}
 
@@ -28,7 +29,6 @@ void WorldEditor::_updateText3dMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->deleteOptions();
 
 			for(auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
@@ -71,12 +71,15 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_deactivateSound3d();
 
 				_currentTemplateText3dId = hoveredOptionId;
+
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, true);
+
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
 					_fe3d->text3d_setPosition(_currentTemplateText3dId, fvec3(0.0f));
+
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

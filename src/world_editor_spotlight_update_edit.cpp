@@ -8,7 +8,7 @@ void WorldEditor::_updateSpotlightEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -24,13 +24,13 @@ void WorldEditor::_updateSpotlightEditing()
 			_dontResetSelectedSpotlight = false;
 		}
 
-		for(const auto & spotlightId : _loadedSpotlightIds)
+		for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@spotlight_" + spotlightId));
+			const auto isHovered = (hoveredAabbId == ("@@spotlight_" + placedSpotlightId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectSpotlight(spotlightId);
+				_selectSpotlight(placedSpotlightId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -40,13 +40,13 @@ void WorldEditor::_updateSpotlightEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
-				if((spotlightId != _selectedSpotlightId) && (spotlightId != _activeSpotlightId))
+				if((placedSpotlightId != _selectedSpotlightId) && (placedSpotlightId != _activeSpotlightId))
 				{
-					_deselectSpotlight(spotlightId);
+					_deselectSpotlight(placedSpotlightId);
 				}
 			}
 		}
@@ -59,8 +59,9 @@ void WorldEditor::_updateSpotlightEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSpotlightId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeSpotlightId = "";
 						window->setActiveScreen("empty");
+
+						_activeSpotlightId = "";
 					}
 				}
 			}
@@ -72,74 +73,36 @@ void WorldEditor::_updateSpotlightEditing()
 
 			window->setActiveScreen("spotlightPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
+			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				screen->getButton("position")->setHoverable(false);
-				screen->getButton("color")->setHoverable(true);
-			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
-			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("color")->setHoverable(false);
-			}
-			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
-			{
-				_fe3d->model_delete(("@@spotlight_" + _activeSpotlightId));
 				_fe3d->spotlight_delete(_activeSpotlightId);
-				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _activeSpotlightId), _loadedSpotlightIds.end());
-				_activeSpotlightId = "";
+				_fe3d->model_delete(("@@spotlight_" + _activeSpotlightId));
+
 				window->setActiveScreen("empty");
+
+				_loadedSpotlightIds.erase(_activeSpotlightId);
+
+				_activeSpotlightId = "";
 
 				return;
 			}
 
 			auto position = _fe3d->spotlight_getPosition(_activeSpotlightId);
-			auto color = _fe3d->spotlight_getColor(_activeSpotlightId);
 			auto yaw = _fe3d->spotlight_getYaw(_activeSpotlightId);
 			auto pitch = _fe3d->spotlight_getPitch(_activeSpotlightId);
-			auto intensity = _fe3d->spotlight_getIntensity(_activeSpotlightId);
-			auto angle = _fe3d->spotlight_getAngle(_activeSpotlightId);
-			auto distance = _fe3d->spotlight_getDistance(_activeSpotlightId);
 
-			if(!screen->getButton("position")->isHoverable())
-			{
-				window->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				window->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				window->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
-
-				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-			}
-			else if(!screen->getButton("color")->isHoverable())
-			{
-				window->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("R");
-				window->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
-				window->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
-
-				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
-			}
-
+			_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+			_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+			_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 			_handleInputBox("spotlightPropertiesMenu", "yawMinus", "yaw", "yawPlus", yaw, SPOTLIGHT_YAW_SPEED);
 			_handleInputBox("spotlightPropertiesMenu", "pitchMinus", "pitch", "pitchPlus", pitch, SPOTLIGHT_PITCH_SPEED);
-			_handleInputBox("spotlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, SPOTLIGHT_INTENSITY_SPEED, SPOTLIGHT_INTENSITY_MULTIPLIER, 0.0f);
-			_handleInputBox("spotlightPropertiesMenu", "angleMinus", "angle", "anglePlus", angle, SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
-			_handleInputBox("spotlightPropertiesMenu", "distanceMinus", "distance", "distancePlus", distance, (_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
 
 			_fe3d->spotlight_setPosition(_activeSpotlightId, position);
-			_fe3d->spotlight_setColor(_activeSpotlightId, color);
 			_fe3d->spotlight_setYaw(_activeSpotlightId, yaw);
 			_fe3d->spotlight_setPitch(_activeSpotlightId, pitch);
-			_fe3d->spotlight_setIntensity(_activeSpotlightId, intensity);
-			_fe3d->spotlight_setAngle(_activeSpotlightId, angle);
-			_fe3d->spotlight_setDistance(_activeSpotlightId, distance);
-
 			_fe3d->model_setBasePosition(("@@spotlight_" + _activeSpotlightId), position);
 			_fe3d->model_setBaseRotation(("@@spotlight_" + _activeSpotlightId), fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation("@@spotlight_" + _activeSpotlightId).z));
 			_fe3d->model_setBaseRotation(("@@spotlight_" + _activeSpotlightId), fvec3(0.0f, _fe3d->model_getBaseRotation("@@spotlight_" + _activeSpotlightId).y, pitch));
-			_fe3d->model_setColor(("@@spotlight_" + _activeSpotlightId), "", color);
 		}
 	}
 }

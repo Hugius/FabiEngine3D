@@ -13,12 +13,12 @@ void WorldEditor::_updateSound3dMenu()
 		{
 			if(!_currentTemplateSound3dId.empty())
 			{
-				_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
-
 				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				}
+
+				_fe3d->model_setVisible(SPEAKER_ID, false);
 
 				_currentTemplateSound3dId = "";
 			}
@@ -34,7 +34,6 @@ void WorldEditor::_updateSound3dMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3dChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("placedSound3ds")->deleteOptions();
 
 			for(auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
@@ -77,13 +76,16 @@ void WorldEditor::_updateSound3dPlacingMenu()
 				_deactivateSound3d();
 
 				_currentTemplateSound3dId = hoveredOptionId;
-				_fe3d->model_setVisible(SOUND3D_MODEL_ID, true);
+
 				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
+				_fe3d->model_setVisible(SPEAKER_ID, true);
+
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
 					_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(0.0f));
+
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

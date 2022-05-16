@@ -10,24 +10,20 @@ void ScriptEditor::_load()
 	_fe3d->quad3d_create(SELECTION_ID, true);
 	_fe3d->quad3d_setVisible(SELECTION_ID, false);
 	_fe3d->quad3d_setColor(SELECTION_ID, SELECTION_COLOR);
-
 	_fe3d->text3d_create(CARET_ID, FONT_MAP_PATH, true);
 	_fe3d->text3d_setVisible(CARET_ID, false);
 	_fe3d->text3d_setContent(CARET_ID, "|");
 	_fe3d->text3d_setSize(CARET_ID, CARET_SIZE);
 	_fe3d->text3d_setMinTextureAlpha(CARET_ID, CARET_MIN_TEXTURE_ALPHA);
-
 	_fe3d->graphics_setBloomEnabled(true);
 	_fe3d->graphics_setBloomType(BLOOM_TYPE);
 	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);
 	_fe3d->graphics_setBloomBlurCount(BLOOM_BLUR_COUNT);
 	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
-
 	_fe3d->camera_setFov(CAMERA_FOV);
 	_fe3d->camera_setYaw(CAMERA_YAW);
 	_fe3d->camera_setPitch(CAMERA_PITCH);
 	_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
-
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 }
 
@@ -49,17 +45,13 @@ void ScriptEditor::_unload()
 	}
 
 	_fe3d->quad3d_delete(SELECTION_ID);
-
 	_fe3d->text3d_delete(CARET_ID);
-
 	_fe3d->graphics_setBloomEnabled(false);
 	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
 	_fe3d->graphics_setBloomIntensity(0.0f);
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomQuality(0);
-
 	_fe3d->camera_reset();
-
 	_fe3d->raycast_setAabbIntersectionEnabled(false);
 
 	_script->clear();

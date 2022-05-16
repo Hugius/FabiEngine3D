@@ -32,9 +32,10 @@ void WorldEditor::_updateAabbPlacing()
 				_idCounter++;
 
 				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
-				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 
 				_fe3d->aabb_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
+
+				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
 
@@ -74,25 +75,28 @@ void WorldEditor::_updateAabbPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+
 				_currentTemplateAabbId = "";
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + AABB_TERRAIN_OFFSET);
+
 			_fe3d->aabb_setVisible(_currentTemplateAabbId, true);
 			_fe3d->aabb_setBasePosition(_currentTemplateAabbId, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
-				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 
 				_fe3d->aabb_setBasePosition(newId, newPosition);
+
+				_loadedAabbIds.insert({newId, _currentTemplateAabbId});
 			}
 		}
 	}

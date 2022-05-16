@@ -223,8 +223,8 @@ void EngineController::initialize()
 	{
 		vector<string> meshPaths = {};
 		meshPaths.push_back(meshDirectoryPath + "box.obj");
-		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
+		meshPaths.push_back(meshDirectoryPath + "lens.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
@@ -285,7 +285,7 @@ void EngineController::update()
 	else
 	{
 		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorId(), Tools::convertToNdc(Tools::getCursorPosition()));
-		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_DEFAULT_TEXTURE_PATH);
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
 		_guiManager->updateOverlay();

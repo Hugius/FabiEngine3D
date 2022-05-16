@@ -8,7 +8,7 @@ void WorldEditor::_updatePointlightEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -32,8 +32,6 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				_selectPointlight(placedPointlightId);
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
-
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
 					if(_selectedPointlightId != _activePointlightId)
@@ -42,7 +40,7 @@ void WorldEditor::_updatePointlightEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -77,42 +75,25 @@ void WorldEditor::_updatePointlightEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@pointlight_" + _activePointlightId);
 				_fe3d->pointlight_delete(_activePointlightId);
-				_loadedPointlightIds.erase(_activePointlightId);
-				_activePointlightId = "";
+				_fe3d->model_delete("@@pointlight_" + _activePointlightId);
+
 				window->setActiveScreen("empty");
+
+				_loadedPointlightIds.erase(_activePointlightId);
+
+				_activePointlightId = "";
 
 				return;
 			}
 
 			auto position = _fe3d->pointlight_getPosition(_activePointlightId);
-			auto radius = _fe3d->pointlight_getRadius(_activePointlightId);
 
-			if(!screen->getButton("position")->isHoverable())
-			{
-				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
-
-				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-			}
-			else if(!screen->getButton("radius")->isHoverable())
-			{
-				window->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
-				window->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
-
-				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER));
-				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER));
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER));
-			}
+			_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+			_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+			_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 
 			_fe3d->pointlight_setPosition(_activePointlightId, position);
-			_fe3d->pointlight_setRadius(_activePointlightId, radius);
-
 			_fe3d->model_setBasePosition(("@@pointlight_" + _activePointlightId), position);
 		}
 	}

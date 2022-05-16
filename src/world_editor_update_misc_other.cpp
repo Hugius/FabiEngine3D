@@ -32,32 +32,32 @@ void WorldEditor::_updateCamera()
 		{
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_A))
 			{
-				_fe3d->camera_followRightXZ(-_editorSpeed / 100.0f);
+				_fe3d->camera_followRightXZ(-_editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER);
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_D))
 			{
-				_fe3d->camera_followRightXZ(_editorSpeed / 100.0f);
+				_fe3d->camera_followRightXZ(_editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER);
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR))
 			{
-				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / 75.0f, 0.0f));
+				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER, 0.0f));
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
 			{
-				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
+				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER), 0.0f));
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_W))
 			{
-				_fe3d->camera_followFrontXZ(_editorSpeed / 100.0f);
+				_fe3d->camera_followFrontXZ(_editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER);
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_S))
 			{
-				_fe3d->camera_followFrontXZ(-_editorSpeed / 100.0f);
+				_fe3d->camera_followFrontXZ(-_editorSpeed / EDITOR_SPEED_MOVEMENT_MULTIPLIER);
 			}
 		}
 	}
@@ -175,10 +175,10 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activeCaptorId.empty() ||
 						   !_activeSound3dId.empty());
 
-	_gui->getOverlay()->getTextField("selectedId")->setVisible(isSelected);
-	_gui->getOverlay()->getTextField("activeId")->setVisible(isActive);
-	_gui->getOverlay()->getTextField("selectedId")->setPosition(fvec2(0.0f, (isActive ? 0.75f : 0.85f)));
-	_gui->getOverlay()->getTextField("activeId")->setPosition(fvec2(0.0f, 0.85f));
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(isSelected);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setVisible(isActive);
+	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setPosition(fvec2(0.0f, (isActive ? 0.75f : 0.85f)));
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setPosition(fvec2(0.0f, 0.85f));
 }
 
 void WorldEditor::_updateWorldCreating()

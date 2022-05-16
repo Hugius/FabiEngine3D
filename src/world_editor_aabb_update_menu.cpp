@@ -14,6 +14,7 @@ void WorldEditor::_updateAabbMenu()
 			if(!_currentTemplateAabbId.empty())
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+
 				_currentTemplateAabbId = "";
 			}
 
@@ -28,7 +29,6 @@ void WorldEditor::_updateAabbMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuAabbChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->deleteOptions();
 
 			for(auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
@@ -71,12 +71,15 @@ void WorldEditor::_updateAabbPlacingMenu()
 				_deactivateSound3d();
 
 				_currentTemplateAabbId = hoveredOptionId;
+
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, true);
+
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
 					_fe3d->aabb_setBasePosition(_currentTemplateAabbId, fvec3(0.0f));
+
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

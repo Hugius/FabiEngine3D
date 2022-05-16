@@ -22,12 +22,14 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
 	auto file = ifstream(filePath);
+
 	if(!file)
 	{
 		return false;
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string lineType;
@@ -90,65 +92,65 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "SKY")
 		{
-			string skyId;
-			string templateId;
+			string placedSkyId;
+			string templateSkyId;
 
 			iss
-				>> skyId
-				>> templateId;
+				>> placedSkyId
+				>> templateSkyId;
 
-			if(!_fe3d->sky_isExisting(templateId))
+			if(!_fe3d->sky_isExisting(templateSkyId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSky(skyId, templateId);
+			_duplicator->copyTemplateSky(placedSkyId, templateSkyId);
 
-			_fe3d->sky_select(skyId);
+			_fe3d->sky_select(placedSkyId);
 		}
 		else if(lineType == "TERRAIN")
 		{
-			string terrainId;
-			string templateId;
+			string placedTerrainId;
+			string templateTerrainId;
 
 			iss
-				>> terrainId
-				>> templateId;
+				>> placedTerrainId
+				>> templateTerrainId;
 
-			if(!_fe3d->terrain_isExisting(templateId))
+			if(!_fe3d->terrain_isExisting(templateTerrainId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateTerrain(terrainId, templateId);
+			_duplicator->copyTemplateTerrain(placedTerrainId, templateTerrainId);
 
-			_fe3d->terrain_select(terrainId);
+			_fe3d->terrain_select(placedTerrainId);
 		}
 		else if(lineType == "WATER")
 		{
-			string waterId;
-			string templateId;
+			string placedWaterId;
+			string templateWaterId;
 			float height;
 
 			iss
-				>> waterId
-				>> templateId
+				>> placedWaterId
+				>> templateWaterId
 				>> height;
 
-			if(!_fe3d->water_isExisting(templateId))
+			if(!_fe3d->water_isExisting(templateWaterId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateWater(waterId, templateId);
+			_duplicator->copyTemplateWater(placedWaterId, templateWaterId);
 
-			_fe3d->water_setHeight(waterId, height);
-			_fe3d->water_select(waterId);
+			_fe3d->water_setHeight(placedWaterId, height);
+			_fe3d->water_select(placedWaterId);
 		}
 		else if(lineType == "MODEL")
 		{
-			string modelId;
-			string templateId;
+			string placedModelId;
+			string templateModelId;
 			string animation3dId;
 			fvec3 position;
 			fvec3 rotation;
@@ -156,8 +158,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			bool isFrozen;
 
 			iss
-				>> modelId
-				>> templateId
+				>> placedModelId
+				>> templateModelId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -174,37 +176,37 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			replace(animation3dId.begin(), animation3dId.end(), '?', ' ');
 
-			if(!_fe3d->model_isExisting(templateId))
+			if(!_fe3d->model_isExisting(templateModelId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateModel(modelId, templateId);
+			_duplicator->copyTemplateModel(placedModelId, templateModelId);
 
-			_loadedModelIds.insert({modelId, templateId});
+			_loadedModelIds.insert({placedModelId, templateModelId});
 
-			_fe3d->model_setBasePosition(modelId, position);
-			_fe3d->model_setBaseRotation(modelId, rotation);
-			_fe3d->model_setBaseSize(modelId, size);
-			_fe3d->model_setFrozen(modelId, isFrozen);
+			_fe3d->model_setBasePosition(placedModelId, position);
+			_fe3d->model_setBaseRotation(placedModelId, rotation);
+			_fe3d->model_setBaseSize(placedModelId, size);
+			_fe3d->model_setFrozen(placedModelId, isFrozen);
 
 			if(_fe3d->animation3d_isExisting(animation3dId))
 			{
-				_fe3d->model_startAnimation(modelId, animation3dId, -1);
+				_fe3d->model_startAnimation(placedModelId, animation3dId, -1);
 			}
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string quad3dId;
-			string templateId;
+			string placedQuad3dId;
+			string templateQuad3dId;
 			string animation2dId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec2 size;
 
 			iss
-				>> quad3dId
-				>> templateId
+				>> placedQuad3dId
+				>> templateQuad3dId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -219,36 +221,36 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			replace(animation2dId.begin(), animation2dId.end(), '?', ' ');
 
-			if(!_fe3d->quad3d_isExisting(templateId))
+			if(!_fe3d->quad3d_isExisting(templateQuad3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateQuad3d(quad3dId, templateId);
+			_duplicator->copyTemplateQuad3d(placedQuad3dId, templateQuad3dId);
 
-			_loadedQuad3dIds.insert({quad3dId, templateId});
+			_loadedQuad3dIds.insert({placedQuad3dId, templateQuad3dId});
 
-			_fe3d->quad3d_setPosition(quad3dId, position);
-			_fe3d->quad3d_setRotation(quad3dId, rotation);
-			_fe3d->quad3d_setSize(quad3dId, size);
+			_fe3d->quad3d_setPosition(placedQuad3dId, position);
+			_fe3d->quad3d_setRotation(placedQuad3dId, rotation);
+			_fe3d->quad3d_setSize(placedQuad3dId, size);
 
 			if(_fe3d->animation2d_isExisting(animation2dId))
 			{
-				_fe3d->quad3d_startAnimation(quad3dId, animation2dId, -1);
+				_fe3d->quad3d_startAnimation(placedQuad3dId, animation2dId, -1);
 			}
 		}
 		else if(lineType == "TEXT3D")
 		{
-			string text3dId;
-			string templateId;
+			string placedText3dId;
+			string templateText3dId;
 			string content;
 			fvec3 position;
 			fvec3 rotation;
 			fvec2 size;
 
 			iss
-				>> text3dId
-				>> templateId
+				>> placedText3dId
+				>> templateText3dId
 				>> content
 				>> position.x
 				>> position.y
@@ -259,30 +261,30 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.x
 				>> size.y;
 
-			if(!_fe3d->text3d_isExisting(templateId))
+			if(!_fe3d->text3d_isExisting(templateText3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateText3d(text3dId, templateId);
+			_duplicator->copyTemplateText3d(placedText3dId, templateText3dId);
 
-			_loadedText3dIds.insert({text3dId, templateId});
+			_loadedText3dIds.insert({placedText3dId, templateText3dId});
 
-			_fe3d->text3d_setContent(text3dId, content);
-			_fe3d->text3d_setPosition(text3dId, position);
-			_fe3d->text3d_setRotation(text3dId, rotation);
-			_fe3d->text3d_setSize(text3dId, size);
+			_fe3d->text3d_setContent(placedText3dId, content);
+			_fe3d->text3d_setPosition(placedText3dId, position);
+			_fe3d->text3d_setRotation(placedText3dId, rotation);
+			_fe3d->text3d_setSize(placedText3dId, size);
 		}
 		else if(lineType == "AABB")
 		{
-			string aabbId;
-			string templateId;
+			string placedAabbId;
+			string templateAabbId;
 			fvec3 position;
 			fvec3 size;
 
 			iss
-				>> aabbId
-				>> templateId
+				>> placedAabbId
+				>> templateAabbId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -290,204 +292,196 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.y
 				>> size.z;
 
-			if(!_fe3d->aabb_isExisting(templateId))
+			if(!_fe3d->aabb_isExisting(templateAabbId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateAabb(aabbId, templateId);
+			_duplicator->copyTemplateAabb(placedAabbId, templateAabbId);
 
-			_loadedAabbIds.insert({aabbId, templateId});
+			_loadedAabbIds.insert({placedAabbId, templateAabbId});
 
-			_fe3d->aabb_setBasePosition(aabbId, position);
-			_fe3d->aabb_setBaseSize(aabbId, size);
+			_fe3d->aabb_setBasePosition(placedAabbId, position);
+			_fe3d->aabb_setBaseSize(placedAabbId, size);
 		}
 		else if(lineType == "POINTLIGHT")
 		{
-			string pointlightId;
-			string templateId;
+			string placedPointlightId;
+			string templatePointlightId;
 			fvec3 position;
-			fvec3 radius;
 
 			iss
-				>> pointlightId
-				>> templateId
+				>> placedPointlightId
+				>> templatePointlightId
 				>> position.x
 				>> position.y
-				>> position.z
-				>> radius.x
-				>> radius.y
-				>> radius.z;
+				>> position.z;
 
-			_duplicator->copyTemplatePointlight(pointlightId, templateId);
+			if(!_fe3d->pointlight_isExisting(templatePointlightId))
+			{
+				continue;
+			}
 
-			_loadedPointlightIds.insert({pointlightId, templateId});
+			_duplicator->copyTemplatePointlight(placedPointlightId, templatePointlightId);
 
-			_fe3d->pointlight_setPosition(pointlightId, position);
-			_fe3d->pointlight_setRadius(pointlightId, radius);
+			_fe3d->pointlight_setPosition(placedPointlightId, position);
+
+			_loadedPointlightIds.insert({placedPointlightId, templatePointlightId});
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@pointlight_" + pointlightId);
+				const auto newModelId = ("@@pointlight_" + placedPointlightId);
 
-				_fe3d->model_create(newModelId, POINTLIGHT_MODEL_PATH);
+				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, POINTLIGHT_MODEL_SIZE);
-				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(pointlightId));
+				_fe3d->model_setBaseSize(newModelId, LAMP_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
+				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(placedPointlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, POINTLIGHT_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, LAMP_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 		else if(lineType == "SPOTLIGHT")
 		{
-			string spotlightId;
+			string placedSpotlightId;
+			string templateSpotlightId;
 			fvec3 position;
-			fvec3 color;
 			float yaw;
 			float pitch;
-			float intensity;
-			float angle;
-			float distance;
 
 			iss
-				>> spotlightId
+				>> placedSpotlightId
+				>> templateSpotlightId
 				>> position.x
 				>> position.y
 				>> position.z
-				>> color.r
-				>> color.g
-				>> color.b
 				>> yaw
-				>> pitch
-				>> intensity
-				>> angle
-				>> distance;
+				>> pitch;
 
-			_fe3d->spotlight_create(spotlightId);
-			_fe3d->spotlight_setPosition(spotlightId, position);
-			_fe3d->spotlight_setColor(spotlightId, color);
-			_fe3d->spotlight_setYaw(spotlightId, yaw);
-			_fe3d->spotlight_setPitch(spotlightId, pitch);
-			_fe3d->spotlight_setIntensity(spotlightId, intensity);
-			_fe3d->spotlight_setAngle(spotlightId, angle);
-			_fe3d->spotlight_setDistance(spotlightId, distance);
+			if(!_fe3d->spotlight_isExisting(templateSpotlightId))
+			{
+				continue;
+			}
 
-			_loadedSpotlightIds.push_back(spotlightId);
+			_fe3d->spotlight_create(placedSpotlightId);
+			_fe3d->spotlight_setPosition(placedSpotlightId, position);
+			_fe3d->spotlight_setYaw(placedSpotlightId, yaw);
+			_fe3d->spotlight_setPitch(placedSpotlightId, pitch);
+
+			_loadedSpotlightIds.insert({placedSpotlightId, templateSpotlightId});
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@spotlight_" + spotlightId);
+				const auto newModelId = ("@@spotlight_" + placedSpotlightId);
 
-				_fe3d->model_create(newModelId, SPOTLIGHT_MODEL_PATH);
+				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, -yaw, pitch));
-				_fe3d->model_setBaseSize(newModelId, SPOTLIGHT_MODEL_SIZE);
-				_fe3d->model_setColor(newModelId, "", color);
+				_fe3d->model_setBaseSize(newModelId, TORCH_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
+				_fe3d->model_setColor(newModelId, "", _fe3d->spotlight_getColor(placedSpotlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, SPOTLIGHT_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, TORCH_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 		else if(lineType == "CAPTOR")
 		{
-			string captorId, exceptionId;
+			string placedCaptorId;
+			string exceptionId;
 			fvec3 position;
 
 			iss
-				>> captorId
+				>> placedCaptorId
 				>> position.x
 				>> position.y
 				>> position.z
 				>> exceptionId;
 
-			_fe3d->captor_create(captorId);
-			_fe3d->captor_setPosition(captorId, position);
-			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
-			_fe3d->captor_capture(captorId);
+			_fe3d->captor_create(placedCaptorId);
+			_fe3d->captor_setPosition(placedCaptorId, position);
+			_fe3d->captor_setExceptionId(placedCaptorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
+			_fe3d->captor_capture(placedCaptorId);
 
-			_loadedCaptorIds.push_back(captorId);
+			_loadedCaptorIds.push_back(placedCaptorId);
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@captor_" + captorId);
+				const auto newModelId = ("@@captor_" + placedCaptorId);
 
-				_fe3d->model_create(newModelId, CAPTOR_MODEL_PATH);
+				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, CAPTOR_MODEL_SIZE);
+				_fe3d->model_setBaseSize(newModelId, LENS_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, CAPTOR_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 		else if(lineType == "SOUND3D")
 		{
-			string sound3dId;
-			string templateId;
+			string placedSound3dId;
+			string templateSound3dId;
 			fvec3 position;
-			float maxVolume;
-			float maxDistance;
 
 			iss
-				>> sound3dId
-				>> templateId
+				>> placedSound3dId
+				>> templateSound3dId
 				>> position.x
 				>> position.y
-				>> position.z
-				>> maxVolume
-				>> maxDistance;
+				>> position.z;
 
-			if(!_fe3d->sound3d_isExisting(templateId))
+			if(!_fe3d->sound3d_isExisting(templateSound3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSound3d(sound3dId, templateId);
+			_duplicator->copyTemplateSound3d(placedSound3dId, templateSound3dId);
 
-			_loadedSound3dIds.insert({sound3dId, templateId});
+			_fe3d->sound3d_setPosition(placedSound3dId, position);
+			_fe3d->sound3d_start(placedSound3dId, -1);
 
-			_fe3d->sound3d_setPosition(sound3dId, position);
-			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
-			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
-			_fe3d->sound3d_start(sound3dId, -1);
+			_loadedSound3dIds.insert({placedSound3dId, templateSound3dId});
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@sound3d_" + sound3dId);
+				const auto newModelId = ("@@sound3d_" + placedSound3dId);
 
-				_fe3d->model_create(newModelId, SOUND3D_MODEL_PATH);
+				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, SOUND3D_MODEL_SIZE);
+				_fe3d->model_setBaseSize(newModelId, SPEAKER_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, SOUND3D_AABB_SIZE);
+				_fe3d->aabb_setLocalSize(newModelId, SPEAKER_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

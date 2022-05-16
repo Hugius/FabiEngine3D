@@ -8,7 +8,7 @@ void WorldEditor::_updateSound3dEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -32,8 +32,6 @@ void WorldEditor::_updateSound3dEditing()
 			{
 				_selectSound3d(placedSound3dId);
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
-
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
 					if(_selectedSound3dId != _activeSound3dId)
@@ -42,7 +40,7 @@ void WorldEditor::_updateSound3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -61,8 +59,9 @@ void WorldEditor::_updateSound3dEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedSound3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeSound3dId = "";
 						window->setActiveScreen("empty");
+
+						_activeSound3dId = "";
 					}
 				}
 			}
@@ -76,28 +75,25 @@ void WorldEditor::_updateSound3dEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@sound3d_" + _activeSound3dId);
 				_fe3d->sound3d_delete(_activeSound3dId);
-				_loadedSound3dIds.erase(_activeSound3dId);
-				_activeSound3dId = "";
+				_fe3d->model_delete("@@sound3d_" + _activeSound3dId);
+
 				window->setActiveScreen("empty");
+
+				_loadedSound3dIds.erase(_activeSound3dId);
+
+				_activeSound3dId = "";
 
 				return;
 			}
 
 			auto position = _fe3d->sound3d_getPosition(_activeSound3dId);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSound3dId);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSound3dId);
 
 			_handleInputBox("sound3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SOUND3D_POSITION_DIVIDER));
 			_handleInputBox("sound3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SOUND3D_POSITION_DIVIDER));
 			_handleInputBox("sound3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SOUND3D_POSITION_DIVIDER));
-			_handleInputBox("sound3dPropertiesMenu", "distanceMinus", "distance", "distancePlus", maxDistance, (_editorSpeed / SOUND3D_DISTANCE_DIVIDER), 1.0f, 0.0f);
-			_handleInputBox("sound3dPropertiesMenu", "volumeMinus", "volume", "volumePlus", maxVolume, SOUND3D_VOLUME_SPEED, SOUND3D_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 
 			_fe3d->sound3d_setPosition(_activeSound3dId, position);
-			_fe3d->sound3d_setMaxDistance(_activeSound3dId, maxDistance);
-			_fe3d->sound3d_setMaxVolume(_activeSound3dId, maxVolume);
 			_fe3d->model_setBasePosition(("@@sound3d_" + _activeSound3dId), position);
 		}
 	}

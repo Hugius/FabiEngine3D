@@ -11,7 +11,6 @@ void Sound2dEditor::_load()
 	_fe3d->quad3d_setPosition(STATUS_ID, STATUS_QUAD3D_POSITION);
 	_fe3d->quad3d_setDiffuseMap(STATUS_ID, STATUS_STOP_TEXTURE_PATH);
 	_fe3d->quad3d_setBright(STATUS_ID, true);
-
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setBloomEnabled(true);
@@ -19,7 +18,6 @@ void Sound2dEditor::_load()
 	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);
 	_fe3d->graphics_setBloomBlurCount(BLOOM_BLUR_COUNT);
 	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
-
 	_fe3d->camera_setYaw(CAMERA_YAW);
 
 	_gui->getOverlay()->createTextField(SOUND2D_TITLE_ID, SOUND2D_TITLE_POSITION, SOUND2D_TITLE_SIZE, "", fvec3(1.0f), true);
@@ -33,7 +31,6 @@ void Sound2dEditor::_unload()
 	}
 
 	_fe3d->quad3d_delete(STATUS_ID);
-
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setBloomEnabled(false);
@@ -41,7 +38,6 @@ void Sound2dEditor::_unload()
 	_fe3d->graphics_setBloomIntensity(0.0f);
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomQuality(0);
-
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField(SOUND2D_TITLE_ID);

@@ -8,7 +8,7 @@ void WorldEditor::_updateAabbEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -40,7 +40,7 @@ void WorldEditor::_updateAabbEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -59,8 +59,9 @@ void WorldEditor::_updateAabbEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedAabbId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeAabbId = "";
 						window->setActiveScreen("empty");
+
+						_activeAabbId = "";
 					}
 				}
 			}
@@ -85,9 +86,12 @@ void WorldEditor::_updateAabbEditing()
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_fe3d->aabb_delete(_activeAabbId);
-				_loadedAabbIds.erase(_activeAabbId);
-				_activeAabbId = "";
+
 				window->setActiveScreen("empty");
+
+				_loadedAabbIds.erase(_activeAabbId);
+
+				_activeAabbId = "";
 
 				return;
 			}

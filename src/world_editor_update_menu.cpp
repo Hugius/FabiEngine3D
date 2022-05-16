@@ -21,13 +21,17 @@ void WorldEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto worldIds = _getWorldIds();
+
 			sort(worldIds.begin(), worldIds.end());
+
 			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", fvec2(0.0f, 0.1f), worldIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto worldIds = _getWorldIds();
+
 			sort(worldIds.begin(), worldIds.end());
+
 			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", fvec2(0.0f, 0.1f), worldIds);
 		}
 	}
@@ -106,9 +110,8 @@ void WorldEditor::_updateChoiceMenu()
 			_fe3d->camera_reset();
 			_fe3d->misc_setVsyncEnabled(true);
 
-			_gui->getOverlay()->getTextField("selectedId")->setVisible(false);
-			_gui->getOverlay()->getTextField("activeId")->setVisible(false);
-
+			_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(false);
+			_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setVisible(false);
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
@@ -118,6 +121,7 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateText3dId = "";
 			_currentTemplateAabbId = "";
 			_currentTemplatePointlightId = "";
+			_currentTemplateSpotlightId = "";
 			_currentTemplateSound3dId = "";
 			_selectedModelId = "";
 			_selectedQuad3dId = "";
@@ -145,7 +149,6 @@ void WorldEditor::_updateChoiceMenu()
 			_dontResetSelectedSpotlight = false;
 			_dontResetSelectedCaptor = false;
 			_dontResetSelectedSound3d = false;
-			_isPlacingSpotlight = false;
 			_isPlacingCaptor = false;
 			_isGridModeEnabled = false;
 			_isWireframeModeEnabled = false;

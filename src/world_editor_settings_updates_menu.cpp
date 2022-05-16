@@ -73,6 +73,7 @@ void WorldEditor::_updateGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shadows")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphicsShadows");
+
 			_fe3d->graphics_setShadowCircleEnabled(true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflections")->isHovered())

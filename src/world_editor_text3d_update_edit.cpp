@@ -8,7 +8,7 @@ void WorldEditor::_updateText3dEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -40,7 +40,7 @@ void WorldEditor::_updateText3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -59,8 +59,9 @@ void WorldEditor::_updateText3dEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedText3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeText3dId = "";
 						window->setActiveScreen("empty");
+
+						_activeText3dId = "";
 					}
 				}
 			}
@@ -101,9 +102,12 @@ void WorldEditor::_updateText3dEditing()
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_fe3d->text3d_delete(_activeText3dId);
-				_loadedText3dIds.erase(_activeText3dId);
-				_activeText3dId = "";
+
 				window->setActiveScreen("empty");
+
+				_loadedText3dIds.erase(_activeText3dId);
+
+				_activeText3dId = "";
 
 				return;
 			}
@@ -142,7 +146,6 @@ void WorldEditor::_updateText3dEditing()
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
-
 			screen->getButton("freeze")->setTextContent(_fe3d->text3d_isFrozen(_activeText3dId) ? "Unfreeze" : "Freeze");
 		}
 	}

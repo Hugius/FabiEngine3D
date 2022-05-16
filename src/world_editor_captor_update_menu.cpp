@@ -13,7 +13,8 @@ void WorldEditor::_updateCaptorMenu()
 		{
 			if(_isPlacingCaptor)
 			{
-				_fe3d->model_setVisible(CAPTOR_MODEL_ID, false);
+				_fe3d->model_setVisible(LENS_ID, false);
+
 				_isPlacingCaptor = false;
 			}
 
@@ -35,12 +36,15 @@ void WorldEditor::_updateCaptorMenu()
 			_deactivateSound3d();
 
 			_isPlacingCaptor = true;
-			_fe3d->model_setVisible(CAPTOR_MODEL_ID, true);
+
+			_fe3d->model_setVisible(LENS_ID, true);
+
 			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 			if(_fe3d->terrain_getSelectedId().empty())
 			{
-				_fe3d->captor_setPosition(CAPTOR_MODEL_ID, fvec3(0.0f));
+				_fe3d->captor_setPosition(LENS_ID, fvec3(0.0f));
+
 				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
@@ -49,7 +53,6 @@ void WorldEditor::_updateCaptorMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->deleteOptions();
 
 			for(auto & captorId : _loadedCaptorIds)

@@ -21,6 +21,7 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
 
 	{
@@ -38,7 +39,7 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto cameraPosition = _fe3d->camera_getPosition();
+		const auto cameraPosition = _fe3d->camera_getPosition();
 
 		file
 			<< "CAMERA_POSITION "
@@ -51,7 +52,7 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto cameraYaw = _fe3d->camera_getYaw();
+		const auto cameraYaw = _fe3d->camera_getYaw();
 
 		file
 			<< "CAMERA_YAW "
@@ -60,7 +61,7 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto cameraPitch = _fe3d->camera_getPitch();
+		const auto cameraPitch = _fe3d->camera_getPitch();
 
 		file
 			<< "CAMERA_PITCH "
@@ -69,50 +70,50 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto skyId = _fe3d->sky_getSelectedId();
+		const auto placedSkyId = _fe3d->sky_getSelectedId();
 
-		if(!skyId.empty())
+		if(!placedSkyId.empty())
 		{
-			auto templateId = ("@" + skyId);
+			const auto templateSkyId = ("@" + placedSkyId);
 
 			file
 				<< "SKY "
-				<< skyId
+				<< placedSkyId
 				<< " "
-				<< templateId
+				<< templateSkyId
 				<< endl;
 		}
 	}
 
 	{
-		auto terrainId = _fe3d->terrain_getSelectedId();
+		const auto placedTerrainId = _fe3d->terrain_getSelectedId();
 
-		if(!terrainId.empty())
+		if(!placedTerrainId.empty())
 		{
-			auto templateId = ("@" + terrainId);
+			const auto templateTerrainId = ("@" + placedTerrainId);
 
 			file
 				<< "TERRAIN "
-				<< terrainId
+				<< placedTerrainId
 				<< " "
-				<< templateId
+				<< templateTerrainId
 				<< endl;
 		}
 	}
 
 	{
-		auto waterId = _fe3d->water_getSelectedId();
+		const auto placedWaterId = _fe3d->water_getSelectedId();
 
-		if(!waterId.empty())
+		if(!placedWaterId.empty())
 		{
-			auto templateId = ("@" + waterId);
-			auto height = _fe3d->water_getHeight(waterId);
+			const auto templateWaterId = ("@" + placedWaterId);
+			const auto height = _fe3d->water_getHeight(placedWaterId);
 
 			file
 				<< "WATER "
-				<< waterId
+				<< placedWaterId
 				<< " "
-				<< templateId
+				<< templateWaterId
 				<< " "
 				<< height
 				<< endl;
@@ -121,7 +122,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 	{
-		auto startedAnimation3dIds = _fe3d->model_getAnimationIds(placedModelId);
+		const auto startedAnimation3dIds = _fe3d->model_getAnimationIds(placedModelId);
 
 		if(!startedAnimation3dIds.empty())
 		{
@@ -137,10 +138,11 @@ const bool WorldEditor::saveWorldToFile() const
 			}
 		}
 
-		auto position = _fe3d->model_getBasePosition(placedModelId);
-		auto rotation = _fe3d->model_getBaseRotation(placedModelId);
-		auto size = _fe3d->model_getBaseSize(placedModelId);
-		auto isFrozen = _fe3d->model_isFrozen(placedModelId);
+		const auto position = _fe3d->model_getBasePosition(placedModelId);
+		const auto rotation = _fe3d->model_getBaseRotation(placedModelId);
+		const auto size = _fe3d->model_getBaseSize(placedModelId);
+		const auto isFrozen = _fe3d->model_isFrozen(placedModelId);
+
 		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
 
 		animation3dId = (animation3dId.empty()) ? "?" : animation3dId;
@@ -180,10 +182,11 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 	{
-		auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(placedQuad3dId);
-		auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
-		auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
-		auto size = _fe3d->quad3d_getSize(placedQuad3dId);
+		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(placedQuad3dId);
+		const auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
+		const auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
+		const auto size = _fe3d->quad3d_getSize(placedQuad3dId);
+
 		auto animation2dId = (startedAnimation2dIds.empty() ? "" : startedAnimation2dIds[0]);
 
 		animation2dId = (animation2dId.empty()) ? "?" : animation2dId;
@@ -218,10 +221,10 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 	{
-		auto content = _fe3d->text3d_getContent(placedText3dId);
-		auto position = _fe3d->text3d_getPosition(placedText3dId);
-		auto rotation = _fe3d->text3d_getRotation(placedText3dId);
-		auto size = _fe3d->text3d_getSize(placedText3dId);
+		const auto content = _fe3d->text3d_getContent(placedText3dId);
+		const auto position = _fe3d->text3d_getPosition(placedText3dId);
+		const auto rotation = _fe3d->text3d_getRotation(placedText3dId);
+		const auto size = _fe3d->text3d_getSize(placedText3dId);
 
 		file
 			<< "TEXT3D "
@@ -251,8 +254,8 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
 	{
-		auto position = _fe3d->aabb_getBasePosition(placedAabbId);
-		auto size = _fe3d->aabb_getBaseSize(placedAabbId);
+		const auto position = _fe3d->aabb_getBasePosition(placedAabbId);
+		const auto size = _fe3d->aabb_getBaseSize(placedAabbId);
 
 		file
 			<< "AABB "
@@ -277,8 +280,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
 	{
-		auto position = _fe3d->pointlight_getPosition(placedPointlightId);
-		auto radius = _fe3d->pointlight_getRadius(placedPointlightId);
+		const auto position = _fe3d->pointlight_getPosition(placedPointlightId);
 
 		file
 			<< "POINTLIGHT "
@@ -291,28 +293,20 @@ const bool WorldEditor::saveWorldToFile() const
 			<< position.y
 			<< " "
 			<< position.z
-			<< " "
-			<< radius.x
-			<< " "
-			<< radius.y
-			<< " "
-			<< radius.z
 			<< endl;
 	}
 
-	for(const auto & spotlightId : _loadedSpotlightIds)
+	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
 	{
-		auto position = _fe3d->spotlight_getPosition(spotlightId);
-		auto color = _fe3d->spotlight_getColor(spotlightId);
-		auto yaw = _fe3d->spotlight_getYaw(spotlightId);
-		auto pitch = _fe3d->spotlight_getPitch(spotlightId);
-		auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
-		auto angle = _fe3d->spotlight_getAngle(spotlightId);
-		auto distance = _fe3d->spotlight_getDistance(spotlightId);
+		const auto position = _fe3d->spotlight_getPosition(placedSpotlightId);
+		const auto yaw = _fe3d->spotlight_getYaw(placedSpotlightId);
+		const auto pitch = _fe3d->spotlight_getPitch(placedSpotlightId);
 
 		file
 			<< "SPOTLIGHT "
-			<< spotlightId
+			<< placedSpotlightId
+			<< " "
+			<< templateSpotlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -320,32 +314,20 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< position.z
 			<< " "
-			<< color.r
-			<< " "
-			<< color.g
-			<< " "
-			<< color.b
-			<< " "
 			<< yaw
 			<< " "
 			<< pitch
-			<< " "
-			<< intensity
-			<< " "
-			<< angle
-			<< " "
-			<< distance
 			<< endl;
 	}
 
-	for(const auto & captorId : _loadedCaptorIds)
+	for(const auto & placedCaptorId : _loadedCaptorIds)
 	{
-		auto position = _fe3d->captor_getPosition(captorId);
-		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+		const auto position = _fe3d->captor_getPosition(placedCaptorId);
+		const auto exceptionId = _fe3d->captor_getExceptionId(placedCaptorId);
 
 		file
 			<< "CAPTOR "
-			<< captorId
+			<< placedCaptorId
 			<< " "
 			<< position.x
 			<< " "
@@ -359,9 +341,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 	{
-		auto position = _fe3d->sound3d_getPosition(placedSound3dId);
-		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSound3dId);
-		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSound3dId);
+		const auto position = _fe3d->sound3d_getPosition(placedSound3dId);
 
 		file
 			<< "SOUND3D "
@@ -374,17 +354,13 @@ const bool WorldEditor::saveWorldToFile() const
 			<< position.y
 			<< " "
 			<< position.z
-			<< " "
-			<< maxVolume
-			<< " "
-			<< maxDistance
 			<< endl;
 	}
 
 	if(_fe3d->graphics_isAmbientLightingEnabled())
 	{
-		auto ambientLightingColor = _fe3d->graphics_getAmbientLightingColor();
-		auto ambientLightingIntensity = _fe3d->graphics_getAmbientLightingIntensity();
+		const auto ambientLightingColor = _fe3d->graphics_getAmbientLightingColor();
+		const auto ambientLightingIntensity = _fe3d->graphics_getAmbientLightingIntensity();
 
 		file
 			<< "LIGHTING_AMBIENT "
@@ -400,9 +376,9 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isDirectionalLightingEnabled())
 	{
-		auto directionalLightingColor = _fe3d->graphics_getDirectionalLightingColor();
-		auto directionalLightingPosition = _fe3d->graphics_getDirectionalLightingPosition();
-		auto directionalLightingIntensity = _fe3d->graphics_getDirectionalLightingIntensity();
+		const auto directionalLightingColor = _fe3d->graphics_getDirectionalLightingColor();
+		const auto directionalLightingPosition = _fe3d->graphics_getDirectionalLightingPosition();
+		const auto directionalLightingIntensity = _fe3d->graphics_getDirectionalLightingIntensity();
 
 		file
 			<< "LIGHTING_DIRECTIONAL "
@@ -424,15 +400,15 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isShadowsEnabled())
 	{
-		auto size = _fe3d->graphics_getShadowSize();
-		auto lightness = _fe3d->graphics_getShadowLightness();
-		auto position = _fe3d->graphics_getShadowPositionOffset();
-		auto lookat = _fe3d->graphics_getShadowLookatOffset();
-		auto isFollowingCameraX = _fe3d->graphics_isShadowFollowingCameraX();
-		auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
-		auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
-		auto interval = _fe3d->graphics_getShadowInterval();
-		auto quality = _fe3d->graphics_getShadowQuality();
+		const auto size = _fe3d->graphics_getShadowSize();
+		const auto lightness = _fe3d->graphics_getShadowLightness();
+		const auto position = _fe3d->graphics_getShadowPositionOffset();
+		const auto lookat = _fe3d->graphics_getShadowLookatOffset();
+		const auto isFollowingCameraX = _fe3d->graphics_isShadowFollowingCameraX();
+		const auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
+		const auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
+		const auto interval = _fe3d->graphics_getShadowInterval();
+		const auto quality = _fe3d->graphics_getShadowQuality();
 
 		file
 			<< "GRAPHICS_SHADOWS "
@@ -465,10 +441,10 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
-		auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
-		auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
-		auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
+		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
+		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFLECTIONS "
@@ -483,10 +459,10 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
-		auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
-		auto planarHeight = _fe3d->graphics_getPlanarRefractionHeight();
-		auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
+		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		const auto planarHeight = _fe3d->graphics_getPlanarRefractionHeight();
+		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFRACTIONS "
@@ -502,10 +478,10 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isDofEnabled())
 	{
-		auto dynamic = _fe3d->graphics_isDofDynamic();
-		auto blurDistance = _fe3d->graphics_getDofBlurDistance();
-		auto maxDistance = _fe3d->graphics_getDofDynamicDistance();
-		auto quality = _fe3d->graphics_getDofQuality();
+		const auto dynamic = _fe3d->graphics_isDofDynamic();
+		const auto blurDistance = _fe3d->graphics_getDofBlurDistance();
+		const auto maxDistance = _fe3d->graphics_getDofDynamicDistance();
+		const auto quality = _fe3d->graphics_getDofQuality();
 
 		file
 			<< "GRAPHICS_DOF "
@@ -521,10 +497,10 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isFogEnabled())
 	{
-		auto minDistance = _fe3d->graphics_getFogMinDistance();
-		auto maxDistance = _fe3d->graphics_getFogMaxDistance();
-		auto thickness = _fe3d->graphics_getFogThickness();
-		auto color = _fe3d->graphics_getFogColor();
+		const auto minDistance = _fe3d->graphics_getFogMinDistance();
+		const auto maxDistance = _fe3d->graphics_getFogMaxDistance();
+		const auto thickness = _fe3d->graphics_getFogThickness();
+		const auto color = _fe3d->graphics_getFogColor();
 
 		file
 			<< "GRAPHICS_FOG "
@@ -544,9 +520,10 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isLensFlareEnabled())
 	{
+		const auto intensity = _fe3d->graphics_getLensFlareIntensity();
+		const auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
+
 		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
-		auto intensity = _fe3d->graphics_getLensFlareIntensity();
-		auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
 
 		flareMapPath = (flareMapPath.empty() ? "" : flareMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -566,20 +543,23 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isSkyExposureEnabled())
 	{
+		const auto intensity = _fe3d->graphics_getSkyExposureIntensity();
+		const auto speed = _fe3d->graphics_getSkyExposureSpeed();
+
 		file
 			<< "GRAPHICS_SKY_EXPOSURE "
-			<< _fe3d->graphics_getSkyExposureIntensity()
+			<< intensity
 			<< " "
-			<< _fe3d->graphics_getSkyExposureSpeed()
+			<< speed
 			<< endl;
 	}
 
 	if(_fe3d->graphics_isBloomEnabled())
 	{
-		auto type = static_cast<int>(_fe3d->graphics_getBloomType());
-		auto intensity = _fe3d->graphics_getBloomIntensity();
-		auto blurCount = _fe3d->graphics_getBloomBlurCount();
-		auto quality = _fe3d->graphics_getBloomQuality();
+		const auto type = static_cast<int>(_fe3d->graphics_getBloomType());
+		const auto intensity = _fe3d->graphics_getBloomIntensity();
+		const auto blurCount = _fe3d->graphics_getBloomBlurCount();
+		const auto quality = _fe3d->graphics_getBloomQuality();
 
 		file
 			<< "GRAPHICS_BLOOM "

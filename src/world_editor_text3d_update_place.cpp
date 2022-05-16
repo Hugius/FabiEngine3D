@@ -32,9 +32,10 @@ void WorldEditor::_updateText3dPlacing()
 				_idCounter++;
 
 				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
-				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 
 				_fe3d->text3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+
+				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
 
@@ -74,25 +75,28 @@ void WorldEditor::_updateText3dPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
+
 				_currentTemplateText3dId = "";
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + TEXT3D_TERRAIN_OFFSET);
+
 			_fe3d->text3d_setVisible(_currentTemplateText3dId, true);
 			_fe3d->text3d_setPosition(_currentTemplateText3dId, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
-				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 
 				_fe3d->text3d_setPosition(newId, newPosition);
+
+				_loadedText3dIds.insert({newId, _currentTemplateText3dId});
 			}
 		}
 	}

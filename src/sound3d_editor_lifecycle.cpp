@@ -23,7 +23,6 @@ void Sound3dEditor::_load()
 	_fe3d->model_setShadowed(SPEAKER_ID, false);
 	_fe3d->model_setBright(SPEAKER_ID, "", true);
 	_fe3d->model_setVisible(SPEAKER_ID, false);
-
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
@@ -36,7 +35,6 @@ void Sound3dEditor::_load()
 	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
-
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonEnabled(true);
@@ -57,7 +55,6 @@ void Sound3dEditor::_unload()
 	_fe3d->model_delete(GRID_ID);
 	_fe3d->model_delete(BOX_ID);
 	_fe3d->model_delete(SPEAKER_ID);
-
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->graphics_setAmbientLightingEnabled(false);
@@ -70,7 +67,6 @@ void Sound3dEditor::_unload()
 	_fe3d->graphics_setShadowQuality(0);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
 	_fe3d->graphics_setShadowSize(0.0f);
-
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField(SOUND3D_TITLE_ID);

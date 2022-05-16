@@ -8,7 +8,7 @@ void WorldEditor::_updateQuad3dEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -40,7 +40,7 @@ void WorldEditor::_updateQuad3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -59,8 +59,9 @@ void WorldEditor::_updateQuad3dEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedQuad3dId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeQuad3dId = "";
 						window->setActiveScreen("empty");
+
+						_activeQuad3dId = "";
 					}
 				}
 			}
@@ -111,7 +112,6 @@ void WorldEditor::_updateQuad3dEditing()
 				else
 				{
 					_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
-
 					_fe3d->quad3d_setUvMultiplier(_activeQuad3dId, fvec2(1.0f));
 					_fe3d->quad3d_setUvOffset(_activeQuad3dId, fvec2(0.0f));
 				}
@@ -124,9 +124,12 @@ void WorldEditor::_updateQuad3dEditing()
 				}
 
 				_fe3d->quad3d_delete(_activeQuad3dId);
-				_loadedQuad3dIds.erase(_activeQuad3dId);
-				_activeQuad3dId = "";
+
 				window->setActiveScreen("empty");
+
+				_loadedQuad3dIds.erase(_activeQuad3dId);
+
+				_activeQuad3dId = "";
 
 				return;
 			}
@@ -160,7 +163,6 @@ void WorldEditor::_updateQuad3dEditing()
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
-
 			screen->getButton("animation2d")->setTextContent(currentAnimation2dIds.empty() ? "Start Animation2D" : "Stop Animation2D");
 			screen->getButton("freeze")->setTextContent(_fe3d->quad3d_isFrozen(_activeQuad3dId) ? "Unfreeze" : "Freeze");
 		}

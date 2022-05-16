@@ -19,7 +19,7 @@ public:
 
 private:
 	static inline const string CURSOR_ID = "@@cursor";
-	static inline const string CURSOR_DEFAULT_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_default.tga";
+	static inline const string CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_default.tga";
 
 	static inline const fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
 

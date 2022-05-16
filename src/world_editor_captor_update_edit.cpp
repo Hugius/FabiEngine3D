@@ -8,7 +8,7 @@ void WorldEditor::_updateCaptorEditing()
 	   _currentTemplateText3dId.empty() &&
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingSpotlight &&
+	   _currentTemplateSpotlightId.empty() &&
 	   _currentTemplateSound3dId.empty() &&
 	   !_isPlacingCaptor)
 	{
@@ -40,7 +40,7 @@ void WorldEditor::_updateCaptorEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_POINTING_TEXTURE_PATH);
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 			}
 			else
 			{
@@ -59,8 +59,9 @@ void WorldEditor::_updateCaptorEditing()
 				{
 					if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && _selectedCaptorId.empty()) || _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_MIDDLE))
 					{
-						_activeCaptorId = "";
 						window->setActiveScreen("empty");
+
+						_activeCaptorId = "";
 					}
 				}
 			}
@@ -74,7 +75,7 @@ void WorldEditor::_updateCaptorEditing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("exception")->isHovered())
 			{
-				vector<string> modelIds;
+				vector<string> modelIds = {};
 
 				for(auto & [placedId, templateId] : _loadedModelIds)
 				{
@@ -91,9 +92,12 @@ void WorldEditor::_updateCaptorEditing()
 			{
 				_fe3d->model_delete("@@captor_" + _activeCaptorId);
 				_fe3d->captor_delete(_activeCaptorId);
-				_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _activeCaptorId), _loadedCaptorIds.end());
-				_activeCaptorId = "";
+
 				window->setActiveScreen("empty");
+
+				_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _activeCaptorId), _loadedCaptorIds.end());
+
+				_activeCaptorId = "";
 
 				return;
 			}
@@ -105,7 +109,6 @@ void WorldEditor::_updateCaptorEditing()
 			_handleInputBox("captorPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / CAPTOR_POSITION_DIVIDER));
 
 			_fe3d->captor_setPosition(_activeCaptorId, position);
-
 			_fe3d->model_setBasePosition(("@@captor_" + _activeCaptorId), position);
 		}
 	}

@@ -16,53 +16,6 @@ void WorldEditor::_load()
 	_spotlightEditor->loadSpotlightsFromFile();
 	_sound3dEditor->loadSound3dsFromFile();
 
-	_fe3d->model_create(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_PATH);
-	_fe3d->model_create(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_PATH);
-	_fe3d->model_create(CAPTOR_MODEL_ID, CAPTOR_MODEL_PATH);
-	_fe3d->model_create(SOUND3D_MODEL_ID, SOUND3D_MODEL_PATH);
-	_fe3d->model_setBaseSize(POINTLIGHT_MODEL_ID, POINTLIGHT_MODEL_SIZE);
-	_fe3d->model_setBaseSize(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_SIZE);
-	_fe3d->model_setBaseSize(CAPTOR_MODEL_ID, CAPTOR_MODEL_SIZE);
-	_fe3d->model_setBaseSize(SOUND3D_MODEL_ID, SOUND3D_MODEL_SIZE);
-	_fe3d->model_setBaseRotation(SPOTLIGHT_MODEL_ID, SPOTLIGHT_MODEL_ROTATION);
-	_fe3d->model_setShadowed(POINTLIGHT_MODEL_ID, false);
-	_fe3d->model_setShadowed(SPOTLIGHT_MODEL_ID, false);
-	_fe3d->model_setShadowed(CAPTOR_MODEL_ID, false);
-	_fe3d->model_setShadowed(SOUND3D_MODEL_ID, false);
-	_fe3d->model_setReflected(POINTLIGHT_MODEL_ID, false);
-	_fe3d->model_setReflected(SPOTLIGHT_MODEL_ID, false);
-	_fe3d->model_setReflected(CAPTOR_MODEL_ID, false);
-	_fe3d->model_setReflected(SOUND3D_MODEL_ID, false);
-	_fe3d->model_setRefracted(POINTLIGHT_MODEL_ID, false);
-	_fe3d->model_setRefracted(SPOTLIGHT_MODEL_ID, false);
-	_fe3d->model_setRefracted(CAPTOR_MODEL_ID, false);
-	_fe3d->model_setRefracted(SOUND3D_MODEL_ID, false);
-	_fe3d->model_setVisible(POINTLIGHT_MODEL_ID, false);
-	_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, false);
-	_fe3d->model_setVisible(CAPTOR_MODEL_ID, false);
-	_fe3d->model_setVisible(SOUND3D_MODEL_ID, false);
-
-	_fe3d->pointlight_create(POINTLIGHT_MODEL_ID);
-	_fe3d->pointlight_setRadius(POINTLIGHT_MODEL_ID, fvec3(POINTLIGHT_RADIUS));
-	_fe3d->pointlight_setIntensity(POINTLIGHT_MODEL_ID, POINTLIGHT_INTENSITY);
-	_fe3d->pointlight_setVisible(POINTLIGHT_MODEL_ID, false);
-
-	_fe3d->spotlight_create(SPOTLIGHT_MODEL_ID);
-	_fe3d->spotlight_setPitch(SPOTLIGHT_MODEL_ID, SPOTLIGHT_PITCH);
-	_fe3d->spotlight_setIntensity(SPOTLIGHT_MODEL_ID, SPOTLIGHT_INTENSITY);
-	_fe3d->spotlight_setAngle(SPOTLIGHT_MODEL_ID, SPOTLIGHT_ANGLE);
-	_fe3d->spotlight_setDistance(SPOTLIGHT_MODEL_ID, SPOTLIGHT_DISTANCE);
-	_fe3d->spotlight_setVisible(SPOTLIGHT_MODEL_ID, false);
-
-	_fe3d->captor_create(CAPTOR_MODEL_ID);
-
-	for(const auto & sound3dId : _sound3dEditor->getLoadedSound3dIds())
-	{
-		_fe3d->sound3d_create(sound3dId, _fe3d->sound3d_getAudioPath(sound3dId));
-		_fe3d->sound3d_setMaxVolume(sound3dId, SOUND3D_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(sound3dId, SOUND3D_MAX_DISTANCE);
-	}
-
 	_fe3d->model_create(GRID_ID, GRID_MESH_PATH);
 	_fe3d->model_setBaseSize(GRID_ID, fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap(GRID_ID, "", GRID_TEXTURE_PATH);
@@ -70,11 +23,40 @@ void WorldEditor::_load()
 	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
 	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
 	_fe3d->model_setShadowed(GRID_ID, false);
-
+	_fe3d->model_create(LAMP_ID, LAMP_MESH_PATH);
+	_fe3d->model_setBaseSize(LAMP_ID, LAMP_SIZE);
+	_fe3d->model_setShadowed(LAMP_ID, false);
+	_fe3d->model_setReflected(LAMP_ID, false);
+	_fe3d->model_setRefracted(LAMP_ID, false);
+	_fe3d->model_setVisible(LAMP_ID, false);
+	_fe3d->model_setBright(LAMP_ID, "", true);
+	_fe3d->model_create(TORCH_ID, TORCH_MESH_PATH);
+	_fe3d->model_setBaseSize(TORCH_ID, TORCH_SIZE);
+	_fe3d->model_setBaseRotation(TORCH_ID, TORCH_ROTATION);
+	_fe3d->model_setShadowed(TORCH_ID, false);
+	_fe3d->model_setReflected(TORCH_ID, false);
+	_fe3d->model_setRefracted(TORCH_ID, false);
+	_fe3d->model_setVisible(TORCH_ID, false);
+	_fe3d->model_setBright(TORCH_ID, "", true);
+	_fe3d->model_create(LENS_ID, LENS_MESH_PATH);
+	_fe3d->model_setBaseSize(LENS_ID, LENS_SIZE);
+	_fe3d->model_setShadowed(LENS_ID, false);
+	_fe3d->model_setReflected(LENS_ID, false);
+	_fe3d->model_setRefracted(LENS_ID, false);
+	_fe3d->model_setVisible(LENS_ID, false);
+	_fe3d->model_setBright(LENS_ID, "", true);
+	_fe3d->model_create(SPEAKER_ID, SPEAKER_MESH_PATH);
+	_fe3d->model_setBaseSize(SPEAKER_ID, SPEAKER_SIZE);
+	_fe3d->model_setShadowed(SPEAKER_ID, false);
+	_fe3d->model_setReflected(SPEAKER_ID, false);
+	_fe3d->model_setRefracted(SPEAKER_ID, false);
+	_fe3d->model_setVisible(SPEAKER_ID, false);
+	_fe3d->model_setBright(SPEAKER_ID, "", true);
+	_fe3d->captor_create(LENS_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
-	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
+	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 
 	for(const auto & skyId : _skyEditor->getLoadedSkyIds())
 	{
@@ -116,19 +98,22 @@ void WorldEditor::_load()
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightPlace")->getScrollingList("templatePointlights")->createOption(pointlightId, pointlightId.substr(1));
 	}
 
+	for(const auto & spotlightId : _spotlightEditor->getLoadedSpotlightIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightPlace")->getScrollingList("templateSpotlights")->createOption(spotlightId, spotlightId.substr(1));
+	}
+
 	for(const auto & sound3dId : _sound3dEditor->getLoadedSound3dIds())
 	{
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dPlace")->getScrollingList("templateSound3ds")->createOption(sound3dId, sound3dId.substr(1));
 	}
 
-	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("activeId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(SELECTED_TITLE_ID, fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField(ACTIVE_TITLE_ID, fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), "", fvec3(1.0f), true);
 }
 
 void WorldEditor::_unload()
 {
-	const auto sound3dIds = _sound3dEditor->getLoadedSound3dIds();
-
 	_skyEditor->deleteLoadedSkies();
 	_terrainEditor->deleteLoadedTerrains();
 	_waterEditor->deleteLoadedWaters();
@@ -142,33 +127,18 @@ void WorldEditor::_unload()
 	_spotlightEditor->deleteLoadedSpotlights();
 	_sound3dEditor->deleteLoadedSound3ds();
 
-	_fe3d->model_delete(POINTLIGHT_MODEL_ID);
-	_fe3d->model_delete(SPOTLIGHT_MODEL_ID);
-	_fe3d->model_delete(CAPTOR_MODEL_ID);
-	_fe3d->model_delete(SOUND3D_MODEL_ID);
-
-	_fe3d->pointlight_delete(POINTLIGHT_MODEL_ID);
-
-	_fe3d->spotlight_delete(SPOTLIGHT_MODEL_ID);
-
-	_fe3d->captor_delete(CAPTOR_MODEL_ID);
-
-	for(const auto & sound3dId : sound3dIds)
-	{
-		_fe3d->sound3d_delete(sound3dId);
-	}
-
 	_fe3d->model_delete(GRID_ID);
-
+	_fe3d->model_delete(LAMP_ID);
+	_fe3d->model_delete(TORCH_ID);
+	_fe3d->model_delete(LENS_ID);
+	_fe3d->model_delete(SPEAKER_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
-
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
-
 	_fe3d->raycast_setAabbIntersectionEnabled(false);
 
-	_gui->getOverlay()->deleteTextField("selectedId");
-	_gui->getOverlay()->deleteTextField("activeId");
+	_gui->getOverlay()->deleteTextField(SELECTED_TITLE_ID);
+	_gui->getOverlay()->deleteTextField(ACTIVE_TITLE_ID);
 }
 
 void WorldEditor::update()
@@ -331,6 +301,11 @@ void WorldEditor::update()
 	if(isLoaded() && !_currentWorldId.empty())
 	{
 		_updatePointlightPlacingMenu();
+	}
+
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSpotlightPlacingMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())

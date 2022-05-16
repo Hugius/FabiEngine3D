@@ -11,11 +11,12 @@ void WorldEditor::_updateSpotlightMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_isPlacingSpotlight)
+			if(!_currentTemplateSpotlightId.empty())
 			{
-				_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, false);
-				_fe3d->spotlight_setVisible(SPOTLIGHT_MODEL_ID, false);
-				_isPlacingSpotlight = false;
+				_fe3d->spotlight_setVisible(TORCH_ID, false);
+				_fe3d->model_setVisible(TORCH_ID, false);
+
+				_currentTemplateSpotlightId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -24,43 +25,70 @@ void WorldEditor::_updateSpotlightMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
-
-			_deactivateModel();
-			_deactivateQuad3d();
-			_deactivateText3d();
-			_deactivateAabb();
-			_deactivatePointlight();
-			_deactivateSpotlight();
-			_deactivateCaptor();
-			_deactivateSound3d();
-
-			_isPlacingSpotlight = true;
-			_fe3d->model_setVisible(SPOTLIGHT_MODEL_ID, true);
-			_fe3d->spotlight_setVisible(SPOTLIGHT_MODEL_ID, true);
-			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
-
-			if(_fe3d->terrain_getSelectedId().empty())
-			{
-				_fe3d->spotlight_setPosition(SPOTLIGHT_MODEL_ID, fvec3(0.0f));
-				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-			}
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->deleteOptions();
 
-			for(auto & spotlightId : _loadedSpotlightIds)
+			for(auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->createOption(spotlightId, spotlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->createOption(placedSpotlightId, placedSpotlightId);
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(!_isPlacingSpotlight);
+		screen->getButton("choice")->setHoverable(_currentTemplateSpotlightId.empty());
+	}
+}
+
+void WorldEditor::_updateSpotlightPlacingMenu()
+{
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+
+	if(screen->getId() == "worldEditorMenuSpotlightPlace")
+	{
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		{
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
+
+			return;
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			const auto hoveredOptionId = screen->getScrollingList("templateSpotlights")->getHoveredOptionId();
+
+			if(!hoveredOptionId.empty())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
+
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateText3d();
+				_deactivateAabb();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateCaptor();
+				_deactivateSound3d();
+
+				_currentTemplateSpotlightId = hoveredOptionId;
+
+				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, true);
+				_fe3d->model_setVisible(TORCH_ID, true);
+				_fe3d->model_setColor(TORCH_ID, "", _fe3d->spotlight_getColor(_currentTemplateSpotlightId));
+
+				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
+
+				if(_fe3d->terrain_getSelectedId().empty())
+				{
+					_fe3d->spotlight_setPosition(_currentTemplateSpotlightId, fvec3(0.0f));
+
+					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
+					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
+					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
+				}
+			}
+		}
 	}
 }
 

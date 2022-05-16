@@ -14,6 +14,7 @@ void WorldEditor::_updateModelMenu()
 			if(!_currentTemplateModelId.empty())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
+
 				_currentTemplateModelId = "";
 			}
 
@@ -28,7 +29,6 @@ void WorldEditor::_updateModelMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModelChoice");
-
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->deleteOptions();
 
 			for(auto & [placedModelId, templateModelId] : _loadedModelIds)
@@ -71,12 +71,15 @@ void WorldEditor::_updateModelPlacingMenu()
 				_deactivateSound3d();
 
 				_currentTemplateModelId = hoveredOptionId;
+
 				_fe3d->model_setVisible(_currentTemplateModelId, true);
+
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
 					_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(0.0f));
+
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

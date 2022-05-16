@@ -15,7 +15,7 @@ void WorldEditor::_activateModel(const string & modelId)
 	window->getScreen("modelPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	window->getScreen("modelPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Model: " + _activeModelId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Model: " + _activeModelId);
 }
 
 void WorldEditor::_activateQuad3d(const string & quad3dId)
@@ -25,15 +25,15 @@ void WorldEditor::_activateQuad3d(const string & quad3dId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->quad3d_getPosition(_activeQuad3dId);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
+	window->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	window->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	window->getScreen("quad3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	window->getScreen("quad3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	window->getScreen("quad3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuad3dId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Quad3D: " + _activeQuad3dId);
 }
 
 void WorldEditor::_activateText3d(const string & text3dId)
@@ -43,15 +43,15 @@ void WorldEditor::_activateText3d(const string & text3dId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->text3d_getPosition(_activeText3dId);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
+	window->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	window->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	window->getScreen("text3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	window->getScreen("text3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	window->getScreen("text3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeText3dId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Text3D: " + _activeText3dId);
 }
 
 void WorldEditor::_activateAabb(const string & aabbId)
@@ -61,14 +61,14 @@ void WorldEditor::_activateAabb(const string & aabbId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->aabb_getBasePosition(_activeAabbId);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("aabbPropertiesMenu")->getButton("position")->setHoverable(false);
+	window->getScreen("aabbPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("aabbPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	window->getScreen("aabbPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	window->getScreen("aabbPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	window->getScreen("aabbPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active AABB: " + _activeAabbId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active AABB: " + _activeAabbId);
 }
 
 void WorldEditor::_activatePointlight(const string & pointlightId)
@@ -78,14 +78,11 @@ void WorldEditor::_activatePointlight(const string & pointlightId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->pointlight_getPosition(_activePointlightId);
 
-	window->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
-
 	window->getScreen("pointlightPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("pointlightPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	window->getScreen("pointlightPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Pointlight: " + _activePointlightId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Pointlight: " + _activePointlightId);
 }
 
 void WorldEditor::_activateSpotlight(const string & spotlightId)
@@ -95,14 +92,11 @@ void WorldEditor::_activateSpotlight(const string & spotlightId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->spotlight_getPosition(_activeSpotlightId);
 
-	window->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
-
 	window->getScreen("spotlightPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("spotlightPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	window->getScreen("spotlightPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Spotlight: " + _activeSpotlightId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Spotlight: " + _activeSpotlightId);
 }
 
 void WorldEditor::_activateCaptor(const string & captorId)
@@ -116,7 +110,7 @@ void WorldEditor::_activateCaptor(const string & captorId)
 	window->getScreen("captorPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	window->getScreen("captorPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Captor: " + _activeCaptorId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Captor: " + _activeCaptorId);
 }
 
 void WorldEditor::_activateSound3d(const string & sound3dId)
@@ -125,16 +119,12 @@ void WorldEditor::_activateSound3d(const string & sound3dId)
 
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->sound3d_getPosition(_activeSound3dId);
-	const auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSound3dId);
-	const auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSound3dId);
 
-	_gui->getLeftViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("volume")->setTextContent(to_string(static_cast<int>(maxVolume * SOUND3D_VOLUME_MULTIPLIER)));
-	_gui->getLeftViewport()->getWindow("main")->getScreen("sound3dPropertiesMenu")->getInputBox("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+	window->getScreen("sound3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	window->getScreen("sound3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	window->getScreen("sound3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound3D: " + _activeSound3dId);
+	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setTextContent("Active Sound3D: " + _activeSound3dId);
 }
 
 void WorldEditor::_deactivateModel()

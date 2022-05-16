@@ -32,9 +32,10 @@ void WorldEditor::_updateQuad3dPlacing()
 				_idCounter++;
 
 				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
-				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+
+				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
 
@@ -74,25 +75,28 @@ void WorldEditor::_updateQuad3dPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
+
 				_currentTemplateQuad3dId = "";
 
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + QUAD3D_TERRAIN_OFFSET);
+
 			_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, true);
 			_fe3d->quad3d_setPosition(_currentTemplateQuad3dId, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
-				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setPosition(newId, newPosition);
+
+				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
 			}
 		}
 	}

@@ -371,7 +371,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->spotlight_create(placedSpotlightId);
+			_duplicator->copyTemplateSpotlight(placedSpotlightId, templateSpotlightId);
+
 			_fe3d->spotlight_setPosition(placedSpotlightId, position);
 			_fe3d->spotlight_setYaw(placedSpotlightId, yaw);
 			_fe3d->spotlight_setPitch(placedSpotlightId, pitch);

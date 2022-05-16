@@ -132,6 +132,7 @@ void WorldEditor::_unload()
 	_fe3d->model_delete(TORCH_ID);
 	_fe3d->model_delete(LENS_ID);
 	_fe3d->model_delete(SPEAKER_ID);
+	_fe3d->captor_delete(LENS_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);

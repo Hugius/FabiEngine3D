@@ -146,7 +146,7 @@ void PointlightEditor::_updatePointlightChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deletePointlight")
 				{
-					_gui->getOverlay()->openAnswerForm("deletePointlight", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deletePointlight", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

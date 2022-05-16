@@ -147,7 +147,7 @@ void SpotlightEditor::_updateSpotlightChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteSpotlight")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteSpotlight", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteSpotlight", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

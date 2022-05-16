@@ -126,7 +126,7 @@ void Sound2dEditor::_updateSound2dChoosing()
 
 			if(_gui->getOverlay()->getChoiceFormId() == "deleteSound2d")
 			{
-				_gui->getOverlay()->openAnswerForm("deleteSound2d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+				_gui->getOverlay()->openAnswerForm("deleteSound2d", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 			}
 			else
 			{

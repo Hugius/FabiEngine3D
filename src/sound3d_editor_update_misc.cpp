@@ -174,7 +174,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteSound3d")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteSound3d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteSound3d", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

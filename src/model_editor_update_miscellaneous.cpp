@@ -26,24 +26,24 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			if(_currentPartId.empty())
 			{
-				_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 			}
 			else
 			{
-				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * OPACITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * OPACITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -53,16 +53,16 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			if(levelOfDetailId.empty())
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", "", fvec2(0.0f, 0.1f), 5, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", "", VALUE_FORM_POSITION, 5, true, true, false);
 			}
 			else
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", levelOfDetailId.substr(1, levelOfDetailId.size() - 1), fvec2(0.0f, 0.1f), 5, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", levelOfDetailId.substr(1, levelOfDetailId.size() - 1), VALUE_FORM_POSITION, 5, true, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("levelOfDetailDistance", "LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("levelOfDetailDistance", "LOD Distance", levelOfDetailDistance, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{

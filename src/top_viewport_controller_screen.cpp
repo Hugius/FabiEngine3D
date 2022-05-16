@@ -17,7 +17,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("createProject")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createProject", "Create Project", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createProject", "Create Project", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
 		{
@@ -28,7 +28,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			{
 				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
 
-				_gui->getOverlay()->openChoiceForm("loadProject", "Load Project", fvec2(0.0f, 0.1f), projectIds);
+				_gui->getOverlay()->openChoiceForm("loadProject", "Load Project", CHOICE_FORM_POSITION, projectIds);
 			}
 			else
 			{
@@ -37,11 +37,11 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("deleteProject")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("deleteProject", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("deleteProject", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(topScreen->getButton("closeWindow")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("closeWindow", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("closeWindow", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 	}
 

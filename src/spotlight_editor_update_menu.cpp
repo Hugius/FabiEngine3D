@@ -12,11 +12,11 @@ void SpotlightEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createSpotlight", "Create Spotlight", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createSpotlight", "Create Spotlight", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -27,7 +27,7 @@ void SpotlightEditor::_updateMainMenu()
 				spotlightId = spotlightId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editSpotlight", "Edit Spotlight", fvec2(-0.5f, 0.1f), spotlightIds);
+			_gui->getOverlay()->openChoiceForm("editSpotlight", "Edit Spotlight", RIGHT_CHOICE_FORM_POSITION, spotlightIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,7 +38,7 @@ void SpotlightEditor::_updateMainMenu()
 				spotlightId = spotlightId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteSpotlight", "Delete Spotlight", fvec2(-0.5f, 0.1f), spotlightIds);
+			_gui->getOverlay()->openChoiceForm("deleteSpotlight", "Delete Spotlight", RIGHT_CHOICE_FORM_POSITION, spotlightIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -88,21 +88,21 @@ void SpotlightEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("angle")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("angle", "Angle", angle, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("angle", "Angle", angle, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("distance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("distance", "Distance", (distance * DISTANCE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("distance", "Distance", (distance * DISTANCE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())

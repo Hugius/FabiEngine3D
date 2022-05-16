@@ -82,7 +82,7 @@ void WorldEditor::_updateCaptorEditing()
 					modelIds.push_back(placedId);
 				}
 
-				_gui->getOverlay()->openChoiceForm("selectException", "Select Exception", fvec2(0.0f, 0.1f), modelIds);
+				_gui->getOverlay()->openChoiceForm("selectException", "Select Exception", CENTER_CHOICE_FORM_POSITION, modelIds);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 			{

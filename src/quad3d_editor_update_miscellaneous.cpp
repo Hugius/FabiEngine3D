@@ -24,8 +24,8 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
@@ -59,11 +59,11 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{

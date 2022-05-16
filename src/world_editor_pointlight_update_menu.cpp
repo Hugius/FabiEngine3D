@@ -83,9 +83,9 @@ void WorldEditor::_updatePointlightPlacingMenu()
 				{
 					_fe3d->pointlight_setPosition(_currentTemplatePointlightId, fvec3(0.0f));
 
-					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
+					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
+					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
+					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, VALUE_FORM_POSITION, 5, false, true, false);
 				}
 			}
 		}

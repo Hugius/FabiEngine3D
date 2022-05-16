@@ -123,7 +123,7 @@ void SkyEditor::_updateSkyChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteSky")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteSky", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteSky", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

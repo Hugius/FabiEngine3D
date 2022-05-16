@@ -16,7 +16,7 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createWorld", "Create World", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createWorld", "Create World", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -24,7 +24,7 @@ void WorldEditor::_updateMainMenu()
 
 			sort(worldIds.begin(), worldIds.end());
 
-			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", fvec2(0.0f, 0.1f), worldIds);
+			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", CENTER_CHOICE_FORM_POSITION, worldIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -32,7 +32,7 @@ void WorldEditor::_updateMainMenu()
 
 			sort(worldIds.begin(), worldIds.end());
 
-			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", fvec2(0.0f, 0.1f), worldIds);
+			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", CENTER_CHOICE_FORM_POSITION, worldIds);
 		}
 	}
 }
@@ -45,7 +45,7 @@ void WorldEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 
 			return;
 		}

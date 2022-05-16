@@ -21,23 +21,23 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("maxHeight", "Max Height", maxHeight, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxHeight", "Max Height", maxHeight, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("redTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("redTextureRepeat", "Red Texture Repeat", redTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("redTextureRepeat", "Red Texture Repeat", redTextureRepeat, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("greenTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("greenTextureRepeat", "Green Texture Repeat", greenTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("greenTextureRepeat", "Green Texture Repeat", greenTextureRepeat, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blueTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("blueTextureRepeat", "Blue Texture Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("blueTextureRepeat", "Blue Texture Repeat", blueTextureRepeat, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "maxHeight") && _gui->getOverlay()->isValueFormConfirmed())

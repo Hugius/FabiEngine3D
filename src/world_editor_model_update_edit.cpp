@@ -103,7 +103,7 @@ void WorldEditor::_updateModelEditing()
 						animation3dId = animation3dId.substr(1);
 					}
 
-					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
+					_gui->getOverlay()->openChoiceForm("selectAnimation3d", "Select Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
 				}
 				else
 				{

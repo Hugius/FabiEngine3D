@@ -138,7 +138,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteQuad3d")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteQuad3d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteQuad3d", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

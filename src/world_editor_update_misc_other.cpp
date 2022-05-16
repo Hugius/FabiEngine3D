@@ -240,7 +240,7 @@ void WorldEditor::_updateWorldChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteWorld")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteWorld", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteWorld", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{
@@ -287,7 +287,7 @@ void WorldEditor::_updateExceptionChoosing()
 
 void WorldEditor::_updateAnimation3dChoosing()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
+	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation3d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 		const auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
@@ -317,7 +317,7 @@ void WorldEditor::_updateAnimation3dChoosing()
 
 void WorldEditor::_updateAnimation2dChoosing()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation") && _gui->getOverlay()->isChoiceFormConfirmed())
+	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation2d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 		const auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);

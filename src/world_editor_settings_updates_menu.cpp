@@ -25,7 +25,7 @@ void WorldEditor::_updateSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("editorSpeed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("editorSpeed", "Editor Speed", _editorSpeed, VALUE_FORM_POSITION, 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "editorSpeed") && _gui->getOverlay()->isValueFormConfirmed())

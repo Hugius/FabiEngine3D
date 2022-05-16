@@ -12,11 +12,11 @@ void AabbEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createAabb", "Create AABB", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createAabb", "Create AABB", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -27,7 +27,7 @@ void AabbEditor::_updateMainMenu()
 				aabbId = aabbId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editAabb", "Edit AABB", fvec2(-0.5f, 0.1f), aabbIds);
+			_gui->getOverlay()->openChoiceForm("editAabb", "Edit AABB", RIGHT_CHOICE_FORM_POSITION, aabbIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,7 +38,7 @@ void AabbEditor::_updateMainMenu()
 				aabbId = aabbId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteAabb", "Delete AABB", fvec2(-0.5f, 0.1f), aabbIds);
+			_gui->getOverlay()->openChoiceForm("deleteAabb", "Delete AABB", RIGHT_CHOICE_FORM_POSITION, aabbIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -83,15 +83,15 @@ void AabbEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())

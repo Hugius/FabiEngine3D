@@ -30,6 +30,12 @@ protected:
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
+	static inline const fvec2 LEFT_CHOICE_FORM_POSITION = fvec2(-0.5f, 0.1f);
+	static inline const fvec2 CENTER_CHOICE_FORM_POSITION = fvec2(0.0f, 0.1f);
+	static inline const fvec2 RIGHT_CHOICE_FORM_POSITION = fvec2(0.5f, 0.1f);
+	static inline const fvec2 VALUE_FORM_POSITION = fvec2(0.0f, 0.1f);
+	static inline const fvec2 ANSWER_FORM_POSITION = fvec2(0.0f, 0.25f);
+
 	static inline constexpr float CW = 0.11f;
 	static inline constexpr float CH = 0.085f;
 

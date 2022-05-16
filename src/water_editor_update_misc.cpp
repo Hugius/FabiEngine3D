@@ -134,7 +134,7 @@ void WaterEditor::_updateWaterChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteWater")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteWater", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteWater", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

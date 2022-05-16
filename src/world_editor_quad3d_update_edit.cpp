@@ -107,7 +107,7 @@ void WorldEditor::_updateQuad3dEditing()
 						animation2dId = animation2dId.substr(1);
 					}
 
-					_gui->getOverlay()->openChoiceForm("selectAnimation", "Select Animation2D", fvec2(0.0f, 0.1f), animation2dIds);
+					_gui->getOverlay()->openChoiceForm("selectAnimation2d", "Select Animation2D", CENTER_CHOICE_FORM_POSITION, animation2dIds);
 				}
 				else
 				{

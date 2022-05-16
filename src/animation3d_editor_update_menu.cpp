@@ -10,11 +10,11 @@ void Animation3dEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createAnimation3d", "Create Animation3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createAnimation3d", "Create Animation3D", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -25,7 +25,7 @@ void Animation3dEditor::_updateMainMenu()
 				animation3dId = animation3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
+			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -36,7 +36,7 @@ void Animation3dEditor::_updateMainMenu()
 				animation3dId = animation3dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", fvec2(0.0f, 0.1f), animation3dIds);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -121,7 +121,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				modelId = modelId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(0.5f, 0.1f), modelIds);
+			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", RIGHT_CHOICE_FORM_POSITION, modelIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{

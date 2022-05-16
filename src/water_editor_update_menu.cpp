@@ -10,7 +10,7 @@ void WaterEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sky")->isHovered())
 		{
@@ -23,7 +23,7 @@ void WaterEditor::_updateMainMenu()
 					skyId = skyId.substr(1);
 				}
 
-				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", CENTER_CHOICE_FORM_POSITION, skyIds);
 			}
 			else
 			{
@@ -32,7 +32,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", CENTER_CHOICE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -43,7 +43,7 @@ void WaterEditor::_updateMainMenu()
 				waterId = waterId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editWater", "Edit Water", fvec2(-0.5f, 0.1f), waterIds);
+			_gui->getOverlay()->openChoiceForm("editWater", "Edit Water", LEFT_CHOICE_FORM_POSITION, waterIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -54,7 +54,7 @@ void WaterEditor::_updateMainMenu()
 				waterId = waterId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteWater", "Delete Water", fvec2(-0.5f, 0.1f), waterIds);
+			_gui->getOverlay()->openChoiceForm("deleteWater", "Delete Water", LEFT_CHOICE_FORM_POSITION, waterIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

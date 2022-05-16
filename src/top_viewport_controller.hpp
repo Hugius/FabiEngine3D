@@ -72,6 +72,9 @@ private:
 	static inline const fvec3 ROUND_BUTTON_HOVER_COLOR = fvec3(0.25f);
 
 	static inline const fvec2 ROUND_BUTTON_SIZE = fvec2(0.2f, 1.75f);
+	static inline const fvec2 CHOICE_FORM_POSITION = fvec2(0.0f, 0.1f);
+	static inline const fvec2 VALUE_FORM_POSITION = fvec2(0.0f, 0.1f);
+	static inline const fvec2 ANSWER_FORM_POSITION = fvec2(0.0f, 0.25f);
 
 	static inline constexpr float LCW = 0.05f;
 	static inline constexpr float LCH = 1.5f;

@@ -205,7 +205,7 @@ void ModelEditor::_updateModelChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteModel")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteModel", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteModel", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{
@@ -369,7 +369,7 @@ void ModelEditor::_updateAabbChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteAabb")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

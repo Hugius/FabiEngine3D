@@ -231,7 +231,7 @@ void Animation3dEditor::_updateAnimation3dChoosing()
 
 			if(_gui->getOverlay()->getChoiceFormId() == "deleteAnimation3d")
 			{
-				_gui->getOverlay()->openAnswerForm("deleteAnimation3d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+				_gui->getOverlay()->openAnswerForm("deleteAnimation3d", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 			}
 			else
 			{

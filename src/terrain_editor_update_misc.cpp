@@ -173,7 +173,7 @@ void TerrainEditor::_updateTerrainChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteTerrain")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteTerrain", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteTerrain", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

@@ -8,11 +8,11 @@ void Sound2dEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("save", "Save Changes?", "Yes", "No", ANSWER_FORM_POSITION);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createSound2d", "Create Sound2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createSound2d", "Create Sound2D", "", VALUE_FORM_POSITION, 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -23,7 +23,7 @@ void Sound2dEditor::_updateMainMenu()
 				sound2dId = sound2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editSound2d", "Edit Sound2D", fvec2(0.0f, 0.1f), sound2dIds);
+			_gui->getOverlay()->openChoiceForm("editSound2d", "Edit Sound2D", CENTER_CHOICE_FORM_POSITION, sound2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -34,7 +34,7 @@ void Sound2dEditor::_updateMainMenu()
 				sound2dId = sound2dId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteSound2d", "Delete Sound2D", fvec2(0.0f, 0.1f), sound2dIds);
+			_gui->getOverlay()->openChoiceForm("deleteSound2d", "Delete Sound2D", CENTER_CHOICE_FORM_POSITION, sound2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -149,9 +149,9 @@ void WorldEditor::_updateModelEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
 
 				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
@@ -165,9 +165,9 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
 
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}

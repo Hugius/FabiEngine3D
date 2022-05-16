@@ -57,7 +57,7 @@ private:
 	static inline constexpr float GRID_LIGHTNESS = 0.25f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 1.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
-	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 3.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;

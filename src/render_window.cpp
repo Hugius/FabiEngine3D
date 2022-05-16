@@ -248,7 +248,7 @@ void RenderWindow::setKeyingColor(const fvec3 & value)
 		abort();
 	}
 
-	SetLayeredWindowAttributes(_windowHandle, RGB(static_cast<int>(value.r * COLOR_MULTIPLIER), static_cast<int>(value.g * COLOR_MULTIPLIER), static_cast<int>(value.b * COLOR_MULTIPLIER)), 0, LWA_COLORKEY);
+	SetLayeredWindowAttributes(_windowHandle, RGB(static_cast<int>(value.r * COLOR_FACTOR), static_cast<int>(value.g * COLOR_FACTOR), static_cast<int>(value.b * COLOR_FACTOR)), 0, LWA_COLORKEY);
 }
 
 void RenderWindow::setTitle(const string & value)

@@ -86,11 +86,11 @@ void Sound3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxVolume")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("maxVolume", "Max Volume", (maxVolume * VOLUME_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxVolume", "Max Volume", (maxVolume * VOLUME_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("maxDistance", "Max Distance", (maxDistance * DISTANCE_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("maxDistance", "Max Distance", (maxDistance * DISTANCE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "maxVolume") && _gui->getOverlay()->isValueFormConfirmed())
@@ -98,14 +98,14 @@ void Sound3dEditor::_updateChoiceMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->sound3d_setMaxVolume(_currentSound3dId, (value / VOLUME_MULTIPLIER));
+			_fe3d->sound3d_setMaxVolume(_currentSound3dId, (value / VOLUME_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "maxDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->sound3d_setMaxDistance(_currentSound3dId, (value / DISTANCE_MULTIPLIER));
+			_fe3d->sound3d_setMaxDistance(_currentSound3dId, (value / DISTANCE_FACTOR));
 		}
 	}
 }

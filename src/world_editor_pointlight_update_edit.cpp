@@ -89,9 +89,9 @@ void WorldEditor::_updatePointlightEditing()
 
 			auto position = _fe3d->pointlight_getPosition(_activePointlightId);
 
-			_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-			_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-			_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+			_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_SPEED_DIVIDER));
+			_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_SPEED_DIVIDER));
+			_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_SPEED_DIVIDER));
 
 			_fe3d->pointlight_setPosition(_activePointlightId, position);
 			_fe3d->model_setBasePosition(("@@pointlight_" + _activePointlightId), position);

@@ -101,15 +101,15 @@ void WorldEditor::_updateAabbEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("aabbPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / AABB_POSITION_DIVIDER));
-				_handleInputBox("aabbPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / AABB_POSITION_DIVIDER));
-				_handleInputBox("aabbPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / AABB_POSITION_DIVIDER));
+				_handleInputBox("aabbPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / AABB_POSITION_SPEED_DIVIDER));
+				_handleInputBox("aabbPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / AABB_POSITION_SPEED_DIVIDER));
+				_handleInputBox("aabbPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / AABB_POSITION_SPEED_DIVIDER));
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("aabbPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("aabbPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("aabbPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / AABB_SIZE_DIVIDER), AABB_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("aabbPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / AABB_SIZE_SPEED_DIVIDER), AABB_SIZE_FACTOR, 0.0f);
+				_handleInputBox("aabbPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / AABB_SIZE_SPEED_DIVIDER), AABB_SIZE_FACTOR, 0.0f);
+				_handleInputBox("aabbPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / AABB_SIZE_SPEED_DIVIDER), AABB_SIZE_FACTOR, 0.0f);
 			}
 
 			_fe3d->aabb_setBasePosition(_activeAabbId, position);

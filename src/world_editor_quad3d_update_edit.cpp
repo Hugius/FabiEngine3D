@@ -140,9 +140,9 @@ void WorldEditor::_updateQuad3dEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
-				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
-				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
+				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
+				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -152,8 +152,8 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f);
+				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f);
 			}
 
 			_fe3d->quad3d_setPosition(_activeQuad3dId, position);

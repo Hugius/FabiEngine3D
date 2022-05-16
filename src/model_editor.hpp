@@ -72,11 +72,13 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
-	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 3.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
+	static inline constexpr float POSITION_FACTOR = 100.0f;
+	static inline constexpr float SIZE_FACTOR = 100.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;
 	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;

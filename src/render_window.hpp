@@ -37,7 +37,7 @@ public:
 	const bool isVsyncEnabled() const;
 
 private:
-	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float COLOR_FACTOR = 255.0f;
 
 	static inline constexpr int MAX_TITLE_LENGTH = 100;
 

@@ -104,9 +104,9 @@ void WorldEditor::_updateCaptorEditing()
 
 			auto position = _fe3d->captor_getPosition(_activeCaptorId);
 
-			_handleInputBox("captorPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / CAPTOR_POSITION_DIVIDER));
-			_handleInputBox("captorPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / CAPTOR_POSITION_DIVIDER));
-			_handleInputBox("captorPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / CAPTOR_POSITION_DIVIDER));
+			_handleInputBox("captorPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / CAPTOR_POSITION_SPEED_DIVIDER));
+			_handleInputBox("captorPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / CAPTOR_POSITION_SPEED_DIVIDER));
+			_handleInputBox("captorPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / CAPTOR_POSITION_SPEED_DIVIDER));
 
 			_fe3d->captor_setPosition(_activeCaptorId, position);
 			_fe3d->model_setBasePosition(("@@captor_" + _activeCaptorId), position);

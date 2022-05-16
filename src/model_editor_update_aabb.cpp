@@ -71,15 +71,15 @@ void ModelEditor::_updateChoiceAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("positionX", "X", (position.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionY", "Y", (position.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionZ", "Z", (position.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionX", "X", (position.x * POSITION_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionY", "Y", (position.y * POSITION_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionZ", "Z", (position.z * POSITION_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * SIZE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
@@ -87,42 +87,42 @@ void ModelEditor::_updateChoiceAabbMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3((value / 100.0f), position.y, position.z));
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3((value / POSITION_FACTOR), position.y, position.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3(position.x, (value / 100.0f), position.z));
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3(position.x, (value / POSITION_FACTOR), position.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3(position.x, position.y, (value / 100.0f)));
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), fvec3(position.x, position.y, (value / POSITION_FACTOR)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3((value / 100.0f), size.y, size.z));
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3((value / SIZE_FACTOR), size.y, size.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3(size.x, (value / 100.0f), size.z));
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3(size.x, (value / SIZE_FACTOR), size.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3(size.x, size.y, (value / 100.0f)));
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), fvec3(size.x, size.y, (value / SIZE_FACTOR)));
 		}
 	}
 }

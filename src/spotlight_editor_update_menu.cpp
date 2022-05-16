@@ -88,13 +88,13 @@ void SpotlightEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("angle")->isHovered())
 		{
@@ -102,7 +102,7 @@ void SpotlightEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("distance")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("distance", "Distance", (distance * DISTANCE_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("distance", "Distance", (distance * DISTANCE_FACTOR), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
@@ -110,28 +110,28 @@ void SpotlightEditor::_updateChoiceMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3((value / COLOR_MULTIPLIER), color.g, color.b));
+			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3((value / COLOR_FACTOR), color.g, color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3(color.r, (value / COLOR_MULTIPLIER), color.b));
+			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3(color.r, (value / COLOR_FACTOR), color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3(color.r, color.g, (value / COLOR_MULTIPLIER)));
+			_fe3d->spotlight_setColor(_currentSpotlightId, fvec3(color.r, color.g, (value / COLOR_FACTOR)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->spotlight_setIntensity(_currentSpotlightId, (value / INTENSITY_MULTIPLIER));
+			_fe3d->spotlight_setIntensity(_currentSpotlightId, (value / INTENSITY_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "angle") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -145,7 +145,7 @@ void SpotlightEditor::_updateChoiceMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->spotlight_setDistance(_currentSpotlightId, (value / DISTANCE_MULTIPLIER));
+			_fe3d->spotlight_setDistance(_currentSpotlightId, (value / DISTANCE_FACTOR));
 		}
 	}
 }

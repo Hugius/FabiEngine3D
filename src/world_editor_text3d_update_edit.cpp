@@ -123,9 +123,9 @@ void WorldEditor::_updateText3dEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
-				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
-				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
+				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / TEXT3D_POSITION_SPEED_DIVIDER));
+				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / TEXT3D_POSITION_SPEED_DIVIDER));
+				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / TEXT3D_POSITION_SPEED_DIVIDER));
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -135,8 +135,8 @@ void WorldEditor::_updateText3dEditing()
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / TEXT3D_SIZE_DIVIDER), TEXT3D_SIZE_MULTIPLIER, 0.0f);
-				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / TEXT3D_SIZE_DIVIDER), TEXT3D_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / TEXT3D_SIZE_SPEED_DIVIDER), TEXT3D_SIZE_FACTOR, 0.0f);
+				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / TEXT3D_SIZE_SPEED_DIVIDER), TEXT3D_SIZE_FACTOR, 0.0f);
 			}
 
 			_fe3d->text3d_setPosition(_activeText3dId, position);

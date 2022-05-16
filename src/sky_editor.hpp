@@ -37,7 +37,7 @@ private:
 	static inline const fvec2 SKY_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
-	static inline constexpr float COLOR_MULTIPLIER = 255.0f;
+	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float MOTION_BLUR_INTENSITY = 0.25f;
 
 	static inline constexpr int MOTION_BLUR_QUALITY = 5;

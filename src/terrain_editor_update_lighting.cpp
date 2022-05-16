@@ -72,21 +72,21 @@ void TerrainEditor::_updateLightingMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setColor(_currentTerrainId, fvec3((value / COLOR_MULTIPLIER), color.g, color.b));
+			_fe3d->terrain_setColor(_currentTerrainId, fvec3((value / COLOR_FACTOR), color.g, color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setColor(_currentTerrainId, fvec3(color.r, (value / COLOR_MULTIPLIER), color.b));
+			_fe3d->terrain_setColor(_currentTerrainId, fvec3(color.r, (value / COLOR_FACTOR), color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->terrain_setColor(_currentTerrainId, fvec3(color.r, color.g, (value / COLOR_MULTIPLIER)));
+			_fe3d->terrain_setColor(_currentTerrainId, fvec3(color.r, color.g, (value / COLOR_FACTOR)));
 		}
 
 		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");

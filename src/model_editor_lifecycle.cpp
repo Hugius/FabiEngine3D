@@ -17,7 +17,7 @@ void ModelEditor::_load()
 	_fe3d->model_setBaseSize(GRID_ID, fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap(GRID_ID, "", GRID_TEXTURE_PATH);
 	_fe3d->model_setTextureRepeat(GRID_ID, "", GRID_REPEAT);
-	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
+	_fe3d->model_setMinAlpha(GRID_ID, "", GRID_MIN_ALPHA);
 	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
 	_fe3d->model_setShadowed(GRID_ID, false);
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
@@ -154,7 +154,7 @@ void ModelEditor::_loadGUI()
 	leftWindow->createScreen("modelEditorMenuMiscellaneous");
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("size", fvec2(0.0f, POSITIONS(8)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("opacity", fvec2(0.0f, POSITIONS(8)[1]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("minTextureAlpha", fvec2(0.0f, POSITIONS(8)[2]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("minAlpha", fvec2(0.0f, POSITIONS(8)[2]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("isFaceCulled", fvec2(0.0f, POSITIONS(8)[3]), TEXT_SIZE("Culling: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Culling: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("levelOfDetailId", fvec2(0.0f, POSITIONS(8)[4]), TEXT_SIZE("LOD Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOD Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("levelOfDetailDistance", fvec2(0.0f, POSITIONS(8)[5]), TEXT_SIZE("LOD Distance"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOD Distance", TEXT_COLOR, TEXT_HOVER_COLOR, true);

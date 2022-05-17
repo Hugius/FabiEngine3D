@@ -12,7 +12,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || _currentPartId.empty());
 		const auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelId) : fvec3(0.0f));
 		const auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelId, _currentPartId) : 0.0f);
-		const auto minTextureAlpha = (isPartSelected ? _fe3d->model_getMinTextureAlpha(_currentModelId, _currentPartId) : 0.0f);
+		const auto minAlpha = (isPartSelected ? _fe3d->model_getMinAlpha(_currentModelId, _currentPartId) : 0.0f);
 		const auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelId, _currentPartId) : false);
 		const auto levelOfDetailId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailId(_currentModelId) : "");
 		const auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
@@ -41,9 +41,9 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * OPACITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("minAlpha", "Min Alpha", (minAlpha * MIN_ALPHA_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -142,12 +142,12 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_originalPartOpacity = opacity;
 			}
 		}
-		else if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "minAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (value / MIN_TEXTURE_ALPHA_FACTOR));
+			_fe3d->model_setMinAlpha(_currentModelId, _currentPartId, (value / MIN_ALPHA_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "levelOfDetailId") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -218,7 +218,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		screen->getButton("size")->setHoverable(isNoPartSelected);
 		screen->getButton("opacity")->setHoverable(isPartSelected);
-		screen->getButton("minTextureAlpha")->setHoverable(isPartSelected);
+		screen->getButton("minAlpha")->setHoverable(isPartSelected);
 		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
 		screen->getButton("levelOfDetailId")->setHoverable(isNoPartSelected);
 		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);

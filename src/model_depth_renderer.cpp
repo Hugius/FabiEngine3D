@@ -51,7 +51,7 @@ void ModelDepthRenderer::render(const shared_ptr<Model> model)
 	{
 		_shaderBuffer->uploadUniform("u_transformation", model->getTransformation(partId));
 		_shaderBuffer->uploadUniform("u_textureRepeat", model->getTextureRepeat(partId));
-		_shaderBuffer->uploadUniform("u_minTextureAlpha", model->getMinTextureAlpha(partId));
+		_shaderBuffer->uploadUniform("u_minAlpha", model->getMinAlpha(partId));
 
 		if(model->isFaceCulled(partId))
 		{

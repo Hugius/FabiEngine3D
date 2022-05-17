@@ -93,7 +93,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 		fvec3 color;
 		float lightness;
 		float opacity;
-		float minTextureAlpha;
+		float minAlpha;
 		int rotationOrder;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
@@ -125,7 +125,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 			>> lightness
 			>> isBright
 			>> opacity
-			>> minTextureAlpha
+			>> minAlpha
 			>> rotationOrder
 			>> hasAabb;
 
@@ -155,7 +155,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 			_fe3d->text3d_setRefracted(text3dId, isRefracted);
 			_fe3d->text3d_setBright(text3dId, isBright);
 			_fe3d->text3d_setOpacity(text3dId, opacity);
-			_fe3d->text3d_setMinTextureAlpha(text3dId, minTextureAlpha);
+			_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
 			_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
 
 			if(hasAabb)

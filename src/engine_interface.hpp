@@ -259,7 +259,7 @@ public:
 	void model_setLightness(const string & modelId, const string & partId, float value);
 	void model_setEmissionIntensity(const string & modelId, const string & partId, float value);
 	void model_setOpacity(const string & modelId, const string & partId, float value);
-	void model_setMinTextureAlpha(const string & modelId, const string & partId, float value);
+	void model_setMinAlpha(const string & modelId, const string & partId, float value);
 	void model_setColor(const string & modelId, const string & partId, const fvec3 & value);
 	void model_setWireframeColor(const string & modelId, const string & partId, const fvec3 & value);
 	void model_setMinClipPosition(const string & modelId, const fvec3 & value);
@@ -308,7 +308,7 @@ public:
 	const float model_getOpacity(const string & modelId, const string & partId) const;
 	const float model_getLevelOfDetailDistance(const string & modelId) const;
 	const float model_getEmissionIntensity(const string & modelId, const string & partId) const;
-	const float model_getMinTextureAlpha(const string & modelId, const string & partId) const;
+	const float model_getMinAlpha(const string & modelId, const string & partId) const;
 	const float model_getAnimationSpeedMultiplier(const string & modelId, const string & animation3dId) const;
 	const int model_getAnimationPlayCount(const string & modelId, const string & animation3dId) const;
 	const int model_getTextureRepeat(const string & modelId, const string & partId) const;
@@ -363,7 +363,7 @@ public:
 	void quad3d_setOpacity(const string & quad3dId, float value);
 	void quad3d_setTextureRepeat(const string & quad3dId, int value);
 	void quad3d_setEmissionIntensity(const string & quad3dId, float value);
-	void quad3d_setMinTextureAlpha(const string & quad3dId, float value);
+	void quad3d_setMinAlpha(const string & quad3dId, float value);
 	void quad3d_setVisible(const string & quad3dId, bool value);
 	void quad3d_setFacingCameraHorizontally(const string & quad3dId, bool value);
 	void quad3d_setFacingCameraVertically(const string & quad3dId, bool value);
@@ -403,7 +403,7 @@ public:
 	const float quad3d_getLightness(const string & quad3dId) const;
 	const float quad3d_getOpacity(const string & quad3dId) const;
 	const float quad3d_getEmissionIntensity(const string & quad3dId) const;
-	const float quad3d_getMinTextureAlpha(const string & quad3dId) const;
+	const float quad3d_getMinAlpha(const string & quad3dId) const;
 	const int quad3d_getAnimationPlayCount(const string & quad3dId, const string & animation2dId) const;
 	const int quad3d_getTextureRepeat(const string & quad3dId) const;
 	const int quad3d_getAnimationRowIndex(const string & quad3dId, const string & animation2dId) const;
@@ -511,7 +511,7 @@ public:
 	void text3d_setMaxClipPosition(const string & text3dId, const fvec3 & value);
 	void text3d_setLightness(const string & text3dId, float value);
 	void text3d_setOpacity(const string & text3dId, float value);
-	void text3d_setMinTextureAlpha(const string & text3dId, float value);
+	void text3d_setMinAlpha(const string & text3dId, float value);
 	void text3d_setVisible(const string & text3dId, bool value);
 	void text3d_setFacingCameraHorizontally(const string & text3dId, bool value);
 	void text3d_setFacingCameraVertically(const string & text3dId, bool value);
@@ -538,7 +538,7 @@ public:
 	const fvec2 & text3d_getSize(const string & text3dId) const;
 	const float text3d_getLightness(const string & text3dId) const;
 	const float text3d_getOpacity(const string & text3dId) const;
-	const float text3d_getMinTextureAlpha(const string & text3dId) const;
+	const float text3d_getMinAlpha(const string & text3dId) const;
 	const bool text3d_isExisting(const string & text3dId) const;
 	const bool text3d_isVisible(const string & text3dId) const;
 	const bool text3d_isFacingCameraHorizontally(const string & text3dId) const;

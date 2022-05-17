@@ -395,9 +395,9 @@ void Model::setRotationOrder(DirectionOrderType value)
 	_rotationOrder = value;
 }
 
-void Model::setMinTextureAlpha(const string & partId, float value)
+void Model::setMinAlpha(const string & partId, float value)
 {
-	_parts.at(partId)->minTextureAlpha = clamp(value, 0.0f, 1.0f);
+	_parts.at(partId)->minAlpha = clamp(value, 0.0f, 1.0f);
 }
 
 void Model::setReflectionType(const string & partId, ReflectionType value)
@@ -855,9 +855,9 @@ const float Model::getEmissionIntensity(const string & partId) const
 	return _parts.at(partId)->emissionIntensity;
 }
 
-const float Model::getMinTextureAlpha(const string & partId) const
+const float Model::getMinAlpha(const string & partId) const
 {
-	return _parts.at(partId)->minTextureAlpha;
+	return _parts.at(partId)->minAlpha;
 }
 
 const float Model::getOpacity(const string & partId) const

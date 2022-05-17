@@ -254,6 +254,8 @@ void TopViewportController::_updateExtraScreenManagement()
 					file.close();
 				}
 			}
+
+			Logger::throwWarning("Project exported");
 		}
 	}
 	else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("documentation")->isHovered())

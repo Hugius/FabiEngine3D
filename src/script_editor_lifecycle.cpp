@@ -14,7 +14,7 @@ void ScriptEditor::_load()
 	_fe3d->text3d_setVisible(CARET_ID, false);
 	_fe3d->text3d_setContent(CARET_ID, "|");
 	_fe3d->text3d_setSize(CARET_ID, CARET_SIZE);
-	_fe3d->text3d_setMinTextureAlpha(CARET_ID, CARET_MIN_TEXTURE_ALPHA);
+	_fe3d->text3d_setMinAlpha(CARET_ID, CARET_MIN_ALPHA);
 	_fe3d->graphics_setBloomEnabled(true);
 	_fe3d->graphics_setBloomType(BLOOM_TYPE);
 	_fe3d->graphics_setBloomIntensity(BLOOM_INTENSITY);

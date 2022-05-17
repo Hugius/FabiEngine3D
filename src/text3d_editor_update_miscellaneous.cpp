@@ -13,7 +13,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		const auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(_currentText3dId);
 		const auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(_currentText3dId);
 		const auto opacity = _fe3d->text3d_getOpacity(_currentText3dId);
-		const auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(_currentText3dId);
+		const auto minAlpha = _fe3d->text3d_getMinAlpha(_currentText3dId);
 		const auto rotationOrder = _fe3d->text3d_getRotationOrder(_currentText3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -61,9 +61,9 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * MIN_TEXTURE_ALPHA_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("minAlpha", "Min Alpha", (minAlpha * MIN_ALPHA_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
@@ -129,12 +129,12 @@ void Text3dEditor::_updateMiscellaneousMenu()
 
 			_fe3d->text3d_setOpacity(_currentText3dId, (value / OPACITY_FACTOR));
 		}
-		else if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
+		else if((_gui->getOverlay()->getValueFormId() == "minAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->text3d_setMinTextureAlpha(_currentText3dId, (value / MIN_TEXTURE_ALPHA_FACTOR));
+			_fe3d->text3d_setMinAlpha(_currentText3dId, (value / MIN_ALPHA_FACTOR));
 		}
 
 		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");

@@ -293,9 +293,9 @@ void Quad3d::setFrozen(bool value)
 	_isFrozen = value;
 }
 
-void Quad3d::setMinTextureAlpha(float value)
+void Quad3d::setMinAlpha(float value)
 {
-	_minTextureAlpha = value;
+	_minAlpha = value;
 }
 
 void Quad3d::setHorizontallyFlipped(bool value)
@@ -418,9 +418,9 @@ const float Quad3d::getEmissionIntensity() const
 	return _emissionIntensity;
 }
 
-const float Quad3d::getMinTextureAlpha() const
+const float Quad3d::getMinAlpha() const
 {
-	return _minTextureAlpha;
+	return _minAlpha;
 }
 
 const bool Quad3d::isVisible() const

@@ -51,7 +51,7 @@ uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_opacity;
-uniform float u_minTextureAlpha;
+uniform float u_minAlpha;
 uniform float u_shadowSize;
 uniform float u_minFogDistance;
 uniform float u_maxFogDistance;
@@ -174,7 +174,7 @@ vec3 calculateDiffuseMapping()
 		
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(GAMMA_VALUE));
 
-		if(diffuseMapColor.a < u_minTextureAlpha)
+		if(diffuseMapColor.a < u_minAlpha)
 		{
 			discard;
 		}
@@ -193,7 +193,7 @@ vec3 calculateEmissionMapping()
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if(emissionMapColor.a < u_minTextureAlpha)
+		if(emissionMapColor.a < u_minAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -212,7 +212,7 @@ vec3 calculateSpecularMapping()
     {
 		vec4 specularMapColor = texture(u_specularMap, f_uv);
 
-		if(specularMapColor.a < u_minTextureAlpha)
+		if(specularMapColor.a < u_minAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -231,7 +231,7 @@ vec3 calculateReflectionMapping()
     {
 		vec4 reflectionMapColor = texture(u_reflectionMap, f_uv);
 
-		if(reflectionMapColor.a < u_minTextureAlpha)
+		if(reflectionMapColor.a < u_minAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -250,7 +250,7 @@ vec3 calculateRefractionMapping()
     {
 		vec4 refractionMapColor = texture(u_refractionMap, f_uv);
 
-		if(refractionMapColor.a < u_minTextureAlpha)
+		if(refractionMapColor.a < u_minAlpha)
 		{
 			return vec3(0.0f);
 		}

@@ -204,7 +204,7 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 
 	for(const auto & partId : model->getPartIds())
 	{
-		_shaderBuffer->uploadUniform("u_minTextureAlpha", model->getMinTextureAlpha(partId));
+		_shaderBuffer->uploadUniform("u_minAlpha", model->getMinAlpha(partId));
 		_shaderBuffer->uploadUniform("u_isReflective", model->isReflective(partId));
 		_shaderBuffer->uploadUniform("u_isRefractive", model->isRefractive(partId));
 		_shaderBuffer->uploadUniform("u_emissionIntensity", model->getEmissionIntensity(partId));

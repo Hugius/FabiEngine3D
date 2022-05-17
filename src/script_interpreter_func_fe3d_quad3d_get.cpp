@@ -657,7 +657,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad3d_get_min_texture_alpha")
+	else if(functionName == "fe3d:quad3d_get_min_alpha")
 	{
 		const auto types = {SVT::STRING};
 
@@ -665,7 +665,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->quad3d_getMinTextureAlpha(args[0]->getString());
+				const auto result = _fe3d->quad3d_getMinAlpha(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

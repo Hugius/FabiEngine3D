@@ -1251,7 +1251,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_min_texture_alpha")
+	else if(functionName == "fe3d:model_get_min_alpha")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -1261,7 +1261,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			{
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					const auto result = _fe3d->model_getMinTextureAlpha(args[0]->getString(), args[1]->getString());
+					const auto result = _fe3d->model_getMinAlpha(args[0]->getString(), args[1]->getString());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 				}

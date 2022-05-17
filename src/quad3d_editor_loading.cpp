@@ -108,7 +108,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		fvec3 color;
 		float lightness;
 		float opacity;
-		float minTextureAlpha;
+		float minAlpha;
 		float emissionIntensity;
 		int textureRepeat;
 		int rotationOrder;
@@ -145,7 +145,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 			>> isBright
 			>> emissionIntensity
 			>> opacity
-			>> minTextureAlpha
+			>> minAlpha
 			>> rotationOrder
 			>> hasAabb;
 
@@ -171,7 +171,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 		_fe3d->quad3d_setBright(quad3dId, isBright);
 		_fe3d->quad3d_setOpacity(quad3dId, opacity);
 		_fe3d->quad3d_setEmissionIntensity(quad3dId, emissionIntensity);
-		_fe3d->quad3d_setMinTextureAlpha(quad3dId, minTextureAlpha);
+		_fe3d->quad3d_setMinAlpha(quad3dId, minAlpha);
 		_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
 
 		if(hasAabb)

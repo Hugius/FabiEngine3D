@@ -17,7 +17,7 @@ uniform float u_minFogDistance;
 uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
-uniform float u_minTextureAlpha;
+uniform float u_minAlpha;
 uniform float u_opacity;
 uniform float u_emissionIntensity;
 
@@ -68,7 +68,7 @@ vec3 calculateDiffuseMapping()
 
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(GAMMA_VALUE));
 
-		if(diffuseMapColor.a < u_minTextureAlpha)
+		if(diffuseMapColor.a < u_minAlpha)
 		{
 			discard;
 		}
@@ -87,7 +87,7 @@ vec3 calculateEmissionMapping()
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if(emissionMapColor.a < u_minTextureAlpha)
+		if(emissionMapColor.a < u_minAlpha)
 		{
 			return vec3(0.0f);
 		}

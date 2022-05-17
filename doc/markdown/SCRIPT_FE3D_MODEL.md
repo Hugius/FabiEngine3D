@@ -66,7 +66,7 @@
 - `fe3d:model_set_reflection_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_refraction_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
-- `fe3d:model_set_min_texture_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_min_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_animation_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_animation_frame_index` (`STR` model_id, `STR` animation_id, `INT` value) -----> `NONE`
 
@@ -150,7 +150,7 @@
 - `fe3d:model_get_normal_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_refraction_type` (`STR` model_id, `STR` part_id) -----> `STR`
-- `fe3d:model_get_min_texture_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_min_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_rotation_order` (`STR` id) -----> `STR`
 - `fe3d:model_get_animation_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
 - `fe3d:model_get_animation_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`

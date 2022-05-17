@@ -90,7 +90,7 @@ const bool ModelEditor::saveModelsToFile() const
 			const auto isBright = _fe3d->model_isBright(modelId, partId);
 			const auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
 			const auto opacity = _fe3d->model_getOpacity(modelId, partId);
-			const auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
+			const auto minAlpha = _fe3d->model_getMinAlpha(modelId, partId);
 
 			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
@@ -174,7 +174,7 @@ const bool ModelEditor::saveModelsToFile() const
 				<< " "
 				<< opacity
 				<< " "
-				<< minTextureAlpha
+				<< minAlpha
 				<< endl;
 		}
 

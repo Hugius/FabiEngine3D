@@ -467,9 +467,9 @@ void EngineInterface::model_setOpacity(const string & modelId, const string & pa
 	_core->getModelManager()->getModel(modelId)->setOpacity(partId, value);
 }
 
-void EngineInterface::model_setMinTextureAlpha(const string & modelId, const string & partId, float value)
+void EngineInterface::model_setMinAlpha(const string & modelId, const string & partId, float value)
 {
-	_core->getModelManager()->getModel(modelId)->setMinTextureAlpha(partId, value);
+	_core->getModelManager()->getModel(modelId)->setMinAlpha(partId, value);
 }
 
 void EngineInterface::model_setShadowed(const string & modelId, bool value)
@@ -750,9 +750,9 @@ const float EngineInterface::model_getEmissionIntensity(const string & modelId, 
 	return _core->getModelManager()->getModel(modelId)->getEmissionIntensity(partId);
 }
 
-const float EngineInterface::model_getMinTextureAlpha(const string & modelId, const string & partId) const
+const float EngineInterface::model_getMinAlpha(const string & modelId, const string & partId) const
 {
-	return _core->getModelManager()->getModel(modelId)->getMinTextureAlpha(partId);
+	return _core->getModelManager()->getModel(modelId)->getMinAlpha(partId);
 }
 
 const float EngineInterface::model_getAnimationSpeedMultiplier(const string & modelId, const string & animation3dId) const

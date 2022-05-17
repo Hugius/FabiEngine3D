@@ -165,9 +165,9 @@ void EngineInterface::text3d_setOpacity(const string & text3dId, float value)
 	_core->getText3dManager()->getText3d(text3dId)->setOpacity(value);
 }
 
-void EngineInterface::text3d_setMinTextureAlpha(const string & text3dId, float value)
+void EngineInterface::text3d_setMinAlpha(const string & text3dId, float value)
 {
-	_core->getText3dManager()->getText3d(text3dId)->setMinTextureAlpha(value);
+	_core->getText3dManager()->getText3d(text3dId)->setMinAlpha(value);
 }
 
 const float EngineInterface::text3d_getLightness(const string & text3dId) const
@@ -180,9 +180,9 @@ const float EngineInterface::text3d_getOpacity(const string & text3dId) const
 	return _core->getText3dManager()->getText3d(text3dId)->getOpacity();
 }
 
-const float EngineInterface::text3d_getMinTextureAlpha(const string & text3dId) const
+const float EngineInterface::text3d_getMinAlpha(const string & text3dId) const
 {
-	return _core->getText3dManager()->getText3d(text3dId)->getMinTextureAlpha();
+	return _core->getText3dManager()->getText3d(text3dId)->getMinAlpha();
 }
 
 const bool EngineInterface::text3d_isExisting(const string & text3dId) const

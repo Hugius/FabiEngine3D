@@ -134,7 +134,7 @@ void Text3d::setContent(const string & value)
 			quad3d->setDiffuseMapPath(_fontMapPath);
 			quad3d->setDiffuseMap(_fontTextureBuffer);
 			quad3d->setOpacity(_opacity);
-			quad3d->setMinTextureAlpha(_minTextureAlpha);
+			quad3d->setMinAlpha(_minAlpha);
 			quad3d->setWireframeColor(_wireframeColor);
 			quad3d->setColor(_color);
 			quad3d->setWireframed(_isWireframed);
@@ -327,13 +327,13 @@ void Text3d::setMaxClipPosition(const fvec3 & value)
 	}
 }
 
-void Text3d::setMinTextureAlpha(float value)
+void Text3d::setMinAlpha(float value)
 {
-	_minTextureAlpha = value;
+	_minAlpha = value;
 
 	for(const auto & quad3d : _quad3ds)
 	{
-		quad3d->setMinTextureAlpha(_minTextureAlpha);
+		quad3d->setMinAlpha(_minAlpha);
 	}
 }
 
@@ -520,9 +520,9 @@ const fvec3 & Text3d::getMaxClipPosition() const
 	return _maxClipPosition;
 }
 
-const float Text3d::getMinTextureAlpha() const
+const float Text3d::getMinAlpha() const
 {
-	return _minTextureAlpha;
+	return _minAlpha;
 }
 
 const float Text3d::getLightness() const

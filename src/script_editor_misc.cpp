@@ -28,7 +28,7 @@ void ScriptEditor::_createDisplayContent()
 		const auto lineNumberSize = fvec2((lineNumberString.size() * CHAR_SIZE.x), CHAR_SIZE.y);
 
 		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, true);
-		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.05f);
+		_fe3d->text3d_setMinAlpha(lineNumberId, 0.05f);
 		_fe3d->text3d_setContent(lineNumberId, lineNumberString);
 		_fe3d->text3d_setPosition(lineNumberId, lineNumberPosition);
 		_fe3d->text3d_setSize(lineNumberId, lineNumberSize);
@@ -52,7 +52,7 @@ void ScriptEditor::_createDisplayContent()
 		const auto isComment = (noWhiteSpace.substr(0, 3) == "///");
 
 		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, true);
-		_fe3d->text3d_setMinTextureAlpha(lineTextId, 0.05f);
+		_fe3d->text3d_setMinAlpha(lineTextId, 0.05f);
 		_fe3d->text3d_setContent(lineTextId, lineTextString);
 		_fe3d->text3d_setPosition(lineTextId, lineTextPosition);
 		_fe3d->text3d_setSize(lineTextId, lineTextSize);

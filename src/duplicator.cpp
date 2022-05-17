@@ -160,7 +160,7 @@ void Duplicator::copyTemplateModel(const string & newId, const string & template
 		_fe3d->model_setColor(newId, partId, _fe3d->model_getColor(templateId, partId));
 		_fe3d->model_setTextureRepeat(newId, partId, _fe3d->model_getTextureRepeat(templateId, partId));
 		_fe3d->model_setFaceCulled(newId, partId, _fe3d->model_isFaceCulled(templateId, partId));
-		_fe3d->model_setMinTextureAlpha(newId, partId, _fe3d->model_getMinTextureAlpha(templateId, partId));
+		_fe3d->model_setMinAlpha(newId, partId, _fe3d->model_getMinAlpha(templateId, partId));
 		_fe3d->model_setOpacity(newId, partId, _fe3d->model_getOpacity(templateId, partId));
 
 		if(_fe3d->model_hasDiffuseMap(templateId, partId))
@@ -229,7 +229,7 @@ void Duplicator::copyTemplateQuad3d(const string & newId, const string & templat
 	_fe3d->quad3d_setEmissionIntensity(newId, _fe3d->quad3d_getEmissionIntensity(templateId));
 	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
 	_fe3d->quad3d_setOpacity(newId, _fe3d->quad3d_getOpacity(templateId));
-	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
+	_fe3d->quad3d_setMinAlpha(newId, _fe3d->quad3d_getMinAlpha(templateId));
 	_fe3d->quad3d_setRotationOrder(newId, _fe3d->quad3d_getRotationOrder(templateId));
 
 	if(_fe3d->quad3d_hasDiffuseMap(templateId))
@@ -293,7 +293,7 @@ void Duplicator::copyTemplateText3d(const string & newId, const string & templat
 	_fe3d->text3d_setBright(newId, _fe3d->text3d_isBright(templateId));
 	_fe3d->text3d_setOpacity(newId, _fe3d->text3d_getOpacity(templateId));
 	_fe3d->text3d_setContent(newId, _fe3d->text3d_getContent(templateId));
-	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
+	_fe3d->text3d_setMinAlpha(newId, _fe3d->text3d_getMinAlpha(templateId));
 	_fe3d->text3d_setRotationOrder(newId, _fe3d->text3d_getRotationOrder(templateId));
 
 	if(_fe3d->aabb_isExisting(templateId))

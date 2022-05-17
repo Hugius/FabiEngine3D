@@ -40,7 +40,7 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 		const auto isBright = _fe3d->quad3d_isBright(quad3dId);
 		const auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quad3dId);
 		const auto opacity = _fe3d->quad3d_getOpacity(quad3dId);
-		const auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(quad3dId);
+		const auto minAlpha = _fe3d->quad3d_getMinAlpha(quad3dId);
 		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quad3dId));
 		const auto hasAabb = _fe3d->aabb_isExisting(quad3dId);
 
@@ -96,7 +96,7 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 			<< " "
 			<< opacity
 			<< " "
-			<< minTextureAlpha
+			<< minAlpha
 			<< " "
 			<< rotationOrder
 			<< " "

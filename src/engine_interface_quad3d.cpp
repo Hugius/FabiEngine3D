@@ -295,9 +295,9 @@ void EngineInterface::quad3d_setEmissionIntensity(const string & quad3dId, float
 	_core->getQuad3dManager()->getQuad3d(quad3dId)->setEmissionIntensity(value);
 }
 
-void EngineInterface::quad3d_setMinTextureAlpha(const string & quad3dId, float value)
+void EngineInterface::quad3d_setMinAlpha(const string & quad3dId, float value)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setMinTextureAlpha(value);
+	_core->getQuad3dManager()->getQuad3d(quad3dId)->setMinAlpha(value);
 }
 
 const float EngineInterface::quad3d_getLightness(const string & quad3dId) const
@@ -320,9 +320,9 @@ const float EngineInterface::quad3d_getEmissionIntensity(const string & quad3dId
 	return _core->getQuad3dManager()->getQuad3d(quad3dId)->getEmissionIntensity();
 }
 
-const float EngineInterface::quad3d_getMinTextureAlpha(const string & quad3dId) const
+const float EngineInterface::quad3d_getMinAlpha(const string & quad3dId) const
 {
-	return _core->getQuad3dManager()->getQuad3d(quad3dId)->getMinTextureAlpha();
+	return _core->getQuad3dManager()->getQuad3d(quad3dId)->getMinAlpha();
 }
 
 const int EngineInterface::quad3d_getAnimationPlayCount(const string & quad3dId, const string & animation2dId) const

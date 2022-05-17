@@ -42,7 +42,7 @@ public:
 	void setOpacity(float value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
-	void setMinTextureAlpha(float value);
+	void setMinAlpha(float value);
 	void setFrozen(bool value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
@@ -71,7 +71,7 @@ public:
 	const fvec2 & getUvMultiplier() const;
 	const fvec2 & getUvOffset() const;
 
-	const float getMinTextureAlpha() const;
+	const float getMinAlpha() const;
 	const float getLightness() const;
 	const float getOpacity() const;
 
@@ -219,7 +219,7 @@ private:
 	fvec2 _uvMultiplier = fvec2(1.0f);
 	fvec2 _uvOffset = fvec2(0.0f);
 
-	float _minTextureAlpha = 1.0f;
+	float _minAlpha = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;

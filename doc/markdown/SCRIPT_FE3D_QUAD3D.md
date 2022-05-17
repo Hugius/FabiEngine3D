@@ -42,7 +42,7 @@
 - `fe3d:quad3d_set_facing_camera_vertically` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_uv_multiplier` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:quad3d_set_uv_offset` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
-- `fe3d:quad3d_set_min_texture_alpha` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:quad3d_set_min_alpha` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_animation_row_index` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_animation_column_index` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_animation_interval_multiplier` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
@@ -106,7 +106,7 @@
 - `fe3d:quad3d_get_uv_multiplier_y` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_y` (`STR` id) -----> `DEC`
-- `fe3d:quad3d_get_min_texture_alpha` (`STR` id) -----> `DEC`
+- `fe3d:quad3d_get_min_alpha` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_animation_row_index` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_column_index` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_play_count` (`STR` quad_id, `STR` animation_id) -----> `INT`

@@ -61,7 +61,7 @@ private:
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
 	static inline constexpr float BLOOM_INTENSITY = 0.95f;
-	static inline constexpr float CARET_MIN_TEXTURE_ALPHA = 0.05f;
+	static inline constexpr float CARET_MIN_ALPHA = 0.05f;
 
 	static inline constexpr int MAX_LINE_COUNT = 99;
 	static inline constexpr int BLOOM_BLUR_COUNT = 3;

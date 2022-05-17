@@ -48,7 +48,7 @@ class ModelPart final
 	float specularIntensity = 1.0f;
 	float opacity = 1.0f;
 	float emissionIntensity = 1.0f;
-	float minTextureAlpha = 1.0f;
+	float minAlpha = 1.0f;
 
 	int textureRepeat = 1;
 

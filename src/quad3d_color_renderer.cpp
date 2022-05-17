@@ -73,7 +73,7 @@ void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
 	_shaderBuffer->uploadUniform("u_textureRepeat", quad3d->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_uvMultiplier", quad3d->getUvMultiplier());
 	_shaderBuffer->uploadUniform("u_uvOffset", quad3d->getUvOffset());
-	_shaderBuffer->uploadUniform("u_minTextureAlpha", quad3d->getMinTextureAlpha());
+	_shaderBuffer->uploadUniform("u_minAlpha", quad3d->getMinAlpha());
 	_shaderBuffer->uploadUniform("u_isHorizontallyFlipped", quad3d->isHorizontallyFlipped());
 	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", quad3d->isVerticallyFlipped());
 

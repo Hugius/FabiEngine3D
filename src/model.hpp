@@ -85,7 +85,7 @@ public:
 	void setWireframed(const string & partId, bool value);
 	void setFaceCulled(const string & partId, bool value);
 	void setRotationOrder(DirectionOrderType value);
-	void setMinTextureAlpha(const string & partId, float value);
+	void setMinAlpha(const string & partId, float value);
 	void setVisible(bool value);
 
 	const vector<string> getPartIds() const;
@@ -135,7 +135,7 @@ public:
 	const float getSpecularIntensity(const string & partId) const;
 	const float getOpacity(const string & partId) const;
 	const float getEmissionIntensity(const string & partId) const;
-	const float getMinTextureAlpha(const string & partId) const;
+	const float getMinAlpha(const string & partId) const;
 
 	const int getTextureRepeat(const string & partId) const;
 

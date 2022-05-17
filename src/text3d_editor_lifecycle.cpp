@@ -11,7 +11,7 @@ void Text3dEditor::_load()
 	_fe3d->model_setBaseSize(GRID_ID, fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap(GRID_ID, "", GRID_TEXTURE_PATH);
 	_fe3d->model_setTextureRepeat(GRID_ID, "", GRID_REPEAT);
-	_fe3d->model_setMinTextureAlpha(GRID_ID, "", GRID_MIN_TEXTURE_ALPHA);
+	_fe3d->model_setMinAlpha(GRID_ID, "", GRID_MIN_ALPHA);
 	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
 	_fe3d->model_setShadowed(GRID_ID, false);
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
@@ -110,7 +110,7 @@ void Text3dEditor::_loadGUI()
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("isHorizontallyFlipped", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("Flipped X: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped X: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("isVerticallyFlipped", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Flipped Y: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped Y: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("opacity", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("minTextureAlpha", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("minAlpha", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("rotationOrder", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Rotation: Y X Z"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation : Y X Z", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 

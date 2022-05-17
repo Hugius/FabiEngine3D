@@ -301,7 +301,7 @@ const bool ModelEditor::loadModelsFromFile()
 			float lightness;
 			float emissionIntensity;
 			float opacity;
-			float minTextureAlpha;
+			float minAlpha;
 			int reflectionType;
 			int refractionType;
 			int textureRepeat;
@@ -338,7 +338,7 @@ const bool ModelEditor::loadModelsFromFile()
 				>> isBright
 				>> emissionIntensity
 				>> opacity
-				>> minTextureAlpha;
+				>> minAlpha;
 
 			partId = (partId == "?") ? "" : partId;
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -381,7 +381,7 @@ const bool ModelEditor::loadModelsFromFile()
 			_fe3d->model_setBright(modelId, partId, isBright);
 			_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
 			_fe3d->model_setOpacity(modelId, partId, opacity);
-			_fe3d->model_setMinTextureAlpha(modelId, partId, minTextureAlpha);
+			_fe3d->model_setMinAlpha(modelId, partId, minAlpha);
 
 			if(!diffuseMapPath.empty())
 			{

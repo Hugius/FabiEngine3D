@@ -49,7 +49,7 @@ public:
 	void setTextureRepeat(int value);
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
-	void setMinTextureAlpha(float value);
+	void setMinAlpha(float value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
 	void setRotationOrder(DirectionOrderType value);
@@ -79,7 +79,7 @@ public:
 	const float getLightness() const;
 	const float getOpacity() const;
 	const float getEmissionIntensity() const;
-	const float getMinTextureAlpha() const;
+	const float getMinAlpha() const;
 
 	const int getTextureRepeat() const;
 
@@ -124,7 +124,7 @@ private:
 	fvec2 _uvMultiplier = fvec2(1.0f);
 	fvec2 _uvOffset = fvec2(0.0f);
 
-	float _minTextureAlpha = 1.0f;
+	float _minAlpha = 1.0f;
 	float _emissionIntensity = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;

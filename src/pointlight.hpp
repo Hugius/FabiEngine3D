@@ -39,7 +39,7 @@ private:
 
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
-	fvec3 _radius = fvec3(1.0f);
+	fvec3 _radius = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 
 	float _positionTargetSpeed = 0.0f;

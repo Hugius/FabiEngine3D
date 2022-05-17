@@ -274,11 +274,11 @@ private:
 	float _lensFlareOpacity = 0.0f;
 	float _lensFlareSensitivity = 1.0f;
 	float _lensFlareIntensity = 1.0f;
-	float _motionBlurIntensity = 0.0f;
+	float _motionBlurIntensity = 1.0f;
 	float _motionBlurMixValue = 0.0f;
-	float _skyExposureIntensity = 0.0f;
+	float _skyExposureIntensity = 1.0f;
 	float _skyExposureSpeed = 0.0f;
-	float _skyExposureLightness = 0.0f;
+	float _skyExposureLightness = 1.0f;
 
 	int _bloomQuality = MIN_BLOOM_QUALITY;
 	int _dofQuality = MIN_DOF_QUALITY;

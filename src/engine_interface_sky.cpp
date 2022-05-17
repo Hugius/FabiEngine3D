@@ -110,11 +110,6 @@ void EngineInterface::sky_delete(const string & skyId)
 	_core->getSkyManager()->deleteSky(skyId);
 }
 
-void EngineInterface::sky_setVisible(const string & skyId, bool value)
-{
-	_core->getSkyManager()->getSky(skyId)->setVisible(value);
-}
-
 void EngineInterface::sky_select(const string & skyId)
 {
 	_core->getSkyManager()->selectSky(skyId);
@@ -240,11 +235,6 @@ const fvec3 & EngineInterface::sky_getColor(const string & skyId) const
 const bool EngineInterface::sky_isExisting(const string & skyId) const
 {
 	return _core->getSkyManager()->isSkyExisting(skyId);
-}
-
-const bool EngineInterface::sky_isVisible(const string & skyId) const
-{
-	return _core->getSkyManager()->getSky(skyId)->isVisible();
 }
 
 const bool EngineInterface::sky_isWireframed(const string & skyId) const

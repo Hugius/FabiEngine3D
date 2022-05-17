@@ -50,7 +50,6 @@ public:
 	void setColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
-	void setVisible(bool value);
 
 	const vector<float> & getPixels() const;
 
@@ -93,7 +92,6 @@ public:
 	const int getBlueTextureRepeat() const;
 	const int getTextureRepeat() const;
 
-	const bool isVisible() const;
 	const bool isSpecular() const;
 	const bool isWireframed() const;
 
@@ -142,5 +140,4 @@ private:
 
 	bool _isSpecular = false;
 	bool _isWireframed = false;
-	bool _isVisible = true;
 };

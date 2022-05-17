@@ -121,11 +121,7 @@ void SkyManager::update()
 	if(sky != nullptr)
 	{
 		sky->updateTarget();
-
-		if(sky->isVisible())
-		{
-			sky->updateTransformation();
-		}
+		sky->updateTransformation();
 	}
 }
 

@@ -178,11 +178,6 @@ void Terrain::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
-void Terrain::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void Terrain::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
@@ -371,11 +366,6 @@ const shared_ptr<VertexBuffer> Terrain::getVertexBuffer() const
 const vector<float> & Terrain::getPixels() const
 {
 	return _pixels;
-}
-
-const bool Terrain::isVisible() const
-{
-	return _isVisible;
 }
 
 const bool Terrain::isSpecular() const

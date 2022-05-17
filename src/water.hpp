@@ -42,7 +42,6 @@ public:
 	void setWireframeColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
-	void setVisible(bool value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
@@ -74,7 +73,6 @@ public:
 
 	const int getTextureRepeat() const;
 
-	const bool isVisible() const;
 	const bool isSpecular() const;
 	const bool isReflective() const;
 	const bool isRefractive() const;
@@ -120,5 +118,4 @@ private:
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireframed = false;
-	bool _isVisible = true;
 };

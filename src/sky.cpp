@@ -113,11 +113,6 @@ void Sky::setRotationOrder(DirectionOrderType value)
 	_rotationOrder = value;
 }
 
-void Sky::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 const shared_ptr<VertexBuffer> Sky::getVertexBuffer() const
 {
 	return _vertexBuffer;
@@ -161,11 +156,6 @@ const float Sky::getLightness() const
 const fvec3 & Sky::getRotation() const
 {
 	return _rotation;
-}
-
-const bool Sky::isVisible() const
-{
-	return _isVisible;
 }
 
 const bool Sky::isWireframed() const

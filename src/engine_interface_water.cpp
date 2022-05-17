@@ -11,11 +11,6 @@ void EngineInterface::water_delete(const string & waterId)
 	_core->getWaterManager()->deleteWater(waterId);
 }
 
-void EngineInterface::water_setVisible(const string & waterId, bool value)
-{
-	_core->getWaterManager()->getWater(waterId)->setVisible(value);
-}
-
 void EngineInterface::water_select(const string & waterId)
 {
 	_core->getWaterManager()->selectWater(waterId);
@@ -209,11 +204,6 @@ void EngineInterface::water_setEdged(const string & waterId, bool value)
 const bool EngineInterface::water_isExisting(const string & waterId) const
 {
 	return _core->getWaterManager()->isWaterExisting(waterId);
-}
-
-const bool EngineInterface::water_isVisible(const string & waterId) const
-{
-	return _core->getWaterManager()->getWater(waterId)->isVisible();
 }
 
 const bool EngineInterface::water_isSpecular(const string & waterId) const

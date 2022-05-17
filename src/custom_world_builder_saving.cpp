@@ -27,7 +27,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(skyId));
 		const auto isWireframed = _fe3d->sky_isWireframed(skyId);
 		const auto wireframeColor = _fe3d->sky_getWireframeColor(skyId);
-		const auto isVisible = _fe3d->sky_isVisible(skyId);
+		const auto isSelected = (skyId == _fe3d->sky_getSelectedId());
 
 		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
 
@@ -75,7 +75,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< wireframeColor.b
 			<< " "
-			<< isVisible
+			<< isSelected
 			<< endl;
 	}
 
@@ -95,7 +95,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto wireframeColor = _fe3d->terrain_getWireframeColor(terrainId);
 		const auto minClipPosition = _fe3d->terrain_getMinClipPosition(terrainId);
 		const auto maxClipPosition = _fe3d->terrain_getMaxClipPosition(terrainId);
-		const auto isVisible = _fe3d->terrain_isVisible(terrainId);
+		const auto isSelected = (terrainId == _fe3d->terrain_getSelectedId());
 
 		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainId);
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
@@ -207,7 +207,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< maxClipPosition.z
 			<< " "
-			<< isVisible
+			<< isSelected
 			<< endl;
 	}
 
@@ -231,7 +231,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto wireframeColor = _fe3d->water_getWireframeColor(waterId);
 		const auto minClipPosition = _fe3d->water_getMinClipPosition(waterId);
 		const auto maxClipPosition = _fe3d->water_getMaxClipPosition(waterId);
-		const auto isVisible = _fe3d->water_isVisible(waterId);
+		const auto isSelected = (waterId == _fe3d->water_getSelectedId());
 
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
@@ -313,7 +313,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< maxClipPosition.z
 			<< " "
-			<< isVisible
+			<< isSelected
 			<< endl;
 	}
 

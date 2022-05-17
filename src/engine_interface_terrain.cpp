@@ -13,11 +13,6 @@ void EngineInterface::terrain_delete(const string & terrainId)
 	_core->getRaycastIntersector()->resetTerrainStatus(terrainId);
 }
 
-void EngineInterface::terrain_setVisible(const string & terrainId, bool value)
-{
-	_core->getTerrainManager()->getTerrain(terrainId)->setVisible(value);
-}
-
 void EngineInterface::terrain_select(const string & terrainId)
 {
 	_core->getTerrainManager()->selectTerrain(terrainId);
@@ -381,11 +376,6 @@ void EngineInterface::terrain_setMaxClipPosition(const string & terrainId, const
 const bool EngineInterface::terrain_isExisting(const string & terrainId) const
 {
 	return _core->getTerrainManager()->isTerrainExisting(terrainId);
-}
-
-const bool EngineInterface::terrain_isVisible(const string & terrainId) const
-{
-	return _core->getTerrainManager()->getTerrain(terrainId)->isVisible();
 }
 
 const bool EngineInterface::terrain_isSpecular(const string & terrainId) const

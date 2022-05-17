@@ -51,7 +51,6 @@ public:
 
 	void sky_create(const string & skyId);
 	void sky_delete(const string & skyId);
-	void sky_setVisible(const string & skyId, bool value);
 	void sky_select(const string & skyId);
 	void sky_setCubeMaps(const string & skyId, const array<string, 6> & value);
 	void sky_setRightCubeMap(const string & skyId, const string & value);
@@ -83,7 +82,6 @@ public:
 	const fvec3 & sky_getRotation(const string & skyId) const;
 	const float sky_getLightness(const string & skyId) const;
 	const bool sky_isExisting(const string & skyId) const;
-	const bool sky_isVisible(const string & skyId) const;
 	const bool sky_isWireframed(const string & skyId) const;
 	const bool sky_hasRightCubeMap(const string & skyId) const;
 	const bool sky_hasLeftCubeMap(const string & skyId) const;
@@ -95,7 +93,6 @@ public:
 
 	void terrain_create(const string & terrainId, const string & heightMapPath);
 	void terrain_delete(const string & terrainId);
-	void terrain_setVisible(const string & terrainId, bool value);
 	void terrain_select(const string & terrainId);
 	void terrain_setBlendMap(const string & terrainId, const string & value);
 	void terrain_setDiffuseMap(const string & terrainId, const string & value);
@@ -148,7 +145,6 @@ public:
 	const int terrain_getGreenTextureRepeat(const string & terrainId) const;
 	const int terrain_getBlueTextureRepeat(const string & terrainId) const;
 	const bool terrain_isExisting(const string & terrainId) const;
-	const bool terrain_isVisible(const string & terrainId) const;
 	const bool terrain_isSpecular(const string & terrainId) const;
 	const bool terrain_isWireframed(const string & terrainId) const;
 	const bool terrain_isInside(const string & terrainId, float x, float z) const;
@@ -164,7 +160,6 @@ public:
 
 	void water_create(const string & waterId);
 	void water_delete(const string & waterId);
-	void water_setVisible(const string & waterId, bool value);
 	void water_select(const string & waterId);
 	void water_setRippleSpeed(const string & waterId, const fvec2 & value);
 	void water_setWaveSpeed(const string & waterId, const fvec2 & value);
@@ -208,7 +203,6 @@ public:
 	const int water_getTextureRepeat(const string & waterId) const;
 	const bool water_isEdged(const string & waterId) const;
 	const bool water_isExisting(const string & waterId) const;
-	const bool water_isVisible(const string & waterId) const;
 	const bool water_isSpecular(const string & waterId) const;
 	const bool water_isReflective(const string & waterId) const;
 	const bool water_isRefractive(const string & waterId) const;

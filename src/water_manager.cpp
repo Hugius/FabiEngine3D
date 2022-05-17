@@ -175,17 +175,9 @@ void WaterManager::update()
 {
 	const auto water = getSelectedWater();
 
-	if(water == nullptr)
+	if(water != nullptr)
 	{
-		return;
+		water->setRippleOffset(fvec2(fmodf((water->getRippleOffset().x + water->getRippleSpeed().x), 1.0f), fmodf((water->getRippleOffset().y - water->getRippleSpeed().y), 1.0f)));
+		water->setWaveOffset(water->getWaveOffset() + (water->getWaveSpeed()));
 	}
-
-	if(!water->isVisible())
-	{
-		return;
-	}
-
-	water->setRippleOffset(fvec2(fmodf((water->getRippleOffset().x + water->getRippleSpeed().x), 1.0f), fmodf((water->getRippleOffset().y - water->getRippleSpeed().y), 1.0f)));
-
-	water->setWaveOffset(water->getWaveOffset() + (water->getWaveSpeed()));
 }

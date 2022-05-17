@@ -13,6 +13,7 @@ class Sound3dManager final
 public:
 	void inject(shared_ptr<AudioLoader> audioLoader);
 	void inject(shared_ptr<WaveBufferCache> waveBufferCache);
+	void update();
 	void createSound3d(const string & sound3dId, const string & audioPath);
 	void deleteSound3d(const string & sound3dId);
 	void deleteSound3ds();

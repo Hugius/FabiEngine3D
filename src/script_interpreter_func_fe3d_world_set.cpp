@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isTerrainAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("terrain already added");
 
 				return true;
 			}
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isWaterAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("water already added");
 
 				return true;
 			}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isModelAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("model already added");
 
 				return true;
 			}
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isQuad3dAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("quad3D already added");
 
 				return true;
 			}
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isText3dAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("text3D already added");
 
 				return true;
 			}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isAabbAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("AABB already added");
 
 				return true;
 			}
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isPointlightAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("pointlight already added");
 
 				return true;
 			}
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isSpotlightAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("spotlight already added");
 
 				return true;
 			}
@@ -224,7 +224,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("captor already added");
 
 				return true;
 			}
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isSound3dAdded(args[0]->getString()))
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("sound3D already added");
 
 				return true;
 			}
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 		{
 			if(_customWorldBuilder->isGraphicsAdded())
 			{
-				_throwRuntimeError("sky already added");
+				_throwRuntimeError("graphics already added");
 
 				return true;
 			}

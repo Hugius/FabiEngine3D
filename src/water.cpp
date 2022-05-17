@@ -140,11 +140,6 @@ void Water::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
-void Water::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void Water::setSize(float value)
 {
 	_size = clamp(value, 0.0f, MAX_SIZE);
@@ -283,11 +278,6 @@ const float Water::getSize() const
 const bool Water::isEdged() const
 {
 	return _isEdged;
-}
-
-const bool Water::isVisible() const
-{
-	return _isVisible;
 }
 
 const bool Water::isSpecular() const

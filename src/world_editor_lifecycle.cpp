@@ -461,6 +461,21 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateExceptionChoosing();
+	}
+
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateAnimation3dChoosing();
+	}
+
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateAnimation2dChoosing();
+	}
+
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updateCamera();
 	}
 

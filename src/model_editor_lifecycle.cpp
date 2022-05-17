@@ -28,7 +28,7 @@ void ModelEditor::_load()
 	_fe3d->captor_setPosition(CAPTOR_ID, CAPTOR_POSITION);
 	_fe3d->captor_capture(CAPTOR_ID);
 	_fe3d->model_setVisible(BOX_ID, true);
-	_fe3d->graphics_setAntiAliasingEnabled(false);
+	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->graphics_setAmbientLightingEnabled(true);
 	_fe3d->graphics_setAmbientLightingIntensity(AMBIENT_LIGHTING_INTENSITY);

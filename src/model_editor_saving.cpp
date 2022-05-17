@@ -45,7 +45,6 @@ const bool ModelEditor::saveModelsToFile() const
 		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
 
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
-		replace(levelOfDetailId.begin(), levelOfDetailId.end(), ' ', '?');
 
 		file
 			<< "MODEL "

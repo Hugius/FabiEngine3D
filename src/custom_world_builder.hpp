@@ -7,7 +7,7 @@ class CustomWorldBuilder final
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void setCurrentProjectId(const string & currentProjectId);
-	void resetWorldBuild();
+	void reset();
 	void addSky(const string & skyId);
 	void addTerrain(const string & terrainId);
 	void addWater(const string & waterId);

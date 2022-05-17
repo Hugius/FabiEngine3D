@@ -325,7 +325,7 @@ const bool CustomWorldBuilder::isGraphicsAdded() const
 	return _isGraphicsAdded;
 }
 
-void CustomWorldBuilder::resetWorldBuild()
+void CustomWorldBuilder::reset()
 {
 	_addedSkyIds.clear();
 	_addedTerrainIds.clear();

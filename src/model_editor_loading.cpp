@@ -261,7 +261,6 @@ const bool ModelEditor::loadModelsFromFile()
 			levelOfDetailId = (levelOfDetailId == "?") ? "" : levelOfDetailId;
 
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
-			replace(levelOfDetailId.begin(), levelOfDetailId.end(), '?', ' ');
 
 			if(!Configuration::getInst().isApplicationExported())
 			{

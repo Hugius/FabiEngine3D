@@ -34,11 +34,6 @@ void TerrainDepthRenderer::unbind()
 
 void TerrainDepthRenderer::render(const shared_ptr<Terrain> terrain)
 {
-	if(!terrain->isVisible())
-	{
-		return;
-	}
-
 	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, terrain->getMinClipPosition().x));
 	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, terrain->getMinClipPosition().y));
 	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, terrain->getMinClipPosition().z));

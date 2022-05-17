@@ -15,11 +15,6 @@ void SkyColorRenderer::unbind()
 
 void SkyColorRenderer::render(const shared_ptr<Sky> sky)
 {
-	if(!sky->isVisible())
-	{
-		return;
-	}
-
 	if(sky->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

@@ -106,6 +106,7 @@ void WaterManager::_loadWaterVertexBuffer(shared_ptr<Water> water, float size)
 	};
 
 	vector<float> highQualityBufferData = {};
+
 	for(float x = -halfSize; x < halfSize; x++)
 	{
 		for(float z = -halfSize; z < halfSize; z++)

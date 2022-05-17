@@ -105,11 +105,6 @@ void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_pt
 
 void WaterColorRenderer::render(const shared_ptr<Water> water)
 {
-	if(!water->isVisible())
-	{
-		return;
-	}
-
 	if(water->isWireframed())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

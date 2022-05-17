@@ -48,13 +48,13 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_TERRAIN_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
 
-	vector<float> pixels;
+	vector<float> pixels = {};
+
 	for(int index = 0; index < (size * size * bytesPerPixel); index += bytesPerPixel)
 	{
 		const auto red = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
 		const auto green = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);
 		const auto blue = (static_cast<float>(image->getPixels()[index + 2]) / 255.0f);
-
 		const auto intensity = ((red + green + blue) / 3.0f);
 
 		pixels.push_back(intensity);
@@ -128,6 +128,7 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 	vector<fvec3> tempPositions = {};
 	vector<fvec2> tempUvs = {};
 	vector<fvec3> tempNormals = {};
+
 	for(float z = 0.0f; z < size; z += 1.0f)
 	{
 		for(float x = 0.0f; x < size; x += 1.0f)
@@ -151,6 +152,7 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 	vector<fvec3> positions = {};
 	vector<fvec2> uvs = {};
 	vector<fvec3> normals = {};
+
 	for(int z = 0; z < (static_cast<int>(size) - 1); z++)
 	{
 		for(int x = 0; x < (static_cast<int>(size) - 1); x++)
@@ -184,6 +186,7 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 	}
 
 	vector<fvec3> tangents = {};
+
 	for(int index = 0; index < static_cast<int>(positions.size()); index += 3)
 	{
 		const auto pos1 = positions[index + 0];
@@ -205,6 +208,7 @@ void TerrainManager::_loadTerrainVertexBuffer(shared_ptr<Terrain> terrain, float
 	}
 
 	vector<float> bufferData = {};
+
 	for(int index = 0; index < static_cast<int>(positions.size()); index++)
 	{
 		bufferData.push_back(positions[index].x);

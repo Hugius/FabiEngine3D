@@ -127,11 +127,6 @@ void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_
 
 void TerrainColorRenderer::render(const shared_ptr<Terrain> terrain)
 {
-	if(!terrain->isVisible())
-	{
-		return;
-	}
-
 	glEnable(GL_CULL_FACE);
 
 	if(terrain->isWireframed())

@@ -71,7 +71,7 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 
 	for(const auto & part : mesh->getParts())
 	{
-		vector<float> bufferData;
+		vector<float> bufferData = {};
 
 		for(int index = 0; index < static_cast<int>(part->getPositions().size()); index++)
 		{

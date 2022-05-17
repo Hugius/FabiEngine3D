@@ -4,24 +4,27 @@
 
 void SkyEditor::_updateCamera()
 {
-	if(_fe3d->camera_isFirstPersonEnabled())
+	if(!_currentSkyId.empty())
 	{
-		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
-	}
-
-	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
-	{
-		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
+		if(_fe3d->camera_isFirstPersonEnabled())
 		{
-			_fe3d->camera_setFirstPersonEnabled(!_fe3d->camera_isFirstPersonEnabled());
+			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
 		}
-	}
 
-	if(_fe3d->camera_isFirstPersonEnabled())
-	{
-		if(_gui->getOverlay()->isFocused())
+		if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 		{
-			_fe3d->camera_setFirstPersonEnabled(false);
+			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
+			{
+				_fe3d->camera_setFirstPersonEnabled(!_fe3d->camera_isFirstPersonEnabled());
+			}
+		}
+
+		if(_fe3d->camera_isFirstPersonEnabled())
+		{
+			if(_gui->getOverlay()->isFocused())
+			{
+				_fe3d->camera_setFirstPersonEnabled(false);
+			}
 		}
 	}
 }

@@ -312,28 +312,17 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 	{
 		if(mergedString[index] == delimiter)
 		{
-			if(index == 0)
-			{
-				continue;
-			}
-			else
-			{
-				result.push_back(tempString);
-
-				tempString = "";
-			}
-		}
-		else if(index == (mergedString.size() - 1))
-		{
-			tempString += mergedString[index];
-
 			result.push_back(tempString);
+
+			tempString = "";
 		}
 		else
 		{
 			tempString += mergedString[index];
 		}
 	}
+
+	result.push_back(tempString);
 
 	return result;
 }

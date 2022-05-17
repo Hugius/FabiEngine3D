@@ -28,13 +28,13 @@
 
 ### 1.4 Animations
 
-- 2D texture animations
 - 3D mesh animations
+- 2D texture animations
 
 ### 1.5 Audio
 
-- 2D sounds
 - 3D sounds
+- 2D sounds
 
 ### 1.6 Scripting
 
@@ -117,7 +117,7 @@
 
 ## 4. Engine Interface
 
-- **Mid Viewport**: 3D display screen
+- **Center Viewport**: 3D display screen
 - **Left Viewport**: editors
 - **Top Viewport**: project/preview management
 - **Right Viewport**: controls & properties

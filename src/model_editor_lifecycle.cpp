@@ -191,6 +191,7 @@ void ModelEditor::_unloadGUI()
 	leftWindow->deleteScreen("modelEditorMenuAabbChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

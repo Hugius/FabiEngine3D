@@ -77,6 +77,7 @@ void Sound2dEditor::_unloadGUI()
 	rightWindow->deleteScreen("sound2dEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

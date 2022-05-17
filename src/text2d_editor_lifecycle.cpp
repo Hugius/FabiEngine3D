@@ -58,6 +58,7 @@ void Text2dEditor::_unloadGUI()
 	leftWindow->deleteScreen("text2dEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

@@ -18,7 +18,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("searchScript", "Search Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+			_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
@@ -45,7 +45,7 @@ void ScriptEditor::_updateMenu()
 		{
 			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				_gui->getOverlay()->openValueForm("searchScript", "Search Keyword", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+				_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 			}
 		}
 
@@ -71,7 +71,7 @@ void ScriptEditor::_updateMenu()
 		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty());
 		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty());
 
-		screen->getTextField("lineCount")->setTextContent("Lines: " + to_string(_script->getTotalLineCount()));
+		screen->getTextField("totalLines")->setTextContent("Total Lines: " + to_string(_script->getTotalLineCount()));
 	}
 }
 
@@ -179,20 +179,20 @@ void ScriptEditor::_updateScriptFileRenaming()
 
 void ScriptEditor::_updateScriptSearching()
 {
-	if((_gui->getOverlay()->getValueFormId() == "searchScript") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "searchScripts") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		const auto searchResult = _script->findKeyword(_gui->getOverlay()->getValueFormContent());
 
 		if(searchResult.empty())
 		{
-			Logger::throwWarning("Keyword not found in scripts");
+			Logger::throwWarning("Search result: not found in scripts");
 
 			return;
 		}
 
 		for(const auto & [scriptId, lineNumber] : searchResult)
 		{
-			Logger::throwInfo("Keyword found in script \"" + scriptId + "\" @ line " + to_string(lineNumber));
+			Logger::throwInfo("Search result: found in script \"" + scriptId + "\" @ line " + to_string(lineNumber));
 		}
 	}
 }

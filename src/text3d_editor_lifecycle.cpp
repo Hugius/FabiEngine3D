@@ -136,6 +136,7 @@ void Text3dEditor::_unloadGUI()
 	leftWindow->deleteScreen("text3dEditorMenuAabb");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

@@ -139,6 +139,7 @@ void Animation3dEditor::_unloadGUI()
 	rightWindow->deleteScreen("animation3dEditorMenuFrame");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

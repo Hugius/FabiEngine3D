@@ -106,6 +106,7 @@ void PointlightEditor::_unloadGUI()
 	rightWindow->deleteScreen("pointlightEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

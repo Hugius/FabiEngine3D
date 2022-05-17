@@ -107,6 +107,7 @@ void SpotlightEditor::_unloadGUI()
 	rightWindow->deleteScreen("spotlightEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

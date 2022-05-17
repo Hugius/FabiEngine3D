@@ -60,6 +60,7 @@ void Quad2dEditor::_unloadGUI()
 	leftWindow->deleteScreen("quad2dEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

@@ -81,6 +81,7 @@ void SkyEditor::_unloadGUI()
 	leftWindow->deleteScreen("skyEditorMenuMiscellaneous");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

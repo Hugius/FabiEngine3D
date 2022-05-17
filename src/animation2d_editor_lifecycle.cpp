@@ -65,6 +65,7 @@ void Animation2dEditor::_unloadGUI()
 	rightWindow->deleteScreen("animation2dEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

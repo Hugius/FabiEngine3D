@@ -478,5 +478,6 @@ void WorldEditor::_unloadGUI()
 	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsBloom");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }

@@ -136,6 +136,7 @@ void WaterEditor::_unloadGUI()
 	leftWindow->deleteScreen("waterEditorMenuMiscellaneous");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

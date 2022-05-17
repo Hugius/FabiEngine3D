@@ -146,6 +146,7 @@ void Quad3dEditor::_unloadGUI()
 	leftWindow->deleteScreen("quad3dEditorMenuAabb");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

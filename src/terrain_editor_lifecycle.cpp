@@ -142,6 +142,7 @@ void TerrainEditor::_unloadGUI()
 	leftWindow->deleteScreen("terrainEditorMenuMiscellaneous");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

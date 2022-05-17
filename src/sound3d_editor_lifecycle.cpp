@@ -104,6 +104,7 @@ void Sound3dEditor::_unloadGUI()
 	rightWindow->deleteScreen("sound3dEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

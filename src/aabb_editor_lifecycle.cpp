@@ -72,20 +72,20 @@ void AabbEditor::_loadGUI()
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	leftWindow->createScreen("aabbEditorMenuMain");
-	leftWindow->getScreen("aabbEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Edit AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->createScreen("aabbEditorMenuMain");
+	rightWindow->getScreen("aabbEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("aabbEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Edit AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("aabbEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("aabbEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("aabbEditorMenuChoice");
-	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("size", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("aabbEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->createScreen("aabbEditorMenuChoice");
+	rightWindow->getScreen("aabbEditorMenuChoice")->createButton("size", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("aabbEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("aabbEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->setActiveScreen("aabbEditorMenuMain");
+	leftWindow->setActiveScreen("empty");
 
-	rightWindow->setActiveScreen("empty");
+	rightWindow->setActiveScreen("aabbEditorMenuMain");
 }
 
 void AabbEditor::_unloadGUI()
@@ -97,6 +97,7 @@ void AabbEditor::_unloadGUI()
 	leftWindow->deleteScreen("aabbEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
+
 	rightWindow->setActiveScreen("main");
 }
 

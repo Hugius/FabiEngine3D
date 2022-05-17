@@ -19,8 +19,9 @@ const bool Animation2dEditor::saveAnimation2dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
 
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
+	auto file = ofstream(filePath);
 
 	for(const auto & animation2dId : _loadedAnimation2dIds)
 	{

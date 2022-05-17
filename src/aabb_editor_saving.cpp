@@ -19,8 +19,9 @@ const bool AabbEditor::saveAabbsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\aabb.fe3d");
 
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\aabb.fe3d");
+	auto file = ofstream(filePath);
 
 	for(const auto & aabbId : _loadedAabbIds)
 	{

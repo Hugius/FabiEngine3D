@@ -20,8 +20,9 @@ const bool Text3dEditor::saveText3dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text3d.fe3d");
 
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text3d.fe3d");
+	auto file = ofstream(filePath);
 
 	for(const auto & text3dId : _loadedText3dIds)
 	{

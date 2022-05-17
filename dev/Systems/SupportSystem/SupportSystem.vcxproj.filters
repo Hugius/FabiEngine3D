@@ -7,7 +7,7 @@
     <Filter Include="Enumeration">
       <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World">
+    <Filter Include="Custom World Builder">
       <UniqueIdentifier>{58f807e0-6eeb-492c-b9ac-742ecb041dcc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -103,7 +103,7 @@
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\custom_world_builder.hpp">
-      <Filter>World</Filter>
+      <Filter>Custom World Builder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,13 +126,13 @@
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\custom_world_builder_misc.cpp">
-      <Filter>World</Filter>
+      <Filter>Custom World Builder</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\custom_world_builder_saving.cpp">
-      <Filter>World</Filter>
+      <Filter>Custom World Builder</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp">
-      <Filter>World</Filter>
+      <Filter>Custom World Builder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -36,7 +36,9 @@ const bool ScriptEditor::saveScriptFiles()
 
 	for(const auto & scriptId : _script->getScriptFileIds())
 	{
-		auto file = ofstream(directoryPath + scriptId + ".fe3d");
+		const auto filePath = (directoryPath + scriptId + ".fe3d");
+
+		auto file = ofstream(filePath);
 
 		file
 			<< _script->getScriptFile(scriptId)->getCursorLineIndex()

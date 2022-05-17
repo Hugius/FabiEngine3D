@@ -19,8 +19,9 @@ const bool PointlightEditor::savePointlightsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\pointlight.fe3d");
 
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\pointlight.fe3d");
+	auto file = ofstream(filePath);
 
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{

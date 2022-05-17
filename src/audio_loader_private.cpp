@@ -8,11 +8,10 @@ using std::make_shared;
 shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto fullFilePath = (rootPath + filePath);
 
 	FILE * file = nullptr;
 
-	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
+	if(fopen_s(&file, string(rootPath + filePath).c_str(), "rb") != 0)
 	{
 		return nullptr;
 	}

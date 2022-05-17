@@ -19,8 +19,9 @@ const bool Quad2dEditor::saveQuad2dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
 
-	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
+	auto file = ofstream(filePath);
 
 	for(const auto & quad2dId : _loadedQuad2dIds)
 	{

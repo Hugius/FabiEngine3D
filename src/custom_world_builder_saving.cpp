@@ -324,6 +324,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 	{
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
+		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
 		const auto position = _fe3d->model_getBasePosition(modelId);
 		const auto rotation = _fe3d->model_getBaseRotation(modelId);
 		const auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
@@ -337,7 +338,6 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
 		const auto isVisible = _fe3d->model_isVisible(modelId);
 		const auto isFrozen = _fe3d->model_isFrozen(modelId);
-		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
 
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
@@ -580,6 +580,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			const auto playCount = _fe3d->model_getAnimation3dPlayCount(modelId, animation3dId);
 			const auto frameIndex = _fe3d->model_getAnimation3dFrameIndex(modelId, animation3dId);
 			const auto speedMultiplier = _fe3d->model_getAnimation3dSpeedMultiplier(modelId, animation3dId);
+			const auto partCount = partIds.size();
 
 			file
 				<< "MODEL_ANIMATION3D "
@@ -592,7 +593,46 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< frameIndex
 				<< " "
 				<< speedMultiplier
-				<< endl;
+				<< " "
+				<< partCount;
+
+			for(auto partId : partIds)
+			{
+				const auto totalMovement = _fe3d->model_getAnimation3dTotalMovement(modelId, partId, animation3dId);
+				const auto totalRotation = _fe3d->model_getAnimation3dTotalRotation(modelId, partId, animation3dId);
+				const auto totalScaling = _fe3d->model_getAnimation3dTotalScaling(modelId, partId, animation3dId);
+				const auto totalSpeed = _fe3d->model_getAnimation3dTotalSpeed(modelId, partId, animation3dId);
+
+				file
+					<< " "
+					<< partId
+					<< " "
+					<< totalMovement.x
+					<< " "
+					<< totalMovement.y
+					<< " "
+					<< totalMovement.z
+					<< " "
+					<< totalRotation.x
+					<< " "
+					<< totalRotation.y
+					<< " "
+					<< totalRotation.z
+					<< " "
+					<< totalScaling.x
+					<< " "
+					<< totalScaling.y
+					<< " "
+					<< totalScaling.z
+					<< " "
+					<< totalSpeed.x
+					<< " "
+					<< totalSpeed.y
+					<< " "
+					<< totalSpeed.z;
+			}
+
+			file << endl;
 		}
 	}
 

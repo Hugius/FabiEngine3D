@@ -304,10 +304,10 @@ public:
 	const fvec3 & model_getWireframeColor(const string & modelId, const string & partId) const;
 	const fvec3 & model_getMinClipPosition(const string & modelId) const;
 	const fvec3 & model_getMaxClipPosition(const string & modelId) const;
-	const fvec3 & model_getAnimation3dTotalMovement(const string & modelId, const string & animation3dId, const string & partId) const;
-	const fvec3 & model_getAnimation3dTotalRotation(const string & modelId, const string & animation3dId, const string & partId) const;
-	const fvec3 & model_getAnimation3dTotalScaling(const string & modelId, const string & animation3dId, const string & partId) const;
-	const fvec3 & model_getAnimation3dTotalSpeed(const string & modelId, const string & animation3dId, const string & partId) const;
+	const fvec3 & model_getAnimation3dTotalMovement(const string & modelId, const string & partId, const string & animation3dId) const;
+	const fvec3 & model_getAnimation3dTotalRotation(const string & modelId, const string & partId, const string & animation3dId) const;
+	const fvec3 & model_getAnimation3dTotalScaling(const string & modelId, const string & partId, const string & animation3dId) const;
+	const fvec3 & model_getAnimation3dTotalSpeed(const string & modelId, const string & partId, const string & animation3dId) const;
 	const float model_getReflectivity(const string & modelId, const string & partId) const;
 	const float model_getRefractivity(const string & modelId, const string & partId) const;
 	const float model_getLightness(const string & modelId, const string & partId) const;

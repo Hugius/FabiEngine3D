@@ -29,7 +29,6 @@ const bool ModelEditor::saveModelsToFile() const
 	{
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
-		const auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		const auto modelSize = _fe3d->model_getBaseSize(modelId);
 		const auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
 		const auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));

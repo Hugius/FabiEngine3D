@@ -324,7 +324,6 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 	{
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
-		const auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		const auto position = _fe3d->model_getBasePosition(modelId);
 		const auto rotation = _fe3d->model_getBaseRotation(modelId);
 		const auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
@@ -387,6 +386,18 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< size.z
 			<< " "
 			<< isFrozen
+			<< " "
+			<< minClipPosition.x
+			<< " "
+			<< minClipPosition.y
+			<< " "
+			<< minClipPosition.z
+			<< " "
+			<< maxClipPosition.x
+			<< " "
+			<< maxClipPosition.y
+			<< " "
+			<< maxClipPosition.z
 			<< endl;
 
 		for(auto partId : partIds)
@@ -586,6 +597,11 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto isVisible = _fe3d->quad3d_isVisible(quad3dId);
 		const auto isWireframed = _fe3d->quad3d_isWireframed(quad3dId);
 		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(quad3dId);
+		const auto minClipPosition = _fe3d->quad3d_getMinClipPosition(quad3dId);
+		const auto maxClipPosition = _fe3d->quad3d_getMaxClipPosition(quad3dId);
+		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
+		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
+		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -599,6 +615,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
 		file
+			<< "QUAD3D "
 			<< quad3dId
 			<< " "
 			<< diffuseMapPath
@@ -655,8 +672,6 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< rotationOrder
 			<< " "
-			<< hasAabb
-			<< " "
 			<< isVisible
 			<< " "
 			<< isWireframed
@@ -666,11 +681,51 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
+			<< " "
+			<< isFrozen
+			<< " "
+			<< uvMultiplier.x
+			<< " "
+			<< uvMultiplier.y
+			<< " "
+			<< uvOffset.x
+			<< " "
+			<< uvOffset.y
+			<< " "
+			<< minClipPosition.x
+			<< " "
+			<< minClipPosition.y
+			<< " "
+			<< minClipPosition.z
+			<< " "
+			<< maxClipPosition.x
+			<< " "
+			<< maxClipPosition.y
+			<< " "
+			<< maxClipPosition.z
 			<< endl;
+
+		if(hasAabb)
+		{
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(quad3dId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(quad3dId);
+			const auto isVisible = _fe3d->aabb_isVisible(quad3dId);
+
+			file
+				<< "QUAD3D_AABB "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
+				<< " "
+				<< isVisible
+				<< endl;
+		}
 	}
 
 	for(const auto & text3dId : _addedText3dIds)
 	{
+		const auto position = _fe3d->text3d_getPosition(text3dId);
+		const auto rotation = _fe3d->text3d_getRotation(text3dId);
 		const auto size = _fe3d->text3d_getSize(text3dId);
 		const auto color = _fe3d->text3d_getColor(text3dId);
 		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(text3dId);
@@ -687,6 +742,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
 		const auto hasAabb = _fe3d->aabb_isExisting(text3dId);
 		const auto isVisible = _fe3d->text3d_isVisible(text3dId);
+		const auto isWireframed = _fe3d->text3d_isWireframed(text3dId);
+		const auto wireframeColor = _fe3d->text3d_getWireframeColor(text3dId);
+		const auto minClipPosition = _fe3d->text3d_getMinClipPosition(text3dId);
+		const auto maxClipPosition = _fe3d->text3d_getMaxClipPosition(text3dId);
+		const auto isFrozen = _fe3d->text3d_isFrozen(text3dId);
+		const auto content = _fe3d->text3d_getContent(text3dId);
 
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
 
@@ -696,9 +757,22 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
+			<< "TEXT3D "
 			<< text3dId
 			<< " "
 			<< fontMapPath
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< size.x
 			<< " "
@@ -737,7 +811,47 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< hasAabb
 			<< " "
 			<< isVisible
+			<< " "
+			<< minClipPosition.x
+			<< " "
+			<< minClipPosition.y
+			<< " "
+			<< minClipPosition.z
+			<< " "
+			<< maxClipPosition.x
+			<< " "
+			<< maxClipPosition.y
+			<< " "
+			<< maxClipPosition.z
+			<< " "
+			<< isWireframed
+			<< " "
+			<< wireframeColor.r
+			<< " "
+			<< wireframeColor.g
+			<< " "
+			<< wireframeColor.b
+			<< " "
+			<< isFrozen
+			<< " "
+			<< content
 			<< endl;
+
+		if(hasAabb)
+		{
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(text3dId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(text3dId);
+			const auto isVisible = _fe3d->aabb_isVisible(text3dId);
+
+			file
+				<< "TEXT3D_AABB "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
+				<< " "
+				<< isVisible
+				<< endl;
+		}
 	}
 
 	for(const auto & aabbId : _addedAabbIds)
@@ -752,6 +866,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto maxClipPosition = _fe3d->aabb_getMaxClipPosition(aabbId);
 
 		file
+			<< "AABB "
 			<< aabbId
 			<< " "
 			<< size.x
@@ -795,6 +910,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto isVisible = _fe3d->pointlight_isVisible(pointlightId);
 
 		file
+			<< "POINTLIGHT "
 			<< pointlightId
 			<< " "
 			<< radius.x
@@ -826,6 +942,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto isVisible = _fe3d->spotlight_isVisible(spotlightId);
 
 		file
+			<< "SPOTLIGHT "
 			<< spotlightId
 			<< " "
 			<< color.r
@@ -853,6 +970,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
 
 		file
+			<< "CAPTOR "
 			<< captorId
 			<< " "
 			<< position.x
@@ -878,6 +996,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		file
+			<< "SOUND3D "
 			<< sound3dId
 			<< " "
 			<< audioPath

@@ -6,12 +6,12 @@
 - `fe3d:sky_select` (`STR`sky_id) -----> `NONE`
 - `fe3d:sky_delete` (`STR`sky_id) -----> `NONE`
 - `fe3d:sky_delete_all` () -----> `NONE`
+- `fe3d:sky_rotate` (`STR`sky_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:sky_rotate_to` (`STR`sky_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:sky_set_lightness` (`STR`sky_id, `DEC` value) -----> `NONE`
 - `fe3d:sky_set_color` (`STR`sky_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:sky_set_wireframe_color` (`STR`sky_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:sky_set_rotation` (`STR`sky_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:sky_rotate` (`STR`sky_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:sky_rotate_to` (`STR`sky_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:sky_set_wireframed` (`STR`sky_id, `DEC` value) -----> `NONE`
 - `fe3d:sky_set_left_cube_map` (`STR`sky_id, `STR` file_path) -----> `NONE`
 - `fe3d:sky_set_right_cube_map` (`STR`sky_id, `STR` file_path) -----> `NONE`

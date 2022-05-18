@@ -163,8 +163,8 @@ void WorldEditor::_updateMiscellaneous()
 							 !_selectedAabbId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
-							 !_selectedCaptorId.empty() ||
-							 !_selectedSound3dId.empty());
+							 !_selectedSound3dId.empty() ||
+							 !_selectedCaptorId.empty());
 
 	const auto isActive = (!_activeModelId.empty() ||
 						   !_activeQuad3dId.empty() ||
@@ -172,8 +172,8 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activeAabbId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
-						   !_activeCaptorId.empty() ||
-						   !_activeSound3dId.empty());
+						   !_activeSound3dId.empty() ||
+						   !_activeCaptorId.empty());
 
 	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(isSelected);
 	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setVisible(isActive);

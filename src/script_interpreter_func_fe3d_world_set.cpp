@@ -216,24 +216,6 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_captor")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
-			{
-				_throwRuntimeError("captor already added to custom world");
-
-				return true;
-			}
-
-			_customWorldBuilder->addCaptor(args[0]->getString());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:world_add_custom_sound3d")
 	{
 		const auto types = {SVT::STRING};
@@ -248,6 +230,24 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			}
 
 			_customWorldBuilder->addSound3d(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:world_add_custom_captor")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("captor already added to custom world");
+
+				return true;
+			}
+
+			_customWorldBuilder->addCaptor(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

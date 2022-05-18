@@ -20,11 +20,11 @@ EngineCore::EngineCore()
 	_text2dManager = make_shared<Text2dManager>();
 	_pointlightManager = make_shared<PointlightManager>();
 	_spotlightManager = make_shared<SpotlightManager>();
-	_captorManager = make_shared<CaptorManager>();
 	_animation3dManager = make_shared<Animation3dManager>();
 	_animation2dManager = make_shared<Animation2dManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
 	_sound2dManager = make_shared<Sound2dManager>();
+	_captorManager = make_shared<CaptorManager>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_waveBufferCache = make_shared<WaveBufferCache>();
@@ -77,10 +77,10 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_waterManager);
 	_masterRenderer->inject(_modelManager);
 	_masterRenderer->inject(_quad3dManager);
-	_masterRenderer->inject(_text3dManager);
-	_masterRenderer->inject(_aabbManager);
 	_masterRenderer->inject(_quad2dManager);
+	_masterRenderer->inject(_text3dManager);
 	_masterRenderer->inject(_text2dManager);
+	_masterRenderer->inject(_aabbManager);
 	_masterRenderer->inject(_pointlightManager);
 	_masterRenderer->inject(_spotlightManager);
 	_masterRenderer->inject(_captorManager);

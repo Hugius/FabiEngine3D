@@ -300,11 +300,6 @@ void ScriptInterpreter::unload()
 		_fe3d->spotlight_delete(spotlightId);
 	}
 
-	for(const auto & captorId : _fe3d->captor_getIds())
-	{
-		_fe3d->captor_delete(captorId);
-	}
-
 	for(const auto & sound3dId : _fe3d->sound3d_getIds())
 	{
 		_fe3d->sound3d_delete(sound3dId);
@@ -313,6 +308,11 @@ void ScriptInterpreter::unload()
 	for(const auto & sound2dId : _fe3d->sound2d_getIds())
 	{
 		_fe3d->sound2d_delete(sound2dId);
+	}
+
+	for(const auto & captorId : _fe3d->captor_getIds())
+	{
+		_fe3d->captor_delete(captorId);
 	}
 
 	for(const auto & clockId : _fe3d->clock_getIds())

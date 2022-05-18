@@ -67,8 +67,8 @@ void WorldEditor::_updateAabbPlacingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateCaptor();
 				_deactivateSound3d();
+				_deactivateCaptor();
 
 				_currentTemplateAabbId = hoveredOptionId;
 
@@ -117,8 +117,8 @@ void WorldEditor::_updateAabbChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateCaptor();
 				_deactivateSound3d();
+				_deactivateCaptor();
 
 				_activateAabb(hoveredOptionId);
 			}

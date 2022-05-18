@@ -401,46 +401,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
-		else if(lineType == "CAPTOR")
-		{
-			string placedCaptorId;
-			string exceptionId;
-			fvec3 position;
-
-			iss
-				>> placedCaptorId
-				>> position.x
-				>> position.y
-				>> position.z
-				>> exceptionId;
-
-			_fe3d->captor_create(placedCaptorId);
-			_fe3d->captor_setPosition(placedCaptorId, position);
-			_fe3d->captor_setExceptionId(placedCaptorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
-			_fe3d->captor_capture(placedCaptorId);
-
-			_loadedCaptorIds.push_back(placedCaptorId);
-
-			if(isLoaded())
-			{
-				const auto newModelId = ("@@captor_" + placedCaptorId);
-
-				_fe3d->model_create(newModelId, LENS_MESH_PATH);
-				_fe3d->model_setBasePosition(newModelId, position);
-				_fe3d->model_setBaseSize(newModelId, LENS_SIZE);
-				_fe3d->model_setShadowed(newModelId, false);
-				_fe3d->model_setReflected(newModelId, false);
-				_fe3d->model_setRefracted(newModelId, false);
-				_fe3d->model_setBright(newModelId, "", true);
-
-				_fe3d->aabb_create(newModelId, true);
-				_fe3d->aabb_setVisible(newModelId, false);
-				_fe3d->aabb_setParentId(newModelId, newModelId);
-				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelId, false);
-			}
-		}
 		else if(lineType == "SOUND3D")
 		{
 			string placedSound3dId;
@@ -483,6 +443,46 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, SPEAKER_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
+			}
+		}
+		else if(lineType == "CAPTOR")
+		{
+			string placedCaptorId;
+			string exceptionId;
+			fvec3 position;
+
+			iss
+				>> placedCaptorId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> exceptionId;
+
+			_fe3d->captor_create(placedCaptorId);
+			_fe3d->captor_setPosition(placedCaptorId, position);
+			_fe3d->captor_setExceptionId(placedCaptorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
+			_fe3d->captor_capture(placedCaptorId);
+
+			_loadedCaptorIds.push_back(placedCaptorId);
+
+			if(isLoaded())
+			{
+				const auto newModelId = ("@@captor_" + placedCaptorId);
+
+				_fe3d->model_create(newModelId, LENS_MESH_PATH);
+				_fe3d->model_setBasePosition(newModelId, position);
+				_fe3d->model_setBaseSize(newModelId, LENS_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setRefracted(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
+
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setVisible(newModelId, false);
+				_fe3d->aabb_setParentId(newModelId, newModelId);
+				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}

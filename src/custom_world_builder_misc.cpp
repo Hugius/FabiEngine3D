@@ -234,14 +234,14 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->spotlight_delete(spotlightId);
 	}
 
-	for(const auto & captorId : _loadedCaptorIds)
-	{
-		_fe3d->captor_delete(captorId);
-	}
-
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
 		_fe3d->sound3d_delete(sound3dId);
+	}
+
+	for(const auto & captorId : _loadedCaptorIds)
+	{
+		_fe3d->captor_delete(captorId);
 	}
 
 	_loadedSkyIds.clear();
@@ -253,8 +253,8 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
-	_loadedCaptorIds.clear();
 	_loadedSound3dIds.clear();
+	_loadedCaptorIds.clear();
 
 	_loadedWorldId = "";
 	_isGraphicsLoaded = false;
@@ -336,8 +336,8 @@ void CustomWorldBuilder::reset()
 	_addedAabbIds.clear();
 	_addedPointlightIds.clear();
 	_addedSpotlightIds.clear();
-	_addedCaptorIds.clear();
 	_addedSound3dIds.clear();
+	_addedCaptorIds.clear();
 
 	_isGraphicsAdded = false;
 }

@@ -32,8 +32,8 @@ void WorldEditor::_updateCaptorMenu()
 			_deactivateAabb();
 			_deactivatePointlight();
 			_deactivateSpotlight();
-			_deactivateCaptor();
 			_deactivateSound3d();
+			_deactivateCaptor();
 
 			_isPlacingCaptor = true;
 
@@ -93,8 +93,8 @@ void WorldEditor::_updateCaptorChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateCaptor();
 				_deactivateSound3d();
+				_deactivateCaptor();
 
 				_activateCaptor(hoveredOptionId);
 			}

@@ -981,28 +981,6 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< endl;
 	}
 
-	for(const auto & captorId : _addedCaptorIds)
-	{
-		const auto position = _fe3d->captor_getPosition(captorId);
-
-		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
-
-		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
-
-		file
-			<< "CAPTOR "
-			<< captorId
-			<< " "
-			<< position.x
-			<< " "
-			<< position.y
-			<< " "
-			<< position.z
-			<< " "
-			<< exceptionId
-			<< endl;
-	}
-
 	for(const auto & sound3dId : _addedSound3dIds)
 	{
 		const auto position = _fe3d->sound3d_getPosition(sound3dId);
@@ -1031,6 +1009,28 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< maxVolume
 			<< " "
 			<< maxDistance
+			<< endl;
+	}
+
+	for(const auto & captorId : _addedCaptorIds)
+	{
+		const auto position = _fe3d->captor_getPosition(captorId);
+
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+
+		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
+
+		file
+			<< "CAPTOR "
+			<< captorId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< exceptionId
 			<< endl;
 	}
 

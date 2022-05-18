@@ -321,6 +321,24 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
+	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	{
+		const auto position = _fe3d->sound3d_getPosition(placedSound3dId);
+
+		file
+			<< "SOUND3D "
+			<< placedSound3dId
+			<< " "
+			<< templateSound3dId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< endl;
+	}
+
 	for(const auto & placedCaptorId : _loadedCaptorIds)
 	{
 		const auto position = _fe3d->captor_getPosition(placedCaptorId);
@@ -337,24 +355,6 @@ const bool WorldEditor::saveWorldToFile() const
 			<< position.z
 			<< " "
 			<< exceptionId
-			<< endl;
-	}
-
-	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
-	{
-		const auto position = _fe3d->sound3d_getPosition(placedSound3dId);
-
-		file
-			<< "SOUND3D "
-			<< placedSound3dId
-			<< " "
-			<< templateSound3dId
-			<< " "
-			<< position.x
-			<< " "
-			<< position.y
-			<< " "
-			<< position.z
 			<< endl;
 	}
 

@@ -25,8 +25,8 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("worldEditorMenuChoice")->createButton("aabb", fvec2(0.0f, POSITIONS(13)[6]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuChoice")->createButton("pointlight", fvec2(0.0f, POSITIONS(13)[7]), TEXT_SIZE("Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuChoice")->createButton("spotlight", fvec2(0.0f, POSITIONS(13)[8]), TEXT_SIZE("Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuChoice")->createButton("captor", fvec2(0.0f, POSITIONS(13)[9]), TEXT_SIZE("Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuChoice")->createButton("sound3d", fvec2(0.0f, POSITIONS(13)[10]), TEXT_SIZE("Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuChoice")->createButton("sound3d", fvec2(0.0f, POSITIONS(13)[9]), TEXT_SIZE("Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuChoice")->createButton("captor", fvec2(0.0f, POSITIONS(13)[10]), TEXT_SIZE("Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuChoice")->createButton("settings", fvec2(0.0f, POSITIONS(13)[11]), TEXT_SIZE("Settings"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Settings", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(13)[12]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
@@ -137,15 +137,6 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("worldEditorMenuSpotlightChoice")->createScrollingList("placedSpotlights", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
 	rightWindow->getScreen("worldEditorMenuSpotlightChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	rightWindow->createScreen("worldEditorMenuCaptor");
-	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("place", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Place Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("choice", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Edit Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
-	rightWindow->createScreen("worldEditorMenuCaptorChoice");
-	rightWindow->getScreen("worldEditorMenuCaptorChoice")->createScrollingList("placedCaptors", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
-	rightWindow->getScreen("worldEditorMenuCaptorChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
 	rightWindow->createScreen("worldEditorMenuSound3d");
 	rightWindow->getScreen("worldEditorMenuSound3d")->createButton("place", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Place Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSound3d")->createButton("choice", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Edit Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -158,6 +149,15 @@ void WorldEditor::_loadGUI()
 	rightWindow->createScreen("worldEditorMenuSound3dChoice");
 	rightWindow->getScreen("worldEditorMenuSound3dChoice")->createScrollingList("placedSound3ds", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
 	rightWindow->getScreen("worldEditorMenuSound3dChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	rightWindow->createScreen("worldEditorMenuCaptor");
+	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("place", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Place Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("choice", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Edit Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuCaptor")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	rightWindow->createScreen("worldEditorMenuCaptorChoice");
+	rightWindow->getScreen("worldEditorMenuCaptorChoice")->createScrollingList("placedCaptors", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), SCROLLING_LIST_COLOR, BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, fvec2(0.125f, 0.075f), 0.25f, true);
+	rightWindow->getScreen("worldEditorMenuCaptorChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("worldEditorMenuSettings");
 	rightWindow->getScreen("worldEditorMenuSettings")->createButton("lighting", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -379,6 +379,22 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("spotlightPropertiesMenu")->createInputBox("pitch", fvec2(0.0f, -0.3f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("spotlightPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.45f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
+	leftWindow->createScreen("sound3dPropertiesMenu");
+	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.5f, 0.1f), "Sound3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.81f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("y", fvec2(0.0f, 0.56f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("z", fvec2(0.0f, 0.31f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.7f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("yPlus", fvec2(0.75f, 0.45f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("zPlus", fvec2(0.75f, 0.2f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.7f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, 0.45f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, 0.2f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("x", fvec2(0.0f, 0.7f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("y", fvec2(0.0f, 0.45f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("z", fvec2(0.0f, 0.2f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
+	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("delete", fvec2(0.0f, 0.05f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
 	leftWindow->createScreen("captorPropertiesMenu");
 	leftWindow->getScreen("captorPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.375f, 0.1f), "Captor Menu", fvec3(0.0f, 1.0f, 0.0f), true);
 	leftWindow->getScreen("captorPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.81f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
@@ -397,22 +413,6 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("captorPropertiesMenu")->createButton("capture", fvec2(0.0f, -0.1f), fvec2(0.875f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Capture", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("captorPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.25f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("sound3dPropertiesMenu");
-	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.5f, 0.1f), "Sound3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.81f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("y", fvec2(0.0f, 0.56f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createTextField("z", fvec2(0.0f, 0.31f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.7f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("yPlus", fvec2(0.75f, 0.45f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("zPlus", fvec2(0.75f, 0.2f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.7f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, 0.45f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, 0.2f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("x", fvec2(0.0f, 0.7f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("y", fvec2(0.0f, 0.45f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createInputBox("z", fvec2(0.0f, 0.2f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
-	leftWindow->getScreen("sound3dPropertiesMenu")->createButton("delete", fvec2(0.0f, 0.05f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
 	leftWindow->setActiveScreen("empty");
 
 	rightWindow->setActiveScreen("worldEditorMenuMain");
@@ -429,8 +429,8 @@ void WorldEditor::_unloadGUI()
 	leftWindow->deleteScreen("aabbPropertiesMenu");
 	leftWindow->deleteScreen("pointlightPropertiesMenu");
 	leftWindow->deleteScreen("spotlightPropertiesMenu");
-	leftWindow->deleteScreen("captorPropertiesMenu");
 	leftWindow->deleteScreen("sound3dPropertiesMenu");
+	leftWindow->deleteScreen("captorPropertiesMenu");
 
 	rightWindow->deleteScreen("worldEditorMenuMain");
 	rightWindow->deleteScreen("worldEditorMenuChoice");
@@ -458,11 +458,11 @@ void WorldEditor::_unloadGUI()
 	rightWindow->deleteScreen("worldEditorMenuSpotlight");
 	rightWindow->deleteScreen("worldEditorMenuSpotlightPlace");
 	rightWindow->deleteScreen("worldEditorMenuSpotlightChoice");
-	rightWindow->deleteScreen("worldEditorMenuCaptor");
-	rightWindow->deleteScreen("worldEditorMenuCaptorChoice");
 	rightWindow->deleteScreen("worldEditorMenuSound3d");
 	rightWindow->deleteScreen("worldEditorMenuSound3dPlace");
 	rightWindow->deleteScreen("worldEditorMenuSound3dChoice");
+	rightWindow->deleteScreen("worldEditorMenuCaptor");
+	rightWindow->deleteScreen("worldEditorMenuCaptorChoice");
 	rightWindow->deleteScreen("worldEditorMenuSettings");
 	rightWindow->deleteScreen("worldEditorMenuSettingsLighting");
 	rightWindow->deleteScreen("worldEditorMenuSettingsLightingAmbient");

@@ -903,6 +903,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & pointlightId : _addedPointlightIds)
 	{
+		const auto position = _fe3d->pointlight_getPosition(pointlightId);
 		const auto radius = _fe3d->pointlight_getRadius(pointlightId);
 		const auto color = _fe3d->pointlight_getColor(pointlightId);
 		const auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
@@ -912,6 +913,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		file
 			<< "POINTLIGHT "
 			<< pointlightId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
 			<< " "
 			<< radius.x
 			<< " "
@@ -935,6 +942,9 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & spotlightId : _addedSpotlightIds)
 	{
+		const auto position = _fe3d->spotlight_getPosition(spotlightId);
+		const auto yaw = _fe3d->spotlight_getYaw(spotlightId);
+		const auto pitch = _fe3d->spotlight_getPitch(spotlightId);
 		const auto color = _fe3d->spotlight_getColor(spotlightId);
 		const auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
 		const auto angle = _fe3d->spotlight_getAngle(spotlightId);
@@ -944,6 +954,16 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		file
 			<< "SPOTLIGHT "
 			<< spotlightId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< yaw
+			<< " "
+			<< pitch
 			<< " "
 			<< color.r
 			<< " "
@@ -985,6 +1005,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & sound3dId : _addedSound3dIds)
 	{
+		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
 		const auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
 
@@ -998,6 +1019,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		file
 			<< "SOUND3D "
 			<< sound3dId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
 			<< " "
 			<< audioPath
 			<< " "

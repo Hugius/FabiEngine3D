@@ -24,13 +24,13 @@ void WorldEditor::_updateCaptorEditing()
 			_dontResetSelectedCaptor = false;
 		}
 
-		for(const auto & captorId : _loadedCaptorIds)
+		for(const auto & placedCaptorId : _loadedCaptorIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@captor_" + captorId));
+			const auto isHovered = (hoveredAabbId == ("@@lens_" + placedCaptorId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectCaptor(captorId);
+				_selectCaptor(placedCaptorId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updateCaptorEditing()
 			}
 			else
 			{
-				if((captorId != _selectedCaptorId) && (captorId != _activeCaptorId))
+				if((placedCaptorId != _selectedCaptorId) && (placedCaptorId != _activeCaptorId))
 				{
-					_deselectCaptor(captorId);
+					_deselectCaptor(placedCaptorId);
 				}
 			}
 		}
@@ -90,7 +90,7 @@ void WorldEditor::_updateCaptorEditing()
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@captor_" + _activeCaptorId);
+				_fe3d->model_delete("@@lens_" + _activeCaptorId);
 				_fe3d->captor_delete(_activeCaptorId);
 
 				window->setActiveScreen("empty");
@@ -109,7 +109,7 @@ void WorldEditor::_updateCaptorEditing()
 			_handleInputBox("captorPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / CAPTOR_POSITION_SPEED_DIVIDER));
 
 			_fe3d->captor_setPosition(_activeCaptorId, position);
-			_fe3d->model_setBasePosition(("@@captor_" + _activeCaptorId), position);
+			_fe3d->model_setBasePosition(("@@lens_" + _activeCaptorId), position);
 		}
 	}
 }

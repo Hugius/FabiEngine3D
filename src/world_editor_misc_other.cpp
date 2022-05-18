@@ -101,7 +101,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@pointlight_" + placedPointlightId);
+			_fe3d->model_delete("@@lamp_" + placedPointlightId);
 		}
 	}
 
@@ -111,7 +111,7 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@spotlight_" + placedSpotlightId);
+			_fe3d->model_delete("@@torch_" + placedSpotlightId);
 		}
 	}
 
@@ -121,17 +121,17 @@ void WorldEditor::clearLoadedWorld()
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@sound3d_" + placedSound3dId);
+			_fe3d->model_delete("@@speaker_" + placedSound3dId);
 		}
 	}
 
-	for(const auto & captorId : _loadedCaptorIds)
+	for(const auto & placedCaptorId : _loadedCaptorIds)
 	{
-		_fe3d->captor_delete(captorId);
+		_fe3d->captor_delete(placedCaptorId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@captor_" + captorId);
+			_fe3d->model_delete("@@lens_" + placedCaptorId);
 		}
 	}
 

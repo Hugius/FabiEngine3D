@@ -43,7 +43,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_idCounter));
-				const auto newModelId = ("@@spotlight_" + newId);
+				const auto newModelId = ("@@torch_" + newId);
 
 				_idCounter++;
 
@@ -137,7 +137,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				}
 
 				const auto newId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_idCounter));
-				const auto newModelId = ("@@spotlight_" + newId);
+				const auto newModelId = ("@@torch_" + newId);
 
 				_idCounter++;
 

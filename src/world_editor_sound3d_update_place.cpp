@@ -30,7 +30,7 @@ void WorldEditor::_updateSound3dPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
-				const auto newModelId = ("@@sound3d_" + newId);
+				const auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;
 
@@ -140,7 +140,7 @@ void WorldEditor::_updateSound3dPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
-				const auto newModelId = ("@@sound3d_" + newId);
+				const auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;
 

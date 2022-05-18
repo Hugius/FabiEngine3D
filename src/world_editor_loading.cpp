@@ -330,7 +330,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const auto newModelId = ("@@pointlight_" + placedPointlightId);
+				const auto newModelId = ("@@lamp_" + placedPointlightId);
 
 				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
@@ -381,7 +381,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const auto newModelId = ("@@spotlight_" + placedSpotlightId);
+				const auto newModelId = ("@@torch_" + placedSpotlightId);
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
@@ -428,7 +428,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const auto newModelId = ("@@sound3d_" + placedSound3dId);
+				const auto newModelId = ("@@speaker_" + placedSound3dId);
 
 				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);
@@ -468,7 +468,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const auto newModelId = ("@@captor_" + placedCaptorId);
+				const auto newModelId = ("@@lens_" + placedCaptorId);
 
 				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, position);

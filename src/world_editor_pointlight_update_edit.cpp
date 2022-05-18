@@ -26,7 +26,7 @@ void WorldEditor::_updatePointlightEditing()
 
 		for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@pointlight_" + placedPointlightId));
+			const auto isHovered = (hoveredAabbId == ("@@lamp_" + placedPointlightId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
@@ -76,7 +76,7 @@ void WorldEditor::_updatePointlightEditing()
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_fe3d->pointlight_delete(_activePointlightId);
-				_fe3d->model_delete("@@pointlight_" + _activePointlightId);
+				_fe3d->model_delete("@@lamp_" + _activePointlightId);
 
 				window->setActiveScreen("empty");
 
@@ -94,7 +94,7 @@ void WorldEditor::_updatePointlightEditing()
 			_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_SPEED_DIVIDER));
 
 			_fe3d->pointlight_setPosition(_activePointlightId, position);
-			_fe3d->model_setBasePosition(("@@pointlight_" + _activePointlightId), position);
+			_fe3d->model_setBasePosition(("@@lamp_" + _activePointlightId), position);
 		}
 	}
 }

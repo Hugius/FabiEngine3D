@@ -26,7 +26,7 @@ void WorldEditor::_updateSound3dEditing()
 
 		for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@sound3d_" + placedSound3dId));
+			const auto isHovered = (hoveredAabbId == ("@@speaker_" + placedSound3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
@@ -76,7 +76,7 @@ void WorldEditor::_updateSound3dEditing()
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_fe3d->sound3d_delete(_activeSound3dId);
-				_fe3d->model_delete("@@sound3d_" + _activeSound3dId);
+				_fe3d->model_delete("@@speaker_" + _activeSound3dId);
 
 				window->setActiveScreen("empty");
 
@@ -94,7 +94,7 @@ void WorldEditor::_updateSound3dEditing()
 			_handleInputBox("sound3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER));
 
 			_fe3d->sound3d_setPosition(_activeSound3dId, position);
-			_fe3d->model_setBasePosition(("@@sound3d_" + _activeSound3dId), position);
+			_fe3d->model_setBasePosition(("@@speaker_" + _activeSound3dId), position);
 		}
 	}
 }

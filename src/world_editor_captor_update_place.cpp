@@ -30,7 +30,7 @@ void WorldEditor::_updateCaptorPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 				const auto newId = ("captor_" + to_string(_idCounter));
-				const auto newModelId = ("@@captor_" + newId);
+				const auto newModelId = ("@@lens_" + newId);
 
 				_idCounter++;
 
@@ -107,7 +107,7 @@ void WorldEditor::_updateCaptorPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				const auto newId = ("captor_" + to_string(_idCounter));
-				const auto newModelId = ("@@captor_" + newId);
+				const auto newModelId = ("@@lens_" + newId);
 
 				_idCounter++;
 

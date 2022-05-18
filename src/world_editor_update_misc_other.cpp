@@ -89,6 +89,7 @@ void WorldEditor::_updateMiscellaneous()
 	}
 
 	_fe3d->model_setVisible(GRID_ID, _isGridModeEnabled);
+	_fe3d->model_setWireframed(GRID_ID, "", _isWireframeModeEnabled);
 
 	if(!_fe3d->sky_getSelectedId().empty())
 	{
@@ -136,6 +137,30 @@ void WorldEditor::_updateMiscellaneous()
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
+	}
+
+	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
+	{
+		_fe3d->model_setWireframed("@@lamp_" + placedPointlightId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@lamp_" + placedPointlightId, _isAabbModeEnabled);
+	}
+
+	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
+	{
+		_fe3d->model_setWireframed("@@torch_" + placedSpotlightId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@torch_" + placedSpotlightId, _isAabbModeEnabled);
+	}
+
+	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	{
+		_fe3d->model_setWireframed("@@speaker_" + placedSound3dId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@speaker_" + placedSound3dId, _isAabbModeEnabled);
+	}
+
+	for(const auto & placedCaptorId : _loadedCaptorIds)
+	{
+		_fe3d->model_setWireframed("@@lens_" + placedCaptorId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@lens_" + placedCaptorId, _isAabbModeEnabled);
 	}
 
 	if(_fe3d->terrain_getSelectedId().empty())

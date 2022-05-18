@@ -26,7 +26,7 @@ void WorldEditor::_updateSpotlightEditing()
 
 		for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@spotlight_" + placedSpotlightId));
+			const auto isHovered = (hoveredAabbId == ("@@torch_" + placedSpotlightId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
@@ -76,7 +76,7 @@ void WorldEditor::_updateSpotlightEditing()
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_fe3d->spotlight_delete(_activeSpotlightId);
-				_fe3d->model_delete(("@@spotlight_" + _activeSpotlightId));
+				_fe3d->model_delete(("@@torch_" + _activeSpotlightId));
 
 				window->setActiveScreen("empty");
 
@@ -100,9 +100,9 @@ void WorldEditor::_updateSpotlightEditing()
 			_fe3d->spotlight_setPosition(_activeSpotlightId, position);
 			_fe3d->spotlight_setYaw(_activeSpotlightId, yaw);
 			_fe3d->spotlight_setPitch(_activeSpotlightId, pitch);
-			_fe3d->model_setBasePosition(("@@spotlight_" + _activeSpotlightId), position);
-			_fe3d->model_setBaseRotation(("@@spotlight_" + _activeSpotlightId), fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation("@@spotlight_" + _activeSpotlightId).z));
-			_fe3d->model_setBaseRotation(("@@spotlight_" + _activeSpotlightId), fvec3(0.0f, _fe3d->model_getBaseRotation("@@spotlight_" + _activeSpotlightId).y, pitch));
+			_fe3d->model_setBasePosition(("@@torch_" + _activeSpotlightId), position);
+			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).z));
+			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).y, pitch));
 		}
 	}
 }

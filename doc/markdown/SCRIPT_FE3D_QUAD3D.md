@@ -24,8 +24,8 @@
 - `fe3d:quad3d_set_size` (`STR`quad_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_set_color` (`STR`quad_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad3d_set_wireframe_color` (`STR`quad_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:quad3d_set_min_height` (`STR`quad_id, `DEC` value) -----> `NONE`
-- `fe3d:quad3d_set_max_height` (`STR`quad_id, `DEC` value) -----> `NONE`
+- `fe3d:quad3d_set_min_clip_position` (`STR`quad_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:quad3d_set_max_clip_position` (`STR`quad_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_set_opacity` (`STR`quad_id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_emission_intensity` (`STR`quad_id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_texture_repeat` (`STR`quad_id, `INT` value) -----> `NONE`
@@ -95,8 +95,12 @@
 - `fe3d:quad3d_get_wireframe_color_r` (`STR`quad_id) -----> `DEC`
 - `fe3d:quad3d_get_wireframe_color_g` (`STR`quad_id) -----> `DEC`
 - `fe3d:quad3d_get_wireframe_color_b` (`STR`quad_id) -----> `DEC`
-- `fe3d:quad3d_get_min_height` (`STR`quad_id) -----> `DEC`
-- `fe3d:quad3d_get_max_height` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_min_clip_position_x` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_min_clip_position_y` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_min_clip_position_z` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_max_clip_position_x` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_max_clip_position_y` (`STR`quad_id) -----> `DEC`
+- `fe3d:quad3d_get_max_clip_position_z` (`STR`quad_id) -----> `DEC`
 - `fe3d:quad3d_get_opacity` (`STR`quad_id) -----> `DEC`
 - `fe3d:quad3d_get_emission_intensity` (`STR`quad_id) -----> `DEC`
 - `fe3d:quad3d_get_texture_repeat` (`STR`quad_id) -----> `INT`

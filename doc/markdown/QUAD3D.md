@@ -62,11 +62,11 @@
 - **Min Alpha**: the minimum texture alpha channel intensity to be visible
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Min Height**: the minimum Y position from which fragments are visible
-  - Type: `decimal`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal3`
   - Constraints: none
-- **Max Height**: the maximum Y position to which fragments are visible
-  - Type: `decimal`
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal3`
   - Constraints: none
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `integer`

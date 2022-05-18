@@ -18,8 +18,8 @@
 - `fe3d:text3d_set_size` (`STR`text_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_set_color` (`STR`text_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text3d_set_wireframe_color` (`STR`text_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:text3d_set_min_height` (`STR`text_id, `DEC` value) -----> `NONE`
-- `fe3d:text3d_set_max_height` (`STR`text_id, `DEC` value) -----> `NONE`
+- `fe3d:text3d_set_min_clip_position` (`STR`text_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:text3d_set_max_clip_position` (`STR`text_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_set_opacity` (`STR`text_id, `DEC` value) -----> `NONE`
 - `fe3d:text3d_set_lightness` (`STR`text_id, `DEC` value) -----> `NONE`
 - `fe3d:text3d_set_aabb_raycast_responsive` (`STR`text_id, `BOL` value) -----> `NONE`
@@ -76,8 +76,12 @@
 - `fe3d:text3d_get_wireframe_color_r` (`STR`text_id) -----> `DEC`
 - `fe3d:text3d_get_wireframe_color_g` (`STR`text_id) -----> `DEC`
 - `fe3d:text3d_get_wireframe_color_b` (`STR`text_id) -----> `DEC`
-- `fe3d:text3d_get_min_height` (`STR`text_id) -----> `DEC`
-- `fe3d:text3d_get_max_height` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_min_clip_position_x` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_min_clip_position_y` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_min_clip_position_z` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_x` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_y` (`STR`text_id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_z` (`STR`text_id) -----> `DEC`
 - `fe3d:text3d_get_opacity` (`STR`text_id) -----> `DEC`
 - `fe3d:text3d_get_lightness` (`STR`text_id) -----> `DEC`
 - `fe3d:text3d_get_ids` () -----> `LIST`

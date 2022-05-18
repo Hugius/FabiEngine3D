@@ -153,6 +153,7 @@ void TopViewportController::_updateProjectLoading()
 		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		vector<string> imagePaths = {};
+
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
@@ -163,6 +164,7 @@ void TopViewportController::_updateProjectLoading()
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
 
 		vector<string> audioPaths = {};
+
 		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
 		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
 

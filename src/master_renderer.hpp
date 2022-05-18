@@ -47,8 +47,8 @@ public:
 	void inject(shared_ptr<WaterManager> waterManager);
 	void inject(shared_ptr<ModelManager> modelManager);
 	void inject(shared_ptr<Quad3dManager> quad3dManager);
-	void inject(shared_ptr<Text3dManager> text3dManager);
 	void inject(shared_ptr<Quad2dManager> quad2dManager);
+	void inject(shared_ptr<Text3dManager> text3dManager);
 	void inject(shared_ptr<Text2dManager> text2dManager);
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<PointlightManager> pointlightManager);
@@ -154,8 +154,8 @@ private:
 	shared_ptr<WaterManager> _waterManager = nullptr;
 	shared_ptr<ModelManager> _modelManager = nullptr;
 	shared_ptr<Quad3dManager> _quad3dManager = nullptr;
-	shared_ptr<Text3dManager> _text3dManager = nullptr;
 	shared_ptr<Quad2dManager> _quad2dManager = nullptr;
+	shared_ptr<Text3dManager> _text3dManager = nullptr;
 	shared_ptr<Text2dManager> _text2dManager = nullptr;
 	shared_ptr<AabbManager> _aabbManager = nullptr;
 	shared_ptr<PointlightManager> _pointlightManager = nullptr;

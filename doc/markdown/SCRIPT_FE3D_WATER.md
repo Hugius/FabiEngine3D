@@ -3,67 +3,67 @@
 ## Setters
 
 - `fe3d:water_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
-- `fe3d:water_select` (`STR` id) -----> `NONE`
-- `fe3d:water_delete` (`STR` id) -----> `NONE`
+- `fe3d:water_select` (`STR`water_id) -----> `NONE`
+- `fe3d:water_delete` (`STR`water_id) -----> `NONE`
 - `fe3d:water_delete_all` () -----> `NONE`
-- `fe3d:water_set_ripple_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
-- `fe3d:water_set_wave_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
-- `fe3d:water_set_max_depth` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_size` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_dudv_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_normal_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_height_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:water_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:water_set_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_wave_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_texture_repeat` (`STR` id, `INT` value) -----> `NONE`
-- `fe3d:water_set_specular_shininess` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_specular_intensity` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_reflective` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_refractive` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_specular` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_edged` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:water_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:water_set_ripple_speed` (`STR`water_id, `DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:water_set_wave_speed` (`STR`water_id, `DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:water_set_max_depth` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_size` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_dudv_map` (`STR`water_id, `STR` file_path) -----> `NONE`
+- `fe3d:water_set_normal_map` (`STR`water_id, `STR` file_path) -----> `NONE`
+- `fe3d:water_set_height_map` (`STR`water_id, `STR` file_path) -----> `NONE`
+- `fe3d:water_set_color` (`STR`water_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:water_set_wireframe_color` (`STR`water_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:water_set_height` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_wave_height` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_texture_repeat` (`STR`water_id, `INT` value) -----> `NONE`
+- `fe3d:water_set_specular_shininess` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_specular_intensity` (`STR`water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_reflective` (`STR`water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_refractive` (`STR`water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_specular` (`STR`water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_wireframed` (`STR`water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_edged` (`STR`water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_min_clip_position` (`STR`water_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:water_set_max_clip_position` (`STR`water_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
-- `fe3d:water_find_ids` (`STR` id) -----> `LIST`
-- `fe3d:water_is_reflective` (`STR` id) -----> `BOL`
-- `fe3d:water_is_refractive` (`STR` id) -----> `BOL`
-- `fe3d:water_is_specular` (`STR` id) -----> `BOL`
-- `fe3d:water_is_edged` (`STR` id) -----> `BOL`
-- `fe3d:water_is_wireframed` (`STR` id) -----> `BOL`
-- `fe3d:water_has_dudv_map` (`STR` id) -----> `BOL`
-- `fe3d:water_has_height_map` (`STR` id) -----> `BOL`
-- `fe3d:water_has_normal_map` (`STR` id) -----> `BOL`
-- `fe3d:water_get_selected_id` (`STR` id) -----> `STR`
-- `fe3d:water_get_dudv_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_height_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_normal_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_min_clip_position_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_min_clip_position_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_min_clip_position_z` (`STR` id) -----> `DEC`
-- `fe3d:water_get_max_clip_position_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_max_clip_position_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_max_clip_position_z` (`STR` id) -----> `DEC`
-- `fe3d:water_get_max_depth` (`STR` id) -----> `DEC`
-- `fe3d:water_get_ripple_speed_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_ripple_speed_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wave_speed_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wave_speed_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_height` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_r` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_g` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_b` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_r` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_g` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_b` (`STR` id) -----> `DEC`
-- `fe3d:water_get_size` (`STR` id) -----> `DEC`
+- `fe3d:water_find_ids` (`STR`water_id) -----> `LIST`
+- `fe3d:water_is_reflective` (`STR`water_id) -----> `BOL`
+- `fe3d:water_is_refractive` (`STR`water_id) -----> `BOL`
+- `fe3d:water_is_specular` (`STR`water_id) -----> `BOL`
+- `fe3d:water_is_edged` (`STR`water_id) -----> `BOL`
+- `fe3d:water_is_wireframed` (`STR`water_id) -----> `BOL`
+- `fe3d:water_has_dudv_map` (`STR`water_id) -----> `BOL`
+- `fe3d:water_has_height_map` (`STR`water_id) -----> `BOL`
+- `fe3d:water_has_normal_map` (`STR`water_id) -----> `BOL`
+- `fe3d:water_get_selected_id` (`STR`water_id) -----> `STR`
+- `fe3d:water_get_dudv_map_path` (`STR`water_id) -----> `STR`
+- `fe3d:water_get_height_map_path` (`STR`water_id) -----> `STR`
+- `fe3d:water_get_normal_map_path` (`STR`water_id) -----> `STR`
+- `fe3d:water_get_min_clip_position_x` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_min_clip_position_y` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_min_clip_position_z` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_x` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_y` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_z` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_max_depth` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_ripple_speed_x` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_ripple_speed_y` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_wave_speed_x` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_wave_speed_y` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_height` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_color_r` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_color_g` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_color_b` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_wireframe_color_r` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_wireframe_color_g` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_wireframe_color_b` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_size` (`STR`water_id) -----> `DEC`
 - `fe3d:water_get_ids` () -----> `LIST`
-- `fe3d:water_get_texture_repeat` (`STR` id) -----> `INT`
-- `fe3d:water_get_wave_height` (`STR` id) -----> `DEC`
-- `fe3d:water_get_specular_shininess` (`STR` id) -----> `DEC`
-- `fe3d:water_get_specular_intensity` (`STR` id) -----> `DEC`
+- `fe3d:water_get_texture_repeat` (`STR`water_id) -----> `INT`
+- `fe3d:water_get_wave_height` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_specular_shininess` (`STR`water_id) -----> `DEC`
+- `fe3d:water_get_specular_intensity` (`STR`water_id) -----> `DEC`

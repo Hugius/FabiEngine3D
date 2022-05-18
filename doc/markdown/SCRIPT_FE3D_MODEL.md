@@ -3,17 +3,17 @@
 ## Setters
 
 - `fe3d:model_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` position_z) -----> `NONE`
-- `fe3d:model_delete` (`STR` id) -----> `NONE`
+- `fe3d:model_delete` (`STR`model_id) -----> `NONE`
 - `fe3d:model_delete_all` () -----> `NONE`
-- `fe3d:model_move_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_rotate_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_scale_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_base` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_rotate_base` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_scale_base` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_move_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_rotate_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_scale_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_move_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
-- `fe3d:model_rotate_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
-- `fe3d:model_scale_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_move_base_to` (`STR`model_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_rotate_base_to` (`STR`model_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_scale_base_to` (`STR`model_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_move_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_rotate_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_scale_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
@@ -22,20 +22,20 @@
 - `fe3d:model_autopause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
 - `fe3d:model_resume_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
 - `fe3d:model_stop_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
-- `fe3d:model_set_visible` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_visible` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_face_culled` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_base_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_base_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_base_rotation_origin` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_base_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_rotation` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_rotation_origin` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_size` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_position` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_rotation` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_rotation_origin` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_size` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_min_clip_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_max_clip_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_aabb_raycast_responsive` (`STR`model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_aabb_collision_responsive` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `INT` value) -----> `NONE`
 - `fe3d:model_set_diffuse_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_emission_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
@@ -45,40 +45,40 @@
 - `fe3d:model_set_normal_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_wireframe_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_lod_id` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_set_lod_id` (`STR`model_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_lightness` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular_shininess` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_reflectivity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_refractivity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
-- `fe3d:model_set_lod_distance` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_lod_distance` (`STR`model_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_opacity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_specular` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_reflected` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_refracted` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_reflected` (`STR`model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_refracted` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_reflective` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_refractive` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_shadowed` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_frozen` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_shadowed` (`STR`model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_frozen` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_wireframed` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_bright` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_emission_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_reflection_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_refraction_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
-- `fe3d:model_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_set_rotation_order` (`STR`model_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_min_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_animation_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_animation_frame_index` (`STR` model_id, `STR` animation_id, `INT` value) -----> `NONE`
 
 ## Getters
 
-- `fe3d:model_find_ids` (`STR` id) -----> `LIST`
-- `fe3d:model_is_existing` (`STR` id) -----> `BOL`
-- `fe3d:model_is_visible` (`STR` id) -----> `BOL`
-- `fe3d:model_is_shadowed` (`STR` id) -----> `BOL`
-- `fe3d:model_is_frozen` (`STR` id) -----> `BOL`
-- `fe3d:model_is_reflected` (`STR` id) -----> `BOL`
-- `fe3d:model_is_refracted` (`STR` id) -----> `BOL`
+- `fe3d:model_find_ids` (`STR`model_id) -----> `LIST`
+- `fe3d:model_is_existing` (`STR`model_id) -----> `BOL`
+- `fe3d:model_is_visible` (`STR`model_id) -----> `BOL`
+- `fe3d:model_is_shadowed` (`STR`model_id) -----> `BOL`
+- `fe3d:model_is_frozen` (`STR`model_id) -----> `BOL`
+- `fe3d:model_is_reflected` (`STR`model_id) -----> `BOL`
+- `fe3d:model_is_refracted` (`STR`model_id) -----> `BOL`
 - `fe3d:model_is_bright` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_face_culled` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_reflective` (`STR` model_id, `STR` part_id) -----> `BOL`
@@ -97,18 +97,18 @@
 - `fe3d:model_has_refraction_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_normal_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_get_ids` () -----> `LIST`
-- `fe3d:model_get_base_position_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_position_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_position_z` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_z` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_origin_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_origin_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_rotation_origin_z` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_size_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_size_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_base_size_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_position_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_position_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_position_z` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_z` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_z` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_size_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_size_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_base_size_z` (`STR`model_id) -----> `DEC`
 - `fe3d:model_get_part_position_x` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_position_y` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_position_z` (`STR` model_id, `STR` part_id) -----> `DEC`
@@ -121,12 +121,12 @@
 - `fe3d:model_get_part_size_x` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_size_y` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_size_z` (`STR` model_id, `STR` part_id) -----> `DEC`
-- `fe3d:model_get_min_clip_position_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_min_clip_position_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_min_clip_position_z` (`STR` id) -----> `DEC`
-- `fe3d:model_get_max_clip_position_x` (`STR` id) -----> `DEC`
-- `fe3d:model_get_max_clip_position_y` (`STR` id) -----> `DEC`
-- `fe3d:model_get_max_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_z` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_x` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_y` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_z` (`STR`model_id) -----> `DEC`
 - `fe3d:model_get_lightness` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_color_r` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_color_g` (`STR` model_id, `STR` part_id) -----> `DEC`
@@ -141,9 +141,9 @@
 - `fe3d:model_get_specular_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_reflectivity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_refractivity` (`STR` model_id, `STR` part_id) -----> `DEC`
-- `fe3d:model_get_lod_distance` (`STR` id) -----> `DEC`
-- `fe3d:model_get_lod_id` (`STR` id) -----> `STR`
-- `fe3d:model_get_mesh_path` (`STR` id) -----> `STR`
+- `fe3d:model_get_lod_distance` (`STR`model_id) -----> `DEC`
+- `fe3d:model_get_lod_id` (`STR`model_id) -----> `STR`
+- `fe3d:model_get_mesh_path` (`STR`model_id) -----> `STR`
 - `fe3d:model_get_diffuse_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_emission_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_specular_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
@@ -153,7 +153,7 @@
 - `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_refraction_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_min_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
-- `fe3d:model_get_rotation_order` (`STR` id) -----> `STR`
+- `fe3d:model_get_rotation_order` (`STR`model_id) -----> `STR`
 - `fe3d:model_get_animation_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
 - `fe3d:model_get_animation_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`
 - `fe3d:model_get_animation_frame_index` (`STR` model_id, `STR` animation_id) -----> `INT`

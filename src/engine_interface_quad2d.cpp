@@ -187,6 +187,11 @@ void EngineInterface::quad2d_setAnimationIntervalDivider(const string & animatio
 	_core->getAnimation2dPlayer()->setQuad2dAnimation2dIntervalDivider(animation2dId, quad2dId, value);
 }
 
+void EngineInterface::quad2d_setAnimationUpdateCount(const string & animation2dId, const string & quad2dId, int value)
+{
+	_core->getAnimation2dPlayer()->setQuad2dAnimation2dUpdateCount(animation2dId, quad2dId, value);
+}
+
 void EngineInterface::quad2d_setTextureRepeat(const string & quad2dId, int value)
 {
 	_core->getQuad2dManager()->getQuad2d(quad2dId)->setTextureRepeat(value);

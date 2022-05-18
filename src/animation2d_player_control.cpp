@@ -227,6 +227,28 @@ void Animation2dPlayer::setQuad3dAnimation2dIntervalDivider(const string & anima
 	_startedQuad3dAnimation2ds.at(mergedId)->setIntervalDivider(value);
 }
 
+void Animation2dPlayer::setQuad3dAnimation2dUpdateCount(const string & animation2dId, const string & quad3dId, int value)
+{
+	const auto mergedId = Tools::mergeStrings(animation2dId, quad3dId, DELIMITER);
+
+	if(!_animation2dManager->isAnimation2dExisting(animation2dId))
+	{
+		abort();
+	}
+
+	if(!_quad3dManager->isQuad3dExisting(quad3dId))
+	{
+		abort();
+	}
+
+	if(!isQuad3dAnimation2dStarted(animation2dId, quad3dId))
+	{
+		abort();
+	}
+
+	_startedQuad3dAnimation2ds.at(mergedId)->setUpdateCount(value);
+}
+
 void Animation2dPlayer::startQuad2dAnimation2d(const string & animation2dId, const string & quad2dId, int playCount)
 {
 	const auto mergedId = Tools::mergeStrings(animation2dId, quad2dId, DELIMITER);
@@ -449,4 +471,26 @@ void Animation2dPlayer::setQuad2dAnimation2dIntervalDivider(const string & anima
 	}
 
 	_startedQuad2dAnimation2ds.at(mergedId)->setIntervalDivider(value);
+}
+
+void Animation2dPlayer::setQuad2dAnimation2dUpdateCount(const string & animation2dId, const string & quad2dId, int value)
+{
+	const auto mergedId = Tools::mergeStrings(animation2dId, quad2dId, DELIMITER);
+
+	if(!_animation2dManager->isAnimation2dExisting(animation2dId))
+	{
+		abort();
+	}
+
+	if(!_quad2dManager->isQuad2dExisting(quad2dId))
+	{
+		abort();
+	}
+
+	if(!isQuad2dAnimation2dStarted(animation2dId, quad2dId))
+	{
+		abort();
+	}
+
+	_startedQuad2dAnimation2ds.at(mergedId)->setUpdateCount(value);
 }

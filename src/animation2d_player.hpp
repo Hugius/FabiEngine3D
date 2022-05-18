@@ -35,6 +35,8 @@ public:
 	void setQuad2dAnimation2dIntervalMultiplier(const string & animation2dId, const string & quad2dId, int value);
 	void setQuad3dAnimation2dIntervalDivider(const string & animation2dId, const string & quad3dId, int value);
 	void setQuad2dAnimation2dIntervalDivider(const string & animation2dId, const string & quad2dId, int value);
+	void setQuad3dAnimation2dUpdateCount(const string & animation2dId, const string & quad3dId, int value);
+	void setQuad2dAnimation2dUpdateCount(const string & animation2dId, const string & quad2dId, int value);
 
 	const vector<pair<string, string>> getStartedQuad3dAnimation2dIds() const;
 	const vector<pair<string, string>> getStartedQuad2dAnimation2dIds() const;

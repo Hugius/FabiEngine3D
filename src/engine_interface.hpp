@@ -385,6 +385,7 @@ public:
 	void quad3d_setAnimationColumnIndex(const string & quad3dId, const string & animation2dId, int value);
 	void quad3d_setAnimationIntervalMultiplier(const string & quad3dId, const string & animation2dId, int value);
 	void quad3d_setAnimationIntervalDivider(const string & quad3dId, const string & animation2dId, int value);
+	void quad3d_setAnimationUpdateCount(const string & quad3dId, const string & animation2dId, int value);
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string & quad3dId) const;
@@ -463,6 +464,7 @@ public:
 	void quad2d_setAnimationColumnIndex(const string & animation2dId, const string & quad2dId, int value);
 	void quad2d_setAnimationIntervalMultiplier(const string & animation2dId, const string & quad2dId, int value);
 	void quad2d_setAnimationIntervalDivider(const string & animation2dId, const string & quad2dId, int value);
+	void quad2d_setAnimationUpdateCount(const string & animation2dId, const string & quad2dId, int value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string & quad2dId) const;

@@ -230,6 +230,11 @@ void EngineInterface::quad3d_setAnimationIntervalDivider(const string & quad3dId
 	_core->getAnimation2dPlayer()->setQuad3dAnimation2dIntervalDivider(animation2dId, quad3dId, value);
 }
 
+void EngineInterface::quad3d_setAnimationUpdateCount(const string & quad3dId, const string & animation2dId, int value)
+{
+	_core->getAnimation2dPlayer()->setQuad3dAnimation2dUpdateCount(animation2dId, quad3dId, value);
+}
+
 void EngineInterface::quad3d_setHorizontallyFlipped(const string & quad3dId, bool value)
 {
 	_core->getQuad3dManager()->getQuad3d(quad3dId)->setHorizontallyFlipped(value);

@@ -183,3 +183,91 @@ void Animation3dPlayer::setModelAnimation3dFrameIndex(const string & animation3d
 
 	_startedModelAnimation3ds.at(mergedId)->setFrameIndex(value);
 }
+
+void Animation3dPlayer::setModelAnimation3dTotalMovement(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value)
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	_startedModelAnimation3ds.at(mergedId)->setTotalMovement(partId, value);
+}
+
+void Animation3dPlayer::setModelAnimation3dTotalRotation(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value)
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	_startedModelAnimation3ds.at(mergedId)->setTotalRotation(partId, value);
+}
+
+void Animation3dPlayer::setModelAnimation3dTotalScaling(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value)
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	_startedModelAnimation3ds.at(mergedId)->setTotalScaling(partId, value);
+}
+
+void Animation3dPlayer::setModelAnimation3dTotalSpeed(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value)
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	_startedModelAnimation3ds.at(mergedId)->setTotalSpeed(partId, value);
+}

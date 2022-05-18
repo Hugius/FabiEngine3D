@@ -452,6 +452,26 @@ void EngineInterface::model_setAnimation3dFrameIndex(const string & modelId, con
 	_core->getAnimation3dPlayer()->setModelAnimation3dFrameIndex(animation3dId, modelId, value);
 }
 
+void EngineInterface::model_setAnimation3dTotalMovement(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value)
+{
+	_core->getAnimation3dPlayer()->setModelAnimation3dTotalMovement(animation3dId, modelId, partId, value);
+}
+
+void EngineInterface::model_setAnimation3dTotalRotation(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value)
+{
+	_core->getAnimation3dPlayer()->setModelAnimation3dTotalRotation(animation3dId, modelId, partId, value);
+}
+
+void EngineInterface::model_setAnimation3dTotalScaling(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value)
+{
+	_core->getAnimation3dPlayer()->setModelAnimation3dTotalScaling(animation3dId, modelId, partId, value);
+}
+
+void EngineInterface::model_setAnimation3dTotalSpeed(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value)
+{
+	_core->getAnimation3dPlayer()->setModelAnimation3dTotalSpeed(animation3dId, modelId, partId, value);
+}
+
 void EngineInterface::model_setFrozen(const string & modelId, bool value)
 {
 	_core->getModelManager()->getModel(modelId)->setFrozen(value);
@@ -703,6 +723,26 @@ const fvec3 & EngineInterface::model_getMinClipPosition(const string & modelId) 
 const fvec3 & EngineInterface::model_getMaxClipPosition(const string & modelId) const
 {
 	return _core->getModelManager()->getModel(modelId)->getMaxClipPosition();
+}
+
+const fvec3 & EngineInterface::model_getAnimation3dTotalMovement(const string & modelId, const string & animation3dId, const string & partId) const
+{
+	return _core->getAnimation3dPlayer()->getModelAnimation3dTotalMovement(animation3dId, modelId, partId);
+}
+
+const fvec3 & EngineInterface::model_getAnimation3dTotalRotation(const string & modelId, const string & animation3dId, const string & partId) const
+{
+	return _core->getAnimation3dPlayer()->getModelAnimation3dTotalRotation(animation3dId, modelId, partId);
+}
+
+const fvec3 & EngineInterface::model_getAnimation3dTotalScaling(const string & modelId, const string & animation3dId, const string & partId) const
+{
+	return _core->getAnimation3dPlayer()->getModelAnimation3dTotalScaling(animation3dId, modelId, partId);
+}
+
+const fvec3 & EngineInterface::model_getAnimation3dTotalSpeed(const string & modelId, const string & animation3dId, const string & partId) const
+{
+	return _core->getAnimation3dPlayer()->getModelAnimation3dTotalSpeed(animation3dId, modelId, partId);
 }
 
 const float EngineInterface::model_getLightness(const string & modelId, const string & partId) const

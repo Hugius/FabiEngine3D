@@ -25,6 +25,94 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimation3d
 	return result;
 }
 
+const fvec3 & Animation3dPlayer::getModelAnimation3dTotalMovement(const string & animation3dId, const string & modelId, const string & partId) const
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	return _startedModelAnimation3ds.at(mergedId)->getTotalMovement(partId);
+}
+
+const fvec3 & Animation3dPlayer::getModelAnimation3dTotalRotation(const string & animation3dId, const string & modelId, const string & partId) const
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	return _startedModelAnimation3ds.at(mergedId)->getTotalRotation(partId);
+}
+
+const fvec3 & Animation3dPlayer::getModelAnimation3dTotalScaling(const string & animation3dId, const string & modelId, const string & partId) const
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	return _startedModelAnimation3ds.at(mergedId)->getTotalScaling(partId);
+}
+
+const fvec3 & Animation3dPlayer::getModelAnimation3dTotalSpeed(const string & animation3dId, const string & modelId, const string & partId) const
+{
+	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);
+
+	if(!_animation3dManager->isAnimation3dExisting(animation3dId))
+	{
+		abort();
+	}
+
+	if(!_modelManager->isModelExisting(modelId))
+	{
+		abort();
+	}
+
+	if(!isModelAnimation3dStarted(animation3dId, modelId))
+	{
+		abort();
+	}
+
+	return _startedModelAnimation3ds.at(mergedId)->getTotalSpeed(partId);
+}
+
 const float Animation3dPlayer::getModelAnimation3dSpeedMultiplier(const string & animation3dId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animation3dId, modelId, DELIMITER);

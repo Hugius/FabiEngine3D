@@ -275,6 +275,10 @@ public:
 	void model_stopAnimation3d(const string & modelId, const string & animation3dId);
 	void model_setAnimation3dSpeedMultiplier(const string & modelId, const string & animation3dId, float value);
 	void model_setAnimation3dFrameIndex(const string & modelId, const string & animation3dId, int value);
+	void model_setAnimation3dTotalMovement(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value);
+	void model_setAnimation3dTotalRotation(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value);
+	void model_setAnimation3dTotalScaling(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value);
+	void model_setAnimation3dTotalSpeed(const string & modelId, const string & partId, const string & animation3dId, const fvec3 & value);
 
 	const vector<string> model_getIds() const;
 	const vector<string> model_getPartIds(const string & modelId) const;
@@ -300,6 +304,10 @@ public:
 	const fvec3 & model_getWireframeColor(const string & modelId, const string & partId) const;
 	const fvec3 & model_getMinClipPosition(const string & modelId) const;
 	const fvec3 & model_getMaxClipPosition(const string & modelId) const;
+	const fvec3 & model_getAnimation3dTotalMovement(const string & modelId, const string & animation3dId, const string & partId) const;
+	const fvec3 & model_getAnimation3dTotalRotation(const string & modelId, const string & animation3dId, const string & partId) const;
+	const fvec3 & model_getAnimation3dTotalScaling(const string & modelId, const string & animation3dId, const string & partId) const;
+	const fvec3 & model_getAnimation3dTotalSpeed(const string & modelId, const string & animation3dId, const string & partId) const;
 	const float model_getReflectivity(const string & modelId, const string & partId) const;
 	const float model_getRefractivity(const string & modelId, const string & partId) const;
 	const float model_getLightness(const string & modelId, const string & partId) const;

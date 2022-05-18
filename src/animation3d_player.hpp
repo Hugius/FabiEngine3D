@@ -17,8 +17,17 @@ public:
 	void stopModelAnimation3d(const string & animation3dId, const string & modelId);
 	void setModelAnimation3dSpeedMultiplier(const string & animation3dId, const string & modelId, float value);
 	void setModelAnimation3dFrameIndex(const string & animation3dId, const string & modelId, int value);
+	void setModelAnimation3dTotalMovement(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value);
+	void setModelAnimation3dTotalRotation(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value);
+	void setModelAnimation3dTotalScaling(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value);
+	void setModelAnimation3dTotalSpeed(const string & animation3dId, const string & modelId, const string & partId, const fvec3 & value);
 
 	const vector<pair<string, string>> getStartedModelAnimation3dIds() const;
+
+	const fvec3 & getModelAnimation3dTotalMovement(const string & animation3dId, const string & modelId, const string & partId) const;
+	const fvec3 & getModelAnimation3dTotalRotation(const string & animation3dId, const string & modelId, const string & partId) const;
+	const fvec3 & getModelAnimation3dTotalScaling(const string & animation3dId, const string & modelId, const string & partId) const;
+	const fvec3 & getModelAnimation3dTotalSpeed(const string & animation3dId, const string & modelId, const string & partId) const;
 
 	const float getModelAnimation3dSpeedMultiplier(const string & animation3dId, const string & modelId) const;
 

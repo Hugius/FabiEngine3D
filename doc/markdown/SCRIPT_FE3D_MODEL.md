@@ -34,6 +34,7 @@
 - `fe3d:model_set_part_size` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_min_clip_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_max_clip_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_aabb_visible` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_aabb_raycast_responsive` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_aabb_collision_responsive` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `INT` value) -----> `NONE`
@@ -88,6 +89,7 @@
 - `fe3d:model_is_animation_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_aabb_visible` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_aabb_raycast_responsive` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_aabb_collision_responsive` (`STR` model_id) -----> `BOL`
 - `fe3d:model_has_diffuse_map` (`STR` model_id, `STR` part_id) -----> `BOL`

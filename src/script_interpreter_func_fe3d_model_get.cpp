@@ -1451,6 +1451,29 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_is_aabb_visible")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString(), false))
+			{
+				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
+
+				if(aabbIds.empty())
+				{
+					_throwRuntimeError("model has no bound AABBs");
+
+					return true;
+				}
+
+				const auto result = _fe3d->aabb_isVisible(aabbIds[0]);
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_is_aabb_collision_responsive")
 	{
 		const auto types = {SVT::STRING};

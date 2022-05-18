@@ -12,7 +12,7 @@ void EngineInterface::model_delete(const string & modelId)
 	{
 		if(modelId == modelId)
 		{
-			model_stopAnimation(modelId, animation3dId);
+			model_stopAnimation3d(modelId, animation3dId);
 		}
 	}
 
@@ -417,37 +417,37 @@ void EngineInterface::model_setRotationOrder(const string & modelId, DirectionOr
 	_core->getModelManager()->getModel(modelId)->setRotationOrder(value);
 }
 
-void EngineInterface::model_startAnimation(const string & modelId, const string & animation3dId, int playCount)
+void EngineInterface::model_startAnimation3d(const string & modelId, const string & animation3dId, int playCount)
 {
 	_core->getAnimation3dPlayer()->startModelAnimation3d(animation3dId, modelId, playCount);
 }
 
-void EngineInterface::model_pauseAnimation(const string & modelId, const string & animation3dId)
+void EngineInterface::model_pauseAnimation3d(const string & modelId, const string & animation3dId)
 {
 	_core->getAnimation3dPlayer()->pauseModelAnimation3d(animation3dId, modelId);
 }
 
-void EngineInterface::model_autopauseAnimation(const string & modelId, const string & animation3dId)
+void EngineInterface::model_autopauseAnimation3d(const string & modelId, const string & animation3dId)
 {
 	_core->getAnimation3dPlayer()->autopauseModelAnimation3d(animation3dId, modelId);
 }
 
-void EngineInterface::model_resumeAnimation(const string & modelId, const string & animation3dId)
+void EngineInterface::model_resumeAnimation3d(const string & modelId, const string & animation3dId)
 {
 	_core->getAnimation3dPlayer()->resumeModelAnimation3d(animation3dId, modelId);
 }
 
-void EngineInterface::model_stopAnimation(const string & modelId, const string & animation3dId)
+void EngineInterface::model_stopAnimation3d(const string & modelId, const string & animation3dId)
 {
 	_core->getAnimation3dPlayer()->stopModelAnimation3d(animation3dId, modelId);
 }
 
-void EngineInterface::model_setAnimationSpeedMultiplier(const string & modelId, const string & animation3dId, float value)
+void EngineInterface::model_setAnimation3dSpeedMultiplier(const string & modelId, const string & animation3dId, float value)
 {
 	_core->getAnimation3dPlayer()->setModelAnimation3dSpeedMultiplier(animation3dId, modelId, value);
 }
 
-void EngineInterface::model_setAnimationFrameIndex(const string & modelId, const string & animation3dId, int value)
+void EngineInterface::model_setAnimation3dFrameIndex(const string & modelId, const string & animation3dId, int value)
 {
 	_core->getAnimation3dPlayer()->setModelAnimation3dFrameIndex(animation3dId, modelId, value);
 }
@@ -615,17 +615,17 @@ const bool EngineInterface::model_hasNormalMap(const string & modelId, const str
 	return (_core->getModelManager()->getModel(modelId)->getNormalTextureBuffer(partId) != nullptr);
 }
 
-const bool EngineInterface::model_isAnimationStarted(const string & modelId, const string & animation3dId) const
+const bool EngineInterface::model_isAnimation3dStarted(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->isModelAnimation3dStarted(animation3dId, modelId);
 }
 
-const bool EngineInterface::model_isAnimationPaused(const string & modelId, const string & animation3dId) const
+const bool EngineInterface::model_isAnimation3dPaused(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->isModelAnimation3dPaused(animation3dId, modelId);
 }
 
-const bool EngineInterface::model_isAnimationAutopaused(const string & modelId, const string & animation3dId) const
+const bool EngineInterface::model_isAnimation3dAutopaused(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->isModelAnimation3dAutopaused(animation3dId, modelId);
 }
@@ -755,17 +755,17 @@ const float EngineInterface::model_getMinAlpha(const string & modelId, const str
 	return _core->getModelManager()->getModel(modelId)->getMinAlpha(partId);
 }
 
-const float EngineInterface::model_getAnimationSpeedMultiplier(const string & modelId, const string & animation3dId) const
+const float EngineInterface::model_getAnimation3dSpeedMultiplier(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->getModelAnimation3dSpeedMultiplier(animation3dId, modelId);
 }
 
-const int EngineInterface::model_getAnimationPlayCount(const string & modelId, const string & animation3dId) const
+const int EngineInterface::model_getAnimation3dPlayCount(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->getModelAnimation3dPlayCount(animation3dId, modelId);
 }
 
-const int EngineInterface::model_getAnimationFrameIndex(const string & modelId, const string & animation3dId) const
+const int EngineInterface::model_getAnimation3dFrameIndex(const string & modelId, const string & animation3dId) const
 {
 	return _core->getAnimation3dPlayer()->getModelAnimation3dFrameIndex(animation3dId, modelId);
 }
@@ -815,7 +815,7 @@ const vector<string> EngineInterface::model_getPartIds(const string & modelId) c
 	return _core->getModelManager()->getModel(modelId)->getPartIds();
 }
 
-const vector<string> EngineInterface::model_getAnimationIds(const string & modelId) const
+const vector<string> EngineInterface::model_getAnimation3dIds(const string & modelId) const
 {
 	vector<string> result = {};
 

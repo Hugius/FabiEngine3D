@@ -70,7 +70,7 @@ void WorldEditor::_updateQuad3dEditing()
 		if(!_activeQuad3dId.empty())
 		{
 			const auto screen = window->getScreen("quad3dPropertiesMenu");
-			const auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
+			const auto currentAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(_activeQuad3dId);
 
 			window->setActiveScreen("quad3dPropertiesMenu");
 
@@ -111,7 +111,7 @@ void WorldEditor::_updateQuad3dEditing()
 				}
 				else
 				{
-					_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
+					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
 					_fe3d->quad3d_setUvMultiplier(_activeQuad3dId, fvec2(1.0f));
 					_fe3d->quad3d_setUvOffset(_activeQuad3dId, fvec2(0.0f));
 				}
@@ -120,7 +120,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				if(!currentAnimation2dIds.empty())
 				{
-					_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
+					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
 				}
 
 				_fe3d->quad3d_delete(_activeQuad3dId);

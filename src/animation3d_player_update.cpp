@@ -12,11 +12,11 @@ void Animation3dPlayer::update()
 
 void Animation3dPlayer::_updateModelAnimation3dExecution()
 {
-	vector<string> modelAnimationsToStop = {};
+	vector<string> modelAnimation3dsToStop = {};
 
-	for(auto & [mergedId, startedAnimation] : _startedModelAnimation3ds)
+	for(auto & [mergedId, startedAnimation3d] : _startedModelAnimation3ds)
 	{
-		if(startedAnimation->isPaused())
+		if(startedAnimation3d->isPaused())
 		{
 			continue;
 		}
@@ -27,24 +27,24 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 		int finishedPartCount = 0;
 
-		for(const auto & partId : startedAnimation->getPartIds())
+		for(const auto & partId : startedAnimation3d->getPartIds())
 		{
-			auto totalMovement = startedAnimation->getTotalMovement(partId);
-			auto totalRotation = startedAnimation->getTotalRotation(partId);
-			auto totalScaling = startedAnimation->getTotalScaling(partId);
-			auto totalSpeed = startedAnimation->getTotalSpeed(partId);
+			auto totalMovement = startedAnimation3d->getTotalMovement(partId);
+			auto totalRotation = startedAnimation3d->getTotalRotation(partId);
+			auto totalScaling = startedAnimation3d->getTotalScaling(partId);
+			auto totalSpeed = startedAnimation3d->getTotalSpeed(partId);
 
 			const auto currentModelSize = model->getBaseSize();
-			const auto transformationType = animation3d->getTransformationType(startedAnimation->getFrameIndex(), partId);
+			const auto transformationType = animation3d->getTransformationType(startedAnimation3d->getFrameIndex(), partId);
 			const auto isMovement = (transformationType == TransformationType::MOVEMENT);
 			const auto isRotation = (transformationType == TransformationType::ROTATION);
 			const auto isScaling = (transformationType == TransformationType::SCALING);
-			const auto speedType = animation3d->getSpeedType(startedAnimation->getFrameIndex(), partId);
-			const auto rotationOrigin = animation3d->getRotationOrigin(startedAnimation->getFrameIndex(), partId);
-			const auto speed = (animation3d->getSpeed(startedAnimation->getFrameIndex(), partId) * startedAnimation->getSpeedMultiplier());
-			const auto targetMovement = animation3d->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
-			const auto targetRotation = animation3d->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
-			const auto targetScaling = animation3d->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
+			const auto speedType = animation3d->getSpeedType(startedAnimation3d->getFrameIndex(), partId);
+			const auto rotationOrigin = animation3d->getRotationOrigin(startedAnimation3d->getFrameIndex(), partId);
+			const auto speed = (animation3d->getSpeed(startedAnimation3d->getFrameIndex(), partId) * startedAnimation3d->getSpeedMultiplier());
+			const auto targetMovement = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
+			const auto targetRotation = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
+			const auto targetScaling = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
 			const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 
 			if(((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) &&
@@ -442,49 +442,49 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				}
 			}
 
-			startedAnimation->setTotalMovement(partId, totalMovement);
-			startedAnimation->setTotalRotation(partId, totalRotation);
-			startedAnimation->setTotalScaling(partId, totalScaling);
-			startedAnimation->setTotalSpeed(partId, totalSpeed);
+			startedAnimation3d->setTotalMovement(partId, totalMovement);
+			startedAnimation3d->setTotalRotation(partId, totalRotation);
+			startedAnimation3d->setTotalScaling(partId, totalScaling);
+			startedAnimation3d->setTotalSpeed(partId, totalSpeed);
 		}
 
-		if(finishedPartCount == startedAnimation->getPartIds().size())
+		if(finishedPartCount == startedAnimation3d->getPartIds().size())
 		{
-			if(startedAnimation->isAutopaused())
+			if(startedAnimation3d->isAutopaused())
 			{
-				startedAnimation->setPaused(true);
+				startedAnimation3d->setPaused(true);
 			}
 
-			if(startedAnimation->getFrameIndex() == (animation3d->getFrameCount() - 1))
+			if(startedAnimation3d->getFrameIndex() == (animation3d->getFrameCount() - 1))
 			{
-				startedAnimation->setFrameIndex(0);
+				startedAnimation3d->setFrameIndex(0);
 
-				for(const auto & partId : startedAnimation->getPartIds())
+				for(const auto & partId : startedAnimation3d->getPartIds())
 				{
-					startedAnimation->setTotalMovement(partId, fvec3(0.0f));
-					startedAnimation->setTotalRotation(partId, fvec3(0.0f));
-					startedAnimation->setTotalScaling(partId, fvec3(0.0f));
-					startedAnimation->setTotalSpeed(partId, fvec3(0.0f));
+					startedAnimation3d->setTotalMovement(partId, fvec3(0.0f));
+					startedAnimation3d->setTotalRotation(partId, fvec3(0.0f));
+					startedAnimation3d->setTotalScaling(partId, fvec3(0.0f));
+					startedAnimation3d->setTotalSpeed(partId, fvec3(0.0f));
 				}
 
-				if(startedAnimation->getPlayCount() != -1)
+				if(startedAnimation3d->getPlayCount() != -1)
 				{
-					startedAnimation->setPlayCount(startedAnimation->getPlayCount() - 1);
+					startedAnimation3d->setPlayCount(startedAnimation3d->getPlayCount() - 1);
 
-					if(startedAnimation->getPlayCount() == 0)
+					if(startedAnimation3d->getPlayCount() == 0)
 					{
-						modelAnimationsToStop.push_back(mergedId);
+						modelAnimation3dsToStop.push_back(mergedId);
 					}
 				}
 			}
 			else
 			{
-				startedAnimation->setFrameIndex(startedAnimation->getFrameIndex() + 1);
+				startedAnimation3d->setFrameIndex(startedAnimation3d->getFrameIndex() + 1);
 			}
 		}
 	}
 
-	for(const auto & mergedId : modelAnimationsToStop)
+	for(const auto & mergedId : modelAnimation3dsToStop)
 	{
 		_startedModelAnimation3ds.erase(mergedId);
 	}

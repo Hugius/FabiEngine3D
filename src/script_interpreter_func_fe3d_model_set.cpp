@@ -1082,7 +1082,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_start_animation")
+	else if(functionName == "fe3d:model_start_animation3d")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -1090,7 +1090,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is already started");
 
@@ -1117,13 +1117,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 					}
 				}
 
-				_fe3d->model_startAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
+				_fe3d->model_startAnimation3d(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_pause_animation")
+	else if(functionName == "fe3d:model_pause_animation3d")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -1131,27 +1131,27 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
+				if(_fe3d->model_isAnimation3dPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is already paused");
 
 					return true;
 				}
 
-				_fe3d->model_pauseAnimation(args[0]->getString(), args[1]->getString());
+				_fe3d->model_pauseAnimation3d(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_autopause_animation")
+	else if(functionName == "fe3d:model_autopause_animation3d")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -1159,27 +1159,27 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
+				if(_fe3d->model_isAnimation3dPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is already paused");
 
 					return true;
 				}
 
-				_fe3d->model_autopauseAnimation(args[0]->getString(), args[1]->getString());
+				_fe3d->model_autopauseAnimation3d(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_resume_animation")
+	else if(functionName == "fe3d:model_resume_animation3d")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -1187,27 +1187,27 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				if(!_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not paused");
 
 					return true;
 				}
 
-				_fe3d->model_resumeAnimation(args[0]->getString(), args[1]->getString());
+				_fe3d->model_resumeAnimation3d(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_stop_animation")
+	else if(functionName == "fe3d:model_stop_animation3d")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -1215,20 +1215,20 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				_fe3d->model_stopAnimation(args[0]->getString(), args[1]->getString());
+				_fe3d->model_stopAnimation3d(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_animation_speed_multiplier")
+	else if(functionName == "fe3d:model_set_animation3d_speed_multiplier")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
@@ -1236,20 +1236,20 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				_fe3d->model_setAnimationSpeedMultiplier(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
+				_fe3d->model_setAnimation3dSpeedMultiplier(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_animation_frame_index")
+	else if(functionName == "fe3d:model_set_animation3d_frame_index")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -1257,14 +1257,14 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation3D is not started");
 
 					return true;
 				}
 
-				_fe3d->model_setAnimationFrameIndex(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
+				_fe3d->model_setAnimation3dFrameIndex(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

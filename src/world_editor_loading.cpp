@@ -192,7 +192,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(_fe3d->animation3d_isExisting(animation3dId))
 			{
-				_fe3d->model_startAnimation(placedModelId, animation3dId, -1);
+				_fe3d->model_startAnimation3d(placedModelId, animation3dId, -1);
 			}
 		}
 		else if(lineType == "QUAD3D")
@@ -236,7 +236,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(_fe3d->animation2d_isExisting(animation2dId))
 			{
-				_fe3d->quad3d_startAnimation(placedQuad3dId, animation2dId, -1);
+				_fe3d->quad3d_startAnimation2d(placedQuad3dId, animation2dId, -1);
 			}
 		}
 		else if(lineType == "TEXT3D")

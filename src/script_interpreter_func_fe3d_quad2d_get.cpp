@@ -435,7 +435,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_is_animation_started")
+	else if(functionName == "fe3d:quad2d_is_animation2d_started")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -443,20 +443,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_is_animation_paused")
+	else if(functionName == "fe3d:quad2d_is_animation2d_paused")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -464,20 +464,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_isAnimation2dPaused(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_is_animation_autopaused")
+	else if(functionName == "fe3d:quad2d_is_animation2d_autopaused")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -485,20 +485,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_isAnimationAutopaused(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_isAnimation2dAutopaused(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_get_animation_row_index")
+	else if(functionName == "fe3d:quad2d_get_animation2d_row_index")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -506,20 +506,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_getAnimationRowIndex(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_getAnimation2dRowIndex(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_get_animation_column_index")
+	else if(functionName == "fe3d:quad2d_get_animation2d_column_index")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -527,20 +527,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_getAnimationColumnIndex(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_getAnimation2dColumnIndex(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_get_animation_play_count")
+	else if(functionName == "fe3d:quad2d_get_animation2d_play_count")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -548,20 +548,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_getAnimationPlayCount(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_getAnimation2dPlayCount(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_get_animation_interval_multiplier")
+	else if(functionName == "fe3d:quad2d_get_animation2d_interval_multiplier")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -569,20 +569,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_getAnimationIntervalMultiplier(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_getAnimation2dIntervalMultiplier(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad2d_get_animation_interval_divider")
+	else if(functionName == "fe3d:quad2d_get_animation2d_interval_divider")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};
 
@@ -590,14 +590,14 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation2D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->quad2d_getAnimationIntervalDivider(args[0]->getString(), args[1]->getString());
+				const auto result = _fe3d->quad2d_getAnimation2dIntervalDivider(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}

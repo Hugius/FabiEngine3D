@@ -337,7 +337,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
 		const auto isVisible = _fe3d->model_isVisible(modelId);
 		const auto isFrozen = _fe3d->model_isFrozen(modelId);
-		const auto animation3dIds = _fe3d->model_getAnimationIds(modelId);
+		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
 
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
@@ -575,11 +575,11 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 		for(const auto & animation3dId : animation3dIds)
 		{
-			const auto isPaused = _fe3d->model_isAnimationPaused(modelId, animation3dId);
-			const auto isAutoPaused = _fe3d->model_isAnimationAutopaused(modelId, animation3dId);
-			const auto playCount = _fe3d->model_getAnimationPlayCount(modelId, animation3dId);
-			const auto frameIndex = _fe3d->model_getAnimationFrameIndex(modelId, animation3dId);
-			const auto speedMultiplier = _fe3d->model_getAnimationSpeedMultiplier(modelId, animation3dId);
+			const auto isPaused = _fe3d->model_isAnimation3dPaused(modelId, animation3dId);
+			const auto isAutoPaused = _fe3d->model_isAnimation3dAutopaused(modelId, animation3dId);
+			const auto playCount = _fe3d->model_getAnimation3dPlayCount(modelId, animation3dId);
+			const auto frameIndex = _fe3d->model_getAnimation3dFrameIndex(modelId, animation3dId);
+			const auto speedMultiplier = _fe3d->model_getAnimation3dSpeedMultiplier(modelId, animation3dId);
 
 			file
 				<< "MODEL_ANIMATION3D "
@@ -625,7 +625,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
 		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
 		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
-		const auto animation2dIds = _fe3d->quad3d_getAnimationIds(quad3dId);
+		const auto animation2dIds = _fe3d->quad3d_getAnimation2dIds(quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -747,14 +747,14 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 		for(const auto & animation2dId : animation2dIds)
 		{
-			const auto isPaused = _fe3d->quad3d_isAnimationPaused(quad3dId, animation2dId);
-			const auto isAutoPaused = _fe3d->quad3d_isAnimationAutopaused(quad3dId, animation2dId);
-			const auto playCount = _fe3d->quad3d_getAnimationPlayCount(quad3dId, animation2dId);
-			const auto rowIndex = _fe3d->quad3d_getAnimationRowIndex(quad3dId, animation2dId);
-			const auto columnIndex = _fe3d->quad3d_getAnimationColumnIndex(quad3dId, animation2dId);
-			const auto intervalMultiplier = _fe3d->quad3d_getAnimationIntervalMultiplier(quad3dId, animation2dId);
-			const auto intervalDivider = _fe3d->quad3d_getAnimationIntervalDivider(quad3dId, animation2dId);
-			const auto updateCount = _fe3d->quad3d_getAnimationUpdateCount(quad3dId, animation2dId);
+			const auto isPaused = _fe3d->quad3d_isAnimation2dPaused(quad3dId, animation2dId);
+			const auto isAutoPaused = _fe3d->quad3d_isAnimation2dAutopaused(quad3dId, animation2dId);
+			const auto playCount = _fe3d->quad3d_getAnimation2dPlayCount(quad3dId, animation2dId);
+			const auto rowIndex = _fe3d->quad3d_getAnimation2dRowIndex(quad3dId, animation2dId);
+			const auto columnIndex = _fe3d->quad3d_getAnimation2dColumnIndex(quad3dId, animation2dId);
+			const auto intervalMultiplier = _fe3d->quad3d_getAnimation2dIntervalMultiplier(quad3dId, animation2dId);
+			const auto intervalDivider = _fe3d->quad3d_getAnimation2dIntervalDivider(quad3dId, animation2dId);
+			const auto updateCount = _fe3d->quad3d_getAnimation2dUpdateCount(quad3dId, animation2dId);
 
 			file
 				<< "QUAD3D_ANIMATION2D "

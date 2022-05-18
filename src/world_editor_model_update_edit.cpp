@@ -70,7 +70,7 @@ void WorldEditor::_updateModelEditing()
 		if(!_activeModelId.empty())
 		{
 			const auto screen = window->getScreen("modelPropertiesMenu");
-			const auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
+			const auto currentAnimation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
 
 			window->setActiveScreen("modelPropertiesMenu");
 
@@ -107,7 +107,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else
 				{
-					_fe3d->model_stopAnimation(_activeModelId, currentAnimation3dIds[0]);
+					_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
 
 					for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
 					{
@@ -129,7 +129,7 @@ void WorldEditor::_updateModelEditing()
 			{
 				if(!currentAnimation3dIds.empty())
 				{
-					_fe3d->model_stopAnimation(_activeModelId, currentAnimation3dIds[0]);
+					_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
 				}
 
 				_fe3d->model_delete(_activeModelId);

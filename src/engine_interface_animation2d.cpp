@@ -12,7 +12,7 @@ void EngineInterface::animation2d_delete(const string & animation2dId)
 	{
 		if(animation2dId == animation2dId)
 		{
-			quad3d_stopAnimation(quad3dId, animation2dId);
+			quad3d_stopAnimation2d(quad3dId, animation2dId);
 		}
 	}
 
@@ -20,7 +20,7 @@ void EngineInterface::animation2d_delete(const string & animation2dId)
 	{
 		if(animation2dId == animation2dId)
 		{
-			quad2d_stopAnimation(quad2dId, animation2dId);
+			quad2d_stopAnimation2d(quad2dId, animation2dId);
 		}
 	}
 

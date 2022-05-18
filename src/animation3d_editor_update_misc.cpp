@@ -51,7 +51,7 @@ void Animation3dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
-				if(!_fe3d->model_isAnimationStarted(_previewModelId, _currentAnimation3dId))
+				if(!_fe3d->model_isAnimation3dStarted(_previewModelId, _currentAnimation3dId))
 				{
 					if(_fe3d->model_isExisting(_previewModelId))
 					{

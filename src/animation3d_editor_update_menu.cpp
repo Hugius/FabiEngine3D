@@ -69,9 +69,9 @@ void Animation3dEditor::_updateChoiceMenu()
 		{
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
-				if(_fe3d->model_isAnimationStarted(_previewModelId, _currentAnimation3dId))
+				if(_fe3d->model_isAnimation3dStarted(_previewModelId, _currentAnimation3dId))
 				{
-					_fe3d->model_stopAnimation(_previewModelId, _currentAnimation3dId);
+					_fe3d->model_stopAnimation3d(_previewModelId, _currentAnimation3dId);
 				}
 
 				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
@@ -143,11 +143,11 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			_fe3d->model_startAnimation(_previewModelId, _currentAnimation3dId, 1);
+			_fe3d->model_startAnimation3d(_previewModelId, _currentAnimation3dId, 1);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d->model_stopAnimation(_previewModelId, _currentAnimation3dId);
+			_fe3d->model_stopAnimation3d(_previewModelId, _currentAnimation3dId);
 
 			for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
 			{
@@ -207,7 +207,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentFrameIndex++;
 		}
 
-		const auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimationStarted(_previewModelId, _currentAnimation3dId));
+		const auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimation3dStarted(_previewModelId, _currentAnimation3dId));
 
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("start")->setHoverable(!isStarted && !_previewModelId.empty() && (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1));

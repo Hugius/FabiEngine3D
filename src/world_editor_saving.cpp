@@ -123,7 +123,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 	{
-		const auto startedAnimation3dIds = _fe3d->model_getAnimationIds(placedModelId);
+		const auto startedAnimation3dIds = _fe3d->model_getAnimation3dIds(placedModelId);
 
 		if(!startedAnimation3dIds.empty())
 		{
@@ -183,7 +183,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 	{
-		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(placedQuad3dId);
+		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(placedQuad3dId);
 		const auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
 		const auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
 		const auto size = _fe3d->quad3d_getSize(placedQuad3dId);

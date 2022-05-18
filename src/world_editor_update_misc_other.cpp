@@ -290,13 +290,13 @@ void WorldEditor::_updateAnimation3dChoosing()
 	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation3d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-		const auto currentAnimation3dIds = _fe3d->model_getAnimationIds(_activeModelId);
+		const auto currentAnimation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
 
 		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			if(!currentAnimation3dIds.empty())
 			{
-				_fe3d->model_stopAnimation(_activeModelId, currentAnimation3dIds[0]);
+				_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
 
 				for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
 				{
@@ -310,7 +310,7 @@ void WorldEditor::_updateAnimation3dChoosing()
 				}
 			}
 
-			_fe3d->model_startAnimation(_activeModelId, ("@" + selectedOptionId), -1);
+			_fe3d->model_startAnimation3d(_activeModelId, ("@" + selectedOptionId), -1);
 		}
 	}
 }
@@ -320,16 +320,16 @@ void WorldEditor::_updateAnimation2dChoosing()
 	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation2d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-		const auto currentAnimation2dIds = _fe3d->quad3d_getAnimationIds(_activeQuad3dId);
+		const auto currentAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(_activeQuad3dId);
 
 		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			if(!currentAnimation2dIds.empty())
 			{
-				_fe3d->quad3d_stopAnimation(_activeQuad3dId, currentAnimation2dIds[0]);
+				_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
 			}
 
-			_fe3d->quad3d_startAnimation(_activeQuad3dId, ("@" + selectedOptionId), -1);
+			_fe3d->quad3d_startAnimation2d(_activeQuad3dId, ("@" + selectedOptionId), -1);
 		}
 	}
 }

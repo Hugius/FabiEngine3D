@@ -40,6 +40,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		}
 
 		file
+			<< "SKY "
 			<< skyId
 			<< " ";
 
@@ -141,6 +142,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), ' ', '?');
 
 		file
+			<< "TERRAIN "
 			<< terrainId
 			<< " "
 			<< heightMapPath
@@ -249,6 +251,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 
 		file
+			<< "WATER "
 			<< waterId
 			<< " "
 			<< dudvMapPath
@@ -322,13 +325,19 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
 		const auto isMultiParted = _fe3d->model_isMultiParted(modelId);
-		const auto modelSize = _fe3d->model_getBaseSize(modelId);
+		const auto position = _fe3d->model_getBasePosition(modelId);
+		const auto rotation = _fe3d->model_getBaseRotation(modelId);
+		const auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
+		const auto size = _fe3d->model_getBaseSize(modelId);
 		const auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
 		const auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
 		const auto isShadowed = _fe3d->model_isShadowed(modelId);
 		const auto isReflected = _fe3d->model_isReflected(modelId);
 		const auto isRefracted = _fe3d->model_isRefracted(modelId);
+		const auto minClipPosition = _fe3d->model_getMinClipPosition(modelId);
+		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
 		const auto isVisible = _fe3d->model_isVisible(modelId);
+		const auto isFrozen = _fe3d->model_isFrozen(modelId);
 
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
@@ -345,12 +354,6 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< meshPath
 			<< " "
-			<< modelSize.x
-			<< " "
-			<< modelSize.y
-			<< " "
-			<< modelSize.z
-			<< " "
 			<< levelOfDetailId
 			<< " "
 			<< levelOfDetailDistance
@@ -364,10 +367,34 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< isRefracted
 			<< " "
 			<< isVisible
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
+			<< " "
+			<< size.x
+			<< " "
+			<< size.y
+			<< " "
+			<< size.z
+			<< " "
+			<< isFrozen
 			<< endl;
 
 		for(auto partId : partIds)
 		{
+			const auto position = _fe3d->model_getPartPosition(modelId, partId);
+			const auto rotation = _fe3d->model_getPartRotation(modelId, partId);
+			const auto rotationOrigin = _fe3d->model_getPartRotationOrigin(modelId, partId);
+			const auto size = _fe3d->model_getPartSize(modelId, partId);
 			const auto isSpecular = _fe3d->model_isSpecular(modelId, partId);
 			const auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
 			const auto specularIntensity = _fe3d->model_getSpecularIntensity(modelId, partId);
@@ -385,6 +412,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			const auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
 			const auto opacity = _fe3d->model_getOpacity(modelId, partId);
 			const auto minAlpha = _fe3d->model_getMinAlpha(modelId, partId);
+			const auto isWireframed = _fe3d->model_isWireframed(modelId, partId);
+			const auto wireframeColor = _fe3d->model_getWireframeColor(modelId, partId);
 
 			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
@@ -415,7 +444,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 			file
-				<< "PART "
+				<< "MODEL_PART "
 				<< modelId
 				<< " "
 				<< partId
@@ -469,6 +498,32 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< opacity
 				<< " "
 				<< minAlpha
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< rotation.x
+				<< " "
+				<< rotation.y
+				<< " "
+				<< rotation.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
+				<< size.z
+				<< " "
+				<< isWireframed
+				<< " "
+				<< wireframeColor.r
+				<< " "
+				<< wireframeColor.g
+				<< " "
+				<< wireframeColor.b
 				<< endl;
 		}
 
@@ -476,9 +531,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		{
 			const auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			const auto size = _fe3d->aabb_getLocalSize(aabbId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(modelId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(modelId);
+			const auto isVisible = _fe3d->aabb_isVisible(modelId);
 
 			file
-				<< "AABB "
+				<< "MODEL_AABB "
 				<< modelId
 				<< " "
 				<< aabbId
@@ -494,6 +552,10 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< size.y
 				<< " "
 				<< size.z
+				<< " "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
 				<< " "
 				<< isVisible
 				<< endl;
@@ -739,7 +801,23 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & captorId : _addedCaptorIds)
 	{
+		const auto position = _fe3d->captor_getPosition(captorId);
 
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+
+		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
+
+		file
+			<< captorId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< exceptionId
+			<< endl;
 	}
 
 	for(const auto & sound3dId : _addedSound3dIds)

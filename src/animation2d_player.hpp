@@ -47,6 +47,8 @@ public:
 	const int getQuad2dAnimation2dIntervalMultiplier(const string & animation2dId, const string & quad2dId) const;
 	const int getQuad3dAnimation2dIntervalDivider(const string & animation2dId, const string & quad3dId) const;
 	const int getQuad2dAnimation2dIntervalDivider(const string & animation2dId, const string & quad2dId) const;
+	const int getQuad3dAnimation2dUpdateCount(const string & animation2dId, const string & quad3dId) const;
+	const int getQuad2dAnimation2dUpdateCount(const string & animation2dId, const string & quad2dId) const;
 
 	const int getQuad3dAnimation2dPlayCount(const string & animation2dId, const string & quad3dId) const;
 	const int getQuad2dAnimation2dPlayCount(const string & animation2dId, const string & quad2dId) const;

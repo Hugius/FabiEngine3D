@@ -486,7 +486,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
-		else if(lineType == "LIGHTING_AMBIENT")
+		else if(lineType == "GRAPHICS_AMBIENT_LIGHTING")
 		{
 			fvec3 color;
 			float intensity;
@@ -501,7 +501,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setAmbientLightingColor(color);
 			_fe3d->graphics_setAmbientLightingIntensity(intensity);
 		}
-		else if(lineType == "LIGHTING_DIRECTIONAL")
+		else if(lineType == "GRAPHICS_DIRECTIONAL_LIGHTING")
 		{
 			fvec3 position;
 			fvec3 color;

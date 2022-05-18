@@ -337,6 +337,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
 		const auto isVisible = _fe3d->model_isVisible(modelId);
 		const auto isFrozen = _fe3d->model_isFrozen(modelId);
+		const auto animation3dIds = _fe3d->model_getAnimationIds(modelId);
 
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
@@ -571,6 +572,28 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< isVisible
 				<< endl;
 		}
+
+		for(const auto & animation3dId : animation3dIds)
+		{
+			const auto isPaused = _fe3d->model_isAnimationPaused(modelId, animation3dId);
+			const auto isAutoPaused = _fe3d->model_isAnimationAutopaused(modelId, animation3dId);
+			const auto playCount = _fe3d->model_getAnimationPlayCount(modelId, animation3dId);
+			const auto frameIndex = _fe3d->model_getAnimationFrameIndex(modelId, animation3dId);
+			const auto speedMultiplier = _fe3d->model_getAnimationSpeedMultiplier(modelId, animation3dId);
+
+			file
+				<< "MODEL_ANIMATION3D "
+				<< isPaused
+				<< " "
+				<< isAutoPaused
+				<< " "
+				<< playCount
+				<< " "
+				<< frameIndex
+				<< " "
+				<< speedMultiplier
+				<< endl;
+		}
 	}
 
 	for(const auto & quad3dId : _addedQuad3dIds)
@@ -602,6 +625,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
 		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
 		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
+		const auto animation2dIds = _fe3d->quad3d_getAnimationIds(quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -718,6 +742,37 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< isCollisionResponsive
 				<< " "
 				<< isVisible
+				<< endl;
+		}
+
+		for(const auto & animation2dId : animation2dIds)
+		{
+			const auto isPaused = _fe3d->quad3d_isAnimationPaused(quad3dId, animation2dId);
+			const auto isAutoPaused = _fe3d->quad3d_isAnimationAutopaused(quad3dId, animation2dId);
+			const auto playCount = _fe3d->quad3d_getAnimationPlayCount(quad3dId, animation2dId);
+			const auto rowIndex = _fe3d->quad3d_getAnimationRowIndex(quad3dId, animation2dId);
+			const auto columnIndex = _fe3d->quad3d_getAnimationColumnIndex(quad3dId, animation2dId);
+			const auto intervalMultiplier = _fe3d->quad3d_getAnimationIntervalMultiplier(quad3dId, animation2dId);
+			const auto intervalDivider = _fe3d->quad3d_getAnimationIntervalDivider(quad3dId, animation2dId);
+			const auto updateCount = _fe3d->quad3d_getAnimationUpdateCount(quad3dId, animation2dId);
+
+			file
+				<< "QUAD3D_ANIMATION2D "
+				<< isPaused
+				<< " "
+				<< isAutoPaused
+				<< " "
+				<< playCount
+				<< " "
+				<< rowIndex
+				<< " "
+				<< columnIndex
+				<< " "
+				<< intervalMultiplier
+				<< " "
+				<< intervalDivider
+				<< " "
+				<< updateCount
 				<< endl;
 		}
 	}
@@ -1034,7 +1089,221 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< endl;
 	}
 
-	// graphics
+	if(_fe3d->graphics_isAmbientLightingEnabled())
+	{
+		const auto ambientLightingColor = _fe3d->graphics_getAmbientLightingColor();
+		const auto ambientLightingIntensity = _fe3d->graphics_getAmbientLightingIntensity();
+
+		file
+			<< "GRAPHICS_AMBIENT_LIGHTING "
+			<< ambientLightingColor.r
+			<< " "
+			<< ambientLightingColor.g
+			<< " "
+			<< ambientLightingColor.b
+			<< " "
+			<< ambientLightingIntensity
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isDirectionalLightingEnabled())
+	{
+		const auto directionalLightingColor = _fe3d->graphics_getDirectionalLightingColor();
+		const auto directionalLightingPosition = _fe3d->graphics_getDirectionalLightingPosition();
+		const auto directionalLightingIntensity = _fe3d->graphics_getDirectionalLightingIntensity();
+
+		file
+			<< "GRAPHICS_DIRECTIONAL_LIGHTING "
+			<< directionalLightingPosition.x
+			<< " "
+			<< directionalLightingPosition.y
+			<< " "
+			<< directionalLightingPosition.z
+			<< " "
+			<< directionalLightingColor.r
+			<< " "
+			<< directionalLightingColor.g
+			<< " "
+			<< directionalLightingColor.b
+			<< " "
+			<< directionalLightingIntensity
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isShadowsEnabled())
+	{
+		const auto size = _fe3d->graphics_getShadowSize();
+		const auto lightness = _fe3d->graphics_getShadowLightness();
+		const auto position = _fe3d->graphics_getShadowPositionOffset();
+		const auto lookat = _fe3d->graphics_getShadowLookatOffset();
+		const auto isFollowingCameraX = _fe3d->graphics_isShadowFollowingCameraX();
+		const auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
+		const auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
+		const auto interval = _fe3d->graphics_getShadowInterval();
+		const auto quality = _fe3d->graphics_getShadowQuality();
+
+		file
+			<< "GRAPHICS_SHADOWS "
+			<< size
+			<< " "
+			<< lightness
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< lookat.x
+			<< " "
+			<< lookat.y
+			<< " "
+			<< lookat.z
+			<< " "
+			<< isFollowingCameraX
+			<< " "
+			<< isFollowingCameraY
+			<< " "
+			<< isFollowingCameraZ
+			<< " "
+			<< interval
+			<< " "
+			<< quality
+			<< endl;
+	}
+
+	{
+		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
+		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
+		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+
+		file
+			<< "GRAPHICS_REFLECTIONS "
+			<< cubeInterval
+			<< " "
+			<< cubeQuality
+			<< " "
+			<< planarHeight
+			<< " "
+			<< planarQuality
+			<< endl;
+	}
+
+	{
+		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
+		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		const auto planarHeight = _fe3d->graphics_getPlanarRefractionHeight();
+		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+
+		file
+			<< "GRAPHICS_REFRACTIONS "
+			<< cubeInterval
+			<< " "
+			<< cubeQuality
+			<< " "
+			<< planarHeight
+			<< " "
+			<< planarQuality
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isDofEnabled())
+	{
+		const auto dynamic = _fe3d->graphics_isDofDynamic();
+		const auto blurDistance = _fe3d->graphics_getDofBlurDistance();
+		const auto maxDistance = _fe3d->graphics_getDofDynamicDistance();
+		const auto quality = _fe3d->graphics_getDofQuality();
+
+		file
+			<< "GRAPHICS_DOF "
+			<< dynamic
+			<< " "
+			<< blurDistance
+			<< " "
+			<< maxDistance
+			<< " "
+			<< quality
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isFogEnabled())
+	{
+		const auto minDistance = _fe3d->graphics_getFogMinDistance();
+		const auto maxDistance = _fe3d->graphics_getFogMaxDistance();
+		const auto thickness = _fe3d->graphics_getFogThickness();
+		const auto color = _fe3d->graphics_getFogColor();
+
+		file
+			<< "GRAPHICS_FOG "
+			<< minDistance
+			<< " "
+			<< maxDistance
+			<< " "
+			<< thickness
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isLensFlareEnabled())
+	{
+		const auto intensity = _fe3d->graphics_getLensFlareIntensity();
+		const auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
+
+		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
+
+		flareMapPath = (flareMapPath.empty() ? "" : flareMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+
+		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
+
+		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
+
+		file
+			<< "GRAPHICS_LENS_FLARE "
+			<< flareMapPath
+			<< " "
+			<< intensity
+			<< " "
+			<< sensitivity
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isSkyExposureEnabled())
+	{
+		const auto intensity = _fe3d->graphics_getSkyExposureIntensity();
+		const auto speed = _fe3d->graphics_getSkyExposureSpeed();
+
+		file
+			<< "GRAPHICS_SKY_EXPOSURE "
+			<< intensity
+			<< " "
+			<< speed
+			<< endl;
+	}
+
+	if(_fe3d->graphics_isBloomEnabled())
+	{
+		const auto type = static_cast<int>(_fe3d->graphics_getBloomType());
+		const auto intensity = _fe3d->graphics_getBloomIntensity();
+		const auto blurCount = _fe3d->graphics_getBloomBlurCount();
+		const auto quality = _fe3d->graphics_getBloomQuality();
+
+		file
+			<< "GRAPHICS_BLOOM "
+			<< type
+			<< " "
+			<< intensity
+			<< " "
+			<< blurCount
+			<< " "
+			<< quality
+			<< endl;
+	}
 
 	file.close();
 

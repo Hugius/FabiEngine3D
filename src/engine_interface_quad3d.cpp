@@ -350,6 +350,11 @@ const int EngineInterface::quad3d_getAnimationIntervalDivider(const string & qua
 	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dIntervalDivider(quad3dId, animation2dId);
 }
 
+const int EngineInterface::quad3d_getAnimationUpdateCount(const string & quad3dId, const string & animation2dId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dUpdateCount(quad3dId, animation2dId);
+}
+
 const bool EngineInterface::quad3d_isExisting(const string & quad3dId) const
 {
 	return _core->getQuad3dManager()->isQuad3dExisting(quad3dId);

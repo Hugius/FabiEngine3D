@@ -311,8 +311,8 @@ public:
 	const float model_getMinAlpha(const string & modelId, const string & partId) const;
 	const float model_getAnimationSpeedMultiplier(const string & modelId, const string & animation3dId) const;
 	const int model_getAnimationPlayCount(const string & modelId, const string & animation3dId) const;
-	const int model_getTextureRepeat(const string & modelId, const string & partId) const;
 	const int model_getAnimationFrameIndex(const string & modelId, const string & animation3dId) const;
+	const int model_getTextureRepeat(const string & modelId, const string & partId) const;
 	const bool model_isExisting(const string & modelId) const;
 	const bool model_isVisible(const string & modelId) const;
 	const bool model_isMultiParted(const string & modelId) const;
@@ -405,11 +405,12 @@ public:
 	const float quad3d_getEmissionIntensity(const string & quad3dId) const;
 	const float quad3d_getMinAlpha(const string & quad3dId) const;
 	const int quad3d_getAnimationPlayCount(const string & quad3dId, const string & animation2dId) const;
-	const int quad3d_getTextureRepeat(const string & quad3dId) const;
 	const int quad3d_getAnimationRowIndex(const string & quad3dId, const string & animation2dId) const;
 	const int quad3d_getAnimationColumnIndex(const string & quad3dId, const string & animation2dId) const;
 	const int quad3d_getAnimationIntervalMultiplier(const string & quad3dId, const string & animation2dId) const;
 	const int quad3d_getAnimationIntervalDivider(const string & quad3dId, const string & animation2dId) const;
+	const int quad3d_getAnimationUpdateCount(const string & quad3dId, const string & animation2dId) const;
+	const int quad3d_getTextureRepeat(const string & quad3dId) const;
 	const bool quad3d_isExisting(const string & quad3dId) const;
 	const bool quad3d_isVisible(const string & quad3dId) const;
 	const bool quad3d_isFacingCameraHorizontally(const string & quad3dId) const;
@@ -482,6 +483,7 @@ public:
 	const int quad2d_getAnimationColumnIndex(const string & quad2dId, const string & animation2dId) const;
 	const int quad2d_getAnimationIntervalMultiplier(const string & quad2dId, const string & animation2dId) const;
 	const int quad2d_getAnimationIntervalDivider(const string & quad2dId, const string & animation2dId) const;
+	const int quad2d_getAnimationUpdateCount(const string & quad2dId, const string & animation2dId) const;
 	const bool quad2d_isExisting(const string & quad2dId) const;
 	const bool quad2d_isVisible(const string & quad2dId) const;
 	const bool quad2d_isCentered(const string & quad2dId) const;

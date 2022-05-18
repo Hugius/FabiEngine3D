@@ -364,7 +364,7 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto ambientLightingIntensity = _fe3d->graphics_getAmbientLightingIntensity();
 
 		file
-			<< "LIGHTING_AMBIENT "
+			<< "GRAPHICS_AMBIENT_LIGHTING "
 			<< ambientLightingColor.r
 			<< " "
 			<< ambientLightingColor.g
@@ -382,7 +382,7 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto directionalLightingIntensity = _fe3d->graphics_getDirectionalLightingIntensity();
 
 		file
-			<< "LIGHTING_DIRECTIONAL "
+			<< "GRAPHICS_DIRECTIONAL_LIGHTING "
 			<< directionalLightingPosition.x
 			<< " "
 			<< directionalLightingPosition.y

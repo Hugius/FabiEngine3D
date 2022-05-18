@@ -54,6 +54,8 @@
 - `fe3d:text3d_is_existing` (`STR` id) -----> `BOL`
 - `fe3d:text3d_is_horizontally_flipped` (`STR` id) -----> `BOL`
 - `fe3d:text3d_is_vertically_flipped` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_aabb_raycast_responsive` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_aabb_collision_responsive` (`STR` id) -----> `BOL`
 - `fe3d:text3d_get_min_clip_position_x` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_min_clip_position_y` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_min_clip_position_z` (`STR` id) -----> `DEC`

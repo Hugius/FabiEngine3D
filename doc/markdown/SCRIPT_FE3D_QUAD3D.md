@@ -71,6 +71,8 @@
 - `fe3d:quad3d_is_animation_started` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
+- `fe3d:quad3d_is_aabb_raycast_responsive` (`STR` quad_id) -----> `BOL`
+- `fe3d:quad3d_is_aabb_collision_responsive` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_has_diffuse_map` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_has_emission_map` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_get_min_clip_position_x` (`STR` id) -----> `DEC`

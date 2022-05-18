@@ -564,6 +564,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & quad3dId : _addedQuad3dIds)
 	{
+		const auto position = _fe3d->quad3d_getPosition(quad3dId);
+		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
 		const auto size = _fe3d->quad3d_getSize(quad3dId);
 		const auto color = _fe3d->quad3d_getColor(quad3dId);
 		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(quad3dId);
@@ -582,6 +584,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quad3dId));
 		const auto hasAabb = _fe3d->aabb_isExisting(quad3dId);
 		const auto isVisible = _fe3d->quad3d_isVisible(quad3dId);
+		const auto isWireframed = _fe3d->quad3d_isWireframed(quad3dId);
+		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -600,6 +604,18 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< diffuseMapPath
 			<< " "
 			<< emissionMapPath
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< size.x
 			<< " "
@@ -642,6 +658,14 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< hasAabb
 			<< " "
 			<< isVisible
+			<< " "
+			<< isWireframed
+			<< " "
+			<< wireframeColor.r
+			<< " "
+			<< wireframeColor.g
+			<< " "
+			<< wireframeColor.b
 			<< endl;
 	}
 
@@ -718,9 +742,14 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 
 	for(const auto & aabbId : _addedAabbIds)
 	{
+		const auto position = _fe3d->aabb_getBasePosition(aabbId);
 		const auto size = _fe3d->aabb_getBaseSize(aabbId);
 		const auto color = _fe3d->aabb_getColor(aabbId);
+		const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+		const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 		const auto isVisible = _fe3d->aabb_isVisible(aabbId);
+		const auto minClipPosition = _fe3d->aabb_getMinClipPosition(aabbId);
+		const auto maxClipPosition = _fe3d->aabb_getMaxClipPosition(aabbId);
 
 		file
 			<< aabbId
@@ -737,7 +766,23 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< color.b
 			<< " "
+			<< isRaycastResponsive
+			<< " "
+			<< isCollisionResponsive
+			<< " "
 			<< isVisible
+			<< " "
+			<< minClipPosition.x
+			<< " "
+			<< minClipPosition.y
+			<< " "
+			<< minClipPosition.z
+			<< " "
+			<< maxClipPosition.x
+			<< " "
+			<< maxClipPosition.y
+			<< " "
+			<< maxClipPosition.z
 			<< endl;
 	}
 

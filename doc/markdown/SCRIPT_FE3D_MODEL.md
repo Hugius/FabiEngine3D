@@ -17,11 +17,11 @@
 - `fe3d:model_move_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_rotate_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_scale_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
-- `fe3d:model_start_animation` (`STR` model_id, `STR` animation_id, `INT` play_count) -----> `NONE`
-- `fe3d:model_pause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
-- `fe3d:model_autopause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
-- `fe3d:model_resume_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
-- `fe3d:model_stop_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_start_animation3d` (`STR` model_id, `STR` animation_id, `INT` play_count) -----> `NONE`
+- `fe3d:model_pause_animation3d` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_autopause_animation3d` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_resume_animation3d` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_stop_animation3d` (`STR` model_id, `STR` animation_id) -----> `NONE`
 - `fe3d:model_set_visible` (`STR`model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_face_culled` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_base_position` (`STR`model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
@@ -68,8 +68,8 @@
 - `fe3d:model_set_refraction_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_rotation_order` (`STR`model_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_min_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
-- `fe3d:model_set_animation_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
-- `fe3d:model_set_animation_frame_index` (`STR` model_id, `STR` animation_id, `INT` value) -----> `NONE`
+- `fe3d:model_set_animation3d_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_animation3d_frame_index` (`STR` model_id, `STR` animation_id, `INT` value) -----> `NONE`
 
 ## Getters
 
@@ -86,9 +86,9 @@
 - `fe3d:model_is_refractive` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_specular` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_wireframed` (`STR` model_id, `STR` part_id) -----> `BOL`
-- `fe3d:model_is_animation_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
-- `fe3d:model_is_animation_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
-- `fe3d:model_is_animation_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_animation3d_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_animation3d_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_animation3d_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_aabb_visible` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_aabb_raycast_responsive` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_aabb_collision_responsive` (`STR` model_id) -----> `BOL`
@@ -156,6 +156,6 @@
 - `fe3d:model_get_refraction_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_get_min_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_rotation_order` (`STR`model_id) -----> `STR`
-- `fe3d:model_get_animation_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
-- `fe3d:model_get_animation_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`
-- `fe3d:model_get_animation_frame_index` (`STR` model_id, `STR` animation_id) -----> `INT`
+- `fe3d:model_get_animation3d_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
+- `fe3d:model_get_animation3d_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`
+- `fe3d:model_get_animation3d_frame_index` (`STR` model_id, `STR` animation_id) -----> `INT`

@@ -35,7 +35,7 @@ void WorldEditor::_updateModelPlacing()
 
 				_fe3d->model_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedModelIds.insert({newId, _currentTemplateModelId});
+				_loadedModelIds.push_back({newId, _currentTemplateModelId});
 
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 
@@ -96,7 +96,7 @@ void WorldEditor::_updateModelPlacing()
 
 				_fe3d->model_setBasePosition(newId, newPosition);
 
-				_loadedModelIds.insert({newId, _currentTemplateModelId});
+				_loadedModelIds.push_back({newId, _currentTemplateModelId});
 			}
 		}
 	}

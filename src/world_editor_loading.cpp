@@ -193,7 +193,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->model_startAnimation3d(placedModelId, animation3dId, -1);
 			}
 
-			_loadedModelIds.insert({placedModelId, templateModelId});
+			_loadedModelIds.push_back({placedModelId, templateModelId});
 		}
 		else if(lineType == "QUAD3D")
 		{
@@ -237,7 +237,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->quad3d_startAnimation2d(placedQuad3dId, animation2dId, -1);
 			}
 
-			_loadedQuad3dIds.insert({placedQuad3dId, templateQuad3dId});
+			_loadedQuad3dIds.push_back({placedQuad3dId, templateQuad3dId});
 		}
 		else if(lineType == "TEXT3D")
 		{
@@ -273,7 +273,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setRotation(placedText3dId, rotation);
 			_fe3d->text3d_setSize(placedText3dId, size);
 
-			_loadedText3dIds.insert({placedText3dId, templateText3dId});
+			_loadedText3dIds.push_back({placedText3dId, templateText3dId});
 		}
 		else if(lineType == "AABB")
 		{
@@ -302,7 +302,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->aabb_setBasePosition(placedAabbId, position);
 			_fe3d->aabb_setBaseSize(placedAabbId, size);
 
-			_loadedAabbIds.insert({placedAabbId, templateAabbId});
+			_loadedAabbIds.push_back({placedAabbId, templateAabbId});
 		}
 		else if(lineType == "POINTLIGHT")
 		{
@@ -326,7 +326,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_fe3d->pointlight_setPosition(placedPointlightId, position);
 
-			_loadedPointlightIds.insert({placedPointlightId, templatePointlightId});
+			_loadedPointlightIds.push_back({placedPointlightId, templatePointlightId});
 
 			if(isLoaded())
 			{
@@ -377,7 +377,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->spotlight_setYaw(placedSpotlightId, yaw);
 			_fe3d->spotlight_setPitch(placedSpotlightId, pitch);
 
-			_loadedSpotlightIds.insert({placedSpotlightId, templateSpotlightId});
+			_loadedSpotlightIds.push_back({placedSpotlightId, templateSpotlightId});
 
 			if(isLoaded())
 			{
@@ -424,7 +424,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->sound3d_setPosition(placedSound3dId, position);
 			_fe3d->sound3d_start(placedSound3dId, -1);
 
-			_loadedSound3dIds.insert({placedSound3dId, templateSound3dId});
+			_loadedSound3dIds.push_back({placedSound3dId, templateSound3dId});
 
 			if(isLoaded())
 			{

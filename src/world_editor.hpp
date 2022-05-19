@@ -241,14 +241,13 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 205;
 
-	unordered_map<string, string> _loadedModelIds = {};
-	unordered_map<string, string> _loadedQuad3dIds = {};
-	unordered_map<string, string> _loadedText3dIds = {};
-	unordered_map<string, string> _loadedAabbIds = {};
-	unordered_map<string, string> _loadedPointlightIds = {};
-	unordered_map<string, string> _loadedSpotlightIds = {};
-	unordered_map<string, string> _loadedSound3dIds = {};
-
+	vector<pair<string, string>> _loadedModelIds = {};
+	vector<pair<string, string>> _loadedQuad3dIds = {};
+	vector<pair<string, string>> _loadedText3dIds = {};
+	vector<pair<string, string>> _loadedAabbIds = {};
+	vector<pair<string, string>> _loadedPointlightIds = {};
+	vector<pair<string, string>> _loadedSpotlightIds = {};
+	vector<pair<string, string>> _loadedSound3dIds = {};
 	vector<string> _loadedCaptorIds = {};
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;

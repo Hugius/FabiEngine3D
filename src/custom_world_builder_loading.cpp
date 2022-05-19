@@ -101,7 +101,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->sky_setWireframed(placedSkyId, isWireframed);
 			_fe3d->sky_setWireframeColor(placedSkyId, wireframeColor);
 
-			_loadedSkyIds.push_back(placedSkyId);
+			_loadedSkyIds.push_back({placedSkyId, templateSkyId});
 
 			if(isSelected)
 			{
@@ -304,7 +304,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				_fe3d->terrain_setBlueDiffuseMap(placedTerrainId, blueDiffuseMapPath);
 			}
 
-			_loadedTerrainIds.push_back(placedTerrainId);
+			_loadedTerrainIds.push_back({placedTerrainId, templateTerrainId});
 
 			if(isSelected)
 			{
@@ -443,7 +443,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				_fe3d->water_setHeightMap(placedWaterId, heightMapPath);
 			}
 
-			_loadedWaterIds.push_back(placedWaterId);
+			_loadedWaterIds.push_back({placedWaterId, templateWaterId});
 		}
 		else if(lineType == "MODEL")
 		{
@@ -518,7 +518,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->model_setMaxClipPosition(placedModelId, maxClipPosition);
 			_fe3d->model_setFrozen(placedModelId, isFrozen);
 
-			_loadedModelIds.push_back(placedModelId);
+			_loadedModelIds.push_back({placedModelId, templateModelId});
 		}
 		else if(lineType == "MODEL_PART")
 		{
@@ -748,6 +748,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "MODEL_ANIMATION3D")
 		{
+			string placedModelId;
+			string animation3dId;
 			float speedMultiplier;
 			int playCount;
 			int frameIndex;
@@ -756,6 +758,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isAutoPaused;
 
 			iss
+				>> placedModelId
+				>> animation3dId
 				>> isPaused
 				>> isAutoPaused
 				>> playCount
@@ -763,18 +767,19 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> speedMultiplier
 				>> partCount;
 
+			_fe3d->model_startAnimation3d(placedModelId, animation3dId, playCount);
+			_fe3d->model_setAnimation3dFrameIndex(
+
+				for(int index = 0; index < partCount; index++)
+				{
+					string partId;
+					fvec3 totalMovement;
+					fvec3 totalRotation;
+					fvec3 totalScaling;
+					fvec3 totalSpeed;
 
 
-			for(int index = 0; index < partCount; index++)
-			{
-				string partId;
-				fvec3 totalMovement;
-				fvec3 totalRotation;
-				fvec3 totalScaling;
-				fvec3 totalSpeed;
-
-
-			}
+				}
 		}
 		else if(lineType == "QUAD3D")
 		{

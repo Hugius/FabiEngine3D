@@ -51,7 +51,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->spotlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedSpotlightIds.insert({newId, _currentTemplateSpotlightId});
+				_loadedSpotlightIds.push_back({newId, _currentTemplateSpotlightId});
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -145,7 +145,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->spotlight_setPosition(newId, newPosition);
 
-				_loadedSpotlightIds.insert({newId, _currentTemplateSpotlightId});
+				_loadedSpotlightIds.push_back({newId, _currentTemplateSpotlightId});
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

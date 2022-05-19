@@ -19,17 +19,17 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	auto file = ofstream(filePath);
 
-	for(const auto & skyId : _addedSkyIds)
+	for(const auto & [placedSkyId, templateSkyId] : _addedSkyIds)
 	{
-		const auto rotation = _fe3d->sky_getRotation(skyId);
-		const auto lightness = _fe3d->sky_getLightness(skyId);
-		const auto color = _fe3d->sky_getColor(skyId);
-		const auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(skyId));
-		const auto isWireframed = _fe3d->sky_isWireframed(skyId);
-		const auto wireframeColor = _fe3d->sky_getWireframeColor(skyId);
-		const auto isSelected = (skyId == _fe3d->sky_getSelectedId());
+		const auto rotation = _fe3d->sky_getRotation(placedSkyId);
+		const auto lightness = _fe3d->sky_getLightness(placedSkyId);
+		const auto color = _fe3d->sky_getColor(placedSkyId);
+		const auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(placedSkyId));
+		const auto isWireframed = _fe3d->sky_isWireframed(placedSkyId);
+		const auto wireframeColor = _fe3d->sky_getWireframeColor(placedSkyId);
+		const auto isSelected = (placedSkyId == _fe3d->sky_getSelectedId());
 
-		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
+		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(placedSkyId);
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{
@@ -41,17 +41,19 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		file
 			<< "SKY "
-			<< skyId
-			<< " ";
+			<< placedSkyId
+			<< " "
+			<< templateSkyId;
 
 		for(const auto & cubeMapPath : cubeMapPaths)
 		{
 			file
-				<< cubeMapPath
-				<< " ";
+				<< " "
+				<< cubeMapPath;
 		}
 
 		file
+			<< " "
 			<< rotation.x
 			<< " "
 			<< rotation.y
@@ -80,33 +82,33 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & terrainId : _addedTerrainIds)
+	for(const auto & [placedTerrainId, templateTerrainId] : _addedTerrainIds)
 	{
-		const auto maxHeight = _fe3d->terrain_getMaxHeight(terrainId);
-		const auto textureRepeat = _fe3d->terrain_getTextureRepeat(terrainId);
-		const auto lightness = _fe3d->terrain_getLightness(terrainId);
-		const auto color = _fe3d->terrain_getColor(terrainId);
-		const auto specularShininess = _fe3d->terrain_getSpecularShininess(terrainId);
-		const auto specularIntensity = _fe3d->terrain_getSpecularIntensity(terrainId);
-		const auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(terrainId);
-		const auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(terrainId);
-		const auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(terrainId);
-		const auto isSpecular = _fe3d->terrain_isSpecular(terrainId);
-		const auto isWireframed = _fe3d->terrain_isWireframed(terrainId);
-		const auto wireframeColor = _fe3d->terrain_getWireframeColor(terrainId);
-		const auto minClipPosition = _fe3d->terrain_getMinClipPosition(terrainId);
-		const auto maxClipPosition = _fe3d->terrain_getMaxClipPosition(terrainId);
-		const auto isSelected = (terrainId == _fe3d->terrain_getSelectedId());
+		const auto maxHeight = _fe3d->terrain_getMaxHeight(placedTerrainId);
+		const auto textureRepeat = _fe3d->terrain_getTextureRepeat(placedTerrainId);
+		const auto lightness = _fe3d->terrain_getLightness(placedTerrainId);
+		const auto color = _fe3d->terrain_getColor(placedTerrainId);
+		const auto specularShininess = _fe3d->terrain_getSpecularShininess(placedTerrainId);
+		const auto specularIntensity = _fe3d->terrain_getSpecularIntensity(placedTerrainId);
+		const auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(placedTerrainId);
+		const auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(placedTerrainId);
+		const auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(placedTerrainId);
+		const auto isSpecular = _fe3d->terrain_isSpecular(placedTerrainId);
+		const auto isWireframed = _fe3d->terrain_isWireframed(placedTerrainId);
+		const auto wireframeColor = _fe3d->terrain_getWireframeColor(placedTerrainId);
+		const auto minClipPosition = _fe3d->terrain_getMinClipPosition(placedTerrainId);
+		const auto maxClipPosition = _fe3d->terrain_getMaxClipPosition(placedTerrainId);
+		const auto isSelected = (placedTerrainId == _fe3d->terrain_getSelectedId());
 
-		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
-		auto normalMapPath = _fe3d->terrain_getNormalMapPath(terrainId);
-		auto blendMapPath = _fe3d->terrain_getBlendMapPath(terrainId);
-		auto redDiffuseMapPath = _fe3d->terrain_getRedDiffuseMapPath(terrainId);
-		auto greenDiffuseMapPath = _fe3d->terrain_getGreenDiffuseMapPath(terrainId);
-		auto blueDiffuseMapPath = _fe3d->terrain_getBlueDiffuseMapPath(terrainId);
-		auto redNormalMapPath = _fe3d->terrain_getRedNormalMapPath(terrainId);
-		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainId);
-		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainId);
+		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(placedTerrainId);
+		auto normalMapPath = _fe3d->terrain_getNormalMapPath(placedTerrainId);
+		auto blendMapPath = _fe3d->terrain_getBlendMapPath(placedTerrainId);
+		auto redDiffuseMapPath = _fe3d->terrain_getRedDiffuseMapPath(placedTerrainId);
+		auto greenDiffuseMapPath = _fe3d->terrain_getGreenDiffuseMapPath(placedTerrainId);
+		auto blueDiffuseMapPath = _fe3d->terrain_getBlueDiffuseMapPath(placedTerrainId);
+		auto redNormalMapPath = _fe3d->terrain_getRedNormalMapPath(placedTerrainId);
+		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(placedTerrainId);
+		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(placedTerrainId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -139,7 +141,9 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		file
 			<< "TERRAIN "
-			<< terrainId
+			<< placedTerrainId
+			<< " "
+			<< templateTerrainId
 			<< " "
 			<< diffuseMapPath
 			<< " "
@@ -207,31 +211,31 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & waterId : _addedWaterIds)
+	for(const auto & [placedWaterId, templateWaterId] : _addedWaterIds)
 	{
-		const auto color = _fe3d->water_getColor(waterId);
-		const auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
-		const auto waveSpeed = _fe3d->water_getWaveSpeed(waterId);
-		const auto size = _fe3d->water_getSize(waterId);
-		const auto textureRepeat = _fe3d->water_getTextureRepeat(waterId);
-		const auto waveHeight = _fe3d->water_getWaveHeight(waterId);
-		const auto maxDepth = _fe3d->water_getMaxDepth(waterId);
-		const auto isEdged = _fe3d->water_isEdged(waterId);
-		const auto specularShininess = _fe3d->water_getSpecularShininess(waterId);
-		const auto specularIntensity = _fe3d->water_getSpecularIntensity(waterId);
-		const auto isSpecular = _fe3d->water_isSpecular(waterId);
-		const auto isReflective = _fe3d->water_isReflective(waterId);
-		const auto isRefractive = _fe3d->water_isRefractive(waterId);
-		const auto height = _fe3d->water_getHeight(waterId);
-		const auto isWireframed = _fe3d->water_isWireframed(waterId);
-		const auto wireframeColor = _fe3d->water_getWireframeColor(waterId);
-		const auto minClipPosition = _fe3d->water_getMinClipPosition(waterId);
-		const auto maxClipPosition = _fe3d->water_getMaxClipPosition(waterId);
-		const auto isSelected = (waterId == _fe3d->water_getSelectedId());
+		const auto color = _fe3d->water_getColor(placedWaterId);
+		const auto rippleSpeed = _fe3d->water_getRippleSpeed(placedWaterId);
+		const auto waveSpeed = _fe3d->water_getWaveSpeed(placedWaterId);
+		const auto size = _fe3d->water_getSize(placedWaterId);
+		const auto textureRepeat = _fe3d->water_getTextureRepeat(placedWaterId);
+		const auto waveHeight = _fe3d->water_getWaveHeight(placedWaterId);
+		const auto maxDepth = _fe3d->water_getMaxDepth(placedWaterId);
+		const auto isEdged = _fe3d->water_isEdged(placedWaterId);
+		const auto specularShininess = _fe3d->water_getSpecularShininess(placedWaterId);
+		const auto specularIntensity = _fe3d->water_getSpecularIntensity(placedWaterId);
+		const auto isSpecular = _fe3d->water_isSpecular(placedWaterId);
+		const auto isReflective = _fe3d->water_isReflective(placedWaterId);
+		const auto isRefractive = _fe3d->water_isRefractive(placedWaterId);
+		const auto height = _fe3d->water_getHeight(placedWaterId);
+		const auto isWireframed = _fe3d->water_isWireframed(placedWaterId);
+		const auto wireframeColor = _fe3d->water_getWireframeColor(placedWaterId);
+		const auto minClipPosition = _fe3d->water_getMinClipPosition(placedWaterId);
+		const auto maxClipPosition = _fe3d->water_getMaxClipPosition(placedWaterId);
+		const auto isSelected = (placedWaterId == _fe3d->water_getSelectedId());
 
-		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
-		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
-		auto heightMapPath = _fe3d->water_getHeightMapPath(waterId);
+		auto dudvMapPath = _fe3d->water_getDudvMapPath(placedWaterId);
+		auto normalMapPath = _fe3d->water_getNormalMapPath(placedWaterId);
+		auto heightMapPath = _fe3d->water_getHeightMapPath(placedWaterId);
 
 		dudvMapPath = (dudvMapPath.empty() ? "" : dudvMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -246,7 +250,9 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		file
 			<< "WATER "
-			<< waterId
+			<< placedWaterId
+			<< " "
+			<< templateWaterId
 			<< " "
 			<< dudvMapPath
 			<< " "
@@ -314,32 +320,34 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & modelId : _addedModelIds)
+	for(const auto & [placedModelId, templateModelId] : _addedModelIds)
 	{
-		const auto partIds = _fe3d->model_getPartIds(modelId);
-		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
-		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
-		const auto position = _fe3d->model_getBasePosition(modelId);
-		const auto rotation = _fe3d->model_getBaseRotation(modelId);
-		const auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
-		const auto size = _fe3d->model_getBaseSize(modelId);
-		const auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
-		const auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
-		const auto isShadowed = _fe3d->model_isShadowed(modelId);
-		const auto isReflected = _fe3d->model_isReflected(modelId);
-		const auto isRefracted = _fe3d->model_isRefracted(modelId);
-		const auto minClipPosition = _fe3d->model_getMinClipPosition(modelId);
-		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
-		const auto isVisible = _fe3d->model_isVisible(modelId);
-		const auto isFrozen = _fe3d->model_isFrozen(modelId);
+		const auto partIds = _fe3d->model_getPartIds(placedModelId);
+		const auto aabbIds = _fe3d->model_getChildAabbIds(placedModelId);
+		const auto animation3dIds = _fe3d->model_getAnimation3dIds(placedModelId);
+		const auto position = _fe3d->model_getBasePosition(placedModelId);
+		const auto rotation = _fe3d->model_getBaseRotation(placedModelId);
+		const auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(placedModelId);
+		const auto size = _fe3d->model_getBaseSize(placedModelId);
+		const auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(placedModelId);
+		const auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(placedModelId));
+		const auto isShadowed = _fe3d->model_isShadowed(placedModelId);
+		const auto isReflected = _fe3d->model_isReflected(placedModelId);
+		const auto isRefracted = _fe3d->model_isRefracted(placedModelId);
+		const auto minClipPosition = _fe3d->model_getMinClipPosition(placedModelId);
+		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(placedModelId);
+		const auto isVisible = _fe3d->model_isVisible(placedModelId);
+		const auto isFrozen = _fe3d->model_isFrozen(placedModelId);
 
-		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
+		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(placedModelId);
 
 		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
 
 		file
 			<< "MODEL "
-			<< modelId
+			<< placedModelId
+			<< " "
+			<< templateModelId
 			<< " "
 			<< levelOfDetailId
 			<< " "
@@ -396,36 +404,36 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(auto partId : partIds)
 		{
-			const auto position = _fe3d->model_getPartPosition(modelId, partId);
-			const auto rotation = _fe3d->model_getPartRotation(modelId, partId);
-			const auto rotationOrigin = _fe3d->model_getPartRotationOrigin(modelId, partId);
-			const auto size = _fe3d->model_getPartSize(modelId, partId);
-			const auto isSpecular = _fe3d->model_isSpecular(modelId, partId);
-			const auto specularShininess = _fe3d->model_getSpecularShininess(modelId, partId);
-			const auto specularIntensity = _fe3d->model_getSpecularIntensity(modelId, partId);
-			const auto reflectivity = _fe3d->model_getReflectivity(modelId, partId);
-			const auto refractivity = _fe3d->model_getRefractivity(modelId, partId);
-			const auto lightness = _fe3d->model_getLightness(modelId, partId);
-			const auto color = _fe3d->model_getColor(modelId, partId);
-			const auto textureRepeat = _fe3d->model_getTextureRepeat(modelId, partId);
-			const auto isReflective = _fe3d->model_isReflective(modelId, partId);
-			const auto isRefractive = _fe3d->model_isRefractive(modelId, partId);
-			const auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(modelId, partId));
-			const auto refractionType = static_cast<int>(_fe3d->model_getRefractionType(modelId, partId));
-			const auto isFaceCulled = _fe3d->model_isFaceCulled(modelId, partId);
-			const auto isBright = _fe3d->model_isBright(modelId, partId);
-			const auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
-			const auto opacity = _fe3d->model_getOpacity(modelId, partId);
-			const auto minAlpha = _fe3d->model_getMinAlpha(modelId, partId);
-			const auto isWireframed = _fe3d->model_isWireframed(modelId, partId);
-			const auto wireframeColor = _fe3d->model_getWireframeColor(modelId, partId);
+			const auto position = _fe3d->model_getPartPosition(placedModelId, partId);
+			const auto rotation = _fe3d->model_getPartRotation(placedModelId, partId);
+			const auto rotationOrigin = _fe3d->model_getPartRotationOrigin(placedModelId, partId);
+			const auto size = _fe3d->model_getPartSize(placedModelId, partId);
+			const auto isSpecular = _fe3d->model_isSpecular(placedModelId, partId);
+			const auto specularShininess = _fe3d->model_getSpecularShininess(placedModelId, partId);
+			const auto specularIntensity = _fe3d->model_getSpecularIntensity(placedModelId, partId);
+			const auto reflectivity = _fe3d->model_getReflectivity(placedModelId, partId);
+			const auto refractivity = _fe3d->model_getRefractivity(placedModelId, partId);
+			const auto lightness = _fe3d->model_getLightness(placedModelId, partId);
+			const auto color = _fe3d->model_getColor(placedModelId, partId);
+			const auto textureRepeat = _fe3d->model_getTextureRepeat(placedModelId, partId);
+			const auto isReflective = _fe3d->model_isReflective(placedModelId, partId);
+			const auto isRefractive = _fe3d->model_isRefractive(placedModelId, partId);
+			const auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(placedModelId, partId));
+			const auto refractionType = static_cast<int>(_fe3d->model_getRefractionType(placedModelId, partId));
+			const auto isFaceCulled = _fe3d->model_isFaceCulled(placedModelId, partId);
+			const auto isBright = _fe3d->model_isBright(placedModelId, partId);
+			const auto emissionIntensity = _fe3d->model_getEmissionIntensity(placedModelId, partId);
+			const auto opacity = _fe3d->model_getOpacity(placedModelId, partId);
+			const auto minAlpha = _fe3d->model_getMinAlpha(placedModelId, partId);
+			const auto isWireframed = _fe3d->model_isWireframed(placedModelId, partId);
+			const auto wireframeColor = _fe3d->model_getWireframeColor(placedModelId, partId);
 
-			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
-			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
-			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelId, partId);
-			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(modelId, partId);
-			auto refractionMapPath = _fe3d->model_getRefractionMapPath(modelId, partId);
-			auto normalMapPath = _fe3d->model_getNormalMapPath(modelId, partId);
+			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(placedModelId, partId);
+			auto emissionMapPath = _fe3d->model_getEmissionMapPath(placedModelId, partId);
+			auto specularMapPath = _fe3d->model_getSpecularMapPath(placedModelId, partId);
+			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(placedModelId, partId);
+			auto refractionMapPath = _fe3d->model_getRefractionMapPath(placedModelId, partId);
+			auto normalMapPath = _fe3d->model_getNormalMapPath(placedModelId, partId);
 
 			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -450,7 +458,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 			file
 				<< "MODEL_PART "
-				<< modelId
+				<< placedModelId
 				<< " "
 				<< partId
 				<< " "
@@ -542,13 +550,13 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		{
 			const auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			const auto size = _fe3d->aabb_getLocalSize(aabbId);
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(modelId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(modelId);
-			const auto isVisible = _fe3d->aabb_isVisible(modelId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(placedModelId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(placedModelId);
+			const auto isVisible = _fe3d->aabb_isVisible(placedModelId);
 
 			file
 				<< "MODEL_AABB "
-				<< modelId
+				<< placedModelId
 				<< " "
 				<< aabbId
 				<< " "
@@ -574,15 +582,19 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & animation3dId : animation3dIds)
 		{
-			const auto isPaused = _fe3d->model_isAnimation3dPaused(modelId, animation3dId);
-			const auto isAutoPaused = _fe3d->model_isAnimation3dAutopaused(modelId, animation3dId);
-			const auto playCount = _fe3d->model_getAnimation3dPlayCount(modelId, animation3dId);
-			const auto frameIndex = _fe3d->model_getAnimation3dFrameIndex(modelId, animation3dId);
-			const auto speedMultiplier = _fe3d->model_getAnimation3dSpeedMultiplier(modelId, animation3dId);
+			const auto isPaused = _fe3d->model_isAnimation3dPaused(placedModelId, animation3dId);
+			const auto isAutoPaused = _fe3d->model_isAnimation3dAutopaused(placedModelId, animation3dId);
+			const auto playCount = _fe3d->model_getAnimation3dPlayCount(placedModelId, animation3dId);
+			const auto frameIndex = _fe3d->model_getAnimation3dFrameIndex(placedModelId, animation3dId);
+			const auto speedMultiplier = _fe3d->model_getAnimation3dSpeedMultiplier(placedModelId, animation3dId);
 			const auto partCount = partIds.size();
 
 			file
 				<< "MODEL_ANIMATION3D "
+				<< placedModelId
+				<< " "
+				<< animation3dId
+				<< " "
 				<< isPaused
 				<< " "
 				<< isAutoPaused
@@ -597,10 +609,10 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 			for(auto partId : partIds)
 			{
-				const auto totalMovement = _fe3d->model_getAnimation3dTotalMovement(modelId, partId, animation3dId);
-				const auto totalRotation = _fe3d->model_getAnimation3dTotalRotation(modelId, partId, animation3dId);
-				const auto totalScaling = _fe3d->model_getAnimation3dTotalScaling(modelId, partId, animation3dId);
-				const auto totalSpeed = _fe3d->model_getAnimation3dTotalSpeed(modelId, partId, animation3dId);
+				const auto totalMovement = _fe3d->model_getAnimation3dTotalMovement(placedModelId, partId, animation3dId);
+				const auto totalRotation = _fe3d->model_getAnimation3dTotalRotation(placedModelId, partId, animation3dId);
+				const auto totalScaling = _fe3d->model_getAnimation3dTotalScaling(placedModelId, partId, animation3dId);
+				const auto totalSpeed = _fe3d->model_getAnimation3dTotalSpeed(placedModelId, partId, animation3dId);
 
 				file
 					<< " "
@@ -635,38 +647,38 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		}
 	}
 
-	for(const auto & quad3dId : _addedQuad3dIds)
+	for(const auto & [placedQuad3dId, templateQuad3dId] : _addedQuad3dIds)
 	{
-		const auto position = _fe3d->quad3d_getPosition(quad3dId);
-		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
-		const auto size = _fe3d->quad3d_getSize(quad3dId);
-		const auto color = _fe3d->quad3d_getColor(quad3dId);
-		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(quad3dId);
-		const auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(quad3dId);
-		const auto isHorizontallyFlipped = _fe3d->quad3d_isHorizontallyFlipped(quad3dId);
-		const auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(quad3dId);
-		const auto isReflected = _fe3d->quad3d_isReflected(quad3dId);
-		const auto isRefracted = _fe3d->quad3d_isRefracted(quad3dId);
-		const auto isShadowed = _fe3d->quad3d_isShadowed(quad3dId);
-		const auto lightness = _fe3d->quad3d_getLightness(quad3dId);
-		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quad3dId);
-		const auto isBright = _fe3d->quad3d_isBright(quad3dId);
-		const auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quad3dId);
-		const auto opacity = _fe3d->quad3d_getOpacity(quad3dId);
-		const auto minAlpha = _fe3d->quad3d_getMinAlpha(quad3dId);
-		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quad3dId));
-		const auto isVisible = _fe3d->quad3d_isVisible(quad3dId);
-		const auto isWireframed = _fe3d->quad3d_isWireframed(quad3dId);
-		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(quad3dId);
-		const auto minClipPosition = _fe3d->quad3d_getMinClipPosition(quad3dId);
-		const auto maxClipPosition = _fe3d->quad3d_getMaxClipPosition(quad3dId);
-		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
-		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
-		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
-		const auto animation2dIds = _fe3d->quad3d_getAnimation2dIds(quad3dId);
+		const auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
+		const auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
+		const auto size = _fe3d->quad3d_getSize(placedQuad3dId);
+		const auto color = _fe3d->quad3d_getColor(placedQuad3dId);
+		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(placedQuad3dId);
+		const auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(placedQuad3dId);
+		const auto isHorizontallyFlipped = _fe3d->quad3d_isHorizontallyFlipped(placedQuad3dId);
+		const auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(placedQuad3dId);
+		const auto isReflected = _fe3d->quad3d_isReflected(placedQuad3dId);
+		const auto isRefracted = _fe3d->quad3d_isRefracted(placedQuad3dId);
+		const auto isShadowed = _fe3d->quad3d_isShadowed(placedQuad3dId);
+		const auto lightness = _fe3d->quad3d_getLightness(placedQuad3dId);
+		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(placedQuad3dId);
+		const auto isBright = _fe3d->quad3d_isBright(placedQuad3dId);
+		const auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(placedQuad3dId);
+		const auto opacity = _fe3d->quad3d_getOpacity(placedQuad3dId);
+		const auto minAlpha = _fe3d->quad3d_getMinAlpha(placedQuad3dId);
+		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(placedQuad3dId));
+		const auto isVisible = _fe3d->quad3d_isVisible(placedQuad3dId);
+		const auto isWireframed = _fe3d->quad3d_isWireframed(placedQuad3dId);
+		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(placedQuad3dId);
+		const auto minClipPosition = _fe3d->quad3d_getMinClipPosition(placedQuad3dId);
+		const auto maxClipPosition = _fe3d->quad3d_getMaxClipPosition(placedQuad3dId);
+		const auto isFrozen = _fe3d->quad3d_isFrozen(placedQuad3dId);
+		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(placedQuad3dId);
+		const auto uvOffset = _fe3d->quad3d_getUvOffset(placedQuad3dId);
+		const auto animation2dIds = _fe3d->quad3d_getAnimation2dIds(placedQuad3dId);
 
-		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
-		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
+		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(placedQuad3dId);
+		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(placedQuad3dId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -678,7 +690,9 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		file
 			<< "QUAD3D "
-			<< quad3dId
+			<< placedQuad3dId
+			<< " "
+			<< templateQuad3dId
 			<< " "
 			<< diffuseMapPath
 			<< " "
@@ -767,15 +781,15 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.z
 			<< endl;
 
-		if(_fe3d->aabb_isExisting(quad3dId))
+		if(_fe3d->aabb_isExisting(placedQuad3dId))
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(quad3dId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(quad3dId);
-			const auto isVisible = _fe3d->aabb_isVisible(quad3dId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(placedQuad3dId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(placedQuad3dId);
+			const auto isVisible = _fe3d->aabb_isVisible(placedQuad3dId);
 
 			file
 				<< "QUAD3D_AABB "
-				<< quad3dId
+				<< placedQuad3dId
 				<< " "
 				<< isRaycastResponsive
 				<< " "
@@ -787,14 +801,14 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & animation2dId : animation2dIds)
 		{
-			const auto isPaused = _fe3d->quad3d_isAnimation2dPaused(quad3dId, animation2dId);
-			const auto isAutoPaused = _fe3d->quad3d_isAnimation2dAutopaused(quad3dId, animation2dId);
-			const auto playCount = _fe3d->quad3d_getAnimation2dPlayCount(quad3dId, animation2dId);
-			const auto rowIndex = _fe3d->quad3d_getAnimation2dRowIndex(quad3dId, animation2dId);
-			const auto columnIndex = _fe3d->quad3d_getAnimation2dColumnIndex(quad3dId, animation2dId);
-			const auto intervalMultiplier = _fe3d->quad3d_getAnimation2dIntervalMultiplier(quad3dId, animation2dId);
-			const auto intervalDivider = _fe3d->quad3d_getAnimation2dIntervalDivider(quad3dId, animation2dId);
-			const auto updateCount = _fe3d->quad3d_getAnimation2dUpdateCount(quad3dId, animation2dId);
+			const auto isPaused = _fe3d->quad3d_isAnimation2dPaused(placedQuad3dId, animation2dId);
+			const auto isAutoPaused = _fe3d->quad3d_isAnimation2dAutopaused(placedQuad3dId, animation2dId);
+			const auto playCount = _fe3d->quad3d_getAnimation2dPlayCount(placedQuad3dId, animation2dId);
+			const auto rowIndex = _fe3d->quad3d_getAnimation2dRowIndex(placedQuad3dId, animation2dId);
+			const auto columnIndex = _fe3d->quad3d_getAnimation2dColumnIndex(placedQuad3dId, animation2dId);
+			const auto intervalMultiplier = _fe3d->quad3d_getAnimation2dIntervalMultiplier(placedQuad3dId, animation2dId);
+			const auto intervalDivider = _fe3d->quad3d_getAnimation2dIntervalDivider(placedQuad3dId, animation2dId);
+			const auto updateCount = _fe3d->quad3d_getAnimation2dUpdateCount(placedQuad3dId, animation2dId);
 
 			file
 				<< "QUAD3D_ANIMATION2D "
@@ -817,44 +831,37 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		}
 	}
 
-	for(const auto & text3dId : _addedText3dIds)
+	for(const auto & [placedText3dId, templateText3dId] : _addedText3dIds)
 	{
-		const auto position = _fe3d->text3d_getPosition(text3dId);
-		const auto rotation = _fe3d->text3d_getRotation(text3dId);
-		const auto size = _fe3d->text3d_getSize(text3dId);
-		const auto color = _fe3d->text3d_getColor(text3dId);
-		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(text3dId);
-		const auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(text3dId);
-		const auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(text3dId);
-		const auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(text3dId);
-		const auto isReflected = _fe3d->text3d_isReflected(text3dId);
-		const auto isRefracted = _fe3d->text3d_isRefracted(text3dId);
-		const auto isShadowed = _fe3d->text3d_isShadowed(text3dId);
-		const auto lightness = _fe3d->text3d_getLightness(text3dId);
-		const auto isBright = _fe3d->text3d_isBright(text3dId);
-		const auto opacity = _fe3d->text3d_getOpacity(text3dId);
-		const auto minAlpha = _fe3d->text3d_getMinAlpha(text3dId);
-		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
-		const auto isVisible = _fe3d->text3d_isVisible(text3dId);
-		const auto isWireframed = _fe3d->text3d_isWireframed(text3dId);
-		const auto wireframeColor = _fe3d->text3d_getWireframeColor(text3dId);
-		const auto minClipPosition = _fe3d->text3d_getMinClipPosition(text3dId);
-		const auto maxClipPosition = _fe3d->text3d_getMaxClipPosition(text3dId);
-		const auto isFrozen = _fe3d->text3d_isFrozen(text3dId);
-		const auto content = _fe3d->text3d_getContent(text3dId);
-
-		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
-
-		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
-
-		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
+		const auto position = _fe3d->text3d_getPosition(placedText3dId);
+		const auto rotation = _fe3d->text3d_getRotation(placedText3dId);
+		const auto size = _fe3d->text3d_getSize(placedText3dId);
+		const auto color = _fe3d->text3d_getColor(placedText3dId);
+		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(placedText3dId);
+		const auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(placedText3dId);
+		const auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(placedText3dId);
+		const auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(placedText3dId);
+		const auto isReflected = _fe3d->text3d_isReflected(placedText3dId);
+		const auto isRefracted = _fe3d->text3d_isRefracted(placedText3dId);
+		const auto isShadowed = _fe3d->text3d_isShadowed(placedText3dId);
+		const auto lightness = _fe3d->text3d_getLightness(placedText3dId);
+		const auto isBright = _fe3d->text3d_isBright(placedText3dId);
+		const auto opacity = _fe3d->text3d_getOpacity(placedText3dId);
+		const auto minAlpha = _fe3d->text3d_getMinAlpha(placedText3dId);
+		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(placedText3dId));
+		const auto isVisible = _fe3d->text3d_isVisible(placedText3dId);
+		const auto isWireframed = _fe3d->text3d_isWireframed(placedText3dId);
+		const auto wireframeColor = _fe3d->text3d_getWireframeColor(placedText3dId);
+		const auto minClipPosition = _fe3d->text3d_getMinClipPosition(placedText3dId);
+		const auto maxClipPosition = _fe3d->text3d_getMaxClipPosition(placedText3dId);
+		const auto isFrozen = _fe3d->text3d_isFrozen(placedText3dId);
+		const auto content = _fe3d->text3d_getContent(placedText3dId);
 
 		file
 			<< "TEXT3D "
-			<< text3dId
+			<< placedText3dId
 			<< " "
-			<< fontMapPath
+			<< templateText3dId
 			<< " "
 			<< position.x
 			<< " "
@@ -929,15 +936,15 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< content
 			<< endl;
 
-		if(_fe3d->aabb_isExisting(text3dId))
+		if(_fe3d->aabb_isExisting(placedText3dId))
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(text3dId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(text3dId);
-			const auto isVisible = _fe3d->aabb_isVisible(text3dId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(placedText3dId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(placedText3dId);
+			const auto isVisible = _fe3d->aabb_isVisible(placedText3dId);
 
 			file
 				<< "TEXT3D_AABB "
-				<< text3dId
+				<< placedText3dId
 				<< " "
 				<< isRaycastResponsive
 				<< " "
@@ -948,20 +955,22 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		}
 	}
 
-	for(const auto & aabbId : _addedAabbIds)
+	for(const auto & [placedAabbId, templateAabbId] : _addedAabbIds)
 	{
-		const auto position = _fe3d->aabb_getBasePosition(aabbId);
-		const auto size = _fe3d->aabb_getBaseSize(aabbId);
-		const auto color = _fe3d->aabb_getColor(aabbId);
-		const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
-		const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
-		const auto isVisible = _fe3d->aabb_isVisible(aabbId);
-		const auto minClipPosition = _fe3d->aabb_getMinClipPosition(aabbId);
-		const auto maxClipPosition = _fe3d->aabb_getMaxClipPosition(aabbId);
+		const auto position = _fe3d->aabb_getBasePosition(placedAabbId);
+		const auto size = _fe3d->aabb_getBaseSize(placedAabbId);
+		const auto color = _fe3d->aabb_getColor(placedAabbId);
+		const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(placedAabbId);
+		const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(placedAabbId);
+		const auto isVisible = _fe3d->aabb_isVisible(placedAabbId);
+		const auto minClipPosition = _fe3d->aabb_getMinClipPosition(placedAabbId);
+		const auto maxClipPosition = _fe3d->aabb_getMaxClipPosition(placedAabbId);
 
 		file
 			<< "AABB "
-			<< aabbId
+			<< placedAabbId
+			<< " "
+			<< templateAabbId
 			<< " "
 			<< position.x
 			<< " "
@@ -1001,18 +1010,20 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & pointlightId : _addedPointlightIds)
+	for(const auto & [placedPointlightId, templatePointlightId] : _addedPointlightIds)
 	{
-		const auto position = _fe3d->pointlight_getPosition(pointlightId);
-		const auto radius = _fe3d->pointlight_getRadius(pointlightId);
-		const auto color = _fe3d->pointlight_getColor(pointlightId);
-		const auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
-		const auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
-		const auto isVisible = _fe3d->pointlight_isVisible(pointlightId);
+		const auto position = _fe3d->pointlight_getPosition(placedPointlightId);
+		const auto radius = _fe3d->pointlight_getRadius(placedPointlightId);
+		const auto color = _fe3d->pointlight_getColor(placedPointlightId);
+		const auto intensity = _fe3d->pointlight_getIntensity(placedPointlightId);
+		const auto shape = static_cast<int>(_fe3d->pointlight_getShape(placedPointlightId));
+		const auto isVisible = _fe3d->pointlight_isVisible(placedPointlightId);
 
 		file
 			<< "POINTLIGHT "
-			<< pointlightId
+			<< placedPointlightId
+			<< " "
+			<< templatePointlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -1040,20 +1051,22 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & spotlightId : _addedSpotlightIds)
+	for(const auto & [placedSpotlightId, templateSpotlightId] : _addedSpotlightIds)
 	{
-		const auto position = _fe3d->spotlight_getPosition(spotlightId);
-		const auto yaw = _fe3d->spotlight_getYaw(spotlightId);
-		const auto pitch = _fe3d->spotlight_getPitch(spotlightId);
-		const auto color = _fe3d->spotlight_getColor(spotlightId);
-		const auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
-		const auto angle = _fe3d->spotlight_getAngle(spotlightId);
-		const auto distance = _fe3d->spotlight_getDistance(spotlightId);
-		const auto isVisible = _fe3d->spotlight_isVisible(spotlightId);
+		const auto position = _fe3d->spotlight_getPosition(placedSpotlightId);
+		const auto yaw = _fe3d->spotlight_getYaw(placedSpotlightId);
+		const auto pitch = _fe3d->spotlight_getPitch(placedSpotlightId);
+		const auto color = _fe3d->spotlight_getColor(placedSpotlightId);
+		const auto intensity = _fe3d->spotlight_getIntensity(placedSpotlightId);
+		const auto angle = _fe3d->spotlight_getAngle(placedSpotlightId);
+		const auto distance = _fe3d->spotlight_getDistance(placedSpotlightId);
+		const auto isVisible = _fe3d->spotlight_isVisible(placedSpotlightId);
 
 		file
 			<< "SPOTLIGHT "
-			<< spotlightId
+			<< placedSpotlightId
+			<< " "
+			<< templateSpotlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -1081,22 +1094,17 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
-	for(const auto & sound3dId : _addedSound3dIds)
+	for(const auto & [placedSound3dId, templateSound3dId] : _addedSound3dIds)
 	{
-		const auto position = _fe3d->sound3d_getPosition(sound3dId);
-		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
-		const auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
-
-		auto audioPath = _fe3d->sound3d_getAudioPath(sound3dId);
-
-		audioPath = (audioPath.empty() ? "" : audioPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		audioPath = (audioPath.empty()) ? "?" : audioPath;
-
-		replace(audioPath.begin(), audioPath.end(), ' ', '?');
+		const auto position = _fe3d->sound3d_getPosition(placedSound3dId);
+		const auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSound3dId);
+		const auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSound3dId);
 
 		file
 			<< "SOUND3D "
-			<< sound3dId
+			<< placedSound3dId
+			<< " "
+			<< templateSound3dId
 			<< " "
 			<< position.x
 			<< " "
@@ -1104,25 +1112,23 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< " "
 			<< position.z
 			<< " "
-			<< audioPath
-			<< " "
 			<< maxVolume
 			<< " "
 			<< maxDistance
 			<< endl;
 	}
 
-	for(const auto & captorId : _addedCaptorIds)
+	for(const auto & placedCaptorId : _addedCaptorIds)
 	{
-		const auto position = _fe3d->captor_getPosition(captorId);
+		const auto position = _fe3d->captor_getPosition(placedCaptorId);
 
-		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+		auto exceptionId = _fe3d->captor_getExceptionId(placedCaptorId);
 
 		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
 
 		file
 			<< "CAPTOR "
-			<< captorId
+			<< placedCaptorId
 			<< " "
 			<< exceptionId
 			<< " "

@@ -35,7 +35,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_fe3d->quad3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
+				_loadedQuad3dIds.push_back({newId, _currentTemplateQuad3dId});
 
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
 
@@ -96,7 +96,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_fe3d->quad3d_setPosition(newId, newPosition);
 
-				_loadedQuad3dIds.insert({newId, _currentTemplateQuad3dId});
+				_loadedQuad3dIds.push_back({newId, _currentTemplateQuad3dId});
 			}
 		}
 	}

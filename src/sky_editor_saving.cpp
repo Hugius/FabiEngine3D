@@ -42,17 +42,17 @@ const bool SkyEditor::saveSkiesToFile() const
 		}
 
 		file
-			<< skyId
-			<< " ";
+			<< skyId;
 
 		for(const auto & cubeMapPath : cubeMapPaths)
 		{
 			file
-				<< cubeMapPath
-				<< " ";
+				<< " "
+				<< cubeMapPath;
 		}
 
 		file
+			<< " "
 			<< rotation.x
 			<< " "
 			<< rotation.y

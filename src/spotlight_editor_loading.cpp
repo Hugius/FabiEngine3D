@@ -29,6 +29,7 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 	}
 
 	string line;
+
 	while(getline(file, line))
 	{
 		string spotlightId;

@@ -668,7 +668,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto opacity = _fe3d->quad3d_getOpacity(quad3dId);
 		const auto minAlpha = _fe3d->quad3d_getMinAlpha(quad3dId);
 		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quad3dId));
-		const auto hasAabb = _fe3d->aabb_isExisting(quad3dId);
 		const auto isVisible = _fe3d->quad3d_isVisible(quad3dId);
 		const auto isWireframed = _fe3d->quad3d_isWireframed(quad3dId);
 		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(quad3dId);
@@ -781,7 +780,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.z
 			<< endl;
 
-		if(hasAabb)
+		if(_fe3d->aabb_isExisting(quad3dId))
 		{
 			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(quad3dId);
 			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(quad3dId);
@@ -789,6 +788,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 			file
 				<< "QUAD3D_AABB "
+				<< quad3dId
+				<< " "
 				<< isRaycastResponsive
 				<< " "
 				<< isCollisionResponsive
@@ -847,7 +848,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto opacity = _fe3d->text3d_getOpacity(text3dId);
 		const auto minAlpha = _fe3d->text3d_getMinAlpha(text3dId);
 		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
-		const auto hasAabb = _fe3d->aabb_isExisting(text3dId);
 		const auto isVisible = _fe3d->text3d_isVisible(text3dId);
 		const auto isWireframed = _fe3d->text3d_isWireframed(text3dId);
 		const auto wireframeColor = _fe3d->text3d_getWireframeColor(text3dId);
@@ -915,8 +915,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< " "
 			<< rotationOrder
 			<< " "
-			<< hasAabb
-			<< " "
 			<< isVisible
 			<< " "
 			<< minClipPosition.x
@@ -944,7 +942,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< content
 			<< endl;
 
-		if(hasAabb)
+		if(_fe3d->aabb_isExisting(text3dId))
 		{
 			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(text3dId);
 			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(text3dId);
@@ -952,6 +950,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 			file
 				<< "TEXT3D_AABB "
+				<< text3dId
+				<< " "
 				<< isRaycastResponsive
 				<< " "
 				<< isCollisionResponsive

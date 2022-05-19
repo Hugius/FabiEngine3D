@@ -1,11 +1,13 @@
 #pragma once
 
 #include "engine_interface.hpp"
+#include "duplicator.hpp"
 
 class CustomWorldBuilder final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
+	void inject(shared_ptr<Duplicator> duplicator);
 	void setCurrentProjectId(const string & currentProjectId);
 	void reset();
 	void addSky(const string & skyId);
@@ -64,6 +66,7 @@ private:
 	vector<string> _loadedCaptorIds = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<Duplicator> _duplicator = nullptr;
 
 	string _currentProjectId = "";
 	string _loadedWorldId = "";

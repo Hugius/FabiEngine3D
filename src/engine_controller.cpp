@@ -159,6 +159,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_worldEditor->inject(_fe3d);
 	_scriptEditor->inject(_fe3d);
 	_customWorldBuilder->inject(_fe3d);
+	_customWorldBuilder->inject(_duplicator);
 	_duplicator->inject(_fe3d);
 	_scriptExecutor->inject(_fe3d);
 	_scriptInterpreter->inject(_fe3d);

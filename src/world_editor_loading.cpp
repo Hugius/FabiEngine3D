@@ -183,8 +183,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_duplicator->copyTemplateModel(placedModelId, templateModelId);
 
-			_loadedModelIds.insert({placedModelId, templateModelId});
-
 			_fe3d->model_setBasePosition(placedModelId, position);
 			_fe3d->model_setBaseRotation(placedModelId, rotation);
 			_fe3d->model_setBaseSize(placedModelId, size);
@@ -194,6 +192,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			{
 				_fe3d->model_startAnimation3d(placedModelId, animation3dId, -1);
 			}
+
+			_loadedModelIds.insert({placedModelId, templateModelId});
 		}
 		else if(lineType == "QUAD3D")
 		{
@@ -228,8 +228,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_duplicator->copyTemplateQuad3d(placedQuad3dId, templateQuad3dId);
 
-			_loadedQuad3dIds.insert({placedQuad3dId, templateQuad3dId});
-
 			_fe3d->quad3d_setPosition(placedQuad3dId, position);
 			_fe3d->quad3d_setRotation(placedQuad3dId, rotation);
 			_fe3d->quad3d_setSize(placedQuad3dId, size);
@@ -238,6 +236,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			{
 				_fe3d->quad3d_startAnimation2d(placedQuad3dId, animation2dId, -1);
 			}
+
+			_loadedQuad3dIds.insert({placedQuad3dId, templateQuad3dId});
 		}
 		else if(lineType == "TEXT3D")
 		{
@@ -268,12 +268,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_duplicator->copyTemplateText3d(placedText3dId, templateText3dId);
 
-			_loadedText3dIds.insert({placedText3dId, templateText3dId});
-
 			_fe3d->text3d_setContent(placedText3dId, content);
 			_fe3d->text3d_setPosition(placedText3dId, position);
 			_fe3d->text3d_setRotation(placedText3dId, rotation);
 			_fe3d->text3d_setSize(placedText3dId, size);
+
+			_loadedText3dIds.insert({placedText3dId, templateText3dId});
 		}
 		else if(lineType == "AABB")
 		{
@@ -299,10 +299,10 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_duplicator->copyTemplateAabb(placedAabbId, templateAabbId);
 
-			_loadedAabbIds.insert({placedAabbId, templateAabbId});
-
 			_fe3d->aabb_setBasePosition(placedAabbId, position);
 			_fe3d->aabb_setBaseSize(placedAabbId, size);
+
+			_loadedAabbIds.insert({placedAabbId, templateAabbId});
 		}
 		else if(lineType == "POINTLIGHT")
 		{

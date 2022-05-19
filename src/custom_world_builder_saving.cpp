@@ -98,7 +98,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto maxClipPosition = _fe3d->terrain_getMaxClipPosition(terrainId);
 		const auto isSelected = (terrainId == _fe3d->terrain_getSelectedId());
 
-		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainId);
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
 		auto normalMapPath = _fe3d->terrain_getNormalMapPath(terrainId);
 		auto blendMapPath = _fe3d->terrain_getBlendMapPath(terrainId);
@@ -109,7 +108,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainId);
 		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainId);
 
-		heightMapPath = (heightMapPath.empty() ? "" : heightMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		blendMapPath = (blendMapPath.empty() ? "" : blendMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -119,7 +117,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		redNormalMapPath = (redNormalMapPath.empty() ? "" : redNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		greenNormalMapPath = (greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		blueNormalMapPath = (blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 		blendMapPath = (blendMapPath.empty()) ? "?" : blendMapPath;
@@ -130,7 +127,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		greenNormalMapPath = (greenNormalMapPath.empty()) ? "?" : greenNormalMapPath;
 		blueNormalMapPath = (blueNormalMapPath.empty()) ? "?" : blueNormalMapPath;
 
-		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
@@ -144,8 +140,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		file
 			<< "TERRAIN "
 			<< terrainId
-			<< " "
-			<< heightMapPath
 			<< " "
 			<< diffuseMapPath
 			<< " "
@@ -339,20 +333,13 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto isVisible = _fe3d->model_isVisible(modelId);
 		const auto isFrozen = _fe3d->model_isFrozen(modelId);
 
-		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
 
-		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
-
-		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 
 		file
 			<< "MODEL "
 			<< modelId
-			<< " "
-			<< meshPath
 			<< " "
 			<< levelOfDetailId
 			<< " "

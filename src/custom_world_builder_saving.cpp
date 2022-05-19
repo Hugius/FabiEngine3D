@@ -8,7 +8,7 @@ using std::endl;
 
 void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 {
-	if(_currentProjectId.empty())
+	if(!Configuration::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		abort();
 	}

@@ -21,11 +21,11 @@ public:
 	void addCaptor(const string & captorId);
 	void addGraphics();
 	void clearLoadedWorld();
+	void saveWorldToFile(const string & fileName);
 
 	const string & getLoadedWorldId() const;
 
 	const bool loadWorldFromFile(const string & fileName);
-	const bool saveWorldToFile(const string & fileName) const;
 	const bool isSkyAdded(const string & skyId) const;
 	const bool isTerrainAdded(const string & terrainId) const;
 	const bool isWaterAdded(const string & waterId) const;

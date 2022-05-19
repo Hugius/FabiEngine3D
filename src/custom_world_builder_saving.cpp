@@ -6,7 +6,7 @@
 using std::ofstream;
 using std::endl;
 
-const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
+void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 {
 	if(_currentProjectId.empty())
 	{
@@ -380,6 +380,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< " "
 			<< rotation.z
 			<< " "
+			<< rotationOrigin.x
+			<< " "
+			<< rotationOrigin.y
+			<< " "
+			<< rotationOrigin.z
+			<< " "
 			<< size.x
 			<< " "
 			<< size.y
@@ -522,6 +528,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 				<< rotation.y
 				<< " "
 				<< rotation.z
+				<< " "
+				<< rotationOrigin.x
+				<< " "
+				<< rotationOrigin.y
+				<< " "
+				<< rotationOrigin.z
 				<< " "
 				<< size.x
 				<< " "
@@ -964,6 +976,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 			<< "AABB "
 			<< aabbId
 			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
 			<< size.x
 			<< " "
 			<< size.y
@@ -1348,6 +1366,4 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 	file.close();
 
 	Logger::throwInfo("Custom world data saved");
-
-	return true;
 }

@@ -1137,13 +1137,13 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "CAPTOR "
 			<< captorId
 			<< " "
+			<< exceptionId
+			<< " "
 			<< position.x
 			<< " "
 			<< position.y
 			<< " "
 			<< position.z
-			<< " "
-			<< exceptionId
 			<< endl;
 	}
 

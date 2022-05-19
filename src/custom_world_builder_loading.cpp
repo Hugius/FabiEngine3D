@@ -41,10 +41,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string skyId;
 			fvec3 color;
 			fvec3 rotation;
+			fvec3 wireframeColor;
 			float lightness;
 			int rotationOrder;
-
-			auto iss = istringstream(line);
+			bool isWireframed;
+			bool isSelected;
 
 			iss
 				>> skyId
@@ -61,7 +62,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> color.r
 				>> color.g
 				>> color.b
-				>> rotationOrder;
+				>> rotationOrder
+				>> isWireframed
+				>> wireframeColor.r
+				>> wireframeColor.g
+				>> wireframeColor.b
+				>> isSelected;
 
 			for(auto & cubeMapPath : cubeMapPaths)
 			{
@@ -84,6 +90,13 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->sky_setRotation(skyId, rotation);
 			_fe3d->sky_setColor(skyId, color);
 			_fe3d->sky_setRotationOrder(skyId, DirectionOrderType(rotationOrder));
+			_fe3d->sky_setWireframed(skyId, isWireframed);
+			_fe3d->sky_setWireframeColor(skyId, wireframeColor);
+
+			if(isSelected)
+			{
+				_fe3d->sky_select(skyId);
+			}
 
 			_loadedSkyIds.push_back(skyId);
 		}
@@ -101,6 +114,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string greenDiffuseMapPath;
 			string blueDiffuseMapPath;
 			fvec3 color;
+			fvec3 wireframeColor;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
 			float maxHeight;
 			float lightness;
 			float specularShininess;
@@ -110,8 +126,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			int greenTextureRepeat;
 			int blueTextureRepeat;
 			bool isSpecular;
-
-			auto iss = istringstream(line);
+			bool isWireframed;
+			bool isSelected;
 
 			iss
 				>> terrainId
@@ -136,7 +152,18 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> blueTextureRepeat
 				>> isSpecular
 				>> specularShininess
-				>> specularIntensity;
+				>> specularIntensity
+				>> isWireframed
+				>> wireframeColor.r
+				>> wireframeColor.g
+				>> wireframeColor.b
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z
+				>> isSelected;
 
 			heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -178,7 +205,15 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				_fe3d->terrain_setBlueTextureRepeat(terrainId, blueTextureRepeat);
 				_fe3d->terrain_setSpecular(terrainId, isSpecular);
 				_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
-				_fe3d->terrain_setSpecularIntensity(terrainId, specularIntensity);
+				_fe3d->terrain_setWireframed(terrainId, isWireframed);
+				_fe3d->terrain_setWireframeColor(terrainId, wireframeColor);
+				_fe3d->terrain_setMinClipPosition(terrainId, minClipPosition);
+				_fe3d->terrain_setMaxClipPosition(terrainId, maxClipPosition);
+
+				if(isSelected)
+				{
+					_fe3d->terrain_select(terrainId);
+				}
 
 				if(!diffuseMapPath.empty())
 				{
@@ -280,6 +315,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string normalMapPath;
 			string heightMapPath;
 			fvec3 color;
+			fvec3 wireframeColor;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
 			fvec2 rippleSpeed;
 			fvec2 waveSpeed;
 			float size;
@@ -287,13 +325,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			float specularShininess;
 			float specularIntensity;
 			float maxDepth;
+			float height;
 			int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
 			bool isRefractive;
 			bool isEdged;
-
-			auto iss = istringstream(line);
+			bool isWireframed;
+			bool isSelected;
 
 			iss
 				>> waterId
@@ -316,7 +355,19 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> isEdged
 				>> specularShininess
 				>> specularIntensity
-				>> maxDepth;
+				>> maxDepth
+				>> height
+				>> isWireframed
+				>> wireframeColor.r
+				>> wireframeColor.g
+				>> wireframeColor.b
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z
+				>> isSelected;
 
 			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 			normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
@@ -340,6 +391,16 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setRippleSpeed(waterId, rippleSpeed);
 			_fe3d->water_setWaveSpeed(waterId, waveSpeed);
 			_fe3d->water_setMaxDepth(waterId, maxDepth);
+			_fe3d->water_setHeight(waterId, height);
+			_fe3d->water_setWireframed(waterId, isWireframed);
+			_fe3d->water_setWireframeColor(waterId, wireframeColor);
+			_fe3d->water_setMinClipPosition(waterId, minClipPosition);
+			_fe3d->water_setMaxClipPosition(waterId, maxClipPosition);
+
+			if(isSelected)
+			{
+				_fe3d->water_select(waterId);
+			}
 
 			if(!dudvMapPath.empty())
 			{
@@ -378,25 +439,49 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string modelId;
 			string meshPath;
 			string levelOfDetailId;
+			fvec3 position;
+			fvec3 rotation;
+			fvec3 rotationOrigin;
 			fvec3 size;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
 			float levelOfDetailDistance;
 			int rotationOrder;
 			bool isShadowed;
 			bool isReflected;
 			bool isRefracted;
+			bool isVisible;
+			bool isFrozen;
 
 			iss
 				>> modelId
 				>> meshPath
-				>> size.x
-				>> size.y
-				>> size.z
 				>> levelOfDetailId
 				>> levelOfDetailDistance
 				>> rotationOrder
 				>> isShadowed
 				>> isReflected
-				>> isRefracted;
+				>> isRefracted
+				>> isVisible
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
+				>> rotationOrigin.x
+				>> rotationOrigin.y
+				>> rotationOrigin.z
+				>> size.x
+				>> size.y
+				>> size.z
+				>> isFrozen
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			levelOfDetailId = (levelOfDetailId == "?") ? "" : levelOfDetailId;
@@ -413,10 +498,15 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			if(_fe3d->model_isExisting(modelId))
 			{
 				_fe3d->model_setVisible(modelId, false);
+				_fe3d->model_setBasePosition(modelId, size);
+				_fe3d->model_setBaseRotation(modelId, size);
+				_fe3d->model_setBaseRotationOrigin(modelId, size);
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setLevelOfDetailId(modelId, levelOfDetailId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
+				_fe3d->model_setMinClipPosition(modelId, minClipPosition);
+				_fe3d->model_setMaxClipPosition(modelId, maxClipPosition);
 
 				_loadedModelIds.push_back(modelId);
 			}
@@ -636,8 +726,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isShadowed;
 			bool isBright;
 
-			auto iss = istringstream(line);
-
 			iss
 				>> quad3dId
 				>> diffuseMapPath
@@ -713,8 +801,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string quad3dId;
 
-			auto iss = istringstream(line);
-
 			iss >> quad3dId;
 
 			_fe3d->aabb_create(quad3dId, false);
@@ -745,8 +831,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isShadowed;
 			bool isBright;
 			bool hasAabb;
-
-			auto iss = istringstream(line);
 
 			iss
 				>> text3dId
@@ -814,8 +898,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string text3dId;
 
-			auto iss = istringstream(line);
-
 			iss >> text3dId;
 
 			_fe3d->aabb_create(text3dId, false);
@@ -828,8 +910,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string aabbId;
 			fvec3 size;
 			fvec3 color;
-
-			auto iss = istringstream(line);
 
 			iss
 				>> aabbId
@@ -854,8 +934,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			fvec3 color;
 			float intensity;
 			int shape;
-
-			auto iss = istringstream(line);
 
 			iss
 				>> pointlightId
@@ -886,8 +964,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			float angle;
 			float distance;
 
-			auto iss = istringstream(line);
-
 			iss
 				>> spotlightId
 				>> color.r
@@ -916,8 +992,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string audioPath;
 			float maxVolume;
 			float maxDistance;
-
-			auto iss = istringstream(line);
 
 			iss
 				>> sound3dId
@@ -949,7 +1023,16 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "CAPTOR")
 		{
+			string captorId;
+			string exceptionId;
+			fvec3 position;
 
+			iss
+				>> captorId
+				>> exceptionId
+				>> position.x
+				>> position.y
+				>> position.z;
 		}
 		else if(lineType == "GRAPHICS_AMBIENT_LIGHTING")
 		{

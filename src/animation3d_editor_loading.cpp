@@ -28,7 +28,7 @@ const bool Animation3dEditor::loadAnimation3dsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

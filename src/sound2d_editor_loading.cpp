@@ -29,7 +29,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 	}
 
 	vector<string> audioPaths = {};
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -81,7 +81,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

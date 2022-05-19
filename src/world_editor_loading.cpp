@@ -28,7 +28,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

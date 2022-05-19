@@ -31,7 +31,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	}
 
 	vector<string> meshPaths = {};
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -89,7 +89,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths = {};
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -222,7 +222,7 @@ const bool ModelEditor::loadModelsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

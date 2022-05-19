@@ -58,7 +58,7 @@ Configuration::Configuration()
 
 void Configuration::_processOption(ifstream & file, const string & name, string & option)
 {
-	string line;
+	string line = "";
 
 	getline(file, line);
 
@@ -93,7 +93,7 @@ void Configuration::_processOption(ifstream & file, const string & name, string 
 
 void Configuration::_processOption(ifstream & file, const string & name, int & option, int minValue, int maxValue)
 {
-	string line;
+	string line = "";
 
 	getline(file, line);
 

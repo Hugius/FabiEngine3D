@@ -30,7 +30,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	}
 
 	vector<string> imagePaths = {};
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -83,7 +83,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

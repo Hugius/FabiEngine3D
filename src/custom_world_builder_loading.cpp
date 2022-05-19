@@ -25,7 +25,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -73,7 +73,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						cubeMapPath = ("projects\\" + getCurrentProjectId() + "\\" + cubeMapPath);
+						cubeMapPath = ("projects\\" + _currentProjectId + "\\" + cubeMapPath);
 					}
 				}
 			}
@@ -162,7 +162,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!Configuration::getInst().isApplicationExported())
 			{
-				heightMapPath = ("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
+				heightMapPath = ("projects\\" + _currentProjectId + "\\" + heightMapPath);
 			}
 
 			_fe3d->terrain_create(terrainId, heightMapPath);
@@ -184,7 +184,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
+						diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 					}
 
 					_fe3d->terrain_setDiffuseMap(terrainId, diffuseMapPath);
@@ -194,7 +194,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						normalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
+						normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 					}
 
 					_fe3d->terrain_setNormalMap(terrainId, normalMapPath);
@@ -204,7 +204,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						redNormalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + redNormalMapPath);
+						redNormalMapPath = ("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
 					}
 
 					_fe3d->terrain_setRedNormalMap(terrainId, redNormalMapPath);
@@ -214,7 +214,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						greenNormalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + greenNormalMapPath);
+						greenNormalMapPath = ("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
 					}
 
 					_fe3d->terrain_setGreenNormalMap(terrainId, greenNormalMapPath);
@@ -224,7 +224,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						blueNormalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + blueNormalMapPath);
+						blueNormalMapPath = ("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
 					}
 
 					_fe3d->terrain_setBlueNormalMap(terrainId, blueNormalMapPath);
@@ -234,7 +234,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						blendMapPath = ("projects\\" + getCurrentProjectId() + "\\" + blendMapPath);
+						blendMapPath = ("projects\\" + _currentProjectId + "\\" + blendMapPath);
 					}
 
 					_fe3d->terrain_setBlendMap(terrainId, blendMapPath);
@@ -244,7 +244,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						redDiffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + redDiffuseMapPath);
+						redDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
 					}
 
 					_fe3d->terrain_setRedDiffuseMap(terrainId, redDiffuseMapPath);
@@ -254,7 +254,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						greenDiffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + greenDiffuseMapPath);
+						greenDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
 					}
 
 					_fe3d->terrain_setGreenDiffuseMap(terrainId, greenDiffuseMapPath);
@@ -264,7 +264,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				{
 					if(!Configuration::getInst().isApplicationExported())
 					{
-						blueDiffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + blueDiffuseMapPath);
+						blueDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
 					}
 
 					_fe3d->terrain_setBlueDiffuseMap(terrainId, blueDiffuseMapPath);
@@ -345,7 +345,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					dudvMapPath = ("projects\\" + getCurrentProjectId() + "\\" + dudvMapPath);
+					dudvMapPath = ("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
 
 				_fe3d->water_setDudvMap(waterId, dudvMapPath);
@@ -355,7 +355,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					normalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
+					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
 				_fe3d->water_setNormalMap(waterId, normalMapPath);
@@ -365,7 +365,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					heightMapPath = ("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
+					heightMapPath = ("projects\\" + _currentProjectId + "\\" + heightMapPath);
 				}
 
 				_fe3d->water_setHeightMap(waterId, heightMapPath);
@@ -405,7 +405,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!Configuration::getInst().isApplicationExported())
 			{
-				meshPath = ("projects\\" + getCurrentProjectId() + "\\" + meshPath);
+				meshPath = ("projects\\" + _currentProjectId + "\\" + meshPath);
 			}
 
 			_fe3d->model_create(modelId, meshPath);
@@ -525,7 +525,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
+					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
 				_fe3d->model_setDiffuseMap(modelId, partId, diffuseMapPath);
@@ -535,7 +535,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					specularMapPath = ("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
+					specularMapPath = ("projects\\" + _currentProjectId + "\\" + specularMapPath);
 				}
 
 				_fe3d->model_setSpecularMap(modelId, partId, specularMapPath);
@@ -545,7 +545,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
+					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
 
 				_fe3d->model_setEmissionMap(modelId, partId, emissionMapPath);
@@ -555,7 +555,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					reflectionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
+					reflectionMapPath = ("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 				}
 
 				_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
@@ -565,7 +565,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					refractionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + refractionMapPath);
+					refractionMapPath = ("projects\\" + _currentProjectId + "\\" + refractionMapPath);
 				}
 
 				_fe3d->model_setRefractionMap(modelId, partId, refractionMapPath);
@@ -575,7 +575,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					normalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
+					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
 				_fe3d->model_setNormalMap(modelId, partId, normalMapPath);
@@ -691,7 +691,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
+					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
 				_fe3d->quad3d_setDiffuseMap(quad3dId, diffuseMapPath);
@@ -701,7 +701,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			{
 				if(!Configuration::getInst().isApplicationExported())
 				{
-					emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
+					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
 
 				_fe3d->quad3d_setEmissionMap(quad3dId, emissionMapPath);
@@ -776,7 +776,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!Configuration::getInst().isApplicationExported())
 			{
-				fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
+				fontMapPath = ("projects\\" + _currentProjectId + "\\" + fontMapPath);
 			}
 
 			_fe3d->text3d_create(text3dId, fontMapPath, false);
@@ -912,7 +912,40 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "SOUND3D")
 		{
+			string sound3dId;
+			string audioPath;
+			float maxVolume;
+			float maxDistance;
 
+			auto iss = istringstream(line);
+
+			iss
+				>> sound3dId
+				>> audioPath
+				>> maxVolume
+				>> maxDistance;
+
+			audioPath = (audioPath == "?") ? "" : audioPath;
+
+			replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+			if(!Configuration::getInst().isApplicationExported())
+			{
+				audioPath = ("projects\\" + _currentProjectId + "\\" + audioPath);
+			}
+
+			_fe3d->sound3d_create(sound3dId, audioPath);
+
+			if(_fe3d->sound3d_isExisting(sound3dId))
+			{
+				_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
+				_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
+				_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
+
+				_loadedSound3dIds.push_back(sound3dId);
+
+				sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
+			}
 		}
 		else if(lineType == "CAPTOR")
 		{
@@ -920,43 +953,209 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_AMBIENT_LIGHTING")
 		{
+			fvec3 color;
+			float intensity;
 
+			iss
+				>> color.r
+				>> color.g
+				>> color.b
+				>> intensity;
+
+			_fe3d->graphics_setAmbientLightingEnabled(true);
+			_fe3d->graphics_setAmbientLightingColor(color);
+			_fe3d->graphics_setAmbientLightingIntensity(intensity);
 		}
 		else if(lineType == "GRAPHICS_DIRECTIONAL_LIGHTING")
 		{
+			fvec3 position;
+			fvec3 color;
+			float intensity;
 
+			iss
+				>> position.x
+				>> position.y
+				>> position.z
+				>> color.r
+				>> color.g
+				>> color.b
+				>> intensity;
+
+			_fe3d->graphics_setDirectionalLightingEnabled(true);
+			_fe3d->graphics_setDirectionalLightingPosition(position);
+			_fe3d->graphics_setDirectionalLightingIntensity(intensity);
+			_fe3d->graphics_setDirectionalLightingColor(color);
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
+			float size;
+			float lightness;
+			fvec3 position;
+			fvec3 center;
+			bool isFollowingCameraX;
+			bool isFollowingCameraY;
+			bool isFollowingCameraZ;
+			int interval;
+			int quality;
 
+			iss
+				>> size
+				>> lightness
+				>> position.x
+				>> position.y
+				>> position.z
+				>> center.x
+				>> center.y
+				>> center.z
+				>> isFollowingCameraX
+				>> isFollowingCameraY
+				>> isFollowingCameraZ
+				>> interval
+				>> quality;
+
+			_fe3d->graphics_setShadowsEnabled(true);
+			_fe3d->graphics_setShadowPositionOffset(position);
+			_fe3d->graphics_setShadowLookatOffset(center);
+			_fe3d->graphics_setShadowSize(size);
+			_fe3d->graphics_setShadowLightness(lightness);
+			_fe3d->graphics_setShadowFollowingCameraX(isFollowingCameraX);
+			_fe3d->graphics_setShadowFollowingCameraY(isFollowingCameraY);
+			_fe3d->graphics_setShadowFollowingCameraZ(isFollowingCameraZ);
+			_fe3d->graphics_setShadowInterval(interval);
+			_fe3d->graphics_setShadowQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
+			float planarHeight;
+			int cubeInterval;
+			int cubeQuality;
+			int planarQuality;
 
+			iss
+				>> cubeInterval
+				>> cubeQuality
+				>> planarHeight
+				>> planarQuality;
+
+			_fe3d->graphics_setCubeReflectionInterval(cubeInterval);
+			_fe3d->graphics_setCubeReflectionQuality(cubeQuality);
+			_fe3d->graphics_setPlanarReflectionHeight(planarHeight);
+			_fe3d->graphics_setPlanarReflectionQuality(planarQuality);
 		}
 		else if(lineType == "GRAPHICS_REFRACTIONS")
 		{
+			float planarHeight;
+			int cubeInterval;
+			int cubeQuality;
+			int planarQuality;
 
+			iss
+				>> cubeInterval
+				>> cubeQuality
+				>> planarHeight
+				>> planarQuality;
+
+			_fe3d->graphics_setCubeRefractionInterval(cubeInterval);
+			_fe3d->graphics_setCubeRefractionQuality(cubeQuality);
+			_fe3d->graphics_setPlanarRefractionHeight(planarHeight);
+			_fe3d->graphics_setPlanarRefractionQuality(planarQuality);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
+			bool isDynamic;
+			float blurDistance;
+			float maxDistance;
+			int quality;
 
+			iss
+				>> isDynamic
+				>> blurDistance
+				>> maxDistance
+				>> quality;
+
+			_fe3d->graphics_setDofEnabled(true);
+			_fe3d->graphics_setDofDynamic(isDynamic);
+			_fe3d->graphics_setDofDynamicDistance(maxDistance);
+			_fe3d->graphics_setDofBlurDistance(blurDistance);
+			_fe3d->graphics_setDofQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
+			float minDistance;
+			float maxDistance;
+			float thickness;
+			fvec3 color;
 
+			iss
+				>> minDistance
+				>> maxDistance
+				>> thickness
+				>> color.r
+				>> color.g
+				>> color.b;
+
+			_fe3d->graphics_setFogEnabled(true);
+			_fe3d->graphics_setFogMinDistance(minDistance);
+			_fe3d->graphics_setFogMaxDistance(maxDistance);
+			_fe3d->graphics_setFogThickness(thickness);
+			_fe3d->graphics_setFogColor(color);
 		}
 		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
+			string flareMapPath;
+			float intensity;
+			float sensitivity;
 
+			iss
+				>> flareMapPath
+				>> intensity
+				>> sensitivity;
+
+			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
+
+			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
+
+			if(!Configuration::getInst().isApplicationExported())
+			{
+				flareMapPath = ("projects\\" + _currentProjectId + "\\" + flareMapPath);
+			}
+
+			_fe3d->graphics_setLensFlareEnabled(true);
+			_fe3d->graphics_setLensFlareMap(flareMapPath);
+			_fe3d->graphics_setLensFlareIntensity(intensity);
+			_fe3d->graphics_setLensFlareSensitivity(sensitivity);
 		}
 		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
+			float intensity;
+			float speed;
 
+			iss
+				>> intensity
+				>> speed;
+
+			_fe3d->graphics_setSkyExposureEnabled(true);
+			_fe3d->graphics_setSkyExposureIntensity(intensity);
+			_fe3d->graphics_setSkyExposureSpeed(speed);
 		}
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
+			float intensity;
+			int type;
+			int blurCount;
+			int quality;
 
+			iss
+				>> type
+				>> intensity
+				>> blurCount
+				>> quality;
+
+			_fe3d->graphics_setBloomEnabled(true);
+			_fe3d->graphics_setBloomType(BloomType(type));
+			_fe3d->graphics_setBloomIntensity(intensity);
+			_fe3d->graphics_setBloomBlurCount(blurCount);
+			_fe3d->graphics_setBloomQuality(quality);
 		}
 		else
 		{

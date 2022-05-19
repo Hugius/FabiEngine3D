@@ -55,7 +55,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 		_script->createScriptFile(scriptFileId);
 
-		string line;
+		string line = "";
 		int cursorLineIndex;
 		int cursorCharIndex;
 

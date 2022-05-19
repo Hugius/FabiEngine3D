@@ -28,7 +28,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 		return nullptr;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

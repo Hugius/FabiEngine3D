@@ -29,7 +29,7 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 	}
 
 	vector<string> audioPaths = {};
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{
@@ -79,7 +79,7 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 		return false;
 	}
 
-	string line;
+	string line = "";
 
 	while(getline(file, line))
 	{

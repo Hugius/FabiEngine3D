@@ -36,7 +36,8 @@ const bool Animation2dEditor::saveAnimation2dsToFile() const
 			<< " "
 			<< columnCount
 			<< " "
-			<< interval << endl;
+			<< interval
+			<< endl;
 	}
 
 	file.close();

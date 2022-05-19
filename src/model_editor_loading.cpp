@@ -276,6 +276,9 @@ const bool ModelEditor::loadModelsFromFile()
 				_fe3d->model_setLevelOfDetailId(modelId, levelOfDetailId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
+				_fe3d->model_setShadowed(modelId, isShadowed);
+				_fe3d->model_setReflected(modelId, isReflected);
+				_fe3d->model_setRefracted(modelId, isRefracted);
 
 				_loadedModelIds.push_back(modelId);
 

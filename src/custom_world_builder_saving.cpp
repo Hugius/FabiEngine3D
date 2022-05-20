@@ -921,6 +921,16 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< " "
 			<< isVisible
 			<< " "
+			<< isWireframed
+			<< " "
+			<< wireframeColor.r
+			<< " "
+			<< wireframeColor.g
+			<< " "
+			<< wireframeColor.b
+			<< " "
+			<< isFrozen
+			<< " "
 			<< minClipPosition.x
 			<< " "
 			<< minClipPosition.y
@@ -932,16 +942,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.y
 			<< " "
 			<< maxClipPosition.z
-			<< " "
-			<< isWireframed
-			<< " "
-			<< wireframeColor.r
-			<< " "
-			<< wireframeColor.g
-			<< " "
-			<< wireframeColor.b
-			<< " "
-			<< isFrozen
 			<< " "
 			<< content
 			<< endl;
@@ -1113,6 +1113,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
 		const auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
+		//const auto isStarted = _fe3d->sound3d_isStarted(sound3dId, 0);
 
 		file
 			<< "SOUND3D "

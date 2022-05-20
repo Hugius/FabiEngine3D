@@ -737,7 +737,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			}
 
 			_fe3d->aabb_create(aabbId, false);
-			_fe3d->aabb_setVisible(aabbId, false);
 			_fe3d->aabb_setParentId(aabbId, modelId);
 			_fe3d->aabb_setParentType(aabbId, AabbParentType::MODEL);
 			_fe3d->aabb_setLocalPosition(aabbId, position);
@@ -979,7 +978,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			}
 
 			_fe3d->aabb_create(quad3dId, false);
-			_fe3d->aabb_setVisible(quad3dId, false);
 			_fe3d->aabb_setParentId(quad3dId, quad3dId);
 			_fe3d->aabb_setParentType(quad3dId, AabbParentType::QUAD3D);
 			_fe3d->aabb_setRaycastResponsive(quad3dId, isRaycastResponsive);
@@ -1037,8 +1035,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string text3dId;
 			string templateText3dId;
-			fvec2 size;
+			string content;
 			fvec3 color;
+			fvec3 position;
+			fvec3 rotation;
+			fvec3 wireframeColor;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
+			fvec2 size;
 			float lightness;
 			float opacity;
 			float minAlpha;
@@ -1051,9 +1055,19 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isRefracted;
 			bool isShadowed;
 			bool isBright;
+			bool isVisible;
+			bool isWireframed;
+			bool isFrozen;
 
 			iss
 				>> text3dId
+				>> templateText3dId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
 				>> size.x
 				>> size.y
 				>> color.r
@@ -1070,7 +1084,20 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> isBright
 				>> opacity
 				>> minAlpha
-				>> rotationOrder;
+				>> rotationOrder
+				>> isVisible
+				>> isWireframed
+				>> wireframeColor.r
+				>> wireframeColor.g
+				>> wireframeColor.b
+				>> isFrozen
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z
+				>> content;
 
 			if(!_fe3d->text3d_isExisting(templateText3dId))
 			{
@@ -1079,7 +1106,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			_duplicator->copyTemplateText3d(text3dId, templateText3dId);
 
-			_fe3d->text3d_setVisible(text3dId, false);
+			_fe3d->text3d_setVisible(text3dId, isVisible);
 			_fe3d->text3d_setSize(text3dId, size);
 			_fe3d->text3d_setColor(text3dId, color);
 			_fe3d->text3d_setLightness(text3dId, lightness);
@@ -1094,6 +1121,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setOpacity(text3dId, opacity);
 			_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
 			_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
+			_fe3d->text3d_setMinClipPosition(text3dId, minClipPosition);
+			_fe3d->text3d_setMaxClipPosition(text3dId, maxClipPosition);
+			_fe3d->text3d_setFrozen(text3dId, isFrozen);
+			_fe3d->text3d_setWireframed(text3dId, isWireframed);
+			_fe3d->text3d_setWireframeColor(text3dId, wireframeColor);
+			_fe3d->text3d_setContent(text3dId, content);
 
 			_loadedText3dIds.push_back(text3dId);
 		}
@@ -1116,7 +1149,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			}
 
 			_fe3d->aabb_create(text3dId, false);
-			_fe3d->aabb_setVisible(text3dId, false);
 			_fe3d->aabb_setParentId(text3dId, text3dId);
 			_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
 			_fe3d->aabb_setRaycastResponsive(text3dId, isRaycastResponsive);
@@ -1126,35 +1158,73 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "AABB")
 		{
 			string aabbId;
+			string templateAabbId;
+			fvec3 position;
 			fvec3 size;
 			fvec3 color;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
+			bool isRaycastResponsive;
+			bool isCollisionResponsive;
+			bool isVisible;
 
 			iss
 				>> aabbId
+				>> templateAabbId
+				>> position.x
+				>> position.y
+				>> position.z
 				>> size.x
 				>> size.y
 				>> size.z
 				>> color.r
 				>> color.g
-				>> color.b;
+				>> color.b
+				>> isRaycastResponsive
+				>> isCollisionResponsive
+				>> isVisible
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z;
 
-			_fe3d->aabb_create(aabbId, false);
-			_fe3d->aabb_setVisible(aabbId, false);
+			if(!_fe3d->aabb_isExisting(templateAabbId))
+			{
+				continue;
+			}
+
+			_duplicator->copyTemplateAabb(aabbId, templateAabbId);
+
+			_fe3d->aabb_setVisible(aabbId, isVisible);
+			_fe3d->aabb_setBasePosition(aabbId, position);
 			_fe3d->aabb_setBaseSize(aabbId, size);
 			_fe3d->aabb_setColor(aabbId, color);
+			_fe3d->aabb_setMinClipPosition(aabbId, minClipPosition);
+			_fe3d->aabb_setMaxClipPosition(aabbId, maxClipPosition);
+			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
 
 			_loadedAabbIds.push_back(aabbId);
 		}
 		else if(lineType == "POINTLIGHT")
 		{
 			string pointlightId;
+			string templatePointlightId;
+			fvec3 position;
 			fvec3 radius;
 			fvec3 color;
 			float intensity;
 			int shape;
+			bool isVisible;
 
 			iss
 				>> pointlightId
+				>> templatePointlightId
+				>> position.x
+				>> position.y
+				>> position.z
 				>> radius.x
 				>> radius.y
 				>> radius.z
@@ -1162,11 +1232,18 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> color.g
 				>> color.b
 				>> intensity
-				>> shape;
+				>> shape
+				>> isVisible;
 
-			_fe3d->pointlight_create(pointlightId);
-			_fe3d->pointlight_setVisible(pointlightId, false);
-			//_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
+			if(!_fe3d->pointlight_isExisting(templatePointlightId))
+			{
+				continue;
+			}
+
+			_duplicator->copyTemplatePointlight(pointlightId, templatePointlightId);
+
+			_fe3d->pointlight_setVisible(pointlightId, isVisible);
+			_fe3d->pointlight_setPosition(pointlightId, position);
 			_fe3d->pointlight_setRadius(pointlightId, radius);
 			_fe3d->pointlight_setColor(pointlightId, color);
 			_fe3d->pointlight_setIntensity(pointlightId, intensity);
@@ -1177,64 +1254,87 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SPOTLIGHT")
 		{
 			string spotlightId;
+			string templateSpotlightId;
 			fvec3 color;
+			fvec3 position;
+			float yaw;
+			float pitch;
 			float intensity;
 			float angle;
 			float distance;
+			bool isVisible;
 
 			iss
 				>> spotlightId
+				>> templateSpotlightId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> yaw
+				>> pitch
 				>> color.r
 				>> color.g
 				>> color.b
 				>> intensity
 				>> angle
-				>> distance;
+				>> distance
+				>> isVisible;
 
-			_fe3d->spotlight_create(spotlightId);
-			_fe3d->spotlight_setVisible(spotlightId, false);
-			//_fe3d->spotlight_setPosition(spotlightId, SPOTLIGHT_POSITION);
-			_fe3d->spotlight_setPitch(spotlightId, -90.0f);
+			if(!_fe3d->spotlight_isExisting(templateSpotlightId))
+			{
+				continue;
+			}
+
+			_duplicator->copyTemplateSpotlight(spotlightId, templateSpotlightId);
+
+			_fe3d->spotlight_setVisible(spotlightId, isVisible);
+			_fe3d->spotlight_setPosition(spotlightId, position);
+			_fe3d->spotlight_setYaw(spotlightId, yaw);
+			_fe3d->spotlight_setPitch(spotlightId, pitch);
 			_fe3d->spotlight_setColor(spotlightId, color);
 			_fe3d->spotlight_setIntensity(spotlightId, intensity);
 			_fe3d->spotlight_setAngle(spotlightId, angle);
 			_fe3d->spotlight_setDistance(spotlightId, distance);
 
 			_loadedSpotlightIds.push_back(spotlightId);
-
-			sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 		}
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
 			string templateSound3dId;
+			fvec3 position;
 			float maxVolume;
 			float maxDistance;
 
 			iss
 				>> sound3dId
 				>> templateSound3dId
+				>> position.x
+				>> position.y
+				>> position.z
 				>> maxVolume
 				>> maxDistance;
 
-			_fe3d->sound3d_create(sound3dId, audioPath);
-
-			if(_fe3d->sound3d_isExisting(sound3dId))
+			if(!_fe3d->sound3d_isExisting(templateSound3dId))
 			{
-				//_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
-				_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
-				_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
-
-				_loadedSound3dIds.push_back(sound3dId);
-
-				sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
+				continue;
 			}
+
+			_duplicator->copyTemplateSound3d(sound3dId, templateSound3dId);
+
+			_fe3d->sound3d_setPosition(sound3dId, position);
+			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
+			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
+
+			_loadedSound3dIds.push_back(sound3dId);
 		}
 		else if(lineType == "CAPTOR")
 		{
 			string captorId;
 			string exceptionId;
 			fvec3 position;
+
+			exceptionId = (exceptionId == "?") ? "" : exceptionId;
 
 			iss
 				>> captorId

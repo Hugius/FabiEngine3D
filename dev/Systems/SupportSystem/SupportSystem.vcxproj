@@ -56,11 +56,12 @@
     <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp" />
     <ClCompile Include="..\..\..\src\custom_world_builder_misc.cpp" />
     <ClCompile Include="..\..\..\src\custom_world_builder_saving.cpp" />
+    <ClCompile Include="..\..\..\src\duplicator_misc.cpp" />
     <ClCompile Include="..\..\..\src\input_handler.cpp" />
     <ClCompile Include="..\..\..\src\logger_message.cpp" />
     <ClCompile Include="..\..\..\src\timer.cpp" />
     <ClCompile Include="..\..\..\src\tools.cpp" />
-    <ClCompile Include="..\..\..\src\duplicator.cpp" />
+    <ClCompile Include="..\..\..\src\duplicator_copy.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

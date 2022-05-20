@@ -144,52 +144,52 @@ void CustomWorldBuilder::clearLoadedWorld()
 
 	for(const auto & skyId : _loadedSkyIds)
 	{
-		_fe3d->sky_delete(skyId);
+		_duplicator->deleteCopiedSky(skyId);
 	}
 
 	for(const auto & terrainId : _loadedTerrainIds)
 	{
-		_fe3d->terrain_delete(terrainId);
+		_duplicator->deleteCopiedTerrain(terrainId);
 	}
 
 	for(const auto & waterId : _loadedWaterIds)
 	{
-		_fe3d->water_delete(waterId);
+		_duplicator->deleteCopiedWater(waterId);
 	}
 
 	for(const auto & modelId : _loadedModelIds)
 	{
-		_fe3d->model_delete(modelId);
+		_duplicator->deleteCopiedModel(modelId);
 	}
 
 	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		_fe3d->quad3d_delete(quad3dId);
+		_duplicator->deleteCopiedQuad3d(quad3dId);
 	}
 
 	for(const auto & text3dId : _loadedText3dIds)
 	{
-		_fe3d->text3d_delete(text3dId);
+		_duplicator->deleteCopiedText3d(text3dId);
 	}
 
 	for(const auto & aabbId : _loadedAabbIds)
 	{
-		_fe3d->aabb_delete(aabbId);
+		_duplicator->deleteCopiedAabb(aabbId);
 	}
 
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		_fe3d->pointlight_delete(pointlightId);
+		_duplicator->deleteCopiedPointlight(pointlightId);
 	}
 
 	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		_fe3d->spotlight_delete(spotlightId);
+		_duplicator->deleteCopiedSpotlight(spotlightId);
 	}
 
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
-		_fe3d->sound3d_delete(sound3dId);
+		_duplicator->deleteCopiedSound3d(sound3dId);
 	}
 
 	for(const auto & captorId : _loadedCaptorIds)

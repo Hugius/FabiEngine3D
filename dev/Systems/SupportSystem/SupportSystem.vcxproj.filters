@@ -122,7 +122,7 @@
     <ClCompile Include="..\..\..\src\logger_message.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\duplicator.cpp">
+    <ClCompile Include="..\..\..\src\duplicator_copy.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\custom_world_builder_misc.cpp">
@@ -133,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp">
       <Filter>Custom World Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\duplicator_misc.cpp">
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

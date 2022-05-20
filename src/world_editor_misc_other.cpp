@@ -14,6 +14,81 @@ void WorldEditor::clearLoadedWorld()
 		abort();
 	}
 
+	if(!_fe3d->sky_getSelectedId().empty())
+	{
+		_duplicator->deleteCopiedSky(_fe3d->sky_getSelectedId());
+	}
+
+	if(!_fe3d->terrain_getSelectedId().empty())
+	{
+		_duplicator->deleteCopiedTerrain(_fe3d->terrain_getSelectedId());
+	}
+
+	if(!_fe3d->water_getSelectedId().empty())
+	{
+		_duplicator->deleteCopiedWater(_fe3d->water_getSelectedId());
+	}
+
+	for(const auto & modelId : _loadedModelIds)
+	{
+		_duplicator->deleteCopiedModel(modelId);
+	}
+
+	for(const auto & quad3dId : _loadedQuad3dIds)
+	{
+		_duplicator->deleteCopiedQuad3d(quad3dId);
+	}
+
+	for(const auto & text3dId : _loadedText3dIds)
+	{
+		_duplicator->deleteCopiedText3d(text3dId);
+	}
+
+	for(const auto & aabbId : _loadedAabbIds)
+	{
+		_duplicator->deleteCopiedAabb(aabbId);
+	}
+
+	for(const auto & pointlightId : _loadedPointlightIds)
+	{
+		_duplicator->deleteCopiedPointlight(pointlightId);
+
+		if(isLoaded())
+		{
+			_fe3d->model_delete("@@lamp_" + pointlightId);
+		}
+	}
+
+	for(const auto & spotlightId : _loadedSpotlightIds)
+	{
+		_duplicator->deleteCopiedSpotlight(spotlightId);
+
+		if(isLoaded())
+		{
+			_fe3d->model_delete("@@torch_" + spotlightId);
+		}
+	}
+
+	for(const auto & sound3dId : _loadedSound3dIds)
+	{
+		_duplicator->deleteCopiedSound3d(sound3dId);
+
+		if(isLoaded())
+		{
+			_fe3d->model_delete("@@speaker_" + sound3dId);
+		}
+	}
+
+	for(const auto & captorId : _loadedCaptorIds)
+	{
+		_fe3d->captor_delete(captorId);
+
+		if(isLoaded())
+		{
+			_fe3d->model_delete("@@lens_" + captorId);
+		}
+	}
+
 	_fe3d->graphics_setAmbientLightingEnabled(false);
 	_fe3d->graphics_setDirectionalLightingEnabled(false);
 	_fe3d->graphics_setFogEnabled(false);
@@ -59,81 +134,6 @@ void WorldEditor::clearLoadedWorld()
 	_fe3d->graphics_setPlanarReflectionQuality(0);
 	_fe3d->graphics_setPlanarRefractionHeight(0.0f);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
-
-	if(!_fe3d->sky_getSelectedId().empty())
-	{
-		_fe3d->sky_delete(_fe3d->sky_getSelectedId());
-	}
-
-	if(!_fe3d->terrain_getSelectedId().empty())
-	{
-		_fe3d->terrain_delete(_fe3d->terrain_getSelectedId());
-	}
-
-	if(!_fe3d->water_getSelectedId().empty())
-	{
-		_fe3d->water_delete(_fe3d->water_getSelectedId());
-	}
-
-	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
-	{
-		_fe3d->model_delete(placedModelId);
-	}
-
-	for(const auto & [placedQuad3dId, templateQuad3d] : _loadedQuad3dIds)
-	{
-		_fe3d->quad3d_delete(placedQuad3dId);
-	}
-
-	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
-	{
-		_fe3d->text3d_delete(placedText3dId);
-	}
-
-	for(const auto & [placedAabbId, templateAabb] : _loadedAabbIds)
-	{
-		_fe3d->aabb_delete(placedAabbId);
-	}
-
-	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
-	{
-		_fe3d->pointlight_delete(placedPointlightId);
-
-		if(isLoaded())
-		{
-			_fe3d->model_delete("@@lamp_" + placedPointlightId);
-		}
-	}
-
-	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
-	{
-		_fe3d->spotlight_delete(placedSpotlightId);
-
-		if(isLoaded())
-		{
-			_fe3d->model_delete("@@torch_" + placedSpotlightId);
-		}
-	}
-
-	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
-	{
-		_fe3d->sound3d_delete(placedSound3dId);
-
-		if(isLoaded())
-		{
-			_fe3d->model_delete("@@speaker_" + placedSound3dId);
-		}
-	}
-
-	for(const auto & placedCaptorId : _loadedCaptorIds)
-	{
-		_fe3d->captor_delete(placedCaptorId);
-
-		if(isLoaded())
-		{
-			_fe3d->model_delete("@@lens_" + placedCaptorId);
-		}
-	}
 
 	_loadedModelIds.clear();
 	_loadedQuad3dIds.clear();

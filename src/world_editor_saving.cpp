@@ -71,15 +71,15 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		const auto placedSkyId = _fe3d->sky_getSelectedId();
+		const auto skyId = _fe3d->sky_getSelectedId();
 
-		if(!placedSkyId.empty())
+		if(!skyId.empty())
 		{
-			const auto templateSkyId = ("@" + placedSkyId);
+			const auto templateSkyId = _duplicator->getTemplateSkyId(skyId);
 
 			file
 				<< "SKY "
-				<< placedSkyId
+				<< skyId
 				<< " "
 				<< templateSkyId
 				<< endl;
@@ -87,15 +87,15 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		const auto placedTerrainId = _fe3d->terrain_getSelectedId();
+		const auto terrainId = _fe3d->terrain_getSelectedId();
 
-		if(!placedTerrainId.empty())
+		if(!terrainId.empty())
 		{
-			const auto templateTerrainId = ("@" + placedTerrainId);
+			const auto templateTerrainId = _duplicator->getTemplateTerrainId(terrainId);
 
 			file
 				<< "TERRAIN "
-				<< placedTerrainId
+				<< terrainId
 				<< " "
 				<< templateTerrainId
 				<< endl;
@@ -103,16 +103,16 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		const auto placedWaterId = _fe3d->water_getSelectedId();
+		const auto waterId = _fe3d->water_getSelectedId();
 
-		if(!placedWaterId.empty())
+		if(!waterId.empty())
 		{
-			const auto templateWaterId = ("@" + placedWaterId);
-			const auto height = _fe3d->water_getHeight(placedWaterId);
+			const auto templateWaterId = _duplicator->getTemplateWaterId(waterId);
+			const auto height = _fe3d->water_getHeight(waterId);
 
 			file
 				<< "WATER "
-				<< placedWaterId
+				<< waterId
 				<< " "
 				<< templateWaterId
 				<< " "
@@ -121,38 +121,22 @@ const bool WorldEditor::saveWorldToFile() const
 		}
 	}
 
-	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
+	for(const auto & modelId : _loadedModelIds)
 	{
-		const auto startedAnimation3dIds = _fe3d->model_getAnimation3dIds(placedModelId);
-
-		if(!startedAnimation3dIds.empty())
-		{
-			for(const auto & partId : _fe3d->model_getPartIds(placedModelId))
-			{
-				if(!partId.empty())
-				{
-					_fe3d->model_setPartPosition(placedModelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartRotationOrigin(placedModelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartRotation(placedModelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartSize(placedModelId, partId, fvec3(1.0f));
-				}
-			}
-		}
-
-		const auto position = _fe3d->model_getBasePosition(placedModelId);
-		const auto rotation = _fe3d->model_getBaseRotation(placedModelId);
-		const auto size = _fe3d->model_getBaseSize(placedModelId);
-		const auto isFrozen = _fe3d->model_isFrozen(placedModelId);
+		const auto templateModelId = _duplicator->getTemplateModelId(modelId);
+		const auto startedAnimation3dIds = _fe3d->model_getAnimation3dIds(modelId);
+		const auto position = _fe3d->model_getBasePosition(modelId);
+		const auto rotation = _fe3d->model_getBaseRotation(modelId);
+		const auto size = _fe3d->model_getBaseSize(modelId);
+		const auto isFrozen = _fe3d->model_isFrozen(modelId);
 
 		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
 
 		animation3dId = (animation3dId.empty()) ? "?" : animation3dId;
 
-		replace(animation3dId.begin(), animation3dId.end(), ' ', '?');
-
 		file
 			<< "MODEL "
-			<< placedModelId
+			<< modelId
 			<< " "
 			<< templateModelId
 			<< " "
@@ -181,22 +165,21 @@ const bool WorldEditor::saveWorldToFile() const
 		file << endl;
 	}
 
-	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
+	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(placedQuad3dId);
-		const auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
-		const auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
-		const auto size = _fe3d->quad3d_getSize(placedQuad3dId);
+		const auto templateQuad3dId = _duplicator->getTemplateQuad3dId(quad3dId);
+		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(quad3dId);
+		const auto position = _fe3d->quad3d_getPosition(quad3dId);
+		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
+		const auto size = _fe3d->quad3d_getSize(quad3dId);
 
 		auto animation2dId = (startedAnimation2dIds.empty() ? "" : startedAnimation2dIds[0]);
 
 		animation2dId = (animation2dId.empty()) ? "?" : animation2dId;
 
-		replace(animation2dId.begin(), animation2dId.end(), ' ', '?');
-
 		file
 			<< "QUAD3D "
-			<< placedQuad3dId
+			<< quad3dId
 			<< " "
 			<< templateQuad3dId
 			<< " "
@@ -220,16 +203,17 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
+	for(const auto & text3dId : _loadedText3dIds)
 	{
-		const auto content = _fe3d->text3d_getContent(placedText3dId);
-		const auto position = _fe3d->text3d_getPosition(placedText3dId);
-		const auto rotation = _fe3d->text3d_getRotation(placedText3dId);
-		const auto size = _fe3d->text3d_getSize(placedText3dId);
+		const auto templateText3dId = _duplicator->getTemplateText3dId(text3dId);
+		const auto content = _fe3d->text3d_getContent(text3dId);
+		const auto position = _fe3d->text3d_getPosition(text3dId);
+		const auto rotation = _fe3d->text3d_getRotation(text3dId);
+		const auto size = _fe3d->text3d_getSize(text3dId);
 
 		file
 			<< "TEXT3D "
-			<< placedText3dId
+			<< text3dId
 			<< " "
 			<< templateText3dId
 			<< " "
@@ -253,14 +237,15 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
+	for(const auto & aabbId : _loadedAabbIds)
 	{
-		const auto position = _fe3d->aabb_getBasePosition(placedAabbId);
-		const auto size = _fe3d->aabb_getBaseSize(placedAabbId);
+		const auto templateAabbId = _duplicator->getTemplateAabbId(aabbId);
+		const auto position = _fe3d->aabb_getBasePosition(aabbId);
+		const auto size = _fe3d->aabb_getBaseSize(aabbId);
 
 		file
 			<< "AABB "
-			<< placedAabbId
+			<< aabbId
 			<< " "
 			<< templateAabbId
 			<< " "
@@ -279,13 +264,14 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
+	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		const auto position = _fe3d->pointlight_getPosition(placedPointlightId);
+		const auto templatePointlightId = _duplicator->getTemplatePointlightId(pointlightId);
+		const auto position = _fe3d->pointlight_getPosition(pointlightId);
 
 		file
 			<< "POINTLIGHT "
-			<< placedPointlightId
+			<< pointlightId
 			<< " "
 			<< templatePointlightId
 			<< " "
@@ -297,15 +283,16 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
+	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		const auto position = _fe3d->spotlight_getPosition(placedSpotlightId);
-		const auto yaw = _fe3d->spotlight_getYaw(placedSpotlightId);
-		const auto pitch = _fe3d->spotlight_getPitch(placedSpotlightId);
+		const auto templateSpotlightId = _duplicator->getTemplateSpotlightId(spotlightId);
+		const auto position = _fe3d->spotlight_getPosition(spotlightId);
+		const auto yaw = _fe3d->spotlight_getYaw(spotlightId);
+		const auto pitch = _fe3d->spotlight_getPitch(spotlightId);
 
 		file
 			<< "SPOTLIGHT "
-			<< placedSpotlightId
+			<< spotlightId
 			<< " "
 			<< templateSpotlightId
 			<< " "
@@ -321,13 +308,14 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	for(const auto & sound3dId : _loadedSound3dIds)
 	{
-		const auto position = _fe3d->sound3d_getPosition(placedSound3dId);
+		const auto templateSound3dId = _duplicator->getTemplateSound3dId(sound3dId);
+		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 
 		file
 			<< "SOUND3D "
-			<< placedSound3dId
+			<< sound3dId
 			<< " "
 			<< templateSound3dId
 			<< " "
@@ -339,14 +327,17 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & placedCaptorId : _loadedCaptorIds)
+	for(const auto & captorId : _loadedCaptorIds)
 	{
-		const auto position = _fe3d->captor_getPosition(placedCaptorId);
-		const auto exceptionId = _fe3d->captor_getExceptionId(placedCaptorId);
+		const auto position = _fe3d->captor_getPosition(captorId);
+
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+
+		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
 
 		file
 			<< "CAPTOR "
-			<< placedCaptorId
+			<< captorId
 			<< " "
 			<< position.x
 			<< " "

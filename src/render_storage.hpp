@@ -159,20 +159,6 @@ public:
 	const int getPlanarReflectionQuality() const;
 	const int getPlanarRefractionQuality() const;
 	const int getAnisotropicFilteringQuality() const;
-	const int getMinBloomQuality() const;
-	const int getMinDofQuality() const;
-	const int getMinMotionBlurQuality() const;
-	const int getMinShadowQuality() const;
-	const int getMinReflectionQuality() const;
-	const int getMinRefractionQuality() const;
-	const int getMinAnisotropicFilteringQuality() const;
-	const int getMaxBloomQuality() const;
-	const int getMaxDofQuality() const;
-	const int getMaxMotionBlurQuality() const;
-	const int getMaxShadowQuality() const;
-	const int getMaxReflectionQuality() const;
-	const int getMaxRefractionQuality() const;
-	const int getMaxAnisotropicFilteringQuality() const;
 	const int getBloomBlurCount() const;
 	const int getTriangleCount() const;
 	const int getGuiDepth() const;
@@ -200,21 +186,6 @@ public:
 	const BloomType getBloomType() const;
 
 private:
-	static inline constexpr int MIN_BLOOM_QUALITY = 1;
-	static inline constexpr int MAX_BLOOM_QUALITY = 5;
-	static inline constexpr int MIN_DOF_QUALITY = 1;
-	static inline constexpr int MAX_DOF_QUALITY = 5;
-	static inline constexpr int MIN_MOTION_BLUR_QUALITY = 1;
-	static inline constexpr int MAX_MOTION_BLUR_QUALITY = 5;
-	static inline constexpr int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
-	static inline constexpr int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
-	static inline constexpr int MIN_SHADOW_QUALITY = 2048;
-	static inline constexpr int MAX_SHADOW_QUALITY = 16384;
-	static inline constexpr int MIN_REFLECTION_QUALITY = 128;
-	static inline constexpr int MAX_REFLECTION_QUALITY = 1024;
-	static inline constexpr int MIN_REFRACTION_QUALITY = 128;
-	static inline constexpr int MAX_REFRACTION_QUALITY = 1024;
-
 	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _planarReflectionTextureBuffer = nullptr;
@@ -272,13 +243,13 @@ private:
 	float _skyExposureSpeed = 0.0f;
 	float _skyExposureLightness = 1.0f;
 
-	int _bloomQuality = MIN_BLOOM_QUALITY;
-	int _dofQuality = MIN_DOF_QUALITY;
-	int _motionBlurQuality = MIN_MOTION_BLUR_QUALITY;
-	int _shadowQuality = MIN_SHADOW_QUALITY;
-	int _planarReflectionQuality = MIN_REFLECTION_QUALITY;
-	int _planarRefractionQuality = MIN_REFRACTION_QUALITY;
-	int _anisotropicFilteringQuality = MIN_ANISOTROPIC_FILTERING_QUALITY;
+	int _bloomQuality = 1;
+	int _dofQuality = 1;
+	int _motionBlurQuality = 1;
+	int _shadowQuality = 2048;
+	int _planarReflectionQuality = 128;
+	int _planarRefractionQuality = 128;
+	int _anisotropicFilteringQuality = 1;
 	int _bloomBlurCount = 0;
 	int _triangleCount = 0;
 	int _guiDepth = 0;

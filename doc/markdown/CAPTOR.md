@@ -17,3 +17,9 @@
 - **Position**: the XYZ position of the captor
   - Type: `decimal3`
   - Constraints: none
+- **Reflection Quality**: the quality of the reflection
+  - Type: `integer`
+  - Constraints: between `128` and `1024`
+- **Reflection Quality**: the quality of the refraction
+  - Type: `integer`
+  - Constraints: between `128` and `1024`

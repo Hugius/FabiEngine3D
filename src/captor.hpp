@@ -23,7 +23,9 @@ public:
 	void moveTo(const fvec3 & target, float speed);
 	void setReflectionCubeMap(shared_ptr<TextureBuffer> value);
 	void setRefractionCubeMap(shared_ptr<TextureBuffer> value);
-	void setExceptionId(const string & id);
+	void setExceptionId(const string & value);
+	void setReflectionQuality(int value);
+	void setRefractionQuality(int value);
 
 	const shared_ptr<TextureBuffer> getReflectionTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getRefractionTextureBuffer() const;
@@ -32,6 +34,9 @@ public:
 	const string & getExceptionId() const;
 
 	const fvec3 & getPosition() const;
+
+	const int getReflectionQuality() const;
+	const int getRefractionQuality() const;
 
 	const bool mustCaptureReflections() const;
 	const bool mustCaptureRefractions() const;
@@ -48,6 +53,9 @@ private:
 	fvec3 _positionTarget = fvec3(0.0f);
 
 	float _positionTargetSpeed = 0.0f;
+
+	int _reflectionQuality = 128;
+	int _refractionQuality = 128;
 
 	bool _mustCaptureReflections = false;
 	bool _mustCaptureRefractions = false;

@@ -66,7 +66,7 @@ void MasterRenderer::captureCubeReflections()
 	{
 		if(captor->mustCaptureReflections())
 		{
-			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeReflectionQuality()), 1, false);
+			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(captor->getReflectionQuality()), 1, false);
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
 
 			if(!captor->getExceptionId().empty())
@@ -159,7 +159,7 @@ void MasterRenderer::captureCubeReflections()
 
 				captureBuffer->unbind();
 
-				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
+				const auto dataSize = (captor->getReflectionQuality() * captor->getReflectionQuality() * 3);
 				const auto data = new unsigned char[dataSize];
 
 				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
@@ -169,7 +169,7 @@ void MasterRenderer::captureCubeReflections()
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getReflectionQuality(), captor->getReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;
@@ -280,7 +280,7 @@ void MasterRenderer::captureCubeRefractions()
 	{
 		if(captor->mustCaptureRefractions())
 		{
-			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeRefractionQuality()), 1, false);
+			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(captor->getRefractionQuality()), 1, false);
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
 
 			if(!captor->getExceptionId().empty())
@@ -373,7 +373,7 @@ void MasterRenderer::captureCubeRefractions()
 
 				captureBuffer->unbind();
 
-				const auto dataSize = (_renderStorage->getCubeRefractionQuality() * _renderStorage->getCubeRefractionQuality() * 3);
+				const auto dataSize = (captor->getRefractionQuality() * captor->getRefractionQuality() * 3);
 				const auto data = new unsigned char[dataSize];
 
 				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
@@ -383,7 +383,7 @@ void MasterRenderer::captureCubeRefractions()
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeRefractionQuality(), _renderStorage->getCubeRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getRefractionQuality(), captor->getRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				delete[] data;

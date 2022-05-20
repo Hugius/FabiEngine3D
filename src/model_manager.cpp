@@ -185,7 +185,7 @@ void ModelManager::update()
 			model->setCubeRefractionMixValue(1.0f);
 		}
 
-		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
+		if((_timer->getPassedUpdateCount() % CUBE_REFLECTION_OVERLAP_INTERVAL) == 0)
 		{
 			map<float, shared_ptr<Captor>> orderedCaptors = {};
 
@@ -215,7 +215,7 @@ void ModelManager::update()
 			model->setCubeReflectionMixValue(model->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
 		}
 
-		if((_renderStorage->getCubeRefractionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeRefractionInterval()) == 0)
+		if((_timer->getPassedUpdateCount() % CUBE_REFRACTION_OVERLAP_INTERVAL) == 0)
 		{
 			map<float, shared_ptr<Captor>> orderedCaptors = {};
 

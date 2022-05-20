@@ -79,9 +79,19 @@ void Captor::setRefractionCubeMap(shared_ptr<TextureBuffer> value)
 	_refractionTextureBuffer = value;
 }
 
-void Captor::setExceptionId(const string & id)
+void Captor::setExceptionId(const string & value)
 {
-	_exceptionId = id;
+	_exceptionId = value;
+}
+
+void Captor::setReflectionQuality(int value)
+{
+	_reflectionQuality = value;
+}
+
+void Captor::setRefractionQuality(int value)
+{
+	_refractionQuality = value;
 }
 
 const string & Captor::getId() const
@@ -97,6 +107,16 @@ const string & Captor::getExceptionId() const
 const fvec3 & Captor::getPosition() const
 {
 	return _position;
+}
+
+const int Captor::getReflectionQuality() const
+{
+	return _reflectionQuality;
+}
+
+const int Captor::getRefractionQuality() const
+{
+	return _refractionQuality;
 }
 
 const bool Captor::mustCaptureReflections() const

@@ -197,17 +197,17 @@ void RenderStorage::setMotionBlurDifference(const fvec2 & value)
 
 void RenderStorage::setBloomQuality(int value)
 {
-	_bloomQuality = clamp(value, MIN_BLOOM_QUALITY, MAX_BLOOM_QUALITY);
+	_bloomQuality = clamp(value, 1, 5);
 }
 
 void RenderStorage::setDofQuality(int value)
 {
-	_dofQuality = clamp(value, MIN_DOF_QUALITY, MAX_DOF_QUALITY);
+	_dofQuality = clamp(value, 1, 5);
 }
 
 void RenderStorage::setMotionBlurQuality(int value)
 {
-	_motionBlurQuality = clamp(value, MIN_MOTION_BLUR_QUALITY, MAX_MOTION_BLUR_QUALITY);
+	_motionBlurQuality = clamp(value, 1, 5);
 }
 
 void RenderStorage::setAmbientLightingIntensity(float value)
@@ -265,17 +265,17 @@ void RenderStorage::increaseTriangleCount(int value)
 
 void RenderStorage::setShadowQuality(int value)
 {
-	_shadowQuality = clamp(value, MIN_SHADOW_QUALITY, MAX_SHADOW_QUALITY);
+	_shadowQuality = clamp(value, 2048, 16384);
 }
 
 void RenderStorage::setPlanarReflectionQuality(int value)
 {
-	_planarReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
+	_planarReflectionQuality = clamp(value, 128, 1024);
 }
 
 void RenderStorage::setPlanarRefractionQuality(int value)
 {
-	_planarRefractionQuality = clamp(value, MIN_REFRACTION_QUALITY, MAX_REFRACTION_QUALITY);
+	_planarRefractionQuality = clamp(value, 128, 1024);
 }
 
 void RenderStorage::resetTriangleCount()
@@ -365,7 +365,7 @@ void RenderStorage::setGuiDepth(int value)
 
 void RenderStorage::setAnisotropicFilteringQuality(int value)
 {
-	_anisotropicFilteringQuality = clamp(value, MIN_ANISOTROPIC_FILTERING_QUALITY, MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_anisotropicFilteringQuality = clamp(value, 1, 16);
 }
 
 void RenderStorage::setCursorId(const string & value)
@@ -696,76 +696,6 @@ const int RenderStorage::getPlanarReflectionQuality() const
 const int RenderStorage::getPlanarRefractionQuality() const
 {
 	return _planarRefractionQuality;
-}
-
-const int RenderStorage::getMinBloomQuality() const
-{
-	return MIN_BLOOM_QUALITY;
-}
-
-const int RenderStorage::getMinDofQuality() const
-{
-	return MIN_DOF_QUALITY;
-}
-
-const int RenderStorage::getMinMotionBlurQuality() const
-{
-	return MIN_MOTION_BLUR_QUALITY;
-}
-
-const int RenderStorage::getMinShadowQuality() const
-{
-	return MIN_SHADOW_QUALITY;
-}
-
-const int RenderStorage::getMinReflectionQuality() const
-{
-	return MIN_REFLECTION_QUALITY;
-}
-
-const int RenderStorage::getMinRefractionQuality() const
-{
-	return MIN_REFRACTION_QUALITY;
-}
-
-const int RenderStorage::getMinAnisotropicFilteringQuality() const
-{
-	return MIN_ANISOTROPIC_FILTERING_QUALITY;
-}
-
-const int RenderStorage::getMaxBloomQuality() const
-{
-	return MAX_BLOOM_QUALITY;
-}
-
-const int RenderStorage::getMaxDofQuality() const
-{
-	return MAX_DOF_QUALITY;
-}
-
-const int RenderStorage::getMaxMotionBlurQuality() const
-{
-	return MAX_MOTION_BLUR_QUALITY;
-}
-
-const int RenderStorage::getMaxShadowQuality() const
-{
-	return MAX_SHADOW_QUALITY;
-}
-
-const int RenderStorage::getMaxReflectionQuality() const
-{
-	return MAX_REFLECTION_QUALITY;
-}
-
-const int RenderStorage::getMaxRefractionQuality() const
-{
-	return MAX_REFRACTION_QUALITY;
-}
-
-const int RenderStorage::getMaxAnisotropicFilteringQuality() const
-{
-	return MAX_ANISOTROPIC_FILTERING_QUALITY;
 }
 
 const bool RenderStorage::isAntiAliasingEnabled() const

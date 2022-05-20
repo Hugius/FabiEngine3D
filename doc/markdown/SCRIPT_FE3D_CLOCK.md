@@ -2,16 +2,16 @@
 
 ## Setters
 
-- `fe3d:clock_create` (`STR` id) -----> `NONE`
-- `fe3d:clock_delete` (`STR` id) -----> `NONE`
-- `fe3d:clock_start` (`STR` id) -----> `NONE`
-- `fe3d:clock_pause` (`STR` id) -----> `NONE`
-- `fe3d:clock_resume` (`STR` id) -----> `NONE`
-- `fe3d:clock_stop` (`STR` id) -----> `NONE`
+- `fe3d:clock_create` (`STR` clock_id) -----> `NONE`
+- `fe3d:clock_delete` (`STR` clock_id) -----> `NONE`
+- `fe3d:clock_start` (`STR` clock_id) -----> `NONE`
+- `fe3d:clock_pause` (`STR` clock_id) -----> `NONE`
+- `fe3d:clock_resume` (`STR` clock_id) -----> `NONE`
+- `fe3d:clock_stop` (`STR` clock_id) -----> `NONE`
 
 ## Getters
 
-- `fe3d:clock_is_existing` (`STR` id) -----> `BOL`
-- `fe3d:clock_is_started` (`STR` id) -----> `BOL`
-- `fe3d:clock_is_paused` (`STR` id) -----> `BOL`
-- `fe3d:clock_get_delta` (`STR` id) -----> `DEC`
+- `fe3d:clock_is_existing` (`STR` clock_id) -----> `BOL`
+- `fe3d:clock_is_started` (`STR` clock_id) -----> `BOL`
+- `fe3d:clock_is_paused` (`STR` clock_id) -----> `BOL`
+- `fe3d:clock_get_delta` (`STR` clock_id) -----> `DEC`

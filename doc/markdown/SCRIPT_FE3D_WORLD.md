@@ -2,29 +2,29 @@
 
 ## Setters
 
-- `fe3d:world_load_editor` (`STR` id) -----> `NONE`
+- `fe3d:world_load_editor` (`STR` world_id) -----> `NONE`
 - `fe3d:world_clear_editor` () -----> `NONE`
 - `fe3d:world_reset_custom_build` () -----> `NONE`
-- `fe3d:world_add_custom_sky` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_terrain` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_water` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_model` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_quad3d` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_text3d` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_aabb` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_pointlight` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_spotlight` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_captor` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_sound3d` (`STR` id) -----> `NONE`
+- `fe3d:world_add_custom_sky` (`STR` sky_id) -----> `NONE`
+- `fe3d:world_add_custom_terrain` (`STR` terrain_id) -----> `NONE`
+- `fe3d:world_add_custom_water` (`STR` water_id) -----> `NONE`
+- `fe3d:world_add_custom_model` (`STR` model_id) -----> `NONE`
+- `fe3d:world_add_custom_quad3d` (`STR` quad_id) -----> `NONE`
+- `fe3d:world_add_custom_text3d` (`STR` text_id) -----> `NONE`
+- `fe3d:world_add_custom_aabb` (`STR` aabb_id) -----> `NONE`
+- `fe3d:world_add_custom_pointlight` (`STR` pointlight_id) -----> `NONE`
+- `fe3d:world_add_custom_spotlight` (`STR` spotlight_id) -----> `NONE`
+- `fe3d:world_add_custom_captor` (`STR` captor_id) -----> `NONE`
+- `fe3d:world_add_custom_sound3d` (`STR` sound_id) -----> `NONE`
 - `fe3d:world_add_custom_graphics` () -----> `NONE`
-- `fe3d:world_save_custom` (`STR` id) -----> `NONE`
-- `fe3d:world_load_custom` (`STR` id) -----> `NONE`
+- `fe3d:world_save_custom` (`STR` world_id) -----> `NONE`
+- `fe3d:world_load_custom` (`STR` world_id) -----> `NONE`
 - `fe3d:world_clear_custom` () -----> `NONE`
-- `fe3d:world_delete_custom` (`STR` id) -----> `NONE`
+- `fe3d:world_delete_custom` (`STR` world_id) -----> `NONE`
 
 ## Getters
 
-- `fe3d:world_is_editor_existing` (`STR` id) -----> `BOL`
-- `fe3d:world_is_custom_existing` (`STR` id) -----> `BOL`
+- `fe3d:world_is_editor_existing` (`STR` world_id) -----> `BOL`
+- `fe3d:world_is_custom_existing` (`STR` world_id) -----> `BOL`
 - `fe3d:world_get_current_editor_id` () -----> `STR`
 - `fe3d:world_get_current_custom_id` () -----> `STR`

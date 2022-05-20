@@ -27,5 +27,5 @@
 - `fe3d:raycast_get_closest_quad3d` () -----> `STR`
 - `fe3d:raycast_get_closest_text3d` () -----> `STR`
 - `fe3d:raycast_get_distance_to_model` (`STR` model_id, `STR` part_id) -----> `STR`
-- `fe3d:raycast_get_distance_to_quad3d` (`STR` id) -----> `STR`
-- `fe3d:raycast_get_distance_to_text3d` (`STR` id) -----> `STR`
+- `fe3d:raycast_get_distance_to_quad3d` (`STR` quad_id) -----> `STR`
+- `fe3d:raycast_get_distance_to_text3d` (`STR` text_id) -----> `STR`

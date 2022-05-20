@@ -38,8 +38,6 @@ void Animation3dEditor::_load()
 	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
-	_fe3d->graphics_setCubeReflectionQuality(CUBE_REFLECTION_QUALITY);
-	_fe3d->graphics_setCubeRefractionQuality(CUBE_REFRACTION_QUALITY);
 	_fe3d->graphics_setPlanarReflectionQuality(PLANAR_REFLECTION_QUALITY);
 	_fe3d->graphics_setPlanarRefractionQuality(PLANAR_REFRACTION_QUALITY);
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
@@ -81,8 +79,6 @@ void Animation3dEditor::_unload()
 	_fe3d->graphics_setShadowQuality(0);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
 	_fe3d->graphics_setShadowSize(0.0f);
-	_fe3d->graphics_setCubeReflectionQuality(0);
-	_fe3d->graphics_setCubeRefractionQuality(0);
 	_fe3d->graphics_setPlanarReflectionQuality(0);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
 	_fe3d->camera_reset();

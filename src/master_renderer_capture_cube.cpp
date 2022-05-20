@@ -66,6 +66,7 @@ void MasterRenderer::captureCubeReflections()
 	{
 		if(captor->mustCaptureReflections())
 		{
+			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeReflectionQuality()), 1, false);
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
 
 			if(!captor->getExceptionId().empty())
@@ -141,7 +142,7 @@ void MasterRenderer::captureCubeReflections()
 				captureShadows();
 				captureWaterEdges();
 
-				_cubeReflectionCaptureBuffer->bind();
+				captureBuffer->bind();
 
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -156,12 +157,12 @@ void MasterRenderer::captureCubeReflections()
 				_renderTransparentQuad3ds();
 				_renderTransparentText3ds();
 
-				_cubeReflectionCaptureBuffer->unbind();
+				captureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
 				const auto data = new unsigned char[dataSize];
 
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getTboId());
+				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
@@ -279,6 +280,7 @@ void MasterRenderer::captureCubeRefractions()
 	{
 		if(captor->mustCaptureRefractions())
 		{
+			const auto captureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeRefractionQuality()), 1, false);
 			const auto wasExceptionModelVisible = (captor->getExceptionId().empty() ? false : _modelManager->getModel(captor->getExceptionId())->isVisible());
 
 			if(!captor->getExceptionId().empty())
@@ -354,7 +356,7 @@ void MasterRenderer::captureCubeRefractions()
 				captureShadows();
 				captureWaterEdges();
 
-				_cubeRefractionCaptureBuffer->bind();
+				captureBuffer->bind();
 
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -369,12 +371,12 @@ void MasterRenderer::captureCubeRefractions()
 				_renderTransparentQuad3ds();
 				_renderTransparentText3ds();
 
-				_cubeRefractionCaptureBuffer->unbind();
+				captureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeRefractionQuality() * _renderStorage->getCubeRefractionQuality() * 3);
 				const auto data = new unsigned char[dataSize];
 
-				glBindTexture(GL_TEXTURE_2D, _cubeRefractionCaptureBuffer->getTexture(0)->getTboId());
+				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 

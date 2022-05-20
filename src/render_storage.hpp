@@ -65,8 +65,6 @@ public:
 	void setDofQuality(int value);
 	void setMotionBlurQuality(int value);
 	void setShadowQuality(int value);
-	void setCubeReflectionQuality(int value);
-	void setCubeRefractionQuality(int value);
 	void setPlanarReflectionQuality(int value);
 	void setPlanarRefractionQuality(int value);
 	void setAnisotropicFilteringQuality(int value);
@@ -96,8 +94,6 @@ public:
 	void setShadowsFollowingCameraX(bool value);
 	void setShadowsFollowingCameraY(bool value);
 	void setShadowsFollowingCameraZ(bool value);
-	void setCubeReflectionInterval(int value);
-	void setCubeRefractionInterval(int value);
 
 	const shared_ptr<TextureBuffer> getPrimarySceneTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getSecondarySceneTextureBuffer() const;
@@ -160,8 +156,6 @@ public:
 	const int getDofQuality() const;
 	const int getMotionBlurQuality() const;
 	const int getShadowQuality() const;
-	const int getCubeReflectionQuality() const;
-	const int getCubeRefractionQuality() const;
 	const int getPlanarReflectionQuality() const;
 	const int getPlanarRefractionQuality() const;
 	const int getAnisotropicFilteringQuality() const;
@@ -183,8 +177,6 @@ public:
 	const int getTriangleCount() const;
 	const int getGuiDepth() const;
 	const int getShadowInterval() const;
-	const int getCubeReflectionInterval() const;
-	const int getCubeRefractionInterval() const;
 
 	const bool isReflectionsEnabled() const;
 	const bool isRefractionsEnabled() const;
@@ -284,8 +276,6 @@ private:
 	int _dofQuality = MIN_DOF_QUALITY;
 	int _motionBlurQuality = MIN_MOTION_BLUR_QUALITY;
 	int _shadowQuality = MIN_SHADOW_QUALITY;
-	int _cubeReflectionQuality = MIN_REFLECTION_QUALITY;
-	int _cubeRefractionQuality = MIN_REFRACTION_QUALITY;
 	int _planarReflectionQuality = MIN_REFLECTION_QUALITY;
 	int _planarRefractionQuality = MIN_REFRACTION_QUALITY;
 	int _anisotropicFilteringQuality = MIN_ANISOTROPIC_FILTERING_QUALITY;
@@ -293,8 +283,6 @@ private:
 	int _triangleCount = 0;
 	int _guiDepth = 0;
 	int _shadowInterval = 0;
-	int _cubeReflectionInterval = 0;
-	int _cubeRefractionInterval = 0;
 
 	bool _isReflectionsEnabled = true;
 	bool _isRefractionsEnabled = true;

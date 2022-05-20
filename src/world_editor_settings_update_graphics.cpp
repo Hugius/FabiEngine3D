@@ -155,8 +155,6 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsReflections")
 	{
-		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
-		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
 		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
 		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
@@ -165,14 +163,6 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 
 			return;
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeInterval")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeQuality")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
@@ -183,21 +173,7 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "cubeQuality") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
-
-			_fe3d->graphics_setCubeReflectionQuality(value);
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "cubeInterval") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
-
-			_fe3d->graphics_setCubeReflectionInterval(value);
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "planarHeight") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "planarHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
@@ -220,8 +196,6 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
-		const auto cubeInterval = _fe3d->graphics_getCubeRefractionInterval();
-		const auto cubeQuality = _fe3d->graphics_getCubeRefractionQuality();
 		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
 		const auto planarQuality = _fe3d->graphics_getPlanarRefractionQuality();
 
@@ -230,14 +204,6 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 
 			return;
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeInterval")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("cubeInterval", "Cube Interval", cubeInterval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("cubeQuality")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("cubeQuality", "Cube Quality", cubeQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
@@ -248,21 +214,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "cubeInterval") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
-
-			_fe3d->graphics_setCubeRefractionInterval(value);
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "cubeQuality") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
-
-			_fe3d->graphics_setCubeRefractionQuality(value);
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "planarHeight") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "planarHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

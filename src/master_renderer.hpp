@@ -64,8 +64,6 @@ public:
 	void loadBloomBlurQuality();
 	void loadDofBlurQuality();
 	void loadMotionBlurBlurQuality();
-	void loadCubeReflectionQuality();
-	void loadCubeRefractionQuality();
 	void loadPlanarReflectionQuality();
 	void loadPlanarRefractionQuality();
 	void loadWaterReflectionQuality();
@@ -130,8 +128,6 @@ private:
 	shared_ptr<ShaderBuffer> _lensFlareShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _motionBlurShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _blurShaderBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _cubeReflectionCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _cubeRefractionCaptureBuffer = nullptr;
 	shared_ptr<CaptureBuffer> _planarReflectionCaptureBuffer = nullptr;
 	shared_ptr<CaptureBuffer> _planarRefractionCaptureBuffer = nullptr;
 	shared_ptr<CaptureBuffer> _waterReflectionCaptureBuffer = nullptr;

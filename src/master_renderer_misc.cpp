@@ -197,8 +197,6 @@ void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 	loadBloomBlurQuality();
 	loadDofBlurQuality();
 	loadMotionBlurBlurQuality();
-	loadCubeReflectionQuality();
-	loadCubeRefractionQuality();
 	loadPlanarReflectionQuality();
 	loadPlanarRefractionQuality();
 	loadWaterReflectionQuality();
@@ -232,16 +230,6 @@ void MasterRenderer::loadMotionBlurBlurQuality()
 	_motionBlurBlurCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getMotionBlurQuality()), 1, true);
 
 	_motionBlurBlurRenderer->inject(_motionBlurBlurCaptureBuffer);
-}
-
-void MasterRenderer::loadCubeReflectionQuality()
-{
-	_cubeReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeReflectionQuality()), 1, false);
-}
-
-void MasterRenderer::loadCubeRefractionQuality()
-{
-	_cubeRefractionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeRefractionQuality()), 1, false);
 }
 
 void MasterRenderer::loadPlanarReflectionQuality()

@@ -51,23 +51,6 @@ void EngineInterface::graphics_setLensFlareEnabled(bool value)
 	_core->getRenderStorage()->setLensFlareEnabled(value);
 }
 
-void EngineInterface::graphics_setCubeReflectionInterval(int value)
-{
-	_core->getRenderStorage()->setCubeReflectionInterval(value);
-}
-
-void EngineInterface::graphics_setCubeRefractionInterval(int value)
-{
-	_core->getRenderStorage()->setCubeRefractionInterval(value);
-}
-
-void EngineInterface::graphics_setCubeRefractionQuality(int value)
-{
-	_core->getRenderStorage()->setCubeRefractionQuality(value);
-
-	_core->getMasterRenderer()->loadCubeRefractionQuality();
-}
-
 void EngineInterface::graphics_setPlanarReflectionHeight(float value)
 {
 	_core->getRenderStorage()->setPlanarReflectionHeight(value);
@@ -121,13 +104,6 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(int value)
 			texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 		}
 	}
-}
-
-void EngineInterface::graphics_setCubeReflectionQuality(int value)
-{
-	_core->getRenderStorage()->setCubeReflectionQuality(value);
-
-	_core->getMasterRenderer()->loadCubeReflectionQuality();
 }
 
 void EngineInterface::graphics_setPlanarReflectionQuality(int value)
@@ -389,26 +365,6 @@ const bool EngineInterface::graphics_isShadowCircleEnabled() const
 const int EngineInterface::graphics_getShadowQuality() const
 {
 	return _core->getRenderStorage()->getShadowQuality();
-}
-
-const int EngineInterface::graphics_getCubeReflectionInterval() const
-{
-	return _core->getRenderStorage()->getCubeReflectionInterval();
-}
-
-const int EngineInterface::graphics_getCubeRefractionInterval() const
-{
-	return _core->getRenderStorage()->getCubeRefractionInterval();
-}
-
-const int EngineInterface::graphics_getCubeRefractionQuality() const
-{
-	return _core->getRenderStorage()->getCubeRefractionQuality();
-}
-
-const int EngineInterface::graphics_getCubeReflectionQuality() const
-{
-	return _core->getRenderStorage()->getCubeReflectionQuality();
 }
 
 const int EngineInterface::graphics_getPlanarReflectionQuality() const

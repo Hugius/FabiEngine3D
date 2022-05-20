@@ -64,37 +64,15 @@
 
 ### 1.6 Cube Reflections
 
-#### 1.6.1 General
-
 - Cube reflections are reflections based on pre-captured cube maps.
 - The reflections are static, but very efficient.
 - Normal vectors are used to render this type of reflection.
 
-#### 1.6.2 Properties
-
-- **Interval**: the amount of engine updates between model adaptions
-  - Type: `integer`
-  - Constraints: at least `0`
-- **Quality**: the quality of cube reflections
-  - Type: `integer`
-  - Constraints: between `128` and `1024`
-
 ### 1.7 Cube Refractions
-
-#### 1.7.1 General
 
 - Cube refractions are refractions based on pre-captured cube maps.
 - The refractions are static, but very efficient.
 - Normal vectors are used to render this type of refraction.
-
-#### 1.7.2 Properties
-
-- **Interval**: the amount of engine updates between model adaptions
-  - Type: `integer`
-  - Constraints: at least `0`
-- **Quality**: the quality of cube refractions
-  - Type: `integer`
-  - Constraints: between `128` and `1024`
 
 ### 1.8 Planar Reflections
 

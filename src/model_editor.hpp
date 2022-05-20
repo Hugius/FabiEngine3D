@@ -92,8 +92,6 @@ private:
 	static inline constexpr int SHADOW_QUALITY = 16384;
 	static inline constexpr int BLOOM_BLUR_COUNT = 5;
 	static inline constexpr int BLOOM_QUALITY = 5;
-	static inline constexpr int CUBE_REFLECTION_QUALITY = 1024;
-	static inline constexpr int CUBE_REFRACTION_QUALITY = 1024;
 	static inline constexpr int PLANAR_REFLECTION_QUALITY = 1024;
 	static inline constexpr int PLANAR_REFRACTION_QUALITY = 1024;
 

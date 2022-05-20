@@ -433,17 +433,11 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
-		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
 		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
 		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFLECTIONS "
-			<< cubeInterval
-			<< " "
-			<< cubeQuality
-			<< " "
 			<< planarHeight
 			<< " "
 			<< planarQuality
@@ -451,17 +445,11 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		const auto cubeInterval = _fe3d->graphics_getCubeReflectionInterval();
-		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
 		const auto planarHeight = _fe3d->graphics_getPlanarRefractionHeight();
 		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFRACTIONS "
-			<< cubeInterval
-			<< " "
-			<< cubeQuality
-			<< " "
 			<< planarHeight
 			<< " "
 			<< planarQuality

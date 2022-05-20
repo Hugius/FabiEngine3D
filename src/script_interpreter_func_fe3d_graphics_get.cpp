@@ -121,42 +121,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_cube_reflection_interval")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->graphics_getCubeReflectionInterval();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
-	else if(functionName == "fe3d:graphics_get_cube_reflection_quality")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->graphics_getCubeReflectionQuality();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
-	else if(functionName == "fe3d:graphics_get_cube_refraction_interval")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->graphics_getCubeRefractionInterval();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
-	else if(functionName == "fe3d:graphics_get_cube_refraction_quality")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->graphics_getCubeRefractionQuality();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
 	else if(functionName == "fe3d:graphics_get_planar_reflection_height")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

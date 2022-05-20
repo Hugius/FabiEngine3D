@@ -1113,7 +1113,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
 		const auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
-		//const auto isStarted = _fe3d->sound3d_isStarted(sound3dId, 0);
+		const auto startedCount = _fe3d->sound3d_getStartedCount(sound3dId);
 
 		file
 			<< "SOUND3D "
@@ -1130,7 +1130,23 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxVolume
 			<< " "
 			<< maxDistance
-			<< endl;
+			<< " "
+			<< startedCount;
+
+		for(int index = 0; index < startedCount; index++)
+		{
+			//const auto playCount = _fe3d->sound3d_getplayc
+			const auto isStarted = _fe3d->sound3d_isStarted(sound3dId, index);
+			const auto isPaused = (isStarted ? _fe3d->sound3d_isPaused(sound3dId, index) : false);
+
+			file
+				<< " "
+				<< isStarted
+				<< " "
+				<< isPaused;
+		}
+
+		file << endl;
 	}
 
 	for(const auto & captorId : _addedCaptorIds)

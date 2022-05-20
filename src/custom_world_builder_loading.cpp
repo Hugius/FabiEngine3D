@@ -1305,6 +1305,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			fvec3 position;
 			float maxVolume;
 			float maxDistance;
+			int startedCount;
 
 			iss
 				>> sound3dId
@@ -1313,7 +1314,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> position.y
 				>> position.z
 				>> maxVolume
-				>> maxDistance;
+				>> maxDistance
+				>> startedCount;
 
 			if(!_fe3d->sound3d_isExisting(templateSound3dId))
 			{
@@ -1325,6 +1327,26 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->sound3d_setPosition(sound3dId, position);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
 			_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
+
+			for(int index = 0; index < startedCount; index++)
+			{
+				bool isStarted;
+				bool isPaused;
+
+				iss
+					>> isStarted
+					>> isPaused;
+
+				if(isStarted)
+				{
+					_fe3d->sound3d_start(sound3dId, -1);
+
+					if(isPaused)
+					{
+						_fe3d->sound3d_pause(sound3dId, index);
+					}
+				}
+			}
 
 			_loadedSound3dIds.push_back(sound3dId);
 		}

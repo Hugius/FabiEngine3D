@@ -35,8 +35,7 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 			<< " "
 			<< partCount
 			<< " "
-			<< frameCount
-			<< " ";
+			<< frameCount;
 
 		for(auto partId : partIds)
 		{
@@ -46,8 +45,8 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 			}
 
 			file
-				<< partId
-				<< " ";
+				<< " "
+				<< partId;
 		}
 
 		for(int frameIndex = 0; frameIndex < frameCount; frameIndex++)
@@ -61,6 +60,7 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 				const auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animation3dId, frameIndex, partIds[partIndex]));
 
 				file
+					<< " "
 					<< targetTransformation.x
 					<< " "
 					<< targetTransformation.y
@@ -82,16 +82,6 @@ const bool Animation3dEditor::saveAnimation3dsToFile() const
 					<< speedType
 					<< " "
 					<< transformationType;
-
-				if(partIndex != (partCount - 1))
-				{
-					file << " ";
-				}
-			}
-
-			if(frameIndex != (frameCount - 1))
-			{
-				file << " ";
 			}
 		}
 

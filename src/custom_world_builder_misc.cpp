@@ -330,7 +330,7 @@ const bool CustomWorldBuilder::isGraphicsAdded() const
 	return _isGraphicsAdded;
 }
 
-void CustomWorldBuilder::reset()
+void CustomWorldBuilder::resetBuild()
 {
 	_addedSkyIds.clear();
 	_addedTerrainIds.clear();

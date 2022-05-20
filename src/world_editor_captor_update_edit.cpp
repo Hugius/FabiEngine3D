@@ -24,13 +24,13 @@ void WorldEditor::_updateCaptorEditing()
 			_dontResetSelectedCaptor = false;
 		}
 
-		for(const auto & placedCaptorId : _loadedCaptorIds)
+		for(const auto & captorId : _loadedCaptorIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@lens_" + placedCaptorId));
+			const auto isHovered = (hoveredAabbId == ("@@lens_" + captorId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectCaptor(placedCaptorId);
+				_selectCaptor(captorId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updateCaptorEditing()
 			}
 			else
 			{
-				if((placedCaptorId != _selectedCaptorId) && (placedCaptorId != _activeCaptorId))
+				if((captorId != _selectedCaptorId) && (captorId != _activeCaptorId))
 				{
-					_deselectCaptor(placedCaptorId);
+					_deselectCaptor(captorId);
 				}
 			}
 		}

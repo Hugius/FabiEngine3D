@@ -55,9 +55,9 @@ void WorldEditor::_updateCaptorMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->deleteOptions();
 
-			for(auto & placedCaptorId : _loadedCaptorIds)
+			for(auto & captorId : _loadedCaptorIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->createOption(placedCaptorId, placedCaptorId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorChoice")->getScrollingList("placedCaptors")->createOption(captorId, captorId);
 			}
 		}
 

@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_customWorldBuilder->reset();
+			_customWorldBuilder->resetBuild();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

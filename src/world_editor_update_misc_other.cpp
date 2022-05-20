@@ -157,10 +157,10 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
 	}
 
-	for(const auto & placedCaptorId : _loadedCaptorIds)
+	for(const auto & captorId : _loadedCaptorIds)
 	{
-		_fe3d->model_setWireframed("@@lens_" + placedCaptorId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@lens_" + placedCaptorId, _isAabbModeEnabled);
+		_fe3d->model_setWireframed("@@lens_" + captorId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@lens_" + captorId, _isAabbModeEnabled);
 	}
 
 	if(_fe3d->terrain_getSelectedId().empty())

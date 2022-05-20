@@ -9,7 +9,7 @@ public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<Duplicator> duplicator);
 	void setCurrentProjectId(const string & currentProjectId);
-	void reset();
+	void resetBuild();
 	void addSky(const string & skyId);
 	void addTerrain(const string & terrainId);
 	void addWater(const string & waterId);

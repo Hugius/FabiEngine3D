@@ -203,6 +203,20 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 			}
 		}
 	}
+	else if(functionName == "fe3d:sound2d_get_play_count")
+	{
+		const auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_getPlayCount(args[0]->getString(), args[0]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:sound2d_is_device_connected")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

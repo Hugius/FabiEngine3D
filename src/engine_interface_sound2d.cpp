@@ -112,3 +112,8 @@ const int EngineInterface::sound2d_getTime(const string & sound2dId, int index) 
 {
 	return _core->getSound2dPlayer()->getSound2dTime(sound2dId, index);
 }
+
+const int EngineInterface::sound2d_getPlayCount(const string & sound2dId, int index) const
+{
+	return _core->getSound2dPlayer()->getSound2dPlayCount(sound2dId, index);
+}

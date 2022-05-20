@@ -3,78 +3,78 @@
 ## Setters
 
 - `fe3d:terrain_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
-- `fe3d:terrain_select` (`STR`terrain_id) -----> `NONE`
-- `fe3d:terrain_delete` (`STR`terrain_id) -----> `NONE`
+- `fe3d:terrain_select` (`STR` terrain_id) -----> `NONE`
+- `fe3d:terrain_delete` (`STR` terrain_id) -----> `NONE`
 - `fe3d:terrain_delete_all` () -----> `NONE`
-- `fe3d:terrain_set_lightness` (`STR`terrain_id, `DEC` value) -----> `NONE`
-- `fe3d:terrain_set_max_height` (`STR`terrain_id, `DEC` value) -----> `NONE`
-- `fe3d:terrain_set_diffuse_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_normal_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_blend_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_red_diffuse_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_green_diffuse_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_blue_diffuse_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_red_normal_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_green_normal_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_blue_normal_map` (`STR`terrain_id, `STR` file_path) -----> `NONE`
-- `fe3d:terrain_set_wireframe_color` (`STR`terrain_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:terrain_set_color` (`STR`terrain_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:terrain_set_specular_shininess` (`STR`terrain_id, `DEC` value) -----> `NONE`
-- `fe3d:terrain_set_specular_intensity` (`STR`terrain_id, `DEC` value) -----> `NONE`
-- `fe3d:terrain_set_texture_repeat` (`STR`terrain_id, `INT` value) -----> `NONE`
-- `fe3d:terrain_set_red_repeat` (`STR`terrain_id, `INT` value) -----> `NONE`
-- `fe3d:terrain_set_green_repeat` (`STR`terrain_id, `INT` value) -----> `NONE`
-- `fe3d:terrain_set_blue_repeat` (`STR`terrain_id, `INT` value) -----> `NONE`
-- `fe3d:terrain_set_specular` (`STR`terrain_id, `BOL` value) -----> `NONE`
-- `fe3d:terrain_set_wireframed` (`STR`terrain_id, `BOL` value) -----> `NONE`
-- `fe3d:terrain_set_min_clip_position` (`STR`terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:terrain_set_max_clip_position` (`STR`terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:terrain_set_lightness` (`STR` terrain_id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_max_height` (`STR` terrain_id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_diffuse_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_normal_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blend_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_red_diffuse_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_green_diffuse_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blue_diffuse_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_red_normal_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_green_normal_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blue_normal_map` (`STR` terrain_id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_wireframe_color` (`STR` terrain_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:terrain_set_color` (`STR` terrain_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:terrain_set_specular_shininess` (`STR` terrain_id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_specular_intensity` (`STR` terrain_id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_texture_repeat` (`STR` terrain_id, `INT` value) -----> `NONE`
+- `fe3d:terrain_set_red_repeat` (`STR` terrain_id, `INT` value) -----> `NONE`
+- `fe3d:terrain_set_green_repeat` (`STR` terrain_id, `INT` value) -----> `NONE`
+- `fe3d:terrain_set_blue_repeat` (`STR` terrain_id, `INT` value) -----> `NONE`
+- `fe3d:terrain_set_specular` (`STR` terrain_id, `BOL` value) -----> `NONE`
+- `fe3d:terrain_set_wireframed` (`STR` terrain_id, `BOL` value) -----> `NONE`
+- `fe3d:terrain_set_min_clip_position` (`STR` terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:terrain_set_max_clip_position` (`STR` terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
-- `fe3d:terrain_find_ids` (`STR`terrain_id) -----> `LIST`
-- `fe3d:terrain_is_specular` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_is_wireframed` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_diffuse_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_normal_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_blend_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_red_diffuse_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_green_diffuse_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_blue_diffuse_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_red_normal_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_green_normal_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_has_blue_normal_map` (`STR`terrain_id) -----> `BOL`
-- `fe3d:terrain_get_selected_id` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_pixel_height` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_height_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_diffuse_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_normal_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_blend_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_red_diffuse_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_green_diffuse_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_blue_diffuse_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_red_normal_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_green_normal_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_blue_normal_map_path` (`STR`terrain_id) -----> `STR`
-- `fe3d:terrain_get_min_clip_position_x` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_min_clip_position_y` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_min_clip_position_z` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_max_clip_position_x` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_max_clip_position_y` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_max_clip_position_z` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_max_height` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_size` (`STR`terrain_id) -----> `DEC`
+- `fe3d:terrain_find_ids` (`STR` terrain_id) -----> `LIST`
+- `fe3d:terrain_is_specular` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_is_wireframed` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_diffuse_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_normal_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_blend_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_red_diffuse_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_green_diffuse_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_blue_diffuse_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_red_normal_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_green_normal_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_has_blue_normal_map` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_get_selected_id` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_pixel_height` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_height_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_diffuse_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_normal_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_blend_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_red_diffuse_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_green_diffuse_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_blue_diffuse_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_red_normal_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_green_normal_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_blue_normal_map_path` (`STR` terrain_id) -----> `STR`
+- `fe3d:terrain_get_min_clip_position_x` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_min_clip_position_y` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_min_clip_position_z` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_x` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_y` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_z` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_max_height` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_size` (`STR` terrain_id) -----> `DEC`
 - `fe3d:terrain_get_ids` () -----> `LIST`
-- `fe3d:terrain_get_lightness` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_specular_shininess` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_specular_intensity` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_wireframe_color_r` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_wireframe_color_g` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_wireframe_color_b` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_color_r` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_color_g` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_color_b` (`STR`terrain_id) -----> `DEC`
-- `fe3d:terrain_get_texture_repeat` (`STR`terrain_id) -----> `INT`
-- `fe3d:terrain_get_red_repeat` (`STR`terrain_id) -----> `INT`
-- `fe3d:terrain_get_green_repeat` (`STR`terrain_id) -----> `INT`
-- `fe3d:terrain_get_blue_repeat` (`STR`terrain_id) -----> `INT`
+- `fe3d:terrain_get_lightness` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_specular_shininess` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_specular_intensity` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_r` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_g` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_b` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_color_r` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_color_g` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_color_b` (`STR` terrain_id) -----> `DEC`
+- `fe3d:terrain_get_texture_repeat` (`STR` terrain_id) -----> `INT`
+- `fe3d:terrain_get_red_repeat` (`STR` terrain_id) -----> `INT`
+- `fe3d:terrain_get_green_repeat` (`STR` terrain_id) -----> `INT`
+- `fe3d:terrain_get_blue_repeat` (`STR` terrain_id) -----> `INT`

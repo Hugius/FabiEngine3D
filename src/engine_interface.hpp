@@ -749,6 +749,7 @@ public:
 	const float sound3d_getRightIntensity(const string & sound3dId, int index) const;
 	const int sound3d_getStartedCount(const string & sound3dId) const;
 	const int sound3d_getTime(const string & sound3dId, int index) const;
+	const int sound3d_getPlayCount(const string & sound3dId, int index) const;
 	const bool sound3d_isExisting(const string & sound3dId) const;
 	const bool sound3d_isStarted(const string & sound3dId, int index) const;
 	const bool sound3d_isPaused(const string & sound3dId, int index) const;
@@ -771,6 +772,7 @@ public:
 	const float sound2d_getRightIntensity(const string & sound2dId, int index) const;
 	const int sound2d_getStartedCount(const string & sound2dId) const;
 	const int sound2d_getTime(const string & sound2dId, int index) const;
+	const int sound2d_getPlayCount(const string & sound2dId, int index) const;
 	const bool sound2d_isExisting(const string & sound2dId) const;
 	const bool sound2d_isStarted(const string & sound2dId, int index) const;
 	const bool sound2d_isPaused(const string & sound2dId, int index) const;

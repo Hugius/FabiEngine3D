@@ -282,6 +282,20 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			}
 		}
 	}
+	else if(functionName == "fe3d:sound3d_get_play_count")
+	{
+		const auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound3d_getPlayCount(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

@@ -141,7 +141,7 @@ const float Sound2dPlayer::getSound2dRightIntensity(const string & sound2dId, in
 	return _startedSound2ds.at(sound2dId)[index]->getRightIntensity();
 }
 
-const int Sound2dPlayer::getPlayCount(const string & sound2dId, int index) const
+const int Sound2dPlayer::getSound2dPlayCount(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{

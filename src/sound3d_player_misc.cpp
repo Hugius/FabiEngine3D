@@ -93,7 +93,7 @@ const float Sound3dPlayer::getSound3dRightIntensity(const string & sound3dId, in
 	return _startedSound3ds.at(sound3dId)[index]->getRightIntensity();
 }
 
-const int Sound3dPlayer::getPlayCount(const string & sound3dId, int index) const
+const int Sound3dPlayer::getSound3dPlayCount(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{

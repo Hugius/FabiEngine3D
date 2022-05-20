@@ -1135,15 +1135,17 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(int index = 0; index < startedCount; index++)
 		{
-			//const auto playCount = _fe3d->sound3d_getplayc
 			const auto isStarted = _fe3d->sound3d_isStarted(sound3dId, index);
 			const auto isPaused = (isStarted ? _fe3d->sound3d_isPaused(sound3dId, index) : false);
+			const auto playCount = (isStarted ? _fe3d->sound3d_getPlayCount(sound3dId, index) : false);
 
 			file
 				<< " "
 				<< isStarted
 				<< " "
-				<< isPaused;
+				<< isPaused
+				<< " "
+				<< playCount;
 		}
 
 		file << endl;

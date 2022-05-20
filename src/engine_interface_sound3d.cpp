@@ -137,3 +137,8 @@ const int EngineInterface::sound3d_getTime(const string & sound3dId, int index) 
 {
 	return _core->getSound3dPlayer()->getSound3dTime(sound3dId, index);
 }
+
+const int EngineInterface::sound3d_getPlayCount(const string & sound3dId, int index) const
+{
+	return _core->getSound3dPlayer()->getSound3dPlayCount(sound3dId, index);
+}

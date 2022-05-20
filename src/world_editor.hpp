@@ -241,13 +241,13 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 205;
 
-	vector<pair<string, string>> _loadedModelIds = {};
-	vector<pair<string, string>> _loadedQuad3dIds = {};
-	vector<pair<string, string>> _loadedText3dIds = {};
-	vector<pair<string, string>> _loadedAabbIds = {};
-	vector<pair<string, string>> _loadedPointlightIds = {};
-	vector<pair<string, string>> _loadedSpotlightIds = {};
-	vector<pair<string, string>> _loadedSound3dIds = {};
+	vector<string> _loadedModelIds = {};
+	vector<string> _loadedQuad3dIds = {};
+	vector<string> _loadedText3dIds = {};
+	vector<string> _loadedAabbIds = {};
+	vector<string> _loadedPointlightIds = {};
+	vector<string> _loadedSpotlightIds = {};
+	vector<string> _loadedSound3dIds = {};
 	vector<string> _loadedCaptorIds = {};
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;

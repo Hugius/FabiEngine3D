@@ -42,27 +42,27 @@ public:
 	const bool isGraphicsAdded() const;
 
 private:
-	vector<pair<string, string>> _addedSkyIds = {};
-	vector<pair<string, string>> _loadedSkyIds = {};
-	vector<pair<string, string>> _addedTerrainIds = {};
-	vector<pair<string, string>> _loadedTerrainIds = {};
-	vector<pair<string, string>> _addedWaterIds = {};
-	vector<pair<string, string>> _loadedWaterIds = {};
-	vector<pair<string, string>> _addedModelIds = {};
-	vector<pair<string, string>> _loadedModelIds = {};
-	vector<pair<string, string>> _addedQuad3dIds = {};
-	vector<pair<string, string>> _loadedQuad3dIds = {};
-	vector<pair<string, string>> _addedText3dIds = {};
-	vector<pair<string, string>> _loadedText3dIds = {};
-	vector<pair<string, string>> _addedAabbIds = {};
-	vector<pair<string, string>> _loadedAabbIds = {};
-	vector<pair<string, string>> _addedPointlightIds = {};
-	vector<pair<string, string>> _loadedPointlightIds = {};
-	vector<pair<string, string>> _addedSpotlightIds = {};
-	vector<pair<string, string>> _loadedSpotlightIds = {};
-	vector<pair<string, string>> _addedSound3dIds = {};
-	vector<pair<string, string>> _loadedSound3dIds = {};
+	vector<string> _addedSkyIds = {};
+	vector<string> _addedTerrainIds = {};
+	vector<string> _addedWaterIds = {};
+	vector<string> _addedModelIds = {};
+	vector<string> _addedQuad3dIds = {};
+	vector<string> _addedText3dIds = {};
+	vector<string> _addedAabbIds = {};
+	vector<string> _addedPointlightIds = {};
+	vector<string> _addedSpotlightIds = {};
+	vector<string> _addedSound3dIds = {};
 	vector<string> _addedCaptorIds = {};
+	vector<string> _loadedSkyIds = {};
+	vector<string> _loadedTerrainIds = {};
+	vector<string> _loadedWaterIds = {};
+	vector<string> _loadedModelIds = {};
+	vector<string> _loadedQuad3dIds = {};
+	vector<string> _loadedText3dIds = {};
+	vector<string> _loadedAabbIds = {};
+	vector<string> _loadedPointlightIds = {};
+	vector<string> _loadedSpotlightIds = {};
+	vector<string> _loadedSound3dIds = {};
 	vector<string> _loadedCaptorIds = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;

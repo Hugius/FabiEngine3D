@@ -19,6 +19,8 @@ void Duplicator::copyTemplateSky(const string & newId, const string & templateId
 	_fe3d->sky_setRotation(newId, _fe3d->sky_getRotation(templateId));
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
 	_fe3d->sky_setRotationOrder(newId, _fe3d->sky_getRotationOrder(templateId));
+
+	_copiedSkyIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateTerrain(const string & newId, const string & templateId)
@@ -85,6 +87,8 @@ void Duplicator::copyTemplateTerrain(const string & newId, const string & templa
 	{
 		_fe3d->terrain_setBlueDiffuseMap(newId, _fe3d->terrain_getBlueDiffuseMapPath(templateId));
 	}
+
+	_copiedTerrainIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateWater(const string & newId, const string & templateId)
@@ -125,6 +129,8 @@ void Duplicator::copyTemplateWater(const string & newId, const string & template
 	{
 		_fe3d->water_setHeightMap(newId, _fe3d->water_getHeightMapPath(templateId));
 	}
+
+	_copiedWaterIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateModel(const string & newId, const string & templateId)
@@ -205,6 +211,8 @@ void Duplicator::copyTemplateModel(const string & newId, const string & template
 		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getLocalPosition(templateAabbId));
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getLocalSize(templateAabbId));
 	}
+
+	_copiedModelIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateQuad3d(const string & newId, const string & templateId)
@@ -249,6 +257,8 @@ void Duplicator::copyTemplateQuad3d(const string & newId, const string & templat
 		_fe3d->aabb_setParentId(newId, newId);
 		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 	}
+
+	_copiedQuad3dIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateQuad2d(const string & newId, const string & templateId)
@@ -270,6 +280,8 @@ void Duplicator::copyTemplateQuad2d(const string & newId, const string & templat
 	{
 		_fe3d->quad2d_setDiffuseMap(newId, _fe3d->quad2d_getDiffuseMapPath(templateId));
 	}
+
+	_copiedQuad2dIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateText3d(const string & newId, const string & templateId)
@@ -303,6 +315,8 @@ void Duplicator::copyTemplateText3d(const string & newId, const string & templat
 		_fe3d->aabb_setParentId(newId, newId);
 		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 	}
+
+	_copiedText3dIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateText2d(const string & newId, const string & templateId)
@@ -319,6 +333,8 @@ void Duplicator::copyTemplateText2d(const string & newId, const string & templat
 	_fe3d->text2d_setColor(newId, _fe3d->text2d_getColor(templateId));
 	_fe3d->text2d_setOpacity(newId, _fe3d->text2d_getOpacity(templateId));
 	_fe3d->text2d_setContent(newId, _fe3d->text2d_getContent(templateId));
+
+	_copiedText2dIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateAabb(const string & newId, const string & templateId)
@@ -331,6 +347,8 @@ void Duplicator::copyTemplateAabb(const string & newId, const string & templateI
 	_fe3d->aabb_create(newId, false);
 	_fe3d->aabb_setBaseSize(newId, _fe3d->aabb_getBaseSize(templateId));
 	_fe3d->aabb_setColor(newId, _fe3d->aabb_getColor(templateId));
+
+	_copiedAabbIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplatePointlight(const string & newId, const string & templateId)
@@ -345,6 +363,8 @@ void Duplicator::copyTemplatePointlight(const string & newId, const string & tem
 	_fe3d->pointlight_setColor(newId, _fe3d->pointlight_getColor(templateId));
 	_fe3d->pointlight_setIntensity(newId, _fe3d->pointlight_getIntensity(templateId));
 	_fe3d->pointlight_setShape(newId, _fe3d->pointlight_getShape(templateId));
+
+	_copiedPointlightIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateSpotlight(const string & newId, const string & templateId)
@@ -361,6 +381,8 @@ void Duplicator::copyTemplateSpotlight(const string & newId, const string & temp
 	_fe3d->spotlight_setIntensity(newId, _fe3d->spotlight_getIntensity(templateId));
 	_fe3d->spotlight_setAngle(newId, _fe3d->spotlight_getAngle(templateId));
 	_fe3d->spotlight_setDistance(newId, _fe3d->spotlight_getDistance(templateId));
+
+	_copiedSpotlightIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateSound3d(const string & newId, const string & templateId)
@@ -373,6 +395,8 @@ void Duplicator::copyTemplateSound3d(const string & newId, const string & templa
 	_fe3d->sound3d_create(newId, _fe3d->sound3d_getAudioPath(templateId));
 	_fe3d->sound3d_setMaxVolume(newId, _fe3d->sound3d_getMaxVolume(templateId));
 	_fe3d->sound3d_setMaxDistance(newId, _fe3d->sound3d_getMaxDistance(templateId));
+
+	_copiedSound3dIds.insert({newId, templateId});
 }
 
 void Duplicator::copyTemplateSound2d(const string & newId, const string & templateId)
@@ -383,4 +407,136 @@ void Duplicator::copyTemplateSound2d(const string & newId, const string & templa
 	}
 
 	_fe3d->sound2d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
+
+	_copiedSound2dIds.insert({newId, templateId});
+}
+
+const string & Duplicator::getTemplateSkyId(const string & skyId)
+{
+	if(_copiedSkyIds.find(skyId) == _copiedSkyIds.end())
+	{
+		abort();
+	}
+
+	return _copiedSkyIds.at(skyId);
+}
+
+const string & Duplicator::getTemplateTerrainId(const string & terrainId)
+{
+	if(_copiedTerrainIds.find(terrainId) == _copiedTerrainIds.end())
+	{
+		abort();
+	}
+
+	return _copiedTerrainIds.at(terrainId);
+}
+
+const string & Duplicator::getTemplateWaterId(const string & waterId)
+{
+	if(_copiedWaterIds.find(waterId) == _copiedWaterIds.end())
+	{
+		abort();
+	}
+
+	return _copiedWaterIds.at(waterId);
+}
+
+const string & Duplicator::getTemplateModelId(const string & modelId)
+{
+	if(_copiedModelIds.find(modelId) == _copiedModelIds.end())
+	{
+		abort();
+	}
+
+	return _copiedModelIds.at(modelId);
+}
+
+const string & Duplicator::getTemplateQuad3dId(const string & quad3dId)
+{
+	if(_copiedQuad3dIds.find(quad3dId) == _copiedQuad3dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedQuad3dIds.at(quad3dId);
+}
+
+const string & Duplicator::getTemplateQuad2dId(const string & quad2dId)
+{
+	if(_copiedQuad2dIds.find(quad2dId) == _copiedQuad2dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedQuad2dIds.at(quad2dId);
+}
+
+const string & Duplicator::getTemplateText3dId(const string & text3dId)
+{
+	if(_copiedText3dIds.find(text3dId) == _copiedText3dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedText3dIds.at(text3dId);
+}
+
+const string & Duplicator::getTemplateText2dId(const string & text2dId)
+{
+	if(_copiedText2dIds.find(text2dId) == _copiedText2dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedText2dIds.at(text2dId);
+}
+
+const string & Duplicator::getTemplateAabbId(const string & aabbId)
+{
+	if(_copiedAabbIds.find(aabbId) == _copiedAabbIds.end())
+	{
+		abort();
+	}
+
+	return _copiedAabbIds.at(aabbId);
+}
+
+const string & Duplicator::getTemplatePointlightId(const string & pointlightId)
+{
+	if(_copiedPointlightIds.find(pointlightId) == _copiedPointlightIds.end())
+	{
+		abort();
+	}
+
+	return _copiedPointlightIds.at(pointlightId);
+}
+
+const string & Duplicator::getTemplateSpotlightId(const string & spotlightId)
+{
+	if(_copiedSpotlightIds.find(spotlightId) == _copiedSpotlightIds.end())
+	{
+		abort();
+	}
+
+	return _copiedSpotlightIds.at(spotlightId);
+}
+
+const string & Duplicator::getTemplateSound3dId(const string & sound3dId)
+{
+	if(_copiedSound3dIds.find(sound3dId) == _copiedSound3dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedSound3dIds.at(sound3dId);
+}
+
+const string & Duplicator::getTemplateSound2dId(const string & sound2dId)
+{
+	if(_copiedSound2dIds.find(sound2dId) == _copiedSound2dIds.end())
+	{
+		abort();
+	}
+
+	return _copiedSound2dIds.at(sound2dId);
 }

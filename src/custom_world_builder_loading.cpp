@@ -767,23 +767,63 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> speedMultiplier
 				>> partCount;
 
+			if(!_fe3d->model_isExisting(placedModelId))
+			{
+				continue;
+			}
+
 			_fe3d->model_startAnimation3d(placedModelId, animation3dId, playCount);
-			_fe3d->model_setAnimation3dFrameIndex(
+			_fe3d->model_setAnimation3dFrameIndex(placedModelId, animation3dId, frameIndex);
+			_fe3d->model_setAnimation3dSpeedMultiplier(placedModelId, animation3dId, speedMultiplier);
 
-				for(int index = 0; index < partCount; index++)
+			if(isPaused)
+			{
+				_fe3d->model_pauseAnimation3d(placedModelId, animation3dId);
+			}
+
+			if(isAutoPaused)
+			{
+				_fe3d->model_autopauseAnimation3d(placedModelId, animation3dId);
+			}
+
+			for(int index = 0; index < partCount; index++)
+			{
+				string partId;
+				fvec3 totalMovement;
+				fvec3 totalRotation;
+				fvec3 totalScaling;
+				fvec3 totalSpeed;
+
+				iss
+					>> partId
+					>> totalMovement.x
+					>> totalMovement.y
+					>> totalMovement.z
+					>> totalRotation.x
+					>> totalRotation.y
+					>> totalRotation.z
+					>> totalScaling.x
+					>> totalScaling.y
+					>> totalScaling.z
+					>> totalSpeed.x
+					>> totalSpeed.y
+					>> totalSpeed.z;
+
+				if(!_fe3d->model_hasPart(placedModelId, partId))
 				{
-					string partId;
-					fvec3 totalMovement;
-					fvec3 totalRotation;
-					fvec3 totalScaling;
-					fvec3 totalSpeed;
-
-
+					continue;
 				}
+
+				_fe3d->model_setAnimation3dTotalMovement(placedModelId, partId, animation3dId, totalMovement);
+				_fe3d->model_setAnimation3dTotalRotation(placedModelId, partId, animation3dId, totalRotation);
+				_fe3d->model_setAnimation3dTotalScaling(placedModelId, partId, animation3dId, totalScaling);
+				_fe3d->model_setAnimation3dTotalSpeed(placedModelId, partId, animation3dId, totalSpeed);
+			}
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string quad3dId;
+			string placedQuad3dId;
+			string templateQuad3dId;
 			string diffuseMapPath;
 			string emissionMapPath;
 			fvec2 size;
@@ -804,7 +844,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isBright;
 
 			iss
-				>> quad3dId
+				>> placedQuad3dId
 				>> diffuseMapPath
 				>> emissionMapPath
 				>> size.x
@@ -833,24 +873,24 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-			_fe3d->quad3d_create(quad3dId, false);
-			_fe3d->quad3d_setVisible(quad3dId, false);
-			_fe3d->quad3d_setSize(quad3dId, size);
-			_fe3d->quad3d_setColor(quad3dId, color);
-			_fe3d->quad3d_setLightness(quad3dId, lightness);
-			_fe3d->quad3d_setFacingCameraHorizontally(quad3dId, isFacingCameraHorizontally);
-			_fe3d->quad3d_setFacingCameraVertically(quad3dId, isFacingCameraVertically);
-			_fe3d->quad3d_setHorizontallyFlipped(quad3dId, isHorizontallyFlipped);
-			_fe3d->quad3d_setVerticallyFlipped(quad3dId, isVerticallyFlipped);
-			_fe3d->quad3d_setShadowed(quad3dId, isShadowed);
-			_fe3d->quad3d_setReflected(quad3dId, isReflected);
-			_fe3d->quad3d_setRefracted(quad3dId, isRefracted);
-			_fe3d->quad3d_setTextureRepeat(quad3dId, textureRepeat);
-			_fe3d->quad3d_setBright(quad3dId, isBright);
-			_fe3d->quad3d_setOpacity(quad3dId, opacity);
-			_fe3d->quad3d_setEmissionIntensity(quad3dId, emissionIntensity);
-			_fe3d->quad3d_setMinAlpha(quad3dId, minAlpha);
-			_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
+			_fe3d->quad3d_create(placedQuad3dId, false);
+			_fe3d->quad3d_setVisible(placedQuad3dId, false);
+			_fe3d->quad3d_setSize(placedQuad3dId, size);
+			_fe3d->quad3d_setColor(placedQuad3dId, color);
+			_fe3d->quad3d_setLightness(placedQuad3dId, lightness);
+			_fe3d->quad3d_setFacingCameraHorizontally(placedQuad3dId, isFacingCameraHorizontally);
+			_fe3d->quad3d_setFacingCameraVertically(placedQuad3dId, isFacingCameraVertically);
+			_fe3d->quad3d_setHorizontallyFlipped(placedQuad3dId, isHorizontallyFlipped);
+			_fe3d->quad3d_setVerticallyFlipped(placedQuad3dId, isVerticallyFlipped);
+			_fe3d->quad3d_setShadowed(placedQuad3dId, isShadowed);
+			_fe3d->quad3d_setReflected(placedQuad3dId, isReflected);
+			_fe3d->quad3d_setRefracted(placedQuad3dId, isRefracted);
+			_fe3d->quad3d_setTextureRepeat(placedQuad3dId, textureRepeat);
+			_fe3d->quad3d_setBright(placedQuad3dId, isBright);
+			_fe3d->quad3d_setOpacity(placedQuad3dId, opacity);
+			_fe3d->quad3d_setEmissionIntensity(placedQuad3dId, emissionIntensity);
+			_fe3d->quad3d_setMinAlpha(placedQuad3dId, minAlpha);
+			_fe3d->quad3d_setRotationOrder(placedQuad3dId, DirectionOrderType(rotationOrder));
 
 			if(!diffuseMapPath.empty())
 			{
@@ -859,7 +899,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->quad3d_setDiffuseMap(quad3dId, diffuseMapPath);
+				_fe3d->quad3d_setDiffuseMap(placedQuad3dId, diffuseMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -869,10 +909,10 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
 
-				_fe3d->quad3d_setEmissionMap(quad3dId, emissionMapPath);
+				_fe3d->quad3d_setEmissionMap(placedQuad3dId, emissionMapPath);
 			}
 
-			_loadedQuad3dIds.push_back(quad3dId);
+			_loadedQuad3dIds.push_back(placedQuad3dId);
 		}
 		else if(lineType == "QUAD3D_AABB")
 		{

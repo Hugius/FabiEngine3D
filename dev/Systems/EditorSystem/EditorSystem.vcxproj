@@ -19,6 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\captor_editor_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\captor_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\captor_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\captor_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\captor_editor_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_misc.cpp" />
@@ -180,6 +186,7 @@
     <ClCompile Include="..\..\..\src\water_editor_update_miscellaneous.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\captor_editor.hpp" />
     <ClInclude Include="..\..\..\src\sound3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\spotlight_editor.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_editor.hpp" />

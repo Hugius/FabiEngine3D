@@ -45,27 +45,26 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 			const auto targetMovement = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
 			const auto targetRotation = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
 			const auto targetScaling = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
-			const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 
-			if(((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) &&
-			   (isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, speed.x)) &&
-			   (isMovement && _hasReachedTarget(totalMovement.z, targetTransformation.z, speed.x)))
+			if(((isMovement && _hasReachedTarget(totalMovement.x, targetMovement.x, speed.x)) &&
+			   (isMovement && _hasReachedTarget(totalMovement.y, targetMovement.y, speed.x)) &&
+			   (isMovement && _hasReachedTarget(totalMovement.z, targetMovement.z, speed.x)))
 			   ||
-			   ((isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.y)) &&
-			   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) &&
-			   (isRotation && _hasReachedTarget(totalRotation.z, targetTransformation.z, speed.y)))
+			   ((isRotation && _hasReachedTarget(totalRotation.x, targetRotation.x, speed.y)) &&
+			   (isRotation && _hasReachedTarget(totalRotation.y, targetRotation.y, speed.y)) &&
+			   (isRotation && _hasReachedTarget(totalRotation.z, targetRotation.z, speed.y)))
 			   ||
-			   ((isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.z)) &&
-			   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.z)) &&
-			   (isScaling && _hasReachedTarget(totalScaling.z, targetTransformation.z, speed.z))))
+			   ((isScaling && _hasReachedTarget(totalScaling.x, targetScaling.x, speed.z)) &&
+			   (isScaling && _hasReachedTarget(totalScaling.y, targetScaling.y, speed.z)) &&
+			   (isScaling && _hasReachedTarget(totalScaling.z, targetScaling.z, speed.z))))
 			{
 				finishedPartCount++;
 			}
 			else
 			{
-				if((isMovement && !_hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
+				if((isMovement && !_hasReachedTarget(totalMovement.x, targetMovement.x, speed.x)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.x, targetRotation.x, speed.x)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.x, targetScaling.x, speed.x)))
 				{
 					auto finalSpeed = speed.x;
 
@@ -75,7 +74,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.x - totalMovement.x);
+								finalSpeed = (targetMovement.x - totalMovement.x);
 							}
 
 							totalMovement.x += finalSpeed;
@@ -86,7 +85,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.x - totalRotation.x);
+								finalSpeed = (targetRotation.x - totalRotation.x);
 							}
 
 							totalRotation.x += finalSpeed;
@@ -97,7 +96,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.x - totalScaling.x);
+								finalSpeed = (targetScaling.x - totalScaling.x);
 							}
 
 							totalScaling.x += finalSpeed;
@@ -113,29 +112,29 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					float difference = 0.0f;
 
-					if((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) ||
-					   (isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
-					   (isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
+					if((isMovement && _hasReachedTarget(totalMovement.x, targetMovement.x, speed.x)) ||
+					   (isRotation && _hasReachedTarget(totalRotation.x, targetRotation.x, speed.x)) ||
+					   (isScaling && _hasReachedTarget(totalScaling.x, targetScaling.x, speed.x)))
 					{
 						switch(transformationType)
 						{
 							case TransformationType::MOVEMENT:
 							{
-								difference = (totalMovement.x - targetTransformation.x);
+								difference = (totalMovement.x - targetMovement.x);
 								totalMovement.x -= difference;
 
 								break;
 							}
 							case TransformationType::ROTATION:
 							{
-								difference = (totalRotation.x - targetTransformation.x);
+								difference = (totalRotation.x - targetRotation.x);
 								totalRotation.x -= difference;
 
 								break;
 							}
 							case TransformationType::SCALING:
 							{
-								difference = (totalScaling.x - targetTransformation.x);
+								difference = (totalScaling.x - targetScaling.x);
 								totalScaling.x -= difference;
 
 								break;
@@ -189,9 +188,9 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					}
 				}
 
-				if((isMovement && !_hasReachedTarget(totalMovement.y, targetTransformation.y, speed.y)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
+				if((isMovement && !_hasReachedTarget(totalMovement.y, targetMovement.y, speed.y)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.y, targetRotation.y, speed.y)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.y, targetScaling.y, speed.y)))
 				{
 					auto finalSpeed = speed.y;
 
@@ -201,7 +200,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.y - totalMovement.y);
+								finalSpeed = (targetMovement.y - totalMovement.y);
 							}
 
 							totalMovement.y += finalSpeed;
@@ -212,7 +211,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.y - totalRotation.y);
+								finalSpeed = (targetRotation.y - totalRotation.y);
 							}
 
 							totalRotation.y += finalSpeed;
@@ -223,7 +222,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.y - totalScaling.y);
+								finalSpeed = (targetScaling.y - totalScaling.y);
 							}
 
 							totalScaling.y += finalSpeed;
@@ -239,29 +238,29 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					float difference = 0.0f;
 
-					if((isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, speed.y)) ||
-					   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
-					   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
+					if((isMovement && _hasReachedTarget(totalMovement.y, targetMovement.y, speed.y)) ||
+					   (isRotation && _hasReachedTarget(totalRotation.y, targetRotation.y, speed.y)) ||
+					   (isScaling && _hasReachedTarget(totalScaling.y, targetScaling.y, speed.y)))
 					{
 						switch(transformationType)
 						{
 							case TransformationType::MOVEMENT:
 							{
-								difference = (totalMovement.y - targetTransformation.y);
+								difference = (totalMovement.y - targetMovement.y);
 								totalMovement.y -= difference;
 
 								break;
 							}
 							case TransformationType::ROTATION:
 							{
-								difference = (totalRotation.y - targetTransformation.y);
+								difference = (totalRotation.y - targetRotation.y);
 								totalRotation.y -= difference;
 
 								break;
 							}
 							case TransformationType::SCALING:
 							{
-								difference = (totalScaling.y - targetTransformation.y);
+								difference = (totalScaling.y - targetScaling.y);
 								totalScaling.y -= difference;
 
 								break;
@@ -315,9 +314,9 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					}
 				}
 
-				if((isMovement && !_hasReachedTarget(totalMovement.z, targetTransformation.z, speed.z)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.z, targetTransformation.z, speed.z)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.z, targetTransformation.z, speed.z)))
+				if((isMovement && !_hasReachedTarget(totalMovement.z, targetMovement.z, speed.z)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.z, targetRotation.z, speed.z)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.z, targetScaling.z, speed.z)))
 				{
 					auto finalSpeed = speed.z;
 
@@ -327,7 +326,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.z - totalMovement.z);
+								finalSpeed = (targetMovement.z - totalMovement.z);
 							}
 
 							totalMovement.z += finalSpeed;
@@ -338,7 +337,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.z - totalRotation.z);
+								finalSpeed = (targetRotation.z - totalRotation.z);
 							}
 
 							totalRotation.z += finalSpeed;
@@ -349,7 +348,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 						{
 							if(speedType == SpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.z - totalScaling.z);
+								finalSpeed = (targetScaling.z - totalScaling.z);
 							}
 
 							totalScaling.z += finalSpeed;
@@ -365,29 +364,29 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					float difference = 0.0f;
 
-					if((isMovement && _hasReachedTarget(totalMovement.z, targetTransformation.z, finalSpeed)) ||
-					   (isRotation && _hasReachedTarget(totalRotation.z, targetTransformation.z, finalSpeed)) ||
-					   (isScaling && _hasReachedTarget(totalScaling.z, targetTransformation.z, finalSpeed)))
+					if((isMovement && _hasReachedTarget(totalMovement.z, targetMovement.z, finalSpeed)) ||
+					   (isRotation && _hasReachedTarget(totalRotation.z, targetRotation.z, finalSpeed)) ||
+					   (isScaling && _hasReachedTarget(totalScaling.z, targetScaling.z, finalSpeed)))
 					{
 						switch(transformationType)
 						{
 							case TransformationType::MOVEMENT:
 							{
-								difference = (totalMovement.z - targetTransformation.z);
+								difference = (totalMovement.z - targetMovement.z);
 								totalMovement.z -= difference;
 
 								break;
 							}
 							case TransformationType::ROTATION:
 							{
-								difference = (totalRotation.z - targetTransformation.z);
+								difference = (totalRotation.z - targetRotation.z);
 								totalRotation.z -= difference;
 
 								break;
 							}
 							case TransformationType::SCALING:
 							{
-								difference = (totalScaling.z - targetTransformation.z);
+								difference = (totalScaling.z - targetScaling.z);
 								totalScaling.z -= difference;
 
 								break;

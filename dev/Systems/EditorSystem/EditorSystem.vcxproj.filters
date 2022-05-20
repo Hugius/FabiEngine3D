@@ -298,6 +298,9 @@
     <Filter Include="Spotlight Editor\Update">
       <UniqueIdentifier>{11ea5eb4-1cc6-4515-a746-6a9c3df3c2bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Captor Editor">
+      <UniqueIdentifier>{64a99028-7669-4a0b-bf0a-5a5afa8e4634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -777,6 +780,24 @@
     <ClCompile Include="..\..\..\src\sound3d_editor_update_misc.cpp">
       <Filter>Sound3d Editor\Update</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_lifecycle.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_loading.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_misc.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_saving.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_update_menu.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp">
+      <Filter>Captor Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -832,6 +853,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound3d_editor.hpp">
       <Filter>Sound3d Editor\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\captor_editor.hpp">
+      <Filter>Captor Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,13 +24,13 @@ void WorldEditor::_updateAabbEditing()
 		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
-		for(const auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
+		for(const auto & aabbId : _loadedAabbIds)
 		{
-			const auto isHovered = (hoveredAabbId == placedAabbId);
+			const auto isHovered = (hoveredAabbId == aabbId);
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectAabb(placedAabbId);
+				_selectAabb(aabbId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updateAabbEditing()
 			}
 			else
 			{
-				if((placedAabbId != _selectedAabbId) && (placedAabbId != _activeAabbId))
+				if((aabbId != _selectedAabbId) && (aabbId != _activeAabbId))
 				{
-					_deselectAabb(placedAabbId);
+					_deselectAabb(aabbId);
 				}
 			}
 		}
@@ -85,11 +85,11 @@ void WorldEditor::_updateAabbEditing()
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->aabb_delete(_activeAabbId);
+				_duplicator->deleteCopiedAabb(_activeAabbId);
 
 				window->setActiveScreen("empty");
 
-				_loadedAabbIds.erase(_activeAabbId);
+				_loadedAabbIds.erase(remove(_loadedAabbIds.begin(), _loadedAabbIds.end(), _activeAabbId), _loadedAabbIds.end());
 
 				_activeAabbId = "";
 

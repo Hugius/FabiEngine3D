@@ -106,55 +106,55 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
 	}
 
-	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
+	for(const auto & modelId : _loadedModelIds)
 	{
-		for(const auto & partId : _fe3d->model_getPartIds(placedModelId))
+		for(const auto & partId : _fe3d->model_getPartIds(modelId))
 		{
-			_fe3d->model_setWireframed(placedModelId, partId, _isWireframeModeEnabled);
+			_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
 		}
 
-		for(const auto & aabbId : _fe3d->model_getChildAabbIds(placedModelId))
-		{
-			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-		}
-	}
-
-	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
-	{
-		_fe3d->quad3d_setWireframed(placedQuad3dId, _isWireframeModeEnabled);
-
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(placedQuad3dId))
+		for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
-	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
+	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		_fe3d->text3d_setWireframed(placedText3dId, _isWireframeModeEnabled);
+		_fe3d->quad3d_setWireframed(quad3dId, _isWireframeModeEnabled);
 
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(placedText3dId))
+		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
-	for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
+	for(const auto & text3dId : _loadedText3dIds)
 	{
-		_fe3d->model_setWireframed("@@lamp_" + placedPointlightId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@lamp_" + placedPointlightId, _isAabbModeEnabled);
+		_fe3d->text3d_setWireframed(text3dId, _isWireframeModeEnabled);
+
+		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
+		{
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+		}
 	}
 
-	for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
+	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		_fe3d->model_setWireframed("@@torch_" + placedSpotlightId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@torch_" + placedSpotlightId, _isAabbModeEnabled);
+		_fe3d->model_setWireframed("@@lamp_" + pointlightId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@lamp_" + pointlightId, _isAabbModeEnabled);
 	}
 
-	for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		_fe3d->model_setWireframed("@@speaker_" + placedSound3dId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@speaker_" + placedSound3dId, _isAabbModeEnabled);
+		_fe3d->model_setWireframed("@@torch_" + spotlightId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@torch_" + spotlightId, _isAabbModeEnabled);
+	}
+
+	for(const auto & sound3dId : _loadedSound3dIds)
+	{
+		_fe3d->model_setWireframed("@@speaker_" + sound3dId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
 	}
 
 	for(const auto & placedCaptorId : _loadedCaptorIds)

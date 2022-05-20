@@ -32,9 +32,9 @@ void WorldEditor::_updatePointlightMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->deleteOptions();
 
-			for(auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
+			for(auto & pointlightId : _loadedPointlightIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->createOption(placedPointlightId, placedPointlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("placedPointlights")->createOption(pointlightId, pointlightId);
 			}
 		}
 

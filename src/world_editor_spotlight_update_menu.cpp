@@ -32,9 +32,9 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->deleteOptions();
 
-			for(auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
+			for(auto & spotlightId : _loadedSpotlightIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->createOption(placedSpotlightId, placedSpotlightId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("placedSpotlights")->createOption(spotlightId, spotlightId);
 			}
 		}
 

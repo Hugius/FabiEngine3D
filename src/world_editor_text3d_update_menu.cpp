@@ -31,9 +31,9 @@ void WorldEditor::_updateText3dMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->deleteOptions();
 
-			for(auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
+			for(auto & text3dId : _loadedText3dIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->createOption(placedText3dId, placedText3dId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("placedText3ds")->createOption(text3dId, text3dId);
 			}
 		}
 

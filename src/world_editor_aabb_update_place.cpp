@@ -35,7 +35,7 @@ void WorldEditor::_updateAabbPlacing()
 
 				_fe3d->aabb_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedAabbIds.push_back({newId, _currentTemplateAabbId});
+				_loadedAabbIds.push_back(newId);
 
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
 
@@ -96,7 +96,7 @@ void WorldEditor::_updateAabbPlacing()
 
 				_fe3d->aabb_setBasePosition(newId, newPosition);
 
-				_loadedAabbIds.push_back({newId, _currentTemplateAabbId});
+				_loadedAabbIds.push_back(newId);
 			}
 		}
 	}

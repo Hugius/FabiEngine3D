@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_delete(args[0]->getString());
+				_duplicator->deleteCopiedQuad3d(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 			{
 				if(quad3dId[0] != '@')
 				{
-					_fe3d->quad3d_delete(quad3dId);
+					_duplicator->deleteCopiedQuad3d(quad3dId);
 				}
 			}
 

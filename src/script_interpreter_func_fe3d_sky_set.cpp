@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 		{
 			if(_validateFe3dSky(args[0]->getString(), false))
 			{
-				_fe3d->sky_delete(args[0]->getString());
+				_duplicator->deleteCopiedSky(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 			{
 				if(skyId[0] != '@')
 				{
-					_fe3d->sky_delete(skyId);
+					_duplicator->deleteCopiedSky(skyId);
 				}
 			}
 

@@ -31,9 +31,9 @@ void WorldEditor::_updateModelMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModelChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->deleteOptions();
 
-			for(auto & [placedModelId, templateModelId] : _loadedModelIds)
+			for(auto & modelId : _loadedModelIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->createOption(placedModelId, placedModelId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("placedModels")->createOption(modelId, modelId);
 			}
 		}
 

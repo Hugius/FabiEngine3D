@@ -24,13 +24,13 @@ void WorldEditor::_updateSpotlightEditing()
 			_dontResetSelectedSpotlight = false;
 		}
 
-		for(const auto & [placedSpotlightId, templateSpotlightId] : _loadedSpotlightIds)
+		for(const auto & spotlightId : _loadedSpotlightIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@torch_" + placedSpotlightId));
+			const auto isHovered = (hoveredAabbId == ("@@torch_" + spotlightId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectSpotlight(placedSpotlightId);
+				_selectSpotlight(spotlightId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 			else
 			{
-				if((placedSpotlightId != _selectedSpotlightId) && (placedSpotlightId != _activeSpotlightId))
+				if((spotlightId != _selectedSpotlightId) && (spotlightId != _activeSpotlightId))
 				{
-					_deselectSpotlight(placedSpotlightId);
+					_deselectSpotlight(spotlightId);
 				}
 			}
 		}
@@ -75,12 +75,13 @@ void WorldEditor::_updateSpotlightEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->spotlight_delete(_activeSpotlightId);
+				_duplicator->deleteCopiedSpotlight(_activeSpotlightId);
+
 				_fe3d->model_delete(("@@torch_" + _activeSpotlightId));
 
 				window->setActiveScreen("empty");
 
-				_loadedSpotlightIds.erase(_activeSpotlightId);
+				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _activeSpotlightId), _loadedSpotlightIds.end());
 
 				_activeSpotlightId = "";
 

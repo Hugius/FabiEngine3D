@@ -38,7 +38,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		if(lineType == "SKY")
 		{
 			array<string, 6> cubeMapPaths{};
-			string placedSkyId;
+			string skyId;
 			string templateSkyId;
 			fvec3 color;
 			fvec3 rotation;
@@ -49,7 +49,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isSelected;
 
 			iss
-				>> placedSkyId
+				>> skyId
 				>> templateSkyId
 				>> cubeMapPaths[0]
 				>> cubeMapPaths[1]
@@ -91,26 +91,26 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_duplicator->copyTemplateSky(placedSkyId, templateSkyId);
+			_duplicator->copyTemplateSky(skyId, templateSkyId);
 
-			_fe3d->sky_setCubeMaps(placedSkyId, cubeMapPaths);
-			_fe3d->sky_setLightness(placedSkyId, lightness);
-			_fe3d->sky_setRotation(placedSkyId, rotation);
-			_fe3d->sky_setColor(placedSkyId, color);
-			_fe3d->sky_setRotationOrder(placedSkyId, DirectionOrderType(rotationOrder));
-			_fe3d->sky_setWireframed(placedSkyId, isWireframed);
-			_fe3d->sky_setWireframeColor(placedSkyId, wireframeColor);
+			_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
+			_fe3d->sky_setLightness(skyId, lightness);
+			_fe3d->sky_setRotation(skyId, rotation);
+			_fe3d->sky_setColor(skyId, color);
+			_fe3d->sky_setRotationOrder(skyId, DirectionOrderType(rotationOrder));
+			_fe3d->sky_setWireframed(skyId, isWireframed);
+			_fe3d->sky_setWireframeColor(skyId, wireframeColor);
 
-			_loadedSkyIds.push_back({placedSkyId, templateSkyId});
+			_loadedSkyIds.push_back(skyId);
 
 			if(isSelected)
 			{
-				_fe3d->sky_select(placedSkyId);
+				_fe3d->sky_select(skyId);
 			}
 		}
 		else if(lineType == "TERRAIN")
 		{
-			string placedTerrainId;
+			string terrainId;
 			string templateTerrainId;
 			string diffuseMapPath;
 			string normalMapPath;
@@ -138,7 +138,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isSelected;
 
 			iss
-				>> placedTerrainId
+				>> terrainId
 				>> templateTerrainId
 				>> diffuseMapPath
 				>> blendMapPath
@@ -198,21 +198,21 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_duplicator->copyTemplateTerrain(placedTerrainId, templateTerrainId);
+			_duplicator->copyTemplateTerrain(terrainId, templateTerrainId);
 
-			_fe3d->terrain_setMaxHeight(placedTerrainId, maxHeight);
-			_fe3d->terrain_setTextureRepeat(placedTerrainId, textureRepeat);
-			_fe3d->terrain_setLightness(placedTerrainId, lightness);
-			_fe3d->terrain_setColor(placedTerrainId, color);
-			_fe3d->terrain_setRedTextureRepeat(placedTerrainId, redTextureRepeat);
-			_fe3d->terrain_setGreenTextureRepeat(placedTerrainId, greenTextureRepeat);
-			_fe3d->terrain_setBlueTextureRepeat(placedTerrainId, blueTextureRepeat);
-			_fe3d->terrain_setSpecular(placedTerrainId, isSpecular);
-			_fe3d->terrain_setSpecularShininess(placedTerrainId, specularShininess);
-			_fe3d->terrain_setWireframed(placedTerrainId, isWireframed);
-			_fe3d->terrain_setWireframeColor(placedTerrainId, wireframeColor);
-			_fe3d->terrain_setMinClipPosition(placedTerrainId, minClipPosition);
-			_fe3d->terrain_setMaxClipPosition(placedTerrainId, maxClipPosition);
+			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
+			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);
+			_fe3d->terrain_setLightness(terrainId, lightness);
+			_fe3d->terrain_setColor(terrainId, color);
+			_fe3d->terrain_setRedTextureRepeat(terrainId, redTextureRepeat);
+			_fe3d->terrain_setGreenTextureRepeat(terrainId, greenTextureRepeat);
+			_fe3d->terrain_setBlueTextureRepeat(terrainId, blueTextureRepeat);
+			_fe3d->terrain_setSpecular(terrainId, isSpecular);
+			_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
+			_fe3d->terrain_setWireframed(terrainId, isWireframed);
+			_fe3d->terrain_setWireframeColor(terrainId, wireframeColor);
+			_fe3d->terrain_setMinClipPosition(terrainId, minClipPosition);
+			_fe3d->terrain_setMaxClipPosition(terrainId, maxClipPosition);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -221,7 +221,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->terrain_setDiffuseMap(placedTerrainId, diffuseMapPath);
+				_fe3d->terrain_setDiffuseMap(terrainId, diffuseMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -231,7 +231,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
-				_fe3d->terrain_setNormalMap(placedTerrainId, normalMapPath);
+				_fe3d->terrain_setNormalMap(terrainId, normalMapPath);
 			}
 
 			if(!redNormalMapPath.empty())
@@ -241,7 +241,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					redNormalMapPath = ("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
 				}
 
-				_fe3d->terrain_setRedNormalMap(placedTerrainId, redNormalMapPath);
+				_fe3d->terrain_setRedNormalMap(terrainId, redNormalMapPath);
 			}
 
 			if(!greenNormalMapPath.empty())
@@ -251,7 +251,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					greenNormalMapPath = ("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
 				}
 
-				_fe3d->terrain_setGreenNormalMap(placedTerrainId, greenNormalMapPath);
+				_fe3d->terrain_setGreenNormalMap(terrainId, greenNormalMapPath);
 			}
 
 			if(!blueNormalMapPath.empty())
@@ -261,7 +261,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					blueNormalMapPath = ("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
 				}
 
-				_fe3d->terrain_setBlueNormalMap(placedTerrainId, blueNormalMapPath);
+				_fe3d->terrain_setBlueNormalMap(terrainId, blueNormalMapPath);
 			}
 
 			if(!blendMapPath.empty())
@@ -271,7 +271,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					blendMapPath = ("projects\\" + _currentProjectId + "\\" + blendMapPath);
 				}
 
-				_fe3d->terrain_setBlendMap(placedTerrainId, blendMapPath);
+				_fe3d->terrain_setBlendMap(terrainId, blendMapPath);
 			}
 
 			if(!redDiffuseMapPath.empty())
@@ -281,7 +281,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					redDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setRedDiffuseMap(placedTerrainId, redDiffuseMapPath);
+				_fe3d->terrain_setRedDiffuseMap(terrainId, redDiffuseMapPath);
 			}
 
 			if(!greenDiffuseMapPath.empty())
@@ -291,7 +291,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					greenDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setGreenDiffuseMap(placedTerrainId, greenDiffuseMapPath);
+				_fe3d->terrain_setGreenDiffuseMap(terrainId, greenDiffuseMapPath);
 			}
 
 			if(!blueDiffuseMapPath.empty())
@@ -301,19 +301,19 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					blueDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setBlueDiffuseMap(placedTerrainId, blueDiffuseMapPath);
+				_fe3d->terrain_setBlueDiffuseMap(terrainId, blueDiffuseMapPath);
 			}
 
-			_loadedTerrainIds.push_back({placedTerrainId, templateTerrainId});
+			_loadedTerrainIds.push_back(terrainId);
 
 			if(isSelected)
 			{
-				_fe3d->terrain_select(placedTerrainId);
+				_fe3d->terrain_select(terrainId);
 			}
 		}
 		else if(lineType == "WATER")
 		{
-			string placedWaterId;
+			string waterId;
 			string templateWaterId;
 			string dudvMapPath;
 			string normalMapPath;
@@ -339,7 +339,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isSelected;
 
 			iss
-				>> placedWaterId
+				>> waterId
 				>> templateWaterId
 				>> dudvMapPath
 				>> normalMapPath
@@ -387,30 +387,30 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_duplicator->copyTemplateWater(placedWaterId, templateWaterId);
+			_duplicator->copyTemplateWater(waterId, templateWaterId);
 
-			_fe3d->water_setSize(placedWaterId, size);
-			_fe3d->water_setSpecular(placedWaterId, isSpecular);
-			_fe3d->water_setReflective(placedWaterId, isReflective);
-			_fe3d->water_setRefractive(placedWaterId, isRefractive);
-			_fe3d->water_setWaveHeight(placedWaterId, waveHeight);
-			_fe3d->water_setSpecularShininess(placedWaterId, specularShininess);
-			_fe3d->water_setSpecularIntensity(placedWaterId, specularIntensity);
-			_fe3d->water_setEdged(placedWaterId, isEdged);
-			_fe3d->water_setColor(placedWaterId, color);
-			_fe3d->water_setTextureRepeat(placedWaterId, textureRepeat);
-			_fe3d->water_setRippleSpeed(placedWaterId, rippleSpeed);
-			_fe3d->water_setWaveSpeed(placedWaterId, waveSpeed);
-			_fe3d->water_setMaxDepth(placedWaterId, maxDepth);
-			_fe3d->water_setHeight(placedWaterId, height);
-			_fe3d->water_setWireframed(placedWaterId, isWireframed);
-			_fe3d->water_setWireframeColor(placedWaterId, wireframeColor);
-			_fe3d->water_setMinClipPosition(placedWaterId, minClipPosition);
-			_fe3d->water_setMaxClipPosition(placedWaterId, maxClipPosition);
+			_fe3d->water_setSize(waterId, size);
+			_fe3d->water_setSpecular(waterId, isSpecular);
+			_fe3d->water_setReflective(waterId, isReflective);
+			_fe3d->water_setRefractive(waterId, isRefractive);
+			_fe3d->water_setWaveHeight(waterId, waveHeight);
+			_fe3d->water_setSpecularShininess(waterId, specularShininess);
+			_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
+			_fe3d->water_setEdged(waterId, isEdged);
+			_fe3d->water_setColor(waterId, color);
+			_fe3d->water_setTextureRepeat(waterId, textureRepeat);
+			_fe3d->water_setRippleSpeed(waterId, rippleSpeed);
+			_fe3d->water_setWaveSpeed(waterId, waveSpeed);
+			_fe3d->water_setMaxDepth(waterId, maxDepth);
+			_fe3d->water_setHeight(waterId, height);
+			_fe3d->water_setWireframed(waterId, isWireframed);
+			_fe3d->water_setWireframeColor(waterId, wireframeColor);
+			_fe3d->water_setMinClipPosition(waterId, minClipPosition);
+			_fe3d->water_setMaxClipPosition(waterId, maxClipPosition);
 
 			if(isSelected)
 			{
-				_fe3d->water_select(placedWaterId);
+				_fe3d->water_select(waterId);
 			}
 
 			if(!dudvMapPath.empty())
@@ -420,7 +420,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					dudvMapPath = ("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
 
-				_fe3d->water_setDudvMap(placedWaterId, dudvMapPath);
+				_fe3d->water_setDudvMap(waterId, dudvMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -430,7 +430,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
-				_fe3d->water_setNormalMap(placedWaterId, normalMapPath);
+				_fe3d->water_setNormalMap(waterId, normalMapPath);
 			}
 
 			if(!heightMapPath.empty())
@@ -440,14 +440,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					heightMapPath = ("projects\\" + _currentProjectId + "\\" + heightMapPath);
 				}
 
-				_fe3d->water_setHeightMap(placedWaterId, heightMapPath);
+				_fe3d->water_setHeightMap(waterId, heightMapPath);
 			}
 
-			_loadedWaterIds.push_back({placedWaterId, templateWaterId});
+			_loadedWaterIds.push_back(waterId);
 		}
 		else if(lineType == "MODEL")
 		{
-			string placedModelId;
+			string modelId;
 			string templateModelId;
 			string levelOfDetailId;
 			fvec3 position;
@@ -465,7 +465,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isFrozen;
 
 			iss
-				>> placedModelId
+				>> modelId
 				>> templateModelId
 				>> levelOfDetailId
 				>> levelOfDetailDistance
@@ -501,28 +501,28 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_duplicator->copyTemplateModel(placedModelId, templateModelId);
+			_duplicator->copyTemplateModel(modelId, templateModelId);
 
-			_fe3d->model_setVisible(placedModelId, isVisible);
-			_fe3d->model_setBasePosition(placedModelId, position);
-			_fe3d->model_setBaseRotation(placedModelId, rotation);
-			_fe3d->model_setBaseRotationOrigin(placedModelId, rotationOrigin);
-			_fe3d->model_setBaseSize(placedModelId, size);
-			_fe3d->model_setLevelOfDetailId(placedModelId, levelOfDetailId);
-			_fe3d->model_setLevelOfDetailDistance(placedModelId, levelOfDetailDistance);
-			_fe3d->model_setRotationOrder(placedModelId, DirectionOrderType(rotationOrder));
-			_fe3d->model_setShadowed(placedModelId, isShadowed);
-			_fe3d->model_setReflected(placedModelId, isReflected);
-			_fe3d->model_setRefracted(placedModelId, isRefracted);
-			_fe3d->model_setMinClipPosition(placedModelId, minClipPosition);
-			_fe3d->model_setMaxClipPosition(placedModelId, maxClipPosition);
-			_fe3d->model_setFrozen(placedModelId, isFrozen);
+			_fe3d->model_setVisible(modelId, isVisible);
+			_fe3d->model_setBasePosition(modelId, position);
+			_fe3d->model_setBaseRotation(modelId, rotation);
+			_fe3d->model_setBaseRotationOrigin(modelId, rotationOrigin);
+			_fe3d->model_setBaseSize(modelId, size);
+			_fe3d->model_setLevelOfDetailId(modelId, levelOfDetailId);
+			_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
+			_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
+			_fe3d->model_setShadowed(modelId, isShadowed);
+			_fe3d->model_setReflected(modelId, isReflected);
+			_fe3d->model_setRefracted(modelId, isRefracted);
+			_fe3d->model_setMinClipPosition(modelId, minClipPosition);
+			_fe3d->model_setMaxClipPosition(modelId, maxClipPosition);
+			_fe3d->model_setFrozen(modelId, isFrozen);
 
-			_loadedModelIds.push_back({placedModelId, templateModelId});
+			_loadedModelIds.push_back(modelId);
 		}
 		else if(lineType == "MODEL_PART")
 		{
-			string placedModelId;
+			string modelId;
 			string partId;
 			string diffuseMapPath;
 			string emissionMapPath;
@@ -555,7 +555,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isWireframed;
 
 			iss
-				>> placedModelId
+				>> modelId
 				>> partId
 				>> diffuseMapPath
 				>> emissionMapPath
@@ -614,39 +614,39 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(refractionMapPath.begin(), refractionMapPath.end(), '?', ' ');
 			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-			if(!_fe3d->model_isExisting(placedModelId))
+			if(!_fe3d->model_isExisting(modelId))
 			{
 				continue;
 			}
 
-			if(!_fe3d->model_hasPart(placedModelId, partId))
+			if(!_fe3d->model_hasPart(modelId, partId))
 			{
 				continue;
 			}
 
-			_fe3d->model_setPartPosition(placedModelId, partId, position);
-			_fe3d->model_setPartRotation(placedModelId, partId, rotation);
-			_fe3d->model_setPartRotationOrigin(placedModelId, partId, rotationOrigin);
-			_fe3d->model_setPartSize(placedModelId, partId, size);
-			_fe3d->model_setColor(placedModelId, partId, color);
-			_fe3d->model_setSpecular(placedModelId, partId, isSpecular);
-			_fe3d->model_setSpecularShininess(placedModelId, partId, specularShininess);
-			_fe3d->model_setSpecularIntensity(placedModelId, partId, specularIntensity);
-			_fe3d->model_setReflectivity(placedModelId, partId, reflectivity);
-			_fe3d->model_setRefractivity(placedModelId, partId, refractivity);
-			_fe3d->model_setLightness(placedModelId, partId, lightness);
-			_fe3d->model_setTextureRepeat(placedModelId, partId, textureRepeat);
-			_fe3d->model_setReflective(placedModelId, partId, isReflective);
-			_fe3d->model_setRefractive(placedModelId, partId, isRefractive);
-			_fe3d->model_setReflectionType(placedModelId, partId, ReflectionType(reflectionType));
-			_fe3d->model_setRefractionType(placedModelId, partId, RefractionType(refractionType));
-			_fe3d->model_setFaceCulled(placedModelId, partId, isFaceCulled);
-			_fe3d->model_setBright(placedModelId, partId, isBright);
-			_fe3d->model_setEmissionIntensity(placedModelId, partId, emissionIntensity);
-			_fe3d->model_setOpacity(placedModelId, partId, opacity);
-			_fe3d->model_setMinAlpha(placedModelId, partId, minAlpha);
-			_fe3d->model_setWireframed(placedModelId, partId, isWireframed);
-			_fe3d->model_setWireframeColor(placedModelId, partId, wireframeColor);
+			_fe3d->model_setPartPosition(modelId, partId, position);
+			_fe3d->model_setPartRotation(modelId, partId, rotation);
+			_fe3d->model_setPartRotationOrigin(modelId, partId, rotationOrigin);
+			_fe3d->model_setPartSize(modelId, partId, size);
+			_fe3d->model_setColor(modelId, partId, color);
+			_fe3d->model_setSpecular(modelId, partId, isSpecular);
+			_fe3d->model_setSpecularShininess(modelId, partId, specularShininess);
+			_fe3d->model_setSpecularIntensity(modelId, partId, specularIntensity);
+			_fe3d->model_setReflectivity(modelId, partId, reflectivity);
+			_fe3d->model_setRefractivity(modelId, partId, refractivity);
+			_fe3d->model_setLightness(modelId, partId, lightness);
+			_fe3d->model_setTextureRepeat(modelId, partId, textureRepeat);
+			_fe3d->model_setReflective(modelId, partId, isReflective);
+			_fe3d->model_setRefractive(modelId, partId, isRefractive);
+			_fe3d->model_setReflectionType(modelId, partId, ReflectionType(reflectionType));
+			_fe3d->model_setRefractionType(modelId, partId, RefractionType(refractionType));
+			_fe3d->model_setFaceCulled(modelId, partId, isFaceCulled);
+			_fe3d->model_setBright(modelId, partId, isBright);
+			_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
+			_fe3d->model_setOpacity(modelId, partId, opacity);
+			_fe3d->model_setMinAlpha(modelId, partId, minAlpha);
+			_fe3d->model_setWireframed(modelId, partId, isWireframed);
+			_fe3d->model_setWireframeColor(modelId, partId, wireframeColor);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -655,7 +655,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->model_setDiffuseMap(placedModelId, partId, diffuseMapPath);
+				_fe3d->model_setDiffuseMap(modelId, partId, diffuseMapPath);
 			}
 
 			if(!specularMapPath.empty())
@@ -665,7 +665,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					specularMapPath = ("projects\\" + _currentProjectId + "\\" + specularMapPath);
 				}
 
-				_fe3d->model_setSpecularMap(placedModelId, partId, specularMapPath);
+				_fe3d->model_setSpecularMap(modelId, partId, specularMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -675,7 +675,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
 
-				_fe3d->model_setEmissionMap(placedModelId, partId, emissionMapPath);
+				_fe3d->model_setEmissionMap(modelId, partId, emissionMapPath);
 			}
 
 			if(!reflectionMapPath.empty())
@@ -685,7 +685,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					reflectionMapPath = ("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 				}
 
-				_fe3d->model_setReflectionMap(placedModelId, partId, reflectionMapPath);
+				_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
 			}
 
 			if(!refractionMapPath.empty())
@@ -695,7 +695,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					refractionMapPath = ("projects\\" + _currentProjectId + "\\" + refractionMapPath);
 				}
 
-				_fe3d->model_setRefractionMap(placedModelId, partId, refractionMapPath);
+				_fe3d->model_setRefractionMap(modelId, partId, refractionMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -705,12 +705,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
-				_fe3d->model_setNormalMap(placedModelId, partId, normalMapPath);
+				_fe3d->model_setNormalMap(modelId, partId, normalMapPath);
 			}
 		}
 		else if(lineType == "MODEL_AABB")
 		{
-			string placedModelId;
+			string modelId;
 			string aabbId;
 			fvec3 position;
 			fvec3 size;
@@ -719,7 +719,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isVisible;
 
 			iss
-				>> placedModelId
+				>> modelId
 				>> aabbId
 				>> position.x
 				>> position.y
@@ -731,14 +731,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> isCollisionResponsive
 				>> isVisible;
 
-			if(!_fe3d->model_isExisting(placedModelId))
+			if(!_fe3d->model_isExisting(modelId))
 			{
 				continue;
 			}
 
 			_fe3d->aabb_create(aabbId, false);
 			_fe3d->aabb_setVisible(aabbId, false);
-			_fe3d->aabb_setParentId(aabbId, placedModelId);
+			_fe3d->aabb_setParentId(aabbId, modelId);
 			_fe3d->aabb_setParentType(aabbId, AabbParentType::MODEL);
 			_fe3d->aabb_setLocalPosition(aabbId, position);
 			_fe3d->aabb_setLocalSize(aabbId, size);
@@ -748,7 +748,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "MODEL_ANIMATION3D")
 		{
-			string placedModelId;
+			string modelId;
 			string animation3dId;
 			float speedMultiplier;
 			int playCount;
@@ -758,7 +758,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isAutoPaused;
 
 			iss
-				>> placedModelId
+				>> modelId
 				>> animation3dId
 				>> isPaused
 				>> isAutoPaused
@@ -767,23 +767,23 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> speedMultiplier
 				>> partCount;
 
-			if(!_fe3d->model_isExisting(placedModelId))
+			if(!_fe3d->model_isExisting(modelId))
 			{
 				continue;
 			}
 
-			_fe3d->model_startAnimation3d(placedModelId, animation3dId, playCount);
-			_fe3d->model_setAnimation3dFrameIndex(placedModelId, animation3dId, frameIndex);
-			_fe3d->model_setAnimation3dSpeedMultiplier(placedModelId, animation3dId, speedMultiplier);
+			_fe3d->model_startAnimation3d(modelId, animation3dId, playCount);
+			_fe3d->model_setAnimation3dFrameIndex(modelId, animation3dId, frameIndex);
+			_fe3d->model_setAnimation3dSpeedMultiplier(modelId, animation3dId, speedMultiplier);
 
 			if(isPaused)
 			{
-				_fe3d->model_pauseAnimation3d(placedModelId, animation3dId);
+				_fe3d->model_pauseAnimation3d(modelId, animation3dId);
 			}
 
 			if(isAutoPaused)
 			{
-				_fe3d->model_autopauseAnimation3d(placedModelId, animation3dId);
+				_fe3d->model_autopauseAnimation3d(modelId, animation3dId);
 			}
 
 			for(int index = 0; index < partCount; index++)
@@ -809,20 +809,20 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					>> totalSpeed.y
 					>> totalSpeed.z;
 
-				if(!_fe3d->model_hasPart(placedModelId, partId))
+				if(!_fe3d->model_hasPart(modelId, partId))
 				{
 					continue;
 				}
 
-				_fe3d->model_setAnimation3dTotalMovement(placedModelId, partId, animation3dId, totalMovement);
-				_fe3d->model_setAnimation3dTotalRotation(placedModelId, partId, animation3dId, totalRotation);
-				_fe3d->model_setAnimation3dTotalScaling(placedModelId, partId, animation3dId, totalScaling);
-				_fe3d->model_setAnimation3dTotalSpeed(placedModelId, partId, animation3dId, totalSpeed);
+				_fe3d->model_setAnimation3dTotalMovement(modelId, partId, animation3dId, totalMovement);
+				_fe3d->model_setAnimation3dTotalRotation(modelId, partId, animation3dId, totalRotation);
+				_fe3d->model_setAnimation3dTotalScaling(modelId, partId, animation3dId, totalScaling);
+				_fe3d->model_setAnimation3dTotalSpeed(modelId, partId, animation3dId, totalSpeed);
 			}
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string placedQuad3dId;
+			string quad3dId;
 			string templateQuad3dId;
 			string diffuseMapPath;
 			string emissionMapPath;
@@ -844,7 +844,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isBright;
 
 			iss
-				>> placedQuad3dId
+				>> quad3dId
 				>> diffuseMapPath
 				>> emissionMapPath
 				>> size.x
@@ -873,24 +873,24 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-			_fe3d->quad3d_create(placedQuad3dId, false);
-			_fe3d->quad3d_setVisible(placedQuad3dId, false);
-			_fe3d->quad3d_setSize(placedQuad3dId, size);
-			_fe3d->quad3d_setColor(placedQuad3dId, color);
-			_fe3d->quad3d_setLightness(placedQuad3dId, lightness);
-			_fe3d->quad3d_setFacingCameraHorizontally(placedQuad3dId, isFacingCameraHorizontally);
-			_fe3d->quad3d_setFacingCameraVertically(placedQuad3dId, isFacingCameraVertically);
-			_fe3d->quad3d_setHorizontallyFlipped(placedQuad3dId, isHorizontallyFlipped);
-			_fe3d->quad3d_setVerticallyFlipped(placedQuad3dId, isVerticallyFlipped);
-			_fe3d->quad3d_setShadowed(placedQuad3dId, isShadowed);
-			_fe3d->quad3d_setReflected(placedQuad3dId, isReflected);
-			_fe3d->quad3d_setRefracted(placedQuad3dId, isRefracted);
-			_fe3d->quad3d_setTextureRepeat(placedQuad3dId, textureRepeat);
-			_fe3d->quad3d_setBright(placedQuad3dId, isBright);
-			_fe3d->quad3d_setOpacity(placedQuad3dId, opacity);
-			_fe3d->quad3d_setEmissionIntensity(placedQuad3dId, emissionIntensity);
-			_fe3d->quad3d_setMinAlpha(placedQuad3dId, minAlpha);
-			_fe3d->quad3d_setRotationOrder(placedQuad3dId, DirectionOrderType(rotationOrder));
+			_fe3d->quad3d_create(quad3dId, false);
+			_fe3d->quad3d_setVisible(quad3dId, false);
+			_fe3d->quad3d_setSize(quad3dId, size);
+			_fe3d->quad3d_setColor(quad3dId, color);
+			_fe3d->quad3d_setLightness(quad3dId, lightness);
+			_fe3d->quad3d_setFacingCameraHorizontally(quad3dId, isFacingCameraHorizontally);
+			_fe3d->quad3d_setFacingCameraVertically(quad3dId, isFacingCameraVertically);
+			_fe3d->quad3d_setHorizontallyFlipped(quad3dId, isHorizontallyFlipped);
+			_fe3d->quad3d_setVerticallyFlipped(quad3dId, isVerticallyFlipped);
+			_fe3d->quad3d_setShadowed(quad3dId, isShadowed);
+			_fe3d->quad3d_setReflected(quad3dId, isReflected);
+			_fe3d->quad3d_setRefracted(quad3dId, isRefracted);
+			_fe3d->quad3d_setTextureRepeat(quad3dId, textureRepeat);
+			_fe3d->quad3d_setBright(quad3dId, isBright);
+			_fe3d->quad3d_setOpacity(quad3dId, opacity);
+			_fe3d->quad3d_setEmissionIntensity(quad3dId, emissionIntensity);
+			_fe3d->quad3d_setMinAlpha(quad3dId, minAlpha);
+			_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
 
 			if(!diffuseMapPath.empty())
 			{
@@ -899,7 +899,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->quad3d_setDiffuseMap(placedQuad3dId, diffuseMapPath);
+				_fe3d->quad3d_setDiffuseMap(quad3dId, diffuseMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -909,10 +909,10 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
 
-				_fe3d->quad3d_setEmissionMap(placedQuad3dId, emissionMapPath);
+				_fe3d->quad3d_setEmissionMap(quad3dId, emissionMapPath);
 			}
 
-			_loadedQuad3dIds.push_back(placedQuad3dId);
+			_loadedQuad3dIds.push_back(quad3dId);
 		}
 		else if(lineType == "QUAD3D_AABB")
 		{
@@ -1065,7 +1065,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			_fe3d->pointlight_create(pointlightId);
 			_fe3d->pointlight_setVisible(pointlightId, false);
-			_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
+			//_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
 			_fe3d->pointlight_setRadius(pointlightId, radius);
 			_fe3d->pointlight_setColor(pointlightId, color);
 			_fe3d->pointlight_setIntensity(pointlightId, intensity);
@@ -1092,7 +1092,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			_fe3d->spotlight_create(spotlightId);
 			_fe3d->spotlight_setVisible(spotlightId, false);
-			_fe3d->spotlight_setPosition(spotlightId, SPOTLIGHT_POSITION);
+			//_fe3d->spotlight_setPosition(spotlightId, SPOTLIGHT_POSITION);
 			_fe3d->spotlight_setPitch(spotlightId, -90.0f);
 			_fe3d->spotlight_setColor(spotlightId, color);
 			_fe3d->spotlight_setIntensity(spotlightId, intensity);
@@ -1129,7 +1129,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(_fe3d->sound3d_isExisting(sound3dId))
 			{
-				_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
+				//_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
 				_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);
 				_fe3d->sound3d_setMaxDistance(sound3dId, maxDistance);
 

@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 		{
 			if(_validateFe3dSpotlight(args[0]->getString(), false))
 			{
-				_fe3d->spotlight_delete(args[0]->getString());
+				_duplicator->deleteCopiedSpotlight(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 			{
 				if(spotlightId[0] != '@')
 				{
-					_fe3d->spotlight_delete(spotlightId);
+					_duplicator->deleteCopiedSpotlight(spotlightId);
 				}
 			}
 

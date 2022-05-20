@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				_fe3d->text2d_delete(args[0]->getString());
+				_duplicator->deleteCopiedText2d(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 			{
 				if(text2dId[0] != '@')
 				{
-					_fe3d->text2d_delete(text2dId);
+					_duplicator->deleteCopiedText2d(text2dId);
 				}
 			}
 

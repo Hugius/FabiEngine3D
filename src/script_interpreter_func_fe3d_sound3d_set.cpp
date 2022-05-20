@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_delete(args[0]->getString());
+				_duplicator->deleteCopiedSound3d(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			{
 				if(sound3dId[0] != '@')
 				{
-					_fe3d->sound3d_delete(sound3dId);
+					_duplicator->deleteCopiedSound3d(sound3dId);
 				}
 			}
 

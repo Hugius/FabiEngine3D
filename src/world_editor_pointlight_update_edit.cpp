@@ -24,13 +24,13 @@ void WorldEditor::_updatePointlightEditing()
 			_dontResetSelectedPointlight = false;
 		}
 
-		for(const auto & [placedPointlightId, templatePointlightId] : _loadedPointlightIds)
+		for(const auto & pointlightId : _loadedPointlightIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@lamp_" + placedPointlightId));
+			const auto isHovered = (hoveredAabbId == ("@@lamp_" + pointlightId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectPointlight(placedPointlightId);
+				_selectPointlight(pointlightId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else
 			{
-				if((placedPointlightId != _selectedPointlightId) && (placedPointlightId != _activePointlightId))
+				if((pointlightId != _selectedPointlightId) && (pointlightId != _activePointlightId))
 				{
-					_deselectPointlight(placedPointlightId);
+					_deselectPointlight(pointlightId);
 				}
 			}
 		}
@@ -75,12 +75,13 @@ void WorldEditor::_updatePointlightEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->pointlight_delete(_activePointlightId);
+				_duplicator->deleteCopiedPointlight(_activePointlightId);
+
 				_fe3d->model_delete("@@lamp_" + _activePointlightId);
 
 				window->setActiveScreen("empty");
 
-				_loadedPointlightIds.erase(_activePointlightId);
+				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _activePointlightId), _loadedPointlightIds.end());
 
 				_activePointlightId = "";
 

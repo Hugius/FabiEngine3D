@@ -36,9 +36,9 @@ void WorldEditor::_updateSound3dMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound3dChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("placedSound3ds")->deleteOptions();
 
-			for(auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+			for(auto & sound3dId : _loadedSound3dIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("placedSound3ds")->createOption(placedSound3dId, placedSound3dId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSound3dChoice")->getScrollingList("placedSound3ds")->createOption(sound3dId, sound3dId);
 			}
 		}
 

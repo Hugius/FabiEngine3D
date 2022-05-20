@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				_fe3d->terrain_delete(args[0]->getString());
+				_duplicator->deleteCopiedTerrain(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 			{
 				if(terrainId[0] != '@')
 				{
-					_fe3d->terrain_delete(terrainId);
+					_duplicator->deleteCopiedTerrain(terrainId);
 				}
 			}
 

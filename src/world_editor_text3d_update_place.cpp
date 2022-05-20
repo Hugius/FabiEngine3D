@@ -35,7 +35,7 @@ void WorldEditor::_updateText3dPlacing()
 
 				_fe3d->text3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedText3dIds.push_back({newId, _currentTemplateText3dId});
+				_loadedText3dIds.push_back(newId);
 
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
 
@@ -96,7 +96,7 @@ void WorldEditor::_updateText3dPlacing()
 
 				_fe3d->text3d_setPosition(newId, newPosition);
 
-				_loadedText3dIds.push_back({newId, _currentTemplateText3dId});
+				_loadedText3dIds.push_back(newId);
 			}
 		}
 	}

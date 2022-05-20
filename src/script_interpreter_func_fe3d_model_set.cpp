@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_delete(args[0]->getString());
+				_duplicator->deleteCopiedModel(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			{
 				if(modelId[0] != '@')
 				{
-					_fe3d->model_delete(modelId);
+					_duplicator->deleteCopiedModel(modelId);
 				}
 			}
 

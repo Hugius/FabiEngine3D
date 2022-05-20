@@ -31,9 +31,9 @@ void WorldEditor::_updateAabbMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuAabbChoice");
 			_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->deleteOptions();
 
-			for(auto & [placedAabbId, templateAabbId] : _loadedAabbIds)
+			for(auto & aabbId : _loadedAabbIds)
 			{
-				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->createOption(placedAabbId, placedAabbId);
+				_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuAabbChoice")->getScrollingList("placedAabbs")->createOption(aabbId, aabbId);
 			}
 		}
 

@@ -24,13 +24,13 @@ void WorldEditor::_updateSound3dEditing()
 			_dontResetSelectedSound3d = false;
 		}
 
-		for(const auto & [placedSound3dId, templateSound3dId] : _loadedSound3dIds)
+		for(const auto & sound3dId : _loadedSound3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@speaker_" + placedSound3dId));
+			const auto isHovered = (hoveredAabbId == ("@@speaker_" + sound3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectSound3d(placedSound3dId);
+				_selectSound3d(sound3dId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -44,9 +44,9 @@ void WorldEditor::_updateSound3dEditing()
 			}
 			else
 			{
-				if((placedSound3dId != _selectedSound3dId) && (placedSound3dId != _activeSound3dId))
+				if((sound3dId != _selectedSound3dId) && (sound3dId != _activeSound3dId))
 				{
-					_deselectSound3d(placedSound3dId);
+					_deselectSound3d(sound3dId);
 				}
 			}
 		}
@@ -75,12 +75,13 @@ void WorldEditor::_updateSound3dEditing()
 
 			if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->sound3d_delete(_activeSound3dId);
+				_duplicator->deleteCopiedSound3d(_activeSound3dId);
+
 				_fe3d->model_delete("@@speaker_" + _activeSound3dId);
 
 				window->setActiveScreen("empty");
 
-				_loadedSound3dIds.erase(_activeSound3dId);
+				_loadedSound3dIds.erase(remove(_loadedSound3dIds.begin(), _loadedSound3dIds.end(), _activeSound3dId), _loadedSound3dIds.end());
 
 				_activeSound3dId = "";
 

@@ -77,9 +77,9 @@ void WorldEditor::_updateCaptorEditing()
 			{
 				vector<string> modelIds = {};
 
-				for(auto & [placedId, templateId] : _loadedModelIds)
+				for(auto & modelId : _loadedModelIds)
 				{
-					modelIds.push_back(placedId);
+					modelIds.push_back(modelId);
 				}
 
 				_gui->getOverlay()->openChoiceForm("selectException", "Select Exception", CENTER_CHOICE_FORM_POSITION, modelIds);
@@ -90,8 +90,8 @@ void WorldEditor::_updateCaptorEditing()
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				_fe3d->model_delete("@@lens_" + _activeCaptorId);
 				_fe3d->captor_delete(_activeCaptorId);
+				_fe3d->model_delete("@@lens_" + _activeCaptorId);
 
 				window->setActiveScreen("empty");
 

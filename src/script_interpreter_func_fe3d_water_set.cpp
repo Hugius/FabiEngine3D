@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_delete(args[0]->getString());
+				_duplicator->deleteCopiedWater(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			{
 				if(waterId[0] != '@')
 				{
-					_fe3d->water_delete(waterId);
+					_duplicator->deleteCopiedWater(waterId);
 				}
 			}
 

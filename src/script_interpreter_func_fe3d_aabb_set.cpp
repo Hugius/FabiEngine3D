@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 					return true;
 				}
 
-				_fe3d->aabb_delete(args[0]->getString());
+				_duplicator->deleteCopiedAabb(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 				{
 					if(_fe3d->aabb_getParentId(args[0]->getString()).empty())
 					{
-						_fe3d->aabb_delete(aabbId);
+						_duplicator->deleteCopiedAabb(aabbId);
 					}
 				}
 			}

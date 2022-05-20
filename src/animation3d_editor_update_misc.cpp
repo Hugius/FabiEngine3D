@@ -83,7 +83,7 @@ void Animation3dEditor::_updateMiscellaneous()
 									{
 										if(_fe3d->animation3d_getTransformationType(_currentAnimation3dId, frameIndex, partId) == TransformationType::MOVEMENT)
 										{
-											auto newPosition = (_initialModelSize * _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId));
+											const auto newPosition = _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId);
 
 											if(partId.empty())
 											{
@@ -96,8 +96,8 @@ void Animation3dEditor::_updateMiscellaneous()
 										}
 										else if(_fe3d->animation3d_getTransformationType(_currentAnimation3dId, frameIndex, partId) == TransformationType::ROTATION)
 										{
-											auto currentModelSize = _fe3d->model_getBaseSize(_previewModelId);
-											auto newOrigin = (currentModelSize * _fe3d->animation3d_getRotationOrigin(_currentAnimation3dId, frameIndex, partId));
+											const auto currentModelSize = _fe3d->model_getBaseSize(_previewModelId);
+											const auto newOrigin = (currentModelSize * _fe3d->animation3d_getRotationOrigin(_currentAnimation3dId, frameIndex, partId));
 
 											if(partId.empty())
 											{
@@ -108,7 +108,7 @@ void Animation3dEditor::_updateMiscellaneous()
 												_fe3d->model_setPartRotationOrigin(_previewModelId, partId, newOrigin);
 											}
 
-											auto newRotation = _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId);
+											const auto newRotation = _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId);
 
 											if(partId.empty())
 											{
@@ -121,8 +121,7 @@ void Animation3dEditor::_updateMiscellaneous()
 										}
 										else if(_fe3d->animation3d_getTransformationType(_currentAnimation3dId, frameIndex, partId) == TransformationType::SCALING)
 										{
-											auto modelSize = (partId.empty() ? _initialModelSize : fvec3(1.0f));
-											auto newSize = (modelSize + (modelSize * _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId)));
+											const auto newSize = (_initialModelSize + _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId));
 
 											if(partId.empty())
 											{

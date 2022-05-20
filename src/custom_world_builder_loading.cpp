@@ -826,8 +826,15 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			string templateQuad3dId;
 			string diffuseMapPath;
 			string emissionMapPath;
-			fvec2 size;
 			fvec3 color;
+			fvec3 wireframeColor;
+			fvec3 minClipPosition;
+			fvec3 maxClipPosition;
+			fvec3 position;
+			fvec3 rotation;
+			fvec2 size;
+			fvec2 uvMultiplier;
+			fvec2 uvOffset;
 			float lightness;
 			float opacity;
 			float minAlpha;
@@ -842,11 +849,21 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isRefracted;
 			bool isShadowed;
 			bool isBright;
+			bool isVisible;
+			bool isWireframed;
+			bool isFrozen;
 
 			iss
 				>> quad3dId
+				>> templateQuad3dId
 				>> diffuseMapPath
 				>> emissionMapPath
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
 				>> size.x
 				>> size.y
 				>> color.r
@@ -865,7 +882,23 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> emissionIntensity
 				>> opacity
 				>> minAlpha
-				>> rotationOrder;
+				>> rotationOrder
+				>> isVisible
+				>> isWireframed
+				>> wireframeColor.r
+				>> wireframeColor.g
+				>> wireframeColor.b
+				>> isFrozen
+				>> uvMultiplier.x
+				>> uvMultiplier.y
+				>> uvOffset.x
+				>> uvOffset.y
+				>> minClipPosition.x
+				>> minClipPosition.y
+				>> minClipPosition.z
+				>> maxClipPosition.x
+				>> maxClipPosition.y
+				>> maxClipPosition.z;
 
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -873,8 +906,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-			_fe3d->quad3d_create(quad3dId, false);
-			_fe3d->quad3d_setVisible(quad3dId, false);
+			if(!_fe3d->quad3d_isExisting(templateQuad3dId))
+			{
+				continue;
+			}
+
+			_duplicator->copyTemplateQuad3d(quad3dId, templateQuad3dId);
+
+			_fe3d->quad3d_setVisible(quad3dId, isVisible);
 			_fe3d->quad3d_setSize(quad3dId, size);
 			_fe3d->quad3d_setColor(quad3dId, color);
 			_fe3d->quad3d_setLightness(quad3dId, lightness);
@@ -891,6 +930,13 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->quad3d_setEmissionIntensity(quad3dId, emissionIntensity);
 			_fe3d->quad3d_setMinAlpha(quad3dId, minAlpha);
 			_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
+			_fe3d->quad3d_setMinClipPosition(quad3dId, minClipPosition);
+			_fe3d->quad3d_setMaxClipPosition(quad3dId, maxClipPosition);
+			_fe3d->quad3d_setFrozen(quad3dId, isFrozen);
+			_fe3d->quad3d_setWireframed(quad3dId, isWireframed);
+			_fe3d->quad3d_setWireframeColor(quad3dId, wireframeColor);
+			_fe3d->quad3d_setUvMultiplier(quad3dId, uvMultiplier);
+			_fe3d->quad3d_setUvOffset(quad3dId, uvOffset);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -917,22 +963,80 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "QUAD3D_AABB")
 		{
 			string quad3dId;
+			bool isRaycastResponsive;
+			bool isCollisionResponsive;
+			bool isVisible;
 
-			iss >> quad3dId;
+			iss
+				>> quad3dId
+				>> isRaycastResponsive
+				>> isCollisionResponsive
+				>> isVisible;
+
+			if(!_fe3d->quad3d_isExisting(quad3dId))
+			{
+				continue;
+			}
 
 			_fe3d->aabb_create(quad3dId, false);
 			_fe3d->aabb_setVisible(quad3dId, false);
 			_fe3d->aabb_setParentId(quad3dId, quad3dId);
 			_fe3d->aabb_setParentType(quad3dId, AabbParentType::QUAD3D);
+			_fe3d->aabb_setRaycastResponsive(quad3dId, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(quad3dId, isCollisionResponsive);
+			_fe3d->aabb_setVisible(quad3dId, isVisible);
 		}
 		else if(lineType == "QUAD3D_ANIMATION2D")
 		{
+			string quad3dId;
+			string animation2dId;
+			int playCount;
+			int rowIndex;
+			int columnIndex;
+			int intervalMultiplier;
+			int intervalDivider;
+			int updateCount;
+			bool isPaused;
+			bool isAutoPaused;
 
+			iss
+				>> quad3dId
+				>> animation2dId
+				>> isPaused
+				>> isAutoPaused
+				>> playCount
+				>> rowIndex
+				>> columnIndex
+				>> intervalMultiplier
+				>> intervalDivider
+				>> updateCount;
+
+			if(!_fe3d->quad3d_isExisting(quad3dId))
+			{
+				continue;
+			}
+
+			_fe3d->quad3d_startAnimation2d(quad3dId, animation2dId, playCount);
+			_fe3d->quad3d_setAnimation2dRowIndex(quad3dId, animation2dId, rowIndex);
+			_fe3d->quad3d_setAnimation2dColumnIndex(quad3dId, animation2dId, columnIndex);
+			_fe3d->quad3d_setAnimation2dIntervalMultiplier(quad3dId, animation2dId, intervalMultiplier);
+			_fe3d->quad3d_setAnimation2dIntervalDivider(quad3dId, animation2dId, intervalDivider);
+			_fe3d->quad3d_setAnimation2dUpdateCount(quad3dId, animation2dId, updateCount);
+
+			if(isPaused)
+			{
+				_fe3d->quad3d_pauseAnimation2d(quad3dId, animation2dId);
+			}
+
+			if(isAutoPaused)
+			{
+				_fe3d->quad3d_autopauseAnimation2d(quad3dId, animation2dId);
+			}
 		}
 		else if(lineType == "TEXT3D")
 		{
 			string text3dId;
-			string fontMapPath;
+			string templateText3dId;
 			fvec2 size;
 			fvec3 color;
 			float lightness;
@@ -947,11 +1051,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isRefracted;
 			bool isShadowed;
 			bool isBright;
-			bool hasAabb;
 
 			iss
 				>> text3dId
-				>> fontMapPath
 				>> size.x
 				>> size.y
 				>> color.r
@@ -968,59 +1070,58 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> isBright
 				>> opacity
 				>> minAlpha
-				>> rotationOrder
-				>> hasAabb;
+				>> rotationOrder;
 
-			fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-
-			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-
-			if(!Configuration::getInst().isApplicationExported())
+			if(!_fe3d->text3d_isExisting(templateText3dId))
 			{
-				fontMapPath = ("projects\\" + _currentProjectId + "\\" + fontMapPath);
+				continue;
 			}
 
-			_fe3d->text3d_create(text3dId, fontMapPath, false);
+			_duplicator->copyTemplateText3d(text3dId, templateText3dId);
 
-			if(_fe3d->text3d_isExisting(text3dId))
-			{
-				_fe3d->text3d_setVisible(text3dId, false);
-				_fe3d->text3d_setSize(text3dId, size);
-				_fe3d->text3d_setColor(text3dId, color);
-				_fe3d->text3d_setLightness(text3dId, lightness);
-				_fe3d->text3d_setFacingCameraHorizontally(text3dId, isFacingCameraHorizontally);
-				_fe3d->text3d_setFacingCameraVertically(text3dId, isFacingCameraVertically);
-				_fe3d->text3d_setHorizontallyFlipped(text3dId, isHorizontallyFlipped);
-				_fe3d->text3d_setVerticallyFlipped(text3dId, isVerticallyFlipped);
-				_fe3d->text3d_setShadowed(text3dId, isShadowed);
-				_fe3d->text3d_setReflected(text3dId, isReflected);
-				_fe3d->text3d_setRefracted(text3dId, isRefracted);
-				_fe3d->text3d_setBright(text3dId, isBright);
-				_fe3d->text3d_setOpacity(text3dId, opacity);
-				_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
-				_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
+			_fe3d->text3d_setVisible(text3dId, false);
+			_fe3d->text3d_setSize(text3dId, size);
+			_fe3d->text3d_setColor(text3dId, color);
+			_fe3d->text3d_setLightness(text3dId, lightness);
+			_fe3d->text3d_setFacingCameraHorizontally(text3dId, isFacingCameraHorizontally);
+			_fe3d->text3d_setFacingCameraVertically(text3dId, isFacingCameraVertically);
+			_fe3d->text3d_setHorizontallyFlipped(text3dId, isHorizontallyFlipped);
+			_fe3d->text3d_setVerticallyFlipped(text3dId, isVerticallyFlipped);
+			_fe3d->text3d_setShadowed(text3dId, isShadowed);
+			_fe3d->text3d_setReflected(text3dId, isReflected);
+			_fe3d->text3d_setRefracted(text3dId, isRefracted);
+			_fe3d->text3d_setBright(text3dId, isBright);
+			_fe3d->text3d_setOpacity(text3dId, opacity);
+			_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
+			_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
 
-				if(hasAabb)
-				{
-					_fe3d->aabb_create(text3dId, false);
-					_fe3d->aabb_setVisible(text3dId, false);
-					_fe3d->aabb_setParentId(text3dId, text3dId);
-					_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
-				}
-
-				_loadedText3dIds.push_back(text3dId);
-			}
+			_loadedText3dIds.push_back(text3dId);
 		}
 		else if(lineType == "TEXT3D_AABB")
 		{
 			string text3dId;
+			bool isRaycastResponsive;
+			bool isCollisionResponsive;
+			bool isVisible;
 
-			iss >> text3dId;
+			iss
+				>> text3dId
+				>> isRaycastResponsive
+				>> isCollisionResponsive
+				>> isVisible;
+
+			if(!_fe3d->text3d_isExisting(text3dId))
+			{
+				continue;
+			}
 
 			_fe3d->aabb_create(text3dId, false);
 			_fe3d->aabb_setVisible(text3dId, false);
 			_fe3d->aabb_setParentId(text3dId, text3dId);
 			_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
+			_fe3d->aabb_setRaycastResponsive(text3dId, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(text3dId, isCollisionResponsive);
+			_fe3d->aabb_setVisible(text3dId, isVisible);
 		}
 		else if(lineType == "AABB")
 		{
@@ -1106,24 +1207,15 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
-			string audioPath;
+			string templateSound3dId;
 			float maxVolume;
 			float maxDistance;
 
 			iss
 				>> sound3dId
-				>> audioPath
+				>> templateSound3dId
 				>> maxVolume
 				>> maxDistance;
-
-			audioPath = (audioPath == "?") ? "" : audioPath;
-
-			replace(audioPath.begin(), audioPath.end(), '?', ' ');
-
-			if(!Configuration::getInst().isApplicationExported())
-			{
-				audioPath = ("projects\\" + _currentProjectId + "\\" + audioPath);
-			}
 
 			_fe3d->sound3d_create(sound3dId, audioPath);
 

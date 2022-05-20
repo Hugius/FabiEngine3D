@@ -817,6 +817,10 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 			file
 				<< "QUAD3D_ANIMATION2D "
+				<< quad3dId
+				<< " "
+				<< animation2dId
+				<< " "
 				<< isPaused
 				<< " "
 				<< isAutoPaused

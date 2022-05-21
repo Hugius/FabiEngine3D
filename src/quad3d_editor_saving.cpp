@@ -26,6 +26,7 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 
 	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
+		const auto aabbIds = _fe3d->quad3d_getChildAabbIds(quad3dId);
 		const auto size = _fe3d->quad3d_getSize(quad3dId);
 		const auto color = _fe3d->quad3d_getColor(quad3dId);
 		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(quad3dId);
@@ -42,7 +43,6 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 		const auto opacity = _fe3d->quad3d_getOpacity(quad3dId);
 		const auto minAlpha = _fe3d->quad3d_getMinAlpha(quad3dId);
 		const auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quad3dId));
-		const auto hasAabb = _fe3d->aabb_isExisting("quad3d@" + quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -56,6 +56,7 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
 		file
+			<< "QUAD3D "
 			<< quad3dId
 			<< " "
 			<< diffuseMapPath
@@ -99,9 +100,17 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 			<< minAlpha
 			<< " "
 			<< rotationOrder
-			<< " "
-			<< hasAabb
 			<< endl;
+
+		for(const auto & aabbId : aabbIds)
+		{
+			file
+				<< "AABB "
+				<< quad3dId
+				<< " "
+				<< aabbId
+				<< endl;
+		}
 	}
 
 	file.close();

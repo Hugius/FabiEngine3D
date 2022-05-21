@@ -26,6 +26,7 @@ const bool Text3dEditor::saveText3dsToFile() const
 
 	for(const auto & text3dId : _loadedText3dIds)
 	{
+		const auto aabbIds = _fe3d->text3d_getChildAabbIds(text3dId);
 		const auto size = _fe3d->text3d_getSize(text3dId);
 		const auto color = _fe3d->text3d_getColor(text3dId);
 		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(text3dId);
@@ -40,7 +41,6 @@ const bool Text3dEditor::saveText3dsToFile() const
 		const auto opacity = _fe3d->text3d_getOpacity(text3dId);
 		const auto minAlpha = _fe3d->text3d_getMinAlpha(text3dId);
 		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
-		const auto hasAabb = _fe3d->aabb_isExisting("text3d@" + text3dId);
 
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
 
@@ -50,6 +50,7 @@ const bool Text3dEditor::saveText3dsToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
+			<< "TEXT3D "
 			<< text3dId
 			<< " "
 			<< fontMapPath
@@ -87,9 +88,17 @@ const bool Text3dEditor::saveText3dsToFile() const
 			<< minAlpha
 			<< " "
 			<< rotationOrder
-			<< " "
-			<< hasAabb
 			<< endl;
+
+		for(const auto & aabbId : aabbIds)
+		{
+			file
+				<< "AABB "
+				<< text3dId
+				<< " "
+				<< aabbId
+				<< endl;
+		}
 	}
 
 	file.close();

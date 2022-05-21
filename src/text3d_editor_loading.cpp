@@ -34,27 +34,34 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 	while(getline(file, line))
 	{
-		string text3dId;
-		string fontMapPath;
+		string lineType;
 
 		auto iss = istringstream(line);
 
-		iss
-			>> text3dId
-			>> fontMapPath;
+		iss >> lineType;
 
-		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-
-		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-
-		if(!fontMapPath.empty())
+		if(lineType == "TEXT3D")
 		{
-			if(!Configuration::getInst().isApplicationExported())
-			{
-				fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
-			}
+			string text3dId;
+			string fontMapPath;
 
-			imagePaths.push_back(fontMapPath);
+			iss
+				>> text3dId
+				>> fontMapPath;
+
+			fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
+
+			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
+
+			if(!fontMapPath.empty())
+			{
+				if(!Configuration::getInst().isApplicationExported())
+				{
+					fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
+				}
+
+				imagePaths.push_back(fontMapPath);
+			}
 		}
 	}
 
@@ -87,90 +94,104 @@ const bool Text3dEditor::loadText3dsFromFile()
 
 	while(getline(file, line))
 	{
-		string text3dId;
-		string fontMapPath;
-		fvec2 size;
-		fvec3 color;
-		float lightness;
-		float opacity;
-		float minAlpha;
-		int rotationOrder;
-		bool isFacingCameraHorizontally;
-		bool isFacingCameraVertically;
-		bool isHorizontallyFlipped;
-		bool isVerticallyFlipped;
-		bool isReflected;
-		bool isRefracted;
-		bool isShadowed;
-		bool isBright;
-		bool hasAabb;
+		string lineType;
 
 		auto iss = istringstream(line);
 
-		iss
-			>> text3dId
-			>> fontMapPath
-			>> size.x
-			>> size.y
-			>> color.r
-			>> color.g
-			>> color.b
-			>> isFacingCameraHorizontally
-			>> isFacingCameraVertically
-			>> isHorizontallyFlipped
-			>> isVerticallyFlipped
-			>> isReflected
-			>> isRefracted
-			>> isShadowed
-			>> lightness
-			>> isBright
-			>> opacity
-			>> minAlpha
-			>> rotationOrder
-			>> hasAabb;
+		iss >> lineType;
 
-		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-
-		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-
-		if(!Configuration::getInst().isApplicationExported())
+		if(lineType == "TEXT3D")
 		{
-			fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
-		}
+			string text3dId;
+			string fontMapPath;
+			fvec2 size;
+			fvec3 color;
+			float lightness;
+			float opacity;
+			float minAlpha;
+			int rotationOrder;
+			bool isFacingCameraHorizontally;
+			bool isFacingCameraVertically;
+			bool isHorizontallyFlipped;
+			bool isVerticallyFlipped;
+			bool isReflected;
+			bool isRefracted;
+			bool isShadowed;
+			bool isBright;
 
-		_fe3d->text3d_create(text3dId, fontMapPath, false);
+			iss
+				>> text3dId
+				>> fontMapPath
+				>> size.x
+				>> size.y
+				>> color.r
+				>> color.g
+				>> color.b
+				>> isFacingCameraHorizontally
+				>> isFacingCameraVertically
+				>> isHorizontallyFlipped
+				>> isVerticallyFlipped
+				>> isReflected
+				>> isRefracted
+				>> isShadowed
+				>> lightness
+				>> isBright
+				>> opacity
+				>> minAlpha
+				>> rotationOrder;
 
-		if(_fe3d->text3d_isExisting(text3dId))
-		{
-			_fe3d->text3d_setVisible(text3dId, false);
-			_fe3d->text3d_setSize(text3dId, size);
-			_fe3d->text3d_setColor(text3dId, color);
-			_fe3d->text3d_setLightness(text3dId, lightness);
-			_fe3d->text3d_setFacingCameraHorizontally(text3dId, isFacingCameraHorizontally);
-			_fe3d->text3d_setFacingCameraVertically(text3dId, isFacingCameraVertically);
-			_fe3d->text3d_setHorizontallyFlipped(text3dId, isHorizontallyFlipped);
-			_fe3d->text3d_setVerticallyFlipped(text3dId, isVerticallyFlipped);
-			_fe3d->text3d_setShadowed(text3dId, isShadowed);
-			_fe3d->text3d_setReflected(text3dId, isReflected);
-			_fe3d->text3d_setRefracted(text3dId, isRefracted);
-			_fe3d->text3d_setBright(text3dId, isBright);
-			_fe3d->text3d_setOpacity(text3dId, opacity);
-			_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
-			_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
+			fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
-			if(hasAabb)
+			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
+
+			if(!Configuration::getInst().isApplicationExported())
 			{
-				const auto aabbId = ("text3d@" + text3dId);
-
-				_fe3d->aabb_create(aabbId, false);
-				_fe3d->aabb_setVisible(aabbId, false);
-				_fe3d->aabb_setParentId(aabbId, text3dId);
-				_fe3d->aabb_setParentType(aabbId, AabbParentType::TEXT3D);
+				fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 			}
 
-			_loadedText3dIds.push_back(text3dId);
+			_fe3d->text3d_create(text3dId, fontMapPath, false);
 
-			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
+			if(_fe3d->text3d_isExisting(text3dId))
+			{
+				_fe3d->text3d_setVisible(text3dId, false);
+				_fe3d->text3d_setSize(text3dId, size);
+				_fe3d->text3d_setColor(text3dId, color);
+				_fe3d->text3d_setLightness(text3dId, lightness);
+				_fe3d->text3d_setFacingCameraHorizontally(text3dId, isFacingCameraHorizontally);
+				_fe3d->text3d_setFacingCameraVertically(text3dId, isFacingCameraVertically);
+				_fe3d->text3d_setHorizontallyFlipped(text3dId, isHorizontallyFlipped);
+				_fe3d->text3d_setVerticallyFlipped(text3dId, isVerticallyFlipped);
+				_fe3d->text3d_setShadowed(text3dId, isShadowed);
+				_fe3d->text3d_setReflected(text3dId, isReflected);
+				_fe3d->text3d_setRefracted(text3dId, isRefracted);
+				_fe3d->text3d_setBright(text3dId, isBright);
+				_fe3d->text3d_setOpacity(text3dId, opacity);
+				_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
+				_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
+
+				_loadedText3dIds.push_back(text3dId);
+
+				sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
+			}
+		}
+		else if(lineType == "AABB")
+		{
+			string text3dId;
+			string aabbId;
+
+			iss
+				>> text3dId
+				>> aabbId;
+
+			if(!_fe3d->text3d_isExisting(text3dId))
+			{
+				continue;
+			}
+
+			_fe3d->aabb_create(aabbId, false);
+			_fe3d->aabb_setVisible(aabbId, false);
+			_fe3d->aabb_setParentId(aabbId, text3dId);
+			_fe3d->aabb_setParentType(aabbId, AabbParentType::TEXT3D);
 		}
 	}
 

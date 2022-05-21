@@ -552,29 +552,15 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & aabbId : aabbIds)
 		{
-			const auto position = _fe3d->aabb_getLocalPosition(aabbId);
-			const auto size = _fe3d->aabb_getLocalSize(aabbId);
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(modelId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(modelId);
-			const auto isVisible = _fe3d->aabb_isVisible(modelId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
 				<< "MODEL_AABB "
 				<< modelId
 				<< " "
 				<< aabbId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< size.x
-				<< " "
-				<< size.y
-				<< " "
-				<< size.z
 				<< " "
 				<< isRaycastResponsive
 				<< " "
@@ -654,6 +640,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 	for(const auto & quad3dId : _addedQuad3dIds)
 	{
 		const auto templateQuad3dId = _duplicator->getTemplateQuad3dId(quad3dId);
+		const auto aabbIds = _fe3d->quad3d_getChildAabbIds(quad3dId);
 		const auto position = _fe3d->quad3d_getPosition(quad3dId);
 		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
 		const auto size = _fe3d->quad3d_getSize(quad3dId);
@@ -786,15 +773,17 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.z
 			<< endl;
 
-		if(_fe3d->aabb_isExisting(quad3dId))
+		for(const auto & aabbId : aabbIds)
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(quad3dId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(quad3dId);
-			const auto isVisible = _fe3d->aabb_isVisible(quad3dId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
 				<< "QUAD3D_AABB "
 				<< quad3dId
+				<< " "
+				<< aabbId
 				<< " "
 				<< isRaycastResponsive
 				<< " "
@@ -843,6 +832,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 	for(const auto & text3dId : _addedText3dIds)
 	{
 		const auto templateText3dId = _duplicator->getTemplateText3dId(text3dId);
+		const auto aabbIds = _fe3d->text3d_getChildAabbIds(text3dId);
 		const auto position = _fe3d->text3d_getPosition(text3dId);
 		const auto rotation = _fe3d->text3d_getRotation(text3dId);
 		const auto size = _fe3d->text3d_getSize(text3dId);
@@ -946,15 +936,17 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< content
 			<< endl;
 
-		if(_fe3d->aabb_isExisting(text3dId))
+		for(const auto & aabbId : aabbIds)
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(text3dId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(text3dId);
-			const auto isVisible = _fe3d->aabb_isVisible(text3dId);
+			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
 				<< "TEXT3D_AABB "
 				<< text3dId
+				<< " "
+				<< aabbId
 				<< " "
 				<< isRaycastResponsive
 				<< " "

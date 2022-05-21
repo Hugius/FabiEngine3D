@@ -712,8 +712,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string modelId;
 			string aabbId;
-			fvec3 position;
-			fvec3 size;
 			bool isRaycastResponsive;
 			bool isCollisionResponsive;
 			bool isVisible;
@@ -721,12 +719,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			iss
 				>> modelId
 				>> aabbId
-				>> position.x
-				>> position.y
-				>> position.z
-				>> size.x
-				>> size.y
-				>> size.z
 				>> isRaycastResponsive
 				>> isCollisionResponsive
 				>> isVisible;
@@ -736,11 +728,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_create(aabbId, false);
-			_fe3d->aabb_setParentId(aabbId, modelId);
-			_fe3d->aabb_setParentType(aabbId, AabbParentType::MODEL);
-			_fe3d->aabb_setLocalPosition(aabbId, position);
-			_fe3d->aabb_setLocalSize(aabbId, size);
+			if(!_fe3d->aabb_isExisting(aabbId))
+			{
+				continue;
+			}
+
 			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
 			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(aabbId, isVisible);
@@ -962,12 +954,14 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "QUAD3D_AABB")
 		{
 			string quad3dId;
+			string aabbId;
 			bool isRaycastResponsive;
 			bool isCollisionResponsive;
 			bool isVisible;
 
 			iss
 				>> quad3dId
+				>> aabbId
 				>> isRaycastResponsive
 				>> isCollisionResponsive
 				>> isVisible;
@@ -977,9 +971,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_create(quad3dId, false);
-			_fe3d->aabb_setParentId(quad3dId, quad3dId);
-			_fe3d->aabb_setParentType(quad3dId, AabbParentType::QUAD3D);
+			if(!_fe3d->aabb_isExisting(aabbId))
+			{
+				continue;
+			}
+
 			_fe3d->aabb_setRaycastResponsive(quad3dId, isRaycastResponsive);
 			_fe3d->aabb_setCollisionResponsive(quad3dId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(quad3dId, isVisible);
@@ -1133,6 +1129,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "TEXT3D_AABB")
 		{
 			string text3dId;
+			string aabbId;
 			bool isRaycastResponsive;
 			bool isCollisionResponsive;
 			bool isVisible;
@@ -1148,9 +1145,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_create(text3dId, false);
-			_fe3d->aabb_setParentId(text3dId, text3dId);
-			_fe3d->aabb_setParentType(text3dId, AabbParentType::TEXT3D);
+			if(!_fe3d->aabb_isExisting(aabbId))
+			{
+				continue;
+			}
+
 			_fe3d->aabb_setRaycastResponsive(text3dId, isRaycastResponsive);
 			_fe3d->aabb_setCollisionResponsive(text3dId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(text3dId, isVisible);

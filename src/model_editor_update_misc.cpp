@@ -318,7 +318,7 @@ void ModelEditor::_updateAabbCreating()
 			return;
 		}
 
-		if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbId))
+		if(_fe3d->aabb_isExisting("model@" + _currentModelId + "@" + newAabbId))
 		{
 			Logger::throwWarning("AABB already exists");
 
@@ -327,9 +327,9 @@ void ModelEditor::_updateAabbCreating()
 
 		_currentAabbId = newAabbId;
 
-		_fe3d->aabb_create((_currentModelId + "@" + _currentAabbId), false);
-		_fe3d->aabb_setParentId((_currentModelId + "@" + _currentAabbId), _currentModelId);
-		_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
+		_fe3d->aabb_create(("model@" + _currentModelId + "@" + _currentAabbId), false);
+		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + _currentAabbId), _currentModelId);
+		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
@@ -348,7 +348,7 @@ void ModelEditor::_updateAabbChoosing()
 		{
 			if(!_hoveredAabbId.empty())
 			{
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+				_fe3d->aabb_setVisible(("model@" + _currentModelId + "@" + _hoveredAabbId), false);
 
 				_hoveredAabbId = "";
 			}
@@ -359,7 +359,7 @@ void ModelEditor::_updateAabbChoosing()
 			{
 				_hoveredAabbId = selectedOptionId;
 
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), true);
+				_fe3d->aabb_setVisible(("model@" + _currentModelId + "@" + _hoveredAabbId), true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
@@ -385,7 +385,7 @@ void ModelEditor::_updateAabbChoosing()
 	{
 		if(!_hoveredAabbId.empty())
 		{
-			_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+			_fe3d->aabb_setVisible(("model@" + _currentModelId + "@" + _hoveredAabbId), false);
 
 			_hoveredAabbId = "";
 		}
@@ -398,7 +398,7 @@ void ModelEditor::_updateAabbDeleting()
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
-			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
+			_fe3d->aabb_delete("model@" + _currentModelId + "@" + _currentAabbId);
 
 			_currentAabbId = "";
 		}

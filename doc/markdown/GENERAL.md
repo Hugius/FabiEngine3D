@@ -125,7 +125,7 @@
 
 ## 5. Terminology
 
-- **String**: a concatenation of characters (example: `hello123!@#`)
+- **String**: a concatenation of characters (example: `Hello123!`)
 - **Decimal3**: a collection of 3 decimals
 - **Decimal2**: a collection of 2 decimals
 - **Decimal**: a floating point number (example: `3.1415`)

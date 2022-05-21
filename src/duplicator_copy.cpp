@@ -197,7 +197,7 @@ void Duplicator::copyTemplateModel(const string & newId, const string & template
 
 	for(const auto & templateAabbId : _fe3d->model_getChildAabbIds(templateId))
 	{
-		const auto newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
+		const auto newAabbId = ("model@" + newId + "@" + templateAabbId.substr(("model@" + templateId + "@").size()));
 
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setVisible(newAabbId, false);
@@ -247,10 +247,12 @@ void Duplicator::copyTemplateQuad3d(const string & newId, const string & templat
 
 	if(_fe3d->aabb_isExisting(templateId))
 	{
-		_fe3d->aabb_create(newId, false);
-		_fe3d->aabb_setVisible(newId, false);
-		_fe3d->aabb_setParentId(newId, newId);
-		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
+		const auto newAabbId = ("quad3d@" + newId);
+
+		_fe3d->aabb_create(newAabbId, false);
+		_fe3d->aabb_setVisible(newAabbId, false);
+		_fe3d->aabb_setParentId(newAabbId, newId);
+		_fe3d->aabb_setParentType(newAabbId, AabbParentType::QUAD3D);
 	}
 
 	_copiedQuad3dIds.insert({newId, templateId});
@@ -305,10 +307,12 @@ void Duplicator::copyTemplateText3d(const string & newId, const string & templat
 
 	if(_fe3d->aabb_isExisting(templateId))
 	{
-		_fe3d->aabb_create(newId, false);
-		_fe3d->aabb_setVisible(newId, false);
-		_fe3d->aabb_setParentId(newId, newId);
-		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
+		const auto newAabbId = ("text3d@" + newId);
+
+		_fe3d->aabb_create(newAabbId, false);
+		_fe3d->aabb_setVisible(newAabbId, false);
+		_fe3d->aabb_setParentId(newAabbId, newId);
+		_fe3d->aabb_setParentType(newAabbId, AabbParentType::TEXT3D);
 	}
 
 	_copiedText3dIds.insert({newId, templateId});

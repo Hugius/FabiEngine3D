@@ -176,10 +176,12 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 
 		if(hasAabb)
 		{
-			_fe3d->aabb_create(quad3dId, false);
-			_fe3d->aabb_setVisible(quad3dId, false);
-			_fe3d->aabb_setParentId(quad3dId, quad3dId);
-			_fe3d->aabb_setParentType(quad3dId, AabbParentType::QUAD3D);
+			const auto aabbId = ("quad3d@" + quad3dId);
+
+			_fe3d->aabb_create(aabbId, false);
+			_fe3d->aabb_setVisible(aabbId, false);
+			_fe3d->aabb_setParentId(aabbId, quad3dId);
+			_fe3d->aabb_setParentType(aabbId, AabbParentType::QUAD3D);
 		}
 
 		if(!diffuseMapPath.empty())

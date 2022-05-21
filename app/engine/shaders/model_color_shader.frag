@@ -107,6 +107,7 @@ vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal);
 vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal);
 vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
 vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color);
+
 float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal);
 float calculateShadows();
 

@@ -88,6 +88,7 @@ vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculatePointlights(vec3 normal);
 vec3 calculateSpotlights(vec3 normal);
 vec3 calculateFog(vec3 color);
+
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float calculateShadows();
 

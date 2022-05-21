@@ -75,92 +75,139 @@ void WorldEditor::_updateMiscellaneous()
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
 		{
 			_isGridModeEnabled = !_isGridModeEnabled;
+
+			_fe3d->model_setVisible(GRID_ID, _isGridModeEnabled);
 		}
 
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 		{
 			_isWireframeModeEnabled = !_isWireframeModeEnabled;
+
+			_fe3d->model_setWireframed(GRID_ID, "", _isWireframeModeEnabled);
+
+			if(!_fe3d->sky_getSelectedId().empty())
+			{
+				_fe3d->sky_setWireframed(_fe3d->sky_getSelectedId(), _isWireframeModeEnabled);
+			}
+
+			if(!_fe3d->terrain_getSelectedId().empty())
+			{
+				_fe3d->terrain_setWireframed(_fe3d->terrain_getSelectedId(), _isWireframeModeEnabled);
+			}
+
+			if(!_fe3d->water_getSelectedId().empty())
+			{
+				_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
+			}
+
+			for(const auto & modelId : _loadedModelIds)
+			{
+				for(const auto & partId : _fe3d->model_getPartIds(modelId))
+				{
+					_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
+				}
+			}
+
+			for(const auto & quad3dId : _loadedQuad3dIds)
+			{
+				_fe3d->quad3d_setWireframed(quad3dId, _isWireframeModeEnabled);
+			}
+
+			for(const auto & text3dId : _loadedText3dIds)
+			{
+				_fe3d->text3d_setWireframed(text3dId, _isWireframeModeEnabled);
+			}
+
+			for(const auto & pointlightId : _loadedPointlightIds)
+			{
+				_fe3d->model_setWireframed("@@lamp_" + pointlightId, "", _isWireframeModeEnabled);
+			}
+
+			for(const auto & spotlightId : _loadedSpotlightIds)
+			{
+				_fe3d->model_setWireframed("@@torch_" + spotlightId, "", _isWireframeModeEnabled);
+			}
+
+			for(const auto & captorId : _loadedCaptorIds)
+			{
+				_fe3d->model_setWireframed("@@lens_" + captorId, "", _isWireframeModeEnabled);
+			}
+
+			for(const auto & sound3dId : _loadedSound3dIds)
+			{
+				_fe3d->model_setWireframed("@@speaker_" + sound3dId, "", _isWireframeModeEnabled);
+			}
 		}
 
 		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_B))
 		{
 			_isAabbModeEnabled = !_isAabbModeEnabled;
+
+			for(const auto & modelId : _loadedModelIds)
+			{
+				if(modelId != _activeModelId)
+				{
+					for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
+					{
+						_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+					}
+				}
+			}
+
+			for(const auto & quad3dId : _loadedQuad3dIds)
+			{
+				if(quad3dId != _activeQuad3dId)
+				{
+					for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
+					{
+						_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+					}
+				}
+			}
+
+			for(const auto & text3dId : _loadedText3dIds)
+			{
+				if(text3dId != _activeText3dId)
+				{
+					for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
+					{
+						_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+					}
+				}
+			}
+
+			for(const auto & pointlightId : _loadedPointlightIds)
+			{
+				if(pointlightId != _activePointlightId)
+				{
+					_fe3d->aabb_setVisible("@@lamp_" + pointlightId, _isAabbModeEnabled);
+				}
+			}
+
+			for(const auto & spotlightId : _loadedSpotlightIds)
+			{
+				if(spotlightId != _activeSpotlightId)
+				{
+					_fe3d->aabb_setVisible("@@torch_" + spotlightId, _isAabbModeEnabled);
+				}
+			}
+
+			for(const auto & captorId : _loadedCaptorIds)
+			{
+				if(captorId != _activeCaptorId)
+				{
+					_fe3d->aabb_setVisible("@@lens_" + captorId, _isAabbModeEnabled);
+				}
+			}
+
+			for(const auto & sound3dId : _loadedSound3dIds)
+			{
+				if(sound3dId != _activeSound3dId)
+				{
+					_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
+				}
+			}
 		}
-	}
-
-	_fe3d->model_setVisible(GRID_ID, _isGridModeEnabled);
-	_fe3d->model_setWireframed(GRID_ID, "", _isWireframeModeEnabled);
-
-	if(!_fe3d->sky_getSelectedId().empty())
-	{
-		_fe3d->sky_setWireframed(_fe3d->sky_getSelectedId(), _isWireframeModeEnabled);
-	}
-
-	if(!_fe3d->terrain_getSelectedId().empty())
-	{
-		_fe3d->terrain_setWireframed(_fe3d->terrain_getSelectedId(), _isWireframeModeEnabled);
-	}
-
-	if(!_fe3d->water_getSelectedId().empty())
-	{
-		_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
-	}
-
-	for(const auto & modelId : _loadedModelIds)
-	{
-		for(const auto & partId : _fe3d->model_getPartIds(modelId))
-		{
-			_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
-		}
-
-		for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
-		{
-			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-		}
-	}
-
-	for(const auto & quad3dId : _loadedQuad3dIds)
-	{
-		_fe3d->quad3d_setWireframed(quad3dId, _isWireframeModeEnabled);
-
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
-		{
-			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-		}
-	}
-
-	for(const auto & text3dId : _loadedText3dIds)
-	{
-		_fe3d->text3d_setWireframed(text3dId, _isWireframeModeEnabled);
-
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
-		{
-			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-		}
-	}
-
-	for(const auto & pointlightId : _loadedPointlightIds)
-	{
-		_fe3d->model_setWireframed("@@lamp_" + pointlightId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@lamp_" + pointlightId, _isAabbModeEnabled);
-	}
-
-	for(const auto & spotlightId : _loadedSpotlightIds)
-	{
-		_fe3d->model_setWireframed("@@torch_" + spotlightId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@torch_" + spotlightId, _isAabbModeEnabled);
-	}
-
-	for(const auto & captorId : _loadedCaptorIds)
-	{
-		_fe3d->model_setWireframed("@@lens_" + captorId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@lens_" + captorId, _isAabbModeEnabled);
-	}
-
-	for(const auto & sound3dId : _loadedSound3dIds)
-	{
-		_fe3d->model_setWireframed("@@speaker_" + sound3dId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
 	}
 
 	if(_fe3d->terrain_getSelectedId().empty())

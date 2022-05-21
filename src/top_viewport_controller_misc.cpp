@@ -185,6 +185,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sound2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\sound3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\spotlight.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\text2d.fe3d");
@@ -195,7 +196,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	{
 		if(!Tools::isDirectoryExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: directory `" + path.substr(Tools::getRootDirectoryPath().size()) + "` does not exist");
+			Logger::throwWarning("Project corrupted: directory `" + path.substr(projectDirectoryPath.size()) + "` does not exist");
 
 			return true;
 		}
@@ -205,7 +206,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	{
 		if(!Tools::isFileExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: file `" + path.substr(Tools::getRootDirectoryPath().size()) + "` does not exist");
+			Logger::throwWarning("Project corrupted: file `" + path.substr(projectDirectoryPath.size()) + "` does not exist");
 
 			return true;
 		}

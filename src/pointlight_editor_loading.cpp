@@ -23,7 +23,7 @@ const bool PointlightEditor::loadPointlightsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `pointlight.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\pointlight.fe3d` does not exist");
 
 		return false;
 	}

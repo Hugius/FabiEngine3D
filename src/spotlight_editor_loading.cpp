@@ -23,7 +23,7 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `spotlight.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\spotlight.fe3d` does not exist");
 
 		return false;
 	}

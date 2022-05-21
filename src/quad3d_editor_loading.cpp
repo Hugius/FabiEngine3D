@@ -24,7 +24,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\quad3d.fe3d` does not exist");
 
 		return {};
 	}
@@ -92,7 +92,7 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\quad3d.fe3d` does not exist");
 
 		return false;
 	}

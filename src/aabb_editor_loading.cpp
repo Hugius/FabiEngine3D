@@ -23,7 +23,7 @@ const bool AabbEditor::loadAabbsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `aabb.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\aabb.fe3d` does not exist");
 
 		return false;
 	}

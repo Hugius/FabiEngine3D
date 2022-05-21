@@ -23,7 +23,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\sound2d.fe3d` does not exist");
 
 		return {};
 	}
@@ -76,7 +76,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound2d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\sound2d.fe3d` does not exist");
 
 		return false;
 	}

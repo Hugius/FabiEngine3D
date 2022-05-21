@@ -23,7 +23,7 @@ const bool CaptorEditor::loadCaptorsFromFile()
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `captor.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `data\\captor.fe3d` does not exist");
 
 		return false;
 	}

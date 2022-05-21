@@ -70,9 +70,9 @@ public:
 	const shared_ptr<AabbManager> getAabbManager() const;
 	const shared_ptr<PointlightManager> getPointlightManager() const;
 	const shared_ptr<SpotlightManager> getSpotlightManager() const;
+	const shared_ptr<CaptorManager> getCaptorManager() const;
 	const shared_ptr<Sound3dManager> getSound3dManager() const;
 	const shared_ptr<Sound2dManager> getSound2dManager() const;
-	const shared_ptr<CaptorManager> getCaptorManager() const;
 	const shared_ptr<RenderWindow> getRenderWindow() const;
 	const shared_ptr<MasterRenderer> getMasterRenderer() const;
 	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
@@ -123,9 +123,9 @@ private:
 	shared_ptr<AabbManager> _aabbManager = nullptr;
 	shared_ptr<PointlightManager> _pointlightManager = nullptr;
 	shared_ptr<SpotlightManager> _spotlightManager = nullptr;
+	shared_ptr<CaptorManager> _captorManager = nullptr;
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
-	shared_ptr<CaptorManager> _captorManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;

@@ -93,8 +93,8 @@ void CaptorEditor::_unloadGUI()
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	leftWindow->deleteScreen("captorEditorMenuMain");
-	leftWindow->deleteScreen("captorEditorMenuChoice");
+	rightWindow->deleteScreen("captorEditorMenuMain");
+	rightWindow->deleteScreen("captorEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
 

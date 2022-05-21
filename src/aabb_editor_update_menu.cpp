@@ -6,7 +6,7 @@
 
 void AabbEditor::_updateMainMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "aabbEditorMenuMain")
 	{
@@ -63,7 +63,7 @@ void AabbEditor::_updateMainMenu()
 
 void AabbEditor::_updateChoiceMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "aabbEditorMenuChoice")
 	{
@@ -75,7 +75,7 @@ void AabbEditor::_updateChoiceMenu()
 			_fe3d->aabb_setVisible(_currentAabbId, false);
 
 			_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuMain");
 
 			_currentAabbId = "";
 

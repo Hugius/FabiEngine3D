@@ -93,8 +93,8 @@ void AabbEditor::_unloadGUI()
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	leftWindow->deleteScreen("aabbEditorMenuMain");
-	leftWindow->deleteScreen("aabbEditorMenuChoice");
+	rightWindow->deleteScreen("aabbEditorMenuMain");
+	rightWindow->deleteScreen("aabbEditorMenuChoice");
 
 	leftWindow->setActiveScreen("main");
 

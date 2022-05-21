@@ -92,7 +92,7 @@ void CaptorEditor::_updateCaptorCreating()
 
 		sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
 
-		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
+		_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
 
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + newCaptorId.substr(1));
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
@@ -136,7 +136,7 @@ void CaptorEditor::_updateCaptorChoosing()
 				}
 				else
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
+					_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + _currentCaptorId.substr(1));
 					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);

@@ -90,7 +90,7 @@ void AabbEditor::_updateAabbCreating()
 
 		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 
-		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
+		_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
 
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + newAabbId.substr(1));
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
@@ -132,7 +132,7 @@ void AabbEditor::_updateAabbChoosing()
 				}
 				else
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
+					_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + _currentAabbId.substr(1));
 					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);

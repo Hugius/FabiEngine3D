@@ -55,12 +55,12 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 	isExecuted = (isExecuted || _executeFe3dPointlightGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSpotlightSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSpotlightGetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dCaptorSetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dCaptorGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dCaptorSetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dCaptorGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dWorldSetter(functionName, args, returnValues));

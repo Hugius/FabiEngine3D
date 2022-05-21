@@ -22,9 +22,9 @@ EngineCore::EngineCore()
 	_aabbManager = make_shared<AabbManager>();
 	_pointlightManager = make_shared<PointlightManager>();
 	_spotlightManager = make_shared<SpotlightManager>();
+	_captorManager = make_shared<CaptorManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
 	_sound2dManager = make_shared<Sound2dManager>();
-	_captorManager = make_shared<CaptorManager>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_waveBufferCache = make_shared<WaveBufferCache>();

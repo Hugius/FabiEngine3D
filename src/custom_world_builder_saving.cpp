@@ -1107,6 +1107,28 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< endl;
 	}
 
+	for(const auto & captorId : _addedCaptorIds)
+	{
+		const auto position = _fe3d->captor_getPosition(captorId);
+
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+
+		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
+
+		file
+			<< "CAPTOR "
+			<< captorId
+			<< " "
+			<< exceptionId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< endl;
+	}
+
 	for(const auto & sound3dId : _addedSound3dIds)
 	{
 		const auto templateSound3dId = _duplicator->getTemplateSound3dId(sound3dId);
@@ -1149,28 +1171,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		}
 
 		file << endl;
-	}
-
-	for(const auto & captorId : _addedCaptorIds)
-	{
-		const auto position = _fe3d->captor_getPosition(captorId);
-
-		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
-
-		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
-
-		file
-			<< "CAPTOR "
-			<< captorId
-			<< " "
-			<< exceptionId
-			<< " "
-			<< position.x
-			<< " "
-			<< position.y
-			<< " "
-			<< position.z
-			<< endl;
 	}
 
 	if(_fe3d->graphics_isAmbientLightingEnabled())

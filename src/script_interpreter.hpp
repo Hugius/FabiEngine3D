@@ -122,12 +122,12 @@ private:
 	const bool _executeFe3dPointlightGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSpotlightSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSpotlightGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
+	const bool _executeFe3dCaptorSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
+	const bool _executeFe3dCaptorGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound3dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound3dGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound2dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound2dGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
-	const bool _executeFe3dCaptorSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
-	const bool _executeFe3dCaptorGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dGraphicsSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dGraphicsGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dWorldSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
@@ -163,9 +163,9 @@ private:
 	const bool _validateFe3dAabb(const string & aabbId, bool isTemplate);
 	const bool _validateFe3dPointlight(const string & pointlightId, bool isTemplate);
 	const bool _validateFe3dSpotlight(const string & spotlightId, bool isTemplate);
+	const bool _validateFe3dCaptor(const string & captorId);
 	const bool _validateFe3dSound3d(const string & sound3dId, bool isTemplate);
 	const bool _validateFe3dSound2d(const string & sound2dId, bool isTemplate);
-	const bool _validateFe3dCaptor(const string & captorId);
 	const bool _validateFe3dId(const string & id);
 	const bool _validateScopeChange(int countedSpaces, const string & scriptLineText, int & scopeDepth);
 	const bool _validateKeyInputString(const string & inputString);

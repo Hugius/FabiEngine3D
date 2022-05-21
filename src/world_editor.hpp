@@ -87,15 +87,15 @@ private:
 	void _updateSpotlightChoosingMenu();
 	void _updateSpotlightPlacing();
 	void _updateSpotlightEditing();
+	void _updateCaptorMenu();
+	void _updateCaptorChoosingMenu();
+	void _updateCaptorPlacing();
+	void _updateCaptorEditing();
 	void _updateSound3dMenu();
 	void _updateSound3dPlacingMenu();
 	void _updateSound3dChoosingMenu();
 	void _updateSound3dPlacing();
 	void _updateSound3dEditing();
-	void _updateCaptorMenu();
-	void _updateCaptorChoosingMenu();
-	void _updateCaptorPlacing();
-	void _updateCaptorEditing();
 	void _updateSettingsMenu();
 	void _updateLightingSettingsMenu();
 	void _updateAmbientLightingSettingsMenu();
@@ -124,32 +124,32 @@ private:
 	void _selectAabb(const string & aabbId);
 	void _selectPointlight(const string & pointlightId);
 	void _selectSpotlight(const string & spotlightId);
-	void _selectSound3d(const string & sound3dId);
 	void _selectCaptor(const string & captorId);
+	void _selectSound3d(const string & sound3dId);
 	void _deselectModel(const string & modelId);
 	void _deselectQuad3d(const string & quad3dId);
 	void _deselectText3d(const string & text3dId);
 	void _deselectAabb(const string & aabbId);
 	void _deselectPointlight(const string & pointlightId);
 	void _deselectSpotlight(const string & spotlightId);
-	void _deselectSound3d(const string & sound3dId);
 	void _deselectCaptor(const string & captorId);
+	void _deselectSound3d(const string & sound3dId);
 	void _activateModel(const string & modelId);
 	void _activateQuad3d(const string & quad3dId);
 	void _activateText3d(const string & text3dId);
 	void _activateAabb(const string & aabbId);
 	void _activatePointlight(const string & pointlightId);
 	void _activateSpotlight(const string & spotlightId);
-	void _activateSound3d(const string & sound3dId);
 	void _activateCaptor(const string & captorId);
+	void _activateSound3d(const string & sound3dId);
 	void _deactivateModel();
 	void _deactivateQuad3d();
 	void _deactivateText3d();
 	void _deactivateAabb();
 	void _deactivatePointlight();
 	void _deactivateSpotlight();
-	void _deactivateSound3d();
 	void _deactivateCaptor();
+	void _deactivateSound3d();
 	void _handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta = 0.0f, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	const vector<string> _getWorldIds() const;
@@ -175,8 +175,8 @@ private:
 	static inline const fvec3 AABB_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
-	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 CAPTOR_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
@@ -220,13 +220,13 @@ private:
 	static inline constexpr float SPOTLIGHT_INTENSITY = 10.0f;
 	static inline constexpr float SPOTLIGHT_ANGLE = 25.0f;
 	static inline constexpr float SPOTLIGHT_DISTANCE = 10.0f;
+	static inline constexpr float CAPTOR_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_DISTANCE_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_FACTOR = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_SPEED = 0.01f;
 	static inline constexpr float SOUND3D_MAX_VOLUME = 1.0f;
 	static inline constexpr float SOUND3D_MAX_DISTANCE = 25.0f;
-	static inline constexpr float CAPTOR_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float GRID_SIZE = 1024.0f;
 	static inline constexpr float GRID_MIN_ALPHA = 0.1f;
 	static inline constexpr float GRID_LIGHTNESS = 0.5f;
@@ -249,8 +249,8 @@ private:
 	vector<string> _loadedAabbIds = {};
 	vector<string> _loadedPointlightIds = {};
 	vector<string> _loadedSpotlightIds = {};
-	vector<string> _loadedSound3dIds = {};
 	vector<string> _loadedCaptorIds = {};
+	vector<string> _loadedSound3dIds = {};
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
@@ -258,12 +258,12 @@ private:
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
 	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<AabbEditor> _aabbEditor = nullptr;
 	shared_ptr<PointlightEditor> _pointlightEditor = nullptr;
 	shared_ptr<SpotlightEditor> _spotlightEditor = nullptr;
 	shared_ptr<CaptorEditor> _captorEditor = nullptr;
-	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
-	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Sound3dEditor> _sound3dEditor = nullptr;
 	shared_ptr<Duplicator> _duplicator = nullptr;
 
@@ -282,16 +282,16 @@ private:
 	string _selectedAabbId = "";
 	string _selectedPointlightId = "";
 	string _selectedSpotlightId = "";
-	string _selectedSound3dId = "";
 	string _selectedCaptorId = "";
+	string _selectedSound3dId = "";
 	string _activeModelId = "";
 	string _activeQuad3dId = "";
 	string _activeText3dId = "";
 	string _activeAabbId = "";
 	string _activePointlightId = "";
 	string _activeSpotlightId = "";
-	string _activeSound3dId = "";
 	string _activeCaptorId = "";
+	string _activeSound3dId = "";
 
 	float _editorSpeed = 1.0f;
 
@@ -303,8 +303,8 @@ private:
 	bool _dontResetSelectedAabb = false;
 	bool _dontResetSelectedPointlight = false;
 	bool _dontResetSelectedSpotlight = false;
-	bool _dontResetSelectedSound3d = false;
 	bool _dontResetSelectedCaptor = false;
+	bool _dontResetSelectedSound3d = false;
 	bool _isPlacingCaptor = false;
 	bool _isGridModeEnabled = true;
 	bool _isWireframeModeEnabled = false;

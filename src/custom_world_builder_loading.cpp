@@ -1298,6 +1298,21 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			_loadedSpotlightIds.push_back(spotlightId);
 		}
+		else if(lineType == "CAPTOR")
+		{
+			string captorId;
+			string exceptionId;
+			fvec3 position;
+
+			exceptionId = (exceptionId == "?") ? "" : exceptionId;
+
+			iss
+				>> captorId
+				>> exceptionId
+				>> position.x
+				>> position.y
+				>> position.z;
+		}
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
@@ -1351,21 +1366,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			}
 
 			_loadedSound3dIds.push_back(sound3dId);
-		}
-		else if(lineType == "CAPTOR")
-		{
-			string captorId;
-			string exceptionId;
-			fvec3 position;
-
-			exceptionId = (exceptionId == "?") ? "" : exceptionId;
-
-			iss
-				>> captorId
-				>> exceptionId
-				>> position.x
-				>> position.y
-				>> position.z;
 		}
 		else if(lineType == "GRAPHICS_AMBIENT_LIGHTING")
 		{

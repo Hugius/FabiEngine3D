@@ -6,7 +6,7 @@
 
 void CaptorEditor::_updateMainMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "captorEditorMenuMain")
 	{
@@ -63,7 +63,7 @@ void CaptorEditor::_updateMainMenu()
 
 void CaptorEditor::_updateChoiceMenu()
 {
-	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getId() == "captorEditorMenuChoice")
 	{
@@ -73,7 +73,7 @@ void CaptorEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("captorEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuMain");
 
 			_currentCaptorId = "";
 

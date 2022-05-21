@@ -88,6 +88,7 @@ private:
 	void _updateSpotlightPlacing();
 	void _updateSpotlightEditing();
 	void _updateCaptorMenu();
+	void _updateCaptorPlacingMenu();
 	void _updateCaptorChoosingMenu();
 	void _updateCaptorPlacing();
 	void _updateCaptorEditing();
@@ -275,6 +276,7 @@ private:
 	string _currentTemplateAabbId = "";
 	string _currentTemplatePointlightId = "";
 	string _currentTemplateSpotlightId = "";
+	string _currentTemplateCaptorId = "";
 	string _currentTemplateSound3dId = "";
 	string _selectedModelId = "";
 	string _selectedQuad3dId = "";
@@ -305,7 +307,6 @@ private:
 	bool _dontResetSelectedSpotlight = false;
 	bool _dontResetSelectedCaptor = false;
 	bool _dontResetSelectedSound3d = false;
-	bool _isPlacingCaptor = false;
 	bool _isGridModeEnabled = true;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;

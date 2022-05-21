@@ -9,8 +9,8 @@ void WorldEditor::_updatePointlightEditing()
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
 	   _currentTemplateSpotlightId.empty() &&
-	   _currentTemplatePointlightId.empty() &&
-	   !_isPlacingCaptor)
+	   _currentTemplateCaptorId.empty() &&
+	   _currentTemplateSound3dId.empty())
 	{
 		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();

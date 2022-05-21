@@ -9,8 +9,8 @@ void WorldEditor::_updateAabbEditing()
 	   _currentTemplateAabbId.empty() &&
 	   _currentTemplatePointlightId.empty() &&
 	   _currentTemplateSpotlightId.empty() &&
-	   _currentTemplateSound3dId.empty() &&
-	   !_isPlacingCaptor)
+	   _currentTemplateCaptorId.empty() &&
+	   _currentTemplateSound3dId.empty())
 	{
 		if(!_dontResetSelectedAabb)
 		{

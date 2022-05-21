@@ -68,8 +68,8 @@ void WorldEditor::_updateSpotlightPlacingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateSpotlightId = hoveredOptionId;
 
@@ -120,8 +120,8 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateSpotlight(hoveredOptionId);
 			}

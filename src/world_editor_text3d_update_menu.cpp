@@ -67,8 +67,8 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateText3dId = hoveredOptionId;
 
@@ -117,8 +117,8 @@ void WorldEditor::_updateText3dChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateText3d(hoveredOptionId);
 			}

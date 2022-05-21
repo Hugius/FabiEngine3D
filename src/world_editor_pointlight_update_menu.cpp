@@ -68,8 +68,8 @@ void WorldEditor::_updatePointlightPlacingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplatePointlightId = hoveredOptionId;
 
@@ -120,8 +120,8 @@ void WorldEditor::_updatePointlightChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activatePointlight(hoveredOptionId);
 			}

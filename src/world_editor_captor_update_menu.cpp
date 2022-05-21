@@ -11,11 +11,11 @@ void WorldEditor::_updateCaptorMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_isPlacingCaptor)
+			if(!_currentTemplateCaptorId.empty())
 			{
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_isPlacingCaptor = false;
+				_currentTemplateCaptorId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -24,31 +24,7 @@ void WorldEditor::_updateCaptorMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
-
-			_deactivateModel();
-			_deactivateQuad3d();
-			_deactivateText3d();
-			_deactivateAabb();
-			_deactivatePointlight();
-			_deactivateSpotlight();
-			_deactivateSound3d();
-			_deactivateCaptor();
-
-			_isPlacingCaptor = true;
-
-			_fe3d->model_setVisible(LENS_ID, true);
-
-			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
-
-			if(_fe3d->terrain_getSelectedId().empty())
-			{
-				_fe3d->captor_setPosition(LENS_ID, fvec3(0.0f));
-
-				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			}
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptorPlace");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
@@ -61,7 +37,55 @@ void WorldEditor::_updateCaptorMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(!_isPlacingCaptor);
+		screen->getButton("choice")->setHoverable(_currentTemplateCaptorId.empty());
+	}
+}
+
+void WorldEditor::_updateCaptorPlacingMenu()
+{
+	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
+
+	if(screen->getId() == "worldEditorMenuCaptorPlace")
+	{
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		{
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptor");
+
+			return;
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
+		{
+			const auto hoveredOptionId = screen->getScrollingList("templateCaptors")->getHoveredOptionId();
+
+			if(!hoveredOptionId.empty())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
+
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateText3d();
+				_deactivateAabb();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateCaptor();
+				_deactivateSound3d();
+
+				_currentTemplateCaptorId = hoveredOptionId;
+
+				_fe3d->model_setVisible(LENS_ID, true);
+
+				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
+
+				if(_fe3d->terrain_getSelectedId().empty())
+				{
+					_fe3d->captor_setPosition(_currentTemplateCaptorId, fvec3(0.0f));
+
+					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+				}
+			}
+		}
 	}
 }
 
@@ -93,8 +117,8 @@ void WorldEditor::_updateCaptorChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateCaptor(hoveredOptionId);
 			}

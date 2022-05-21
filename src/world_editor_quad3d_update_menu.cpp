@@ -67,8 +67,8 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_currentTemplateQuad3dId = hoveredOptionId;
 
@@ -117,8 +117,8 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 				_deactivateAabb();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateSound3d();
 				_deactivateCaptor();
+				_deactivateSound3d();
 
 				_activateQuad3d(hoveredOptionId);
 			}

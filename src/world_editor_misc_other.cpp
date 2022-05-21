@@ -69,6 +69,16 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
+	for(const auto & captorId : _loadedCaptorIds)
+	{
+		_duplicator->deleteCopiedCaptor(captorId);
+
+		if(isLoaded())
+		{
+			_fe3d->model_delete("@@lens_" + captorId);
+		}
+	}
+
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
 		_duplicator->deleteCopiedSound3d(sound3dId);
@@ -76,16 +86,6 @@ void WorldEditor::clearLoadedWorld()
 		if(isLoaded())
 		{
 			_fe3d->model_delete("@@speaker_" + sound3dId);
-		}
-	}
-
-	for(const auto & captorId : _loadedCaptorIds)
-	{
-		_fe3d->captor_delete(captorId);
-
-		if(isLoaded())
-		{
-			_fe3d->model_delete("@@lens_" + captorId);
 		}
 	}
 
@@ -140,8 +140,8 @@ void WorldEditor::clearLoadedWorld()
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
-	_loadedSound3dIds.clear();
 	_loadedCaptorIds.clear();
+	_loadedSound3dIds.clear();
 
 	_loadedWorldId = "";
 	_idCounter = 0;

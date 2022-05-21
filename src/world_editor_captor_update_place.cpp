@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateCaptorPlacing()
 {
-	if(_isPlacingCaptor)
+	if(!_currentTemplateCaptorId.empty())
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
@@ -14,7 +14,7 @@ void WorldEditor::_updateCaptorPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->captor_setPosition(LENS_ID, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->captor_setPosition(_currentTemplateCaptorId, fvec3(value, newPosition.y, newPosition.z));
 				_fe3d->model_setBasePosition(LENS_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			else if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
@@ -22,7 +22,7 @@ void WorldEditor::_updateCaptorPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->captor_setPosition(LENS_ID, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->captor_setPosition(_currentTemplateCaptorId, fvec3(newPosition.x, value, newPosition.z));
 				_fe3d->model_setBasePosition(LENS_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			else if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
@@ -34,7 +34,8 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_idCounter++;
 
-				_fe3d->captor_create(newId);
+				_duplicator->copyTemplateCaptor(newId, _currentTemplateCaptorId);
+
 				_fe3d->captor_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 
 				_loadedCaptorIds.push_back(newId);
@@ -56,14 +57,14 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_isPlacingCaptor = false;
+				_currentTemplatePointlightId = "";
 			}
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_isPlacingCaptor = false;
+				_currentTemplatePointlightId = "";
 			}
 		}
 		else
@@ -86,7 +87,7 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_isPlacingCaptor = false;
+				_currentTemplatePointlightId = "";
 
 				return;
 			}
@@ -100,7 +101,7 @@ void WorldEditor::_updateCaptorPlacing()
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + CAPTOR_TERRAIN_OFFSET);
 
-			_fe3d->captor_setPosition(LENS_ID, newPosition);
+			_fe3d->captor_setPosition(_currentTemplateCaptorId, newPosition);
 			_fe3d->model_setVisible(LENS_ID, true);
 			_fe3d->model_setBasePosition(LENS_ID, newPosition);
 
@@ -111,7 +112,8 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_idCounter++;
 
-				_fe3d->captor_create(newId);
+				_duplicator->copyTemplateCaptor(newId, _currentTemplateCaptorId);
+
 				_fe3d->captor_setPosition(newId, newPosition);
 
 				_loadedCaptorIds.push_back(newId);

@@ -53,7 +53,6 @@ void WorldEditor::_load()
 	_fe3d->model_setRefracted(SPEAKER_ID, false);
 	_fe3d->model_setVisible(SPEAKER_ID, false);
 	_fe3d->model_setBright(SPEAKER_ID, "", true);
-	_fe3d->captor_create(LENS_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
@@ -131,6 +130,7 @@ void WorldEditor::_unload()
 	_aabbEditor->deleteLoadedAabbs();
 	_pointlightEditor->deleteLoadedPointlights();
 	_spotlightEditor->deleteLoadedSpotlights();
+	_captorEditor->deleteLoadedCaptors();
 	_sound3dEditor->deleteLoadedSound3ds();
 
 	_fe3d->model_delete(GRID_ID);
@@ -138,7 +138,6 @@ void WorldEditor::_unload()
 	_fe3d->model_delete(TORCH_ID);
 	_fe3d->model_delete(LENS_ID);
 	_fe3d->model_delete(SPEAKER_ID);
-	_fe3d->captor_delete(LENS_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
@@ -207,12 +206,12 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSound3dPlacing();
+		_updateCaptorPlacing();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateCaptorPlacing();
+		_updateSound3dPlacing();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
@@ -262,12 +261,12 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSound3dMenu();
+		_updateCaptorMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateCaptorMenu();
+		_updateSound3dMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
@@ -317,6 +316,11 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateCaptorPlacingMenu();
+	}
+
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updateSound3dPlacingMenu();
 	}
 
@@ -352,12 +356,12 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSound3dChoosingMenu();
+		_updateCaptorChoosingMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateCaptorChoosingMenu();
+		_updateSound3dChoosingMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
@@ -392,12 +396,12 @@ void WorldEditor::update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSound3dEditing();
+		_updateCaptorEditing();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateCaptorEditing();
+		_updateSound3dEditing();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())

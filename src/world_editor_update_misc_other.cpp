@@ -151,16 +151,16 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->aabb_setVisible("@@torch_" + spotlightId, _isAabbModeEnabled);
 	}
 
-	for(const auto & sound3dId : _loadedSound3dIds)
-	{
-		_fe3d->model_setWireframed("@@speaker_" + sound3dId, "", _isWireframeModeEnabled);
-		_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
-	}
-
 	for(const auto & captorId : _loadedCaptorIds)
 	{
 		_fe3d->model_setWireframed("@@lens_" + captorId, "", _isWireframeModeEnabled);
 		_fe3d->aabb_setVisible("@@lens_" + captorId, _isAabbModeEnabled);
+	}
+
+	for(const auto & sound3dId : _loadedSound3dIds)
+	{
+		_fe3d->model_setWireframed("@@speaker_" + sound3dId, "", _isWireframeModeEnabled);
+		_fe3d->aabb_setVisible("@@speaker_" + sound3dId, _isAabbModeEnabled);
 	}
 
 	if(_fe3d->terrain_getSelectedId().empty())
@@ -188,8 +188,8 @@ void WorldEditor::_updateMiscellaneous()
 							 !_selectedAabbId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
-							 !_selectedSound3dId.empty() ||
-							 !_selectedCaptorId.empty());
+							 !_selectedCaptorId.empty() ||
+							 !_selectedSound3dId.empty());
 
 	const auto isActive = (!_activeModelId.empty() ||
 						   !_activeQuad3dId.empty() ||
@@ -197,8 +197,8 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activeAabbId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
-						   !_activeSound3dId.empty() ||
-						   !_activeCaptorId.empty());
+						   !_activeCaptorId.empty() ||
+						   !_activeSound3dId.empty());
 
 	_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(isSelected);
 	_gui->getOverlay()->getTextField(ACTIVE_TITLE_ID)->setVisible(isActive);

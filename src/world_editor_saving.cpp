@@ -308,6 +308,31 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
+	for(const auto & captorId : _loadedCaptorIds)
+	{
+		const auto templateCaptorId = _duplicator->getTemplateCaptorId(captorId);
+		const auto position = _fe3d->captor_getPosition(captorId);
+
+		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
+
+		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
+
+		file
+			<< "CAPTOR "
+			<< captorId
+			<< " "
+			<< templateCaptorId
+			<< " "
+			<< exceptionId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< endl;
+	}
+
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
 		const auto templateSound3dId = _duplicator->getTemplateSound3dId(sound3dId);
@@ -324,28 +349,6 @@ const bool WorldEditor::saveWorldToFile() const
 			<< position.y
 			<< " "
 			<< position.z
-			<< endl;
-	}
-
-	for(const auto & captorId : _loadedCaptorIds)
-	{
-		const auto position = _fe3d->captor_getPosition(captorId);
-
-		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
-
-		exceptionId = (exceptionId.empty()) ? "?" : exceptionId;
-
-		file
-			<< "CAPTOR "
-			<< captorId
-			<< " "
-			<< position.x
-			<< " "
-			<< position.y
-			<< " "
-			<< position.z
-			<< " "
-			<< exceptionId
 			<< endl;
 	}
 

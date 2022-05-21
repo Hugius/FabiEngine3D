@@ -1301,6 +1301,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "CAPTOR")
 		{
 			string captorId;
+			string templateCaptorId;
 			string exceptionId;
 			fvec3 position;
 
@@ -1308,10 +1309,18 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> captorId
+				>> templateCaptorId
 				>> exceptionId
 				>> position.x
 				>> position.y
 				>> position.z;
+
+			if(!_fe3d->captor_isExisting(templateCaptorId))
+			{
+				continue;
+			}
+
+			_duplicator->copyTemplateCaptor(captorId, templateCaptorId);
 		}
 		else if(lineType == "SOUND3D")
 		{

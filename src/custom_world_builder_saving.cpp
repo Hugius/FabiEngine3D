@@ -1109,6 +1109,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & captorId : _addedCaptorIds)
 	{
+		const auto templateCaptorId = _duplicator->getTemplateCaptorId(captorId);
 		const auto position = _fe3d->captor_getPosition(captorId);
 
 		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
@@ -1118,6 +1119,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		file
 			<< "CAPTOR "
 			<< captorId
+			<< " "
+			<< templateCaptorId
 			<< " "
 			<< exceptionId
 			<< " "

@@ -6,7 +6,117 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dWorldGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:world_get_current_editor_id")
+	if(functionName == "fe3d:world_is_custom_sky_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isSkyAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_terrain_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isTerrainAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_water_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isWaterAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_model_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isModelAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_quad3d_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isQuad3dAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_text3d_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isText3dAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_pointlight_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isPointlightAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_spotlight_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isSpotlightAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_captor_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isCaptorAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_is_custom_sound3d_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isSound3dAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:world_get_current_editor_id")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

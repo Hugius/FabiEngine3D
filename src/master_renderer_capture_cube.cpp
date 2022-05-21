@@ -208,12 +208,16 @@ void MasterRenderer::captureCubeReflections()
 	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
+	_updateShadows();
+
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 	_renderStorage->setShadowInterval(originalShadowInterval);
 
-	_updateShadows();
+	captureShadows();
+	captureWaterEdges();
+
 }
 
 void MasterRenderer::captureCubeRefractions()
@@ -422,10 +426,13 @@ void MasterRenderer::captureCubeRefractions()
 	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
+	_updateShadows();
+
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 	_renderStorage->setShadowInterval(originalShadowInterval);
 
-	_updateShadows();
+	captureShadows();
+	captureWaterEdges();
 }

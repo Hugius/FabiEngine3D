@@ -245,18 +245,30 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, con
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId)
+const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId, bool isTemplate)
 {
 	if(!_validateFe3dId(captorId))
 	{
 		return false;
 	}
 
-	if(!_fe3d->captor_isExisting(captorId))
+	if(isTemplate)
 	{
-		_throwRuntimeError("captor does not exist");
+		if(!_fe3d->captor_isExisting("@" + captorId))
+		{
+			_throwRuntimeError("template captor does not exist");
 
-		return false;
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->captor_isExisting(captorId))
+		{
+			_throwRuntimeError("captor does not exist");
+
+			return false;
+		}
 	}
 
 	return true;

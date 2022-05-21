@@ -17,6 +17,7 @@ public:
 	void copyTemplateAabb(const string & newId, const string & templateId);
 	void copyTemplatePointlight(const string & newId, const string & templateId);
 	void copyTemplateSpotlight(const string & newId, const string & templateId);
+	void copyTemplateCaptor(const string & newId, const string & templateId);
 	void copyTemplateSound3d(const string & newId, const string & templateId);
 	void copyTemplateSound2d(const string & newId, const string & templateId);
 	void deleteCopiedSky(const string & skyId);
@@ -30,6 +31,7 @@ public:
 	void deleteCopiedAabb(const string & aabbId);
 	void deleteCopiedPointlight(const string & pointlightId);
 	void deleteCopiedSpotlight(const string & spotlightId);
+	void deleteCopiedCaptor(const string & captorId);
 	void deleteCopiedSound3d(const string & sound3dId);
 	void deleteCopiedSound2d(const string & sound2dId);
 
@@ -44,6 +46,7 @@ public:
 	const string & getTemplateAabbId(const string & aabbId) const;
 	const string & getTemplatePointlightId(const string & pointlightId) const;
 	const string & getTemplateSpotlightId(const string & spotlightId) const;
+	const string & getTemplateCaptorId(const string & captorId) const;
 	const string & getTemplateSound3dId(const string & sound3dId) const;
 	const string & getTemplateSound2dId(const string & sound2dId) const;
 
@@ -59,6 +62,7 @@ private:
 	unordered_map<string, string> _copiedAabbIds = {};
 	unordered_map<string, string> _copiedPointlightIds = {};
 	unordered_map<string, string> _copiedSpotlightIds = {};
+	unordered_map<string, string> _copiedCaptorIds = {};
 	unordered_map<string, string> _copiedSound3dIds = {};
 	unordered_map<string, string> _copiedSound2dIds = {};
 

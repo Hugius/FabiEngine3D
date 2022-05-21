@@ -28,11 +28,10 @@ void CaptorEditor::_loadGUI()
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	rightWindow->createScreen("captorEditorMenuMain");
-	rightWindow->getScreen("captorEditorMenuMain")->createButton("sky", fvec2(0.0f, POSITIONS(5)[0]), TEXT_SIZE("Select Sky"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("captorEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(5)[1]), TEXT_SIZE("Create Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("captorEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Edit Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("captorEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Delete Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("captorEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("captorEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Create Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("captorEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Edit Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("captorEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Delete Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("captorEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("captorEditorMenuChoice");
 	rightWindow->getScreen("captorEditorMenuChoice")->createButton("reflectionQuality", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Reflect Quality"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflect Quality", TEXT_COLOR, TEXT_HOVER_COLOR, true);

@@ -380,6 +380,20 @@ void Duplicator::copyTemplateSpotlight(const string & newId, const string & temp
 	_copiedSpotlightIds.insert({newId, templateId});
 }
 
+void Duplicator::copyTemplateCaptor(const string & newId, const string & templateId)
+{
+	if(!_fe3d->captor_isExisting(templateId))
+	{
+		abort();
+	}
+
+	_fe3d->captor_create(newId);
+	_fe3d->captor_setReflectionQuality(newId, _fe3d->captor_getReflectionQuality(templateId));
+	_fe3d->captor_setRefractionQuality(newId, _fe3d->captor_getRefractionQuality(templateId));
+
+	_copiedCaptorIds.insert({newId, templateId});
+}
+
 void Duplicator::copyTemplateSound3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound3d_isExisting(templateId))

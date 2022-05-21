@@ -22,10 +22,14 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 				return true;
 			}
 
-			_fe3d->captor_create(args[0]->getString());
-			_fe3d->captor_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+			if(_validateFe3dCaptor(args[1]->getString(), true))
+			{
+				_duplicator->copyTemplateCaptor(args[0]->getString(), ("@" + args[1]->getString()));
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				_fe3d->captor_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:captor_delete")
@@ -34,9 +38,9 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
-				_fe3d->captor_delete(args[0]->getString());
+				_duplicator->deleteCopiedCaptor(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -50,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 			{
 				if(captorId[0] != '@')
 				{
-					_fe3d->captor_delete(captorId);
+					_duplicator->deleteCopiedCaptor(args[0]->getString());
 				}
 			}
 
@@ -63,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
@@ -77,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_move(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
@@ -91,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_moveTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
@@ -105,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_capture(args[0]->getString());
 
@@ -119,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_setExceptionId(args[0]->getString(), args[1]->getString());
 
@@ -133,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_setReflectionQuality(args[0]->getString(), args[1]->getInteger());
 
@@ -147,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				_fe3d->captor_setRefractionQuality(args[0]->getString(), args[1]->getInteger());
 

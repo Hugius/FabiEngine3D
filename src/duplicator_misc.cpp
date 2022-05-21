@@ -82,6 +82,13 @@ void Duplicator::deleteCopiedSpotlight(const string & spotlightId)
 	_copiedSpotlightIds.erase(spotlightId);
 }
 
+void Duplicator::deleteCopiedCaptor(const string & captorId)
+{
+	_fe3d->captor_delete(captorId);
+
+	_copiedCaptorIds.erase(captorId);
+}
+
 void Duplicator::deleteCopiedSound3d(const string & sound3dId)
 {
 	_fe3d->sound3d_delete(sound3dId);
@@ -204,6 +211,16 @@ const string & Duplicator::getTemplateSpotlightId(const string & spotlightId) co
 	}
 
 	return _copiedSpotlightIds.at(spotlightId);
+}
+
+const string & Duplicator::getTemplateCaptorId(const string & captorId) const
+{
+	if(_copiedCaptorIds.find(captorId) == _copiedCaptorIds.end())
+	{
+		abort();
+	}
+
+	return _copiedCaptorIds.at(captorId);
 }
 
 const string & Duplicator::getTemplateSound3dId(const string & sound3dId) const

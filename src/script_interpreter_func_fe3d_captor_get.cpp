@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getPosition(args[0]->getString()).x;
 
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getPosition(args[0]->getString()).y;
 
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getPosition(args[0]->getString()).z;
 
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getExceptionId(args[0]->getString());
 
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getReflectionQuality(args[0]->getString());
 
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dCaptor(args[0]->getString()))
+			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
 				const auto result = _fe3d->captor_getRefractionQuality(args[0]->getString());
 

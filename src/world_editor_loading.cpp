@@ -416,10 +416,17 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> position.y
 				>> position.z;
 
+			exceptionId = (exceptionId == "?") ? "" : exceptionId;
+
+			if(!_fe3d->captor_isExisting(templateCaptorId))
+			{
+				continue;
+			}
+
 			_duplicator->copyTemplateCaptor(captorId, templateCaptorId);
 
-			_fe3d->captor_setPosition(captorId, position);
 			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
+			_fe3d->captor_setPosition(captorId, position);
 			_fe3d->captor_capture(captorId);
 
 			_loadedCaptorIds.push_back(captorId);

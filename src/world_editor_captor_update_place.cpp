@@ -57,14 +57,14 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_currentTemplatePointlightId = "";
+				_currentTemplateCaptorId = "";
 			}
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_currentTemplatePointlightId = "";
+				_currentTemplateCaptorId = "";
 			}
 		}
 		else
@@ -87,7 +87,7 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				_fe3d->model_setVisible(LENS_ID, false);
 
-				_currentTemplatePointlightId = "";
+				_currentTemplateCaptorId = "";
 
 				return;
 			}

@@ -96,6 +96,7 @@ void TopViewportController::_updateMiscellaneous()
 	rightScreen->getButton("aabbEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("pointlightEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("spotlightEditor")->setHoverable(isHoverable);
+	rightScreen->getButton("captorEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("sound3dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("sound2dEditor")->setHoverable(isHoverable);
 	rightScreen->getButton("worldEditor")->setHoverable(isHoverable);
@@ -119,6 +120,7 @@ void TopViewportController::_setProject(const string & projectId)
 	_aabbEditor->setCurrentProjectId(_currentProjectId);
 	_pointlightEditor->setCurrentProjectId(_currentProjectId);
 	_spotlightEditor->setCurrentProjectId(_currentProjectId);
+	_captorEditor->setCurrentProjectId(_currentProjectId);
 	_sound3dEditor->setCurrentProjectId(_currentProjectId);
 	_sound2dEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
@@ -176,6 +178,7 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	filePaths.push_back(projectDirectoryPath + "data\\aabb.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\animation2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\animation3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\captor.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\pointlight.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
@@ -309,4 +312,9 @@ void TopViewportController::inject(shared_ptr<Script> script)
 void TopViewportController::inject(shared_ptr<ScriptExecutor> scriptExecutor)
 {
 	_scriptExecutor = scriptExecutor;
+}
+
+void TopViewportController::inject(shared_ptr<CaptorEditor> captorEditor)
+{
+	_captorEditor = captorEditor;
 }

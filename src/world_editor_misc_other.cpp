@@ -279,6 +279,11 @@ void WorldEditor::inject(shared_ptr<SpotlightEditor> spotlightEditor)
 	_spotlightEditor = spotlightEditor;
 }
 
+void WorldEditor::inject(shared_ptr<CaptorEditor> captorEditor)
+{
+	_captorEditor = captorEditor;
+}
+
 void WorldEditor::inject(shared_ptr<Duplicator> duplicator)
 {
 	_duplicator = duplicator;

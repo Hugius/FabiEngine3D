@@ -84,9 +84,6 @@ void EngineInterface::graphics_setMotionBlurQuality(int value)
 
 void EngineInterface::graphics_setAnisotropicFilteringQuality(int value)
 {
-	const auto minQuality = _core->getRenderStorage()->getMinAnisotropicFilteringQuality();
-	const auto maxQuality = _core->getRenderStorage()->getMaxAnisotropicFilteringQuality();
-
 	_core->getRenderStorage()->setAnisotropicFilteringQuality(value);
 
 	for(const auto & [mergedId, texture] : _core->getTextureBufferCache()->get2dBuffers())

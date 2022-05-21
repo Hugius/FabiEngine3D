@@ -93,6 +93,7 @@ void TopViewportController::_updateProjectCreating()
 		auto aabbFile = ofstream(newProjectDirectoryPath + "data\\aabb.fe3d");
 		auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 		auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
+		auto captorFile = ofstream(newProjectDirectoryPath + "data\\captor.fe3d");
 		auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 		auto pointlightFile = ofstream(newProjectDirectoryPath + "data\\pointlight.fe3d");
 		auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
@@ -107,6 +108,7 @@ void TopViewportController::_updateProjectCreating()
 
 		animation2dFile.close();
 		animation3dFile.close();
+		captorFile.close();
 		modelFile.close();
 		pointlightFile.close();
 		quad2dFile.close();

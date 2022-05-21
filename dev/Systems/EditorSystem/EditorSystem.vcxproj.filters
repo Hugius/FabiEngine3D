@@ -301,6 +301,18 @@
     <Filter Include="Captor Editor">
       <UniqueIdentifier>{64a99028-7669-4a0b-bf0a-5a5afa8e4634}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Captor Editor\Main">
+      <UniqueIdentifier>{f7ab92de-f91b-45d7-97f0-a4e3373cb1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Captor Editor\Miscellaneous">
+      <UniqueIdentifier>{d7a00901-a952-4a2c-80dd-1dfd7ba80d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Captor Editor\Update">
+      <UniqueIdentifier>{5317844b-ea57-4287-8ca7-c83a29de9d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Captor Editor\Persistence">
+      <UniqueIdentifier>{e6eaea1a-cea7-4a53-9596-afbd8e6f76c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -781,22 +793,22 @@
       <Filter>Sound3d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_editor_lifecycle.cpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_editor_loading.cpp">
-      <Filter>Captor Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\captor_editor_misc.cpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_editor_saving.cpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\captor_editor_misc.cpp">
+      <Filter>Captor Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_editor_update_menu.cpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Update</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -855,7 +867,7 @@
       <Filter>Sound3d Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\captor_editor.hpp">
-      <Filter>Captor Editor</Filter>
+      <Filter>Captor Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

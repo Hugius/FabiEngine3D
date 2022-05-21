@@ -14,6 +14,7 @@ void WorldEditor::_load()
 	_aabbEditor->loadAabbsFromFile();
 	_pointlightEditor->loadPointlightsFromFile();
 	_spotlightEditor->loadSpotlightsFromFile();
+	_captorEditor->loadCaptorsFromFile();
 	_sound3dEditor->loadSound3dsFromFile();
 
 	_fe3d->model_create(GRID_ID, GRID_MESH_PATH);
@@ -101,6 +102,11 @@ void WorldEditor::_load()
 	for(const auto & spotlightId : _spotlightEditor->getLoadedSpotlightIds())
 	{
 		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightPlace")->getScrollingList("templateSpotlights")->createOption(spotlightId, spotlightId.substr(1));
+	}
+
+	for(const auto & captorId : _captorEditor->getLoadedCaptorIds())
+	{
+		_gui->getRightViewport()->getWindow("main")->getScreen("worldEditorMenuCaptorPlace")->getScrollingList("templateCaptors")->createOption(captorId, captorId.substr(1));
 	}
 
 	for(const auto & sound3dId : _sound3dEditor->getLoadedSound3dIds())

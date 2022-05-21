@@ -11,15 +11,16 @@ void RightViewportController::initialize()
 
 	window->createScreen("empty");
 	window->createScreen("main");
-	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, POSITIONS(9)[1]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("aabbEditor", fvec2(0.0f, POSITIONS(9)[2]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("pointlightEditor", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("spotlightEditor", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("sound3dEditor", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, POSITIONS(10)[0]), TEXT_SIZE("Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, POSITIONS(10)[1]), TEXT_SIZE("Animation2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("aabbEditor", fvec2(0.0f, POSITIONS(10)[2]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("pointlightEditor", fvec2(0.0f, POSITIONS(10)[3]), TEXT_SIZE("Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("spotlightEditor", fvec2(0.0f, POSITIONS(10)[4]), TEXT_SIZE("Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("captorEditor", fvec2(0.0f, POSITIONS(10)[5]), TEXT_SIZE("Captor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Captor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound3dEditor", fvec2(0.0f, POSITIONS(10)[6]), TEXT_SIZE("Sound3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("sound2dEditor", fvec2(0.0f, POSITIONS(10)[7]), TEXT_SIZE("Sound2D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, POSITIONS(10)[8]), TEXT_SIZE("World"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, POSITIONS(10)[9]), TEXT_SIZE("Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	window->setActiveScreen("main");
 }
 
@@ -64,6 +65,13 @@ void RightViewportController::update()
 				_spotlightEditor->load();
 			}
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("captorEditor")->isHovered())
+		{
+			if(_captorEditor->loadCaptorsFromFile())
+			{
+				_captorEditor->load();
+			}
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("sound3dEditor")->isHovered())
 		{
 			if(_sound3dEditor->loadSound3dsFromFile())
@@ -96,6 +104,7 @@ void RightViewportController::update()
 	_aabbEditor->update();
 	_pointlightEditor->update();
 	_spotlightEditor->update();
+	_captorEditor->update();
 	_sound3dEditor->update();
 	_sound2dEditor->update();
 	_worldEditor->update();
@@ -115,6 +124,11 @@ void RightViewportController::inject(shared_ptr<Sound3dEditor> sound3dEditor)
 void RightViewportController::inject(shared_ptr<SpotlightEditor> spotlightEditor)
 {
 	_spotlightEditor = spotlightEditor;
+}
+
+void RightViewportController::inject(shared_ptr<CaptorEditor> captorEditor)
+{
+	_captorEditor = captorEditor;
 }
 
 void RightViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)

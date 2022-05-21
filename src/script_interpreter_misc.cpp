@@ -252,3 +252,8 @@ void ScriptInterpreter::inject(shared_ptr<Duplicator> duplicator)
 {
 	_duplicator = duplicator;
 }
+
+void ScriptInterpreter::inject(shared_ptr<CaptorEditor> captorEditor)
+{
+	_captorEditor = captorEditor;
+}

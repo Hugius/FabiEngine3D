@@ -78,6 +78,6 @@ private:
 
 	vector<string> _loadedQuad3dIds = {};
 
-	string _hoveredQuad3dId = "";
 	string _currentQuad3dId = "";
+	string _hoveredQuad3dId = "";
 };

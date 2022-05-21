@@ -64,6 +64,6 @@ private:
 
 	vector<string> _loadedAabbIds = {};
 
-	string _hoveredAabbId = "";
 	string _currentAabbId = "";
+	string _hoveredAabbId = "";
 };

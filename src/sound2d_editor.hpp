@@ -51,5 +51,4 @@ private:
 	vector<string> _loadedSound2dIds = {};
 
 	string _currentSound2dId = "";
-	string _hoveredSound2dId = "";
 };

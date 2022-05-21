@@ -61,9 +61,10 @@ private:
 	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float DISTANCE_FACTOR = 100.0f;
-	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.25f;
-	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 0.5f;
+	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.1f;
+	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 0.25f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
+	static inline constexpr float SPOTLIGHT_PITCH = -90.0f;
 
 	static inline constexpr int GRID_REPEAT = 10;
 	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;
@@ -71,6 +72,6 @@ private:
 
 	vector<string> _loadedSpotlightIds = {};
 
-	string _hoveredSpotlightId = "";
 	string _currentSpotlightId = "";
+	string _hoveredSpotlightId = "";
 };

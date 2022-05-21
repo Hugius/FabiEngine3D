@@ -2,50 +2,6 @@
 #include "tools.hpp"
 #include "logger.hpp"
 
-void CaptorEditor::_updateCamera()
-{
-	if(_fe3d->camera_isThirdPersonEnabled())
-	{
-		const auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
-		const auto distanceOffset = (static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_Q)) - static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_E)));
-		const auto lookatOffset = (static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR)) - static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT)));
-
-		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, (_fe3d->camera_getThirdPersonDistance() - (distanceOffset * CAMERA_DISTANCE_SPEED))));
-		_fe3d->camera_setThirdPersonLookat(fvec3(cameraLookat.x, max(0.0f, (cameraLookat.y + (lookatOffset * CAMERA_LOOKAT_SPEED))), cameraLookat.z));
-
-		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
-	}
-
-	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
-	{
-		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
-		{
-			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
-		}
-	}
-
-	if(_gui->getOverlay()->isFocused())
-	{
-		_fe3d->camera_setThirdPersonEnabled(false);
-	}
-}
-
-void CaptorEditor::_updateMiscellaneous()
-{
-	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
-	{
-		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_G))
-		{
-			_fe3d->model_setVisible(GRID_ID, !_fe3d->model_isVisible(GRID_ID));
-		}
-
-		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_R))
-		{
-			_fe3d->model_setVisible(BOX_ID, !_fe3d->model_isVisible(BOX_ID));
-		}
-	}
-}
-
 void CaptorEditor::_updateCaptorCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createCaptor") && _gui->getOverlay()->isValueFormConfirmed())
@@ -83,8 +39,6 @@ void CaptorEditor::_updateCaptorCreating()
 		}
 
 		_fe3d->captor_create(newCaptorId);
-		_fe3d->captor_setExceptionId(newCaptorId, BOX_ID);
-		_fe3d->captor_capture(newCaptorId);
 
 		_currentCaptorId = newCaptorId;
 
@@ -105,30 +59,11 @@ void CaptorEditor::_updateCaptorChoosing()
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(selectedOptionId.empty())
+		if(!selectedOptionId.empty())
 		{
-			if(!_hoveredCaptorId.empty())
-			{
-				_fe3d->model_setReflective(BOX_ID, "", false);
-				_fe3d->model_setRefractive(BOX_ID, "", false);
-
-				_hoveredCaptorId = "";
-			}
-		}
-		else
-		{
-			if(_hoveredCaptorId.empty())
-			{
-				_hoveredCaptorId = ("@" + selectedOptionId);
-
-				_fe3d->model_setReflective(BOX_ID, "", true);
-				_fe3d->model_setRefractive(BOX_ID, "", true);
-			}
-
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
-				_currentCaptorId = _hoveredCaptorId;
-				_hoveredCaptorId = "";
+				_currentCaptorId = ("@" + selectedOptionId);
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteCaptor")
 				{
@@ -144,16 +79,6 @@ void CaptorEditor::_updateCaptorChoosing()
 			}
 		}
 	}
-	else
-	{
-		if(!_hoveredCaptorId.empty())
-		{
-			_fe3d->model_setReflective(BOX_ID, "", false);
-			_fe3d->model_setRefractive(BOX_ID, "", false);
-
-			_hoveredCaptorId = "";
-		}
-	}
 }
 
 void CaptorEditor::_updateCaptorDeleting()
@@ -162,9 +87,6 @@ void CaptorEditor::_updateCaptorDeleting()
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
-			_fe3d->model_setReflective(BOX_ID, "", false);
-			_fe3d->model_setRefractive(BOX_ID, "", false);
-
 			_fe3d->captor_delete(_currentCaptorId);
 
 			_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _currentCaptorId), _loadedCaptorIds.end());
@@ -173,9 +95,6 @@ void CaptorEditor::_updateCaptorDeleting()
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_fe3d->model_setReflective(BOX_ID, "", false);
-			_fe3d->model_setRefractive(BOX_ID, "", false);
-
 			_currentCaptorId = "";
 		}
 	}

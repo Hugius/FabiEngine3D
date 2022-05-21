@@ -9,10 +9,4 @@
 
 ## 2. Controls
 
-- Move camera with your mouse
-- Hold `Q` to zoom camera in
-- Hold `E` to zoom camera out
-- Hold `SPACE` to move camera upwards
-- Hold `SHIFT` to move camera downwards
-- Press `RMB` to toggle camera
 - Press `ESC` to go back

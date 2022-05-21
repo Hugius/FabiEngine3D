@@ -70,6 +70,6 @@ private:
 
 	vector<string> _loadedSound3dIds = {};
 
-	string _hoveredSound3dId = "";
 	string _currentSound3dId = "";
+	string _hoveredSound3dId = "";
 };

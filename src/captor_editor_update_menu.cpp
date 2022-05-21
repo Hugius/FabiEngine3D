@@ -79,11 +79,11 @@ void CaptorEditor::_updateChoiceMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectionQuality")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("refractionQuality")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("refractionQuality", "Refraction Quality", refractionQuality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}

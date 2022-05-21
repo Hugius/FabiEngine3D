@@ -76,6 +76,6 @@ private:
 
 	vector<string> _loadedText3dIds = {};
 
-	string _hoveredText3dId = "";
 	string _currentText3dId = "";
+	string _hoveredText3dId = "";
 };

@@ -41,8 +41,8 @@ private:
 
 	vector<string> _loadedAnimation2dIds = {};
 
-	string _hoveredAnimation2dId = "";
 	string _currentAnimation2dId = "";
+	string _hoveredAnimation2dId = "";
 
 	bool _isPreviewTextureChosen = false;
 };

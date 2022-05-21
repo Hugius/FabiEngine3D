@@ -179,6 +179,7 @@ void SpotlightEditor::_updateSpotlightDeleting()
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->spotlight_delete(_currentSpotlightId);
+			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _currentSpotlightId), _loadedSpotlightIds.end());
 
@@ -187,7 +188,6 @@ void SpotlightEditor::_updateSpotlightDeleting()
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
-
 			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_currentSpotlightId = "";

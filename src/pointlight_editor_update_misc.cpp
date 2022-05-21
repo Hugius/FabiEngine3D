@@ -178,6 +178,7 @@ void PointlightEditor::_updatePointlightDeleting()
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->pointlight_delete(_currentPointlightId);
+			_fe3d->model_setVisible(LAMP_ID, false);
 
 			_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _currentPointlightId), _loadedPointlightIds.end());
 
@@ -186,7 +187,6 @@ void PointlightEditor::_updatePointlightDeleting()
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->pointlight_setVisible(_currentPointlightId, false);
-
 			_fe3d->model_setVisible(LAMP_ID, false);
 
 			_currentPointlightId = "";

@@ -54,21 +54,21 @@ void CaptorEditor::_updateCaptorCreating()
 
 		if(newCaptorId.empty())
 		{
-			Logger::throwWarning("CAPTOR ID cannot be empty");
+			Logger::throwWarning("Captor ID cannot be empty");
 
 			return;
 		}
 
 		if(any_of(newCaptorId.begin(), newCaptorId.end(), isspace))
 		{
-			Logger::throwWarning("CAPTOR ID cannot contain any spaces");
+			Logger::throwWarning("Captor ID cannot contain any spaces");
 
 			return;
 		}
 
 		if(any_of(newCaptorId.begin(), newCaptorId.end(), isupper))
 		{
-			Logger::throwWarning("CAPTOR ID cannot contain any capitals");
+			Logger::throwWarning("Captor ID cannot contain any capitals");
 
 			return;
 		}
@@ -77,12 +77,14 @@ void CaptorEditor::_updateCaptorCreating()
 
 		if(find(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), newCaptorId) != _loadedCaptorIds.end())
 		{
-			Logger::throwWarning("CAPTOR already exists");
+			Logger::throwWarning("Captor already exists");
 
 			return;
 		}
 
-		_fe3d->captor_create(newCaptorId, false);
+		_fe3d->captor_create(newCaptorId);
+		_fe3d->captor_setExceptionId(newCaptorId, BOX_ID);
+		_fe3d->captor_capture(newCaptorId);
 
 		_currentCaptorId = newCaptorId;
 
@@ -92,7 +94,7 @@ void CaptorEditor::_updateCaptorCreating()
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
 
-		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("CAPTOR: " + newCaptorId.substr(1));
+		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + newCaptorId.substr(1));
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
 	}
 }
@@ -107,7 +109,8 @@ void CaptorEditor::_updateCaptorChoosing()
 		{
 			if(!_hoveredCaptorId.empty())
 			{
-				_fe3d->captor_setVisible(_hoveredCaptorId, false);
+				_fe3d->model_setReflective(BOX_ID, "", false);
+				_fe3d->model_setRefractive(BOX_ID, "", false);
 
 				_hoveredCaptorId = "";
 			}
@@ -118,7 +121,8 @@ void CaptorEditor::_updateCaptorChoosing()
 			{
 				_hoveredCaptorId = ("@" + selectedOptionId);
 
-				_fe3d->captor_setVisible(_hoveredCaptorId, true);
+				_fe3d->model_setReflective(BOX_ID, "", true);
+				_fe3d->model_setRefractive(BOX_ID, "", true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
@@ -134,7 +138,7 @@ void CaptorEditor::_updateCaptorChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("CAPTOR: " + _currentCaptorId.substr(1));
+					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + _currentCaptorId.substr(1));
 					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
 				}
 			}
@@ -144,7 +148,8 @@ void CaptorEditor::_updateCaptorChoosing()
 	{
 		if(!_hoveredCaptorId.empty())
 		{
-			_fe3d->captor_setVisible(_hoveredCaptorId, false);
+			_fe3d->model_setReflective(BOX_ID, "", false);
+			_fe3d->model_setRefractive(BOX_ID, "", false);
 
 			_hoveredCaptorId = "";
 		}
@@ -157,6 +162,9 @@ void CaptorEditor::_updateCaptorDeleting()
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
+			_fe3d->model_setReflective(BOX_ID, "", false);
+			_fe3d->model_setRefractive(BOX_ID, "", false);
+
 			_fe3d->captor_delete(_currentCaptorId);
 
 			_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _currentCaptorId), _loadedCaptorIds.end());
@@ -165,7 +173,8 @@ void CaptorEditor::_updateCaptorDeleting()
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_fe3d->captor_setVisible(_currentCaptorId, false);
+			_fe3d->model_setReflective(BOX_ID, "", false);
+			_fe3d->model_setRefractive(BOX_ID, "", false);
 
 			_currentCaptorId = "";
 		}

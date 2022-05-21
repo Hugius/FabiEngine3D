@@ -75,17 +75,17 @@
 - If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the spotlight.
 
-## 12. Sound3Ds
-
-- You can place/edit/delete sound3Ds in the world.
-- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the sound3D.
-
-## 13. Captors
+## 12. Captors
 
 - You can place/edit/delete captors in the world.
 - If a terrain is selected, you can place the captor on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the captor.
+
+## 13. Sound3Ds
+
+- You can place/edit/delete sound3Ds in the world.
+- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the sound3D.
 
 ## 14. Settings
 

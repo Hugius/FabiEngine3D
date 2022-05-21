@@ -33,24 +33,19 @@ const bool CaptorEditor::loadCaptorsFromFile()
 	while(getline(file, line))
 	{
 		string captorId;
-		fvec3 size;
-		fvec3 color;
+		int reflectionQuality;
+		int refractionQuality;
 
 		auto iss = istringstream(line);
 
 		iss
 			>> captorId
-			>> size.x
-			>> size.y
-			>> size.z
-			>> color.r
-			>> color.g
-			>> color.b;
+			>> reflectionQuality
+			>> refractionQuality;
 
-		_fe3d->captor_create(captorId, false);
-		_fe3d->captor_setVisible(captorId, false);
-		_fe3d->captor_setBaseSize(captorId, size);
-		_fe3d->captor_setColor(captorId, color);
+		_fe3d->captor_create(captorId);
+		_fe3d->captor_setReflectionQuality(captorId, reflectionQuality);
+		_fe3d->captor_setRefractionQuality(captorId, refractionQuality);
 
 		_loadedCaptorIds.push_back(captorId);
 
@@ -59,7 +54,7 @@ const bool CaptorEditor::loadCaptorsFromFile()
 
 	file.close();
 
-	Logger::throwInfo("CAPTOR editor data loaded");
+	Logger::throwInfo("Captor editor data loaded");
 
 	return true;
 }

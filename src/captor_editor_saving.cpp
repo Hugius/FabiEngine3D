@@ -25,29 +25,21 @@ const bool CaptorEditor::saveCaptorsToFile() const
 
 	for(const auto & captorId : _loadedCaptorIds)
 	{
-		const auto size = _fe3d->captor_getBaseSize(captorId);
-		const auto color = _fe3d->captor_getColor(captorId);
+		const auto reflectionQuality = _fe3d->captor_getReflectionQuality(captorId);
+		const auto refractionQuality = _fe3d->captor_getRefractionQuality(captorId);
 
 		file
 			<< captorId
 			<< " "
-			<< size.x
+			<< reflectionQuality
 			<< " "
-			<< size.y
-			<< " "
-			<< size.z
-			<< " "
-			<< color.r
-			<< " "
-			<< color.g
-			<< " "
-			<< color.b
+			<< refractionQuality
 			<< endl;
 	}
 
 	file.close();
 
-	Logger::throwInfo("CAPTOR editor data saved");
+	Logger::throwInfo("Captor editor data saved");
 
 	return true;
 }

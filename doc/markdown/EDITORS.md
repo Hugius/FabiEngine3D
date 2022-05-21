@@ -13,6 +13,7 @@
 - [AABB Editor](AABB_EDITOR.md)
 - [Pointlight Editor](POINTLIGHT_EDITOR.md)
 - [Spotlight Editor](SPOTLIGHT_EDITOR.md)
+- [Captor Editor](CAPTOR_EDITOR.md)
 - [Sound3D Editor](SOUND3D_EDITOR.md)
 - [Sound2D Editor](SOUND2D_EDITOR.md)
 - [World Editor](WORLD_EDITOR.md)

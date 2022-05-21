@@ -1,5 +1,7 @@
 #include "captor.hpp"
 
+using std::clamp;
+
 Captor::Captor(const string & id)
 	:
 	_id(id)
@@ -86,12 +88,12 @@ void Captor::setExceptionId(const string & value)
 
 void Captor::setReflectionQuality(int value)
 {
-	_reflectionQuality = value;
+	_reflectionQuality = clamp(value, 128, 1024);
 }
 
 void Captor::setRefractionQuality(int value)
 {
-	_refractionQuality = value;
+	_refractionQuality = clamp(value, 128, 1024);
 }
 
 const string & Captor::getId() const

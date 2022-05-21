@@ -785,10 +785,14 @@ public:
 	void captor_moveTo(const string & captorId, const fvec3 & target, float speed);
 	void captor_capture(const string & captorId);
 	void captor_setExceptionId(const string & captorId, const string & value);
+	void captor_setReflectionQuality(const string & captorId, int value);
+	void captor_setRefractionQuality(const string & captorId, int value);
 
 	const vector<string> captor_getIds() const;
 	const string & captor_getExceptionId(const string & captorId) const;
 	const fvec3 & captor_getPosition(const string & captorId) const;
+	const int captor_getReflectionQuality(const string & captorId) const;
+	const int captor_getRefractionQuality(const string & captorId) const;
 	const bool captor_isExisting(const string & captorId) const;
 
 	void clock_create(const string & clockId);

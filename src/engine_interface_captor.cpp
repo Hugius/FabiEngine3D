@@ -36,6 +36,16 @@ void EngineInterface::captor_setExceptionId(const string & captorId, const strin
 	_core->getCaptorManager()->getCaptor(captorId)->setExceptionId(value);
 }
 
+void EngineInterface::captor_setReflectionQuality(const string & captorId, int value)
+{
+	_core->getCaptorManager()->getCaptor(captorId)->setReflectionQuality(value);
+}
+
+void EngineInterface::captor_setRefractionQuality(const string & captorId, int value)
+{
+	_core->getCaptorManager()->getCaptor(captorId)->setRefractionQuality(value);
+}
+
 const vector<string> EngineInterface::captor_getIds() const
 {
 	vector<string> result = {};
@@ -56,6 +66,16 @@ const string & EngineInterface::captor_getExceptionId(const string & captorId) c
 const fvec3 & EngineInterface::captor_getPosition(const string & captorId) const
 {
 	return _core->getCaptorManager()->getCaptor(captorId)->getPosition();
+}
+
+const int EngineInterface::captor_getReflectionQuality(const string & captorId) const
+{
+	return _core->getCaptorManager()->getCaptor(captorId)->getReflectionQuality();
+}
+
+const int EngineInterface::captor_getRefractionQuality(const string & captorId) const
+{
+	return _core->getCaptorManager()->getCaptor(captorId)->getRefractionQuality();
 }
 
 const bool EngineInterface::captor_isExisting(const string & captorId) const

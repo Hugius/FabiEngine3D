@@ -127,6 +127,34 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:captor_set_reflection_quality")
+	{
+		const auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dCaptor(args[0]->getString()))
+			{
+				_fe3d->captor_setReflectionQuality(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:captor_set_refraction_quality")
+	{
+		const auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dCaptor(args[0]->getString()))
+			{
+				_fe3d->captor_setRefractionQuality(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

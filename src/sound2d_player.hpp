@@ -49,7 +49,7 @@ private:
 
 	unordered_map<string, vector<shared_ptr<StartedSound2D>>> _startedSound2ds = {};
 
-	vector<pair<string, int>> _volumeThreadQueue;
+	vector<pair<string, int>> _volumeThreadQueue = {};
 
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 

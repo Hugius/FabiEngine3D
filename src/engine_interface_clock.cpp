@@ -118,34 +118,13 @@ const bool EngineInterface::clock_isPaused(const string & clockId) const
 
 const bool EngineInterface::clock_isIdReserved(const string & clockId) const
 {
-	return
-		(
-		clockId == "total" ||
-		clockId == "mainUpdate" ||
-		clockId == "physicsUpdate" ||
-		clockId == "environmentUpdate" ||
-		clockId == "modelUpdate" ||
-		clockId == "quadUpdate" ||
-		clockId == "textUpdate" ||
-		clockId == "aabbUpdate" ||
-		clockId == "lightUpdate" ||
-		clockId == "captorUpdate" ||
-		clockId == "renderUpdate" ||
-		clockId == "animationUpdate" ||
-		clockId == "soundUpdate" ||
-		clockId == "networkUpdate" ||
-		clockId == "depthPreRender" ||
-		clockId == "shadowPreRender" ||
-		clockId == "reflectionPreRender" ||
-		clockId == "refractionPreRender" ||
-		clockId == "waterPreRender" ||
-		clockId == "3dRender" ||
-		clockId == "antiAliasingPostRender" ||
-		clockId == "bloomPreRender" ||
-		clockId == "dofPreRender" ||
-		clockId == "lensFlarePreRender" ||
-		clockId == "motionBlurPreRender" ||
-		clockId == "2dRender" ||
-		clockId == "bufferSwap"
-		);
+	for(const auto & reservedClockId : _core->getReservedClockIds())
+	{
+		if(clockId == reservedClockId)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

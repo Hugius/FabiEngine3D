@@ -48,7 +48,7 @@ private:
 
 	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSound3ds = {};
 
-	vector<pair<string, int>> _volumeThreadQueue;
+	vector<pair<string, int>> _volumeThreadQueue = {};
 
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

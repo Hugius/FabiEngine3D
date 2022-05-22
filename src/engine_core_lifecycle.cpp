@@ -157,6 +157,34 @@ EngineCore::EngineCore()
 	_renderDeltaTimes.push_back({"motionBlurPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"2dRender", 0.0f});
 	_renderDeltaTimes.push_back({"bufferSwap", 0.0f});
+
+	_reservedClockIds.push_back("total");
+	_reservedClockIds.push_back("mainUpdate");
+	_reservedClockIds.push_back("physicsUpdate");
+	_reservedClockIds.push_back("environmentUpdate");
+	_reservedClockIds.push_back("modelUpdate");
+	_reservedClockIds.push_back("quadUpdate");
+	_reservedClockIds.push_back("textUpdate");
+	_reservedClockIds.push_back("aabbUpdate");
+	_reservedClockIds.push_back("lightUpdate");
+	_reservedClockIds.push_back("captorUpdate");
+	_reservedClockIds.push_back("renderUpdate");
+	_reservedClockIds.push_back("animationUpdate");
+	_reservedClockIds.push_back("soundUpdate");
+	_reservedClockIds.push_back("networkUpdate");
+	_reservedClockIds.push_back("depthPreRender");
+	_reservedClockIds.push_back("shadowPreRender");
+	_reservedClockIds.push_back("reflectionPreRender");
+	_reservedClockIds.push_back("refractionPreRender");
+	_reservedClockIds.push_back("waterPreRender");
+	_reservedClockIds.push_back("3dRender");
+	_reservedClockIds.push_back("antiAliasingPostRender");
+	_reservedClockIds.push_back("bloomPreRender");
+	_reservedClockIds.push_back("dofPreRender");
+	_reservedClockIds.push_back("lensFlarePreRender");
+	_reservedClockIds.push_back("motionBlurPreRender");
+	_reservedClockIds.push_back("2dRender");
+	_reservedClockIds.push_back("bufferSwap");
 }
 
 void EngineCore::start()

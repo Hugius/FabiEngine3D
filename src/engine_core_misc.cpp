@@ -222,6 +222,11 @@ const vector<pair<string, float>> & EngineCore::getRenderDeltaTimes() const
 	return _renderDeltaTimes;
 }
 
+const vector<string> & EngineCore::getReservedClockIds() const
+{
+	return _reservedClockIds;
+}
+
 void EngineCore::_initialize()
 {
 	const auto keyingColor = fvec3(0.1f);

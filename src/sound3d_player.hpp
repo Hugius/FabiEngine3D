@@ -34,7 +34,6 @@ public:
 
 	const int getStartedSound3dCount(const string & sound3dId) const;
 	const int getSound3dCurrentMilliseconds(const string & sound3dId, int index) const;
-
 	const int getSound3dPlayCount(const string & sound3dId, int index) const;
 
 	const bool isSound3dStarted(const string & sound3dId, int index) const;

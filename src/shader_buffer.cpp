@@ -127,7 +127,7 @@ ShaderBuffer::~ShaderBuffer()
 	glDeleteProgram(_programId);
 }
 
-const int ShaderBuffer::getUniformId(const string & name)
+const unsigned int ShaderBuffer::getUniformId(const string & name)
 {
 	const auto cacheIterator = _uniformCache.find(name);
 
@@ -147,7 +147,7 @@ const int ShaderBuffer::getUniformId(const string & name)
 
 	_uniformCache.insert({name, uniformId});
 
-	return uniformId;
+	return static_cast<unsigned int>(uniformId);
 }
 
 void ShaderBuffer::bind()

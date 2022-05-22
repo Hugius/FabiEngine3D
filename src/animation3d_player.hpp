@@ -32,7 +32,6 @@ public:
 	const float getModelAnimation3dSpeedMultiplier(const string & animation3dId, const string & modelId) const;
 
 	const int getModelAnimation3dFrameIndex(const string & animation3dId, const string & modelId) const;
-
 	const int getModelAnimation3dPlayCount(const string & animation3dId, const string & modelId) const;
 
 	const bool isModelAnimation3dStarted(const string & animation3dId, const string & modelId) const;

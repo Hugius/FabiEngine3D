@@ -21,7 +21,6 @@ public:
 	const int getColumnIndex() const;
 	const int getIntervalMultiplier() const;
 	const int getIntervalDivider() const;
-
 	const int getPlayCount() const;
 
 	const bool isPaused() const;

@@ -32,7 +32,6 @@ public:
 	const float getSpeedMultiplier() const;
 
 	const int getFrameIndex() const;
-
 	const int getPlayCount() const;
 
 	const bool isPaused() const;

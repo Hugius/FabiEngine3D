@@ -26,7 +26,7 @@ public:
 	void unbind();
 
 	const unsigned int getProgramId() const;
-	const int getUniformId(const string & name);
+	const unsigned int getUniformId(const string & name);
 
 private:
 	void _uploadUniform(const int & uniformId, const bool & data);

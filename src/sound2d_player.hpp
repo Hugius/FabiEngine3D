@@ -35,7 +35,6 @@ public:
 
 	const int getStartedSound2dCount(const string & sound2dId) const;
 	const int getSound2dCurrentMilliseconds(const string & sound2dId, int index) const;
-
 	const int getSound2dPlayCount(const string & sound2dId, int index) const;
 
 	const bool isSound2dStarted(const string & sound2dId, int index) const;

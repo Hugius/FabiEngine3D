@@ -21,7 +21,7 @@ class Sound2dPlayer final
 public:
 	void inject(shared_ptr<Sound2dManager> sound2dManager);
 	void update();
-	void startSound2d(const string & sound2dId, int playCount);
+	void startSound2d(const string & sound2dId, int playCount, int startMilliseconds);
 	void pauseSound2d(const string & sound2dId, int index);
 	void resumeSound2d(const string & sound2dId, int index);
 	void stopSound2d(const string & sound2dId, int index);
@@ -45,7 +45,7 @@ public:
 private:
 	void _terminateSound2d(const string & sound2dId, int index);
 	void _terminateSound2ds();
-	void _updateSamplesVolume(int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity);
+	void _updateSamplesVolume(int originalSampleCount, int startedSampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity);
 
 	unordered_map<string, vector<shared_ptr<StartedSound2D>>> _startedSound2ds = {};
 

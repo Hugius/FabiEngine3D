@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
+void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, int startMilliseconds)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -15,8 +15,20 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 		abort();
 	}
 
+	if(startMilliseconds < 0)
+	{
+		abort();
+	}
+
 	const auto newSound2d = make_shared<StartedSound2D>();
 	const auto waveBuffer = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer();
+	const auto originalByteCount = static_cast<int>(waveBuffer->getHeader()->dwBufferLength);
+	const auto startIndex = static_cast<int>(((waveBuffer->getFormat()->nSamplesPerSec / 1000) * startMilliseconds) * 2);
+
+	if(startIndex >= originalByteCount)
+	{
+		abort();
+	}
 
 	HWAVEOUT handle = nullptr;
 
@@ -38,15 +50,15 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount)
 		}
 	}
 
-	auto header = new WAVEHDR();
+	const auto header = new WAVEHDR();
 
-	header->dwBufferLength = waveBuffer->getHeader()->dwBufferLength;
+	header->dwBufferLength = (originalByteCount - startIndex);
 	header->lpData = new char[header->dwBufferLength];
 	header->dwFlags = 0;
 
-	for(int index = 0; index < static_cast<int>(header->dwBufferLength); index++)
+	for(int index = startIndex; index < originalByteCount; index++)
 	{
-		header->lpData[index] = waveBuffer->getHeader()->lpData[index];
+		header->lpData[index - startIndex] = waveBuffer->getHeader()->lpData[index];
 	}
 
 	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));

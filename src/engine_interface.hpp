@@ -774,7 +774,7 @@ public:
 
 	void sound2d_create(const string & sound2dId, const string & audioPath);
 	void sound2d_delete(const string & sound2dId);
-	void sound2d_start(const string & sound2dId, int playCount);
+	void sound2d_start(const string & sound2dId, int playCount, int startMilliseconds);
 	void sound2d_pause(const string & sound2dId, int index);
 	void sound2d_resume(const string & sound2dId, int index);
 	void sound2d_stop(const string & sound2dId, int index);

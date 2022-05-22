@@ -18,9 +18,9 @@ void EngineInterface::sound2d_delete(const string & sound2dId)
 	_core->getSound2dManager()->deleteSound2d(sound2dId);
 }
 
-void EngineInterface::sound2d_start(const string & sound2dId, int playCount)
+void EngineInterface::sound2d_start(const string & sound2dId, int playCount, int startMilliseconds)
 {
-	_core->getSound2dPlayer()->startSound2d(sound2dId, playCount);
+	_core->getSound2dPlayer()->startSound2d(sound2dId, playCount, startMilliseconds);
 }
 
 void EngineInterface::sound2d_pause(const string & sound2dId, int index)

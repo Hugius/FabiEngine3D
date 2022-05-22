@@ -136,13 +136,14 @@ void Sound2dPlayer::update()
 
 		const auto startedSound2d = _startedSound2ds.at(sound2dId)[index];
 		const auto originalSound2d = _sound2dManager->getSound2d(sound2dId);
-		const auto sampleCount = (originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto originalSampleCount = static_cast<int>(originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto startedSampleCount = (originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound2d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound2d->getHeader()->lpData); // short = 2 bytes
 		const auto volume = startedSound2d->getVolume();
 		const auto leftIntensity = startedSound2d->getLeftIntensity();
 		const auto rightIntensity = startedSound2d->getRightIntensity();
 
-		_volumeThread = async(launch::async, &Sound2dPlayer::_updateSamplesVolume, this, sampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
+		_volumeThread = async(launch::async, &Sound2dPlayer::_updateSamplesVolume, this, originalSampleCount, startedSampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
 	}
 }

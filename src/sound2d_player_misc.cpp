@@ -24,17 +24,19 @@ void Sound2dPlayer::_terminateSound2ds()
 	}
 }
 
-void Sound2dPlayer::_updateSamplesVolume(int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
+void Sound2dPlayer::_updateSamplesVolume(int originalSampleCount, int startedSampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
 {
-	for(int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
+	const auto startIndex = (originalSampleCount - startedSampleCount);
+
+	for(int index = startIndex; index < originalSampleCount; index++)
 	{
-		if(((sampleIndex + 1) % 2) == 0)
+		if(((index + 1) % 2) == 0)
 		{
-			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
+			startedSamples[index - startIndex] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * rightIntensity);
 		}
 		else
 		{
-			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
+			startedSamples[index - startIndex] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * leftIntensity);
 		}
 	}
 }

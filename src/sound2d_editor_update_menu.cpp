@@ -80,7 +80,7 @@ void Sound2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d->sound2d_start(_currentSound2dId, 1);
+			_fe3d->sound2d_start(_currentSound2dId, 1, 0);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{

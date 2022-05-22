@@ -240,7 +240,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			vector<string> aabbIds;
+			vector<string> aabbIds = {};
 
 			if(args[1]->getString().empty())
 			{
@@ -297,7 +297,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			vector<string> aabbIds;
+			vector<string> aabbIds = {};
 
 			if(args[1]->getString().empty())
 			{
@@ -337,7 +337,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			vector<string> aabbIds;
+			vector<string> aabbIds = {};
 
 			if(args[1]->getString().empty())
 			{
@@ -377,7 +377,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			vector<string> aabbIds;
+			vector<string> aabbIds = {};
 
 			if(args[1]->getString().empty())
 			{

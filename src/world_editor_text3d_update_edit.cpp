@@ -26,7 +26,7 @@ void WorldEditor::_updateText3dEditing()
 
 		for(const auto & text3dId : _loadedText3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == text3dId);
+			const auto isHovered = (hoveredAabbId.substr(0, (string("text3d@").size() + text3dId.size())) == ("text3d@" + text3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{

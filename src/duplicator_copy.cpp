@@ -245,7 +245,7 @@ void Duplicator::copyTemplateQuad3d(const string & newId, const string & templat
 		_fe3d->quad3d_setEmissionMap(newId, _fe3d->quad3d_getEmissionMapPath(templateId));
 	}
 
-	if(_fe3d->aabb_isExisting(templateId))
+	if(!_fe3d->quad3d_getChildAabbIds(templateId).empty())
 	{
 		const auto newAabbId = ("quad3d@" + newId);
 
@@ -305,7 +305,7 @@ void Duplicator::copyTemplateText3d(const string & newId, const string & templat
 	_fe3d->text3d_setMinAlpha(newId, _fe3d->text3d_getMinAlpha(templateId));
 	_fe3d->text3d_setRotationOrder(newId, _fe3d->text3d_getRotationOrder(templateId));
 
-	if(_fe3d->aabb_isExisting(templateId))
+	if(!_fe3d->text3d_getChildAabbIds(templateId).empty())
 	{
 		const auto newAabbId = ("text3d@" + newId);
 

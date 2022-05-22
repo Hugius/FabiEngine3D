@@ -26,7 +26,7 @@ void WorldEditor::_updateQuad3dEditing()
 
 		for(const auto & quad3dId : _loadedQuad3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == quad3dId);
+			const auto isHovered = (hoveredAabbId.substr(0, (string("quad3d@").size() + quad3dId.size())) == ("quad3d@" + quad3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{

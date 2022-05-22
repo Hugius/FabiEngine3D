@@ -26,7 +26,8 @@ void WorldEditor::_updateModelEditing()
 
 		for(const auto & modelId : _loadedModelIds)
 		{
-			const auto isHovered = (hoveredAabbId.substr(0, (string("model@").size() + modelId.size())) == ("model@" + modelId));
+			const auto hasParent = (!hoveredAabbId.empty() && _fe3d->aabb_hasParent(hoveredAabbId) && (_fe3d->aabb_getParentType(hoveredAabbId) == AabbParentType::MODEL));
+			const auto isHovered = (hasParent && (_fe3d->aabb_getParentId(hoveredAabbId) == modelId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{

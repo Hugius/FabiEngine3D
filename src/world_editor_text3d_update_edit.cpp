@@ -26,7 +26,8 @@ void WorldEditor::_updateText3dEditing()
 
 		for(const auto & text3dId : _loadedText3dIds)
 		{
-			const auto isHovered = (hoveredAabbId.substr(0, (string("text3d@").size() + text3dId.size())) == ("text3d@" + text3dId));
+			const auto hasParent = (!hoveredAabbId.empty() && _fe3d->aabb_hasParent(hoveredAabbId) && (_fe3d->aabb_getParentType(hoveredAabbId) == AabbParentType::TEXT3D));
+			const auto isHovered = (hasParent && (_fe3d->aabb_getParentId(hoveredAabbId) == text3dId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{

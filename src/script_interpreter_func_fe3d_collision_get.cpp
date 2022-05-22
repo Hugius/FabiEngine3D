@@ -75,29 +75,31 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString()), false))
+				const auto fullAabbId = ("model@" + args[0]->getString() + "@" + args[1]->getString());
+
+				if(_validateFe3dAabb(fullAabbId, false))
 				{
 					if(args[2]->getString().empty())
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()));
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "X")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::X);
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::X);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Y")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::Y);
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Y);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Z")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::Z);
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Z);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
@@ -119,35 +121,40 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				if(args[1]->getString().empty())
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString());
+				const auto fullAabbId = ("quad3d@" + args[0]->getString());
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "X")
+				if(_validateFe3dAabb(fullAabbId, false))
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::X);
+					if(args[1]->getString().empty())
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "Y")
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Y);
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "X")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::X);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "Z")
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Z);
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "Y")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Y);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else
-				{
-					_throwRuntimeError("direction is invalid");
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "Z")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Z);
 
-					return true;
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else
+					{
+						_throwRuntimeError("direction is invalid");
+
+						return true;
+					}
 				}
 			}
 		}
@@ -160,35 +167,40 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
-				if(args[1]->getString().empty())
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString());
+				const auto fullAabbId = ("text3d@" + args[0]->getString());
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "X")
+				if(_validateFe3dAabb(fullAabbId, false))
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::X);
+					if(args[1]->getString().empty())
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "Y")
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Y);
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "X")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::X);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else if(args[1]->getString() == "Z")
-				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Z);
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "Y")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Y);
 
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-				else
-				{
-					_throwRuntimeError("direction is invalid");
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else if(args[1]->getString() == "Z")
+					{
+						const auto result = _fe3d->collision_checkCameraWithAabb(fullAabbId, DirectionType::Z);
 
-					return true;
+						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					}
+					else
+					{
+						_throwRuntimeError("direction is invalid");
+
+						return true;
+					}
 				}
 			}
 		}
@@ -267,24 +279,27 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 			for(const auto & aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					const auto modelId = aabbId.substr(0, aabbId.find('@'));
-
-					if(args[0]->getString().empty())
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL)
 					{
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, modelId));
-					}
-					else
-					{
-						auto rawAabbId = aabbId;
-						reverse(rawAabbId.begin(), rawAabbId.end());
-						rawAabbId = rawAabbId.substr(0, rawAabbId.find('@'));
-						reverse(rawAabbId.begin(), rawAabbId.end());
-
-						if(rawAabbId == args[0]->getString())
+						if(args[0]->getString().empty())
 						{
-							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, modelId));
+							const auto result = _fe3d->aabb_getParentId(aabbId);
+
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+						}
+						else
+						{
+							const auto rawAabbId = aabbId.substr(string("model@").size());
+							const auto subAabbId = rawAabbId.substr(rawAabbId.find('@'));
+
+							if(subAabbId == args[0]->getString())
+							{
+								const auto result = _fe3d->aabb_getParentId(aabbId);
+
+								returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+							}
 						}
 					}
 				}
@@ -324,9 +339,14 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 			for(const auto & aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D)
+					{
+						const auto result = _fe3d->aabb_getParentId(aabbId);
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
 				}
 			}
 		}
@@ -364,9 +384,14 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 			for(const auto & aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D)
+					{
+						const auto result = _fe3d->aabb_getParentId(aabbId);
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
 				}
 			}
 		}

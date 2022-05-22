@@ -137,6 +137,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto aabbId = _fe3d->raycast_getClosestAabbId();
+
 			string result = "";
 
 			if(!aabbId.empty())
@@ -151,12 +152,10 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 						}
 						else
 						{
-							auto partId = aabbId;
-							reverse(partId.begin(), partId.end());
-							partId = partId.substr(0, partId.find('@'));
-							reverse(partId.begin(), partId.end());
+							const auto rawAabbId = aabbId.substr(string("model@").size());
+							const auto subAabbId = rawAabbId.substr(rawAabbId.find('@'));
 
-							if(partId == args[1]->getString())
+							if(subAabbId == args[1]->getString())
 							{
 								result = _fe3d->aabb_getParentId(aabbId);
 							}
@@ -173,6 +172,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto aabbId = _fe3d->raycast_getClosestAabbId();
+
 			string result = "";
 
 			if(!aabbId.empty())
@@ -194,6 +194,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto aabbId = _fe3d->raycast_getClosestAabbId();
+
 			string result = "";
 
 			if(!aabbId.empty())
@@ -218,9 +219,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString()), false))
+				const auto fullAabbId = ("model@" + args[0]->getString() + "@" + args[1]->getString());
+
+				if(_validateFe3dAabb(fullAabbId, false))
 				{
-					const auto result = _fe3d->raycast_getDistanceToAabb((args[0]->getString() + "@" + args[1]->getString()));
+					const auto result = _fe3d->raycast_getDistanceToAabb(fullAabbId);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 				}

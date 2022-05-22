@@ -5,7 +5,7 @@
 - `fe3d:sound2d_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
 - `fe3d:sound2d_delete` (`STR` sound_id) -----> `NONE`
 - `fe3d:sound2d_delete_all` () -----> `NONE`
-- `fe3d:sound2d_start` (`STR` sound_id, `INT` play_count) -----> `NONE`
+- `fe3d:sound2d_start` (`STR` sound_id, `INT` play_count, `INT` start_milliseconds) -----> `NONE`
 - `fe3d:sound2d_pause` (`STR` sound_id, `INT` index) -----> `NONE`
 - `fe3d:sound2d_resume` (`STR` sound_id, `INT` index) -----> `NONE`
 - `fe3d:sound2d_stop` (`STR` sound_id, `INT` index) -----> `NONE`
@@ -23,7 +23,7 @@
 - `fe3d:sound2d_get_volume` (`STR` sound_id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_left_intensity` (`STR` sound_id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_right_intensity` (`STR` sound_id, `INT` index) -----> `DEC`
-- `fe3d:sound2d_get_time` (`STR` sound_id, `INT` index) -----> `INT`
+- `fe3d:sound2d_get_current_milliseconds` (`STR` sound_id, `INT` index) -----> `INT`
 - `fe3d:sound2d_get_play_count` (`STR` sound_id, `INT` index) -----> `INT`
 - `fe3d:sound2d_get_started_count` (`STR` sound_id) -----> `INT`
 - `fe3d:sound2d_get_ids` () -----> `LIST`

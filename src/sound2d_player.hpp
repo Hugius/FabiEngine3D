@@ -34,7 +34,7 @@ public:
 	const float getSound2dRightIntensity(const string & sound2dId, int index) const;
 
 	const int getStartedSound2dCount(const string & sound2dId) const;
-	const int getSound2dTime(const string & sound2dId, int index) const;
+	const int getSound2dCurrentMilliseconds(const string & sound2dId, int index) const;
 
 	const int getSound2dPlayCount(const string & sound2dId, int index) const;
 

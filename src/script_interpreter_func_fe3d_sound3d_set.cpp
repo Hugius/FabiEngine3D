@@ -67,14 +67,14 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
+			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
 			{
-				_throwRuntimeError("sound3D is already started");
+				_throwRuntimeError("play count is invalid");
 
 				return true;
 			}
 
-			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
+			if((args[2]->getInteger() < 0) || (args[2]->getInteger() < -1))
 			{
 				_throwRuntimeError("play count is invalid");
 

@@ -65,13 +65,6 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string & functionN
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
-			{
-				_throwRuntimeError("sound2D is already started");
-
-				return true;
-			}
-
 			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
 			{
 				_throwRuntimeError("play count is invalid");

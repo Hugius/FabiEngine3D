@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound3d_get_time")
+	else if(functionName == "fe3d:sound3d_get_current_milliseconds")
 	{
 		const auto types = {SVT::STRING, SVT::INTEGER};
 
@@ -178,12 +178,12 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
 
-				const auto result = _fe3d->sound3d_getCurrentTime(args[0]->getString(), args[1]->getInteger());
+				const auto result = _fe3d->sound3d_getCurrentMilliseconds(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}

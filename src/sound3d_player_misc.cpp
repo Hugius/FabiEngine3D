@@ -179,7 +179,7 @@ void Sound3dPlayer::_updateSamplesVolume(int originalSampleCount, int startedSam
 	}
 }
 
-const int Sound3dPlayer::getSound3dCurrentTime(const string & sound3dId, int index) const
+const int Sound3dPlayer::getSound3dCurrentMilliseconds(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{

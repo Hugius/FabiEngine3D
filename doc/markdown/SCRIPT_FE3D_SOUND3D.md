@@ -25,7 +25,7 @@
 - `fe3d:sound3d_get_volume` (`STR` sound_id, `INT` index) -----> `DEC`
 - `fe3d:sound3d_get_left_intensity` (`STR` sound_id, `INT` index) -----> `DEC`
 - `fe3d:sound3d_get_right_intensity` (`STR` sound_id, `INT` index) -----> `DEC`
-- `fe3d:sound3d_get_time` (`STR` sound_id, `INT` index) -----> `INT`
+- `fe3d:sound3d_get_current_milliseconds` (`STR` sound_id, `INT` index) -----> `INT`
 - `fe3d:sound3d_get_play_count` (`STR` sound_id, `INT` index) -----> `INT`
 - `fe3d:sound3d_get_started_count` (`STR` sound_id) -----> `INT`
 - `fe3d:sound3d_get_ids` () -----> `LIST`

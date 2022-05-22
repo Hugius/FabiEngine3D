@@ -108,9 +108,9 @@ const int EngineInterface::sound2d_getStartedCount(const string & sound2dId) con
 	return _core->getSound2dPlayer()->getStartedSound2dCount(sound2dId);
 }
 
-const int EngineInterface::sound2d_getTime(const string & sound2dId, int index) const
+const int EngineInterface::sound2d_getCurrentMilliseconds(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->getSound2dTime(sound2dId, index);
+	return _core->getSound2dPlayer()->getSound2dCurrentMilliseconds(sound2dId, index);
 }
 
 const int EngineInterface::sound2d_getPlayCount(const string & sound2dId, int index) const

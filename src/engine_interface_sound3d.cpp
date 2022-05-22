@@ -8,9 +8,11 @@ void EngineInterface::sound3d_create(const string & sound3dId, const string & au
 
 void EngineInterface::sound3d_delete(const string & sound3dId)
 {
-	for(int index = 0; index < _core->getSound3dPlayer()->getStartedSound3dCount(sound3dId); index++)
+	const auto startedSound3dCount = _core->getSound3dPlayer()->getStartedSound3dCount(sound3dId);
+
+	for(int index = 0; index < startedSound3dCount; index++)
 	{
-		sound3d_stop(sound3dId, index);
+		sound3d_stop(sound3dId, 0);
 	}
 
 	_core->getSound3dManager()->deleteSound3d(sound3dId);

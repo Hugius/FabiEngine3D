@@ -1357,17 +1357,19 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			for(int index = 0; index < startedCount; index++)
 			{
 				int playCount;
+				int time;
 				bool isStarted;
 				bool isPaused;
 
 				iss
 					>> isStarted
 					>> isPaused
-					>> playCount;
+					>> playCount
+					>> time;
 
 				if(isStarted)
 				{
-					_fe3d->sound3d_start(sound3dId, playCount);
+					_fe3d->sound3d_start(sound3dId, playCount, time);
 				}
 
 				if(isPaused)

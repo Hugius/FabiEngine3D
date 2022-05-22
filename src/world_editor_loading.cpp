@@ -472,7 +472,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_duplicator->copyTemplateSound3d(sound3dId, templateSound3dId);
 
 			_fe3d->sound3d_setPosition(sound3dId, position);
-			_fe3d->sound3d_start(sound3dId, -1);
+			_fe3d->sound3d_start(sound3dId, -1, 0);
 
 			_loadedSound3dIds.push_back(sound3dId);
 

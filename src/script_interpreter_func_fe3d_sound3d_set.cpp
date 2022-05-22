@@ -63,13 +63,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_start")
 	{
-		const auto types = {SVT::STRING, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 			{
-				_throwRuntimeError("sound2D is already started");
+				_throwRuntimeError("sound3D is already started");
 
 				return true;
 			}
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger());
+				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -99,14 +99,14 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
 
 				if(_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is already paused");
+					_throwRuntimeError("sound3D is already paused");
 
 					return true;
 				}
@@ -127,14 +127,14 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}
 
 				if(!_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not paused");
+					_throwRuntimeError("sound3D is not paused");
 
 					return true;
 				}
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			{
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound2D is not started");
+					_throwRuntimeError("sound3D is not started");
 
 					return true;
 				}

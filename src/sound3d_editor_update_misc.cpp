@@ -120,7 +120,7 @@ void Sound3dEditor::_updateSound3dCreating()
 		if(_fe3d->sound3d_isExisting(newSound3dId))
 		{
 			_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
-			_fe3d->sound3d_start(newSound3dId, -1);
+			_fe3d->sound3d_start(newSound3dId, -1, 0);
 
 			_currentSound3dId = newSound3dId;
 
@@ -162,7 +162,7 @@ void Sound3dEditor::_updateSound3dChoosing()
 			{
 				_hoveredSound3dId = ("@" + selectedOptionId);
 
-				_fe3d->sound3d_start(_hoveredSound3dId, -1);
+				_fe3d->sound3d_start(_hoveredSound3dId, -1, 0);
 
 				_fe3d->model_setVisible(SPEAKER_ID, true);
 			}

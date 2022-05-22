@@ -41,7 +41,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1);
+				_fe3d->sound3d_start(newId, -1, 0);
 
 				_loadedSound3dIds.push_back(newId);
 
@@ -130,7 +130,7 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(!_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
 			{
-				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
+				_fe3d->sound3d_start(_currentTemplateSound3dId, -1, 0);
 			}
 
 			_fe3d->sound3d_setPosition(_currentTemplateSound3dId, newPosition);
@@ -149,7 +149,7 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1);
+				_fe3d->sound3d_start(newId, -1, 0);
 
 				_loadedSound3dIds.push_back(newId);
 

@@ -162,22 +162,24 @@ void Sound3dPlayer::_terminateSound3d(const string & sound3dId, int index)
 	}
 }
 
-void Sound3dPlayer::_updateSamplesVolume(int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
+void Sound3dPlayer::_updateSamplesVolume(int originalSampleCount, int startedSampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
 {
-	for(int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
+	const auto startIndex = (originalSampleCount - startedSampleCount);
+
+	for(int index = startIndex; index < originalSampleCount; index++)
 	{
-		if(((sampleIndex + 1) % 2) == 0)
+		if(((index + 1) % 2) == 0)
 		{
-			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
+			startedSamples[index - startIndex] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * rightIntensity);
 		}
 		else
 		{
-			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
+			startedSamples[index - startIndex] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * leftIntensity);
 		}
 	}
 }
 
-const int Sound3dPlayer::getSound3dTime(const string & sound3dId, int index) const
+const int Sound3dPlayer::getSound3dCurrentTime(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -197,7 +199,7 @@ const int Sound3dPlayer::getSound3dTime(const string & sound3dId, int index) con
 
 	const auto sampleIndex = currentTime->u.sample;
 	const auto sampleRate = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;
-	const auto result = static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
+	const auto result = (static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate)) * 1000);
 
 	delete currentTime;
 

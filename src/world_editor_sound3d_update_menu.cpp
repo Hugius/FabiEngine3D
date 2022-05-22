@@ -77,7 +77,7 @@ void WorldEditor::_updateSound3dPlacingMenu()
 
 				_currentTemplateSound3dId = hoveredOptionId;
 
-				_fe3d->sound3d_start(_currentTemplateSound3dId, -1);
+				_fe3d->sound3d_start(_currentTemplateSound3dId, -1, 0);
 				_fe3d->model_setVisible(SPEAKER_ID, true);
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));

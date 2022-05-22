@@ -23,7 +23,7 @@ public:
 	void inject(shared_ptr<Sound3dManager> sound3dManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void startSound3d(const string & sound3dId, int playCount);
+	void startSound3d(const string & sound3dId, int playCount, int startTime);
 	void pauseSound3d(const string & sound3dId, int index);
 	void resumeSound3d(const string & sound3dId, int index);
 	void stopSound3d(const string & sound3dId, int index);
@@ -33,7 +33,7 @@ public:
 	const float getSound3dRightIntensity(const string & sound3dId, int index) const;
 
 	const int getStartedSound3dCount(const string & sound3dId) const;
-	const int getSound3dTime(const string & sound3dId, int index) const;
+	const int getSound3dCurrentTime(const string & sound3dId, int index) const;
 
 	const int getSound3dPlayCount(const string & sound3dId, int index) const;
 
@@ -44,7 +44,7 @@ public:
 private:
 	void _terminateSound3d(const string & sound3dId, int index);
 	void _terminateSound3ds();
-	void _updateSamplesVolume(int sampleCount, short * originalSamples, short * currentSamples, float volume, float leftIntensity, float rightIntensity);
+	void _updateSamplesVolume(int originalSampleCount, int startedSampleCount, short * originalSamples, short * currentSamples, float volume, float leftIntensity, float rightIntensity);
 
 	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSound3ds = {};
 

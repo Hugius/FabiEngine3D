@@ -152,15 +152,16 @@ void Sound3dPlayer::update()
 			continue;
 		}
 
-		const auto startedSound3d = _startedSound3ds.at(sound3dId)[index];
 		const auto originalSound3d = _sound3dManager->getSound3d(sound3dId);
-		const auto sampleCount = (originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto startedSound3d = _startedSound3ds.at(sound3dId)[index];
+		const auto originalSampleCount = static_cast<int>(originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto startedSampleCount = static_cast<int>(startedSound3d->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound3d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound3d->getHeader()->lpData); // short = 2 bytes
 		const auto volume = startedSound3d->getVolume();
 		const auto leftIntensity = startedSound3d->getLeftIntensity();
 		const auto rightIntensity = startedSound3d->getRightIntensity();
 
-		_volumeThread = async(launch::async, &Sound3dPlayer::_updateSamplesVolume, this, sampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
+		_volumeThread = async(launch::async, &Sound3dPlayer::_updateSamplesVolume, this, originalSampleCount, startedSampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
 	}
 }

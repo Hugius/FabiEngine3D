@@ -1155,6 +1155,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			const auto isStarted = _fe3d->sound3d_isStarted(sound3dId, index);
 			const auto isPaused = (isStarted ? _fe3d->sound3d_isPaused(sound3dId, index) : false);
 			const auto playCount = (isStarted ? _fe3d->sound3d_getPlayCount(sound3dId, index) : false);
+			const auto currentTime = (isStarted ? _fe3d->sound3d_getCurrentTime(sound3dId, index) : false);
 
 			file
 				<< " "
@@ -1162,7 +1163,9 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				<< " "
 				<< isPaused
 				<< " "
-				<< playCount;
+				<< playCount
+				<< " "
+				<< currentTime;
 		}
 
 		file << endl;

@@ -23,7 +23,7 @@ public:
 	void inject(shared_ptr<Sound3dManager> sound3dManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void startSound3d(const string & sound3dId, int playCount, int startMilliseconds);
+	void startSound3d(const string & sound3dId, int playCount, float startTime);
 	void pauseSound3d(const string & sound3dId, int index);
 	void resumeSound3d(const string & sound3dId, int index);
 	void stopSound3d(const string & sound3dId, int index);
@@ -31,9 +31,9 @@ public:
 	const float getSound3dVolume(const string & sound3dId, int index) const;
 	const float getSound3dLeftIntensity(const string & sound3dId, int index) const;
 	const float getSound3dRightIntensity(const string & sound3dId, int index) const;
+	const float getSound3dCurrentTime(const string & sound3dId, int index) const;
 
 	const int getStartedSound3dCount(const string & sound3dId) const;
-	const int getSound3dCurrentMilliseconds(const string & sound3dId, int index) const;
 	const int getSound3dPlayCount(const string & sound3dId, int index) const;
 
 	const bool isSound3dStarted(const string & sound3dId, int index) const;

@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, int startMilliseconds)
+void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, float startTime)
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -15,7 +15,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, int st
 		abort();
 	}
 
-	if(startMilliseconds < 0)
+	if((startTime < 0.0f) || (startTime >= 1.0f))
 	{
 		abort();
 	}
@@ -23,12 +23,7 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, int st
 	const auto newSound2d = make_shared<StartedSound2D>();
 	const auto waveBuffer = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer();
 	const auto originalByteCount = static_cast<int>(waveBuffer->getHeader()->dwBufferLength);
-	const auto startIndex = static_cast<int>(((waveBuffer->getFormat()->nSamplesPerSec / 1000) * startMilliseconds) * 2);
-
-	if(startIndex >= originalByteCount)
-	{
-		abort();
-	}
+	const auto startIndex = static_cast<int>(static_cast<float>(originalByteCount) * startTime);
 
 	HWAVEOUT handle = nullptr;
 

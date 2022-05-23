@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount, int startMilliseconds)
+void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount, float startTime)
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -15,7 +15,7 @@ void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount, int st
 		abort();
 	}
 
-	if(startMilliseconds < 0)
+	if((startTime < 0.0f) || (startTime >= 1.0f))
 	{
 		abort();
 	}
@@ -23,12 +23,7 @@ void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount, int st
 	const auto newSound3d = make_shared<StartedSound3D>();
 	const auto waveBuffer = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer();
 	const auto originalByteCount = static_cast<int>(waveBuffer->getHeader()->dwBufferLength);
-	const auto startIndex = static_cast<int>(((waveBuffer->getFormat()->nSamplesPerSec / 1000) * startMilliseconds) * 2);
-
-	if(startIndex >= originalByteCount)
-	{
-		abort();
-	}
+	const auto startIndex = static_cast<int>(static_cast<float>(originalByteCount) * startTime);
 
 	HWAVEOUT handle = nullptr;
 

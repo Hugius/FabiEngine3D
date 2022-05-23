@@ -43,9 +43,9 @@ void EngineInterface::sound3d_setMaxDistance(const string & sound3dId, float val
 	_core->getSound3dManager()->getSound3d(sound3dId)->setMaxDistance(value);
 }
 
-void EngineInterface::sound3d_start(const string & sound3dId, int playCount, int startMilliseconds)
+void EngineInterface::sound3d_start(const string & sound3dId, int playCount, float startTime)
 {
-	_core->getSound3dPlayer()->startSound3d(sound3dId, playCount, startMilliseconds);
+	_core->getSound3dPlayer()->startSound3d(sound3dId, playCount, startTime);
 }
 
 void EngineInterface::sound3d_pause(const string & sound3dId, int index)
@@ -135,9 +135,9 @@ const int EngineInterface::sound3d_getStartedCount(const string & sound3dId) con
 	return _core->getSound3dPlayer()->getStartedSound3dCount(sound3dId);
 }
 
-const int EngineInterface::sound3d_getCurrentMilliseconds(const string & sound3dId, int index) const
+const float EngineInterface::sound3d_getCurrentTime(const string & sound3dId, int index) const
 {
-	return _core->getSound3dPlayer()->getSound3dCurrentMilliseconds(sound3dId, index);
+	return _core->getSound3dPlayer()->getSound3dCurrentTime(sound3dId, index);
 }
 
 const int EngineInterface::sound3d_getPlayCount(const string & sound3dId, int index) const

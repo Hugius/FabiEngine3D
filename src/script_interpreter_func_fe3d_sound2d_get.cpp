@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound2d_get_current_milliseconds")
+	else if(functionName == "fe3d:sound2d_get_current_time")
 	{
 		const auto types = {SVT::STRING, SVT::INTEGER};
 
@@ -183,9 +183,9 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 					return true;
 				}
 
-				const auto result = _fe3d->sound2d_getCurrentMilliseconds(args[0]->getString(), args[1]->getInteger());
+				const auto result = _fe3d->sound2d_getCurrentTime(args[0]->getString(), args[1]->getInteger());
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}

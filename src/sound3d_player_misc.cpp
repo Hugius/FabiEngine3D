@@ -179,7 +179,7 @@ void Sound3dPlayer::_updateSamplesVolume(int originalSampleCount, int startedSam
 	}
 }
 
-const int Sound3dPlayer::getSound3dCurrentMilliseconds(const string & sound3dId, int index) const
+const float Sound3dPlayer::getSound3dCurrentTime(const string & sound3dId, int index) const
 {
 	if(!_sound3dManager->isSound3dExisting(sound3dId))
 	{
@@ -198,8 +198,8 @@ const int Sound3dPlayer::getSound3dCurrentMilliseconds(const string & sound3dId,
 	waveOutGetPosition(_startedSound3ds.at(sound3dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
 
 	const auto sampleIndex = currentTime->u.sample;
-	const auto sampleRate = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;
-	const auto result = (static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate)) * 1000);
+	const auto sampleCount = (_sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+	const auto result = (static_cast<float>(sampleIndex) / static_cast<float>(sampleCount));
 
 	delete currentTime;
 

@@ -1356,8 +1356,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			for(int index = 0; index < startedCount; index++)
 			{
+				float currentTime;
 				int playCount;
-				int currentMilliseconds;
 				bool isStarted;
 				bool isPaused;
 
@@ -1365,11 +1365,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					>> isStarted
 					>> isPaused
 					>> playCount
-					>> currentMilliseconds;
+					>> currentTime;
 
 				if(isStarted)
 				{
-					_fe3d->sound3d_start(sound3dId, playCount, currentMilliseconds);
+					_fe3d->sound3d_start(sound3dId, playCount, currentTime);
 				}
 
 				if(isPaused)

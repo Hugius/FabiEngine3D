@@ -21,7 +21,7 @@ class Sound2dPlayer final
 public:
 	void inject(shared_ptr<Sound2dManager> sound2dManager);
 	void update();
-	void startSound2d(const string & sound2dId, int playCount, int startMilliseconds);
+	void startSound2d(const string & sound2dId, int playCount, float startTime);
 	void pauseSound2d(const string & sound2dId, int index);
 	void resumeSound2d(const string & sound2dId, int index);
 	void stopSound2d(const string & sound2dId, int index);
@@ -32,9 +32,9 @@ public:
 	const float getSound2dVolume(const string & sound2dId, int index) const;
 	const float getSound2dLeftIntensity(const string & sound2dId, int index) const;
 	const float getSound2dRightIntensity(const string & sound2dId, int index) const;
+	const float getSound2dCurrentTime(const string & sound2dId, int index) const;
 
 	const int getStartedSound2dCount(const string & sound2dId) const;
-	const int getSound2dCurrentMilliseconds(const string & sound2dId, int index) const;
 	const int getSound2dPlayCount(const string & sound2dId, int index) const;
 
 	const bool isSound2dStarted(const string & sound2dId, int index) const;

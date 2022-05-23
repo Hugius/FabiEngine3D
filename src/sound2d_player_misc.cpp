@@ -173,7 +173,7 @@ const int Sound2dPlayer::getStartedSound2dCount(const string & sound2dId) const
 	return static_cast<int>(_startedSound2ds.at(sound2dId).size());
 }
 
-const int Sound2dPlayer::getSound2dCurrentMilliseconds(const string & sound2dId, int index) const
+const float Sound2dPlayer::getSound2dCurrentTime(const string & sound2dId, int index) const
 {
 	if(!_sound2dManager->isSound2dExisting(sound2dId))
 	{
@@ -192,8 +192,8 @@ const int Sound2dPlayer::getSound2dCurrentMilliseconds(const string & sound2dId,
 	waveOutGetPosition(_startedSound2ds.at(sound2dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
 
 	const auto sampleIndex = currentTime->u.sample;
-	const auto sampleRate = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getFormat()->nSamplesPerSec;
-	const auto result = (static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate)) * 1000);
+	const auto sampleCount = (_sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+	const auto result = (static_cast<float>(sampleIndex) / static_cast<float>(sampleCount));
 
 	delete currentTime;
 

@@ -751,7 +751,7 @@ public:
 	void sound3d_moveTo(const string & sound3dId, const fvec3 & target, float speed);
 	void sound3d_setMaxVolume(const string & sound3dId, float value);
 	void sound3d_setMaxDistance(const string & sound3dId, float value);
-	void sound3d_start(const string & sound3dId, int playCount, int startMilliseconds);
+	void sound3d_start(const string & sound3dId, int playCount, float startTime);
 	void sound3d_pause(const string & sound3dId, int index);
 	void sound3d_resume(const string & sound3dId, int index);
 	void sound3d_stop(const string & sound3dId, int index);
@@ -764,8 +764,8 @@ public:
 	const float sound3d_getVolume(const string & sound3dId, int index) const;
 	const float sound3d_getLeftIntensity(const string & sound3dId, int index) const;
 	const float sound3d_getRightIntensity(const string & sound3dId, int index) const;
+	const float sound3d_getCurrentTime(const string & sound3dId, int index) const;
 	const int sound3d_getStartedCount(const string & sound3dId) const;
-	const int sound3d_getCurrentMilliseconds(const string & sound3dId, int index) const;
 	const int sound3d_getPlayCount(const string & sound3dId, int index) const;
 	const bool sound3d_isExisting(const string & sound3dId) const;
 	const bool sound3d_isStarted(const string & sound3dId, int index) const;
@@ -774,7 +774,7 @@ public:
 
 	void sound2d_create(const string & sound2dId, const string & audioPath);
 	void sound2d_delete(const string & sound2dId);
-	void sound2d_start(const string & sound2dId, int playCount, int startMilliseconds);
+	void sound2d_start(const string & sound2dId, int playCount, float startTime);
 	void sound2d_pause(const string & sound2dId, int index);
 	void sound2d_resume(const string & sound2dId, int index);
 	void sound2d_stop(const string & sound2dId, int index);
@@ -787,8 +787,8 @@ public:
 	const float sound2d_getVolume(const string & sound2dId, int index) const;
 	const float sound2d_getLeftIntensity(const string & sound2dId, int index) const;
 	const float sound2d_getRightIntensity(const string & sound2dId, int index) const;
+	const float sound2d_getCurrentTime(const string & sound2dId, int index) const;
 	const int sound2d_getStartedCount(const string & sound2dId) const;
-	const int sound2d_getCurrentMilliseconds(const string & sound2dId, int index) const;
 	const int sound2d_getPlayCount(const string & sound2dId, int index) const;
 	const bool sound2d_isExisting(const string & sound2dId) const;
 	const bool sound2d_isStarted(const string & sound2dId, int index) const;

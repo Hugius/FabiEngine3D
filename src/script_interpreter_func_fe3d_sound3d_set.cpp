@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	}
 	else if(functionName == "fe3d:sound3d_start")
 	{
-		const auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
+		const auto types = {SVT::STRING, SVT::INTEGER, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -74,16 +74,16 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 				return true;
 			}
 
-			if((args[2]->getInteger() < 0) || (args[2]->getInteger() < -1))
+			if((args[2]->getDecimal() < 0.0f) || (args[2]->getDecimal() >= 1.0f))
 			{
-				_throwRuntimeError("play count is invalid");
+				_throwRuntimeError("start time is invalid");
 
 				return true;
 			}
 
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger());
+				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getDecimal());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

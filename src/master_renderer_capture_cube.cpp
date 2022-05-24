@@ -159,20 +159,19 @@ void MasterRenderer::captureCubeReflections()
 
 				captureBuffer->unbind();
 
-				const auto dataSize = (captor->getReflectionQuality() * captor->getReflectionQuality() * 3);
-				const auto data = new unsigned char[dataSize];
+				const auto pixels = new unsigned char[(captor->getReflectionQuality() * captor->getReflectionQuality() * 3)];
 
 				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
-				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getReflectionQuality(), captor->getReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getReflectionQuality(), captor->getReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				delete[] data;
+				delete[] pixels;
 			}
 
 			captor->setReflectionCubeMap(make_shared<TextureBuffer>(textureId));
@@ -377,20 +376,19 @@ void MasterRenderer::captureCubeRefractions()
 
 				captureBuffer->unbind();
 
-				const auto dataSize = (captor->getRefractionQuality() * captor->getRefractionQuality() * 3);
-				const auto data = new unsigned char[dataSize];
+				const auto pixels = new unsigned char[(captor->getRefractionQuality() * captor->getRefractionQuality() * 3)];
 
 				glBindTexture(GL_TEXTURE_2D, captureBuffer->getTexture(0)->getTboId());
-				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getRefractionQuality(), captor->getRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, captor->getRefractionQuality(), captor->getRefractionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				delete[] data;
+				delete[] pixels;
 			}
 
 			captor->setRefractionCubeMap(make_shared<TextureBuffer>(textureId));

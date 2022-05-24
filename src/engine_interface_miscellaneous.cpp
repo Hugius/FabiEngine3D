@@ -65,6 +65,8 @@ void EngineInterface::misc_clearImageCache(const string & filePath)
 void EngineInterface::misc_clearAudioCache(const string & filePath)
 {
 	_core->getAudioLoader()->clearAudioCache(filePath);
+
+	_core->getWaveBufferCache()->deleteBuffer(filePath);
 }
 
 void EngineInterface::misc_clearMeshesCache()

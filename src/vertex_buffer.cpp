@@ -68,13 +68,13 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], int dataCo
 
 VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 {
-	float * data = nullptr;
+	float * vertices = nullptr;
 
 	_bufferType = VertexBufferType::POS_UV;
 
 	if(isCentered)
 	{
-		data = new float[24]
+		vertices = new float[24]
 		{
 			x - (w * 0.5f), y - (h * 0.5f), 0.0f, 0.0f,
 			x + (w * 0.5f), y - (h * 0.5f), 1.0f, 0.0f,
@@ -87,7 +87,7 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 	}
 	else
 	{
-		data = new float[24]
+		vertices = new float[24]
 		{
 			x,     y,     0.0f, 0.0f,
 			x + w, y,     1.0f, 0.0f,
@@ -103,7 +103,7 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 	glGenBuffers(1, &_vboId);
 	glBindVertexArray(_vaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, _vboId);
-	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &data[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &vertices[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
@@ -111,7 +111,7 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	delete[] data;
+	delete[] vertices;
 
 	_vertexCount = 6;
 }

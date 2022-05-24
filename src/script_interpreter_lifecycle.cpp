@@ -392,6 +392,9 @@ void ScriptInterpreter::unload()
 
 	_fe3d->misc_setVsyncEnabled(true);
 
+	_customWorldBuilder->resetBuild();
+	_customWorldBuilder->clearLoadedWorld();
+
 	_debuggingTimes.clear();
 	_localVariables.clear();
 	_globalVariables.clear();

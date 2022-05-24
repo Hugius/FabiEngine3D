@@ -187,13 +187,13 @@ const float Sound2dPlayer::getSound2dCurrentTime(const string & sound2dId, int i
 
 	auto currentTime = new MMTIME();
 
-	currentTime->wType = TIME_SAMPLES;
+	currentTime->wType = TIME_BYTES;
 
 	waveOutGetPosition(_startedSound2ds.at(sound2dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
 
-	const auto sampleIndex = currentTime->u.sample;
-	const auto sampleCount = (_sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-	const auto result = (static_cast<float>(sampleIndex) / static_cast<float>(sampleCount));
+	const auto byteIndex = currentTime->u.cb;
+	const auto byteCount = _startedSound2ds.at(sound2dId)[index]->getHeader()->dwBufferLength;
+	const auto result = fmodf((static_cast<float>(byteIndex) / static_cast<float>(byteCount)), 1.0f);
 
 	delete currentTime;
 

@@ -193,13 +193,13 @@ const float Sound3dPlayer::getSound3dCurrentTime(const string & sound3dId, int i
 
 	auto currentTime = new MMTIME();
 
-	currentTime->wType = TIME_SAMPLES;
+	currentTime->wType = TIME_BYTES;
 
 	waveOutGetPosition(_startedSound3ds.at(sound3dId)[index]->getHandle(), currentTime, sizeof(MMTIME));
 
-	const auto sampleIndex = currentTime->u.sample;
-	const auto sampleCount = (_sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-	const auto result = (static_cast<float>(sampleIndex) / static_cast<float>(sampleCount));
+	const auto byteIndex = currentTime->u.cb;
+	const auto byteCount = _startedSound3ds.at(sound3dId)[index]->getHeader()->dwBufferLength;
+	const auto result = fmodf((static_cast<float>(byteIndex) / static_cast<float>(byteCount)), 1.0f);
 
 	delete currentTime;
 

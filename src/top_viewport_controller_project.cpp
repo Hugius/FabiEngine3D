@@ -203,9 +203,9 @@ void TopViewportController::_updateProjectDeleting()
 				return;
 			}
 
-			_setProject("");
-
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" deleted");
+
+			_setProject("");
 		}
 	}
 }

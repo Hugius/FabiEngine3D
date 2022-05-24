@@ -8,11 +8,11 @@ void EngineInterface::quad2d_create(const string & quad2dId, bool isCentered)
 
 void EngineInterface::quad2d_delete(const string & quad2dId)
 {
-	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{
-		if(quad2dId == quad2dId)
+		if(quad2dId == startedQuad2dId)
 		{
-			quad2d_stopAnimation2d(quad2dId, animation2dId);
+			quad2d_stopAnimation2d(startedQuad2dId, startedAnimation2dId);
 		}
 	}
 
@@ -278,11 +278,11 @@ const vector<string> EngineInterface::quad2d_getAnimation2dIds(const string & qu
 {
 	vector<string> result = {};
 
-	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{
-		if(quad2dId == quad2dId)
+		if(quad2dId == startedQuad2dId)
 		{
-			result.push_back(animation2dId);
+			result.push_back(startedAnimation2dId);
 		}
 	}
 

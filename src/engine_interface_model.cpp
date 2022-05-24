@@ -8,11 +8,11 @@ void EngineInterface::model_create(const string & modelId, const string & meshPa
 
 void EngineInterface::model_delete(const string & modelId)
 {
-	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
+	for(const auto & [startedAnimation3dId, startedModelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
 	{
-		if(modelId == modelId)
+		if(modelId == startedModelId)
 		{
-			model_stopAnimation3d(modelId, animation3dId);
+			model_stopAnimation3d(startedModelId, startedAnimation3dId);
 		}
 	}
 
@@ -859,11 +859,11 @@ const vector<string> EngineInterface::model_getAnimation3dIds(const string & mod
 {
 	vector<string> result = {};
 
-	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
+	for(const auto & [startedAnimation3dId, startedModelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
 	{
-		if(modelId == modelId)
+		if(modelId == startedModelId)
 		{
-			result.push_back(animation3dId);
+			result.push_back(startedAnimation3dId);
 		}
 	}
 

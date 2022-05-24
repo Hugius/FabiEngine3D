@@ -8,19 +8,19 @@ void EngineInterface::animation2d_create(const string & animation2dId)
 
 void EngineInterface::animation2d_delete(const string & animation2dId)
 {
-	for(const auto & [animation2dId, quad3dId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad3dId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimation2dIds())
 	{
-		if(animation2dId == animation2dId)
+		if(animation2dId == startedAnimation2dId)
 		{
-			quad3d_stopAnimation2d(quad3dId, animation2dId);
+			quad3d_stopAnimation2d(startedQuad3dId, startedAnimation2dId);
 		}
 	}
 
-	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimation2dIds())
 	{
-		if(animation2dId == animation2dId)
+		if(animation2dId == startedAnimation2dId)
 		{
-			quad2d_stopAnimation2d(quad2dId, animation2dId);
+			quad2d_stopAnimation2d(startedQuad2dId, startedAnimation2dId);
 		}
 	}
 

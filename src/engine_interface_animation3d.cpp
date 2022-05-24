@@ -8,11 +8,11 @@ void EngineInterface::animation3d_create(const string & animation3dId)
 
 void EngineInterface::animation3d_delete(const string & animation3dId)
 {
-	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
+	for(const auto & [startedAnimation3dId, startedModelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
 	{
-		if(animation3dId == animation3dId)
+		if(animation3dId == startedAnimation3dId)
 		{
-			model_stopAnimation3d(modelId, animation3dId);
+			model_stopAnimation3d(startedModelId, startedAnimation3dId);
 		}
 	}
 

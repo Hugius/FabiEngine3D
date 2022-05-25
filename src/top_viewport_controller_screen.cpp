@@ -87,7 +87,9 @@ void TopViewportController::_updateApplicationScreenManagement()
 			else if(topScreen->getButton("restart")->isHovered())
 			{
 				_scriptExecutor->stop();
+
 				_scriptEditor->loadScriptFiles(true);
+
 				_scriptExecutor->start();
 			}
 			else if(topScreen->getButton("stop")->isHovered())

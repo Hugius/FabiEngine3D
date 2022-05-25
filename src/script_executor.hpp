@@ -22,4 +22,6 @@ private:
 
 	bool _isStarted = false;
 	bool _mustSkipUpdate = false;
+	bool _wasCursorVisible = false;
+	bool _wasCursorInsideDisplay = false;
 };

@@ -9,8 +9,6 @@ void ScriptExecutor::start()
 		abort();
 	}
 
-	Tools::setCursorVisible(true);
-
 	_scriptInterpreter->load();
 	_scriptInterpreter->executeInitializeScripts();
 
@@ -29,6 +27,8 @@ void ScriptExecutor::start()
 
 	_isStarted = true;
 	_mustSkipUpdate = true;
+	_wasCursorVisible = Tools::isCursorVisible();
+	_wasCursorInsideDisplay = Tools::isCursorInsideDisplay();
 }
 
 void ScriptExecutor::update(bool isDebugging)
@@ -56,6 +56,32 @@ void ScriptExecutor::update(bool isDebugging)
 		if(_mustSkipUpdate)
 		{
 			_mustSkipUpdate = false;
+		}
+
+		if(!Configuration::getInst().isApplicationExported())
+		{
+			if(Tools::isCursorInsideDisplay())
+			{
+				if(!_wasCursorInsideDisplay)
+				{
+					Tools::setCursorVisible(_wasCursorVisible);
+				}
+
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
+			}
+			else
+			{
+				if(_wasCursorInsideDisplay)
+				{
+					_wasCursorVisible = Tools::isCursorVisible();
+				}
+
+				Tools::setCursorVisible(false);
+
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), true);
+			}
+
+			_wasCursorInsideDisplay = Tools::isCursorInsideDisplay();
 		}
 	}
 }
@@ -103,4 +129,6 @@ void ScriptExecutor::_stop(bool mustExecuteTerminationScripts)
 
 	_isStarted = false;
 	_mustSkipUpdate = false;
+	_wasCursorVisible = false;
+	_wasCursorInsideDisplay = false;
 }

@@ -905,6 +905,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_duplicator->copyTemplateQuad3d(quad3dId, templateQuad3dId);
 
 			_fe3d->quad3d_setVisible(quad3dId, isVisible);
+			_fe3d->quad3d_setPosition(quad3dId, position);
+			_fe3d->quad3d_setRotation(quad3dId, rotation);
 			_fe3d->quad3d_setSize(quad3dId, size);
 			_fe3d->quad3d_setColor(quad3dId, color);
 			_fe3d->quad3d_setLightness(quad3dId, lightness);
@@ -1103,6 +1105,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_duplicator->copyTemplateText3d(text3dId, templateText3dId);
 
 			_fe3d->text3d_setVisible(text3dId, isVisible);
+			_fe3d->text3d_setPosition(text3dId, position);
+			_fe3d->text3d_setRotation(text3dId, rotation);
 			_fe3d->text3d_setSize(text3dId, size);
 			_fe3d->text3d_setColor(text3dId, color);
 			_fe3d->text3d_setLightness(text3dId, lightness);

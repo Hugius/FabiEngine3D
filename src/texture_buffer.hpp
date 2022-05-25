@@ -8,8 +8,8 @@
 #include <memory>
 #include <glew.h>
 
-using std::array;
 using std::shared_ptr;
+using std::array;
 
 class TextureBuffer final
 {

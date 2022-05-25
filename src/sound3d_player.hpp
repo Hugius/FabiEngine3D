@@ -11,11 +11,11 @@
 #include <future>
 
 using std::string;
-using std::array;
 using std::vector;
 using std::shared_ptr;
 using std::pair;
 using std::future;
+using std::array;
 
 class Sound3dPlayer final
 {

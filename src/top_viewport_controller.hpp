@@ -51,7 +51,6 @@ public:
 	void update();
 
 	const bool isScriptStarted() const;
-	const bool isScriptRunning() const;
 	const bool isProjectCorrupted(const string & projectDirectoryPath) const;
 
 private:

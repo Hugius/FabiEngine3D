@@ -66,7 +66,6 @@ void TopViewportController::_updateApplicationScreenManagement()
 	if(_currentProjectId.empty())
 	{
 		topScreen->getButton("start")->setHoverable(false);
-		topScreen->getButton("pause")->setHoverable(false);
 		topScreen->getButton("restart")->setHoverable(false);
 		topScreen->getButton("stop")->setHoverable(false);
 		topScreen->getButton("debug")->setHoverable(false);
@@ -77,19 +76,9 @@ void TopViewportController::_updateApplicationScreenManagement()
 		{
 			if(topScreen->getButton("start")->isHovered())
 			{
-				if(_scriptExecutor->isStarted())
-				{
-					_scriptExecutor->resume();
-				}
-				else
-				{
-					_scriptEditor->loadScriptFiles(true);
-					_scriptExecutor->start();
-				}
-			}
-			else if(topScreen->getButton("pause")->isHovered())
-			{
-				_scriptExecutor->pause();
+				_scriptEditor->loadScriptFiles(true);
+
+				_scriptExecutor->start();
 			}
 			else if(topScreen->getButton("restart")->isHovered())
 			{
@@ -103,19 +92,15 @@ void TopViewportController::_updateApplicationScreenManagement()
 			}
 			else if(topScreen->getButton("debug")->isHovered())
 			{
-				_scriptExecutor->resume();
 				_scriptExecutor->update(true);
-				_scriptExecutor->pause();
 			}
 		}
 
 		const auto isInMainMenu = (leftScreen->getId() == "main");
 		const auto isScriptEmpty = _script->isEmpty();
 		const auto isScriptStarted = _scriptExecutor->isStarted();
-		const auto isScriptRunning = _scriptExecutor->isRunning();
 
-		topScreen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptRunning);
-		topScreen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning);
+		topScreen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptStarted);
 		topScreen->getButton("restart")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("stop")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
@@ -123,14 +108,6 @@ void TopViewportController::_updateApplicationScreenManagement()
 		if(isInMainMenu && !isScriptStarted && _script->isEmpty())
 		{
 			_scriptEditor->loadScriptFiles(false);
-		}
-
-		if(isScriptRunning)
-		{
-			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE))
-			{
-				_scriptExecutor->pause();
-			}
 		}
 
 		_scriptExecutor->update(false);

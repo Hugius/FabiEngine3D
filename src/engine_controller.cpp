@@ -224,7 +224,7 @@ void EngineController::initialize()
 
 		_scriptExecutor->start();
 
-		if(!_scriptExecutor->isRunning())
+		if(!_scriptExecutor->isStarted())
 		{
 			_fe3d->application_stop();
 		}
@@ -283,7 +283,7 @@ void EngineController::update()
 {
 	if(Configuration::getInst().isApplicationExported())
 	{
-		if(_scriptExecutor->isRunning())
+		if(_scriptExecutor->isStarted())
 		{
 			_scriptExecutor->update(false);
 		}
@@ -311,7 +311,7 @@ void EngineController::update()
 
 void EngineController::terminate()
 {
-	if(_scriptExecutor->isRunning())
+	if(_scriptExecutor->isStarted())
 	{
 		_scriptExecutor->stop();
 	}

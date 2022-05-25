@@ -28,7 +28,6 @@ void ScriptExecutor::start()
 	}
 
 	_isStarted = true;
-	_isRunning = true;
 	_mustSkipUpdate = true;
 }
 
@@ -36,175 +35,29 @@ void ScriptExecutor::update(bool isDebugging)
 {
 	if(_isStarted)
 	{
-		if(!Configuration::getInst().isApplicationExported())
+		if(!_mustSkipUpdate || isDebugging)
 		{
-			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), !_isRunning);
+			_scriptInterpreter->executeUpdateScripts(isDebugging);
+
+			if(_scriptInterpreter->hasThrownError())
+			{
+				_stop(false);
+
+				return;
+			}
+			else if(_scriptInterpreter->mustStopApplication())
+			{
+				_stop(true);
+
+				return;
+			}
 		}
 
-		if(_isRunning)
+		if(_mustSkipUpdate)
 		{
-			if(!_mustSkipUpdate || isDebugging)
-			{
-				_scriptInterpreter->executeUpdateScripts(isDebugging);
-
-				if(_scriptInterpreter->hasThrownError())
-				{
-					_stop(false);
-
-					return;
-				}
-				else if(_scriptInterpreter->mustStopApplication())
-				{
-					_stop(true);
-
-					return;
-				}
-			}
-
 			_mustSkipUpdate = false;
 		}
 	}
-}
-
-void ScriptExecutor::pause()
-{
-	if(!_isStarted || !_isRunning)
-	{
-		abort();
-	}
-
-	_wasCursorVisible = Tools::isCursorVisible();
-	_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
-	_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
-	_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
-
-	for(const auto & sound3dId : _fe3d->sound3d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
-		{
-			if(_fe3d->sound3d_isStarted(sound3dId, index) && _fe3d->sound3d_isPaused(sound3dId, index))
-			{
-				_pausedSound3dIds.push_back({sound3dId, index});
-			}
-		}
-	}
-
-	for(const auto & sound2dId : _fe3d->sound2d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
-		{
-			if(_fe3d->sound2d_isStarted(sound2dId, index) && _fe3d->sound2d_isPaused(sound2dId, index))
-			{
-				_pausedSound2dIds.push_back({sound2dId, index});
-			}
-		}
-	}
-
-	for(const auto & clockId : _fe3d->clock_getIds())
-	{
-		if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
-		{
-			_pausedClockIds.push_back(clockId);
-		}
-	}
-
-	Tools::setCursorVisible(false);
-	_fe3d->misc_setVsyncEnabled(true);
-	_fe3d->camera_setFirstPersonEnabled(false);
-	_fe3d->camera_setThirdPersonEnabled(false);
-
-	for(const auto & sound3dId : _fe3d->sound3d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
-		{
-			if(_fe3d->sound3d_isStarted(sound3dId, index) && !_fe3d->sound3d_isPaused(sound3dId, index))
-			{
-				_fe3d->sound3d_pause(sound3dId, index);
-			}
-		}
-	}
-
-	for(const auto & sound2dId : _fe3d->sound2d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
-		{
-			if(_fe3d->sound2d_isStarted(sound2dId, index) && !_fe3d->sound2d_isPaused(sound2dId, index))
-			{
-				_fe3d->sound2d_pause(sound2dId, index);
-			}
-		}
-	}
-
-	for(const auto & clockId : _fe3d->clock_getIds())
-	{
-		if(_fe3d->clock_isStarted(clockId) && !_fe3d->clock_isPaused(clockId))
-		{
-			_fe3d->clock_pause(clockId);
-		}
-	}
-
-	_isRunning = false;
-}
-
-void ScriptExecutor::resume()
-{
-	if(!_isStarted || _isRunning)
-	{
-		abort();
-	}
-
-	Tools::setCursorVisible(_wasCursorVisible);
-	_fe3d->misc_setVsyncEnabled(_wasVsyncEnabled);
-	_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
-	_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
-
-	for(const auto & sound3dId : _fe3d->sound3d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
-		{
-			if(_fe3d->sound3d_isStarted(sound3dId, index) && _fe3d->sound3d_isPaused(sound3dId, index))
-			{
-				_fe3d->sound3d_resume(sound3dId, index);
-			}
-		}
-	}
-
-	for(const auto & sound2dId : _fe3d->sound2d_getIds())
-	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
-		{
-			if(_fe3d->sound2d_isStarted(sound2dId, index) && _fe3d->sound2d_isPaused(sound2dId, index))
-			{
-				_fe3d->sound2d_resume(sound2dId, index);
-			}
-		}
-	}
-
-	for(const auto & clockId : _fe3d->clock_getIds())
-	{
-		if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
-		{
-			_fe3d->clock_resume(clockId);
-		}
-	}
-
-	for(const auto & [sound3dId, index] : _pausedSound3dIds)
-	{
-		_fe3d->sound3d_pause(sound3dId, index);
-	}
-
-	for(const auto & [sound2dId, index] : _pausedSound2dIds)
-	{
-		_fe3d->sound2d_pause(sound2dId, index);
-	}
-
-	for(const auto & clockId : _pausedClockIds)
-	{
-		_fe3d->clock_pause(clockId);
-	}
-
-	_isRunning = true;
-	_mustSkipUpdate = true;
 }
 
 void ScriptExecutor::stop()
@@ -237,11 +90,6 @@ const bool ScriptExecutor::isStarted() const
 	return _isStarted;
 }
 
-const bool ScriptExecutor::isRunning() const
-{
-	return _isRunning;
-}
-
 void ScriptExecutor::_stop(bool mustExecuteTerminationScripts)
 {
 	if(mustExecuteTerminationScripts)
@@ -253,14 +101,6 @@ void ScriptExecutor::_stop(bool mustExecuteTerminationScripts)
 
 	Tools::setCursorVisible(false);
 
-	_pausedSound3dIds.clear();
-	_pausedSound2dIds.clear();
-	_pausedClockIds.clear();
 	_isStarted = false;
-	_isRunning = false;
-	_wasCursorVisible = false;
-	_wasVsyncEnabled = false;
-	_wasFirstPersonEnabled = false;
-	_wasThirdPersonEnabled = false;
 	_mustSkipUpdate = false;
 }

@@ -234,32 +234,32 @@ const int EngineInterface::quad2d_getTextureRepeat(const string & quad2dId) cons
 
 const int EngineInterface::quad2d_getAnimation2dPlayCount(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dPlayCount(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dPlayCount(animation2dId, quad2dId);
 }
 
 const int EngineInterface::quad2d_getAnimation2dRowIndex(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dRowIndex(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dRowIndex(animation2dId, quad2dId);
 }
 
 const int EngineInterface::quad2d_getAnimation2dColumnIndex(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dColumnIndex(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dColumnIndex(animation2dId, quad2dId);
 }
 
 const int EngineInterface::quad2d_getAnimation2dIntervalMultiplier(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalMultiplier(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalMultiplier(animation2dId, quad2dId);
 }
 
 const int EngineInterface::quad2d_getAnimation2dIntervalDivider(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalDivider(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dIntervalDivider(animation2dId, quad2dId);
 }
 
 const int EngineInterface::quad2d_getAnimation2dUpdateCount(const string & quad2dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dUpdateCount(quad2dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad2dAnimation2dUpdateCount(animation2dId, quad2dId);
 }
 
 const vector<string> EngineInterface::quad2d_getIds() const

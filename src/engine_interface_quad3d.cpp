@@ -332,32 +332,32 @@ const float EngineInterface::quad3d_getMinAlpha(const string & quad3dId) const
 
 const int EngineInterface::quad3d_getAnimation2dPlayCount(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dPlayCount(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dPlayCount(animation2dId, quad3dId);
 }
 
 const int EngineInterface::quad3d_getAnimation2dRowIndex(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dRowIndex(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dRowIndex(animation2dId, quad3dId);
 }
 
 const int EngineInterface::quad3d_getAnimation2dColumnIndex(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dColumnIndex(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dColumnIndex(animation2dId, quad3dId);
 }
 
 const int EngineInterface::quad3d_getAnimation2dIntervalMultiplier(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dIntervalMultiplier(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dIntervalMultiplier(animation2dId, quad3dId);
 }
 
 const int EngineInterface::quad3d_getAnimation2dIntervalDivider(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dIntervalDivider(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dIntervalDivider(animation2dId, quad3dId);
 }
 
 const int EngineInterface::quad3d_getAnimation2dUpdateCount(const string & quad3dId, const string & animation2dId) const
 {
-	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dUpdateCount(quad3dId, animation2dId);
+	return _core->getAnimation2dPlayer()->getQuad3dAnimation2dUpdateCount(animation2dId, quad3dId);
 }
 
 const bool EngineInterface::quad3d_isExisting(const string & quad3dId) const

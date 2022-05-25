@@ -195,7 +195,15 @@ const int Animation2dPlayer::getQuad3dAnimation2dIntervalMultiplier(const string
 		abort();
 	}
 
-	return _startedQuad2dAnimation2ds.at(mergedId)->getIntervalMultiplier();
+	try
+	{
+		return _startedQuad3dAnimation2ds.at(mergedId)->getIntervalMultiplier();
+	}
+	catch(...)
+	{
+		Logger::throwDebug(mergedId);
+		return 0;
+	}
 }
 
 const int Animation2dPlayer::getQuad2dAnimation2dIntervalMultiplier(const string & animation2dId, const string & quad2dId) const
@@ -239,7 +247,7 @@ const int Animation2dPlayer::getQuad3dAnimation2dIntervalDivider(const string & 
 		abort();
 	}
 
-	return _startedQuad2dAnimation2ds.at(mergedId)->getIntervalDivider();
+	return _startedQuad3dAnimation2ds.at(mergedId)->getIntervalDivider();
 }
 
 const int Animation2dPlayer::getQuad2dAnimation2dIntervalDivider(const string & animation2dId, const string & quad2dId) const
@@ -283,7 +291,7 @@ const int Animation2dPlayer::getQuad3dAnimation2dUpdateCount(const string & anim
 		abort();
 	}
 
-	return _startedQuad2dAnimation2ds.at(mergedId)->getUpdateCount();
+	return _startedQuad3dAnimation2ds.at(mergedId)->getUpdateCount();
 }
 
 const int Animation2dPlayer::getQuad2dAnimation2dUpdateCount(const string & animation2dId, const string & quad2dId) const

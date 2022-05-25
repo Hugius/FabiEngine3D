@@ -209,6 +209,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->terrain_setBlueTextureRepeat(terrainId, blueTextureRepeat);
 			_fe3d->terrain_setSpecular(terrainId, isSpecular);
 			_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
+			_fe3d->terrain_setSpecularIntensity(terrainId, specularIntensity);
 			_fe3d->terrain_setWireframed(terrainId, isWireframed);
 			_fe3d->terrain_setWireframeColor(terrainId, wireframeColor);
 			_fe3d->terrain_setMinClipPosition(terrainId, minClipPosition);
@@ -408,11 +409,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setMinClipPosition(waterId, minClipPosition);
 			_fe3d->water_setMaxClipPosition(waterId, maxClipPosition);
 
-			if(isSelected)
-			{
-				_fe3d->water_select(waterId);
-			}
-
 			if(!dudvMapPath.empty())
 			{
 				if(!Configuration::getInst().isApplicationExported())
@@ -444,6 +440,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			}
 
 			_loadedWaterIds.push_back(waterId);
+
+			if(isSelected)
+			{
+				_fe3d->water_select(waterId);
+			}
 		}
 		else if(lineType == "MODEL")
 		{

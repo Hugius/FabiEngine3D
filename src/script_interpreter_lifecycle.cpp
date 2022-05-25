@@ -214,6 +214,11 @@ void ScriptInterpreter::unload()
 		_worldEditor->clearLoadedWorld();
 	}
 
+	if(!_customWorldBuilder->getLoadedWorldId().empty())
+	{
+		_customWorldBuilder->clearLoadedWorld();
+	}
+
 	_skyEditor->deleteLoadedSkies();
 	_terrainEditor->deleteLoadedTerrains();
 	_waterEditor->deleteLoadedWaters();
@@ -393,7 +398,6 @@ void ScriptInterpreter::unload()
 	_fe3d->misc_setVsyncEnabled(true);
 
 	_customWorldBuilder->resetBuild();
-	_customWorldBuilder->clearLoadedWorld();
 
 	_debuggingTimes.clear();
 	_localVariables.clear();

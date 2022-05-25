@@ -976,9 +976,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_setRaycastResponsive(quad3dId, isRaycastResponsive);
-			_fe3d->aabb_setCollisionResponsive(quad3dId, isCollisionResponsive);
-			_fe3d->aabb_setVisible(quad3dId, isVisible);
+			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
+			_fe3d->aabb_setVisible(aabbId, isVisible);
 		}
 		else if(lineType == "QUAD3D_ANIMATION2D")
 		{
@@ -1150,9 +1150,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_setRaycastResponsive(text3dId, isRaycastResponsive);
-			_fe3d->aabb_setCollisionResponsive(text3dId, isCollisionResponsive);
-			_fe3d->aabb_setVisible(text3dId, isVisible);
+			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
+			_fe3d->aabb_setVisible(aabbId, isVisible);
 		}
 		else if(lineType == "AABB")
 		{

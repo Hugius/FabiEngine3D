@@ -195,15 +195,7 @@ const int Animation2dPlayer::getQuad3dAnimation2dIntervalMultiplier(const string
 		abort();
 	}
 
-	try
-	{
-		return _startedQuad3dAnimation2ds.at(mergedId)->getIntervalMultiplier();
-	}
-	catch(...)
-	{
-		Logger::throwDebug(mergedId);
-		return 0;
-	}
+	return _startedQuad3dAnimation2ds.at(mergedId)->getIntervalMultiplier();
 }
 
 const int Animation2dPlayer::getQuad2dAnimation2dIntervalMultiplier(const string & animation2dId, const string & quad2dId) const

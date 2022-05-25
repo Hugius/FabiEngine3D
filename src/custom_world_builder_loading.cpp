@@ -1327,6 +1327,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
 			_fe3d->captor_setPosition(captorId, position);
+			_fe3d->captor_capture(captorId);
+
+			_loadedCaptorIds.push_back(captorId);
 		}
 		else if(lineType == "SOUND3D")
 		{

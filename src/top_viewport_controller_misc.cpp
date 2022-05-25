@@ -31,9 +31,9 @@ void TopViewportController::initialize()
 
 	executionWindow->createScreen("main");
 	executionWindow->getScreen("main")->createButton("start", fvec2(executionPositions[0], 0.0f), ROUND_BUTTON_SIZE, "start.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("restart", fvec2(executionPositions[1], 0.0f), ROUND_BUTTON_SIZE, "restart.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("stop", fvec2(executionPositions[2], 0.0f), ROUND_BUTTON_SIZE, "stop.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("debug", fvec2(executionPositions[3], 0.0f), ROUND_BUTTON_SIZE, "debug.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(executionPositions[1], 0.0f), ROUND_BUTTON_SIZE, "debug.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(executionPositions[2], 0.0f), ROUND_BUTTON_SIZE, "restart.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(executionPositions[3], 0.0f), ROUND_BUTTON_SIZE, "stop.tga", ROUND_BUTTON_COLOR, ROUND_BUTTON_HOVER_COLOR, "", fvec3(0.0f), fvec3(0.0f), true);
 	executionWindow->setActiveScreen("main");
 
 	extraWindow->createScreen("main");

@@ -2,13 +2,13 @@
 
 ## Getters
 
-- `fe3d:input_is_mouse_scrolled`(`STR` button) -----> `BOL`
+- `fe3d:input_is_mouse_scrolled`(`STR` wheel) -----> `BOL`
 - `fe3d:input_is_mouse_held`(`STR` button) -----> `BOL`
 - `fe3d:input_is_mouse_pressed`(`STR` button) -----> `BOL`
 - `fe3d:input_is_mouse_toggled`(`STR` button) -----> `BOL`
-- `fe3d:input_is_key_held`(`STR` key) -----> `BOL`
-- `fe3d:input_is_key_pressed`(`STR` key) -----> `BOL`
-- `fe3d:input_is_key_toggled`(`STR` key) -----> `BOL`
+- `fe3d:input_is_keyboard_held`(`STR` key) -----> `BOL`
+- `fe3d:input_is_keyboard_pressed`(`STR` key) -----> `BOL`
+- `fe3d:input_is_keyboard_toggled`(`STR` key) -----> `BOL`
   
 ## Mouse wheel
 

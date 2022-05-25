@@ -120,7 +120,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 
 const bool ScriptInterpreter::_validateKeyInputString(const string & inputString)
 {
-	if(keyboard_key_typeS.find(inputString) == keyboard_key_typeS.end())
+	if(keyboard_key_types.find(inputString) == keyboard_key_types.end())
 	{
 		_throwRuntimeError("invalid keyboard key");
 
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_validateKeyInputString(const string & inputString
 
 const bool ScriptInterpreter::_validateMouseInputString(const string & inputString)
 {
-	if(mouse_button_typeS.find(inputString) == mouse_button_typeS.end())
+	if(mouse_button_types.find(inputString) == mouse_button_types.end())
 	{
 		_throwRuntimeError("invalid mouse button");
 

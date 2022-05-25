@@ -171,18 +171,18 @@ private:
 	const bool _validateMouseInputString(const string & inputString);
 	const bool _validateSavesDirectory();
 
-	static inline const unordered_map<string, MouseWheelType> mouse_wheel_typeS =
+	static inline const unordered_map<string, MouseWheelType> mouse_wheel_types =
 	{
 		{"WHEEL_FORWARD", MouseWheelType::WHEEL_FORWARD},
 		{"WHEEL_BACKWARD", MouseWheelType::WHEEL_BACKWARD},
 	};
-	static inline const unordered_map<string, MouseButtonType> mouse_button_typeS =
+	static inline const unordered_map<string, MouseButtonType> mouse_button_types =
 	{
 		{"BUTTON_LEFT", MouseButtonType::BUTTON_LEFT},
 		{"BUTTON_MIDDLE", MouseButtonType::BUTTON_MIDDLE},
 		{"BUTTON_RIGHT", MouseButtonType::BUTTON_RIGHT},
 	};
-	static inline const unordered_map<string, KeyboardKeyType> keyboard_key_typeS =
+	static inline const unordered_map<string, KeyboardKeyType> keyboard_key_types =
 	{
 		{"KEY_BACKSPACE", KeyboardKeyType::KEY_BACKSPACE},
 		{"KEY_TAB", KeyboardKeyType::KEY_TAB},

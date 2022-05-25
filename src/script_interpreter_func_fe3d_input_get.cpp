@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = _fe3d->input_isMouseScrolled(mouse_wheel_typeS.at(args[0]->getString()));
+			const auto result = _fe3d->input_isMouseScrolled(mouse_wheel_types.at(args[0]->getString()));
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMouseHeld(mouse_button_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isMouseHeld(mouse_button_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMousePressed(mouse_button_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isMousePressed(mouse_button_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMouseToggled(mouse_button_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isMouseToggled(mouse_button_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyboardHeld(keyboard_key_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isKeyboardHeld(keyboard_key_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyboardPressed(keyboard_key_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isKeyboardPressed(keyboard_key_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyboardToggled(keyboard_key_typeS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isKeyboardToggled(keyboard_key_types.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}

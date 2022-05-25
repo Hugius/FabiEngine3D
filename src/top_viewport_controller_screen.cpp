@@ -66,9 +66,9 @@ void TopViewportController::_updateApplicationScreenManagement()
 	if(_currentProjectId.empty())
 	{
 		topScreen->getButton("start")->setHoverable(false);
+		topScreen->getButton("debug")->setHoverable(false);
 		topScreen->getButton("restart")->setHoverable(false);
 		topScreen->getButton("stop")->setHoverable(false);
-		topScreen->getButton("debug")->setHoverable(false);
 	}
 	else
 	{
@@ -80,6 +80,10 @@ void TopViewportController::_updateApplicationScreenManagement()
 
 				_scriptExecutor->start();
 			}
+			else if(topScreen->getButton("debug")->isHovered())
+			{
+				_scriptExecutor->update(true);
+			}
 			else if(topScreen->getButton("restart")->isHovered())
 			{
 				_scriptExecutor->stop();
@@ -90,10 +94,6 @@ void TopViewportController::_updateApplicationScreenManagement()
 			{
 				_scriptExecutor->stop();
 			}
-			else if(topScreen->getButton("debug")->isHovered())
-			{
-				_scriptExecutor->update(true);
-			}
 		}
 
 		const auto isInMainMenu = (leftScreen->getId() == "main");
@@ -101,9 +101,9 @@ void TopViewportController::_updateApplicationScreenManagement()
 		const auto isScriptStarted = _scriptExecutor->isStarted();
 
 		topScreen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptStarted);
+		topScreen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("restart")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("stop")->setHoverable(isInMainMenu && isScriptStarted);
-		topScreen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
 
 		if(isInMainMenu && !isScriptStarted && _script->isEmpty())
 		{

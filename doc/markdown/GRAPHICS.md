@@ -145,6 +145,9 @@
 - **Interval**: the amount of engine updates between camera follow movements
   - Type: `integer`
   - Constraints: at least `0`
+- **PCF Count**: the amount of times the shadows must be smoothed using PCF
+  - Type: `integer`
+  - Constraints: between `0` and `5`
 - **Enabled**: shadows are enabled
   - Type: `boolean`
   - Constraints: none

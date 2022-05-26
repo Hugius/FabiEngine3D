@@ -27,6 +27,7 @@ void TerrainColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_shadowSize", _renderStorage->getShadowSize());
 	_shaderBuffer->uploadUniform("u_shadowLookat", _renderStorage->getShadowLookat());
 	_shaderBuffer->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());
+	_shaderBuffer->uploadUniform("u_shadowPcfCount", _renderStorage->getShadowPcfCount());
 	_shaderBuffer->uploadUniform("u_isShadowsEnabled", _renderStorage->isShadowsEnabled());
 	_shaderBuffer->uploadUniform("u_isShadowCircleEnabled", _renderStorage->isShadowCircleEnabled());
 	_shaderBuffer->uploadUniform("u_shadowMap", 0);

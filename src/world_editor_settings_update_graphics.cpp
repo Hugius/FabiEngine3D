@@ -17,6 +17,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		const auto position = _fe3d->graphics_getShadowPositionOffset();
 		const auto lookat = _fe3d->graphics_getShadowLookatOffset();
 		const auto interval = _fe3d->graphics_getShadowInterval();
+		const auto pcfCount = _fe3d->graphics_getShadowPcfCount();
 		const auto quality = _fe3d->graphics_getShadowQuality();
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -65,6 +66,10 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("interval", "Interval", interval, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pcfCount")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("pcfCount", "PCF Count", pcfCount, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -133,6 +138,13 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
 
 			_fe3d->graphics_setShadowInterval(value);
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "pcfCount") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? Tools::parseInteger(content) : 0);
+
+			_fe3d->graphics_setShadowPcfCount(value);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{

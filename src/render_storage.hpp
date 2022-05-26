@@ -91,6 +91,7 @@ public:
 	void setSkyExposureLightness(float value);
 	void setSkyExposureEnabled(bool value);
 	void setShadowInterval(int value);
+	void setShadowPcfCount(int value);
 	void setShadowsFollowingCameraX(bool value);
 	void setShadowsFollowingCameraY(bool value);
 	void setShadowsFollowingCameraZ(bool value);
@@ -163,6 +164,7 @@ public:
 	const int getTriangleCount() const;
 	const int getGuiDepth() const;
 	const int getShadowInterval() const;
+	const int getShadowPcfCount() const;
 
 	const bool isReflectionsEnabled() const;
 	const bool isRefractionsEnabled() const;
@@ -254,6 +256,7 @@ private:
 	int _triangleCount = 0;
 	int _guiDepth = 0;
 	int _shadowInterval = 0;
+	int _shadowPcfCount = 0;
 
 	bool _isReflectionsEnabled = true;
 	bool _isRefractionsEnabled = true;

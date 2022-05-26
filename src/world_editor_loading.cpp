@@ -590,6 +590,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			bool isFollowingCameraY;
 			bool isFollowingCameraZ;
 			int interval;
+			int pcfCount;
 			int quality;
 
 			iss
@@ -605,6 +606,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> isFollowingCameraY
 				>> isFollowingCameraZ
 				>> interval
+				>> pcfCount
 				>> quality;
 
 			_fe3d->graphics_setShadowsEnabled(true);
@@ -616,6 +618,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setShadowFollowingCameraY(isFollowingCameraY);
 			_fe3d->graphics_setShadowFollowingCameraZ(isFollowingCameraZ);
 			_fe3d->graphics_setShadowInterval(interval);
+			_fe3d->graphics_setShadowPcfCount(pcfCount);
 			_fe3d->graphics_setShadowQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_REFLECTIONS")

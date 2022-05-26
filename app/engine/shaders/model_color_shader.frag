@@ -69,6 +69,7 @@ uniform int u_pointlightCount;
 uniform int u_spotlightCount;
 uniform int u_reflectionType;
 uniform int u_refractionType;
+uniform int u_shadowPcfCount;
 
 uniform bool u_isWireframed;
 uniform bool u_isReflective;
@@ -521,9 +522,9 @@ float calculateShadows()
 				return 1.0f;
 			}
 
-			for (int x = -1; x <= 1; x++)
+			for (int x = -u_shadowPcfCount; x <= u_shadowPcfCount; x++)
 			{
-				for (int y = -1; y <= 1; y++)
+				for (int y = -u_shadowPcfCount; y <= u_shadowPcfCount; y++)
 				{
 					vec2 uvOffset = (vec2(x, y) * texelSize);
 
@@ -534,7 +535,9 @@ float calculateShadows()
 				}    
 			}
             
-			shadow /= 9.0f;
+			int fullPcfCount = ((u_shadowPcfCount * 2) + 1);
+
+			shadow /= float(fullPcfCount * fullPcfCount);
 			
 			if(shadow > 1.0f)
 			{

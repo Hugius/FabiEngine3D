@@ -842,6 +842,7 @@ public:
 	void graphics_setShadowLightness(float value);
 	void graphics_setShadowQuality(int value);
 	void graphics_setShadowInterval(int value);
+	void graphics_setShadowPcfCount(int value);
 	void graphics_setShadowFollowingCameraX(bool value);
 	void graphics_setShadowFollowingCameraY(bool value);
 	void graphics_setShadowFollowingCameraZ(bool value);
@@ -894,6 +895,7 @@ public:
 	const int graphics_getPlanarRefractionQuality() const;
 	const int graphics_getBloomBlurCount() const;
 	const int graphics_getShadowInterval() const;
+	const int graphics_getShadowPcfCount() const;
 	const bool graphics_isAntiAliasingEnabled() const;
 	const bool graphics_isAmbientLightingEnabled() const;
 	const bool graphics_isDirectionalLightingEnabled() const;

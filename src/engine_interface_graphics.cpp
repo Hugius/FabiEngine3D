@@ -201,6 +201,11 @@ void EngineInterface::graphics_setShadowInterval(int value)
 	_core->getRenderStorage()->setShadowInterval(value);
 }
 
+void EngineInterface::graphics_setShadowPcfCount(int value)
+{
+	_core->getRenderStorage()->setShadowPcfCount(value);
+}
+
 void EngineInterface::graphics_setShadowFollowingCameraX(bool value)
 {
 	_core->getRenderStorage()->setShadowsFollowingCameraX(value);
@@ -487,6 +492,11 @@ const int EngineInterface::graphics_getBloomBlurCount() const
 const int EngineInterface::graphics_getShadowInterval() const
 {
 	return _core->getRenderStorage()->getShadowInterval();
+}
+
+const int EngineInterface::graphics_getShadowPcfCount() const
+{
+	return _core->getRenderStorage()->getShadowPcfCount();
 }
 
 const float EngineInterface::graphics_getSkyExposureIntensity() const

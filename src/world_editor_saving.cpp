@@ -452,6 +452,7 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto isFollowingCameraY = _fe3d->graphics_isShadowFollowingCameraY();
 		const auto isFollowingCameraZ = _fe3d->graphics_isShadowFollowingCameraZ();
 		const auto interval = _fe3d->graphics_getShadowInterval();
+		const auto pcfCount = _fe3d->graphics_getShadowPcfCount();
 		const auto quality = _fe3d->graphics_getShadowQuality();
 
 		file
@@ -479,6 +480,8 @@ const bool WorldEditor::saveWorldToFile() const
 			<< isFollowingCameraZ
 			<< " "
 			<< interval
+			<< " "
+			<< pcfCount
 			<< " "
 			<< quality
 			<< endl;

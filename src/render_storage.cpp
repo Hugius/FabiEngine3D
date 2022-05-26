@@ -403,6 +403,11 @@ void RenderStorage::setShadowInterval(int value)
 	_shadowInterval = max(0, value);
 }
 
+void RenderStorage::setShadowPcfCount(int value)
+{
+	_shadowPcfCount = clamp(value, 0, 5);
+}
+
 void RenderStorage::setShadowsFollowingCameraX(bool value)
 {
 	_isShadowsFollowingCameraX = value;
@@ -681,6 +686,11 @@ const int RenderStorage::getAnisotropicFilteringQuality() const
 const int RenderStorage::getShadowInterval() const
 {
 	return _shadowInterval;
+}
+
+const int RenderStorage::getShadowPcfCount() const
+{
+	return _shadowPcfCount;
 }
 
 const int RenderStorage::getShadowQuality() const

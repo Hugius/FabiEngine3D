@@ -154,8 +154,8 @@ void Sound3dPlayer::update()
 
 		const auto originalSound3d = _sound3dManager->getSound3d(sound3dId);
 		const auto startedSound3d = _startedSound3ds.at(sound3dId)[index];
-		const auto originalSampleCount = static_cast<int>(originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-		const auto startedSampleCount = static_cast<int>(startedSound3d->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto originalSampleCount = static_cast<int>(originalSound3d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample (left OR right) = 2 bytes
+		const auto startedSampleCount = static_cast<int>(startedSound3d->getHeader()->dwBufferLength / 2); // 1 sample (left OR right) = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound3d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound3d->getHeader()->lpData); // short = 2 bytes
 		const auto volume = startedSound3d->getVolume();

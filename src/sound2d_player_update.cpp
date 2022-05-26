@@ -134,10 +134,10 @@ void Sound2dPlayer::update()
 			continue;
 		}
 
-		const auto startedSound2d = _startedSound2ds.at(sound2dId)[index];
 		const auto originalSound2d = _sound2dManager->getSound2d(sound2dId);
-		const auto originalSampleCount = static_cast<int>(originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-		const auto startedSampleCount = (originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto startedSound2d = _startedSound2ds.at(sound2dId)[index];
+		const auto originalSampleCount = static_cast<int>(originalSound2d->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample (left OR right) = 2 bytes
+		const auto startedSampleCount = static_cast<int>(startedSound2d->getHeader()->dwBufferLength / 2); // 1 sample (left OR right) = 2 bytes
 		const auto originalSamples = reinterpret_cast<short *>(originalSound2d->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
 		const auto startedSamples = reinterpret_cast<short *>(startedSound2d->getHeader()->lpData); // short = 2 bytes
 		const auto volume = startedSound2d->getVolume();

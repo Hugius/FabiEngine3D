@@ -24,13 +24,10 @@ void Sound3dPlayer::startSound3d(const string & sound3dId, int playCount, float 
 	const auto waveBuffer = _sound3dManager->getSound3d(sound3dId)->getWaveBuffer();
 	const auto originalByteCount = static_cast<int>(waveBuffer->getHeader()->dwBufferLength);
 
-	auto startIndex = (static_cast<int>(static_cast<float>(originalByteCount) * startTime));
+	auto startIndex = static_cast<int>(static_cast<float>(originalByteCount) * startTime);
 
-	// Make sure index is not even because of LRLRLR order
-	if((startIndex % 2) == 0)
-	{
-		startIndex++;
-	}
+	// Make sure index is divisible by 4 because of LLRR byte order
+	startIndex -= (startIndex % 4);
 
 	HWAVEOUT handle = nullptr;
 

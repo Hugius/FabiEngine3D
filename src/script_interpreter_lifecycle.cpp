@@ -199,9 +199,7 @@ void ScriptInterpreter::load()
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->camera_reset();
-
 	_fe3d->clock_create("scriptDebug");
-
 	_fe3d->misc_setVsyncEnabled(false);
 
 	_checkEngineWarnings(lastLoggerMessageCount);
@@ -386,6 +384,7 @@ void ScriptInterpreter::unload()
 	_fe3d->collision_setCameraTerrainResponseEnabled(false);
 	_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
 	_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
+	_fe3d->misc_setVsyncEnabled(true);
 
 	if(_fe3d->server_isRunning())
 	{
@@ -396,8 +395,6 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d->client_stop();
 	}
-
-	_fe3d->misc_setVsyncEnabled(true);
 
 	_customWorldBuilder->resetBuild();
 

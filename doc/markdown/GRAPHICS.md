@@ -9,6 +9,7 @@
 - Ambient lighting is a form of global illumination.
 - The lighting is not cast from a light source.
 - Real life light scattering is mimicked.
+- Applicable to terrain, water and models.
 
 #### 1.1.2 Properties
 
@@ -29,6 +30,7 @@
 - Directional lighting is light that comes from a directional light source.
 - The light is only cast from a certain direction.
 - Normal vectors are used to render this type of lighting.
+- Applicable to terrain, water and models.
 
 #### 1.2.2 Properties
 
@@ -49,30 +51,35 @@
 
 - Specular lighting is light that is mirroring light from another source.
 - Normal vectors are used to render this type of lighting.
+- Applicable to terrain, water and models.
 
 ### 1.4 Point Lighting
 
 - Point lighting is light that comes from a positional light source.
 - The light is cast in every direction by the light source.
 - Normal vectors are used to render this type of lighting.
+- Applicable to terrain, water and models.
 
 ### 1.5 Spot Lighting
 
 - Spot lighting is light that comes from a rotational light source.
 - The light creates a spotlight effect.
 - Normal vectors are used to render this type of lighting.
+- Applicable to terrain, water and models.
 
 ### 1.6 Cube Reflections
 
 - Cube reflections are reflections based on pre-captured cube maps.
 - The reflections are static, but very efficient.
 - Normal vectors are used to render this type of reflection.
+- Applicable only to models.
 
 ### 1.7 Cube Refractions
 
 - Cube refractions are refractions based on pre-captured cube maps.
 - The refractions are static, but very efficient.
 - Normal vectors are used to render this type of refraction.
+- Applicable only to models.
 
 ### 1.8 Planar Reflections
 
@@ -81,6 +88,7 @@
 - Planar reflections are real-time reflections rendered on flat surfaces.
 - The reflections are performance-heavy, but very realistic.
 - Projective texturing is used to render this type of reflection.
+- Applicable to water and models.
 
 #### 1.8.2 Properties
 
@@ -98,6 +106,7 @@
 - Planar refractions are real-time refractions rendered on flat surfaces.
 - The refractions are performance-heavy, but very realistic.
 - Projective texturing is used to render this type of refraction.
+- Applicable to water and models.
 
 #### 1.9.2 Properties
 
@@ -114,6 +123,7 @@
 
 - Shadows are cast from a directional shadow source.
 - Shadow mapping is used to render this type of lighting.
+- Applicable to terrain, water and models.
 
 #### 1.10.2 Properties
 
@@ -265,6 +275,7 @@
 #### 3.1.1 General
 
 - Fog is a graphical effect that mimics real life fog.
+- Applicable to terrain, water, models, quad3Ds, text3Ds and AABBs.
 
 #### 3.1.2 Properties
 
@@ -289,6 +300,7 @@
 #### 3.2.1 General
 
 - Sky exposure is an effect that makes the sky very bright if not looking at it.
+- Applicable only to sky.
 
 #### 3.2.2 Properties
 
@@ -328,12 +340,15 @@
 - Normal mapping is the process of increasing the lighting details by distorting normal vectors.
 - A normal map is used to calculate distorted normal vectors.
 - Flat surfaces look detailed with normal mapping.
+- Applicable to terrain, water and models.
 
 ### 3.6 Transparent Water Edges
 
 - The transparent water edges effect makes fragments transparent that are undeep.
+- Applicable only to water.
 
 ### 3.7 Water Fresnel Effect
 
 - The water fresnel effect mixes the reflection and refraction colors automatically based on the camera position.
 - The water fresnel effect is always enabled.
+- Applicable only to water.

@@ -147,7 +147,7 @@
 - **Face Culled**: the mesh uses the face culling optimization
   - Type: `boolean`
   - Constraints: none
-- **Bright**: the mesh is captured for bloom and not affected by shadows or lighting
+- **Bright**: the mesh is captured for bloom and not affected by lighting
   - Type: `boolean`
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe

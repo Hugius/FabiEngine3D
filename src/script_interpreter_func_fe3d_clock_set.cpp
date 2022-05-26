@@ -16,6 +16,11 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(!_validateFe3dId(args[0]->getString()))
+			{
+				return true;
+			}
+
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
@@ -25,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is already existing");
+				_throwRuntimeError("clock already exists");
 
 				return true;
 			}
@@ -50,12 +55,27 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
 
 			_fe3d->clock_delete(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_delete_all")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & clockId : _fe3d->clock_getIds())
+			{
+				if(clockId[0] != '@')
+				{
+					_fe3d->clock_delete(args[0]->getString());
+				}
+			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -75,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
@@ -107,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
@@ -146,7 +166,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
@@ -185,7 +205,7 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}

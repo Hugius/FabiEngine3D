@@ -72,13 +72,13 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			_debuggingTimes.insert({scriptId, 0.0f});
 		}
 
-		_fe3d->clock_start("scriptDebug");
+		_fe3d->clock_start("@@scriptDebug");
 	}
 
+	vector<ScriptConditionStatement> conditionStatements = {};
 	vector<int> loopScopeDepths = {};
 	vector<int> loopLineIndices = {};
 	vector<int> loopIterationCounts = {};
-	vector<ScriptConditionStatement> conditionStatements = {};
 	int scopeDepth = 0;
 
 	_executionDepth++;
@@ -259,16 +259,16 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				if(_isDebugging)
 				{
-					_fe3d->clock_stop("scriptDebug");
+					_fe3d->clock_stop("@@scriptDebug");
 
-					_debuggingTimes[scriptId] += _fe3d->clock_getDeltaTime("scriptDebug");
+					_debuggingTimes[scriptId] += _fe3d->clock_getDeltaTime("@@scriptDebug");
 				}
 
 				_executeScript(scriptToExecuteId, scriptType);
 
 				if(_isDebugging)
 				{
-					_fe3d->clock_start("scriptDebug");
+					_fe3d->clock_start("@@scriptDebug");
 				}
 			}
 			else
@@ -514,8 +514,8 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 	if(_isDebugging)
 	{
-		_fe3d->clock_stop("scriptDebug");
+		_fe3d->clock_stop("@@scriptDebug");
 
-		_debuggingTimes[scriptId] += _fe3d->clock_getDeltaTime("scriptDebug");
+		_debuggingTimes[scriptId] += _fe3d->clock_getDeltaTime("@@scriptDebug");
 	}
 }

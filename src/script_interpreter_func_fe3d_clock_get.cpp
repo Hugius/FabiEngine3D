@@ -22,6 +22,42 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:clock_find_ids")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_validateFe3dId(args[0]->getString()))
+			{
+				return true;
+			}
+
+			for(const auto & result : _fe3d->clock_getIds())
+			{
+				if(result[0] != '@')
+				{
+					if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
+					{
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:clock_get_ids")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & result : _fe3d->clock_getIds())
+			{
+				if(result[0] != '@')
+				{
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:clock_is_started")
 	{
 		const auto types = {SVT::STRING};
@@ -37,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
@@ -62,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}
@@ -94,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("clock is not existing");
+				_throwRuntimeError("clock does not exist");
 
 				return true;
 			}

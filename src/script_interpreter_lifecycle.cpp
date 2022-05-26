@@ -198,8 +198,7 @@ void ScriptInterpreter::load()
 	_sound3dEditor->loadSound3dsFromFile();
 	_sound2dEditor->loadSound2dsFromFile();
 
-	_fe3d->camera_reset();
-	_fe3d->clock_create("scriptDebug");
+	_fe3d->clock_create("@@scriptDebug");
 	_fe3d->misc_setVsyncEnabled(false);
 
 	_checkEngineWarnings(lastLoggerMessageCount);

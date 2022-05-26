@@ -2,7 +2,6 @@
 #include "render_storage.hpp"
 
 using std::make_shared;
-using std::min;
 
 constexpr float bufferData[] =
 {

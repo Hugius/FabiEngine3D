@@ -27,14 +27,15 @@ out vec2 f_uv;
 void main()
 {
 	vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
-	vec4 shadowSpacePosition = (u_shadowProjection * u_shadowView * worldSpacePosition);
+	vec4 viewSpacePosition = (u_shadowView * worldSpacePosition);
+	vec4 clipSpacePosition = (u_shadowProjection * viewSpacePosition);
 
 	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
 	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
 	f_uv.x = ((u_uvOffset.x + (f_uv.x * u_uvMultiplier.x)) * float(u_textureRepeat));
 	f_uv.y = ((u_uvOffset.y + (f_uv.y * u_uvMultiplier.y)) * float(u_textureRepeat));
 
-	gl_Position = shadowSpacePosition;
+	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
 	gl_ClipDistance[2] = dot(worldSpacePosition, vec4( 0.0f,  1.0f,  0.0f, -u_minY));

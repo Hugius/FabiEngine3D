@@ -159,6 +159,9 @@
     <ClCompile Include="..\..\..\src\aabb_depth_renderer.cpp">
       <Filter>Renderer\Depth</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\terrain_shadow_renderer.cpp">
+      <Filter>Renderer\Shadow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_depth_renderer.hpp">
       <Filter>Renderer\Depth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\terrain_shadow_renderer.hpp">
+      <Filter>Renderer\Shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

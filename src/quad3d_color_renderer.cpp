@@ -1,9 +1,6 @@
 #include "quad3d_color_renderer.hpp"
 #include "configuration.hpp"
 
-using std::min;
-using std::max;
-
 void Quad3dColorRenderer::bind()
 {
 	_shaderBuffer->bind();

@@ -1,8 +1,5 @@
 #include "aabb_depth_renderer.hpp"
 
-using std::min;
-using std::max;
-
 void AabbDepthRenderer::bind()
 {
 	_shaderBuffer->bind();

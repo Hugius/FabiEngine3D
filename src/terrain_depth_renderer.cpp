@@ -1,9 +1,6 @@
 #include "terrain_depth_renderer.hpp"
 #include "render_storage.hpp"
 
-using std::min;
-using std::max;
-
 void TerrainDepthRenderer::bind()
 {
 	_shaderBuffer->bind();

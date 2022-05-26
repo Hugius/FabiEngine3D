@@ -61,6 +61,7 @@
     <ClCompile Include="..\..\..\src\aabb_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\anti_aliasing_renderer.cpp" />
     <ClCompile Include="..\..\..\src\base_renderer.cpp" />
+    <ClCompile Include="..\..\..\src\terrain_shadow_renderer.cpp" />
     <ClCompile Include="..\..\..\src\water_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_color_renderer.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="..\..\..\src\aabb_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\anti_aliasing_renderer.hpp" />
     <ClInclude Include="..\..\..\src\base_renderer.hpp" />
+    <ClInclude Include="..\..\..\src\terrain_shadow_renderer.hpp" />
     <ClInclude Include="..\..\..\src\water_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_color_renderer.hpp" />

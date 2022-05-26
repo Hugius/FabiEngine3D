@@ -5,7 +5,6 @@
 #include <shlobj_core.h>
 #include <iostream>
 
-using std::max;
 using std::to_string;
 using std::filesystem::copy;
 using std::filesystem::copy_file;

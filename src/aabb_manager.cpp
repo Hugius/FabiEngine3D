@@ -3,7 +3,6 @@
 #include "tools.hpp"
 
 using std::make_shared;
-using std::max;
 
 constexpr float centeredBufferData[] =
 {

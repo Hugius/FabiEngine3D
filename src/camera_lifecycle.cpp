@@ -5,7 +5,6 @@
 
 #include <algorithm>
 
-using std::max;
 using std::clamp;
 
 Camera::Camera()

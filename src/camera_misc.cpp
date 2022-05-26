@@ -1,10 +1,9 @@
 #include "camera.hpp"
 #include "configuration.hpp"
-#include <iostream>
+
 #include <algorithm>
 
 using std::clamp;
-using std::max;
 
 void Camera::followRightXZ(float speed)
 {

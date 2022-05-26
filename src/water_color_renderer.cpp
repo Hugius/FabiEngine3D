@@ -2,8 +2,6 @@
 #include "configuration.hpp"
 
 using std::to_string;
-using std::min;
-using std::max;
 
 void WaterColorRenderer::bind()
 {

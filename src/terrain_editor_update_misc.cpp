@@ -2,8 +2,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-using std::max;
-
 void TerrainEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())

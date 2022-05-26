@@ -1,7 +1,5 @@
 #include "raycast_intersector.hpp"
 
-using std::min;
-using std::max;
 using std::make_shared;
 
 void RaycastIntersector::update()

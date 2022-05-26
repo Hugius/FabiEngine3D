@@ -3,7 +3,6 @@
 #include <map>
 
 using std::make_shared;
-using std::max;
 using std::map;
 
 const shared_ptr<Model> ModelManager::getModel(const string & modelId) const

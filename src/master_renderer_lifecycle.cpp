@@ -7,8 +7,6 @@
 
 using std::make_unique;
 using std::make_shared;
-using std::min;
-using std::max;
 using std::clamp;
 
 MasterRenderer::MasterRenderer()

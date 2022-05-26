@@ -1,8 +1,5 @@
 #include "model_depth_renderer.hpp"
 
-using std::min;
-using std::max;
-
 void ModelDepthRenderer::bind()
 {
 	_shaderBuffer->bind();

@@ -1,6 +1,5 @@
 #include "animation3d.hpp"
 
-using std::max;
 using std::make_unique;
 
 Animation3d::Animation3d(const string & id)

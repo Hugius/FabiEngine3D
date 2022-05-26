@@ -1,8 +1,5 @@
 #include "aabb_color_renderer.hpp"
 
-using std::min;
-using std::max;
-
 void AabbColorRenderer::bind()
 {
 	_shaderBuffer->bind();

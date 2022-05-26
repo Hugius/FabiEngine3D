@@ -1,8 +1,5 @@
 #include "quad3d_shadow_renderer.hpp"
 
-using std::min;
-using std::max;
-
 void Quad3dShadowRenderer::bind()
 {
 	_shaderBuffer->bind();

@@ -1,9 +1,6 @@
 #include "model_shadow_renderer.hpp"
 #include "render_storage.hpp"
 
-using std::min;
-using std::max;
-
 void ModelShadowRenderer::bind()
 {
 	_shaderBuffer->bind();

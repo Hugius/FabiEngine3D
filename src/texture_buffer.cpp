@@ -1,7 +1,5 @@
 #include "texture_buffer.hpp"
 
-using std::min;
-
 TextureBuffer::TextureBuffer(unsigned int tboId)
 	:
 	_tboId(tboId)

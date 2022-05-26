@@ -1,8 +1,5 @@
 #include "water_depth_renderer.hpp"
 
-using std::min;
-using std::max;
-
 void WaterDepthRenderer::bind()
 {
 	_shaderBuffer->bind();

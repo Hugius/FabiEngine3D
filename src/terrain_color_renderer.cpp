@@ -3,8 +3,6 @@
 #include "tools.hpp"
 
 using std::to_string;
-using std::min;
-using std::max;
 
 void TerrainColorRenderer::bind()
 {

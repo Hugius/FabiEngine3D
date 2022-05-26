@@ -21,6 +21,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & skyId : _addedSkyIds)
 	{
+		if(!_fe3d->sky_isExisting(skyId))
+		{
+			continue;
+		}
+
 		const auto templateSkyId = _duplicator->getTemplateSkyId(skyId);
 		const auto rotation = _fe3d->sky_getRotation(skyId);
 		const auto lightness = _fe3d->sky_getLightness(skyId);
@@ -85,6 +90,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & terrainId : _addedTerrainIds)
 	{
+		if(!_fe3d->terrain_isExisting(terrainId))
+		{
+			continue;
+		}
+
 		const auto templateTerrainId = _duplicator->getTemplateTerrainId(terrainId);
 		const auto maxHeight = _fe3d->terrain_getMaxHeight(terrainId);
 		const auto textureRepeat = _fe3d->terrain_getTextureRepeat(terrainId);
@@ -215,6 +225,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & waterId : _addedWaterIds)
 	{
+		if(!_fe3d->water_isExisting(waterId))
+		{
+			continue;
+		}
+
 		const auto templateWaterId = _duplicator->getTemplateWaterId(waterId);
 		const auto color = _fe3d->water_getColor(waterId);
 		const auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
@@ -325,6 +340,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & modelId : _addedModelIds)
 	{
+		if(!_fe3d->model_isExisting(modelId))
+		{
+			continue;
+		}
+
 		const auto templateModelId = _duplicator->getTemplateModelId(modelId);
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
@@ -639,6 +659,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & quad3dId : _addedQuad3dIds)
 	{
+		if(!_fe3d->quad3d_isExisting(quad3dId))
+		{
+			continue;
+		}
+
 		const auto templateQuad3dId = _duplicator->getTemplateQuad3dId(quad3dId);
 		const auto aabbIds = _fe3d->quad3d_getChildAabbIds(quad3dId);
 		const auto position = _fe3d->quad3d_getPosition(quad3dId);
@@ -831,6 +856,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & text3dId : _addedText3dIds)
 	{
+		if(!_fe3d->text3d_isExisting(text3dId))
+		{
+			continue;
+		}
+
 		const auto templateText3dId = _duplicator->getTemplateText3dId(text3dId);
 		const auto aabbIds = _fe3d->text3d_getChildAabbIds(text3dId);
 		const auto position = _fe3d->text3d_getPosition(text3dId);
@@ -959,6 +989,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & aabbId : _addedAabbIds)
 	{
+		if(!_fe3d->aabb_isExisting(aabbId))
+		{
+			continue;
+		}
+
 		const auto templateAabbId = _duplicator->getTemplateAabbId(aabbId);
 		const auto position = _fe3d->aabb_getBasePosition(aabbId);
 		const auto size = _fe3d->aabb_getBaseSize(aabbId);
@@ -1015,6 +1050,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & pointlightId : _addedPointlightIds)
 	{
+		if(!_fe3d->pointlight_isExisting(pointlightId))
+		{
+			continue;
+		}
+
 		const auto templatePointlightId = _duplicator->getTemplatePointlightId(pointlightId);
 		const auto position = _fe3d->pointlight_getPosition(pointlightId);
 		const auto radius = _fe3d->pointlight_getRadius(pointlightId);
@@ -1057,6 +1097,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & spotlightId : _addedSpotlightIds)
 	{
+		if(!_fe3d->spotlight_isExisting(spotlightId))
+		{
+			continue;
+		}
+
 		const auto templateSpotlightId = _duplicator->getTemplateSpotlightId(spotlightId);
 		const auto position = _fe3d->spotlight_getPosition(spotlightId);
 		const auto yaw = _fe3d->spotlight_getYaw(spotlightId);
@@ -1101,6 +1146,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & captorId : _addedCaptorIds)
 	{
+		if(!_fe3d->captor_isExisting(captorId))
+		{
+			continue;
+		}
+
 		const auto templateCaptorId = _duplicator->getTemplateCaptorId(captorId);
 		const auto position = _fe3d->captor_getPosition(captorId);
 
@@ -1126,6 +1176,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 	for(const auto & sound3dId : _addedSound3dIds)
 	{
+		if(!_fe3d->sound3d_isExisting(sound3dId))
+		{
+			continue;
+		}
+
 		const auto templateSound3dId = _duplicator->getTemplateSound3dId(sound3dId);
 		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);

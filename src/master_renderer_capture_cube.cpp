@@ -50,8 +50,12 @@ void MasterRenderer::captureCubeReflections()
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
-	const auto originalShadowInterval = _renderStorage->getShadowInterval();
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
+	const auto originalShadowInterval = _renderStorage->getShadowInterval();
+	const auto originalShadowPosition = _renderStorage->getShadowPosition();
+	const auto originalShadowLookat = _renderStorage->getShadowLookat();
+	const auto originalShadowView = _renderStorage->getShadowView();
+	const auto originalShadowProjection = _renderStorage->getShadowProjection();
 
 	_camera->invertUp();
 	_camera->setAspectRatio(1.0f);
@@ -207,12 +211,14 @@ void MasterRenderer::captureCubeReflections()
 	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
-	_updateShadows();
-
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 	_renderStorage->setShadowInterval(originalShadowInterval);
+	_renderStorage->setShadowPosition(originalShadowPosition);
+	_renderStorage->setShadowLookat(originalShadowLookat);
+	_renderStorage->setShadowView(originalShadowView);
+	_renderStorage->setShadowProjection(originalShadowProjection);
 
 	captureShadows();
 	captureWaterEdges();
@@ -267,8 +273,12 @@ void MasterRenderer::captureCubeRefractions()
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
-	const auto originalShadowInterval = _renderStorage->getShadowInterval();
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
+	const auto originalShadowInterval = _renderStorage->getShadowInterval();
+	const auto originalShadowPosition = _renderStorage->getShadowPosition();
+	const auto originalShadowLookat = _renderStorage->getShadowLookat();
+	const auto originalShadowView = _renderStorage->getShadowView();
+	const auto originalShadowProjection = _renderStorage->getShadowProjection();
 
 	_camera->invertUp();
 	_camera->setAspectRatio(1.0f);
@@ -424,12 +434,14 @@ void MasterRenderer::captureCubeRefractions()
 	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
-	_updateShadows();
-
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 	_renderStorage->setShadowInterval(originalShadowInterval);
+	_renderStorage->setShadowPosition(originalShadowPosition);
+	_renderStorage->setShadowLookat(originalShadowLookat);
+	_renderStorage->setShadowView(originalShadowView);
+	_renderStorage->setShadowProjection(originalShadowProjection);
 
 	captureShadows();
 	captureWaterEdges();

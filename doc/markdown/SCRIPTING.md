@@ -3,7 +3,7 @@
 ## 1. General
 
 - FabScript is a custom interpreted scripting language created for FabiEngine3D.
-- Experience with coding is a prerequisite (such as: Python, Java, C++, C#, Javascript, etc.).
+- Experience with coding is a prerequisite (such as: Python, Java, C++, C#, Javascript, et cetera).
 - Scripts are run from the first line to the last line, from left to right.
 
 ## 2. Comments

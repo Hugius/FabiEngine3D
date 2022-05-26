@@ -6,8 +6,9 @@
 - Every thing that you place is based on the version in their own editor.
 - Only the changes in the placed things made in the world editor are saved.
 - Placed things can be selected if it has 1 or more bound AABBs.
-- Each world has its own ID counter, which starts from 0.
+- Each world has its own ID counters for every placable thing (which starts from 0).
 - Every thing that you place will increase the ID counter by 1, so that all placed things are unique.
+- The structure of the IDs look like this: `"name_123"`.
 
 ## 2. Controls
 

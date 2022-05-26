@@ -476,5 +476,12 @@ const bool ScriptInterpreter::_validateFe3dId(const string & id)
 		return false;
 	}
 
+	if(id.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789") != string::npos)
+	{
+		_throwRuntimeError("ID cannot contain any specials");
+
+		return false;
+	}
+
 	return true;
 }

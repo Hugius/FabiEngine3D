@@ -144,7 +144,14 @@ void WorldEditor::clearLoadedWorld()
 	_loadedSound3dIds.clear();
 
 	_loadedWorldId = "";
-	_idCounter = 0;
+	_modelIdCounter = 0;
+	_quad3dIdCounter = 0;
+	_text3dIdCounter = 0;
+	_aabbIdCounter = 0;
+	_pointlightIdCounter = 0;
+	_spotlightIdCounter = 0;
+	_captorIdCounter = 0;
+	_sound3dIdCounter = 0;
 }
 
 const string & WorldEditor::getLoadedWorldId() const

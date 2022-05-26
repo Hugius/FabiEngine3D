@@ -27,8 +27,57 @@ const bool WorldEditor::saveWorldToFile() const
 
 	{
 		file
-			<< "ID_COUNTER "
-			<< _idCounter
+			<< "MODEL_ID_COUNTER "
+			<< _modelIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "QUAD3D_ID_COUNTER "
+			<< _quad3dIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "TEXT3D_ID_COUNTER "
+			<< _text3dIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "AABB_ID_COUNTER "
+			<< _aabbIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "POINTLIGHT_ID_COUNTER "
+			<< _pointlightIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "SPOTLIGHT_ID_COUNTER "
+			<< _spotlightIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "CAPTOR_ID_COUNTER "
+			<< _captorIdCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "SOUND3D_ID_COUNTER "
+			<< _sound3dIdCounter
 			<< endl;
 	}
 

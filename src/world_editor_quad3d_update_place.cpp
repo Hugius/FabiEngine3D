@@ -27,9 +27,9 @@ void WorldEditor::_updateQuad3dPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
 
-				_idCounter++;
+				_quad3dIdCounter++;
 
 				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
 
@@ -88,9 +88,9 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
 
-				_idCounter++;
+				_quad3dIdCounter++;
 
 				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
 

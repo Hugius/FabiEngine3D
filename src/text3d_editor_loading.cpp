@@ -193,6 +193,10 @@ const bool Text3dEditor::loadText3dsFromFile()
 			_fe3d->aabb_setParentId(aabbId, text3dId);
 			_fe3d->aabb_setParentType(aabbId, AabbParentType::TEXT3D);
 		}
+		else
+		{
+			abort();
+		}
 	}
 
 	file.close();

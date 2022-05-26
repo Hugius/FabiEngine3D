@@ -228,6 +228,10 @@ const bool Quad3dEditor::loadQuad3dsFromFile()
 			_fe3d->aabb_setParentId(aabbId, quad3dId);
 			_fe3d->aabb_setParentType(aabbId, AabbParentType::QUAD3D);
 		}
+		else
+		{
+			abort();
+		}
 	}
 
 	file.close();

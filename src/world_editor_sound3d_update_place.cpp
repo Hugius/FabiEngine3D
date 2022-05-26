@@ -29,10 +29,10 @@ void WorldEditor::_updateSound3dPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
 				const auto newModelId = ("@@speaker_" + newId);
 
-				_idCounter++;
+				_sound3dIdCounter++;
 
 				_duplicator->copyTemplateSound3d(newId, _currentTemplateSound3dId);
 
@@ -139,10 +139,10 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
 				const auto newModelId = ("@@speaker_" + newId);
 
-				_idCounter++;
+				_sound3dIdCounter++;
 
 				_duplicator->copyTemplateSound3d(newId, _currentTemplateSound3dId);
 

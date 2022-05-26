@@ -297,7 +297,14 @@ private:
 
 	float _editorSpeed = 1.0f;
 
-	int _idCounter = 0;
+	int _modelIdCounter = 0;
+	int _quad3dIdCounter = 0;
+	int _text3dIdCounter = 0;
+	int _aabbIdCounter = 0;
+	int _pointlightIdCounter = 0;
+	int _spotlightIdCounter = 0;
+	int _captorIdCounter = 0;
+	int _sound3dIdCounter = 0;
 
 	bool _dontResetSelectedModel = false;
 	bool _dontResetSelectedQuad3d = false;

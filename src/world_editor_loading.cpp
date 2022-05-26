@@ -38,11 +38,60 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 		iss >> lineType;
 
-		if(lineType == "ID_COUNTER")
+		if(lineType == "MODEL_ID_COUNTER")
 		{
 			if(isLoaded())
 			{
-				iss >> _idCounter;
+				iss >> _modelIdCounter;
+			}
+		}
+		else if(lineType == "QUAD3D_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _quad3dIdCounter;
+			}
+		}
+		else if(lineType == "TEXT3D_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _text3dIdCounter;
+			}
+		}
+		else if(lineType == "AABB_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _aabbIdCounter;
+			}
+		}
+		else if(lineType == "POINTLIGHT_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _pointlightIdCounter;
+			}
+		}
+		else if(lineType == "SPOTLIGHT_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _spotlightIdCounter;
+			}
+		}
+		else if(lineType == "CAPTOR_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _captorIdCounter;
+			}
+		}
+		else if(lineType == "SOUND3D_ID_COUNTER")
+		{
+			if(isLoaded())
+			{
+				iss >> _sound3dIdCounter;
 			}
 		}
 		else if(lineType == "EDITOR_SPEED")

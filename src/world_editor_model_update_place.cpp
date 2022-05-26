@@ -27,9 +27,9 @@ void WorldEditor::_updateModelPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
 
-				_idCounter++;
+				_modelIdCounter++;
 
 				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
 
@@ -88,9 +88,9 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
+				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
 
-				_idCounter++;
+				_modelIdCounter++;
 
 				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
 

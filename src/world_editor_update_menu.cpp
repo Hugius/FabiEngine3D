@@ -141,7 +141,14 @@ void WorldEditor::_updateChoiceMenu()
 			_activeCaptorId = "";
 			_activeSound3dId = "";
 			_editorSpeed = 1.0f;
-			_idCounter = 0;
+			_modelIdCounter = 0;
+			_quad3dIdCounter = 0;
+			_text3dIdCounter = 0;
+			_aabbIdCounter = 0;
+			_pointlightIdCounter = 0;
+			_spotlightIdCounter = 0;
+			_captorIdCounter = 0;
+			_sound3dIdCounter = 0;
 			_dontResetSelectedModel = false;
 			_dontResetSelectedQuad3d = false;
 			_dontResetSelectedText3d = false;

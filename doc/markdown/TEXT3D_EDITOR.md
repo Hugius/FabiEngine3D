@@ -7,7 +7,6 @@
 - You can create/delete an AABB for the text3Ds.
 - Every created text3D can be placed using the world editor or scripting.
 - Every created AABB is bound its parent text3D.
-- The ID of a new text3D cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

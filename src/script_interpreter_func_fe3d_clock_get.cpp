@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dClockGetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:clock_get_delta")
+	else if(functionName == "fe3d:clock_get_delta_time")
 	{
 		const auto types = {SVT::STRING};
 

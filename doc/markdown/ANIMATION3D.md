@@ -2,12 +2,13 @@
 
 ## 1. General
 
-- Animation3D is used for creating 3D mesh animations.
+- The animation3D is used for creating 3D mesh animations.
 - These animations can be applied to models.
 - Each animation consists of 1 or more frames.
 - The first keyframe is always the default model transformation.
 - The last keyframe should be the same as the first keyframe.
 - If the model is multiparted, each part can be animated independently.
+- The ID of an animation3D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 

@@ -5,6 +5,7 @@
 - The text2D is a composition of quad2Ds.
 - Every quad2D represents a text character.
 - A font map is used to form a line of text.
+- The ID of a text2D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 

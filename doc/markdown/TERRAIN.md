@@ -4,6 +4,7 @@
 
 - The terrain is a 3D object in 3D space.
 - The mesh of a terrain is generated using a height map.
+- The ID of a terrain cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 

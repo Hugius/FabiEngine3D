@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- Sound3D is stereo audio in 3D space.
+- The sound3D is a stereo audio in 3D space.
 - A single sound3D can be simultaneously started multiple times.
 - Each of these sound3D instances can be started and stopped individually.
 - Every sound3D instance plays on a unique sound channel.
@@ -13,6 +13,7 @@
 - If no audio memory is available, sounds cannot be started.
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.
 - Sounds with a large audio file (5 minutes long for example) can cause a lag spike when started.
+- The ID of a sound3D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 

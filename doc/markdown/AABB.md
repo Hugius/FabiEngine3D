@@ -11,6 +11,7 @@
 - Bound AABBs follow the transformation of their parent.
 - Bound AABBs are invisible and unresponsive if their parent is invisible.
 - Bound AABBs cannot directly be accessed or deleted.
+- The ID of an AABB cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Properties
 

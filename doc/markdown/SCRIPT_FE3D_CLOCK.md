@@ -16,5 +16,5 @@
 - `fe3d:clock_is_existing` (`STR` clock_id) -----> `BOL`
 - `fe3d:clock_is_started` (`STR` clock_id) -----> `BOL`
 - `fe3d:clock_is_paused` (`STR` clock_id) -----> `BOL`
-- `fe3d:clock_get_delta` (`STR` clock_id) -----> `DEC`
+- `fe3d:clock_get_delta_time` (`STR` clock_id) -----> `DEC`
 - `fe3d:clock_get_ids` () -----> `LIST`

@@ -5,6 +5,7 @@
 - The pointlight is a 3D light in 3D space.
 - Emitted light is cast in all directions from a position.
 - Only a maximum of 64 pointlights can exist.
+- The ID of a pointlight cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Properties
 

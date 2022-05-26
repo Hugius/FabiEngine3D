@@ -7,8 +7,6 @@
 - You can create/edit/delete AABBs for the models.
 - Every created model can be placed using the world editor or scripting.
 - Every created AABB is bound its parent model.
-- The ID of a new model cannot be empty or contain spaces/capitals.
-- The ID of a new AABB cannot be empty or contain spaces/capitals.
 - The accuracy of cube reflections/refractions might be off.
 
 ## 2. Controls

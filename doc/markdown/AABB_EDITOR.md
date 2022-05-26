@@ -5,7 +5,6 @@
 - All AABBs will be saved in `~\projects\<your_project>\data\aabb.fe3d`.
 - You can create/edit/delete AABBs.
 - Every created AABB can be placed using the world editor or scripting.
-- The ID of a new AABB cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

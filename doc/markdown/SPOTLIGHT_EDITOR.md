@@ -5,7 +5,6 @@
 - All spotlights will be saved in `~\projects\<your_project>\data\spotlight.fe3d`.
 - You can create/edit/delete spotlights.
 - Every created spotlight can be placed using the world editor or scripting.
-- The ID of a new spotlight cannot be empty or contain spaces/capitals.
 
 ## 2. Controls
 

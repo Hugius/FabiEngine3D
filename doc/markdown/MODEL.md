@@ -8,6 +8,7 @@
 - If the mesh is multiparted, each part has its own properties.
 - Models can be rendered as another model to achieve LOD.
 - The instead rendered LOD model uses the transformation and visibility of the main model.
+- The ID of a model cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 

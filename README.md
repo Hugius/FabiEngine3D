@@ -40,6 +40,7 @@ White Noise is a multiplayer first person shooter game based in a science-fictio
 - [Captor](doc/markdown/CAPTOR.md)
 - [Sound3D](doc/markdown/SOUND3D.md)
 - [Sound2D](doc/markdown/SOUND2D.md)
+- [Clock](doc/markdown/CLOCK.md)
 - [Graphics](doc/markdown/GRAPHICS.md)
 - [Camera](doc/markdown/CAMERA.md)
 - [Physics](doc/markdown/PHYSICS.md)

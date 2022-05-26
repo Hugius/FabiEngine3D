@@ -2,9 +2,10 @@
 
 ## 1. General
 
-- Animation2D is used for creating 2D texture animations.
+- The animation2D is used for creating 2D texture animations.
 - These animations can be applied to quad2Ds/quad3Ds.
 - Animated textures should consist of multiple smaller animation frames, divided by rows and columns.
+- The ID of an animation2D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 

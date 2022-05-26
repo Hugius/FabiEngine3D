@@ -23,7 +23,7 @@ private:
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.0025f, 0.0025f, 0.0025f);
 	static inline const fvec3 TIMESTAMP_COLOR = fvec3(0.8f, 0.4f, 0.1f);
-	static inline const fvec3 INFO_COLOR = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 INFO_COLOR = fvec3(1.0f);
 	static inline const fvec3 WARN_COLOR = fvec3(1.0f, 0.0f, 0.0f);
 
 	static inline const fvec2 CHAR_SIZE = fvec2(0.02f, 0.15f);

@@ -170,22 +170,22 @@ private:
 	static inline const string SELECTED_TITLE_ID = "selected_title";
 	static inline const string CURSOR_TEXTURE_PATH = "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga";
 
-	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
-	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
-	static inline const fvec3 TEXT3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
-	static inline const fvec3 AABB_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
+	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f);
+	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f);
+	static inline const fvec3 TEXT3D_TERRAIN_OFFSET = fvec3(0.0f);
+	static inline const fvec3 AABB_TERRAIN_OFFSET = fvec3(0.0f);
 	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 CAPTOR_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SOUND3D_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-	static inline const fvec3 LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 LAMP_SIZE = fvec3(1.0f);
 	static inline const fvec3 LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
-	static inline const fvec3 TORCH_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 TORCH_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
-	static inline const fvec3 LENS_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 LENS_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
-	static inline const fvec3 SPEAKER_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 TORCH_SIZE = fvec3(1.0f);
+	static inline const fvec3 TORCH_AABB_SIZE = fvec3(1.0f);
+	static inline const fvec3 LENS_SIZE = fvec3(1.0f);
+	static inline const fvec3 LENS_AABB_SIZE = fvec3(1.0f);
+	static inline const fvec3 SPEAKER_SIZE = fvec3(1.0f);
 	static inline const fvec3 SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 
 	static inline constexpr float MODEL_POSITION_SPEED_DIVIDER = 100.0f;

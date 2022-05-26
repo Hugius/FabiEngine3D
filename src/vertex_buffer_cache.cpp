@@ -4,9 +4,8 @@
 void VertexBufferCache::storeBuffer(const string & filePath, const string & partId, shared_ptr<VertexBuffer> buffer)
 {
 	const auto mergedId = Tools::mergeStrings(filePath, partId, DELIMITER);
-	const auto cacheIterator = _buffers.find(mergedId);
 
-	if(cacheIterator != _buffers.end())
+	if(_buffers.find(mergedId) != _buffers.end())
 	{
 		abort();
 	}
@@ -34,11 +33,11 @@ void VertexBufferCache::clearBuffers()
 const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string & filePath, const string & partId) const
 {
 	const auto mergedId = Tools::mergeStrings(filePath, partId, DELIMITER);
-	const auto cacheIterator = _buffers.find(mergedId);
+	const auto iterator = _buffers.find(mergedId);
 
-	if(cacheIterator != _buffers.end())
+	if(iterator != _buffers.end())
 	{
-		return cacheIterator->second;
+		return iterator->second;
 	}
 
 	return nullptr;

@@ -12,11 +12,11 @@ using std::chrono::seconds;
 
 const shared_ptr<Mesh> MeshLoader::loadMesh(const string & filePath)
 {
-	const auto cacheIterator = _cache.find(filePath);
+	const auto iterator = _cache.find(filePath);
 
-	if(cacheIterator != _cache.end())
+	if(iterator != _cache.end())
 	{
-		return cacheIterator->second;
+		return iterator->second;
 	}
 
 	auto loadedMesh = _loadMesh(filePath);
@@ -37,9 +37,9 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string & filePath)
 
 void MeshLoader::cacheMesh(const string & filePath, bool isCrucial)
 {
-	const auto cacheIterator = _cache.find(filePath);
+	const auto iterator = _cache.find(filePath);
 
-	if(cacheIterator != _cache.end())
+	if(iterator != _cache.end())
 	{
 		return;
 	}

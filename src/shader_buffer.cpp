@@ -129,11 +129,11 @@ ShaderBuffer::~ShaderBuffer()
 
 const unsigned int ShaderBuffer::getUniformId(const string & name)
 {
-	const auto cacheIterator = _uniformCache.find(name);
+	const auto iterator = _uniformCache.find(name);
 
-	if(cacheIterator != _uniformCache.end())
+	if(iterator != _uniformCache.end())
 	{
-		return cacheIterator->second;
+		return iterator->second;
 	}
 
 	const auto uniformId = glGetUniformLocation(_programId, name.c_str());

@@ -3,9 +3,7 @@
 
 void TextureBufferCache::store2dBuffer(const string & filePath, shared_ptr<TextureBuffer> buffer)
 {
-	const auto cacheIterator = _2dBuffers.find(filePath);
-
-	if(cacheIterator != _2dBuffers.end())
+	if(_2dBuffers.find(filePath) != _2dBuffers.end())
 	{
 		abort();
 	}
@@ -16,9 +14,8 @@ void TextureBufferCache::store2dBuffer(const string & filePath, shared_ptr<Textu
 void TextureBufferCache::store3dBuffer(const array<string, 6> & filePaths, shared_ptr<TextureBuffer> buffer)
 {
 	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
-	const auto cacheIterator = _3dBuffers.find(mergedId);
 
-	if(cacheIterator != _3dBuffers.end())
+	if(_3dBuffers.find(mergedId) != _3dBuffers.end())
 	{
 		abort();
 	}
@@ -60,11 +57,11 @@ void TextureBufferCache::clear3dBuffers()
 
 const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string & filePath) const
 {
-	const auto cacheIterator = _2dBuffers.find(filePath);
+	const auto iterator = _2dBuffers.find(filePath);
 
-	if(cacheIterator != _2dBuffers.end())
+	if(iterator != _2dBuffers.end())
 	{
-		return cacheIterator->second;
+		return iterator->second;
 	}
 
 	return nullptr;
@@ -73,11 +70,11 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string & f
 const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<string, 6> & filePaths) const
 {
 	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
-	const auto cacheIterator = _3dBuffers.find(mergedId);
+	const auto iterator = _3dBuffers.find(mergedId);
 
-	if(cacheIterator != _3dBuffers.end())
+	if(iterator != _3dBuffers.end())
 	{
-		return cacheIterator->second;
+		return iterator->second;
 	}
 
 	return nullptr;

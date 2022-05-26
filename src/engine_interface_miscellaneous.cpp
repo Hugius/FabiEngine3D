@@ -65,7 +65,14 @@ void EngineInterface::misc_clearImageCache(const string & filePath)
 void EngineInterface::misc_clearAudioCache(const string & filePath)
 {
 	_core->getAudioLoader()->clearAudioCache(filePath);
-	_core->getWaveBufferCache()->deleteBuffer(filePath);
+
+	for(const auto & mergedId : _core->getWaveBufferCache()->getFilePaths())
+	{
+		if(filePath == mergedId)
+		{
+			_core->getWaveBufferCache()->deleteBuffer(mergedId);
+		}
+	}
 }
 
 void EngineInterface::misc_clearMeshesCache()
@@ -84,7 +91,7 @@ void EngineInterface::misc_clearImagesCache()
 void EngineInterface::misc_clearAudiosCache()
 {
 	_core->getAudioLoader()->clearAudiosCache();
-	_core->getWaveBufferCache()->deleteBuffers();
+	_core->getWaveBufferCache()->clearBuffers();
 }
 
 void EngineInterface::misc_cacheMeshes(const vector<string> & filePaths, bool isCrucial)

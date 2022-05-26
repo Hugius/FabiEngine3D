@@ -8,6 +8,7 @@ using std::chrono::seconds;
 void Sound2dPlayer::update()
 {
 	vector<pair<string, int>> sound2dsToStop = {};
+	vector<pair<string, int>> sound2dsToStart = {};
 
 	for(auto & [sound2dId, startedSound2ds] : _startedSound2ds)
 	{
@@ -26,23 +27,32 @@ void Sound2dPlayer::update()
 				}
 				else
 				{
-					startedSound2ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
-
-					const auto writeResult = waveOutWrite(startedSound2ds[index]->getHandle(), startedSound2ds[index]->getHeader(), sizeof(WAVEHDR));
-
-					if(writeResult != MMSYSERR_NOERROR)
+					if(startedSound2ds[index]->getHeader()->dwBufferLength < _sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getHeader()->dwBufferLength)
 					{
-						if(writeResult == MMSYSERR_NODRIVER)
-						{
-							_terminateSound2ds();
+						sound2dsToStop.push_back({sound2dId, index});
 
-							return;
-						}
-						else
-						{
-							Logger::throwDebug(writeResult);
+						sound2dsToStart.push_back({sound2dId, startedSound2ds[index]->getPlayCount()});
+					}
+					else
+					{
+						startedSound2ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
-							abort();
+						const auto writeResult = waveOutWrite(startedSound2ds[index]->getHandle(), startedSound2ds[index]->getHeader(), sizeof(WAVEHDR));
+
+						if(writeResult != MMSYSERR_NOERROR)
+						{
+							if(writeResult == MMSYSERR_NODRIVER)
+							{
+								_terminateSound2ds();
+
+								return;
+							}
+							else
+							{
+								Logger::throwDebug(writeResult);
+
+								abort();
+							}
 						}
 					}
 				}
@@ -89,6 +99,11 @@ void Sound2dPlayer::update()
 		}
 
 		_terminateSound2d(sound2dId, index);
+	}
+
+	for(const auto & [sound2dId, playCount] : sound2dsToStart)
+	{
+		startSound2d(sound2dId, playCount, 0.0f);
 	}
 
 	if(_volumeThreadQueue.empty())

@@ -65,21 +65,18 @@ void EngineInterface::misc_clearImageCache(const string & filePath)
 void EngineInterface::misc_clearAudioCache(const string & filePath)
 {
 	_core->getAudioLoader()->clearAudioCache(filePath);
-
 	_core->getWaveBufferCache()->deleteBuffer(filePath);
 }
 
 void EngineInterface::misc_clearMeshesCache()
 {
 	_core->getMeshLoader()->clearMeshesCache();
-
 	_core->getVertexBufferCache()->clearBuffers();
 }
 
 void EngineInterface::misc_clearImagesCache()
 {
 	_core->getImageLoader()->clearImagesCache();
-
 	_core->getTextureBufferCache()->clear2dBuffers();
 	_core->getTextureBufferCache()->clear3dBuffers();
 }
@@ -87,6 +84,7 @@ void EngineInterface::misc_clearImagesCache()
 void EngineInterface::misc_clearAudiosCache()
 {
 	_core->getAudioLoader()->clearAudiosCache();
+	_core->getWaveBufferCache()->deleteBuffers();
 }
 
 void EngineInterface::misc_cacheMeshes(const vector<string> & filePaths, bool isCrucial)

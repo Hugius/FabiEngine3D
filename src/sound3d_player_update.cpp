@@ -9,6 +9,7 @@ using std::clamp;
 void Sound3dPlayer::update()
 {
 	vector<pair<string, int>> sound3dsToStop = {};
+	vector<pair<string, int>> sound3dsToStart = {};
 
 	for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
 	{
@@ -40,23 +41,32 @@ void Sound3dPlayer::update()
 				}
 				else
 				{
-					startedSound3ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
-
-					const auto writeResult = waveOutWrite(startedSound3ds[index]->getHandle(), startedSound3ds[index]->getHeader(), sizeof(WAVEHDR));
-
-					if(writeResult != MMSYSERR_NOERROR)
+					if(startedSound3ds[index]->getHeader()->dwBufferLength < _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getHeader()->dwBufferLength)
 					{
-						if(writeResult == MMSYSERR_NODRIVER)
-						{
-							_terminateSound3ds();
+						sound3dsToStop.push_back({sound3dId, index});
 
-							return;
-						}
-						else
-						{
-							Logger::throwDebug(writeResult);
+						sound3dsToStart.push_back({sound3dId, startedSound3ds[index]->getPlayCount()});
+					}
+					else
+					{
+						startedSound3ds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
-							abort();
+						const auto writeResult = waveOutWrite(startedSound3ds[index]->getHandle(), startedSound3ds[index]->getHeader(), sizeof(WAVEHDR));
+
+						if(writeResult != MMSYSERR_NOERROR)
+						{
+							if(writeResult == MMSYSERR_NODRIVER)
+							{
+								_terminateSound3ds();
+
+								return;
+							}
+							else
+							{
+								Logger::throwDebug(writeResult);
+
+								abort();
+							}
 						}
 					}
 				}
@@ -107,6 +117,11 @@ void Sound3dPlayer::update()
 		}
 
 		_terminateSound3d(sound3dId, index);
+	}
+
+	for(const auto & [sound3dId, playCount] : sound3dsToStart)
+	{
+		startSound3d(sound3dId, playCount, 0.0f);
 	}
 
 	if(_volumeThreadQueue.empty())

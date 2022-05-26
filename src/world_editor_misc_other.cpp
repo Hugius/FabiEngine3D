@@ -113,6 +113,8 @@ void WorldEditor::clearLoadedWorld()
 	_fe3d->graphics_setShadowLightness(0.0f);
 	_fe3d->graphics_setShadowQuality(0);
 	_fe3d->graphics_setShadowInterval(0);
+	_fe3d->graphics_setShadowPcfCount(0);
+	_fe3d->graphics_setShadowBias(0.0f);
 	_fe3d->graphics_setShadowFollowingCameraX(false);
 	_fe3d->graphics_setShadowFollowingCameraY(false);
 	_fe3d->graphics_setShadowFollowingCameraZ(false);

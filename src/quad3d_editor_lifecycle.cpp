@@ -32,6 +32,8 @@ void Quad3dEditor::_load()
 	_fe3d->graphics_setShadowsEnabled(true);
 	_fe3d->graphics_setShadowLightness(SHADOW_LIGHTNESS);
 	_fe3d->graphics_setShadowQuality(SHADOW_QUALITY);
+	_fe3d->graphics_setShadowPcfCount(SHADOW_PCF_COUNT);
+	_fe3d->graphics_setShadowBias(SHADOW_BIAS);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE * 0.5f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE * 0.5f)));
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);

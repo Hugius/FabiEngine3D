@@ -68,6 +68,7 @@ private:
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.5f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
+	static inline constexpr float SHADOW_BIAS = 0.000001f;
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
 	static inline constexpr float SPEED_FACTOR = 100.0f;
 	static inline constexpr float ROTATION_ORIGIN_FACTOR = 100.0f;
@@ -79,6 +80,7 @@ private:
 	static inline constexpr int MAX_FRAME_COUNT = 100;
 	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;
 	static inline constexpr int SHADOW_QUALITY = 16384;
+	static inline constexpr int SHADOW_PCF_COUNT = 1;
 	static inline constexpr int BLOOM_BLUR_COUNT = 5;
 	static inline constexpr int BLOOM_QUALITY = 5;
 	static inline constexpr int PLANAR_REFLECTION_QUALITY = 1024;

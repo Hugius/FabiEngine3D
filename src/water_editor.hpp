@@ -66,10 +66,12 @@ private:
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.5f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
+	static inline constexpr float SHADOW_BIAS = 0.000001f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 	static inline constexpr int ANISOTROPIC_FILTERING_QUALITY = 16;
 	static inline constexpr int SHADOW_QUALITY = 16384;
+	static inline constexpr int SHADOW_PCF_COUNT = 1;
 	static inline constexpr int PLANAR_REFLECTION_QUALITY = 1024;
 	static inline constexpr int PLANAR_REFRACTION_QUALITY = 1024;
 

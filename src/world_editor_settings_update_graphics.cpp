@@ -48,18 +48,6 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("lookatY", "Y", lookat.y, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraX")->isHovered())
-		{
-			_fe3d->graphics_setShadowFollowingCameraX(!isFollowingCameraX);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraY")->isHovered())
-		{
-			_fe3d->graphics_setShadowFollowingCameraY(!isFollowingCameraY);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraZ")->isHovered())
-		{
-			_fe3d->graphics_setShadowFollowingCameraZ(!isFollowingCameraZ);
-		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * SHADOW_LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
@@ -79,6 +67,18 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("quality", "Quality", quality, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraX")->isHovered())
+		{
+			_fe3d->graphics_setShadowFollowingCameraX(!isFollowingCameraX);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraY")->isHovered())
+		{
+			_fe3d->graphics_setShadowFollowingCameraY(!isFollowingCameraY);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFollowingCameraZ")->isHovered())
+		{
+			_fe3d->graphics_setShadowFollowingCameraZ(!isFollowingCameraZ);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())

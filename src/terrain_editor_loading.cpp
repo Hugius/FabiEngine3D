@@ -235,6 +235,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 		int greenTextureRepeat;
 		int blueTextureRepeat;
 		bool isSpecular;
+		bool isShadowed;
 
 		auto iss = istringstream(line);
 
@@ -261,7 +262,8 @@ const bool TerrainEditor::loadTerrainsFromFile()
 			>> blueTextureRepeat
 			>> isSpecular
 			>> specularShininess
-			>> specularIntensity;
+			>> specularIntensity
+			>> isShadowed;
 
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -304,6 +306,7 @@ const bool TerrainEditor::loadTerrainsFromFile()
 			_fe3d->terrain_setSpecular(terrainId, isSpecular);
 			_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
 			_fe3d->terrain_setSpecularIntensity(terrainId, specularIntensity);
+			_fe3d->terrain_setShadowed(terrainId, isShadowed);
 
 			if(!diffuseMapPath.empty())
 			{

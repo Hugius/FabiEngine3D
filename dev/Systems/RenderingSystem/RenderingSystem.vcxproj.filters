@@ -373,5 +373,11 @@
     <None Include="..\..\..\app\engine\shaders\aabb_depth_shader.frag">
       <Filter>Shaders\Depth</Filter>
     </None>
+    <None Include="..\..\..\app\engine\shaders\terrain_shadow_shader.vert">
+      <Filter>Shaders\Shadow</Filter>
+    </None>
+    <None Include="..\..\..\app\engine\shaders\terrain_shadow_shader.frag">
+      <Filter>Shaders\Shadow</Filter>
+    </None>
   </ItemGroup>
 </Project>

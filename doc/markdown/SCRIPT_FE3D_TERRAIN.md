@@ -27,6 +27,7 @@
 - `fe3d:terrain_set_blue_repeat` (`STR` terrain_id, `INT` value) -----> `NONE`
 - `fe3d:terrain_set_specular` (`STR` terrain_id, `BOL` value) -----> `NONE`
 - `fe3d:terrain_set_wireframed` (`STR` terrain_id, `BOL` value) -----> `NONE`
+- `fe3d:terrain_set_shadowed` (`STR` terrain_id, `BOL` value) -----> `NONE`
 - `fe3d:terrain_set_min_clip_position` (`STR` terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:terrain_set_max_clip_position` (`STR` terrain_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
@@ -35,6 +36,7 @@
 - `fe3d:terrain_find_ids` (`STR` terrain_id) -----> `LIST`
 - `fe3d:terrain_is_specular` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_is_wireframed` (`STR` terrain_id) -----> `BOL`
+- `fe3d:terrain_is_shadowed` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_has_diffuse_map` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_has_normal_map` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_has_blend_map` (`STR` terrain_id) -----> `BOL`

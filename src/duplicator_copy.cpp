@@ -37,6 +37,7 @@ void Duplicator::copyTemplateTerrain(const string & newId, const string & templa
 	_fe3d->terrain_setSpecular(newId, _fe3d->terrain_isSpecular(templateId));
 	_fe3d->terrain_setSpecularShininess(newId, _fe3d->terrain_getSpecularShininess(templateId));
 	_fe3d->terrain_setSpecularIntensity(newId, _fe3d->terrain_getSpecularIntensity(templateId));
+	_fe3d->terrain_setShadowed(newId, _fe3d->terrain_isShadowed(templateId));
 
 	if(_fe3d->terrain_hasDiffuseMap(templateId))
 	{

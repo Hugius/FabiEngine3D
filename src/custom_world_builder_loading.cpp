@@ -135,6 +135,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			int blueTextureRepeat;
 			bool isSpecular;
 			bool isWireframed;
+			bool isShadowed;
 			bool isSelected;
 
 			iss
@@ -171,6 +172,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxClipPosition.x
 				>> maxClipPosition.y
 				>> maxClipPosition.z
+				>> isShadowed
 				>> isSelected;
 
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -211,6 +213,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
 			_fe3d->terrain_setSpecularIntensity(terrainId, specularIntensity);
 			_fe3d->terrain_setWireframed(terrainId, isWireframed);
+			_fe3d->terrain_setShadowed(terrainId, isShadowed);
 			_fe3d->terrain_setWireframeColor(terrainId, wireframeColor);
 			_fe3d->terrain_setMinClipPosition(terrainId, minClipPosition);
 			_fe3d->terrain_setMaxClipPosition(terrainId, maxClipPosition);

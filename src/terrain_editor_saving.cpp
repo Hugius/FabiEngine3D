@@ -31,6 +31,7 @@ const bool TerrainEditor::saveTerrainsToFile() const
 		const auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(terrainId);
 		const auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(terrainId);
 		const auto isSpecular = _fe3d->terrain_isSpecular(terrainId);
+		const auto isShadowed = _fe3d->terrain_isShadowed(terrainId);
 
 		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainId);
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
@@ -121,6 +122,8 @@ const bool TerrainEditor::saveTerrainsToFile() const
 			<< specularShininess
 			<< " "
 			<< specularIntensity
+			<< " "
+			<< isShadowed
 			<< endl;
 	}
 

@@ -158,6 +158,11 @@ void Terrain::setWireframed(bool value)
 	_isWireframed = value;
 }
 
+void Terrain::setShadowed(bool value)
+{
+	_isShadowed = value;
+}
+
 void Terrain::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
@@ -376,4 +381,9 @@ const bool Terrain::isSpecular() const
 const bool Terrain::isWireframed() const
 {
 	return _isWireframed;
+}
+
+const bool Terrain::isShadowed() const
+{
+	return _isShadowed;
 }

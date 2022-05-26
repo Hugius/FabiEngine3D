@@ -112,6 +112,7 @@ public:
 	void terrain_setSpecularShininess(const string & terrainId, float value);
 	void terrain_setSpecularIntensity(const string & terrainId, float value);
 	void terrain_setSpecular(const string & terrainId, bool value);
+	void terrain_setShadowed(const string & terrainId, bool value);
 	void terrain_setWireframed(const string & terrainId, bool value);
 	void terrain_setWireframeColor(const string & terrainId, const fvec3 & value);
 	void terrain_setColor(const string & terrainId, const fvec3 & value);
@@ -147,6 +148,7 @@ public:
 	const bool terrain_isExisting(const string & terrainId) const;
 	const bool terrain_isSpecular(const string & terrainId) const;
 	const bool terrain_isWireframed(const string & terrainId) const;
+	const bool terrain_isShadowed(const string & terrainId) const;
 	const bool terrain_isInside(const string & terrainId, float x, float z) const;
 	const bool terrain_hasBlendMap(const string & terrainId) const;
 	const bool terrain_hasDiffuseMap(const string & terrainId) const;

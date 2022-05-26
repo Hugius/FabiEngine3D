@@ -348,6 +348,11 @@ void EngineInterface::terrain_setSpecular(const string & terrainId, bool value)
 	_core->getTerrainManager()->getTerrain(terrainId)->setSpecular(value);
 }
 
+void EngineInterface::terrain_setShadowed(const string & terrainId, bool value)
+{
+	_core->getTerrainManager()->getTerrain(terrainId)->setShadowed(value);
+}
+
 void EngineInterface::terrain_setWireframed(const string & terrainId, bool value)
 {
 	_core->getTerrainManager()->getTerrain(terrainId)->setWireframed(value);
@@ -386,6 +391,11 @@ const bool EngineInterface::terrain_isSpecular(const string & terrainId) const
 const bool EngineInterface::terrain_isWireframed(const string & terrainId) const
 {
 	return _core->getTerrainManager()->getTerrain(terrainId)->isWireframed();
+}
+
+const bool EngineInterface::terrain_isShadowed(const string & terrainId) const
+{
+	return _core->getTerrainManager()->getTerrain(terrainId)->isShadowed();
 }
 
 const float EngineInterface::terrain_getSize(const string & terrainId) const

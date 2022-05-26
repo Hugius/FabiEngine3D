@@ -163,6 +163,8 @@
     <None Include="..\..\..\app\engine\shaders\terrain_color_shader.vert" />
     <None Include="..\..\..\app\engine\shaders\terrain_depth_shader.frag" />
     <None Include="..\..\..\app\engine\shaders\terrain_depth_shader.vert" />
+    <None Include="..\..\..\app\engine\shaders\terrain_shadow_shader.frag" />
+    <None Include="..\..\..\app\engine\shaders\terrain_shadow_shader.vert" />
     <None Include="..\..\..\app\engine\shaders\water_depth_shader.frag" />
     <None Include="..\..\..\app\engine\shaders\water_depth_shader.vert" />
     <None Include="..\..\..\app\engine\shaders\water_color_shader.frag" />

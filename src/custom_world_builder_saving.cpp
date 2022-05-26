@@ -110,6 +110,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto wireframeColor = _fe3d->terrain_getWireframeColor(terrainId);
 		const auto minClipPosition = _fe3d->terrain_getMinClipPosition(terrainId);
 		const auto maxClipPosition = _fe3d->terrain_getMaxClipPosition(terrainId);
+		const auto isShadowed = _fe3d->terrain_isShadowed(terrainId);
 		const auto isSelected = (terrainId == _fe3d->terrain_getSelectedId());
 
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
@@ -218,6 +219,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.y
 			<< " "
 			<< maxClipPosition.z
+			<< " "
+			<< isShadowed
 			<< " "
 			<< isSelected
 			<< endl;

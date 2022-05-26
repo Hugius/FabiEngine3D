@@ -46,6 +46,7 @@ public:
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
 	void setWireframed(bool value);
+	void setShadowed(bool value);
 	void setWireframeColor(const fvec3 & value);
 	void setColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
@@ -94,6 +95,7 @@ public:
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;
+	const bool isShadowed() const;
 
 private:
 	const string _id;
@@ -140,4 +142,5 @@ private:
 
 	bool _isSpecular = false;
 	bool _isWireframed = false;
+	bool _isShadowed = false;
 };

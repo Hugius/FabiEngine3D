@@ -652,6 +652,20 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 			}
 		}
 	}
+	else if(functionName == "fe3d:terrain_is_shadowed")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dTerrain(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->terrain_isShadowed(_fe3d->terrain_getSelectedId());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

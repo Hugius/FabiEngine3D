@@ -3,6 +3,7 @@
 #include "sky_color_renderer.hpp"
 #include "terrain_color_renderer.hpp"
 #include "terrain_depth_renderer.hpp"
+#include "terrain_shadow_renderer.hpp"
 #include "water_color_renderer.hpp"
 #include "water_depth_renderer.hpp"
 #include "model_color_renderer.hpp"
@@ -111,6 +112,7 @@ private:
 	shared_ptr<ShaderBuffer> _skyColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _terrainColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _terrainDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _terrainShadowShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _waterColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _waterDepthShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _modelColorShaderBuffer = nullptr;
@@ -164,6 +166,7 @@ private:
 	unique_ptr<SkyColorRenderer> _skyColorRenderer = nullptr;
 	unique_ptr<TerrainColorRenderer> _terrainColorRenderer = nullptr;
 	unique_ptr<TerrainDepthRenderer> _terrainDepthRenderer = nullptr;
+	unique_ptr<TerrainShadowRenderer> _terrainShadowRenderer = nullptr;
 	unique_ptr<WaterColorRenderer> _waterColorRenderer = nullptr;
 	unique_ptr<WaterDepthRenderer> _waterDepthRenderer = nullptr;
 	unique_ptr<ModelColorRenderer> _modelColorRenderer = nullptr;

@@ -108,6 +108,12 @@ void WorldEditor::_updateChoiceMenu()
 			clearLoadedWorld();
 
 			_fe3d->camera_reset();
+			_fe3d->raycast_setTerrainIntersectionEnabled(false);
+			_fe3d->raycast_setTerrainIntersectionDistance(0.0f);
+			_fe3d->raycast_setTerrainIntersectionPrecision(0.0f);
+			_fe3d->collision_setCameraTerrainResponseEnabled(false);
+			_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
+			_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
 			_fe3d->misc_setVsyncEnabled(true);
 
 			_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(false);

@@ -21,8 +21,8 @@ uniform int u_textureRepeat;
 
 uniform bool u_hasNormalMap;
 
-out vec4 f_shadowSpacePos;
 out vec3 f_worldSpacePos;
+out vec4 f_shadowSpacePos;
 out vec2 f_uv;
 out vec3 f_normal;
 out mat3 f_tbn;

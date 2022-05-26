@@ -140,8 +140,8 @@ void WorldEditor::_unload()
 	_fe3d->model_delete(SPEAKER_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
-	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
 	_fe3d->raycast_setAabbIntersectionEnabled(false);
+	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
 
 	_gui->getOverlay()->deleteTextField(SELECTED_TITLE_ID);
 	_gui->getOverlay()->deleteTextField(ACTIVE_TITLE_ID);

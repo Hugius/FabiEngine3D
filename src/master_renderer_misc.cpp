@@ -78,6 +78,7 @@ void MasterRenderer::inject(shared_ptr<Camera> camera)
 	_skyColorRenderer->inject(_camera);
 	_terrainColorRenderer->inject(_camera);
 	_terrainDepthRenderer->inject(_camera);
+	_terrainShadowRenderer->inject(_camera);
 	_waterColorRenderer->inject(_camera);
 	_waterDepthRenderer->inject(_camera);
 	_modelColorRenderer->inject(_camera);
@@ -172,6 +173,7 @@ void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 	_skyColorRenderer->inject(_renderStorage);
 	_terrainColorRenderer->inject(_renderStorage);
 	_terrainDepthRenderer->inject(_renderStorage);
+	_terrainShadowRenderer->inject(_renderStorage);
 	_waterColorRenderer->inject(_renderStorage);
 	_waterDepthRenderer->inject(_renderStorage);
 	_modelColorRenderer->inject(_renderStorage);

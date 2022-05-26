@@ -24,9 +24,9 @@ uniform int u_textureRepeat;
 
 uniform bool u_hasNormalMap;
 
-out vec4 f_clipSpacePos;
 out vec4 f_shadowSpacePos;
 out vec3 f_worldSpacePos;
+out vec4 f_clipSpacePos;
 out vec2 f_uv;
 out vec3 f_normal;
 out mat3 f_tbn;
@@ -39,9 +39,9 @@ void main()
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
-	f_clipSpacePos = clipSpacePosition;
 	f_shadowSpacePos = (u_shadowProjection * u_shadowView * worldSpacePosition);
 	f_worldSpacePos = worldSpacePosition.xyz;
+	f_clipSpacePos = clipSpacePosition;
 	f_uv = (v_uv * float(u_textureRepeat));
 	f_normal = normalize(u_normalTransformation * v_normal);
     f_tbn = calculateTbn();

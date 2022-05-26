@@ -6,8 +6,8 @@
 #define SHADOW_BIAS 0.000001f
 #define GAMMA_VALUE 2.2f
 
-in vec4 f_shadowSpacePos;
 in vec3 f_worldSpacePos;
+in vec4 f_shadowSpacePos;
 in vec2 f_uv;
 in vec3 f_normal;
 in mat3 f_tbn;

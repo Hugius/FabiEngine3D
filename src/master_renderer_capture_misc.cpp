@@ -266,6 +266,13 @@ void MasterRenderer::captureShadows()
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
+		if(_terrainManager->getSelectedTerrain() != nullptr)
+		{
+			_terrainShadowRenderer->bind();
+			_terrainShadowRenderer->render(_terrainManager->getSelectedTerrain());
+			_terrainShadowRenderer->unbind();
+		}
+
 		if(!_modelManager->getModels().empty())
 		{
 			_modelShadowRenderer->bind();

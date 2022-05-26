@@ -16,6 +16,7 @@ MasterRenderer::MasterRenderer()
 	_skyColorRenderer = make_unique<SkyColorRenderer>();
 	_terrainColorRenderer = make_unique<TerrainColorRenderer>();
 	_terrainDepthRenderer = make_unique<TerrainDepthRenderer>();
+	_terrainShadowRenderer = make_unique<TerrainShadowRenderer>();
 	_waterColorRenderer = make_unique<WaterColorRenderer>();
 	_waterDepthRenderer = make_unique<WaterDepthRenderer>();
 	_modelColorRenderer = make_unique<ModelColorRenderer>();
@@ -45,6 +46,7 @@ MasterRenderer::MasterRenderer()
 	_skyColorShaderBuffer = make_shared<ShaderBuffer>("sky_color_shader.vert", "sky_color_shader.frag");
 	_terrainColorShaderBuffer = make_shared<ShaderBuffer>("terrain_color_shader.vert", "terrain_color_shader.frag");
 	_terrainDepthShaderBuffer = make_shared<ShaderBuffer>("terrain_depth_shader.vert", "terrain_depth_shader.frag");
+	_terrainShadowShaderBuffer = make_shared<ShaderBuffer>("terrain_shadow_shader.vert", "terrain_shadow_shader.frag");
 	_waterColorShaderBuffer = make_shared<ShaderBuffer>("water_color_shader.vert", "water_color_shader.frag");
 	_waterDepthShaderBuffer = make_shared<ShaderBuffer>("water_depth_shader.vert", "water_depth_shader.frag");
 	_modelColorShaderBuffer = make_shared<ShaderBuffer>("model_color_shader.vert", "model_color_shader.frag");
@@ -75,6 +77,7 @@ MasterRenderer::MasterRenderer()
 	_skyColorRenderer->inject(_skyColorShaderBuffer);
 	_terrainColorRenderer->inject(_terrainColorShaderBuffer);
 	_terrainDepthRenderer->inject(_terrainDepthShaderBuffer);
+	_terrainShadowRenderer->inject(_terrainShadowShaderBuffer);
 	_waterColorRenderer->inject(_waterColorShaderBuffer);
 	_waterDepthRenderer->inject(_waterDepthShaderBuffer);
 	_modelColorRenderer->inject(_modelColorShaderBuffer);

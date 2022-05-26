@@ -1282,6 +1282,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto interval = _fe3d->graphics_getShadowInterval();
 		const auto pcfCount = _fe3d->graphics_getShadowPcfCount();
 		const auto quality = _fe3d->graphics_getShadowQuality();
+		const auto bias = _fe3d->graphics_getShadowBias();
 
 		file
 			<< "GRAPHICS_SHADOWS "
@@ -1312,6 +1313,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< pcfCount
 			<< " "
 			<< quality
+			<< " "
+			<< bias
 			<< endl;
 	}
 

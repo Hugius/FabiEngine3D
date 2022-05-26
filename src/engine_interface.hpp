@@ -840,6 +840,7 @@ public:
 	void graphics_setShadowLookatOffset(const fvec3 & value);
 	void graphics_setShadowSize(float value);
 	void graphics_setShadowLightness(float value);
+	void graphics_setShadowBias(float value);
 	void graphics_setShadowQuality(int value);
 	void graphics_setShadowInterval(int value);
 	void graphics_setShadowPcfCount(int value);
@@ -878,6 +879,7 @@ public:
 	const float graphics_getPlanarRefractionHeight() const;
 	const float graphics_getShadowSize() const;
 	const float graphics_getShadowLightness() const;
+	const float graphics_getShadowBias() const;
 	const float graphics_getBloomIntensity() const;
 	const float graphics_getSkyExposureIntensity() const;
 	const float graphics_getSkyExposureSpeed() const;

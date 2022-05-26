@@ -55,6 +55,7 @@ public:
 	void setPlanarRefractionHeight(float value);
 	void setShadowSize(float value);
 	void setShadowLightness(float value);
+	void setShadowBias(float value);
 	void setLensFlareOpacity(float value);
 	void setLensFlareIntensity(float value);
 	void setLensFlareSensitivity(float value);
@@ -144,6 +145,7 @@ public:
 	const float getPlanarRefractionHeight() const;
 	const float getShadowSize() const;
 	const float getShadowLightness() const;
+	const float getShadowBias() const;
 	const float getLensFlareOpacity() const;
 	const float getLensFlareIntensity() const;
 	const float getLensFlareSensitivity() const;
@@ -236,6 +238,7 @@ private:
 	float _planarRefractionHeight = 0.0f;
 	float _shadowSize = 0.0f;
 	float _shadowLightness = 0.0f;
+	float _shadowBias = 0.0f;
 	float _lensFlareOpacity = 0.0f;
 	float _lensFlareSensitivity = 1.0f;
 	float _lensFlareIntensity = 1.0f;

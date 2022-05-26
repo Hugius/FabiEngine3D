@@ -247,6 +247,24 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
+	else if(functionName == "fe3d:graphics_get_shadow_bias")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->graphics_getShadowBias();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_shadow_pcf_count")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->graphics_getShadowPcfCount();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+		}
+	}
 	else if(functionName == "fe3d:graphics_is_shadow_following_camera_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

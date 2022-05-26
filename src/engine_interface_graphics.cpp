@@ -196,6 +196,11 @@ void EngineInterface::graphics_setShadowLightness(float value)
 	_core->getRenderStorage()->setShadowLightness(value);
 }
 
+void EngineInterface::graphics_setShadowBias(float value)
+{
+	_core->getRenderStorage()->setShadowBias(value);
+}
+
 void EngineInterface::graphics_setShadowInterval(int value)
 {
 	_core->getRenderStorage()->setShadowInterval(value);
@@ -457,6 +462,11 @@ const float EngineInterface::graphics_getShadowSize() const
 const float EngineInterface::graphics_getShadowLightness() const
 {
 	return _core->getRenderStorage()->getShadowLightness();
+}
+
+const float EngineInterface::graphics_getShadowBias() const
+{
+	return _core->getRenderStorage()->getShadowBias();
 }
 
 const bool EngineInterface::graphics_isShadowFollowingCameraX() const

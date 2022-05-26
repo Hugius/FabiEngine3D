@@ -19,6 +19,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		const auto interval = _fe3d->graphics_getShadowInterval();
 		const auto pcfCount = _fe3d->graphics_getShadowPcfCount();
 		const auto quality = _fe3d->graphics_getShadowQuality();
+		const auto bias = _fe3d->graphics_getShadowBias();
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -62,6 +63,10 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * SHADOW_LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("bias")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("bias", "Bias", (bias * SHADOW_BIAS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
@@ -131,6 +136,13 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->graphics_setShadowLightness(value / SHADOW_LIGHTNESS_FACTOR);
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "bias") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->graphics_setShadowBias(value / SHADOW_BIAS_FACTOR);
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{

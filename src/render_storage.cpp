@@ -165,6 +165,11 @@ void RenderStorage::setShadowLightness(float value)
 	_shadowLightness = max(0.0f, value);
 }
 
+void RenderStorage::setShadowBias(float value)
+{
+	_shadowBias = max(0.0f, value);
+}
+
 void RenderStorage::setLensFlareOpacity(float value)
 {
 	_lensFlareOpacity = max(0.0f, value);
@@ -581,6 +586,11 @@ const float RenderStorage::getShadowSize() const
 const float RenderStorage::getShadowLightness() const
 {
 	return _shadowLightness;
+}
+
+const float RenderStorage::getShadowBias() const
+{
+	return _shadowBias;
 }
 
 const float RenderStorage::getLensFlareOpacity() const

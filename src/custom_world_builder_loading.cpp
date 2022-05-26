@@ -1428,16 +1428,17 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
-			float size;
-			float lightness;
 			fvec3 position;
 			fvec3 center;
-			bool isFollowingCameraX;
-			bool isFollowingCameraY;
-			bool isFollowingCameraZ;
+			float size;
+			float lightness;
+			float bias;
 			int interval;
 			int pcfCount;
 			int quality;
+			bool isFollowingCameraX;
+			bool isFollowingCameraY;
+			bool isFollowingCameraZ;
 
 			iss
 				>> size
@@ -1453,7 +1454,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> isFollowingCameraZ
 				>> interval
 				>> pcfCount
-				>> quality;
+				>> quality
+				>> bias;
 
 			_fe3d->graphics_setShadowsEnabled(true);
 			_fe3d->graphics_setShadowPositionOffset(position);
@@ -1466,6 +1468,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setShadowInterval(interval);
 			_fe3d->graphics_setShadowPcfCount(pcfCount);
 			_fe3d->graphics_setShadowQuality(quality);
+			_fe3d->graphics_setShadowBias(bias);
 		}
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
@@ -1493,10 +1496,10 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
-			bool isDynamic;
 			float blurDistance;
 			float maxDistance;
 			int quality;
+			bool isDynamic;
 
 			iss
 				>> isDynamic
@@ -1512,10 +1515,10 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
+			fvec3 color;
 			float minDistance;
 			float maxDistance;
 			float thickness;
-			fvec3 color;
 
 			iss
 				>> minDistance

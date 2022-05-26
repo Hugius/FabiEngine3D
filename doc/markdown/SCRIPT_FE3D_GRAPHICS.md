@@ -17,8 +17,10 @@
 - `fe3d:graphics_set_shadow_lookat` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:graphics_set_shadow_size` (`DEC` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_lightness` (`DEC` value) -----> `NONE`
+- `fe3d:graphics_set_shadow_bias` (`DEC` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_quality` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_interval` (`INT` value) -----> `NONE`
+- `fe3d:graphics_set_shadow_pcf_count` (`INT` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_following_camera_x` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_following_camera_y` (`BOL` value) -----> `NONE`
 - `fe3d:graphics_set_shadow_following_camera_z` (`BOL` value) -----> `NONE`
@@ -90,8 +92,10 @@
 - `fe3d:graphics_get_shadow_lookat_z` () -----> `DEC`
 - `fe3d:graphics_get_shadow_size` () -----> `DEC`
 - `fe3d:graphics_get_shadow_lightness` () -----> `DEC`
+- `fe3d:graphics_get_shadow_bias` () -----> `DEC`
 - `fe3d:graphics_get_shadow_quality` () -----> `INT`
 - `fe3d:graphics_get_shadow_interval` () -----> `INT`
+- `fe3d:graphics_get_shadow_pcf_count` () -----> `INT`
 - `fe3d:graphics_get_min_fog_distance` () -----> `DEC`
 - `fe3d:graphics_get_max_fog_distance` () -----> `DEC`
 - `fe3d:graphics_get_fog_thickness` () -----> `DEC`

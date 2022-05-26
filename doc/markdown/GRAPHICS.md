@@ -139,6 +139,9 @@
 - **Lightness**: the lightness of the shadows
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Bias**: the bias of the shadows to prevent shadow acne
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Quality**: the quality of the shadow map
   - Type: `integer`
   - Constraints: between `2048` and `16384`

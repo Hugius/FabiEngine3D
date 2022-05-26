@@ -3,11 +3,11 @@
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
-#define SHADOW_BIAS 0.000001f
+#define SHADOW_BIAS 0.001f
 #define GAMMA_VALUE 2.2f
 
-in vec3 f_worldSpacePos;
 in vec4 f_shadowSpacePos;
+in vec3 f_worldSpacePos;
 in vec2 f_uv;
 in vec3 f_normal;
 in mat3 f_tbn;
@@ -399,24 +399,6 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
-{
-    if(u_isSpecular)
-    {
-        vec3 lightDirection = normalize(lightPosition - f_worldSpacePos);
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-        return (lighting * u_specularIntensity);
-    }
-    else
-    {
-        return 0.0f;
-    }
-}
-
 float calculateShadows()
 {
 	if(u_isShadowsEnabled)
@@ -432,10 +414,10 @@ float calculateShadows()
 			float shadow = 0.0f;
 
 			if(uvCoords.z > 1.0f)
-			{	
+			{
 				return 1.0f;
 			}
-			
+
 			for (int x = -1; x <= 1; x++)
 			{
 				for (int y = -1; y <= 1; y++)
@@ -445,12 +427,12 @@ float calculateShadows()
 					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
 					float lightness = (((uvCoords.z - SHADOW_BIAS) > depth) ? u_shadowLightness : 1.0f);
 
-					shadow += lightness;            
+					shadow += lightness;         
 				}    
 			}
             
 			shadow /= 9.0f;
-
+			
 			if(shadow > 1.0f)
 			{
 				shadow = 1.0f;
@@ -479,4 +461,22 @@ float calculateShadows()
 	{
 		return 1.0f;
 	}
+}
+
+float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
+{
+    if(u_isSpecular)
+    {
+        vec3 lightDirection = normalize(lightPosition - f_worldSpacePos);
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+        return (lighting * u_specularIntensity);
+    }
+    else
+    {
+        return 0.0f;
+    }
 }

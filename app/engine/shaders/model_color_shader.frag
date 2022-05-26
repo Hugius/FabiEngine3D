@@ -3,7 +3,7 @@
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
-#define SHADOW_BIAS 0.000001f
+#define SHADOW_BIAS 0.001f
 #define GAMMA_VALUE 2.2f
 
 in vec4 f_shadowSpacePos;

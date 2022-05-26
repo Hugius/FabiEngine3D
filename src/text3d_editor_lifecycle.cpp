@@ -72,6 +72,8 @@ void Text3dEditor::_unload()
 	_fe3d->graphics_setShadowQuality(0);
 	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
 	_fe3d->graphics_setShadowSize(0.0f);
+	_fe3d->graphics_setShadowPcfCount(0);
+	_fe3d->graphics_setShadowBias(0.0f);
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField(TEXT3D_TITLE_ID);

@@ -23,7 +23,14 @@ void Sound2dPlayer::startSound2d(const string & sound2dId, int playCount, float 
 	const auto newSound2d = make_shared<StartedSound2D>();
 	const auto waveBuffer = _sound2dManager->getSound2d(sound2dId)->getWaveBuffer();
 	const auto originalByteCount = static_cast<int>(waveBuffer->getHeader()->dwBufferLength);
-	const auto startIndex = static_cast<int>(static_cast<float>(originalByteCount) * startTime);
+
+	auto startIndex = (static_cast<int>(static_cast<float>(originalByteCount) * startTime));
+
+	// Make sure index is not even because of LRLRLR order
+	if((startIndex % 2) == 0)
+	{
+		startIndex++;
+	}
 
 	HWAVEOUT handle = nullptr;
 

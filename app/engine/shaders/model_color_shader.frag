@@ -109,7 +109,7 @@ vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal);
 vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
 vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color);
 
-float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal);
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal);
 float calculateShadows();
 
 void main()
@@ -299,10 +299,10 @@ vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
 	if(u_isDirectionalLightingEnabled)
 	{
         vec3 lighting = vec3(0.0f);
-		vec3 direction = normalize(u_directionalLightingPosition - f_worldSpacePos);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
 
-		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_directionalLightingPosition, normal);
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(specularMapColor, lightDirection, normal);
 
         lighting += vec3(diffuse);
         lighting += vec3(specular);
@@ -323,10 +323,10 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 
 	for (int index = 0; index < u_pointlightCount; index++)
 	{
-		vec3 direction = normalize(u_pointlightPositions[index] - f_worldSpacePos);
+		vec3 lightDirection = normalize(u_pointlightPositions[index] - f_worldSpacePos);
 
-		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_pointlightPositions[index], normal);
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(specularMapColor, lightDirection, normal);
 
 		float attenuation;
 
@@ -368,11 +368,11 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 
 	for (int index = 0; index < u_spotlightCount; index++)
 	{
-		vec3 direction = normalize(u_spotlightPositions[index] - f_worldSpacePos);
+		vec3 lightDirection = normalize(u_spotlightPositions[index] - f_worldSpacePos);
 
-		float spot = dot(direction, normalize(-u_spotlightFronts[index]));
-		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_spotlightPositions[index], normal);
+		float spot = dot(lightDirection, normalize(-u_spotlightFronts[index]));
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(specularMapColor, lightDirection, normal);
 		float smoothingAngle = (u_spotlightAngles[index] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
 		float intensity = clamp(((spot - (u_spotlightAngles[index] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 		float fragmentDistance = distance(u_spotlightPositions[index], f_worldSpacePos);
@@ -503,6 +503,24 @@ vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color)
 	}
 }
 
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal)
+{
+    if(u_isSpecular)
+    {
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
+        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), (u_specularShininess * specularMapIntensity));
+
+        return (lighting * u_specularIntensity * specularMapIntensity);
+    }
+    else
+    {
+        return 0.0f;
+    }
+}
+
 float calculateShadows()
 {
 	if(u_isShadowsEnabled)
@@ -567,23 +585,4 @@ float calculateShadows()
 	{
 		return 1.0f;
 	}
-}
-
-float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal)
-{
-    if(u_isSpecular)
-    {
-        vec3 lightDirection = normalize(lightPosition - f_worldSpacePos);
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
-        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), (u_specularShininess * specularMapIntensity));
-
-        return (lighting * u_specularIntensity * specularMapIntensity);
-    }
-    else
-    {
-        return 0.0f;
-    }
 }

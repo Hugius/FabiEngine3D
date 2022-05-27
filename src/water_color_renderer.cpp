@@ -8,6 +8,9 @@ void WaterColorRenderer::bind()
 	_shaderBuffer->bind();
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shaderBuffer->uploadUniform("u_ambientLightingColor", _renderStorage->getAmbientLightingColor());
+	_shaderBuffer->uploadUniform("u_ambientLightingIntensity", _renderStorage->getAmbientLightingIntensity());
+	_shaderBuffer->uploadUniform("u_isAmbientLightingEnabled", _renderStorage->isAmbientLightingEnabled());
 	_shaderBuffer->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());
 	_shaderBuffer->uploadUniform("u_directionalLightingPosition", _renderStorage->getDirectionalLightingPosition());
 	_shaderBuffer->uploadUniform("u_cameraPosition", _camera->getPosition());

@@ -150,4 +150,4 @@
 <img src="../image/specular_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
-- Specular maps are used to specify which parts of a mesh are specular lighted.
+- Specular maps are used to specify which parts of a mesh are specular.

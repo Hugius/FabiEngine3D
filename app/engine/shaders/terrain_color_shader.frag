@@ -343,7 +343,7 @@ vec3 calculateDirectionalLighting(vec3 normal)
 	}
 }
 
-vec3 calculatePointlighting(vec3 normal)
+vec3 calculatePointLighting(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 		
@@ -386,7 +386,7 @@ vec3 calculatePointlighting(vec3 normal)
 	return result;
 }
 
-vec3 calculateSpotlighting(vec3 normal)
+vec3 calculateSpotLighting(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
@@ -447,17 +447,18 @@ void main()
     float shadowLighting = calculateShadows();
 	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 
+	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 normalMapping = calculateNormalMapping();
 	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
 	vec3 directionalLighting = (calculateDirectionalLighting(normalMapping) * shadowOcclusion);
-	vec3 pointlighting = calculatePointlighting(normalMapping);
-	vec3 spotlighting = calculateSpotlighting(normalMapping);
+	vec3 pointLighting = calculatePointLighting(normalMapping);
+	vec3 spotLighting = calculateSpotLighting(normalMapping);
 	vec3 primaryColor = vec3(0.0f);
 
-	primaryColor += calculateDiffuseMapping();
+	primaryColor += diffuseMapping;
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
-	primaryColor *= (ambientLighting + directionalLighting + pointlighting + spotlighting);
+	primaryColor *= (ambientLighting + directionalLighting + pointLighting + spotLighting);
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));

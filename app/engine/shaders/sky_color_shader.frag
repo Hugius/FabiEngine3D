@@ -17,7 +17,21 @@ uniform bool u_isWireframed;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-vec3 calculateCubeMapping();
+vec3 calculateCubeMapping()
+{
+	if(u_hasCubeMap)
+	{
+		vec4 cubeMapColor = texture(u_cubeMap, f_uv);
+
+		cubeMapColor.rgb = pow(cubeMapColor.rgb, vec3(GAMMA_VALUE));
+
+		return cubeMapColor.rgb;
+	}
+	else
+	{
+		return vec3(1.0f);
+	}
+}
 
 void main()
 {
@@ -40,20 +54,4 @@ void main()
 
 	o_primaryColor = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-}
-
-vec3 calculateCubeMapping()
-{
-	if(u_hasCubeMap)
-	{
-		vec4 cubeMapColor = texture(u_cubeMap, f_uv);
-
-		cubeMapColor.rgb = pow(cubeMapColor.rgb, vec3(GAMMA_VALUE));
-
-		return cubeMapColor.rgb;
-	}
-	else
-	{
-		return vec3(1.0f);
-	}
 }

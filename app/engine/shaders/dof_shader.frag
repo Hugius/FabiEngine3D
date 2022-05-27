@@ -19,7 +19,12 @@ uniform bool u_isDofDynamic;
 
 layout (location = 0) out vec4 o_finalColor;
 
-float convertDepthToPerspective(float depth);
+float convertDepthToPerspective(float depth)
+{
+    float z = ((depth * 2.0f) - 1.0f);
+
+    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
+}
 
 void main()
 {
@@ -61,11 +66,4 @@ void main()
         o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
     }
-}
-
-float convertDepthToPerspective(float depth)
-{
-    float z = ((depth * 2.0f) - 1.0f);
-
-    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

@@ -30,36 +30,6 @@ uniform bool u_hasEmissionMap;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-vec3 calculateDiffuseMapping();
-vec3 calculateEmissionMapping();
-vec3 calculateFog(vec3 color);
-
-void main()
-{
-	if(u_isWireframed)
-	{
-		o_primaryColor = vec4(u_wireframeColor, 1.0f);
-		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-
-		return;
-	}
-
-	vec3 diffuseMapping = calculateDiffuseMapping();
-	vec3 emissionMapping = calculateEmissionMapping();
-	vec3 primaryColor = vec3(0.0f);
-
-	primaryColor += diffuseMapping;
-	primaryColor += emissionMapping;
-	primaryColor *= u_color;
-	primaryColor *= u_lightness;
-	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor = calculateFog(primaryColor);
-	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
-
-	o_primaryColor = vec4(primaryColor, u_opacity);
-	o_secondaryColor = vec4((((emissionMapping != vec3(0.0f)) || u_isBright) ? primaryColor : vec3(0.0f)), 1.0f);
-}
-
 vec3 calculateDiffuseMapping()
 {
 	if(u_hasDiffuseMap)
@@ -115,4 +85,30 @@ vec3 calculateFog(vec3 color)
 	{
 		return color;
 	}
+}
+
+void main()
+{
+	if(u_isWireframed)
+	{
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+		return;
+	}
+
+	vec3 diffuseMapping = calculateDiffuseMapping();
+	vec3 emissionMapping = calculateEmissionMapping();
+	vec3 primaryColor = vec3(0.0f);
+
+	primaryColor += diffuseMapping;
+	primaryColor += emissionMapping;
+	primaryColor *= u_color;
+	primaryColor *= u_lightness;
+	primaryColor = calculateFog(primaryColor);
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
+
+	o_primaryColor = vec4(primaryColor, u_opacity);
+	o_secondaryColor = vec4((((emissionMapping != vec3(0.0f)) || u_isBright) ? primaryColor : vec3(0.0f)), 1.0f);
 }

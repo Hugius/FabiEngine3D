@@ -1,5 +1,7 @@
 #version 460 core
 
+#define GAMMA_VALUE 2.2f
+
 in vec3 f_worldSpacePos;
 
 uniform vec3 u_cameraPosition;
@@ -14,20 +16,6 @@ uniform bool u_isFogEnabled;
 
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
-
-vec3 calculateFog(vec3 color);
-
-void main()
-{
-	vec3 primaryColor = u_color;
-
-	primaryColor = calculateFog(primaryColor);
-
-	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
-
-	o_primaryColor = vec4(primaryColor, 1.0f);
-	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-}
 
 vec3 calculateFog(vec3 color)
 {
@@ -45,4 +33,17 @@ vec3 calculateFog(vec3 color)
 	{
 		return color;
 	}
+}
+
+void main()
+{
+	vec3 primaryColor = vec3(0.0f);
+
+	primaryColor += u_color;
+	primaryColor = calculateFog(primaryColor);
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
+
+	o_primaryColor = vec4(primaryColor, 1.0f);
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

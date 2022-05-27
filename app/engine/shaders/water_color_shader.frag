@@ -51,35 +51,68 @@ uniform bool u_hasNormalMap;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-vec4 calculateWaterColor();
-vec3 calculateAmbientLighting();
-vec3 calculateDirectionalDiffuseLighting(vec3 normal);
-vec3 calculateDirectionalSpecularLighting(vec3 normal);
-vec3 calculateFog(vec3 color);
-
-float calculateSpecularLighting(vec3 lightDirection, vec3 normal);
-float convertDepthToPerspective(float depth);
-
-void main()
+float convertDepthToPerspective(float depth)
 {
-	if(u_isWireframed)
+    float z = ((depth * 2.0f) - 1.0f);
+
+    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
+}
+
+vec3 calculateAmbientLighting()
+{
+	if(u_isAmbientLightingEnabled)
 	{
-		o_primaryColor = vec4(u_wireframeColor, 1.0f);
-		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-		
-		return;
+		return (u_ambientLightingColor * u_ambientLightingIntensity);
 	}
+	else
+	{
+		return vec3(0.0f);
+	}
+}
 
-	vec4 waterColor = calculateWaterColor();
-	vec3 primaryColor = vec3(0.0f);
+vec3 calculateDirectionalDiffuseLighting(vec3 normal)
+{
+	if(u_isDirectionalLightingEnabled)
+	{
+        vec3 lighting = vec3(0.0f);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
 
-	primaryColor += waterColor.rgb;
-	primaryColor = calculateFog(primaryColor);
-	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 
-	o_primaryColor = vec4(primaryColor, waterColor.a);
-	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        lighting += vec3(diffuse);
+        lighting *= u_directionalLightingColor;
+        lighting *= u_directionalLightingIntensity;
+
+        return lighting;
+	}
+	else
+	{
+		return vec3(0.0f);
+	}
+}
+
+vec3 calculateDirectionalSpecularLighting(vec3 normal)
+{
+    if(u_isDirectionalLightingEnabled && u_isSpecular && (u_cameraPosition.y > f_worldSpacePos.y))
+    {
+		vec3 lighting = vec3(0.0f);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+        lighting += vec3(specular);
+        lighting *= u_directionalLightingColor;
+        lighting *= u_directionalLightingIntensity;
+		lighting *= u_specularIntensity;
+
+        return lighting;
+    }
+    else
+    {
+        return vec3(0.0f);
+    }
 }
 
 vec4 calculateWaterColor()
@@ -168,63 +201,6 @@ vec4 calculateWaterColor()
 	return vec4(finalColor, opacity);
 }
 
-vec3 calculateAmbientLighting()
-{
-	if(u_isAmbientLightingEnabled)
-	{
-		return (u_ambientLightingColor * u_ambientLightingIntensity);
-	}
-	else
-	{
-		return vec3(0.0f);
-	}
-}
-
-vec3 calculateDirectionalDiffuseLighting(vec3 normal)
-{
-	if(u_isDirectionalLightingEnabled)
-	{
-        vec3 lighting = vec3(0.0f);
-		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
-
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-
-        lighting += vec3(diffuse);
-        lighting *= u_directionalLightingColor;
-        lighting *= u_directionalLightingIntensity;
-
-        return lighting;
-	}
-	else
-	{
-		return vec3(0.0f);
-	}
-}
-
-vec3 calculateDirectionalSpecularLighting(vec3 normal)
-{
-    if(u_isDirectionalLightingEnabled && u_isSpecular && (u_cameraPosition.y > f_worldSpacePos.y))
-    {
-		vec3 lighting = vec3(0.0f);
-		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-        lighting += vec3(specular);
-        lighting *= u_directionalLightingColor;
-        lighting *= u_directionalLightingIntensity;
-		lighting *= u_specularIntensity;
-
-        return lighting;
-    }
-    else
-    {
-        return vec3(0.0f);
-    }
-}
-
 vec3 calculateFog(vec3 color)
 {
 	if(u_isFogEnabled)
@@ -243,9 +219,24 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-float convertDepthToPerspective(float depth)
+void main()
 {
-    float z = ((depth * 2.0f) - 1.0f);
+	if(u_isWireframed)
+	{
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		
+		return;
+	}
 
-    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
+	vec4 waterColor = calculateWaterColor();
+	vec3 primaryColor = vec3(0.0f);
+
+	primaryColor += waterColor.rgb;
+	primaryColor = calculateFog(primaryColor);
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
+
+	o_primaryColor = vec4(primaryColor, waterColor.a);
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

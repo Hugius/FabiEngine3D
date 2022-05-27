@@ -93,79 +93,22 @@ uniform bool u_isBright;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-vec3 calculateDiffuseMapping();
-vec3 calculateEmissionMapping();
-vec3 calculateSpecularMapping();
-vec3 calculateReflectionMapping();
-vec3 calculateRefractionMapping();
-vec3 calculateNormalMapping();
-vec3 calculateAmbientLighting();
-vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal);
-vec3 calculatePointlights(vec3 specularMapColor, vec3 normal);
-vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal);
-vec3 calculateFog(vec3 color);
-vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal);
-vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal);
-vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
-vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color);
-
-float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal);
-float calculateShadows();
-
-void main()
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal)
 {
-	if(u_isWireframed)
-	{
-		o_primaryColor = vec4(u_wireframeColor, 1.0f);
-		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    if(u_isSpecular)
+    {
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
 
-		return;
-	}
+		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
+        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
-	float shadowLighting = calculateShadows();
-	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
-
-	vec3 diffuseMapping = calculateDiffuseMapping();
-	vec3 emissionMapping = calculateEmissionMapping();
-    vec3 specularMapping = calculateSpecularMapping();
-    vec3 reflectionMapping = calculateReflectionMapping();
-	vec3 refractionMapping = calculateRefractionMapping();
-    vec3 normalMapping = calculateNormalMapping();
-	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
-	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
-	vec3 pointlights = calculatePointlights(specularMapping, normalMapping);
-	vec3 spotlights	= calculateSpotlights(specularMapping, normalMapping);
-	vec3 primaryColor = vec3(0.0f);
-
-	primaryColor += diffuseMapping;
-	primaryColor += emissionMapping;
-	primaryColor = calculateCubeReflection(reflectionMapping, primaryColor, normalMapping);
-	primaryColor = calculateCubeRefraction(refractionMapping, primaryColor, normalMapping);
-	primaryColor = calculatePlanarReflection(reflectionMapping, primaryColor);
-	primaryColor = calculatePlanarRefraction(refractionMapping, primaryColor);
-	primaryColor *= u_color;
-	primaryColor *= u_lightness;
-	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	
-	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);
-
-	if(!isBright)
-	{
-		vec3 lighting = vec3(0.0f);
-
-		lighting += ambientLighting;
-		lighting += directionalLighting;
-		lighting += pointlights;
-		lighting += spotlights;
-
-		primaryColor *= lighting;
-	}
-
-	primaryColor = calculateFog(primaryColor);
-    primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
-
-	o_primaryColor = vec4(primaryColor, u_opacity);
-	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
+        return (lighting * u_specularIntensity * specularMapIntensity);
+    }
+    else
+    {
+        return 0.0f;
+    }
 }
 
 vec3 calculateDiffuseMapping()
@@ -503,24 +446,6 @@ vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color)
 	}
 }
 
-float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal)
-{
-    if(u_isSpecular)
-    {
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
-        float lighting = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-        return (lighting * u_specularIntensity * specularMapIntensity);
-    }
-    else
-    {
-        return 0.0f;
-    }
-}
-
 float calculateShadows()
 {
 	if(u_isShadowsEnabled)
@@ -585,4 +510,60 @@ float calculateShadows()
 	{
 		return 1.0f;
 	}
+}
+
+void main()
+{
+	if(u_isWireframed)
+	{
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+		return;
+	}
+
+	float shadowLighting = calculateShadows();
+	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+
+	vec3 diffuseMapping = calculateDiffuseMapping();
+	vec3 emissionMapping = calculateEmissionMapping();
+    vec3 specularMapping = calculateSpecularMapping();
+    vec3 reflectionMapping = calculateReflectionMapping();
+	vec3 refractionMapping = calculateRefractionMapping();
+    vec3 normalMapping = calculateNormalMapping();
+	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
+	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
+	vec3 pointlights = calculatePointlights(specularMapping, normalMapping);
+	vec3 spotlights	= calculateSpotlights(specularMapping, normalMapping);
+	vec3 primaryColor = vec3(0.0f);
+
+	primaryColor += diffuseMapping;
+	primaryColor += emissionMapping;
+	primaryColor = calculateCubeReflection(reflectionMapping, primaryColor, normalMapping);
+	primaryColor = calculateCubeRefraction(refractionMapping, primaryColor, normalMapping);
+	primaryColor = calculatePlanarReflection(reflectionMapping, primaryColor);
+	primaryColor = calculatePlanarRefraction(refractionMapping, primaryColor);
+	primaryColor *= u_color;
+	primaryColor *= u_lightness;
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	
+	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);
+
+	if(!isBright)
+	{
+		vec3 lighting = vec3(0.0f);
+
+		lighting += ambientLighting;
+		lighting += directionalLighting;
+		lighting += pointlights;
+		lighting += spotlights;
+
+		primaryColor *= lighting;
+	}
+
+	primaryColor = calculateFog(primaryColor);
+    primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
+
+	o_primaryColor = vec4(primaryColor, u_opacity);
+	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
 }

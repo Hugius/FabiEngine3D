@@ -43,8 +43,8 @@ void main()
 		return;
 	}
 
-	vec3 cubeMapping = calculateCubeMapping();
 	vec3 primaryColor = vec3(0.0f);
+	vec3 cubeMapping = calculateCubeMapping();
 
 	primaryColor += cubeMapping;
 	primaryColor *= u_color;

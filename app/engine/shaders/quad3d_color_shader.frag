@@ -97,9 +97,9 @@ void main()
 		return;
 	}
 
+	vec3 primaryColor = vec3(0.0f);
 	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 emissionMapping = calculateEmissionMapping();
-	vec3 primaryColor = vec3(0.0f);
 
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;

@@ -444,6 +444,7 @@ void main()
 		return;
 	}
 
+	vec3 primaryColor = vec3(0.0f);
 	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 normalMapping = calculateNormalMapping();
 
@@ -454,7 +455,6 @@ void main()
 	vec3 directionalLighting = (calculateDirectionalLighting(normalMapping) * shadowOcclusion);
 	vec3 pointLighting = calculatePointLighting(normalMapping);
 	vec3 spotLighting = calculateSpotLighting(normalMapping);
-	vec3 primaryColor = vec3(0.0f);
 
 	primaryColor += diffuseMapping;
 	primaryColor *= u_color;

@@ -297,17 +297,16 @@ void calculateDirectionalLighting(in vec3 normal, out vec3 diffuse, out vec3 spe
 	}
 }
 
-void calculatePointLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
+void calculatePointLighting(in vec3 normal, out vec3 resultDiffuse, out vec3 resultSpecular)
 {
-	diffuse = vec3(0.0f);
-	specular = vec3(0.0f);
+	resultDiffuse = vec3(0.0f);
+	resultSpecular = vec3(0.0f);
 		
 	for (int index = 0; index < u_pointlightCount; index++)
 	{
 		vec3 lightDirection = normalize(u_pointlightPositions[index] - f_worldSpacePos);
-
-		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
-		specular = vec3(calculateSpecularLighting(lightDirection, normal));
+		vec3 currentDiffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
+		vec3 currentSpecular = vec3(calculateSpecularLighting(lightDirection, normal));
 
 		float attenuation;
 
@@ -329,27 +328,29 @@ void calculatePointLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
-		diffuse *= u_pointlightColors[index];
-		diffuse *= u_pointlightIntensities[index];
-		diffuse *= (attenuation * attenuation);
+		currentDiffuse *= u_pointlightColors[index];
+		currentDiffuse *= u_pointlightIntensities[index];
+		currentDiffuse *= (attenuation * attenuation);
 
-		specular *= u_pointlightColors[index];
-		specular *= u_pointlightIntensities[index];
-		specular *= (attenuation * attenuation);
+		currentSpecular *= u_pointlightColors[index];
+		currentSpecular *= u_pointlightIntensities[index];
+		currentSpecular *= (attenuation * attenuation);
+
+		resultDiffuse += currentDiffuse;
+		resultSpecular += currentSpecular;
 	}
 }
 
-void calculateSpotLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
+void calculateSpotLighting(in vec3 normal, out vec3 resultDiffuse, out vec3 resultSpecular)
 {
-	diffuse = vec3(0.0f);
-	specular = vec3(0.0f);
+	resultDiffuse = vec3(0.0f);
+	resultSpecular = vec3(0.0f);
 
 	for (int index = 0; index < u_spotlightCount; index++)
 	{
 		vec3 lightDirection = normalize(u_spotlightPositions[index] - f_worldSpacePos);
-
-		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
-		specular = vec3(calculateSpecularLighting(lightDirection, normal));
+		vec3 currentDiffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
+		vec3 currentSpecular = vec3(calculateSpecularLighting(lightDirection, normal));
 
 		float spot = dot(lightDirection, normalize(-u_spotlightFronts[index]));
 		float smoothingAngle = (u_spotlightAngles[index] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
@@ -357,15 +358,18 @@ void calculateSpotLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
 		float fragmentDistance = distance(u_spotlightPositions[index], f_worldSpacePos);
 		float distanceMultiplier = (1.0f - clamp((fragmentDistance / u_spotlightDistances[index]), 0.0f, 1.0f));
 
-		diffuse *= intensity;
-		diffuse *= u_spotlightColors[index];
-		diffuse *= u_spotlightIntensities[index];
-		diffuse *= distanceMultiplier;
+		currentDiffuse *= intensity;
+		currentDiffuse *= u_spotlightColors[index];
+		currentDiffuse *= u_spotlightIntensities[index];
+		currentDiffuse *= distanceMultiplier;
 
-		specular *= intensity;
-		specular *= u_spotlightColors[index];
-		specular *= u_spotlightIntensities[index];
-		specular *= distanceMultiplier;
+		currentSpecular *= intensity;
+		currentSpecular *= u_spotlightColors[index];
+		currentSpecular *= u_spotlightIntensities[index];
+		currentSpecular *= distanceMultiplier;
+
+		resultDiffuse += currentDiffuse;
+		resultSpecular += currentSpecular;
 	}
 }
 
@@ -397,6 +401,7 @@ void main()
 		return;
 	}
 
+	vec3 primaryColor = vec3(0.0f);
 	vec2 dudvMapping = calculateDudvMapping();
 	vec3 normalMapping = calculateNormalMapping(dudvMapping);
 	vec4 diffuseColor = calculateDiffuseColor(dudvMapping, normalMapping);
@@ -411,7 +416,6 @@ void main()
 	vec3 specularDirectionalLighting;
 	vec3 specularPointLighting;
 	vec3 specularSpotLighting;
-	vec3 primaryColor = vec3(0.0f);
 
 	calculateDirectionalLighting(normalMapping, diffuseDirectionalLighting, specularDirectionalLighting);
 	calculatePointLighting(normalMapping, diffusePointLighting, specularPointLighting);

@@ -525,6 +525,7 @@ void main()
 		return;
 	}
 
+	vec3 primaryColor = vec3(0.0f);
 	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 emissionMapping = calculateEmissionMapping();
     vec3 specularMapping = calculateSpecularMapping();
@@ -539,7 +540,6 @@ void main()
 	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
 	vec3 pointLighting = calculatePointLighting(specularMapping, normalMapping);
 	vec3 spotLighting = calculateSpotLighting(specularMapping, normalMapping);
-	vec3 primaryColor = vec3(0.0f);
 
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;

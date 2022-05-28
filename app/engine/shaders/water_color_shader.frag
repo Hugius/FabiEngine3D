@@ -1,5 +1,8 @@
 #version 460 core
 
+#define MAX_POINTLIGHT_COUNT 64
+#define MAX_SPOTLIGHT_COUNT 64
+#define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 #define GAMMA_VALUE 2.2f
 
 in vec4 f_shadowSpacePos;
@@ -14,6 +17,12 @@ layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 layout (location = 6) uniform sampler2D u_shadowMap;
 
+uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_pointlightRadiuses[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_pointlightColors[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_spotlightPositions[MAX_SPOTLIGHT_COUNT];
+uniform vec3 u_spotlightFronts[MAX_SPOTLIGHT_COUNT];
+uniform vec3 u_spotlightColors[MAX_SPOTLIGHT_COUNT];
 uniform vec3 u_ambientLightingColor;
 uniform vec3 u_directionalLightingColor;
 uniform vec3 u_directionalLightingPosition;
@@ -25,6 +34,10 @@ uniform vec3 u_shadowLookat;
 
 uniform vec2 u_rippleOffset;
 
+uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
+uniform float u_spotlightIntensities[MAX_SPOTLIGHT_COUNT];
+uniform float u_spotlightAngles[MAX_SPOTLIGHT_COUNT];
+uniform float u_spotlightDistances[MAX_SPOTLIGHT_COUNT];
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
@@ -39,6 +52,9 @@ uniform float u_shadowSize;
 uniform float u_shadowLightness;
 uniform float u_shadowBias;
 
+uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
+uniform int u_pointlightCount;
+uniform int u_spotlightCount;
 uniform int u_shadowPcfCount;
 
 uniform bool u_isReflectionsEnabled;
@@ -281,6 +297,78 @@ void calculateDirectionalLighting(in vec3 normal, out vec3 diffuse, out vec3 spe
 	}
 }
 
+void calculatePointLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
+{
+	diffuse = vec3(0.0f);
+	specular = vec3(0.0f);
+		
+	for (int index = 0; index < u_pointlightCount; index++)
+	{
+		vec3 lightDirection = normalize(u_pointlightPositions[index] - f_worldSpacePos);
+
+		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
+		specular = vec3(calculateSpecularLighting(lightDirection, normal));
+
+		float attenuation;
+
+		if(u_pointlightShapes[index] == 0)
+		{
+			float fragmentDistance = distance(u_pointlightPositions[index], f_worldSpacePos);
+			float averageRadius = ((u_pointlightRadiuses[index].x + u_pointlightRadiuses[index].y + u_pointlightRadiuses[index].z) / 3.0f);
+
+			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
+		}
+		else
+		{
+			vec3 fragmentDistance = abs(u_pointlightPositions[index] - f_worldSpacePos);
+
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[index].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[index].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[index].z)));
+
+			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
+		}
+
+		diffuse *= u_pointlightColors[index];
+		diffuse *= u_pointlightIntensities[index];
+		diffuse *= (attenuation * attenuation);
+
+		specular *= u_pointlightColors[index];
+		specular *= u_pointlightIntensities[index];
+		specular *= (attenuation * attenuation);
+	}
+}
+
+void calculateSpotLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
+{
+	diffuse = vec3(0.0f);
+	specular = vec3(0.0f);
+
+	for (int index = 0; index < u_spotlightCount; index++)
+	{
+		vec3 lightDirection = normalize(u_spotlightPositions[index] - f_worldSpacePos);
+
+		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
+		specular = vec3(calculateSpecularLighting(lightDirection, normal));
+
+		float spot = dot(lightDirection, normalize(-u_spotlightFronts[index]));
+		float smoothingAngle = (u_spotlightAngles[index] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
+		float intensity = clamp(((spot - (u_spotlightAngles[index] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
+		float fragmentDistance = distance(u_spotlightPositions[index], f_worldSpacePos);
+		float distanceMultiplier = (1.0f - clamp((fragmentDistance / u_spotlightDistances[index]), 0.0f, 1.0f));
+
+		diffuse *= intensity;
+		diffuse *= u_spotlightColors[index];
+		diffuse *= u_spotlightIntensities[index];
+		diffuse *= distanceMultiplier;
+
+		specular *= intensity;
+		specular *= u_spotlightColors[index];
+		specular *= u_spotlightIntensities[index];
+		specular *= distanceMultiplier;
+	}
+}
+
 vec3 calculateFog(vec3 color)
 {
 	if(u_isFogEnabled)
@@ -317,16 +405,26 @@ void main()
 	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 
 	vec3 ambientLighting = calculateAmbientLighting();
-	vec3 directionalDiffuseLighting;
-	vec3 directionalSpecularLighting;
+	vec3 diffuseDirectionalLighting;
+	vec3 diffusePointLighting;
+	vec3 diffuseSpotLighting;
+	vec3 specularDirectionalLighting;
+	vec3 specularPointLighting;
+	vec3 specularSpotLighting;
 	vec3 primaryColor = vec3(0.0f);
 
-	calculateDirectionalLighting(normalMapping, directionalDiffuseLighting, directionalSpecularLighting);
+	calculateDirectionalLighting(normalMapping, diffuseDirectionalLighting, specularDirectionalLighting);
+	calculatePointLighting(normalMapping, diffusePointLighting, specularPointLighting);
+	calculateSpotLighting(normalMapping, diffuseSpotLighting, specularSpotLighting);
+
+	ambientLighting *= shadowLighting;
+	diffuseDirectionalLighting *= shadowOcclusion;
+	specularDirectionalLighting *= shadowOcclusion;
 
 	primaryColor += diffuseColor.rgb;
 	primaryColor *= u_color;
-	primaryColor *= ((ambientLighting * shadowLighting) + (directionalDiffuseLighting * shadowOcclusion));
-	primaryColor += (directionalSpecularLighting * shadowOcclusion);
+	primaryColor *= (ambientLighting + diffuseDirectionalLighting + diffusePointLighting + diffuseSpotLighting);
+	primaryColor += (specularDirectionalLighting + specularPointLighting + specularSpotLighting);
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));

@@ -8,6 +8,8 @@ void WaterColorRenderer::bind()
 	_shaderBuffer->bind();
 	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shaderBuffer->uploadUniform("u_shadowView", _renderStorage->getShadowView());
+	_shaderBuffer->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
 	_shaderBuffer->uploadUniform("u_ambientLightingColor", _renderStorage->getAmbientLightingColor());
 	_shaderBuffer->uploadUniform("u_ambientLightingIntensity", _renderStorage->getAmbientLightingIntensity());
 	_shaderBuffer->uploadUniform("u_isAmbientLightingEnabled", _renderStorage->isAmbientLightingEnabled());
@@ -25,12 +27,20 @@ void WaterColorRenderer::bind()
 	_shaderBuffer->uploadUniform("u_directionalLightingIntensity", _renderStorage->getDirectionalLightingIntensity());
 	_shaderBuffer->uploadUniform("u_isReflectionsEnabled", _renderStorage->isReflectionsEnabled());
 	_shaderBuffer->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
+	_shaderBuffer->uploadUniform("u_shadowSize", _renderStorage->getShadowSize());
+	_shaderBuffer->uploadUniform("u_shadowLookat", _renderStorage->getShadowLookat());
+	_shaderBuffer->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());
+	_shaderBuffer->uploadUniform("u_shadowBias", _renderStorage->getShadowBias());
+	_shaderBuffer->uploadUniform("u_shadowPcfCount", _renderStorage->getShadowPcfCount());
+	_shaderBuffer->uploadUniform("u_isShadowsEnabled", _renderStorage->isShadowsEnabled());
+	_shaderBuffer->uploadUniform("u_isShadowCircleEnabled", _renderStorage->isShadowCircleEnabled());
 	_shaderBuffer->uploadUniform("u_reflectionMap", 0);
 	_shaderBuffer->uploadUniform("u_refractionMap", 1);
 	_shaderBuffer->uploadUniform("u_edgeMap", 2);
 	_shaderBuffer->uploadUniform("u_dudvMap", 3);
 	_shaderBuffer->uploadUniform("u_normalMap", 4);
 	_shaderBuffer->uploadUniform("u_heightMap", 5);
+	_shaderBuffer->uploadUniform("u_shadowMap", 6);
 	_shaderBuffer->uploadUniform("u_hasReflectionMap", (_renderStorage->getWaterReflectionTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasRefractionMap", (_renderStorage->getWaterRefractionTextureBuffer() != nullptr));
 
@@ -50,6 +60,12 @@ void WaterColorRenderer::bind()
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterEdgeTextureBuffer()->getTboId());
+	}
+
+	if(_renderStorage->getShadowTextureBuffer() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE6);
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getTboId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -88,6 +104,12 @@ void WaterColorRenderer::unbind()
 	if(_renderStorage->getWaterEdgeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	if(_renderStorage->getShadowTextureBuffer() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

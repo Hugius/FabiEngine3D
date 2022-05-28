@@ -2,8 +2,8 @@
 
 #define GAMMA_VALUE 2.2f
 
-in vec2 f_uv;
 in vec3 f_worldSpacePos;
+in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;
 layout (location = 1) uniform sampler2D u_emissionMap;

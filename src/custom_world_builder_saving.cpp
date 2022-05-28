@@ -253,6 +253,9 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto minClipPosition = _fe3d->water_getMinClipPosition(waterId);
 		const auto maxClipPosition = _fe3d->water_getMaxClipPosition(waterId);
 		const auto lightness = _fe3d->water_getLightness(waterId);
+		const auto distortionSize = _fe3d->water_getDistortionSize(waterId);
+		const auto distortionFactor = _fe3d->water_getDistortionFactor(waterId);
+		const auto captureOffset = _fe3d->water_getCaptureOffset(waterId);
 		const auto isSelected = (waterId == _fe3d->water_getSelectedId());
 
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
@@ -339,6 +342,12 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< maxClipPosition.z
 			<< " "
 			<< lightness
+			<< " "
+			<< distortionSize
+			<< " "
+			<< distortionFactor
+			<< " "
+			<< captureOffset
 			<< " "
 			<< isSelected
 			<< endl;

@@ -39,8 +39,6 @@ public:
 	const bool isVisible() const;
 
 private:
-	static inline constexpr float MAX_ANGLE = 45.0f;
-
 	const string _id;
 
 	fvec3 _position = fvec3(0.0f);

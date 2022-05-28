@@ -52,6 +52,8 @@ uniform float u_shadowSize;
 uniform float u_shadowLightness;
 uniform float u_shadowBias;
 uniform float u_lightness;
+uniform float u_distortionSize;
+uniform float u_distortionFactor;
 
 uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
 uniform int u_pointlightCount;
@@ -111,7 +113,7 @@ vec2 calculateDudvMapping()
     if(u_hasNormalMap)
     {
 		vec2 dudvMapColor = texture(u_dudvMap, (f_uv + u_rippleOffset)).rg;
-		vec2 dudv = (dudvMapColor * 0.1f);
+		vec2 dudv = (dudvMapColor * u_distortionSize);
 
 		return dudv;
     }
@@ -164,7 +166,7 @@ vec4 calculateDiffuseColor(vec2 dudv, vec3 normal)
 
 		distortedNdcUv *= 2.0f;
 		distortedNdcUv -= 1.0f;
-		distortedNdcUv *= 0.05f;
+		distortedNdcUv *= u_distortionFactor;
 
 		reflectionUv += distortedNdcUv;
 		refractionUv += distortedNdcUv;

@@ -228,6 +228,11 @@ void RenderWindow::setSize(const ivec2 & value)
 		abort();
 	}
 
+	if((value.x < 0) || (value.y < 0))
+	{
+		abort();
+	}
+
 	SetWindowPos(_windowHandle, nullptr, 0, 0, value.x, value.y, SWP_NOMOVE);
 }
 

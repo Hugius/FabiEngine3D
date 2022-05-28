@@ -17,6 +17,9 @@
 - `fe3d:water_set_wireframe_color` (`STR` water_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:water_set_height` (`STR` water_id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_lightness` (`STR` water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_distortion_size` (`STR` water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_distortion_factor` (`STR` water_id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_capture_offset` (`STR` water_id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_wave_height` (`STR` water_id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_texture_repeat` (`STR` water_id, `INT` value) -----> `NONE`
 - `fe3d:water_set_specular_shininess` (`STR` water_id, `DEC` value) -----> `NONE`
@@ -57,6 +60,9 @@
 - `fe3d:water_get_wave_speed_y` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_height` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_lightness` (`STR` water_id) -----> `DEC`
+- `fe3d:water_get_distortion_size` (`STR` water_id) -----> `DEC`
+- `fe3d:water_get_distortion_factor` (`STR` water_id) -----> `DEC`
+- `fe3d:water_get_capture_offset` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_color_r` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_color_g` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_color_b` (`STR` water_id) -----> `DEC`

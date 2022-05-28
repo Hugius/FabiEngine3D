@@ -48,6 +48,21 @@ void EngineInterface::water_setMaxClipPosition(const string & waterId, const fve
 	_core->getWaterManager()->getWater(waterId)->setMaxClipPosition(value);
 }
 
+void EngineInterface::water_setDistortionSize(const string & waterId, float value)
+{
+	_core->getWaterManager()->getWater(waterId)->setDistortionSize(value);
+}
+
+void EngineInterface::water_setDistortionFactor(const string & waterId, float value)
+{
+	_core->getWaterManager()->getWater(waterId)->setDistortionFactor(value);
+}
+
+void EngineInterface::water_setCaptureOffset(const string & waterId, float value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureOffset(value);
+}
+
 void EngineInterface::water_setReflective(const string & waterId, bool value)
 {
 	_core->getWaterManager()->getWater(waterId)->setReflective(value);
@@ -311,6 +326,21 @@ const float EngineInterface::water_getSpecularIntensity(const string & waterId) 
 const float EngineInterface::water_getLightness(const string & waterId) const
 {
 	return _core->getWaterManager()->getWater(waterId)->getLightness();
+}
+
+const float EngineInterface::water_getDistortionSize(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->getDistortionSize();
+}
+
+const float EngineInterface::water_getDistortionFactor(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->getDistortionFactor();
+}
+
+const float EngineInterface::water_getCaptureOffset(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->getCaptureOffset();
 }
 
 const bool EngineInterface::water_isEdged(const string & waterId) const

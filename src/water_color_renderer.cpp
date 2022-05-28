@@ -187,6 +187,8 @@ void WaterColorRenderer::render(const shared_ptr<Water> water)
 	_shaderBuffer->uploadUniform("u_isRefractive", water->isRefractive());
 	_shaderBuffer->uploadUniform("u_color", water->getColor());
 	_shaderBuffer->uploadUniform("u_lightness", water->getLightness());
+	_shaderBuffer->uploadUniform("u_distortionSize", water->getDistortionSize());
+	_shaderBuffer->uploadUniform("u_distortionFactor", water->getDistortionFactor());
 	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, water->getMinClipPosition().x));
 	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, water->getMinClipPosition().y));
 	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, water->getMinClipPosition().z));

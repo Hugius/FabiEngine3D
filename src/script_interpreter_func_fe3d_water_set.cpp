@@ -129,6 +129,48 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_set_distortion_size")
+	{
+		const auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setDistortionSize(_fe3d->water_getSelectedId(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_distortion_factor")
+	{
+		const auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setDistortionFactor(_fe3d->water_getSelectedId(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capture_offset")
+	{
+		const auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureOffset(_fe3d->water_getSelectedId(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_set_max_depth")
 	{
 		const auto types = {SVT::STRING, SVT::DECIMAL};

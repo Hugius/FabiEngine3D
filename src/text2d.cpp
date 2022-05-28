@@ -210,7 +210,7 @@ void Text2d::setVisible(bool value)
 
 void Text2d::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = max(0.0f, value);
 
 	for(const auto & quad2d : _quad2ds)
 	{

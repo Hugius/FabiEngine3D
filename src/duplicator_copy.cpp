@@ -111,6 +111,9 @@ void Duplicator::copyTemplateWater(const string & newId, const string & template
 	_fe3d->water_setRippleSpeed(newId, _fe3d->water_getRippleSpeed(templateId));
 	_fe3d->water_setWaveSpeed(newId, _fe3d->water_getWaveSpeed(templateId));
 	_fe3d->water_setMaxDepth(newId, _fe3d->water_getMaxDepth(templateId));
+	_fe3d->water_setDistortionSize(newId, _fe3d->water_getDistortionSize(templateId));
+	_fe3d->water_setDistortionFactor(newId, _fe3d->water_getDistortionFactor(templateId));
+	_fe3d->water_setCaptureOffset(newId, _fe3d->water_getCaptureOffset(templateId));
 
 	if(_fe3d->water_hasDudvMap(templateId))
 	{

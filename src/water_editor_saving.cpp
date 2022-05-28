@@ -40,6 +40,9 @@ const bool WaterEditor::saveWatersToFile() const
 		const auto isReflective = _fe3d->water_isReflective(waterId);
 		const auto isRefractive = _fe3d->water_isRefractive(waterId);
 		const auto lightness = _fe3d->water_getLightness(waterId);
+		const auto distortionSize = _fe3d->water_getDistortionSize(waterId);
+		const auto distortionFactor = _fe3d->water_getDistortionFactor(waterId);
+		const auto captureOffset = _fe3d->water_getCaptureOffset(waterId);
 
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
@@ -100,6 +103,12 @@ const bool WaterEditor::saveWatersToFile() const
 			<< maxDepth
 			<< " "
 			<< lightness
+			<< " "
+			<< distortionSize
+			<< " "
+			<< distortionFactor
+			<< " "
+			<< captureOffset
 			<< endl;
 	}
 

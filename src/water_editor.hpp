@@ -64,6 +64,8 @@ private:
 	static inline constexpr float WAVE_SPEED_FACTOR = 100000.0f;
 	static inline constexpr float WAVE_HEIGHT_FACTOR = 100.0f;
 	static inline constexpr float SPECULAR_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float DISTORTION_SIZE_FACTOR = 100.0f;
+	static inline constexpr float DISTORTION_FACTOR_FACTOR = 100.0f;
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.5f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;

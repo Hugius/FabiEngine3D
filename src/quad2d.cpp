@@ -337,5 +337,5 @@ void Quad2d::setVisible(bool value)
 
 void Quad2d::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = max(0.0f, value);
 }

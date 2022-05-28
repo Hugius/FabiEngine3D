@@ -88,7 +88,7 @@ void Spotlight::setIntensity(float value)
 
 void Spotlight::setAngle(float value)
 {
-	_angle = clamp(value, 0.0f, MAX_ANGLE);
+	_angle = clamp(value, 0.0f, 45.0f);
 }
 
 void Spotlight::setDistance(float value)

@@ -9,6 +9,9 @@ void WaterEditor::_updateLightingMenu()
 	{
 		const auto color = _fe3d->water_getColor(_currentWaterId);
 		const auto lightness = _fe3d->water_getLightness(_currentWaterId);
+		const auto distortionSize = _fe3d->water_getDistortionSize(_currentWaterId);
+		const auto distortionFactor = _fe3d->water_getDistortionFactor(_currentWaterId);
+		const auto captureOffset = _fe3d->water_getCaptureOffset(_currentWaterId);
 		const auto isReflective = _fe3d->water_isReflective(_currentWaterId);
 		const auto isRefractive = _fe3d->water_isRefractive(_currentWaterId);
 		const auto isSpecular = _fe3d->water_isSpecular(_currentWaterId);
@@ -56,6 +59,18 @@ void WaterEditor::_updateLightingMenu()
 		{
 			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * SPECULAR_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("distortionSize")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("distortionSize", "Distortion Size", (distortionSize * DISTORTION_SIZE_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("distortionFactor")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("distortionFactor", "Distortion Factor", (distortionFactor * DISTORTION_FACTOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("captureOffset")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("captureOffset", "Capture Offset", captureOffset, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -98,6 +113,27 @@ void WaterEditor::_updateLightingMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->water_setLightness(_currentWaterId, (value / LIGHTNESS_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "distortionSize") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->water_setDistortionSize(_currentWaterId, (value / DISTORTION_SIZE_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "distortionFactor") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->water_setDistortionFactor(_currentWaterId, (value / DISTORTION_FACTOR_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "captureOffset") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->water_setCaptureOffset(_currentWaterId, value);
 		}
 
 		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");

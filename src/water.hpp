@@ -35,6 +35,9 @@ public:
 	void setSize(float value);
 	void setMaxDepth(float value);
 	void setLightness(float value);
+	void setDistortionSize(float value);
+	void setDistortionFactor(float value);
+	void setCaptureOffset(float value);
 	void setEdged(bool value);
 	void setSpecular(bool value);
 	void setReflective(bool value);
@@ -72,6 +75,9 @@ public:
 	const float getSpecularIntensity() const;
 	const float getSize() const;
 	const float getLightness() const;
+	const float getDistortionSize() const;
+	const float getDistortionFactor() const;
+	const float getCaptureOffset() const;
 
 	const int getTextureRepeat() const;
 
@@ -82,8 +88,6 @@ public:
 	const bool isEdged() const;
 
 private:
-	static inline constexpr float MAX_SIZE = 1024.0f;
-
 	const string _id;
 
 	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
@@ -113,6 +117,9 @@ private:
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
 	float _lightness = 1.0f;
+	float _distortionFactor = 1.0f;
+	float _distortionSize = 1.0f;
+	float _captureOffset = 1.0f;
 
 	int _textureRepeat = 1;
 

@@ -335,6 +335,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			float maxDepth;
 			float height;
 			float lightness;
+			float distortionSize;
+			float distortionFactor;
+			float captureOffset;
 			int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
@@ -378,6 +381,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxClipPosition.y
 				>> maxClipPosition.z
 				>> lightness
+				>> distortionSize
+				>> distortionFactor
+				>> captureOffset
 				>> isSelected;
 
 			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
@@ -414,6 +420,9 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setMinClipPosition(waterId, minClipPosition);
 			_fe3d->water_setMaxClipPosition(waterId, maxClipPosition);
 			_fe3d->water_setLightness(waterId, lightness);
+			_fe3d->water_setDistortionSize(waterId, distortionSize);
+			_fe3d->water_setDistortionFactor(waterId, distortionFactor);
+			_fe3d->water_setCaptureOffset(waterId, captureOffset);
 
 			if(!dudvMapPath.empty())
 			{

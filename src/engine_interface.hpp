@@ -185,6 +185,9 @@ public:
 	void water_setTextureRepeat(const string & waterId, int value);
 	void water_setMinClipPosition(const string & waterId, const fvec3 & value);
 	void water_setMaxClipPosition(const string & waterId, const fvec3 & value);
+	void water_setDistortionSize(const string & waterId, float value);
+	void water_setDistortionFactor(const string & waterId, float value);
+	void water_setCaptureOffset(const string & waterId, float value);
 
 	const vector<string> water_getIds() const;
 	const string & water_getDudvMapPath(const string & waterId) const;
@@ -204,6 +207,9 @@ public:
 	const float water_getSpecularShininess(const string & waterId) const;
 	const float water_getSpecularIntensity(const string & waterId) const;
 	const float water_getLightness(const string & waterId) const;
+	const float water_getDistortionSize(const string & waterId) const;
+	const float water_getDistortionFactor(const string & waterId) const;
+	const float water_getCaptureOffset(const string & waterId) const;
 	const int water_getTextureRepeat(const string & waterId) const;
 	const bool water_isEdged(const string & waterId) const;
 	const bool water_isExisting(const string & waterId) const;

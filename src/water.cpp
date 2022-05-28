@@ -142,7 +142,7 @@ void Water::setMaxClipPosition(const fvec3 & value)
 
 void Water::setSize(float value)
 {
-	_size = clamp(value, 0.0f, MAX_SIZE);
+	_size = clamp(value, 0.0f, 1024.0f);
 }
 
 void Water::setMaxDepth(float value)
@@ -152,7 +152,22 @@ void Water::setMaxDepth(float value)
 
 void Water::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = max(0.0f, value);
+}
+
+void Water::setDistortionSize(float value)
+{
+	_distortionSize = clamp(value, 0.0f, 1.0f);
+}
+
+void Water::setDistortionFactor(float value)
+{
+	_distortionFactor = clamp(value, 0.0f, 1.0f);
+}
+
+void Water::setCaptureOffset(float value)
+{
+	_captureOffset = max(0.0f, value);
 }
 
 void Water::setEdged(bool value)
@@ -283,6 +298,21 @@ const float Water::getSize() const
 const float Water::getLightness() const
 {
 	return _lightness;
+}
+
+const float Water::getDistortionSize() const
+{
+	return _distortionSize;
+}
+
+const float Water::getDistortionFactor() const
+{
+	return _distortionFactor;
+}
+
+const float Water::getCaptureOffset() const
+{
+	return _captureOffset;
 }
 
 const bool Water::isEdged() const

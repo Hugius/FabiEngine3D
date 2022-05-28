@@ -68,6 +68,15 @@
 - **Opacity**: the opacity of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Distortion Size**: the size of the DUDV map distortion
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **Distortion Factor**: the factor of the DUDV map distortion
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **Capture Offset**: the offset from the water height for correcting capturing artifacts
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `integer`
   - Constraints: at least `1`

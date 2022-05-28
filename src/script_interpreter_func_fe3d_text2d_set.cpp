@@ -336,6 +336,20 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:text2d_set_lightness")
+	{
+		const auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText2d(args[0]->getString(), false))
+			{
+				_fe3d->text2d_setLightness(args[0]->getString(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

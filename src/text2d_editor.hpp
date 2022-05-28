@@ -37,6 +37,7 @@ private:
 	static inline constexpr float CAMERA_YAW = 270.0f;
 	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float OPACITY_FACTOR = 100.0f;
+	static inline constexpr float LIGHTNESS_FACTOR = 100.0f;
 
 	vector<string> _loadedText2dIds = {};
 

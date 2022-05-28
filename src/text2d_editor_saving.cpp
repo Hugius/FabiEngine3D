@@ -27,6 +27,7 @@ const bool Text2dEditor::saveText2dsToFile() const
 	{
 		const auto color = _fe3d->text2d_getColor(text2dId);
 		const auto opacity = _fe3d->text2d_getOpacity(text2dId);
+		const auto lightness = _fe3d->text2d_getLightness(text2dId);
 		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(text2dId);
 		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(text2dId);
 
@@ -53,6 +54,8 @@ const bool Text2dEditor::saveText2dsToFile() const
 			<< isHorizontallyFlipped
 			<< " "
 			<< isVerticallyFlipped
+			<< " "
+			<< lightness
 			<< endl;
 	}
 

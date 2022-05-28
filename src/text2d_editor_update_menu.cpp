@@ -66,6 +66,7 @@ void Text2dEditor::_updateChoiceMenu()
 	{
 		const auto color = _fe3d->text2d_getColor(_currentText2dId);
 		const auto opacity = _fe3d->text2d_getOpacity(_currentText2dId);
+		const auto lightness = _fe3d->text2d_getLightness(_currentText2dId);
 		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(_currentText2dId);
 		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(_currentText2dId);
 
@@ -90,6 +91,10 @@ void Text2dEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
 		{
@@ -127,6 +132,13 @@ void Text2dEditor::_updateChoiceMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->text2d_setOpacity(_currentText2dId, (value / OPACITY_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->text2d_setLightness(_currentText2dId, (value / LIGHTNESS_FACTOR));
 		}
 
 		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");

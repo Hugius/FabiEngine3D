@@ -334,6 +334,7 @@ void Duplicator::copyTemplateText2d(const string & newId, const string & templat
 	_fe3d->text2d_setVerticallyFlipped(newId, _fe3d->text2d_isVerticallyFlipped(templateId));
 	_fe3d->text2d_setColor(newId, _fe3d->text2d_getColor(templateId));
 	_fe3d->text2d_setOpacity(newId, _fe3d->text2d_getOpacity(templateId));
+	_fe3d->text2d_setLightness(newId, _fe3d->text2d_getLightness(templateId));
 	_fe3d->text2d_setContent(newId, _fe3d->text2d_getContent(templateId));
 
 	_copiedText2dIds.insert({newId, templateId});

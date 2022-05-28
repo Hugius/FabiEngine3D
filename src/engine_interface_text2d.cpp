@@ -96,6 +96,11 @@ void EngineInterface::text2d_setWireframeColor(const string & text2dId, const fv
 	_core->getText2dManager()->getText2d(text2dId)->setWireframeColor(value);
 }
 
+void EngineInterface::text2d_setLightness(const string & text2dId, float value)
+{
+	_core->getText2dManager()->getText2d(text2dId)->setLightness(value);
+}
+
 void EngineInterface::text2d_setMinClipPosition(const string & text2dId, const fvec2 & value)
 {
 	_core->getText2dManager()->getText2d(text2dId)->setMinClipPosition(value);
@@ -149,6 +154,11 @@ const float EngineInterface::text2d_getRotation(const string & text2dId) const
 const float EngineInterface::text2d_getOpacity(const string & text2dId) const
 {
 	return _core->getText2dManager()->getText2d(text2dId)->getOpacity();
+}
+
+const float EngineInterface::text2d_getLightness(const string & text2dId) const
+{
+	return _core->getText2dManager()->getText2d(text2dId)->getLightness();
 }
 
 const fvec2 & EngineInterface::text2d_getSize(const string & text2dId) const

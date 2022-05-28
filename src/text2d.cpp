@@ -208,6 +208,16 @@ void Text2d::setVisible(bool value)
 	}
 }
 
+void Text2d::setLightness(float value)
+{
+	_lightness = value;
+
+	for(const auto & quad2d : _quad2ds)
+	{
+		quad2d->setLightness(_lightness);
+	}
+}
+
 void Text2d::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
@@ -424,6 +434,11 @@ const fvec2 & Text2d::getPosition() const
 const float Text2d::getRotation() const
 {
 	return _rotation;
+}
+
+const float Text2d::getLightness() const
+{
+	return _lightness;
 }
 
 const fvec2 & Text2d::getSize() const

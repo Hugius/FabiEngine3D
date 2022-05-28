@@ -18,6 +18,7 @@
 - `fe3d:text2d_set_color` (`STR` text_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text2d_set_wireframe_color` (`STR` text_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text2d_set_opacity` (`STR` text_id, `DEC` value) -----> `NONE`
+- `fe3d:text2d_set_lightness` (`STR` text_id, `DEC` value) -----> `NONE`
 - `fe3d:text2d_set_wireframed` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text2d_set_horizontally_flipped` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text2d_set_vertically_flipped` (`STR` text_id, `BOL` value) -----> `NONE`
@@ -45,6 +46,7 @@
 - `fe3d:text2d_get_wireframe_color_g` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_wireframe_color_b` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_opacity` (`STR` text_id) -----> `DEC`
+- `fe3d:text2d_get_lightness` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_ids` () -----> `LIST`
 - `fe3d:text2d_get_content` (`STR` text_id) -----> `STR`
 - `fe3d:text2d_get_font_map_path` (`STR` text_id) -----> `STR`

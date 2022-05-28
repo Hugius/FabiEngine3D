@@ -38,11 +38,12 @@ void Text2dEditor::_loadGUI()
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("text2dEditorMenuChoice");
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(5)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, POSITIONS(5)[1]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isHorizontallyFlipped", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Flipped X: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped X: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isVerticallyFlipped", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Flipped Y: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped Y: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("lightness", fvec2(0.0f, POSITIONS(6)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isHorizontallyFlipped", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Flipped X: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped X: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isVerticallyFlipped", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Flipped Y: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped Y: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("text2dEditorMenuMain");
 

@@ -39,6 +39,7 @@ public:
 	void setWireframed(bool value);
 	void setCentered(bool value);
 	void setVisible(bool value);
+	void setLightness(float value);
 
 	const vector<shared_ptr<Quad2d>> & getQuad2ds() const;
 
@@ -59,6 +60,7 @@ public:
 
 	const float getOpacity() const;
 	const float getRotation() const;
+	const float getLightness() const;
 
 	const int getDepth() const;
 
@@ -197,6 +199,7 @@ private:
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 	float _opacity = 1.0f;
+	float _lightness = 1.0f;
 
 	int _depth = 0;
 

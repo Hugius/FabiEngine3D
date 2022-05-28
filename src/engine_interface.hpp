@@ -592,6 +592,7 @@ public:
 	void text2d_setVerticallyFlipped(const string & text2dId, bool value);
 	void text2d_setWireframed(const string & text2dId, bool value);
 	void text2d_setWireframeColor(const string & text2dId, const fvec3 & value);
+	void text2d_setLightness(const string & text2dId, float value);
 
 	const vector<string> text2d_getIds() const;
 	const string & text2d_getFontMapPath(const string & text2dId) const;
@@ -604,6 +605,7 @@ public:
 	const fvec2 & text2d_getMaxClipPosition(const string & text2dId) const;
 	const float text2d_getRotation(const string & text2dId) const;
 	const float text2d_getOpacity(const string & text2dId) const;
+	const float text2d_getLightness(const string & text2dId) const;
 	const bool text2d_isExisting(const string & text2dId) const;
 	const bool text2d_isVisible(const string & text2dId) const;
 	const bool text2d_isCentered(const string & text2dId) const;

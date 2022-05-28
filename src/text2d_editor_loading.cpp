@@ -90,6 +90,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 		string fontMapPath;
 		fvec3 color;
 		float opacity;
+		float lightness;
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 
@@ -103,7 +104,8 @@ const bool Text2dEditor::loadText2dsFromFile()
 			>> color.b
 			>> opacity
 			>> isHorizontallyFlipped
-			>> isVerticallyFlipped;
+			>> isVerticallyFlipped
+			>> lightness;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -123,6 +125,7 @@ const bool Text2dEditor::loadText2dsFromFile()
 			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(text2dId, color);
 			_fe3d->text2d_setOpacity(text2dId, opacity);
+			_fe3d->text2d_setLightness(text2dId, lightness);
 			_fe3d->text2d_setHorizontallyFlipped(text2dId, isHorizontallyFlipped);
 			_fe3d->text2d_setVerticallyFlipped(text2dId, isVerticallyFlipped);
 

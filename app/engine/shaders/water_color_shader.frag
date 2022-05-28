@@ -58,6 +58,36 @@ float convertDepthToPerspective(float depth)
     return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }
 
+vec2 calculateDudvMapping()
+{
+    if(u_hasNormalMap)
+    {
+		vec2 dudvMapColor = texture(u_dudvMap, (f_uv + u_rippleOffset)).rg;
+		vec2 dudv = (dudvMapColor * 0.1f);
+
+		return dudv;
+    }
+    else
+    {
+        return vec2(0.0f);
+    }
+}
+
+vec3 calculateNormalMapping(vec2 dudv)
+{
+    if(u_hasNormalMap)
+    {
+		vec3 normalMapColor = texture(u_normalMap, (f_uv + dudv)).rgb;
+		vec3 normal = normalize(vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f)));
+
+		return normal;
+    }
+    else
+    {
+        return vec3(0.0f, 1.0f, 0.0f);
+    }
+}
+
 vec3 calculateAmbientLighting()
 {
 	if(u_isAmbientLightingEnabled)
@@ -115,17 +145,15 @@ vec3 calculateDirectionalSpecularLighting(vec3 normal)
     }
 }
 
-vec4 calculateWaterColor()
+vec4 calculateDiffuseColor(vec2 dudv, vec3 normal)
 {
 	vec2 ndc = (f_clipSpacePos.xy / f_clipSpacePos.w);
 
 	ndc /= 2.0f;
 	ndc += 0.5f;
 
-	vec2 defaultUv = f_uv;
 	vec2 reflectionUv = vec2(ndc.x, -ndc.y);
 	vec2 refractionUv = vec2(ndc.x, ndc.y);
-	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 
 	float opacity = 1.0f;
 
@@ -141,12 +169,7 @@ vec4 calculateWaterColor()
 
 	if(u_hasDudvMap)
 	{
-		vec2 distortedMapUv = texture(u_dudvMap, (defaultUv + u_rippleOffset)).rg;
-
-		distortedMapUv *= 0.1f;
-		defaultUv += distortedMapUv;
-
-		vec2 distortedNdcUv = texture(u_dudvMap, defaultUv).rg;
+		vec2 distortedNdcUv = texture(u_dudvMap, (f_uv + dudv)).rg;
 
 		distortedNdcUv *= 2.0f;
 		distortedNdcUv -= 1.0f;
@@ -159,14 +182,6 @@ vec4 calculateWaterColor()
 		reflectionUv.y = clamp(reflectionUv.y, -0.999f, -0.001f);
 		refractionUv.x = clamp(refractionUv.x, 0.001f, 0.999f);
 		refractionUv.y = clamp(refractionUv.y, 0.001f, 0.999f);
-	}
-
-	if(u_hasNormalMap)
-	{
-		vec3 normalMapColor = texture(u_normalMap, defaultUv).rgb;
-
-		normal = vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f));
-		normal = normalize(normal);
 	}
 
 	vec3 finalColor;
@@ -190,13 +205,6 @@ vec4 calculateWaterColor()
 	{
 		finalColor = u_color;
 	}
-
-	vec3 ambientLighting = calculateAmbientLighting();
-	vec3 directionalDiffuseLighting = calculateDirectionalDiffuseLighting(normal);
-	vec3 directionalSpecularLighting = calculateDirectionalSpecularLighting(normal);
-
-	finalColor *= (ambientLighting + directionalDiffuseLighting);
-	finalColor += directionalSpecularLighting;
 
 	return vec4(finalColor, opacity);
 }
@@ -229,14 +237,24 @@ void main()
 		return;
 	}
 
-	vec4 waterColor = calculateWaterColor();
+	vec2 dudvMapping = calculateDudvMapping();
+	vec3 normalMapping = calculateNormalMapping(dudvMapping);
+	vec4 diffuseColor = calculateDiffuseColor(dudvMapping, normalMapping);
+
+
+
+	vec3 ambientLighting = calculateAmbientLighting();
+	vec3 directionalDiffuseLighting = calculateDirectionalDiffuseLighting(normalMapping);
+	vec3 directionalSpecularLighting = calculateDirectionalSpecularLighting(normalMapping);
 	vec3 primaryColor = vec3(0.0f);
 
-	primaryColor += waterColor.rgb;
+	primaryColor += diffuseColor.rgb;
+	primaryColor *= (ambientLighting + directionalDiffuseLighting);
+	primaryColor += directionalSpecularLighting;
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));
 
-	o_primaryColor = vec4(primaryColor, waterColor.a);
+	o_primaryColor = vec4(primaryColor, diffuseColor.a);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

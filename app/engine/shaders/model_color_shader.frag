@@ -93,95 +93,6 @@ uniform bool u_isBright;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal)
-{
-    if(u_isSpecular)
-    {
-		float result = 0.0f;
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
-        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-		result += specular;
-		result *= u_specularIntensity;
-		result *= specularMapIntensity;
-
-        return result;
-    }
-    else
-    {
-        return 0.0f;
-    }
-}
-
-float calculateShadows()
-{
-	if(u_isShadowsEnabled)
-	{
-		float halfSize = (u_shadowSize * 0.5f);
-		float fragmentDistance = distance(f_worldSpacePos.xz, u_shadowLookat.xz);
-
-		if(fragmentDistance <= halfSize)
-		{
-			vec3 uvCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
-			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
-
-			float shadow = 0.0f;
-
-			if(uvCoords.z > 1.0f)
-			{
-				return 1.0f;
-			}
-
-			for (int x = -u_shadowPcfCount; x <= u_shadowPcfCount; x++)
-			{
-				for (int y = -u_shadowPcfCount; y <= u_shadowPcfCount; y++)
-				{
-					vec2 uvOffset = (vec2(x, y) * texelSize);
-
-					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
-					float lightness = (((uvCoords.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
-
-					shadow += lightness;         
-				}    
-			}
-            
-			int fullPcfCount = ((u_shadowPcfCount * 2) + 1);
-
-			shadow /= float(fullPcfCount * fullPcfCount);
-			
-			if(shadow > 1.0f)
-			{
-				shadow = 1.0f;
-			}
-
-			float opacity = (fragmentDistance - (halfSize * 0.9f));
-
-			opacity = clamp(opacity, 0.0f, (halfSize * 0.1f));
-			opacity /= (halfSize * 0.1f);
-			opacity = (1.0f - opacity);
-
-			if(u_isShadowCircleEnabled)
-			{
-				if((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
-				{
-					return 0.0f;
-				}
-			}
-
-			return mix(1.0f, shadow, opacity);
-		}
-
-		return 1.0f;
-	}
-	else
-	{
-		return 1.0f;
-	}
-}
-
 vec3 calculateDiffuseMapping()
 {
 	if(u_hasDiffuseMap)
@@ -283,16 +194,103 @@ vec3 calculateNormalMapping()
 {
     if(u_hasNormalMap)
     {
-        vec3 normal = texture(u_normalMap, f_uv).rgb;
-
-        normal = ((normal * 2.0f) - 1.0f);
-        normal = normalize(f_tbn * normal);
+        vec3 normalMapColor = texture(u_normalMap, f_uv).rgb;
+        vec3 normal = normalize(f_tbn * ((normalMapColor * 2.0f) - 1.0f));
 
         return normal;
     }
     else
     {
         return f_normal;
+    }
+}
+
+float calculateShadows()
+{
+	if(u_isShadowsEnabled)
+	{
+		float halfSize = (u_shadowSize * 0.5f);
+		float fragmentDistance = distance(f_worldSpacePos.xz, u_shadowLookat.xz);
+
+		if(fragmentDistance <= halfSize)
+		{
+			vec3 uvCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
+			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
+
+			float shadow = 0.0f;
+
+			if(uvCoords.z > 1.0f)
+			{
+				return 1.0f;
+			}
+
+			for (int x = -u_shadowPcfCount; x <= u_shadowPcfCount; x++)
+			{
+				for (int y = -u_shadowPcfCount; y <= u_shadowPcfCount; y++)
+				{
+					vec2 uvOffset = (vec2(x, y) * texelSize);
+
+					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
+					float lightness = (((uvCoords.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
+
+					shadow += lightness;         
+				}    
+			}
+            
+			int fullPcfCount = ((u_shadowPcfCount * 2) + 1);
+
+			shadow /= float(fullPcfCount * fullPcfCount);
+			
+			if(shadow > 1.0f)
+			{
+				shadow = 1.0f;
+			}
+
+			float opacity = (fragmentDistance - (halfSize * 0.9f));
+
+			opacity = clamp(opacity, 0.0f, (halfSize * 0.1f));
+			opacity /= (halfSize * 0.1f);
+			opacity = (1.0f - opacity);
+
+			if(u_isShadowCircleEnabled)
+			{
+				if((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
+				{
+					return 0.0f;
+				}
+			}
+
+			return mix(1.0f, shadow, opacity);
+		}
+
+		return 1.0f;
+	}
+	else
+	{
+		return 1.0f;
+	}
+}
+
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightDirection, vec3 normal)
+{
+    if(u_isSpecular)
+    {
+		float result = 0.0f;
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
+        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+		result += specular;
+		result *= u_specularIntensity;
+		result *= specularMapIntensity;
+
+        return result;
+    }
+    else
+    {
+        return 0.0f;
     }
 }
 
@@ -527,15 +525,16 @@ void main()
 		return;
 	}
 
-	float shadowLighting = calculateShadows();
-	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
-
 	vec3 diffuseMapping = calculateDiffuseMapping();
 	vec3 emissionMapping = calculateEmissionMapping();
     vec3 specularMapping = calculateSpecularMapping();
     vec3 reflectionMapping = calculateReflectionMapping();
 	vec3 refractionMapping = calculateRefractionMapping();
     vec3 normalMapping = calculateNormalMapping();
+
+	float shadowLighting = calculateShadows();
+	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+
 	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
 	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
 	vec3 pointLighting = calculatePointLighting(specularMapping, normalMapping);

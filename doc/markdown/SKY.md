@@ -35,7 +35,7 @@
 - **Front Cube Map Path**: the path of the front part of the cube map file
   - Type: `string`
   - Constraints: none
-- **Color**: the RGB color multiplier of the fragments
+- **Color**: the RGB color multiplier of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
@@ -44,7 +44,7 @@
 - **Rotation**: the rotation of the mesh around the Y axis
   - Type: `decimal3`
   - Constraints: between `0.0` and `360.0`
-- **Lightness**: the lightness multiplier of the fragments
+- **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Visible**: the visibility of the sky in the world

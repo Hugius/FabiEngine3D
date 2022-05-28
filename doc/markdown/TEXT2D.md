@@ -22,7 +22,7 @@
 - **Content**: the content of the characters
   - Type: `string`
   - Constraints: none
-- **Color**: the RGB color multiplier of the fragments
+- **Color**: the RGB color multiplier of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
@@ -34,18 +34,21 @@
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal2`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal2`
   - Constraints: none
 - **Rotation**: the rotation of the mesh around the Z axis
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
-- **Opacity**: the opacity of the fragments
+- **Opacity**: the opacity of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Lightness**: the lightness multiplier of the mesh
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Visible**: the visibility of the text2D in the world
   - Type: `boolean`
   - Constraints: none

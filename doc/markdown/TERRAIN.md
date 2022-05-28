@@ -48,16 +48,16 @@
 - **Blue Normal Map Path**: the path of the blue normal map file
   - Type: `string`
   - Constraints: none
-- **Color**: the RGB color multiplier of the fragments
+- **Color**: the RGB color multiplier of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
 - **Max Height**: the maximum height of the mesh
@@ -66,7 +66,7 @@
 - **Size**: the size of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `1024.0`
-- **Lightness**: the lightness multiplier of the fragments
+- **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Specular Shininess**: the shininess of the specular lighting

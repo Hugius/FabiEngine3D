@@ -24,13 +24,13 @@
 - **Size**: the XYZ size of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
-- **Color**: the RGB color multiplier of the fragments
+- **Color**: the RGB color multiplier of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
 - **Visible**: the visibility of the AABB in the world

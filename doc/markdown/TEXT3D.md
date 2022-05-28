@@ -22,16 +22,16 @@
 - **Content**: the content of the characters
   - Type: `string`
   - Constraints: none
-- **Color**: the RGB color multiplier of the fragments
+- **Color**: the RGB color multiplier of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
 - **Position**: the XY position of the mesh
@@ -46,16 +46,16 @@
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Opacity**: the opacity of the fragments
+- **Opacity**: the opacity of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Min Alpha**: the minimum texture alpha channel intensity to be visible
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
 - **Visible**: the visibility of the text3D in the world

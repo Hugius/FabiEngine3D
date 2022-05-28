@@ -32,10 +32,10 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Min Clip Position**: the minimum position from which fragments are visible
+- **Min Clip Position**: the minimum position from which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **Max Clip Position**: the maximum position to which fragments are visible
+- **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
 - **Ripple Speed**: the speed of the rippling movement
@@ -62,7 +62,10 @@
 - **Specular Intesity**: the intensity of the specular lighting
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Opacity**: the opacity of the fragments
+- **Lightness**: the lightness multiplier of the mesh
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Opacity**: the opacity of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Texture Repeat**: the amount of times the textures are repeated

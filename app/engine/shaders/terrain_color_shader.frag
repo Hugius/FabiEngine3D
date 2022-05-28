@@ -82,6 +82,27 @@ uniform bool u_hasBlueNormalMap;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
+float calculateSpecularLighting(vec3 lightDirection, vec3 normal)
+{
+    if(u_isSpecular)
+    {
+		float result = 0.0f;
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+		result += specular;
+		result *= u_specularIntensity;
+
+        return result;
+	}
+    else
+    {
+        return 0.0f;
+    }
+}
+
 vec3 calculateDiffuseMapping()
 {
 	if(u_hasBlendMap)
@@ -280,27 +301,6 @@ float calculateShadows()
 	{
 		return 1.0f;
 	}
-}
-
-float calculateSpecularLighting(vec3 lightDirection, vec3 normal)
-{
-    if(u_isSpecular)
-    {
-		float result = 0.0f;
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-		result += specular;
-		result *= u_specularIntensity;
-
-        return result;
-	}
-    else
-    {
-        return 0.0f;
-    }
 }
 
 vec3 calculateAmbientLighting()

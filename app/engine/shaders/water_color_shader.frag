@@ -68,6 +68,27 @@ float convertDepthToPerspective(float depth)
     return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }
 
+float calculateSpecularLighting(vec3 lightDirection, vec3 normal)
+{
+    if(u_isDirectionalLightingEnabled && u_isSpecular && (u_cameraPosition.y > f_worldSpacePos.y))
+    {
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+
+		float result = 0.0f;
+        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
+
+        result += specular;
+		result *= u_specularIntensity;
+
+        return result;
+    }
+    else
+    {
+        return 0.0f;
+    }
+}
+
 vec2 calculateDudvMapping()
 {
     if(u_hasNormalMap)
@@ -147,16 +168,14 @@ vec4 calculateDiffuseColor(vec2 dudv, vec3 normal)
 		float fresnelMixValue = dot(viewDirection, normal);
 
 		finalColor = mix(reflectionColor, (reflectionColor * 0.05f), fresnelMixValue);
-		finalColor *= u_color;
 	}
 	else if(u_isRefractionsEnabled && u_hasRefractionMap && u_isRefractive)
 	{
 		finalColor = texture(u_refractionMap, refractionUv).rgb;
-		finalColor *= u_color;
 	}
 	else
 	{
-		finalColor = u_color;
+		finalColor = vec3(1.0f);
 	}
 
 	return vec4(finalColor, opacity);
@@ -240,49 +259,26 @@ vec3 calculateAmbientLighting()
 	}
 }
 
-vec3 calculateDirectionalDiffuseLighting(vec3 normal)
+void calculateDirectionalLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
 {
 	if(u_isDirectionalLightingEnabled)
 	{
-        vec3 lighting = vec3(0.0f);
 		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
 
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
+		specular = vec3(calculateSpecularLighting(lightDirection, normal));
 
-        lighting += vec3(diffuse);
-        lighting *= u_directionalLightingColor;
-        lighting *= u_directionalLightingIntensity;
+        diffuse *= u_directionalLightingColor;
+        diffuse *= u_directionalLightingIntensity;
 
-        return lighting;
+        specular *= u_directionalLightingColor;
+        specular *= u_directionalLightingIntensity;
 	}
 	else
 	{
-		return vec3(0.0f);
+		diffuse = vec3(0.0f);
+		specular = vec3(0.0f);
 	}
-}
-
-vec3 calculateDirectionalSpecularLighting(vec3 normal)
-{
-    if(u_isDirectionalLightingEnabled && u_isSpecular && (u_cameraPosition.y > f_worldSpacePos.y))
-    {
-		vec3 lighting = vec3(0.0f);
-		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
-        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
-        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-
-        float specular = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
-
-        lighting += vec3(specular);
-        lighting *= u_directionalLightingColor;
-        lighting *= u_directionalLightingIntensity;
-		lighting *= u_specularIntensity;
-
-        return lighting;
-    }
-    else
-    {
-        return vec3(0.0f);
-    }
 }
 
 vec3 calculateFog(vec3 color)
@@ -320,14 +316,17 @@ void main()
 	float shadowLighting = calculateShadows();
 	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 
-	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
-	vec3 directionalDiffuseLighting = (calculateDirectionalDiffuseLighting(normalMapping) * shadowOcclusion);
-	vec3 directionalSpecularLighting = (calculateDirectionalSpecularLighting(normalMapping) * shadowOcclusion);
+	vec3 ambientLighting = calculateAmbientLighting();
+	vec3 directionalDiffuseLighting;
+	vec3 directionalSpecularLighting;
 	vec3 primaryColor = vec3(0.0f);
 
+	calculateDirectionalLighting(normalMapping, directionalDiffuseLighting, directionalSpecularLighting);
+
 	primaryColor += diffuseColor.rgb;
-	primaryColor *= (ambientLighting + directionalDiffuseLighting);
-	primaryColor += directionalSpecularLighting;
+	primaryColor *= u_color;
+	primaryColor *= ((ambientLighting * shadowLighting) + (directionalDiffuseLighting * shadowOcclusion));
+	primaryColor += (directionalSpecularLighting * shadowOcclusion);
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = pow(primaryColor, vec3(1.0f / GAMMA_VALUE));

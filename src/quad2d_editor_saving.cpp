@@ -27,6 +27,7 @@ const bool Quad2dEditor::saveQuad2dsToFile() const
 	{
 		const auto color = _fe3d->quad2d_getColor(quad2dId);
 		const auto opacity = _fe3d->quad2d_getOpacity(quad2dId);
+		const auto lightness = _fe3d->quad2d_getLightness(quad2dId);
 		const auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quad2dId);
 		const auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quad2dId);
 		const auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quad2dId);
@@ -56,6 +57,8 @@ const bool Quad2dEditor::saveQuad2dsToFile() const
 			<< isHorizontallyFlipped
 			<< " "
 			<< isVerticallyFlipped
+			<< " "
+			<< lightness
 			<< endl;
 	}
 

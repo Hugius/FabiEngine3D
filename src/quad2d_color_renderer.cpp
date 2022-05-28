@@ -64,6 +64,7 @@ void Quad2dColorRenderer::render(const shared_ptr<Quad2d> quad2d)
 	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", quad2d->isVerticallyFlipped());
 	_shaderBuffer->uploadUniform("u_color", quad2d->getColor());
 	_shaderBuffer->uploadUniform("u_opacity", quad2d->getOpacity());
+	_shaderBuffer->uploadUniform("u_lightness", quad2d->getLightness());
 	_shaderBuffer->uploadUniform("u_textureRepeat", quad2d->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (quad2d->getDiffuseTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_wireframeColor", quad2d->getWireframeColor());

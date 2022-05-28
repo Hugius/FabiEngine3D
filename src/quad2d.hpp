@@ -42,6 +42,7 @@ public:
 	void setCentered(bool value);
 	void setTextureRepeat(int value);
 	void setVisible(bool value);
+	void setLightness(float value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -63,6 +64,7 @@ public:
 
 	const float getOpacity() const;
 	const float getRotation() const;
+	const float getLightness() const;
 
 	const int getTextureRepeat() const;
 	const int getDepth() const;
@@ -101,6 +103,7 @@ private:
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 	float _opacity = 1.0f;
+	float _lightness = 1.0f;
 
 	int _textureRepeat = 1;
 	int _depth = 0;

@@ -24,6 +24,7 @@
 - `fe3d:quad2d_set_color` (`STR` quad_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad2d_set_wireframe_color` (`STR` quad_id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad2d_set_opacity` (`STR` quad_id, `DEC` value) -----> `NONE`
+- `fe3d:quad2d_set_lightness` (`STR` quad_id, `DEC` value) -----> `NONE`
 - `fe3d:quad2d_set_texture_repeat` (`STR` quad_id, `INT` value) -----> `NONE`
 - `fe3d:quad2d_set_wireframed` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad2d_set_horizontally_flipped` (`STR` quad_id, `BOL` value) -----> `NONE`
@@ -61,6 +62,7 @@
 - `fe3d:quad2d_get_wireframe_color_g` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_wireframe_color_b` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_opacity` (`STR` quad_id) -----> `DEC`
+- `fe3d:quad2d_get_lightness` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_texture_repeat` (`STR` quad_id) -----> `INT`
 - `fe3d:quad2d_get_ids` () -----> `LIST`
 - `fe3d:quad2d_get_diffuse_map_path` (`STR` quad_id) -----> `STR`

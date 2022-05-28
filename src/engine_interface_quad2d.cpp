@@ -207,6 +207,11 @@ void EngineInterface::quad2d_setVerticallyFlipped(const string & quad2dId, bool 
 	_core->getQuad2dManager()->getQuad2d(quad2dId)->setVerticallyFlipped(value);
 }
 
+void EngineInterface::quad2d_setLightness(const string & quad2dId, float value)
+{
+	_core->getQuad2dManager()->getQuad2d(quad2dId)->setLightness(value);
+}
+
 const bool EngineInterface::quad2d_isExisting(const string & quad2dId) const
 {
 	return _core->getQuad2dManager()->isQuad2dExisting(quad2dId);
@@ -225,6 +230,11 @@ const float EngineInterface::quad2d_getRotation(const string & quad2dId) const
 const float EngineInterface::quad2d_getOpacity(const string & quad2dId) const
 {
 	return _core->getQuad2dManager()->getQuad2d(quad2dId)->getOpacity();
+}
+
+const float EngineInterface::quad2d_getLightness(const string & quad2dId) const
+{
+	return _core->getQuad2dManager()->getQuad2d(quad2dId)->getLightness();
 }
 
 const int EngineInterface::quad2d_getTextureRepeat(const string & quad2dId) const

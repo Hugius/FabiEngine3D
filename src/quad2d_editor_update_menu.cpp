@@ -67,6 +67,7 @@ void Quad2dEditor::_updateChoiceMenu()
 	{
 		const auto color = _fe3d->quad2d_getColor(_currentQuad2dId);
 		const auto opacity = _fe3d->quad2d_getOpacity(_currentQuad2dId);
+		const auto lightness = _fe3d->quad2d_getLightness(_currentQuad2dId);
 		const auto textureRepeat = _fe3d->quad2d_getTextureRepeat(_currentQuad2dId);
 		const auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(_currentQuad2dId);
 		const auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(_currentQuad2dId);
@@ -126,6 +127,10 @@ void Quad2dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * OPACITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
@@ -170,6 +175,13 @@ void Quad2dEditor::_updateChoiceMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->quad2d_setOpacity(_currentQuad2dId, (value / OPACITY_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->quad2d_setLightness(_currentQuad2dId, (value / LIGHTNESS_FACTOR));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{

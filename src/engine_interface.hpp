@@ -462,6 +462,7 @@ public:
 	void quad2d_scaleTo(const string & quad2dId, const fvec2 & target, float speed);
 	void quad2d_setHorizontallyFlipped(const string & quad2dId, bool value);
 	void quad2d_setVerticallyFlipped(const string & quad2dId, bool value);
+	void quad2d_setLightness(const string & quad2dId, float value);
 	void quad2d_setWireframed(const string & quad2dId, bool value);
 	void quad2d_setWireframeColor(const string & quad2dId, const fvec3 & value);
 	void quad2d_setUvMultiplier(const string & quad2dId, const fvec2 & value);
@@ -491,6 +492,7 @@ public:
 	const fvec2 & quad2d_getUvOffset(const string & quad2dId) const;
 	const float quad2d_getRotation(const string & quad2dId) const;
 	const float quad2d_getOpacity(const string & quad2dId) const;
+	const float quad2d_getLightness(const string & quad2dId) const;
 	const int quad2d_getAnimation2dPlayCount(const string & quad2dId, const string & animation2dId) const;
 	const int quad2d_getAnimation2dRowIndex(const string & quad2dId, const string & animation2dId) const;
 	const int quad2d_getAnimation2dColumnIndex(const string & quad2dId, const string & animation2dId) const;

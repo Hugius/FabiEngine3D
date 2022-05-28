@@ -274,6 +274,7 @@ void Duplicator::copyTemplateQuad2d(const string & newId, const string & templat
 	_fe3d->quad2d_setColor(newId, _fe3d->quad2d_getColor(templateId));
 	_fe3d->quad2d_setTextureRepeat(newId, _fe3d->quad2d_getTextureRepeat(templateId));
 	_fe3d->quad2d_setOpacity(newId, _fe3d->quad2d_getOpacity(templateId));
+	_fe3d->quad2d_setLightness(newId, _fe3d->quad2d_getLightness(templateId));
 
 	if(_fe3d->quad2d_hasDiffuseMap(templateId))
 	{

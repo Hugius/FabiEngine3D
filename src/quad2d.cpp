@@ -275,6 +275,11 @@ const float Quad2d::getRotation() const
 	return _rotation;
 }
 
+const float Quad2d::getLightness() const
+{
+	return _lightness;
+}
+
 const int Quad2d::getTextureRepeat() const
 {
 	return _textureRepeat;
@@ -328,4 +333,9 @@ void Quad2d::setTextureRepeat(int value)
 void Quad2d::setVisible(bool value)
 {
 	_isVisible = value;
+}
+
+void Quad2d::setLightness(float value)
+{
+	_lightness = value;
 }

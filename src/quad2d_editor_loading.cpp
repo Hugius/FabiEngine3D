@@ -90,6 +90,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 		string diffuseMapPath;
 		fvec3 color;
 		float opacity;
+		float lightness;
 		int textureRepeat;
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
@@ -105,7 +106,8 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 			>> opacity
 			>> textureRepeat
 			>> isHorizontallyFlipped
-			>> isVerticallyFlipped;
+			>> isVerticallyFlipped
+			>> lightness;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
@@ -120,6 +122,7 @@ const bool Quad2dEditor::loadQuad2dsFromFile()
 			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quad2dId, color);
 			_fe3d->quad2d_setOpacity(quad2dId, opacity);
+			_fe3d->quad2d_setLightness(quad2dId, lightness);
 			_fe3d->quad2d_setTextureRepeat(quad2dId, textureRepeat);
 			_fe3d->quad2d_setHorizontallyFlipped(quad2dId, isHorizontallyFlipped);
 			_fe3d->quad2d_setVerticallyFlipped(quad2dId, isVerticallyFlipped);

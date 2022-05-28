@@ -10,6 +10,7 @@ uniform vec3 u_color;
 uniform vec3 u_wireframeColor;
 
 uniform float u_opacity;
+uniform float u_lightness;
 
 uniform bool u_hasDiffuseMap;
 uniform bool u_isWireframed;
@@ -46,6 +47,7 @@ void main()
 
 	primaryColor.rgb += diffuseMapping.rgb;
 	primaryColor.rgb *= u_color;
+	primaryColor.rgb *= u_lightness;
 	primaryColor.rgb = clamp(primaryColor.rgb, vec3(0.0f), vec3(1.0f));
 	primaryColor.rgb = pow(primaryColor.rgb, vec3(1.0f / GAMMA_VALUE));
 	primaryColor.a += diffuseMapping.a;

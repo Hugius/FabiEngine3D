@@ -253,6 +253,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad2d_get_lightness")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->quad2d_getLightness(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad2d_get_texture_repeat")
 	{
 		const auto types = {SVT::STRING};

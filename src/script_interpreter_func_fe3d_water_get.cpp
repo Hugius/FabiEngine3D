@@ -133,6 +133,20 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_get_lightness")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->water_getLightness(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_get_dudv_map_path")
 	{
 		const auto types = {SVT::STRING};

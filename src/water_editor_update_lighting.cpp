@@ -8,6 +8,7 @@ void WaterEditor::_updateLightingMenu()
 	if(screen->getId() == "waterEditorMenuLighting")
 	{
 		const auto color = _fe3d->water_getColor(_currentWaterId);
+		const auto lightness = _fe3d->water_getLightness(_currentWaterId);
 		const auto isReflective = _fe3d->water_isReflective(_currentWaterId);
 		const auto isRefractive = _fe3d->water_isRefractive(_currentWaterId);
 		const auto isSpecular = _fe3d->water_isSpecular(_currentWaterId);
@@ -26,6 +27,10 @@ void WaterEditor::_updateLightingMenu()
 			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
@@ -86,6 +91,13 @@ void WaterEditor::_updateLightingMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->water_setSpecularIntensity(_currentWaterId, (value / SPECULAR_INTENSITY_FACTOR));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = _gui->getOverlay()->getValueFormContent();
+			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+
+			_fe3d->water_setLightness(_currentWaterId, (value / LIGHTNESS_FACTOR));
 		}
 
 		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");

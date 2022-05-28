@@ -106,6 +106,7 @@ void Duplicator::copyTemplateWater(const string & newId, const string & template
 	_fe3d->water_setSpecularIntensity(newId, _fe3d->water_getSpecularIntensity(templateId));
 	_fe3d->water_setEdged(newId, _fe3d->water_isEdged(templateId));
 	_fe3d->water_setColor(newId, _fe3d->water_getColor(templateId));
+	_fe3d->water_setLightness(newId, _fe3d->water_getLightness(templateId));
 	_fe3d->water_setTextureRepeat(newId, _fe3d->water_getTextureRepeat(templateId));
 	_fe3d->water_setRippleSpeed(newId, _fe3d->water_getRippleSpeed(templateId));
 	_fe3d->water_setWaveSpeed(newId, _fe3d->water_getWaveSpeed(templateId));

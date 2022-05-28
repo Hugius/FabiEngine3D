@@ -213,6 +213,20 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_set_lightness")
+	{
+		const auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setLightness(_fe3d->water_getSelectedId(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_set_wireframe_color")
 	{
 		const auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

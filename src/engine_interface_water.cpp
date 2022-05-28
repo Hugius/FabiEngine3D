@@ -181,6 +181,11 @@ void EngineInterface::water_setMaxDepth(const string & waterId, float value)
 	_core->getWaterManager()->getWater(waterId)->setMaxDepth(value);
 }
 
+void EngineInterface::water_setLightness(const string & waterId, float value)
+{
+	_core->getWaterManager()->getWater(waterId)->setLightness(value);
+}
+
 void EngineInterface::water_setRippleSpeed(const string & waterId, const fvec2 & value)
 {
 	_core->getWaterManager()->getWater(waterId)->setRippleSpeed(value);
@@ -301,6 +306,11 @@ const float EngineInterface::water_getSpecularShininess(const string & waterId) 
 const float EngineInterface::water_getSpecularIntensity(const string & waterId) const
 {
 	return _core->getWaterManager()->getWater(waterId)->getSpecularIntensity();
+}
+
+const float EngineInterface::water_getLightness(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->getLightness();
 }
 
 const bool EngineInterface::water_isEdged(const string & waterId) const

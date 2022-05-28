@@ -51,6 +51,7 @@ uniform float u_maxDepth;
 uniform float u_shadowSize;
 uniform float u_shadowLightness;
 uniform float u_shadowBias;
+uniform float u_lightness;
 
 uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
 uniform int u_pointlightCount;
@@ -427,6 +428,7 @@ void main()
 
 	primaryColor += diffuseColor.rgb;
 	primaryColor *= u_color;
+	primaryColor *= u_lightness;
 	primaryColor *= (ambientLighting + diffuseDirectionalLighting + diffusePointLighting + diffuseSpotLighting);
 	primaryColor += (specularDirectionalLighting + specularPointLighting + specularSpotLighting);
 	primaryColor = calculateFog(primaryColor);

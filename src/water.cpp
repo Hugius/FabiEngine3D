@@ -150,6 +150,11 @@ void Water::setMaxDepth(float value)
 	_maxDepth = max(0.0f, value);
 }
 
+void Water::setLightness(float value)
+{
+	_lightness = value;
+}
+
 void Water::setEdged(bool value)
 {
 	_isEdged = value;
@@ -273,6 +278,11 @@ const float Water::getSpecularIntensity() const
 const float Water::getSize() const
 {
 	return _size;
+}
+
+const float Water::getLightness() const
+{
+	return _lightness;
 }
 
 const bool Water::isEdged() const

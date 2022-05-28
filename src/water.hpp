@@ -34,6 +34,7 @@ public:
 	void setHeight(float value);
 	void setSize(float value);
 	void setMaxDepth(float value);
+	void setLightness(float value);
 	void setEdged(bool value);
 	void setSpecular(bool value);
 	void setReflective(bool value);
@@ -70,6 +71,7 @@ public:
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 	const float getSize() const;
+	const float getLightness() const;
 
 	const int getTextureRepeat() const;
 
@@ -110,6 +112,7 @@ private:
 	float _maxDepth = 0.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
+	float _lightness = 1.0f;
 
 	int _textureRepeat = 1;
 

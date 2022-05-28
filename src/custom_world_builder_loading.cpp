@@ -334,6 +334,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			float specularIntensity;
 			float maxDepth;
 			float height;
+			float lightness;
 			int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
@@ -376,6 +377,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxClipPosition.x
 				>> maxClipPosition.y
 				>> maxClipPosition.z
+				>> lightness
 				>> isSelected;
 
 			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
@@ -411,6 +413,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setWireframeColor(waterId, wireframeColor);
 			_fe3d->water_setMinClipPosition(waterId, minClipPosition);
 			_fe3d->water_setMaxClipPosition(waterId, maxClipPosition);
+			_fe3d->water_setLightness(waterId, lightness);
 
 			if(!dudvMapPath.empty())
 			{

@@ -75,7 +75,7 @@ private:
 	static inline const fvec3 POSITIVE_UP = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 NEGATIVE_UP = fvec3(0.0f, -1.0f, 0.0f);
 
-	static inline constexpr float DEFAULT_NEAR = 0.01f;
+	static inline constexpr float DEFAULT_NEAR = 0.1f;
 	static inline constexpr float DEFAULT_FAR = 10000.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline constexpr float DEFAULT_FOV = 90.0f;

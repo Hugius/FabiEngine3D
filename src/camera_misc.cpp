@@ -171,12 +171,12 @@ const float Camera::getMaxFirstPersonPitch() const
 
 const float Camera::getNear() const
 {
-	return DEFAULT_NEAR;
+	return _near;
 }
 
 const float Camera::getFar() const
 {
-	return DEFAULT_FAR;
+	return _far;
 }
 
 const float Camera::getCursorSensitivity() const

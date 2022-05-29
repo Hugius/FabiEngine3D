@@ -125,3 +125,16 @@ const bool EngineInterface::animation3d_isExisting(const string & animation3dId)
 {
 	return _core->getAnimation3dManager()->isAnimation3dExisting(animation3dId);
 }
+
+const bool EngineInterface::animation3d_hasPart(const string & animation3dId, const string & partId) const
+{
+	for(const auto & existingPartId : animation3d_getPartIds(animation3dId))
+	{
+		if(partId == existingPartId)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}

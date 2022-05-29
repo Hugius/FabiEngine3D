@@ -776,6 +776,26 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
+			if(!_fe3d->animation3d_isExisting(animation3dId))
+			{
+				continue;
+			}
+
+			bool hasAllParts = true;
+
+			for(const auto & partId : _fe3d->animation3d_getPartIds(animation3dId))
+			{
+				if(!partId.empty() && !_fe3d->model_hasPart(modelId, partId))
+				{
+					hasAllParts = false;
+				}
+			}
+
+			if(!hasAllParts)
+			{
+				continue;
+			}
+
 			_fe3d->model_startAnimation3d(modelId, animation3dId, playCount);
 			_fe3d->model_setAnimation3dFrameIndex(modelId, animation3dId, frameIndex);
 			_fe3d->model_setAnimation3dSpeedMultiplier(modelId, animation3dId, speedMultiplier);
@@ -813,9 +833,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					>> totalSpeed.y
 					>> totalSpeed.z;
 
-				if(!_fe3d->model_hasPart(modelId, partId))
+				if(_fe3d->animation3d_hasPart(animation3dId, partId))
 				{
-					continue;
+					_fe3d->model_stopAnimation3d(modelId, animation3dId);
+
+					break;
 				}
 
 				_fe3d->model_setAnimation3dTotalMovement(modelId, partId, animation3dId, totalMovement);
@@ -1018,6 +1040,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> updateCount;
 
 			if(!_fe3d->quad3d_isExisting(quad3dId))
+			{
+				continue;
+			}
+
+			if(!_fe3d->animation2d_isExisting(animation2dId))
 			{
 				continue;
 			}

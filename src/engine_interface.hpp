@@ -632,10 +632,11 @@ public:
 	const fvec3 & animation3d_getTargetTransformation(const string & animation3dId, int frameIndex, const string & partId) const;
 	const fvec3 & animation3d_getRotationOrigin(const string & animation3dId, int frameIndex, const string & partId) const;
 	const fvec3 & animation3d_getSpeed(const string & animation3dId, int frameIndex, const string & partId) const;
-	const SpeedType & animation3d_getSpeedType(const string & animation3dId, int frameIndex, const string & partId) const;
-	const TransformationType & animation3d_getTransformationType(const string & animation3dId, int frameIndex, const string & partId) const;
 	const int animation3d_getFrameCount(const string & animation3dId);
 	const bool animation3d_isExisting(const string & animation3dId) const;
+	const bool animation3d_hasPart(const string & animation3dId, const string & partId) const;
+	const SpeedType & animation3d_getSpeedType(const string & animation3dId, int frameIndex, const string & partId) const;
+	const TransformationType & animation3d_getTransformationType(const string & animation3dId, int frameIndex, const string & partId) const;
 
 	void animation2d_create(const string & animation2dId);
 	void animation2d_delete(const string & animation2dId);

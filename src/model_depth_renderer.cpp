@@ -42,7 +42,6 @@ void ModelDepthRenderer::render(const shared_ptr<Model> model)
 	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, model->getMaxClipPosition().x));
 	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, model->getMaxClipPosition().y));
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, model->getMaxClipPosition().z));
-	_shaderBuffer->uploadUniform("u_cameraView", (model->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
 	for(const auto & partId : model->getPartIds())
 	{

@@ -4,6 +4,7 @@
 void Quad3dColorRenderer::bind()
 {
 	_shaderBuffer->bind();
+	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shaderBuffer->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
@@ -50,7 +51,6 @@ void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shaderBuffer->uploadUniform("u_cameraView", (quad3d->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 	_shaderBuffer->uploadUniform("u_isWireframed", quad3d->isWireframed());
 	_shaderBuffer->uploadUniform("u_transformation", quad3d->getTransformation());
 	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (quad3d->getDiffuseTextureBuffer() != nullptr));

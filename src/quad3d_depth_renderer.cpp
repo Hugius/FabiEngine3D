@@ -36,7 +36,6 @@ void Quad3dDepthRenderer::render(const shared_ptr<Quad3d> quad3d)
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_cameraView", (quad3d->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 	_shaderBuffer->uploadUniform("u_transformation", quad3d->getTransformation());
 	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, quad3d->getMinClipPosition().x));
 	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, quad3d->getMinClipPosition().y));

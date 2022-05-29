@@ -122,10 +122,6 @@ void WorldEditor::_updateModelEditing()
 					}
 				}
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
-			{
-				_fe3d->model_setFrozen(_activeModelId, !_fe3d->model_isFrozen(_activeModelId));
-			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				if(!currentAnimation3dIds.empty())
@@ -174,7 +170,6 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			screen->getButton("animation3d")->setTextContent(currentAnimation3dIds.empty() ? "Start Animation3D" : "Stop Animation3D");
-			screen->getButton("freeze")->setTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
 		}
 	}
 }

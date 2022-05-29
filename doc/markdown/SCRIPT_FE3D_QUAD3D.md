@@ -38,7 +38,6 @@
 - `fe3d:quad3d_set_refracted` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_bright` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_wireframed` (`STR` quad_id, `BOL` value) -----> `NONE`
-- `fe3d:quad3d_set_frozen` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_facing_camera_horizontally` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_facing_camera_vertically` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_uv_multiplier` (`STR` quad_id, `DEC` x, `DEC` y) -----> `NONE`
@@ -63,7 +62,6 @@
 - `fe3d:quad3d_is_refracted` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_bright` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_wireframed` (`STR` quad_id) -----> `BOL`
-- `fe3d:quad3d_is_frozen` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_existing` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_horizontally_flipped` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_vertically_flipped` (`STR` quad_id) -----> `BOL`

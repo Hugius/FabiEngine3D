@@ -48,7 +48,6 @@ public:
 	void setMaxClipPosition(const fvec3 & value);
 	void setTextureRepeat(int value);
 	void setEmissionIntensity(float value);
-	void setFrozen(bool value);
 	void setMinAlpha(float value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
@@ -90,7 +89,6 @@ public:
 	const bool isReflected() const;
 	const bool isRefracted() const;
 	const bool isBright() const;
-	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool isCentered() const;
 	const bool isHorizontallyFlipped() const;
@@ -141,7 +139,6 @@ private:
 	bool _isRefracted = true;
 	bool _isBright = false;
 	bool _isWireframed = false;
-	bool _isFrozen = false;
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;

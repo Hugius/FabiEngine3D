@@ -60,7 +60,6 @@
 - `fe3d:model_set_reflective` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_refractive` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_shadowed` (`STR` model_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_frozen` (`STR` model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_wireframed` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_bright` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_emission_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
@@ -77,7 +76,6 @@
 - `fe3d:model_is_existing` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_visible` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_shadowed` (`STR` model_id) -----> `BOL`
-- `fe3d:model_is_frozen` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_reflected` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_refracted` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_bright` (`STR` model_id, `STR` part_id) -----> `BOL`

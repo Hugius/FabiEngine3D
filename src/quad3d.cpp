@@ -288,11 +288,6 @@ void Quad3d::setEmissionIntensity(float value)
 	_emissionIntensity = value;
 }
 
-void Quad3d::setFrozen(bool value)
-{
-	_isFrozen = value;
-}
-
 void Quad3d::setMinAlpha(float value)
 {
 	_minAlpha = value;
@@ -481,9 +476,4 @@ const bool Quad3d::isVerticallyFlipped() const
 const DirectionOrderType Quad3d::getRotationOrder() const
 {
 	return _rotationOrder;
-}
-
-const bool Quad3d::isFrozen() const
-{
-	return _isFrozen;
 }

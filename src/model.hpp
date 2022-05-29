@@ -22,7 +22,6 @@ public:
 	void setShadowed(bool value);
 	void setReflected(bool value);
 	void setRefracted(bool value);
-	void setFrozen(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailId(const string & value);
 	void setPreviousCaptorId(const string & value);
@@ -140,7 +139,6 @@ public:
 	const int getTextureRepeat(const string & partId) const;
 
 	const bool isVisible() const;
-	const bool isFrozen() const;
 	const bool isLevelOfDetailed() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
@@ -187,7 +185,6 @@ private:
 	float _cubeRefractionMixValue = 1.0f;
 	float _levelOfDetailDistance = 0.0f;
 
-	bool _isFrozen = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isRefracted = true;

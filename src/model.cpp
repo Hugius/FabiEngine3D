@@ -440,11 +440,6 @@ void Model::setRefracted(bool value)
 	_isRefracted = value;
 }
 
-void Model::setFrozen(bool value)
-{
-	_isFrozen = value;
-}
-
 void Model::setLevelOfDetailed(bool value)
 {
 	_isLevelOfDetailed = value;
@@ -818,11 +813,6 @@ const bool Model::isBright(const string & partId) const
 const bool Model::isVisible() const
 {
 	return _isVisible;
-}
-
-const bool Model::isFrozen() const
-{
-	return _isFrozen;
 }
 
 const bool Model::isLevelOfDetailed() const

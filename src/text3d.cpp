@@ -148,7 +148,6 @@ void Text3d::setContent(const string & value)
 			quad3d->setLightness(_lightness);
 			quad3d->setMinClipPosition(_minClipPosition);
 			quad3d->setMaxClipPosition(_maxClipPosition);
-			quad3d->setFrozen(_isFrozen);
 			quad3d->setUvMultiplier(uvMultiplier);
 			quad3d->setUvOffset(uvOffset);
 
@@ -334,16 +333,6 @@ void Text3d::setMinAlpha(float value)
 	for(const auto & quad3d : _quad3ds)
 	{
 		quad3d->setMinAlpha(_minAlpha);
-	}
-}
-
-void Text3d::setFrozen(bool value)
-{
-	_isFrozen = value;
-
-	for(const auto & quad3d : _quad3ds)
-	{
-		quad3d->setFrozen(_isFrozen);
 	}
 }
 
@@ -593,9 +582,4 @@ const bool Text3d::isVerticallyFlipped() const
 const DirectionOrderType Text3d::getRotationOrder() const
 {
 	return _rotationOrder;
-}
-
-const bool Text3d::isFrozen() const
-{
-	return _isFrozen;
 }

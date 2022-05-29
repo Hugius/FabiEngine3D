@@ -82,9 +82,6 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
-- **Frozen**: the XYZ position of the mesh is not affected by the camera position
-  - Type: `boolean`
-  - Constraints: none
 - **Horizontally Flipped**: the characters are horizontally flipped
   - Type: `boolean`
   - Constraints: none

@@ -229,7 +229,7 @@ void AabbManager::update()
 						aabb->setBasePosition(parentModel->getBasePosition() + rotatedLocalPosition);
 					}
 
-					if(!parentModel->isVisible() || parentModel->isFrozen())
+					if(!parentModel->isVisible())
 					{
 						aabb->setVisible(false);
 						aabb->setCollisionResponsive(false);
@@ -306,7 +306,7 @@ void AabbManager::update()
 					aabb->setBasePosition(newAabbPosition);
 					aabb->setBaseSize(newAabbSize);
 
-					if(!parentQuad3d->isVisible() || parentQuad3d->isFrozen())
+					if(!parentQuad3d->isVisible())
 					{
 						aabb->setVisible(false);
 						aabb->setCollisionResponsive(false);
@@ -383,7 +383,7 @@ void AabbManager::update()
 					aabb->setBasePosition(newAabbPosition);
 					aabb->setBaseSize(newAabbSize);
 
-					if(!parentText3d->isVisible() || parentText3d->isFrozen())
+					if(!parentText3d->isVisible())
 					{
 						aabb->setVisible(false);
 						aabb->setCollisionResponsive(false);

@@ -177,7 +177,6 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto position = _fe3d->model_getBasePosition(modelId);
 		const auto rotation = _fe3d->model_getBaseRotation(modelId);
 		const auto size = _fe3d->model_getBaseSize(modelId);
-		const auto isFrozen = _fe3d->model_isFrozen(modelId);
 
 		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
 
@@ -206,8 +205,6 @@ const bool WorldEditor::saveWorldToFile() const
 			<< size.y
 			<< " "
 			<< size.z
-			<< " "
-			<< isFrozen
 			<< " "
 			<< animation3dId;
 

@@ -105,11 +105,6 @@ void EngineInterface::text3d_setWireframed(const string & text3dId, bool value)
 	_core->getText3dManager()->getText3d(text3dId)->setWireframed(value);
 }
 
-void EngineInterface::text3d_setFrozen(const string & text3dId, bool value)
-{
-	_core->getText3dManager()->getText3d(text3dId)->setFrozen(value);
-}
-
 void EngineInterface::text3d_setHorizontallyFlipped(const string & text3dId, bool value)
 {
 	_core->getText3dManager()->getText3d(text3dId)->setHorizontallyFlipped(value);
@@ -301,11 +296,6 @@ const bool EngineInterface::text3d_isRefracted(const string & text3dId) const
 const bool EngineInterface::text3d_isBright(const string & text3dId) const
 {
 	return _core->getText3dManager()->getText3d(text3dId)->isBright();
-}
-
-const bool EngineInterface::text3d_isFrozen(const string & text3dId) const
-{
-	return _core->getText3dManager()->getText3d(text3dId)->isFrozen();
 }
 
 const bool EngineInterface::text3d_isHorizontallyFlipped(const string & text3dId) const

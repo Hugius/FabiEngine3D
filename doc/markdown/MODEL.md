@@ -52,9 +52,6 @@
 - **LOD Distance**: the minimum distance by which the LOD model will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Frozen**: the XYZ position of the mesh is not affected by the camera position
-  - Type: `boolean`
-  - Constraints: none
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none

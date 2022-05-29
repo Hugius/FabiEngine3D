@@ -204,7 +204,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec3 position;
 			fvec3 rotation;
 			fvec3 size;
-			bool isFrozen;
 
 			iss
 				>> modelId
@@ -218,7 +217,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.x
 				>> size.y
 				>> size.z
-				>> isFrozen
 				>> animation3dId;
 
 			animation3dId = (animation3dId == "?") ? "" : animation3dId;
@@ -235,7 +233,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->model_setBasePosition(modelId, position);
 			_fe3d->model_setBaseRotation(modelId, rotation);
 			_fe3d->model_setBaseSize(modelId, size);
-			_fe3d->model_setFrozen(modelId, isFrozen);
 
 			if(_fe3d->animation3d_isExisting(animation3dId))
 			{

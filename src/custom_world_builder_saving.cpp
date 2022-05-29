@@ -376,7 +376,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto minClipPosition = _fe3d->model_getMinClipPosition(modelId);
 		const auto maxClipPosition = _fe3d->model_getMaxClipPosition(modelId);
 		const auto isVisible = _fe3d->model_isVisible(modelId);
-		const auto isFrozen = _fe3d->model_isFrozen(modelId);
 
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
 
@@ -425,8 +424,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< size.y
 			<< " "
 			<< size.z
-			<< " "
-			<< isFrozen
 			<< " "
 			<< minClipPosition.x
 			<< " "
@@ -704,7 +701,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto wireframeColor = _fe3d->quad3d_getWireframeColor(quad3dId);
 		const auto minClipPosition = _fe3d->quad3d_getMinClipPosition(quad3dId);
 		const auto maxClipPosition = _fe3d->quad3d_getMaxClipPosition(quad3dId);
-		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
 		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
 		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
 		const auto animation2dId = _fe3d->quad3d_getAnimation2dId(quad3dId);
@@ -789,8 +785,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
-			<< " "
-			<< isFrozen
 			<< " "
 			<< uvMultiplier.x
 			<< " "
@@ -899,7 +893,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto wireframeColor = _fe3d->text3d_getWireframeColor(text3dId);
 		const auto minClipPosition = _fe3d->text3d_getMinClipPosition(text3dId);
 		const auto maxClipPosition = _fe3d->text3d_getMaxClipPosition(text3dId);
-		const auto isFrozen = _fe3d->text3d_isFrozen(text3dId);
 		const auto content = _fe3d->text3d_getContent(text3dId);
 
 		file
@@ -963,8 +956,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
-			<< " "
-			<< isFrozen
 			<< " "
 			<< minClipPosition.x
 			<< " "

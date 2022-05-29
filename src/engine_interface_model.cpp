@@ -472,11 +472,6 @@ void EngineInterface::model_setAnimation3dTotalSpeed(const string & modelId, con
 	_core->getAnimation3dPlayer()->setModelAnimation3dTotalSpeed(animation3dId, modelId, partId, value);
 }
 
-void EngineInterface::model_setFrozen(const string & modelId, bool value)
-{
-	_core->getModelManager()->getModel(modelId)->setFrozen(value);
-}
-
 void EngineInterface::model_setWireframed(const string & modelId, const string & partId, bool value)
 {
 	_core->getModelManager()->getModel(modelId)->setWireframed(partId, value);
@@ -565,11 +560,6 @@ const bool EngineInterface::model_isReflected(const string & modelId) const
 const bool EngineInterface::model_isRefracted(const string & modelId) const
 {
 	return _core->getModelManager()->getModel(modelId)->isRefracted();
-}
-
-const bool EngineInterface::model_isFrozen(const string & modelId) const
-{
-	return _core->getModelManager()->getModel(modelId)->isFrozen();
 }
 
 const bool EngineInterface::model_isWireframed(const string & modelId, const string & partId) const

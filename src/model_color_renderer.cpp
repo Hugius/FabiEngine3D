@@ -7,6 +7,7 @@ using std::to_string;
 void ModelColorRenderer::bind()
 {
 	_shaderBuffer->bind();
+	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_shadowView", _renderStorage->getShadowView());
 	_shaderBuffer->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
@@ -170,7 +171,6 @@ void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_m
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, model->getMaxClipPosition().z));
 	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", model->getCubeReflectionMixValue());
 	_shaderBuffer->uploadUniform("u_cubeRefractionMixValue", model->getCubeRefractionMixValue());
-	_shaderBuffer->uploadUniform("u_cameraView", (model->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
 	if(!model->getPreviousCaptorId().empty())
 	{

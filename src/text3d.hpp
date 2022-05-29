@@ -43,7 +43,6 @@ public:
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
 	void setMinAlpha(float value);
-	void setFrozen(bool value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
 	void setRotationOrder(DirectionOrderType value);
@@ -82,7 +81,6 @@ public:
 	const bool isReflected() const;
 	const bool isRefracted() const;
 	const bool isBright() const;
-	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool isCentered() const;
 	const bool isHorizontallyFlipped() const;
@@ -233,7 +231,6 @@ private:
 	bool _isRefracted = true;
 	bool _isBright = false;
 	bool _isWireframed = false;
-	bool _isFrozen = false;
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;

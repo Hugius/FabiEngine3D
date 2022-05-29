@@ -478,7 +478,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isReflected;
 			bool isRefracted;
 			bool isVisible;
-			bool isFrozen;
 
 			iss
 				>> modelId
@@ -502,7 +501,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> size.x
 				>> size.y
 				>> size.z
-				>> isFrozen
 				>> minClipPosition.x
 				>> minClipPosition.y
 				>> minClipPosition.z
@@ -532,7 +530,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->model_setRefracted(modelId, isRefracted);
 			_fe3d->model_setMinClipPosition(modelId, minClipPosition);
 			_fe3d->model_setMaxClipPosition(modelId, maxClipPosition);
-			_fe3d->model_setFrozen(modelId, isFrozen);
 
 			_loadedModelIds.push_back(modelId);
 		}
@@ -858,7 +855,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isBright;
 			bool isVisible;
 			bool isWireframed;
-			bool isFrozen;
 
 			iss
 				>> quad3dId
@@ -895,7 +891,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> wireframeColor.r
 				>> wireframeColor.g
 				>> wireframeColor.b
-				>> isFrozen
 				>> uvMultiplier.x
 				>> uvMultiplier.y
 				>> uvOffset.x
@@ -941,7 +936,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
 			_fe3d->quad3d_setMinClipPosition(quad3dId, minClipPosition);
 			_fe3d->quad3d_setMaxClipPosition(quad3dId, maxClipPosition);
-			_fe3d->quad3d_setFrozen(quad3dId, isFrozen);
 			_fe3d->quad3d_setWireframed(quad3dId, isWireframed);
 			_fe3d->quad3d_setWireframeColor(quad3dId, wireframeColor);
 			_fe3d->quad3d_setUvMultiplier(quad3dId, uvMultiplier);
@@ -1071,7 +1065,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isBright;
 			bool isVisible;
 			bool isWireframed;
-			bool isFrozen;
 
 			iss
 				>> text3dId
@@ -1104,7 +1097,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> wireframeColor.r
 				>> wireframeColor.g
 				>> wireframeColor.b
-				>> isFrozen
 				>> minClipPosition.x
 				>> minClipPosition.y
 				>> minClipPosition.z
@@ -1139,7 +1131,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
 			_fe3d->text3d_setMinClipPosition(text3dId, minClipPosition);
 			_fe3d->text3d_setMaxClipPosition(text3dId, maxClipPosition);
-			_fe3d->text3d_setFrozen(text3dId, isFrozen);
 			_fe3d->text3d_setWireframed(text3dId, isWireframed);
 			_fe3d->text3d_setWireframeColor(text3dId, wireframeColor);
 			_fe3d->text3d_setContent(text3dId, content);

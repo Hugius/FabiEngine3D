@@ -883,20 +883,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_frozen")
-	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0]->getString(), false))
-			{
-				_fe3d->model_setFrozen(args[0]->getString(), args[1]->getBoolean());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_set_wireframed")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};

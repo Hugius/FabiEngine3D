@@ -30,7 +30,6 @@
 - `fe3d:text3d_set_refracted` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_bright` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_wireframed` (`STR` text_id, `BOL` value) -----> `NONE`
-- `fe3d:text3d_set_frozen` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_facing_camera_horizontally` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_facing_camera_vertically` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_min_alpha` (`STR` text_id, `DEC` value) -----> `NONE`
@@ -49,7 +48,6 @@
 - `fe3d:text3d_is_refracted` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_bright` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_wireframed` (`STR` text_id) -----> `BOL`
-- `fe3d:text3d_is_frozen` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_existing` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_horizontally_flipped` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_vertically_flipped` (`STR` text_id) -----> `BOL`

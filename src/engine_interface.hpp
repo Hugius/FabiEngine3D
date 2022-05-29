@@ -240,7 +240,6 @@ public:
 	void model_setShadowed(const string & modelId, bool value);
 	void model_setReflected(const string & modelId, bool value);
 	void model_setRefracted(const string & modelId, bool value);
-	void model_setFrozen(const string & modelId, bool value);
 	void model_setWireframed(const string & modelId, const string & partId, bool value);
 	void model_setBasePosition(const string & modelId, const fvec3 & value);
 	void model_setBaseRotation(const string & modelId, const fvec3 & value);
@@ -339,7 +338,6 @@ public:
 	const bool model_isShadowed(const string & modelId) const;
 	const bool model_isReflected(const string & modelId) const;
 	const bool model_isRefracted(const string & modelId) const;
-	const bool model_isFrozen(const string & modelId) const;
 	const bool model_isWireframed(const string & modelId, const string & partId) const;
 	const bool model_hasPart(const string & modelId, const string & partId) const;
 	const bool model_isBright(const string & modelId, const string & partId) const;
@@ -390,7 +388,6 @@ public:
 	void quad3d_setRefracted(const string & quad3dId, bool value);
 	void quad3d_setBright(const string & quad3dId, bool value);
 	void quad3d_setWireframed(const string & quad3dId, bool value);
-	void quad3d_setFrozen(const string & quad3dId, bool value);
 	void quad3d_setHorizontallyFlipped(const string & quad3dId, bool value);
 	void quad3d_setVerticallyFlipped(const string & quad3dId, bool value);
 	void quad3d_setRotationOrder(const string & quad3dId, DirectionOrderType value);
@@ -441,7 +438,6 @@ public:
 	const bool quad3d_isWireframed(const string & quad3dId) const;
 	const bool quad3d_hasDiffuseMap(const string & quad3dId) const;
 	const bool quad3d_hasEmissionMap(const string & quad3dId) const;
-	const bool quad3d_isFrozen(const string & quad3dId) const;
 	const bool quad3d_isAnimation2dStarted(const string & quad3dId, const string & animation2dId) const;
 	const bool quad3d_isAnimation2dPaused(const string & quad3dId, const string & animation2dId) const;
 	const bool quad3d_isAnimation2dAutopaused(const string & quad3dId, const string & animation2dId) const;
@@ -544,7 +540,6 @@ public:
 	void text3d_setRefracted(const string & text3dId, bool value);
 	void text3d_setBright(const string & text3dId, bool value);
 	void text3d_setWireframed(const string & text3dId, bool value);
-	void text3d_setFrozen(const string & text3dId, bool value);
 	void text3d_setHorizontallyFlipped(const string & text3dId, bool value);
 	void text3d_setVerticallyFlipped(const string & text3dId, bool value);
 	void text3d_setRotationOrder(const string & text3dId, DirectionOrderType value);
@@ -572,7 +567,6 @@ public:
 	const bool text3d_isRefracted(const string & text3dId) const;
 	const bool text3d_isBright(const string & text3dId) const;
 	const bool text3d_isWireframed(const string & text3dId) const;
-	const bool text3d_isFrozen(const string & text3dId) const;
 	const bool text3d_isHorizontallyFlipped(const string & text3dId) const;
 	const bool text3d_isVerticallyFlipped(const string & text3dId) const;
 	const DirectionOrderType text3d_getRotationOrder(const string & text3dId) const;

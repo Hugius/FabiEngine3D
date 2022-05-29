@@ -180,11 +180,6 @@ void EngineInterface::quad3d_setWireframed(const string & quad3dId, bool value)
 	_core->getQuad3dManager()->getQuad3d(quad3dId)->setWireframed(value);
 }
 
-void EngineInterface::quad3d_setFrozen(const string & quad3dId, bool value)
-{
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setFrozen(value);
-}
-
 void EngineInterface::quad3d_startAnimation2d(const string & quad3dId, const string & animation2dId, int playCount)
 {
 	_core->getAnimation2dPlayer()->startQuad3dAnimation2d(animation2dId, quad3dId, playCount);
@@ -509,11 +504,6 @@ const bool EngineInterface::quad3d_hasDiffuseMap(const string & quad3dId) const
 const bool EngineInterface::quad3d_hasEmissionMap(const string & quad3dId) const
 {
 	return (_core->getQuad3dManager()->getQuad3d(quad3dId)->getEmissionTextureBuffer() != nullptr);
-}
-
-const bool EngineInterface::quad3d_isFrozen(const string & quad3dId) const
-{
-	return _core->getQuad3dManager()->getQuad3d(quad3dId)->isFrozen();
 }
 
 const bool EngineInterface::quad3d_isAnimation2dStarted(const string & quad3dId, const string & animation2dId) const

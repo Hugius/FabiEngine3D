@@ -278,8 +278,7 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("modelPropertiesMenu")->createInputBox("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("modelPropertiesMenu")->createInputBox("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("modelPropertiesMenu")->createButton("animation3d", fvec2(0.0f, -0.625f), fvec2(1.875f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Start Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("quad3dPropertiesMenu");
 	leftWindow->getScreen("quad3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.375f, 0.1f), "Quad3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
@@ -299,8 +298,7 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("quad3dPropertiesMenu")->createInputBox("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("quad3dPropertiesMenu")->createInputBox("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("quad3dPropertiesMenu")->createButton("animation2d", fvec2(0.0f, -0.625f), fvec2(1.875f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Start Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad3dPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("text3dPropertiesMenu");
 	leftWindow->getScreen("text3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.375f, 0.1f), "Text3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
@@ -320,8 +318,7 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("text3dPropertiesMenu")->createInputBox("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("text3dPropertiesMenu")->createInputBox("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 7, false, true, false, true);
 	leftWindow->getScreen("text3dPropertiesMenu")->createButton("content", fvec2(0.0f, -0.625f), fvec2(0.875f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Content", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.775f), fvec2(0.75f, 0.1f), "", fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("aabbPropertiesMenu");
 	leftWindow->getScreen("aabbPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.125f, 0.1f), "AABB Menu", fvec3(0.0f, 1.0f, 0.0f), true);

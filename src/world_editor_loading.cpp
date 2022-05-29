@@ -236,7 +236,22 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(_fe3d->animation3d_isExisting(animation3dId))
 			{
-				_fe3d->model_startAnimation3d(modelId, animation3dId, -1);
+				bool hasAllParts = true;
+
+				for(const auto & partId : _fe3d->animation3d_getPartIds(animation3dId))
+				{
+					if(!partId.empty() && !_fe3d->model_hasPart(modelId, partId))
+					{
+						hasAllParts = false;
+
+						break;
+					}
+				}
+
+				if(hasAllParts)
+				{
+					_fe3d->model_startAnimation3d(modelId, animation3dId, -1);
+				}
 			}
 
 			_loadedModelIds.push_back(modelId);

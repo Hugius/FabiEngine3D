@@ -1092,14 +1092,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 				for(const auto & partId : _fe3d->animation3d_getPartIds(args[1]->getString()))
 				{
-					if(!partId.empty())
+					if(!partId.empty() && !_fe3d->model_hasPart(args[0]->getString(), partId))
 					{
-						if(!_fe3d->model_hasPart(args[0]->getString(), partId))
-						{
-							_throwRuntimeError("model does not have the required animation3D parts");
+						_throwRuntimeError("model does not have the required animation3D parts");
 
-							return true;
-						}
+						return true;
 					}
 				}
 

@@ -27,6 +27,29 @@ void Animation3dPlayer::startModelAnimation3d(const string & animation3dId, cons
 		abort();
 	}
 
+	for(const auto & animationPartId : _animation3dManager->getAnimation3d(animation3dId)->getPartIds())
+	{
+		if(!animationPartId.empty())
+		{
+			bool hasPart = false;
+
+			for(const auto & modelPartId : _modelManager->getModel(modelId)->getPartIds())
+			{
+				if(modelPartId == animationPartId)
+				{
+					hasPart = true;
+
+					break;
+				}
+			}
+
+			if(!hasPart)
+			{
+				abort();
+			}
+		}
+	}
+
 	const auto newAnimation3d = make_shared<StartedAnimation3d>();
 
 	newAnimation3d->setPlayCount(playCount);

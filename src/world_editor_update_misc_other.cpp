@@ -341,27 +341,25 @@ void WorldEditor::_updateAnimation3dChoosing()
 	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation3d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-		const auto currentAnimation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
+		const auto animation3dId = ("@" + selectedOptionId);
 
 		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			if(!currentAnimation3dIds.empty())
+			for(const auto & partId : _fe3d->animation3d_getPartIds(animation3dId))
 			{
-				_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
-
-				for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
+				if(!partId.empty() && !_fe3d->model_hasPart(_activeModelId, partId))
 				{
-					if(!partId.empty())
-					{
-						_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
-					}
+					Logger::throwWarning("model does not have the required animation3D parts");
+
+					return;
 				}
 			}
 
-			_fe3d->model_startAnimation3d(_activeModelId, ("@" + selectedOptionId), -1);
+			if(!_fe3d->model_isAnimation3dStarted(_activeModelId, animation3dId))
+			{
+				_fe3d->model_startAnimation3d(_activeModelId, animation3dId, -1);
+				_fe3d->model_pauseAnimation3d(_activeModelId, animation3dId);
+			}
 		}
 	}
 }

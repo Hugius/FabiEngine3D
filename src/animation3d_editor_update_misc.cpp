@@ -79,7 +79,7 @@ void Animation3dEditor::_updateMiscellaneous()
 							{
 								for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
 								{
-									if(_fe3d->model_hasPart(_previewModelId, partId) || partId.empty())
+									if(partId.empty() || _fe3d->model_hasPart(_previewModelId, partId))
 									{
 										if(_fe3d->animation3d_getTransformationType(_currentAnimation3dId, frameIndex, partId) == TransformationType::MOVEMENT)
 										{
@@ -290,21 +290,14 @@ void Animation3dEditor::_updateModelChoosing()
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
-				bool hasAllParts = true;
-
 				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
 				{
-					if(!partId.empty())
+					if(!partId.empty() && !_fe3d->model_hasPart(_hoveredModelId, partId))
 					{
-						hasAllParts = (hasAllParts && _fe3d->model_hasPart(_hoveredModelId, partId));
+						Logger::throwWarning("Preview model does not have the required animation3D parts");
+
+						return;
 					}
-				}
-
-				if(!hasAllParts)
-				{
-					Logger::throwWarning("Preview model does not have the required animation3D parts");
-
-					return;
 				}
 
 				_previewModelId = _hoveredModelId;

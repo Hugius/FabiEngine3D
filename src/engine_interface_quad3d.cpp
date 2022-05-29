@@ -427,19 +427,17 @@ const vector<string> EngineInterface::quad3d_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::quad3d_getAnimation2dIds(const string & quad3dId) const
+const string EngineInterface::quad3d_getAnimation2dId(const string & quad3dId) const
 {
-	vector<string> result = {};
-
 	for(const auto & [startedAnimation2dId, startedQuad3dId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimation2dIds())
 	{
 		if(quad3dId == startedQuad3dId)
 		{
-			result.push_back(startedAnimation2dId);
+			return startedAnimation2dId;
 		}
 	}
 
-	return result;
+	return "";
 }
 
 const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & quad3dId) const

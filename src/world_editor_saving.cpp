@@ -217,12 +217,11 @@ const bool WorldEditor::saveWorldToFile() const
 	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
 		const auto templateQuad3dId = _duplicator->getTemplateQuad3dId(quad3dId);
-		const auto startedAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(quad3dId);
 		const auto position = _fe3d->quad3d_getPosition(quad3dId);
 		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
 		const auto size = _fe3d->quad3d_getSize(quad3dId);
 
-		auto animation2dId = (startedAnimation2dIds.empty() ? "" : startedAnimation2dIds[0]);
+		auto animation2dId = _fe3d->quad3d_getAnimation2dId(quad3dId);
 
 		animation2dId = (animation2dId.empty()) ? "?" : animation2dId;
 

@@ -17,9 +17,12 @@ void Animation2dPlayer::startQuad3dAnimation2d(const string & animation2dId, con
 		abort();
 	}
 
-	if(isQuad3dAnimation2dStarted(animation2dId, quad3dId))
+	for(const auto [startedAnimation2dId, startedQuad3dId] : getStartedQuad3dAnimation2dIds())
 	{
-		abort();
+		if(quad3dId == startedQuad3dId)
+		{
+			abort();
+		}
 	}
 
 	if((playCount == 0) || (playCount < -1))
@@ -263,9 +266,12 @@ void Animation2dPlayer::startQuad2dAnimation2d(const string & animation2dId, con
 		abort();
 	}
 
-	if(isQuad2dAnimation2dStarted(animation2dId, quad2dId))
+	for(const auto [startedAnimation2dId, startedQuad2dId] : getStartedQuad2dAnimation2dIds())
 	{
-		abort();
+		if(quad2dId == startedQuad2dId)
+		{
+			abort();
+		}
 	}
 
 	if((playCount == 0) || (playCount < -1))

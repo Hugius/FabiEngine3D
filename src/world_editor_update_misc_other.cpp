@@ -371,13 +371,13 @@ void WorldEditor::_updateAnimation2dChoosing()
 	if((_gui->getOverlay()->getChoiceFormId() == "selectAnimation2d") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
-		const auto currentAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(_activeQuad3dId);
+		const auto currentAnimation2dId = _fe3d->quad3d_getAnimation2dId(_activeQuad3dId);
 
 		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			if(!currentAnimation2dIds.empty())
+			if(!currentAnimation2dId.empty())
 			{
-				_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
+				_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dId);
 			}
 
 			_fe3d->quad3d_startAnimation2d(_activeQuad3dId, ("@" + selectedOptionId), -1);

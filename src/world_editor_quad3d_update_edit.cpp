@@ -71,7 +71,7 @@ void WorldEditor::_updateQuad3dEditing()
 		if(!_activeQuad3dId.empty())
 		{
 			const auto screen = window->getScreen("quad3dPropertiesMenu");
-			const auto currentAnimation2dIds = _fe3d->quad3d_getAnimation2dIds(_activeQuad3dId);
+			const auto currentAnimation2dId = _fe3d->quad3d_getAnimation2dId(_activeQuad3dId);
 
 			window->setActiveScreen("quad3dPropertiesMenu");
 
@@ -99,7 +99,7 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2d")->isHovered())
 			{
-				if(currentAnimation2dIds.empty())
+				if(currentAnimation2dId.empty())
 				{
 					auto animation2dIds = _animation2dEditor->getLoadedAnimation2dIds();
 
@@ -112,16 +112,16 @@ void WorldEditor::_updateQuad3dEditing()
 				}
 				else
 				{
-					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
+					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dId);
 					_fe3d->quad3d_setUvMultiplier(_activeQuad3dId, fvec2(1.0f));
 					_fe3d->quad3d_setUvOffset(_activeQuad3dId, fvec2(0.0f));
 				}
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				if(!currentAnimation2dIds.empty())
+				if(!currentAnimation2dId.empty())
 				{
-					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dIds[0]);
+					_fe3d->quad3d_stopAnimation2d(_activeQuad3dId, currentAnimation2dId);
 				}
 
 				_duplicator->deleteCopiedQuad3d(_activeQuad3dId);
@@ -164,7 +164,7 @@ void WorldEditor::_updateQuad3dEditing()
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("animation2d")->setTextContent(currentAnimation2dIds.empty() ? "Start Animation2D" : "Stop Animation2D");
+			screen->getButton("animation2d")->setTextContent(currentAnimation2dId.empty() ? "Start Animation2D" : "Stop Animation2D");
 			screen->getButton("freeze")->setTextContent(_fe3d->quad3d_isFrozen(_activeQuad3dId) ? "Unfreeze" : "Freeze");
 		}
 	}

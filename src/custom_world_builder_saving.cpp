@@ -707,7 +707,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		const auto isFrozen = _fe3d->quad3d_isFrozen(quad3dId);
 		const auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quad3dId);
 		const auto uvOffset = _fe3d->quad3d_getUvOffset(quad3dId);
-		const auto animation2dIds = _fe3d->quad3d_getAnimation2dIds(quad3dId);
+		const auto animation2dId = _fe3d->quad3d_getAnimation2dId(quad3dId);
 
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
@@ -833,7 +833,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				<< endl;
 		}
 
-		for(const auto & animation2dId : animation2dIds)
+		if(!animation2dId.empty())
 		{
 			const auto isPaused = _fe3d->quad3d_isAnimation2dPaused(quad3dId, animation2dId);
 			const auto isAutoPaused = _fe3d->quad3d_isAnimation2dAutopaused(quad3dId, animation2dId);

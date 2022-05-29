@@ -406,8 +406,8 @@ public:
 	void quad3d_setAnimation2dUpdateCount(const string & quad3dId, const string & animation2dId, int value);
 
 	const vector<string> quad3d_getIds() const;
-	const vector<string> quad3d_getAnimation2dIds(const string & quad3dId) const;
 	const vector<string> quad3d_getChildAabbIds(const string & quad3dId) const;
+	const string quad3d_getAnimation2dId(const string & quad3dId) const;
 	const string & quad3d_getDiffuseMapPath(const string & quad3dId) const;
 	const string & quad3d_getEmissionMapPath(const string & quad3dId) const;
 	const fvec3 & quad3d_getPosition(const string & quad3dId) const;

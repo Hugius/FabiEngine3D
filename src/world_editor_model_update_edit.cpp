@@ -71,7 +71,8 @@ void WorldEditor::_updateModelEditing()
 		if(!_activeModelId.empty())
 		{
 			const auto screen = window->getScreen("modelPropertiesMenu");
-			const auto currentAnimation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
+			const auto animation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
+			const auto isAnimation3dPaused = (animation3dIds.empty() ? false : _fe3d->model_isAnimation3dPaused(_activeModelId, animation3dIds[0]));
 
 			window->setActiveScreen("modelPropertiesMenu");
 
@@ -93,22 +94,32 @@ void WorldEditor::_updateModelEditing()
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation3d")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("addAnimation3d")->isHovered())
 			{
-				if(currentAnimation3dIds.empty())
+				auto animation3dIds = _animation3dEditor->getLoadedAnimation3dIds();
+
+				for(auto & animation3dId : animation3dIds)
 				{
-					auto animation3dIds = _animation3dEditor->getLoadedAnimation3dIds();
+					animation3dId = animation3dId.substr(1);
+				}
 
-					for(auto & animation3dId : animation3dIds)
+				_gui->getOverlay()->openChoiceForm("selectAnimation3d", "Select Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
+			}
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("startAnimation3d")->isHovered())
+			{
+				if(isAnimation3dPaused)
+				{
+					for(const auto & animation3dId : animation3dIds)
 					{
-						animation3dId = animation3dId.substr(1);
+						_fe3d->model_resumeAnimation3d(_activeModelId, animation3dId);
 					}
-
-					_gui->getOverlay()->openChoiceForm("selectAnimation3d", "Select Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
 				}
 				else
 				{
-					_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
+					for(const auto & animation3dId : animation3dIds)
+					{
+						_fe3d->model_stopAnimation3d(_activeModelId, animation3dId);
+					}
 
 					for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
 					{
@@ -124,9 +135,9 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
-				if(!currentAnimation3dIds.empty())
+				for(const auto & animation3dId : animation3dIds)
 				{
-					_fe3d->model_stopAnimation3d(_activeModelId, currentAnimation3dIds[0]);
+					_fe3d->model_stopAnimation3d(_activeModelId, animation3dId);
 				}
 
 				_duplicator->deleteCopiedModel(_activeModelId);
@@ -169,7 +180,9 @@ void WorldEditor::_updateModelEditing()
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
 
-			screen->getButton("animation3d")->setTextContent(currentAnimation3dIds.empty() ? "Start Animation3D" : "Stop Animation3D");
+			screen->getButton("addAnimation3d")->setHoverable(animation3dIds.empty() || isAnimation3dPaused);
+			screen->getButton("startAnimation3d")->setHoverable(!animation3dIds.empty());
+			screen->getButton("startAnimation3d")->setTextContent((animation3dIds.empty() || isAnimation3dPaused) ? "Start Animation3D" : "Stop Animation3D");
 		}
 	}
 }

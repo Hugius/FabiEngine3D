@@ -200,10 +200,10 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		{
 			string modelId;
 			string templateModelId;
-			string animation3dId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec3 size;
+			int animation3dCount;
 
 			iss
 				>> modelId
@@ -217,11 +217,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.x
 				>> size.y
 				>> size.z
-				>> animation3dId;
-
-			animation3dId = (animation3dId == "?") ? "" : animation3dId;
-
-			replace(animation3dId.begin(), animation3dId.end(), '?', ' ');
+				>> animation3dCount;
 
 			if(!_fe3d->model_isExisting(templateModelId))
 			{
@@ -234,23 +230,30 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->model_setBaseRotation(modelId, rotation);
 			_fe3d->model_setBaseSize(modelId, size);
 
-			if(_fe3d->animation3d_isExisting(animation3dId))
+			for(int index = 0; index < animation3dCount; index++)
 			{
-				bool hasAllParts = true;
+				string animation3dId;
 
-				for(const auto & partId : _fe3d->animation3d_getPartIds(animation3dId))
+				iss >> animation3dId;
+
+				if(_fe3d->animation3d_isExisting(animation3dId))
 				{
-					if(!partId.empty() && !_fe3d->model_hasPart(modelId, partId))
+					bool hasAllParts = true;
+
+					for(const auto & partId : _fe3d->animation3d_getPartIds(animation3dId))
 					{
-						hasAllParts = false;
+						if(!partId.empty() && !_fe3d->model_hasPart(modelId, partId))
+						{
+							hasAllParts = false;
 
-						break;
+							break;
+						}
 					}
-				}
 
-				if(hasAllParts)
-				{
-					_fe3d->model_startAnimation3d(modelId, animation3dId, -1);
+					if(hasAllParts)
+					{
+						_fe3d->model_startAnimation3d(modelId, animation3dId, -1);
+					}
 				}
 			}
 
@@ -279,8 +282,6 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> animation2dId;
 
 			animation2dId = (animation2dId == "?") ? "" : animation2dId;
-
-			replace(animation2dId.begin(), animation2dId.end(), '?', ' ');
 
 			if(!_fe3d->quad3d_isExisting(templateQuad3dId))
 			{

@@ -93,7 +93,7 @@ void WorldEditor::_updateQuad3dEditing()
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("animation2d")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("startAnimation2d")->isHovered())
 			{
 				if(currentAnimation2dId.empty())
 				{
@@ -160,7 +160,7 @@ void WorldEditor::_updateQuad3dEditing()
 			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
 			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("animation2d")->setTextContent(currentAnimation2dId.empty() ? "Start Animation2D" : "Stop Animation2D");
+			screen->getButton("startAnimation2d")->setTextContent(currentAnimation2dId.empty() ? "Start Animation2D" : "Stop Animation2D");
 		}
 	}
 }

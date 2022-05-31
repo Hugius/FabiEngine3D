@@ -173,14 +173,11 @@ const bool WorldEditor::saveWorldToFile() const
 	for(const auto & modelId : _loadedModelIds)
 	{
 		const auto templateModelId = _duplicator->getTemplateModelId(modelId);
-		const auto startedAnimation3dIds = _fe3d->model_getAnimation3dIds(modelId);
+		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
+		const auto animation3dCount = animation3dIds.size();
 		const auto position = _fe3d->model_getBasePosition(modelId);
 		const auto rotation = _fe3d->model_getBaseRotation(modelId);
 		const auto size = _fe3d->model_getBaseSize(modelId);
-
-		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
-
-		animation3dId = (animation3dId.empty()) ? "?" : animation3dId;
 
 		file
 			<< "MODEL "
@@ -206,7 +203,14 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< size.z
 			<< " "
-			<< animation3dId;
+			<< animation3dCount;
+
+		for(const auto & animation3dId : animation3dIds)
+		{
+			file
+				<< " "
+				<< animation3dId;
+		}
 
 		file << endl;
 	}

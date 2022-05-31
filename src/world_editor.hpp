@@ -245,6 +245,10 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 205;
 
+	unordered_map<string, fvec3> _originalModelPositions = {};
+	unordered_map<string, fvec3> _originalModelRotations = {};
+	unordered_map<string, fvec3> _originalModelSizes = {};
+
 	vector<string> _loadedModelIds = {};
 	vector<string> _loadedQuad3dIds = {};
 	vector<string> _loadedText3dIds = {};

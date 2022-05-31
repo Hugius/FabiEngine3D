@@ -175,9 +175,9 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto templateModelId = _duplicator->getTemplateModelId(modelId);
 		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
 		const auto animation3dCount = animation3dIds.size();
-		const auto position = _fe3d->model_getBasePosition(modelId);
-		const auto rotation = _fe3d->model_getBaseRotation(modelId);
-		const auto size = _fe3d->model_getBaseSize(modelId);
+		const auto position = _originalModelPositions.at(modelId);
+		const auto rotation = _originalModelRotations.at(modelId);
+		const auto size = _originalModelSizes.at(modelId);
 
 		file
 			<< "MODEL "

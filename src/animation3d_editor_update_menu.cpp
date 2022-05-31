@@ -83,7 +83,7 @@ void Animation3dEditor::_updateChoiceMenu()
 						_fe3d->model_setBasePosition(_previewModelId, fvec3(0.0f));
 						_fe3d->model_setBaseRotationOrigin(_previewModelId, fvec3(0.0f));
 						_fe3d->model_setBaseRotation(_previewModelId, fvec3(0.0f));
-						_fe3d->model_setBaseSize(_previewModelId, _initialModelSize);
+						_fe3d->model_setBaseSize(_previewModelId, _originalModelSize);
 					}
 					else
 					{
@@ -102,7 +102,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_previewModelId = "";
 			_currentAnimation3dId = "";
-			_initialModelSize = fvec3(0.0f);
+			_originalModelSize = fvec3(0.0f);
 			_currentFrameIndex = 0;
 
 			return;
@@ -132,7 +132,7 @@ void Animation3dEditor::_updateChoiceMenu()
 					_fe3d->model_setBasePosition(_previewModelId, fvec3(0.0f));
 					_fe3d->model_setBaseRotationOrigin(_previewModelId, fvec3(0.0f));
 					_fe3d->model_setBaseRotation(_previewModelId, fvec3(0.0f));
-					_fe3d->model_setBaseSize(_previewModelId, _initialModelSize);
+					_fe3d->model_setBaseSize(_previewModelId, _originalModelSize);
 				}
 				else
 				{
@@ -156,7 +156,7 @@ void Animation3dEditor::_updateChoiceMenu()
 					_fe3d->model_setBasePosition(_previewModelId, fvec3(0.0f));
 					_fe3d->model_setBaseRotationOrigin(_previewModelId, fvec3(0.0f));
 					_fe3d->model_setBaseRotation(_previewModelId, fvec3(0.0f));
-					_fe3d->model_setBaseSize(_previewModelId, _initialModelSize);
+					_fe3d->model_setBaseSize(_previewModelId, _originalModelSize);
 				}
 				else
 				{

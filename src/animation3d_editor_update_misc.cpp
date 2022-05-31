@@ -62,7 +62,7 @@ void Animation3dEditor::_updateMiscellaneous()
 								_fe3d->model_setBasePosition(_previewModelId, fvec3(0.0f));
 								_fe3d->model_setBaseRotationOrigin(_previewModelId, fvec3(0.0f));
 								_fe3d->model_setBaseRotation(_previewModelId, fvec3(0.0f));
-								_fe3d->model_setBaseSize(_previewModelId, _initialModelSize);
+								_fe3d->model_setBaseSize(_previewModelId, _originalModelSize);
 							}
 							else
 							{
@@ -121,7 +121,7 @@ void Animation3dEditor::_updateMiscellaneous()
 										}
 										else if(_fe3d->animation3d_getTransformationType(_currentAnimation3dId, frameIndex, partId) == TransformationType::SCALING)
 										{
-											const auto newSize = (_initialModelSize + _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId));
+											const auto newSize = (_originalModelSize + _fe3d->animation3d_getTargetTransformation(_currentAnimation3dId, frameIndex, partId));
 
 											if(partId.empty())
 											{
@@ -301,7 +301,7 @@ void Animation3dEditor::_updateModelChoosing()
 				}
 
 				_previewModelId = _hoveredModelId;
-				_initialModelSize = _fe3d->model_getBaseSize(_previewModelId);
+				_originalModelSize = _fe3d->model_getBaseSize(_previewModelId);
 
 				if(_fe3d->animation3d_getFrameCount(_currentAnimation3dId) == 0)
 				{

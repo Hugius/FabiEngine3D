@@ -258,6 +258,10 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			}
 
 			_loadedModelIds.push_back(modelId);
+
+			_originalModelPositions.insert({modelId, position});
+			_originalModelRotations.insert({modelId, rotation});
+			_originalModelSizes.insert({modelId, size});
 		}
 		else if(lineType == "QUAD3D")
 		{

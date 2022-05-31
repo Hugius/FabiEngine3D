@@ -27,15 +27,19 @@ void WorldEditor::_updateModelPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
+				const auto newModelId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
 
 				_modelIdCounter++;
 
-				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
+				_duplicator->copyTemplateModel(newModelId, _currentTemplateModelId);
 
-				_fe3d->model_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedModelIds.push_back(newId);
+				_originalModelPositions.insert({newModelId, _fe3d->model_getBasePosition(newModelId)});
+				_originalModelRotations.insert({newModelId, _fe3d->model_getBaseRotation(newModelId)});
+				_originalModelSizes.insert({newModelId, _fe3d->model_getBaseSize(newModelId)});
+
+				_loadedModelIds.push_back(newModelId);
 
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 
@@ -88,15 +92,19 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
+				const auto newModelId = (_currentTemplateModelId.substr(1) + "_" + to_string(_modelIdCounter));
 
 				_modelIdCounter++;
 
-				_duplicator->copyTemplateModel(newId, _currentTemplateModelId);
+				_duplicator->copyTemplateModel(newModelId, _currentTemplateModelId);
 
-				_fe3d->model_setBasePosition(newId, newPosition);
+				_fe3d->model_setBasePosition(newModelId, newPosition);
 
-				_loadedModelIds.push_back(newId);
+				_originalModelPositions.insert({newModelId, _fe3d->model_getBasePosition(newModelId)});
+				_originalModelRotations.insert({newModelId, _fe3d->model_getBaseRotation(newModelId)});
+				_originalModelSizes.insert({newModelId, _fe3d->model_getBaseSize(newModelId)});
+
+				_loadedModelIds.push_back(newModelId);
 			}
 		}
 	}

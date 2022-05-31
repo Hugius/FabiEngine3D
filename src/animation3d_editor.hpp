@@ -98,7 +98,7 @@ private:
 	string _hoveredPartId = "";
 	string _previewModelId = "";
 
-	fvec3 _initialModelSize = fvec3(0.0f);
+	fvec3 _originalModelSize = fvec3(0.0f);
 
 	float _originalPartOpacity = 0.0f;
 

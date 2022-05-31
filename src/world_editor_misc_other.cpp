@@ -136,6 +136,9 @@ void WorldEditor::clearLoadedWorld()
 	_fe3d->graphics_setPlanarRefractionHeight(0.0f);
 	_fe3d->graphics_setPlanarRefractionQuality(0);
 
+	_originalModelPositions.clear();
+	_originalModelRotations.clear();
+	_originalModelSizes.clear();
 	_loadedModelIds.clear();
 	_loadedQuad3dIds.clear();
 	_loadedText3dIds.clear();

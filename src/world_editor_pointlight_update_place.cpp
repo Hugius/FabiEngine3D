@@ -42,16 +42,16 @@ void WorldEditor::_updatePointlightPlacing()
 
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplatePointlightId.substr(1) + "_" + to_string(_pointlightIdCounter));
-				const auto newModelId = ("@@lamp_" + newId);
+				const auto newPointlightId = (_currentTemplatePointlightId.substr(1) + "_" + to_string(_pointlightIdCounter));
+				const auto newModelId = ("@@lamp_" + newPointlightId);
 
 				_pointlightIdCounter++;
 
-				_duplicator->copyTemplatePointlight(newId, _currentTemplatePointlightId);
+				_duplicator->copyTemplatePointlight(newPointlightId, _currentTemplatePointlightId);
 
-				_fe3d->pointlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->pointlight_setPosition(newPointlightId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedPointlightIds.push_back(newId);
+				_loadedPointlightIds.push_back(newPointlightId);
 
 				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -60,7 +60,7 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
 				_fe3d->model_setBright(newModelId, "", true);
-				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(newId));
+				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(newPointlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
@@ -135,16 +135,16 @@ void WorldEditor::_updatePointlightPlacing()
 					return;
 				}
 
-				const auto newId = (_currentTemplatePointlightId.substr(1) + "_" + to_string(_pointlightIdCounter));
-				const auto newModelId = ("@@lamp_" + newId);
+				const auto newPointlightId = (_currentTemplatePointlightId.substr(1) + "_" + to_string(_pointlightIdCounter));
+				const auto newModelId = ("@@lamp_" + newPointlightId);
 
 				_pointlightIdCounter++;
 
-				_duplicator->copyTemplatePointlight(newId, _currentTemplatePointlightId);
+				_duplicator->copyTemplatePointlight(newPointlightId, _currentTemplatePointlightId);
 
-				_fe3d->pointlight_setPosition(newId, newPosition);
+				_fe3d->pointlight_setPosition(newPointlightId, newPosition);
 
-				_loadedPointlightIds.push_back(newId);
+				_loadedPointlightIds.push_back(newPointlightId);
 
 				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -153,7 +153,7 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
 				_fe3d->model_setBright(newModelId, "", true);
-				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(newId));
+				_fe3d->model_setColor(newModelId, "", _fe3d->pointlight_getColor(newPointlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);

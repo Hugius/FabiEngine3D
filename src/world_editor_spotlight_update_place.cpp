@@ -42,16 +42,16 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
-				const auto newModelId = ("@@torch_" + newId);
+				const auto newSpotlightId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
+				const auto newModelId = ("@@torch_" + newSpotlightId);
 
 				_spotlightIdCounter++;
 
-				_duplicator->copyTemplateSpotlight(newId, _currentTemplateSpotlightId);
+				_duplicator->copyTemplateSpotlight(newSpotlightId, _currentTemplateSpotlightId);
 
-				_fe3d->spotlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->spotlight_setPosition(newSpotlightId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedSpotlightIds.push_back(newId);
+				_loadedSpotlightIds.push_back(newSpotlightId);
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -61,7 +61,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
 				_fe3d->model_setBright(newModelId, "", true);
-				_fe3d->model_setColor(newModelId, "", _fe3d->spotlight_getColor(newId));
+				_fe3d->model_setColor(newModelId, "", _fe3d->spotlight_getColor(newSpotlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
@@ -136,16 +136,16 @@ void WorldEditor::_updateSpotlightPlacing()
 					return;
 				}
 
-				const auto newId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
-				const auto newModelId = ("@@torch_" + newId);
+				const auto newSpotlightId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
+				const auto newModelId = ("@@torch_" + newSpotlightId);
 
 				_spotlightIdCounter++;
 
-				_duplicator->copyTemplateSpotlight(newId, _currentTemplateSpotlightId);
+				_duplicator->copyTemplateSpotlight(newSpotlightId, _currentTemplateSpotlightId);
 
-				_fe3d->spotlight_setPosition(newId, newPosition);
+				_fe3d->spotlight_setPosition(newSpotlightId, newPosition);
 
-				_loadedSpotlightIds.push_back(newId);
+				_loadedSpotlightIds.push_back(newSpotlightId);
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -155,7 +155,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 				_fe3d->model_setRefracted(newModelId, false);
 				_fe3d->model_setBright(newModelId, "", true);
-				_fe3d->model_setColor(newModelId, "", _fe3d->spotlight_getColor(newId));
+				_fe3d->model_setColor(newModelId, "", _fe3d->spotlight_getColor(newSpotlightId));
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);

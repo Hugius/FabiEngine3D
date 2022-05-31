@@ -27,15 +27,15 @@ void WorldEditor::_updateAabbPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_aabbIdCounter));
+				const auto newAabbId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_aabbIdCounter));
 
 				_aabbIdCounter++;
 
-				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
+				_duplicator->copyTemplateAabb(newAabbId, _currentTemplateAabbId);
 
-				_fe3d->aabb_setBasePosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->aabb_setBasePosition(newAabbId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedAabbIds.push_back(newId);
+				_loadedAabbIds.push_back(newAabbId);
 
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
 
@@ -88,15 +88,15 @@ void WorldEditor::_updateAabbPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_aabbIdCounter));
+				const auto newAabbId = (_currentTemplateAabbId.substr(1) + "_" + to_string(_aabbIdCounter));
 
 				_aabbIdCounter++;
 
-				_duplicator->copyTemplateAabb(newId, _currentTemplateAabbId);
+				_duplicator->copyTemplateAabb(newAabbId, _currentTemplateAabbId);
 
-				_fe3d->aabb_setBasePosition(newId, newPosition);
+				_fe3d->aabb_setBasePosition(newAabbId, newPosition);
 
-				_loadedAabbIds.push_back(newId);
+				_loadedAabbIds.push_back(newAabbId);
 			}
 		}
 	}

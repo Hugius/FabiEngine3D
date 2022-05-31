@@ -29,21 +29,21 @@ void WorldEditor::_updateSound3dPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
-				const auto newModelId = ("@@speaker_" + newId);
+				const auto newSound3dId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
+				const auto newModelId = ("@@speaker_" + newSound3dId);
 
 				_sound3dIdCounter++;
 
-				_duplicator->copyTemplateSound3d(newId, _currentTemplateSound3dId);
+				_duplicator->copyTemplateSound3d(newSound3dId, _currentTemplateSound3dId);
 
-				_loadedSound3dIds.push_back(newId);
+				_loadedSound3dIds.push_back(newSound3dId);
 
-				_fe3d->sound3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1, 0);
+				_fe3d->sound3d_setPosition(newSound3dId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->sound3d_setMaxVolume(newSound3dId, SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newSound3dId, SOUND3D_MAX_DISTANCE);
+				_fe3d->sound3d_start(newSound3dId, -1, 0);
 
-				_loadedSound3dIds.push_back(newId);
+				_loadedSound3dIds.push_back(newSound3dId);
 
 				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -139,19 +139,19 @@ void WorldEditor::_updateSound3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
-				const auto newModelId = ("@@speaker_" + newId);
+				const auto newSound3dId = (_currentTemplateSound3dId.substr(1) + "_" + to_string(_sound3dIdCounter));
+				const auto newModelId = ("@@speaker_" + newSound3dId);
 
 				_sound3dIdCounter++;
 
-				_duplicator->copyTemplateSound3d(newId, _currentTemplateSound3dId);
+				_duplicator->copyTemplateSound3d(newSound3dId, _currentTemplateSound3dId);
 
-				_fe3d->sound3d_setPosition(newId, newPosition);
-				_fe3d->sound3d_setMaxVolume(newId, SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newId, SOUND3D_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1, 0);
+				_fe3d->sound3d_setPosition(newSound3dId, newPosition);
+				_fe3d->sound3d_setMaxVolume(newSound3dId, SOUND3D_MAX_VOLUME);
+				_fe3d->sound3d_setMaxDistance(newSound3dId, SOUND3D_MAX_DISTANCE);
+				_fe3d->sound3d_start(newSound3dId, -1, 0);
 
-				_loadedSound3dIds.push_back(newId);
+				_loadedSound3dIds.push_back(newSound3dId);
 
 				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

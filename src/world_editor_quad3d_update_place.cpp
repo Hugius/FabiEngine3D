@@ -27,15 +27,15 @@ void WorldEditor::_updateQuad3dPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
+				const auto newQuad3dId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
 
 				_quad3dIdCounter++;
 
-				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
+				_duplicator->copyTemplateQuad3d(newQuad3dId, _currentTemplateQuad3dId);
 
-				_fe3d->quad3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->quad3d_setPosition(newQuad3dId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedQuad3dIds.push_back(newId);
+				_loadedQuad3dIds.push_back(newQuad3dId);
 
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
 
@@ -88,15 +88,15 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
+				const auto newQuad3dId = (_currentTemplateQuad3dId.substr(1) + "_" + to_string(_quad3dIdCounter));
 
 				_quad3dIdCounter++;
 
-				_duplicator->copyTemplateQuad3d(newId, _currentTemplateQuad3dId);
+				_duplicator->copyTemplateQuad3d(newQuad3dId, _currentTemplateQuad3dId);
 
-				_fe3d->quad3d_setPosition(newId, newPosition);
+				_fe3d->quad3d_setPosition(newQuad3dId, newPosition);
 
-				_loadedQuad3dIds.push_back(newId);
+				_loadedQuad3dIds.push_back(newQuad3dId);
 			}
 		}
 	}

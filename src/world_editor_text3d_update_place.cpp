@@ -27,15 +27,15 @@ void WorldEditor::_updateText3dPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_text3dIdCounter));
+				const auto newText3dId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_text3dIdCounter));
 
 				_text3dIdCounter++;
 
-				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
+				_duplicator->copyTemplateText3d(newText3dId, _currentTemplateText3dId);
 
-				_fe3d->text3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->text3d_setPosition(newText3dId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedText3dIds.push_back(newId);
+				_loadedText3dIds.push_back(newText3dId);
 
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
 
@@ -88,15 +88,15 @@ void WorldEditor::_updateText3dPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_text3dIdCounter));
+				const auto newText3dId = (_currentTemplateText3dId.substr(1) + "_" + to_string(_text3dIdCounter));
 
 				_text3dIdCounter++;
 
-				_duplicator->copyTemplateText3d(newId, _currentTemplateText3dId);
+				_duplicator->copyTemplateText3d(newText3dId, _currentTemplateText3dId);
 
-				_fe3d->text3d_setPosition(newId, newPosition);
+				_fe3d->text3d_setPosition(newText3dId, newPosition);
 
-				_loadedText3dIds.push_back(newId);
+				_loadedText3dIds.push_back(newText3dId);
 			}
 		}
 	}

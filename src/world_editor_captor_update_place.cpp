@@ -29,16 +29,16 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newId = ("captor_" + to_string(_captorIdCounter));
-				const auto newModelId = ("@@lens_" + newId);
+				const auto newCaptorId = ("captor_" + to_string(_captorIdCounter));
+				const auto newModelId = ("@@lens_" + newCaptorId);
 
 				_captorIdCounter++;
 
-				_duplicator->copyTemplateCaptor(newId, _currentTemplateCaptorId);
+				_duplicator->copyTemplateCaptor(newCaptorId, _currentTemplateCaptorId);
 
-				_fe3d->captor_setPosition(newId, fvec3(newPosition.x, newPosition.y, value));
+				_fe3d->captor_setPosition(newCaptorId, fvec3(newPosition.x, newPosition.y, value));
 
-				_loadedCaptorIds.push_back(newId);
+				_loadedCaptorIds.push_back(newCaptorId);
 
 				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -107,16 +107,16 @@ void WorldEditor::_updateCaptorPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
-				const auto newId = ("captor_" + to_string(_captorIdCounter));
-				const auto newModelId = ("@@lens_" + newId);
+				const auto newCaptorId = ("captor_" + to_string(_captorIdCounter));
+				const auto newModelId = ("@@lens_" + newCaptorId);
 
 				_captorIdCounter++;
 
-				_duplicator->copyTemplateCaptor(newId, _currentTemplateCaptorId);
+				_duplicator->copyTemplateCaptor(newCaptorId, _currentTemplateCaptorId);
 
-				_fe3d->captor_setPosition(newId, newPosition);
+				_fe3d->captor_setPosition(newCaptorId, newPosition);
 
-				_loadedCaptorIds.push_back(newId);
+				_loadedCaptorIds.push_back(newCaptorId);
 
 				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

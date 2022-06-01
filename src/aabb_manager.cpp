@@ -108,7 +108,7 @@ void AabbManager::update()
 	{
 		aabb->updateTarget();
 
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			switch(aabb->getParentType())
 			{

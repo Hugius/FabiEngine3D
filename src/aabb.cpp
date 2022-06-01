@@ -342,11 +342,6 @@ const bool Aabb::isCollisionResponsive() const
 	return _isCollisionResponsive;
 }
 
-const bool Aabb::hasParent() const
-{
-	return !_parentId.empty();
-}
-
 const bool Aabb::hasCollided() const
 {
 	return _hasCollided;

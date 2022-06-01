@@ -18,7 +18,7 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(quad3dId == aabb->getParentId())
 			{
@@ -441,7 +441,7 @@ const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & quad
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(quad3dId == aabb->getParentId())
 			{

@@ -18,7 +18,7 @@ void EngineInterface::model_delete(const string & modelId)
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(modelId == aabb->getParentId())
 			{
@@ -878,7 +878,7 @@ const vector<string> EngineInterface::model_getChildAabbIds(const string & model
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(modelId == aabb->getParentId())
 			{

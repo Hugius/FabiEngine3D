@@ -61,7 +61,6 @@ public:
 	const bool isCentered() const;
 	const bool isRaycastResponsive() const;
 	const bool isCollisionResponsive() const;
-	const bool hasParent() const;
 	const bool hasCollided() const;
 
 	const AabbParentType getParentType() const;

@@ -175,7 +175,7 @@ const bool EngineInterface::aabb_isVisible(const string & aabbId) const
 
 const bool EngineInterface::aabb_hasParent(const string & aabbId) const
 {
-	return _core->getAabbManager()->getAabb(aabbId)->hasParent();
+	return !_core->getAabbManager()->getAabb(aabbId)->getParentId().empty();
 }
 
 const vector<string> EngineInterface::aabb_getIds() const

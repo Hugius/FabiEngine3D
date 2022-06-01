@@ -15,7 +15,7 @@ void EngineInterface::text3d_delete(const string & text3dId)
 {
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(text3dId == aabb->getParentId())
 			{
@@ -243,7 +243,7 @@ const vector<string> EngineInterface::text3d_getChildAabbIds(const string & text
 
 	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
 	{
-		if(aabb->hasParent())
+		if(!aabb->getParentId().empty())
 		{
 			if(text3dId == aabb->getParentId())
 			{

@@ -46,7 +46,22 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 			iss >> partId;
 
-			if(partId.empty() || (partId == "?"))
+			if(partId.empty())
+			{
+				return nullptr;
+			}
+
+			if(any_of(partId.begin(), partId.end(), isspace))
+			{
+				return nullptr;
+			}
+
+			if(any_of(partId.begin(), partId.end(), isupper))
+			{
+				return nullptr;
+			}
+
+			if(partId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789") != string::npos)
 			{
 				return nullptr;
 			}

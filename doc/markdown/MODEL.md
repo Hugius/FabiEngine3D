@@ -8,7 +8,6 @@
 - If the mesh is multiparted, each part has its own properties.
 - Models can be rendered as another model to achieve LOD.
 - The instead rendered LOD model uses the transformation and visibility of the main model.
-- The ID of a model cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 
@@ -22,9 +21,9 @@
 
 ## 3. Base Properties
 
-- **ID**: the identifier of the model
+- **ID**: the unique identifier of the model
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed

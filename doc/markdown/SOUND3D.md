@@ -13,13 +13,12 @@
 - If no audio memory is available, sounds cannot be started.
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.
 - Sounds with a large audio file (5 minutes long for example) can cause a lag spike when started.
-- The ID of a sound3D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 
-- **ID**: the identifier of the sound
+- **ID**: the unique identifier of the sound
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Audio Path**: the path of the audio file
   - Type: `string`
   - Constraints: cannot be changed

@@ -5,7 +5,6 @@
 - The text3D is a composition of quad3Ds.
 - Every quad3D represents a text character.
 - The text itself is generated using a font map.
-- The ID of a text3D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 
@@ -13,9 +12,9 @@
 
 ## 3. Properties
 
-- **ID**: the identifier of the text3D
+- **ID**: the unique identifier of the text3D
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Font Map Path**: the path of the font map file
   - Type: `string`
   - Constraints: cannot be changed

@@ -8,16 +8,15 @@
 - The first keyframe is always the default model transformation.
 - The last keyframe should be the same as the first keyframe.
 - If the model is multiparted, each part can be animated independently.
-- The ID of an animation3D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 
-- **ID**: the identifier of the animation
+- **ID**: the unique identifier of the animation
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
-- **Part IDs**: the identifiers of the animation parts
+  - Constraints: cannot be empty or contain spaces/capitals/specials
+- **Part IDs**: the unique identifiers of the animation parts
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Frames**: the frames of the animation
 
 ## 3. Frame Properties

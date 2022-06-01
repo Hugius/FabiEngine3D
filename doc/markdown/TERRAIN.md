@@ -4,7 +4,6 @@
 
 - The terrain is a 3D object in 3D space.
 - The mesh of a terrain is generated using a height map.
-- The ID of a terrain cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 
@@ -15,9 +14,9 @@
 
 ## 3. Properties
 
-- **ID**: the identifier of the terrain
+- **ID**: the unique identifier of the terrain
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Height Map Path**: the path of the height map file
   - Type: `string`
   - Constraints: cannot be changed

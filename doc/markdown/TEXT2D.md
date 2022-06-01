@@ -5,7 +5,6 @@
 - The text2D is a composition of quad2Ds.
 - Every quad2D represents a text character.
 - A font map is used to form a line of text.
-- The ID of a text2D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Assets
 
@@ -13,9 +12,9 @@
 
 ## 3. Properties
 
-- **ID**: the identifier of the text2D
+- **ID**: the unique identifier of the text2D
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Font Map Path**: the path of the font map file
   - Type: `string`
   - Constraints: none

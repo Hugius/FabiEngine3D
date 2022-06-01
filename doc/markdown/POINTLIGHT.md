@@ -5,13 +5,12 @@
 - The pointlight is a 3D light in 3D space.
 - Emitted light is cast in all directions from a position.
 - Only a maximum of 64 pointlights can exist.
-- The ID of a pointlight cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Properties
 
-- **ID**: the identifier of the pointlight
+- **ID**: the unique identifier of the pointlight
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Position**: the XYZ position of the light
   - Type: `decimal3`
   - Constraints: none

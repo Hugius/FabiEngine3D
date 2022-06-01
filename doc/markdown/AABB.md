@@ -11,13 +11,12 @@
 - Bound AABBs follow the transformation of their parent.
 - Bound AABBs are invisible and unresponsive if their parent is invisible.
 - Bound AABBs cannot directly be accessed or deleted.
-- The ID of an AABB cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Properties
 
-- **ID**: the identifier of the AABB
+- **ID**: the unique identifier of the AABB
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Position**: the XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none

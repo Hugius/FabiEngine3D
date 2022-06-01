@@ -5,13 +5,12 @@
 - The spotlight is a 3D light in 3D space.
 - Emitted light is cast in a direction from a position.
 - Only a maximum of 64 spotlights can exist.
-- The ID of a spotlight cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Properties
 
-- **ID**: the identifier of the spotlight
+- **ID**: the unique identifier of the spotlight
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Position**: the XYZ position of the light
   - Type: `decimal3`
   - Constraints: none

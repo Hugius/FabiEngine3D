@@ -5,13 +5,12 @@
 - The animation2D is used for creating 2D texture animations.
 - Only one animation can be applied to a quad3D/quad2D.
 - Animated textures should consist of multiple smaller animation frames, divided by rows and columns.
-- The ID of an animation2D cannot be empty or contain spaces/capitals/specials.
 
 ## 2. Base Properties
 
-- **ID**: the identifier of the sound
+- **ID**: the unique identifier of the sound
   - Type: `string`
-  - Constraints: must be unique, cannot be changed
+  - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Row Count**: the amount of rows in the animated texture
   - Type: `integer`
   - Constraints: at least `1`

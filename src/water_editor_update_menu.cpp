@@ -74,6 +74,8 @@ void WaterEditor::_updateMainMenu()
 				return;
 			}
 		}
+
+		screen->getButton("sky")->setTextContent(_fe3d->sky_getSelectedId().empty() ? "Select Sky" : "Unselect Sky");
 	}
 }
 

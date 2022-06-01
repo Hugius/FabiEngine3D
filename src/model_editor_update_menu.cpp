@@ -55,8 +55,6 @@ void ModelEditor::_updateMainMenu()
 			_gui->getOverlay()->openChoiceForm("deleteModel", "Delete Model", LEFT_CHOICE_FORM_POSITION, modelIds);
 		}
 
-		screen->getButton("sky")->setTextContent(_fe3d->sky_getSelectedId().empty() ? "Select Sky" : "Unselect Sky");
-
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
@@ -74,6 +72,8 @@ void ModelEditor::_updateMainMenu()
 				return;
 			}
 		}
+
+		screen->getButton("sky")->setTextContent(_fe3d->sky_getSelectedId().empty() ? "Select Sky" : "Unselect Sky");
 	}
 }
 

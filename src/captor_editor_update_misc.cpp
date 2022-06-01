@@ -40,16 +40,15 @@ void CaptorEditor::_updateCaptorCreating()
 
 		_fe3d->captor_create(newCaptorId);
 
-		_currentCaptorId = newCaptorId;
-
 		_loadedCaptorIds.push_back(newCaptorId);
 
 		sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + newCaptorId.substr(1));
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
+
+		_currentCaptorId = newCaptorId;
 	}
 }
 

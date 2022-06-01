@@ -102,7 +102,8 @@ void ScriptEditor::_updateScriptFileCreating()
 			return;
 		}
 
-		auto existingScriptFileIds = _script->getScriptFileIds();
+		const auto existingScriptFileIds = _script->getScriptFileIds();
+
 		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 		{
 			Logger::throwWarning("Script already exists");

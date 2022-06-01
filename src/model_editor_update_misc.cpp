@@ -155,21 +155,19 @@ void ModelEditor::_updateModelCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearMeshCache(finalFilePath);
-
 		_fe3d->model_create(newModelId, finalFilePath);
 
 		if(_fe3d->model_isExisting(newModelId))
 		{
-			_currentModelId = newModelId;
-
 			_loadedModelIds.push_back(newModelId);
 
 			sort(_loadedModelIds.begin(), _loadedModelIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setTextContent("Model: " + newModelId.substr(1));
 			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setVisible(true);
+
+			_currentModelId = newModelId;
 		}
 	}
 }
@@ -325,16 +323,15 @@ void ModelEditor::_updateAabbCreating()
 			return;
 		}
 
-		_currentAabbId = newAabbId;
-
-		_fe3d->aabb_create(("model@" + _currentModelId + "@" + _currentAabbId), false);
-		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + _currentAabbId), _currentModelId);
-		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
+		_fe3d->aabb_create(("model@" + _currentModelId + "@" + newAabbId), false);
+		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + newAabbId), _currentModelId);
+		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + newAabbId), AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-
-		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + _currentAabbId);
+		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + newAabbId);
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
+
+		_currentAabbId = newAabbId;
 	}
 }
 

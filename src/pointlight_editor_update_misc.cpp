@@ -95,8 +95,6 @@ void PointlightEditor::_updatePointlightCreating()
 		_fe3d->pointlight_create(newPointlightId);
 		_fe3d->pointlight_setPosition(newPointlightId, POINTLIGHT_POSITION);
 
-		_currentPointlightId = newPointlightId;
-
 		_loadedPointlightIds.push_back(newPointlightId);
 
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
@@ -105,9 +103,10 @@ void PointlightEditor::_updatePointlightCreating()
 		_fe3d->model_setColor(LAMP_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + newPointlightId.substr(1));
 		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(true);
+
+		_currentPointlightId = newPointlightId;
 	}
 }
 

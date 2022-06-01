@@ -100,16 +100,15 @@ void Sound2dEditor::_updateSound2dCreating()
 
 		if(_fe3d->sound2d_isExisting(newSound2dId))
 		{
-			_currentSound2dId = newSound2dId;
-
 			_loadedSound2dIds.push_back(newSound2dId);
 
 			sort(_loadedSound2dIds.begin(), _loadedSound2dIds.end());
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setTextContent("Sound2D: " + newSound2dId.substr(1));
 			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setVisible(true);
+
+			_currentSound2dId = newSound2dId;
 		}
 	}
 }

@@ -84,16 +84,15 @@ void AabbEditor::_updateAabbCreating()
 
 		_fe3d->aabb_create(newAabbId, false);
 
-		_currentAabbId = newAabbId;
-
 		_loadedAabbIds.push_back(newAabbId);
 
 		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + newAabbId.substr(1));
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
+
+		_currentAabbId = newAabbId;
 	}
 }
 

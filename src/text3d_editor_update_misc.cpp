@@ -127,16 +127,15 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(_fe3d->text3d_isExisting(newText3dId))
 		{
-			_currentText3dId = newText3dId;
-
 			_loadedText3dIds.push_back(newText3dId);
 
 			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setTextContent("Text3D: " + newText3dId.substr(1));
 			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setVisible(true);
+
+			_currentText3dId = newText3dId;
 		}
 	}
 }

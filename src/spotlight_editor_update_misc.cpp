@@ -96,8 +96,6 @@ void SpotlightEditor::_updateSpotlightCreating()
 		_fe3d->spotlight_setPosition(newSpotlightId, SPOTLIGHT_POSITION);
 		_fe3d->spotlight_setPitch(newSpotlightId, SPOTLIGHT_PITCH);
 
-		_currentSpotlightId = newSpotlightId;
-
 		_loadedSpotlightIds.push_back(newSpotlightId);
 
 		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
@@ -106,9 +104,10 @@ void SpotlightEditor::_updateSpotlightCreating()
 		_fe3d->model_setColor(TORCH_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + newSpotlightId.substr(1));
 		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(true);
+
+		_currentSpotlightId = newSpotlightId;
 	}
 }
 

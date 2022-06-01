@@ -122,8 +122,6 @@ void Sound3dEditor::_updateSound3dCreating()
 			_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
 			_fe3d->sound3d_start(newSound3dId, -1, 0);
 
-			_currentSound3dId = newSound3dId;
-
 			_loadedSound3dIds.push_back(newSound3dId);
 
 			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
@@ -132,9 +130,10 @@ void Sound3dEditor::_updateSound3dCreating()
 			_fe3d->model_setColor(SPEAKER_ID, "", fvec3(1.0f));
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + newSound3dId.substr(1));
 			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(true);
+
+			_currentSound3dId = newSound3dId;
 		}
 	}
 }

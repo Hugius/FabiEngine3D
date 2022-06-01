@@ -90,16 +90,15 @@ void WaterEditor::_updateWaterCreating()
 		_fe3d->water_create(newWaterId);
 		_fe3d->water_select(newWaterId);
 
-		_currentWaterId = newWaterId;
-
 		_loadedWaterIds.push_back(newWaterId);
 
 		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setTextContent("Water: " + newWaterId.substr(1));
 		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setVisible(true);
+
+		_currentWaterId = newWaterId;
 	}
 }
 

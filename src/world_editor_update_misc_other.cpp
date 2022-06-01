@@ -268,12 +268,12 @@ void WorldEditor::_updateWorldCreating()
 			return;
 		}
 
-		_currentWorldId = newWorldId;
-		_loadedWorldId = newWorldId;
-
 		_fe3d->misc_setVsyncEnabled(false);
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+
+		_currentWorldId = newWorldId;
+		_loadedWorldId = newWorldId;
 	}
 }
 

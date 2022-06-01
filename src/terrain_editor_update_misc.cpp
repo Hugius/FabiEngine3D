@@ -119,23 +119,21 @@ void TerrainEditor::_updateTerrainCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
-
 		_fe3d->terrain_create(newTerrainId, finalFilePath);
 
 		if(_fe3d->terrain_isExisting(newTerrainId))
 		{
 			_fe3d->terrain_select(newTerrainId);
 
-			_currentTerrainId = newTerrainId;
-
 			_loadedTerrainIds.push_back(newTerrainId);
 
 			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setTextContent("Terrain: " + newTerrainId.substr(1));
 			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setVisible(true);
+
+			_currentTerrainId = newTerrainId;
 		}
 	}
 }

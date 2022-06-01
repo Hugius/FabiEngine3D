@@ -204,20 +204,20 @@ void Animation3dEditor::_updateAnimation3dCreating()
 			return;
 		}
 
-		_currentAnimation3dId = newAnimation3dId;
+		_fe3d->animation3d_create(newAnimation3dId);
+		_fe3d->animation3d_createPart(newAnimation3dId, "");
 
-		_fe3d->animation3d_create(_currentAnimation3dId);
-		_fe3d->animation3d_createPart(_currentAnimation3dId, "");
-
-		_loadedAnimation3dIds.push_back(_currentAnimation3dId);
+		_loadedAnimation3dIds.push_back(newAnimation3dId);
 
 		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + _currentAnimation3dId);
+		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + newAnimation3dId);
 		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+
+		_currentAnimation3dId = newAnimation3dId;
 	}
 }
 

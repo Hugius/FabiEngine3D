@@ -84,7 +84,6 @@ void Text2dEditor::_updateText2dCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
-
 		_fe3d->text2d_create(newText2dId, finalFilePath, true);
 
 		if(_fe3d->text2d_isExisting(newText2dId))
@@ -92,16 +91,15 @@ void Text2dEditor::_updateText2dCreating()
 			_fe3d->text2d_setPosition(newText2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->text2d_setSize(newText2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
-			_currentText2dId = newText2dId;
-
 			_loadedText2dIds.push_back(newText2dId);
 
 			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
-
 			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setTextContent("Text2D: " + newText2dId.substr(1));
 			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setVisible(true);
+
+			_currentText2dId = newText2dId;
 		}
 	}
 }

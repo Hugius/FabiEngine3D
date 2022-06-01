@@ -52,8 +52,6 @@ void Animation2dEditor::_updateAnimation2dCreating()
 
 		_fe3d->animation2d_create(newAnimation2dId);
 
-		_currentAnimation2dId = newAnimation2dId;
-
 		_loadedAnimation2dIds.push_back(newAnimation2dId);
 
 		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
@@ -61,9 +59,10 @@ void Animation2dEditor::_updateAnimation2dCreating()
 		_fe3d->quad3d_setVisible(PREVIEW_QUAD3D_ID, true);
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setTextContent("Animation2D: " + newAnimation2dId);
 		_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setVisible(true);
+
+		_currentAnimation2dId = newAnimation2dId;
 	}
 }
 

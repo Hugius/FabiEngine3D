@@ -92,16 +92,15 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 		_fe3d->quad3d_create(newQuad3dId, false);
 
-		_currentQuad3dId = newQuad3dId;
-
 		_loadedQuad3dIds.push_back(newQuad3dId);
 
 		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-
 		_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setTextContent("Quad3D: " + newQuad3dId.substr(1));
 		_gui->getOverlay()->getTextField(QUAD3D_TITLE_ID)->setVisible(true);
+
+		_currentQuad3dId = newQuad3dId;
 	}
 }
 

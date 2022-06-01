@@ -197,7 +197,7 @@ void WorldEditor::_deleteWorldFile(const string & worldId)
 	Tools::deleteFile(filePath);
 }
 
-void WorldEditor::_handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta, float multiplier, float minimum, float maximum)
+bool WorldEditor::_handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta, float multiplier, float minimum, float maximum)
 {
 	const auto inputBox = _gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
 
@@ -215,19 +215,27 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 
 			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
 		}
+
+		return true;
 	}
 	else
 	{
 		if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value - delta), minimum, maximum);
+
+			return true;
 		}
 		else if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value + delta), minimum, maximum);
+
+			return true;
 		}
 
 		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
+
+		return false;
 	}
 }
 

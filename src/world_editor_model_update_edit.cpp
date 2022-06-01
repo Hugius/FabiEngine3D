@@ -73,9 +73,6 @@ void WorldEditor::_updateModelEditing()
 			const auto screen = window->getScreen("modelPropertiesMenu");
 			const auto animation3dIds = _fe3d->model_getAnimation3dIds(_activeModelId);
 			const auto isAnimations3dPlaying = (animation3dIds.empty() ? false : !_fe3d->model_isAnimation3dPaused(_activeModelId, animation3dIds[0]));
-			const auto originalPosition = _fe3d->model_getBasePosition(_activeModelId);
-			const auto originalRotation = _fe3d->model_getBaseRotation(_activeModelId);
-			const auto originalSize = _fe3d->model_getBaseSize(_activeModelId);
 
 			window->setActiveScreen("modelPropertiesMenu");
 
@@ -158,36 +155,38 @@ void WorldEditor::_updateModelEditing()
 				return;
 			}
 
-			auto position = originalPosition;
-			auto rotation = originalRotation;
-			auto size = originalSize;
+			auto position = _fe3d->model_getBasePosition(_activeModelId);
+			auto rotation = _fe3d->model_getBaseRotation(_activeModelId);
+			auto size = _fe3d->model_getBaseSize(_activeModelId);
+
+			bool hasChanged = false;
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
-				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
-				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
 
 				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
-				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
-				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
-				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, MODEL_ROTATION_SPEED, 1.0f, 0.0f, 359.0f));
 
 				_fe3d->model_setBaseRotation(_activeModelId, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
-				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
-				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f);
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
 
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
 
-			if((position != originalPosition) || (rotation != originalRotation) || (size != originalSize))
+			if(hasChanged)
 			{
 				_originalModelPositions.at(_activeModelId) = position;
 				_originalModelRotations.at(_activeModelId) = rotation;

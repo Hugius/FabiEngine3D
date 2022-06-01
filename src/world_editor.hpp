@@ -151,9 +151,9 @@ private:
 	void _deactivateSpotlight();
 	void _deactivateCaptor();
 	void _deactivateSound3d();
-	void _handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta = 0.0f, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	const vector<string> _getWorldIds() const;
+	bool _handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta = 0.0f, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	static inline const string GRID_ID = "@@grid";
 	static inline const string GRID_MESH_PATH = "engine\\assets\\mesh\\plane.obj";

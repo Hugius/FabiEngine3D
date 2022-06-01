@@ -17,7 +17,7 @@ void Animation2dPlayer::startQuad3dAnimation2d(const string & animation2dId, con
 		abort();
 	}
 
-	for(const auto [startedAnimation2dId, startedQuad3dId] : getStartedQuad3dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad3dId] : getStartedQuad3dAnimation2dIds())
 	{
 		if(quad3dId == startedQuad3dId)
 		{
@@ -266,7 +266,7 @@ void Animation2dPlayer::startQuad2dAnimation2d(const string & animation2dId, con
 		abort();
 	}
 
-	for(const auto [startedAnimation2dId, startedQuad2dId] : getStartedQuad2dAnimation2dIds())
+	for(const auto & [startedAnimation2dId, startedQuad2dId] : getStartedQuad2dAnimation2dIds())
 	{
 		if(quad2dId == startedQuad2dId)
 		{

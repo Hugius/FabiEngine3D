@@ -8,19 +8,19 @@ void EngineInterface::terrain_create(const string & terrainId, const string & he
 
 void EngineInterface::terrain_delete(const string & terrainId)
 {
-	_core->getTerrainManager()->deleteTerrain(terrainId);
-
 	_core->getRaycastIntersector()->resetTerrainStatus(terrainId);
+
+	_core->getTerrainManager()->deleteTerrain(terrainId);
 }
 
 void EngineInterface::terrain_select(const string & terrainId)
 {
-	_core->getTerrainManager()->selectTerrain(terrainId);
-
 	if(terrainId.empty() || (terrainId != _core->getRaycastIntersector()->getTerrainId()))
 	{
 		_core->getRaycastIntersector()->resetTerrainStatus(terrainId);
 	}
+
+	_core->getTerrainManager()->selectTerrain(terrainId);
 }
 
 void EngineInterface::terrain_setMaxHeight(const string & terrainId, float value)

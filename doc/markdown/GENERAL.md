@@ -102,7 +102,7 @@
             └── height_map
             └── normal_map
         └── mesh
-      └── data (do NOT change)
+      └── domain (do NOT change)
       └── saves (do NOT change)
       └── scripts (do NOT change)
       └── worlds (do NOT change)

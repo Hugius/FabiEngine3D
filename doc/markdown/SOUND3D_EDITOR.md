@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All sound3Ds will be saved in `~\projects\<your_project>\data\sound3d.fe3d`.
+- All sound3Ds will be saved in `~\projects\<your_project>\domain\sound3d.fe3d`.
 - You can create/edit/delete sound3Ds.
 - Every created sound3D can be placed using the world editor or scripting.
 - Sound playback in this editor is at 50% volume.

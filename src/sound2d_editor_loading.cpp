@@ -17,13 +17,13 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sound2d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sound2d.fe3d` does not exist");
 
 		return {};
 	}
@@ -70,13 +70,13 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound2d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sound2d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sound2d.fe3d` does not exist");
 
 		return false;
 	}

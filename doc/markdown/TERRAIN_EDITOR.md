@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
+- All terrains will be saved in `~\projects\<your_project>\domain\terrain.fe3d`.
 - You can create/edit/delete terrains.
 - Every created terrain can be placed using the world editor or scripting.
 

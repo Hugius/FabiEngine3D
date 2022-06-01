@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All AABBs will be saved in `~\projects\<your_project>\data\aabb.fe3d`.
+- All AABBs will be saved in `~\projects\<your_project>\domain\aabb.fe3d`.
 - You can create/edit/delete AABBs.
 - Every created AABB can be placed using the world editor or scripting.
 

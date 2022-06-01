@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All skies will be saved in `~\projects\<your_project>\data\sky.fe3d`.
+- All skies will be saved in `~\projects\<your_project>\domain\sky.fe3d`.
 - You can create/edit/delete skies will.
 - Every created skies can be placed using the world editor or scripting.
 

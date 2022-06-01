@@ -19,7 +19,7 @@ const bool CaptorEditor::saveCaptorsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\captor.fe3d");
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\domain\\captor.fe3d");
 
 	auto file = ofstream(filePath);
 

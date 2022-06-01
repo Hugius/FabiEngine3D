@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All quad3Ds will be saved in `~\projects\<your_project>\data\quad3d.fe3d`.
+- All quad3Ds will be saved in `~\projects\<your_project>\domain\quad3d.fe3d`.
 - You can create/edit/delete quad3Ds.
 - You can create/delete an AABB for the quad3Ds.
 - Every created quad3D can be placed using the world editor or scripting.

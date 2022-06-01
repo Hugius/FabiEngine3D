@@ -18,13 +18,13 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\text3d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\text3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\text3d.fe3d` does not exist");
 
 		return {};
 	}
@@ -79,13 +79,13 @@ const bool Text3dEditor::loadText3dsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\text3d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\text3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\text3d.fe3d` does not exist");
 
 		return false;
 	}

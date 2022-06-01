@@ -17,13 +17,13 @@ const bool SpotlightEditor::loadSpotlightsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\spotlight.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\spotlight.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\spotlight.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\spotlight.fe3d` does not exist");
 
 		return false;
 	}

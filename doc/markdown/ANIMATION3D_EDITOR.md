@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All animation3Ds will be saved in `~\projects\<your_project>\data\animation3d.fe3d`.
+- All animation3Ds will be saved in `~\projects\<your_project>\domain\animation3d.fe3d`.
 - You can create/edit/delete animation3Ds.
 - Every created animation3D can be applied to models.
 - You can select a preview model for the animation3D playback.

@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All pointlights will be saved in `~\projects\<your_project>\data\pointlight.fe3d`.
+- All pointlights will be saved in `~\projects\<your_project>\domain\pointlight.fe3d`.
 - You can create/edit/delete pointlights.
 - Every created pointlight can be placed using the world editor or scripting.
 

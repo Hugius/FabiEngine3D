@@ -17,13 +17,13 @@ const vector<string> Sound3dEditor::getAudioPathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound3d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sound3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sound3d.fe3d` does not exist");
 
 		return {};
 	}
@@ -68,13 +68,13 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound3d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sound3d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sound3d.fe3d` does not exist");
 
 		return false;
 	}

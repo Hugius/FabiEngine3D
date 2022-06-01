@@ -18,13 +18,13 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sky.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sky.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sky.fe3d` does not exist");
 
 		return {};
 	}
@@ -80,13 +80,13 @@ const bool SkyEditor::loadSkiesFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sky.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\sky.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\sky.fe3d` does not exist");
 
 		return false;
 	}

@@ -17,13 +17,13 @@ const bool CaptorEditor::loadCaptorsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\captor.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\captor.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\captor.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\captor.fe3d` does not exist");
 
 		return false;
 	}

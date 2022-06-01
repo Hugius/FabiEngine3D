@@ -16,13 +16,13 @@ const bool Animation2dEditor::loadAnimation2dsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\animation2d.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\animation2d.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\animation2d.fe3d` does not exist");
 
 		return false;
 	}

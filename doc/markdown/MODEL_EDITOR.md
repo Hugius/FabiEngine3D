@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All models will be saved in `~\projects\<your_project>\data\model.fe3d`.
+- All models will be saved in `~\projects\<your_project>\domain\model.fe3d`.
 - You can create/edit/delete models.
 - You can create/edit/delete AABBs for the models.
 - Every created model can be placed using the world editor or scripting.

@@ -19,7 +19,7 @@ const bool Text2dEditor::saveText2dsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text2d.fe3d");
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\domain\\text2d.fe3d");
 
 	auto file = ofstream(filePath);
 

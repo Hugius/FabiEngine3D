@@ -18,13 +18,13 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\terrain.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\terrain.fe3d` does not exist");
 
 
 		return {};
@@ -199,13 +199,13 @@ const bool TerrainEditor::loadTerrainsFromFile()
 
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
 
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `data\\terrain.fe3d` does not exist");
+		Logger::throwWarning("Project corrupted: file `domain\\terrain.fe3d` does not exist");
 
 		return false;
 	}

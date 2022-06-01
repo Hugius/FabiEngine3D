@@ -20,7 +20,7 @@ const bool SkyEditor::saveSkiesToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sky.fe3d");
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\domain\\sky.fe3d");
 
 	auto file = ofstream(filePath);
 

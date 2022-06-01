@@ -155,29 +155,29 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\water\\height_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\water\\normal_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\mesh\\");
-	directoryPaths.push_back(projectDirectoryPath + "data\\");
+	directoryPaths.push_back(projectDirectoryPath + "domain\\");
 	directoryPaths.push_back(projectDirectoryPath + "saves\\");
 	directoryPaths.push_back(projectDirectoryPath + "scripts\\");
 	directoryPaths.push_back(projectDirectoryPath + "worlds\\");
 	directoryPaths.push_back(projectDirectoryPath + "worlds\\custom\\");
 	directoryPaths.push_back(projectDirectoryPath + "worlds\\editor\\");
 
-	filePaths.push_back(projectDirectoryPath + "data\\aabb.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\animation2d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\animation3d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\captor.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\pointlight.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\sound2d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\sound3d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\spotlight.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\text2d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\text3d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\water.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\aabb.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\animation2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\animation3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\captor.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\model.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\pointlight.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\quad2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\quad3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\sky.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\sound2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\sound3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\spotlight.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\terrain.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\text2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\text3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "domain\\water.fe3d");
 
 	for(const auto & path : directoryPaths)
 	{

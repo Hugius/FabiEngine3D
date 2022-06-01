@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All captors will be saved in `~\projects\<your_project>\data\captor.fe3d`.
+- All captors will be saved in `~\projects\<your_project>\domain\captor.fe3d`.
 - You can create/edit/delete captors.
 - Every created captor can be placed using the world editor or scripting.
 

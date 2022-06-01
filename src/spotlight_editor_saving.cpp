@@ -19,7 +19,7 @@ const bool SpotlightEditor::saveSpotlightsToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\spotlight.fe3d");
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\domain\\spotlight.fe3d");
 
 	auto file = ofstream(filePath);
 

@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All text3Ds will be saved in `~\projects\<your_project>\data\text3d.fe3d`.
+- All text3Ds will be saved in `~\projects\<your_project>\domain\text3d.fe3d`.
 - You can create/edit/delete text3Ds.
 - You can create/delete an AABB for the text3Ds.
 - Every created text3D can be placed using the world editor or scripting.

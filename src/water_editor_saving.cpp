@@ -20,7 +20,7 @@ const bool WaterEditor::saveWatersToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\data\\water.fe3d");
+	const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\domain\\water.fe3d");
 
 	auto file = ofstream(filePath);
 

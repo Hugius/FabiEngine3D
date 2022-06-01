@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- All waters will be saved in `~\projects\<your_project>\data\water.fe3d`.
+- All waters will be saved in `~\projects\<your_project>\domain\water.fe3d`.
 - You can create/edit/delete waters.
 - Every created water can be placed using the world editor or scripting.
 

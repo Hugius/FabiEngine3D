@@ -22,7 +22,7 @@ void Aabb::setVertexBuffer(shared_ptr<VertexBuffer> value)
 
 void Aabb::updateTarget()
 {
-	if(hasParent())
+	if(!_parentId.empty())
 	{
 		if(_localPosition != _localPositionTarget)
 		{

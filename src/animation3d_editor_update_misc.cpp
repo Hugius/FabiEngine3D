@@ -204,19 +204,20 @@ void Animation3dEditor::_updateAnimation3dCreating()
 			return;
 		}
 
-		_fe3d->animation3d_create(newAnimation3dId);
-
 		_currentAnimation3dId = newAnimation3dId;
 
-		_loadedAnimation3dIds.push_back(newAnimation3dId);
+		_fe3d->animation3d_create(_currentAnimation3dId);
+		_fe3d->animation3d_createPart(_currentAnimation3dId, "");
+
+		_loadedAnimation3dIds.push_back(_currentAnimation3dId);
 
 		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-
-		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + newAnimation3dId);
+		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + _currentAnimation3dId);
 		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);
+		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 	}
 }
 
@@ -263,75 +264,49 @@ void Animation3dEditor::_updateAnimation3dDeleting()
 	}
 }
 
-void Animation3dEditor::_updateModelChoosing()
+void Animation3dEditor::_updatePartCreating()
 {
-	if(_gui->getOverlay()->getChoiceFormId() == "selectModel")
+	if((_gui->getOverlay()->getValueFormId() == "createPart") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+		auto newPartId = _gui->getOverlay()->getValueFormContent();
 
-		if(selectedOptionId.empty())
+		if(newPartId.empty())
 		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
+			_fe3d->animation3d_createFrame(_currentAnimation3dId, 0);
 
-				_hoveredModelId = "";
-			}
-		}
-		else
-		{
-
-			if(_hoveredModelId.empty())
-			{
-				_hoveredModelId = ("@" + selectedOptionId);
-
-				_fe3d->model_setVisible(_hoveredModelId, true);
-			}
-
-			if(_gui->getOverlay()->isChoiceFormConfirmed())
-			{
-				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
-				{
-					if(!partId.empty() && !_fe3d->model_hasPart(_hoveredModelId, partId))
-					{
-						Logger::throwWarning("Preview model does not have the required animation3D parts");
-
-						return;
-					}
-				}
-
-				_previewModelId = _hoveredModelId;
-				_originalModelSize = _fe3d->model_getBaseSize(_previewModelId);
-
-				if(_fe3d->animation3d_getFrameCount(_currentAnimation3dId) == 0)
-				{
-					_fe3d->animation3d_createPart(_currentAnimation3dId, "");
-
-					for(const auto & partId : _fe3d->model_getPartIds(_previewModelId))
-					{
-						_fe3d->animation3d_createPart(_currentAnimation3dId, partId);
-					}
-
-					_fe3d->animation3d_createFrame(_currentAnimation3dId, 0);
-				}
-
-				_hoveredModelId = "";
-			}
-		}
-	}
-	else
-	{
-		if(!_hoveredModelId.empty())
-		{
-			_fe3d->model_setVisible(_hoveredModelId, false);
-
-			_hoveredModelId = "";
+			return;
 		}
 
-		if(!_previewModelId.empty())
+		if(any_of(newPartId.begin(), newPartId.end(), isspace))
 		{
-			_fe3d->model_setVisible(_previewModelId, true);
+			Logger::throwWarning("Part ID cannot contain any spaces");
+
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+
+			return;
 		}
+
+		if(any_of(newPartId.begin(), newPartId.end(), isupper))
+		{
+			Logger::throwWarning("Part ID cannot contain any capitals");
+
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+
+			return;
+		}
+
+		if(_fe3d->animation3d_hasPart(_currentAnimation3dId, newPartId))
+		{
+			Logger::throwWarning("Part already exists");
+
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+
+			return;
+		}
+
+		_fe3d->animation3d_createPart(_currentAnimation3dId, newPartId);
+
+		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 	}
 }
 
@@ -372,6 +347,67 @@ void Animation3dEditor::_updatePartChoosing()
 			_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
 
 			_hoveredPartId = "";
+		}
+	}
+}
+
+void Animation3dEditor::_updateModelChoosing()
+{
+	if(_gui->getOverlay()->getChoiceFormId() == "selectModel")
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+
+				_hoveredModelId = "";
+			}
+		}
+		else
+		{
+
+			if(_hoveredModelId.empty())
+			{
+				_hoveredModelId = ("@" + selectedOptionId);
+
+				_fe3d->model_setVisible(_hoveredModelId, true);
+			}
+
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
+			{
+				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimation3dId))
+				{
+					if(!partId.empty() && !_fe3d->model_hasPart(_hoveredModelId, partId))
+					{
+						Logger::throwWarning("Preview model does not have the required animation3D parts");
+
+						return;
+					}
+				}
+
+				_previewModelId = _hoveredModelId;
+
+				_originalModelSize = _fe3d->model_getBaseSize(_previewModelId);
+
+				_hoveredModelId = "";
+			}
+		}
+	}
+	else
+	{
+		if(!_hoveredModelId.empty())
+		{
+			_fe3d->model_setVisible(_hoveredModelId, false);
+
+			_hoveredModelId = "";
+		}
+
+		if(!_previewModelId.empty())
+		{
+			_fe3d->model_setVisible(_previewModelId, true);
 		}
 	}
 }

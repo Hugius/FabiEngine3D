@@ -10,7 +10,6 @@ public:
 	using BaseEditor::inject;
 
 	void inject(shared_ptr<ModelEditor> modelEditor);
-
 	void update();
 	void deleteLoadedAnimation3ds();
 
@@ -30,8 +29,9 @@ private:
 	void _updateAnimation3dCreating();
 	void _updateAnimation3dChoosing();
 	void _updateAnimation3dDeleting();
-	void _updateModelChoosing();
+	void _updatePartCreating();
 	void _updatePartChoosing();
+	void _updateModelChoosing();
 	void _updateCamera();
 	void _updateMiscellaneous();
 

@@ -177,12 +177,17 @@ void Animation3dEditor::update()
 
 	if(isLoaded())
 	{
-		_updateModelChoosing();
+		_updatePartCreating();
 	}
 
 	if(isLoaded())
 	{
 		_updatePartChoosing();
+	}
+
+	if(isLoaded())
+	{
+		_updateModelChoosing();
 	}
 
 	if(isLoaded())

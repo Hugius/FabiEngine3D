@@ -18,8 +18,8 @@
 - Every mesh should have XYZ(0,0,0) as center.
 - Every mesh should be modeled in a way that the lowest vertex (Y coordinate) is positioned at the center.
 - A mesh can consist of 1 or multiple parts.
-- To make a mesh multiparted, you must specify at least 2 parts by writing `FE3D_PART <name>`.
-- The name of a mesh part cannot be empty or '?'.
+- To make a mesh multiparted, you must specify at least 2 parts by writing `FE3D_PART <id>`.
+- The ID of a mesh part cannot be empty or contain spaces/capitals/specials.
 - The first mesh part must be specified before the first `f` data.
 - Example multiparted `.obj` file:
 

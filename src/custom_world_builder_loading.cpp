@@ -344,6 +344,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isRefractive;
 			bool isEdged;
 			bool isWireframed;
+			bool mustCaptureSky;
+			bool mustCaptureTerrain;
+			bool mustCaptureModels;
+			bool mustCaptureQuad3ds;
+			bool mustCaptureText3ds;
+			bool mustCaptureAabbs;
 			bool isSelected;
 
 			iss
@@ -384,6 +390,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> distortionSize
 				>> distortionFactor
 				>> captureOffset
+				>> mustCaptureSky
+				>> mustCaptureTerrain
+				>> mustCaptureModels
+				>> mustCaptureQuad3ds
+				>> mustCaptureText3ds
+				>> mustCaptureAabbs
 				>> isSelected;
 
 			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
@@ -423,6 +435,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setDistortionSize(waterId, distortionSize);
 			_fe3d->water_setDistortionFactor(waterId, distortionFactor);
 			_fe3d->water_setCaptureOffset(waterId, captureOffset);
+			_fe3d->water_setCaptureSky(waterId, mustCaptureSky);
+			_fe3d->water_setCaptureTerrain(waterId, mustCaptureTerrain);
+			_fe3d->water_setCaptureModels(waterId, mustCaptureModels);
+			_fe3d->water_setCaptureQuad3ds(waterId, mustCaptureQuad3ds);
+			_fe3d->water_setCaptureText3ds(waterId, mustCaptureText3ds);
+			_fe3d->water_setCaptureAabbs(waterId, mustCaptureAabbs);
 
 			if(!dudvMapPath.empty())
 			{

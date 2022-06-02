@@ -136,6 +136,12 @@ const bool WaterEditor::loadWatersFromFile()
 		bool isReflective;
 		bool isRefractive;
 		bool isEdged;
+		bool mustCaptureSky;
+		bool mustCaptureTerrain;
+		bool mustCaptureModels;
+		bool mustCaptureQuad3ds;
+		bool mustCaptureText3ds;
+		bool mustCaptureAabbs;
 
 		auto iss = istringstream(line);
 
@@ -164,7 +170,13 @@ const bool WaterEditor::loadWatersFromFile()
 			>> lightness
 			>> distortionSize
 			>> distortionFactor
-			>> captureOffset;
+			>> captureOffset
+			>> mustCaptureSky
+			>> mustCaptureTerrain
+			>> mustCaptureModels
+			>> mustCaptureQuad3ds
+			>> mustCaptureText3ds
+			>> mustCaptureAabbs;
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
@@ -192,6 +204,12 @@ const bool WaterEditor::loadWatersFromFile()
 		_fe3d->water_setDistortionSize(waterId, distortionSize);
 		_fe3d->water_setDistortionFactor(waterId, distortionFactor);
 		_fe3d->water_setCaptureOffset(waterId, captureOffset);
+		_fe3d->water_setCaptureSky(waterId, mustCaptureSky);
+		_fe3d->water_setCaptureTerrain(waterId, mustCaptureTerrain);
+		_fe3d->water_setCaptureModels(waterId, mustCaptureModels);
+		_fe3d->water_setCaptureQuad3ds(waterId, mustCaptureQuad3ds);
+		_fe3d->water_setCaptureText3ds(waterId, mustCaptureText3ds);
+		_fe3d->water_setCaptureAabbs(waterId, mustCaptureAabbs);
 
 		if(!dudvMapPath.empty())
 		{

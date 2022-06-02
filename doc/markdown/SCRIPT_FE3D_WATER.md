@@ -29,6 +29,12 @@
 - `fe3d:water_set_specular` (`STR` water_id, `BOL` value) -----> `NONE`
 - `fe3d:water_set_wireframed` (`STR` water_id, `BOL` value) -----> `NONE`
 - `fe3d:water_set_edged` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_sky` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_terrain` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_models` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_quad3ds` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_text3ds` (`STR` water_id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_capturing_aabbs` (`STR` water_id, `BOL` value) -----> `NONE`
 - `fe3d:water_set_min_clip_position` (`STR` water_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:water_set_max_clip_position` (`STR` water_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
@@ -39,6 +45,12 @@
 - `fe3d:water_is_refractive` (`STR` water_id) -----> `BOL`
 - `fe3d:water_is_specular` (`STR` water_id) -----> `BOL`
 - `fe3d:water_is_edged` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_sky` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_terrain` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_models` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_quad3ds` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_text3ds` (`STR` water_id) -----> `BOL`
+- `fe3d:water_is_capturing_aabbs` (`STR` water_id) -----> `BOL`
 - `fe3d:water_is_wireframed` (`STR` water_id) -----> `BOL`
 - `fe3d:water_has_dudv_map` (`STR` water_id) -----> `BOL`
 - `fe3d:water_has_height_map` (`STR` water_id) -----> `BOL`

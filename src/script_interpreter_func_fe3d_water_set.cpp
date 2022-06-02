@@ -423,6 +423,90 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_set_capturing_sky")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureSky(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capturing_terrain")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureTerrain(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capturing_models")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureModels(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capturing_quad3ds")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureQuad3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capturing_text3ds")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureText3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_capturing_aabbs")
+	{
+		const auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setCaptureAabbs(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

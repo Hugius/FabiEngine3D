@@ -46,12 +46,12 @@ public:
 	void setWireframeColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
-	void setCaptureSky(bool value);
-	void setCaptureTerrain(bool value);
-	void setCaptureModels(bool value);
-	void setCaptureQuad3ds(bool value);
-	void setCaptureText3ds(bool value);
-	void setCaptureAabbs(bool value);
+	void setCapturingSky(bool value);
+	void setCapturingTerrain(bool value);
+	void setCapturingModels(bool value);
+	void setCapturingQuad3ds(bool value);
+	void setCapturingText3ds(bool value);
+	void setCapturingAabbs(bool value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;

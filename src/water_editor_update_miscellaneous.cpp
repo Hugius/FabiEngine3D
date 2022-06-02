@@ -54,27 +54,27 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingSky")->isHovered())
 		{
-			_fe3d->water_setCaptureSky(_currentWaterId, !isCapturingSky);
+			_fe3d->water_setCapturingSky(_currentWaterId, !isCapturingSky);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingTerrain")->isHovered())
 		{
-			_fe3d->water_setCaptureTerrain(_currentWaterId, !isCapturingTerrain);
+			_fe3d->water_setCapturingTerrain(_currentWaterId, !isCapturingTerrain);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingModels")->isHovered())
 		{
-			_fe3d->water_setCaptureModels(_currentWaterId, !isCapturingModels);
+			_fe3d->water_setCapturingModels(_currentWaterId, !isCapturingModels);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingQuad3ds")->isHovered())
 		{
-			_fe3d->water_setCaptureQuad3ds(_currentWaterId, !isCapturingQuad3ds);
+			_fe3d->water_setCapturingQuad3ds(_currentWaterId, !isCapturingQuad3ds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingText3ds")->isHovered())
 		{
-			_fe3d->water_setCaptureText3ds(_currentWaterId, !isCapturingText3ds);
+			_fe3d->water_setCapturingText3ds(_currentWaterId, !isCapturingText3ds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isCapturingAabbs")->isHovered())
 		{
-			_fe3d->water_setCaptureAabbs(_currentWaterId, !isCapturingAabbs);
+			_fe3d->water_setCapturingAabbs(_currentWaterId, !isCapturingAabbs);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())

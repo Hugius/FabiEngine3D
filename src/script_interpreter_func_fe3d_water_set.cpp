@@ -431,7 +431,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureSky(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingSky(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -445,7 +445,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureTerrain(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingTerrain(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -459,7 +459,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureModels(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingModels(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -473,7 +473,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureQuad3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingQuad3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -487,7 +487,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureText3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingText3ds(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -501,7 +501,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setCaptureAabbs(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+				_fe3d->water_setCapturingAabbs(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

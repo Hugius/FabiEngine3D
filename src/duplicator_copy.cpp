@@ -114,12 +114,12 @@ void Duplicator::copyTemplateWater(const string & newId, const string & template
 	_fe3d->water_setDistortionSize(newId, _fe3d->water_getDistortionSize(templateId));
 	_fe3d->water_setDistortionFactor(newId, _fe3d->water_getDistortionFactor(templateId));
 	_fe3d->water_setCaptureOffset(newId, _fe3d->water_getCaptureOffset(templateId));
-	_fe3d->water_setCaptureSky(newId, _fe3d->water_isCapturingSky(templateId));
-	_fe3d->water_setCaptureTerrain(newId, _fe3d->water_isCapturingTerrain(templateId));
-	_fe3d->water_setCaptureModels(newId, _fe3d->water_isCapturingModels(templateId));
-	_fe3d->water_setCaptureQuad3ds(newId, _fe3d->water_isCapturingQuad3ds(templateId));
-	_fe3d->water_setCaptureText3ds(newId, _fe3d->water_isCapturingText3ds(templateId));
-	_fe3d->water_setCaptureAabbs(newId, _fe3d->water_isCapturingAabbs(templateId));
+	_fe3d->water_setCapturingSky(newId, _fe3d->water_isCapturingSky(templateId));
+	_fe3d->water_setCapturingTerrain(newId, _fe3d->water_isCapturingTerrain(templateId));
+	_fe3d->water_setCapturingModels(newId, _fe3d->water_isCapturingModels(templateId));
+	_fe3d->water_setCapturingQuad3ds(newId, _fe3d->water_isCapturingQuad3ds(templateId));
+	_fe3d->water_setCapturingText3ds(newId, _fe3d->water_isCapturingText3ds(templateId));
+	_fe3d->water_setCapturingAabbs(newId, _fe3d->water_isCapturingAabbs(templateId));
 
 	if(_fe3d->water_hasDudvMap(templateId))
 	{

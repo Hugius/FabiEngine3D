@@ -63,34 +63,34 @@ void EngineInterface::water_setCaptureOffset(const string & waterId, float value
 	_core->getWaterManager()->getWater(waterId)->setCaptureOffset(value);
 }
 
-void EngineInterface::water_setCaptureSky(const string & waterId, bool value)
+void EngineInterface::water_setCapturingSky(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureSky(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingSky(value);
 }
 
-void EngineInterface::water_setCaptureTerrain(const string & waterId, bool value)
+void EngineInterface::water_setCapturingTerrain(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureTerrain(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingTerrain(value);
 }
 
-void EngineInterface::water_setCaptureModels(const string & waterId, bool value)
+void EngineInterface::water_setCapturingModels(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureModels(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingModels(value);
 }
 
-void EngineInterface::water_setCaptureQuad3ds(const string & waterId, bool value)
+void EngineInterface::water_setCapturingQuad3ds(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureQuad3ds(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingQuad3ds(value);
 }
 
-void EngineInterface::water_setCaptureText3ds(const string & waterId, bool value)
+void EngineInterface::water_setCapturingText3ds(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureText3ds(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingText3ds(value);
 }
 
-void EngineInterface::water_setCaptureAabbs(const string & waterId, bool value)
+void EngineInterface::water_setCapturingAabbs(const string & waterId, bool value)
 {
-	_core->getWaterManager()->getWater(waterId)->setCaptureAabbs(value);
+	_core->getWaterManager()->getWater(waterId)->setCapturingAabbs(value);
 }
 
 void EngineInterface::water_setReflective(const string & waterId, bool value)

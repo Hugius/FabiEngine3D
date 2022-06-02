@@ -140,32 +140,32 @@ void Water::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
-void Water::setCaptureSky(bool value)
+void Water::setCapturingSky(bool value)
 {
 	_isCapturingSky = value;
 }
 
-void Water::setCaptureTerrain(bool value)
+void Water::setCapturingTerrain(bool value)
 {
 	_isCapturingTerrain = value;
 }
 
-void Water::setCaptureModels(bool value)
+void Water::setCapturingModels(bool value)
 {
 	_isCapturingModels = value;
 }
 
-void Water::setCaptureQuad3ds(bool value)
+void Water::setCapturingQuad3ds(bool value)
 {
 	_isCapturingQuad3ds = value;
 }
 
-void Water::setCaptureText3ds(bool value)
+void Water::setCapturingText3ds(bool value)
 {
 	_isCapturingText3ds = value;
 }
 
-void Water::setCaptureAabbs(bool value)
+void Water::setCapturingAabbs(bool value)
 {
 	_isCapturingAabbs = value;
 }

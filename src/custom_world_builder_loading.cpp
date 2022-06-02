@@ -435,12 +435,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setDistortionSize(waterId, distortionSize);
 			_fe3d->water_setDistortionFactor(waterId, distortionFactor);
 			_fe3d->water_setCaptureOffset(waterId, captureOffset);
-			_fe3d->water_setCaptureSky(waterId, isCapturingSky);
-			_fe3d->water_setCaptureTerrain(waterId, isCapturingTerrain);
-			_fe3d->water_setCaptureModels(waterId, isCapturingModels);
-			_fe3d->water_setCaptureQuad3ds(waterId, isCapturingQuad3ds);
-			_fe3d->water_setCaptureText3ds(waterId, isCapturingText3ds);
-			_fe3d->water_setCaptureAabbs(waterId, isCapturingAabbs);
+			_fe3d->water_setCapturingSky(waterId, isCapturingSky);
+			_fe3d->water_setCapturingTerrain(waterId, isCapturingTerrain);
+			_fe3d->water_setCapturingModels(waterId, isCapturingModels);
+			_fe3d->water_setCapturingQuad3ds(waterId, isCapturingQuad3ds);
+			_fe3d->water_setCapturingText3ds(waterId, isCapturingText3ds);
+			_fe3d->water_setCapturingAabbs(waterId, isCapturingAabbs);
 
 			if(!dudvMapPath.empty())
 			{

@@ -344,12 +344,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			bool isRefractive;
 			bool isEdged;
 			bool isWireframed;
-			bool mustCaptureSky;
-			bool mustCaptureTerrain;
-			bool mustCaptureModels;
-			bool mustCaptureQuad3ds;
-			bool mustCaptureText3ds;
-			bool mustCaptureAabbs;
+			bool isCapturingSky;
+			bool isCapturingTerrain;
+			bool isCapturingModels;
+			bool isCapturingQuad3ds;
+			bool isCapturingText3ds;
+			bool isCapturingAabbs;
 			bool isSelected;
 
 			iss
@@ -390,12 +390,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> distortionSize
 				>> distortionFactor
 				>> captureOffset
-				>> mustCaptureSky
-				>> mustCaptureTerrain
-				>> mustCaptureModels
-				>> mustCaptureQuad3ds
-				>> mustCaptureText3ds
-				>> mustCaptureAabbs
+				>> isCapturingSky
+				>> isCapturingTerrain
+				>> isCapturingModels
+				>> isCapturingQuad3ds
+				>> isCapturingText3ds
+				>> isCapturingAabbs
 				>> isSelected;
 
 			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
@@ -435,12 +435,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			_fe3d->water_setDistortionSize(waterId, distortionSize);
 			_fe3d->water_setDistortionFactor(waterId, distortionFactor);
 			_fe3d->water_setCaptureOffset(waterId, captureOffset);
-			_fe3d->water_setCaptureSky(waterId, mustCaptureSky);
-			_fe3d->water_setCaptureTerrain(waterId, mustCaptureTerrain);
-			_fe3d->water_setCaptureModels(waterId, mustCaptureModels);
-			_fe3d->water_setCaptureQuad3ds(waterId, mustCaptureQuad3ds);
-			_fe3d->water_setCaptureText3ds(waterId, mustCaptureText3ds);
-			_fe3d->water_setCaptureAabbs(waterId, mustCaptureAabbs);
+			_fe3d->water_setCaptureSky(waterId, isCapturingSky);
+			_fe3d->water_setCaptureTerrain(waterId, isCapturingTerrain);
+			_fe3d->water_setCaptureModels(waterId, isCapturingModels);
+			_fe3d->water_setCaptureQuad3ds(waterId, isCapturingQuad3ds);
+			_fe3d->water_setCaptureText3ds(waterId, isCapturingText3ds);
+			_fe3d->water_setCaptureAabbs(waterId, isCapturingAabbs);
 
 			if(!dudvMapPath.empty())
 			{

@@ -291,34 +291,34 @@ const bool EngineInterface::water_hasHeightMap(const string & waterId) const
 	return (_core->getWaterManager()->getWater(waterId)->getHeightTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::water_mustCaptureSky(const string & waterId) const
+const bool EngineInterface::water_isCapturingSky(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureSky();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingSky();
 }
 
-const bool EngineInterface::water_mustCaptureTerrain(const string & waterId) const
+const bool EngineInterface::water_isCapturingTerrain(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureTerrain();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingTerrain();
 }
 
-const bool EngineInterface::water_mustCaptureModels(const string & waterId) const
+const bool EngineInterface::water_isCapturingModels(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureModels();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingModels();
 }
 
-const bool EngineInterface::water_mustCaptureQuad3ds(const string & waterId) const
+const bool EngineInterface::water_isCapturingQuad3ds(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureQuad3ds();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingQuad3ds();
 }
 
-const bool EngineInterface::water_mustCaptureText3ds(const string & waterId) const
+const bool EngineInterface::water_isCapturingText3ds(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureText3ds();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingText3ds();
 }
 
-const bool EngineInterface::water_mustCaptureAabbs(const string & waterId) const
+const bool EngineInterface::water_isCapturingAabbs(const string & waterId) const
 {
-	return _core->getWaterManager()->getWater(waterId)->mustCaptureAabbs();
+	return _core->getWaterManager()->getWater(waterId)->isCapturingAabbs();
 }
 
 const string EngineInterface::water_getSelectedId() const

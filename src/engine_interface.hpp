@@ -226,12 +226,12 @@ public:
 	const bool water_hasDudvMap(const string & waterId) const;
 	const bool water_hasNormalMap(const string & waterId) const;
 	const bool water_hasHeightMap(const string & waterId) const;
-	const bool water_mustCaptureSky(const string & waterId) const;
-	const bool water_mustCaptureTerrain(const string & waterId) const;
-	const bool water_mustCaptureModels(const string & waterId) const;
-	const bool water_mustCaptureQuad3ds(const string & waterId) const;
-	const bool water_mustCaptureText3ds(const string & waterId) const;
-	const bool water_mustCaptureAabbs(const string & waterId) const;
+	const bool water_isCapturingSky(const string & waterId) const;
+	const bool water_isCapturingTerrain(const string & waterId) const;
+	const bool water_isCapturingModels(const string & waterId) const;
+	const bool water_isCapturingQuad3ds(const string & waterId) const;
+	const bool water_isCapturingText3ds(const string & waterId) const;
+	const bool water_isCapturingAabbs(const string & waterId) const;
 
 	void model_create(const string & modelId, const string & meshPath);
 	void model_delete(const string & modelId);

@@ -93,47 +93,47 @@ void MasterRenderer::captureWaterReflections()
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	if(water->mustCaptureSky())
+	if(water->isCapturingSky())
 	{
 		_renderSky();
 	}
 
-	if(water->mustCaptureTerrain())
+	if(water->isCapturingTerrain())
 	{
 		_renderTerrain();
 	}
 
-	if(water->mustCaptureModels())
+	if(water->isCapturingModels())
 	{
 		_renderOpaqueModels();
 	}
 
-	if(water->mustCaptureQuad3ds())
+	if(water->isCapturingQuad3ds())
 	{
 		_renderOpaqueQuad3ds();
 	}
 
-	if(water->mustCaptureText3ds())
+	if(water->isCapturingText3ds())
 	{
 		_renderOpaqueText3ds();
 	}
 
-	if(water->mustCaptureAabbs())
+	if(water->isCapturingAabbs())
 	{
 		_renderAabbs();
 	}
 
-	if(water->mustCaptureModels())
+	if(water->isCapturingModels())
 	{
 		_renderTransparentModels();
 	}
 
-	if(water->mustCaptureQuad3ds())
+	if(water->isCapturingQuad3ds())
 	{
 		_renderTransparentQuad3ds();
 	}
 
-	if(water->mustCaptureText3ds())
+	if(water->isCapturingText3ds())
 	{
 		_renderTransparentText3ds();
 	}
@@ -266,47 +266,47 @@ void MasterRenderer::captureWaterRefractions()
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	if(water->mustCaptureSky())
+	if(water->isCapturingSky())
 	{
 		_renderSky();
 	}
 
-	if(water->mustCaptureTerrain())
+	if(water->isCapturingTerrain())
 	{
 		_renderTerrain();
 	}
 
-	if(water->mustCaptureModels())
+	if(water->isCapturingModels())
 	{
 		_renderOpaqueModels();
 	}
 
-	if(water->mustCaptureQuad3ds())
+	if(water->isCapturingQuad3ds())
 	{
 		_renderOpaqueQuad3ds();
 	}
 
-	if(water->mustCaptureText3ds())
+	if(water->isCapturingText3ds())
 	{
 		_renderOpaqueText3ds();
 	}
 
-	if(water->mustCaptureAabbs())
+	if(water->isCapturingAabbs())
 	{
 		_renderAabbs();
 	}
 
-	if(water->mustCaptureModels())
+	if(water->isCapturingModels())
 	{
 		_renderTransparentModels();
 	}
 
-	if(water->mustCaptureQuad3ds())
+	if(water->isCapturingQuad3ds())
 	{
 		_renderTransparentQuad3ds();
 	}
 
-	if(water->mustCaptureText3ds())
+	if(water->isCapturingText3ds())
 	{
 		_renderTransparentText3ds();
 	}

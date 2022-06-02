@@ -589,7 +589,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureSky(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingSky(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -603,7 +603,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureTerrain(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingTerrain(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -617,7 +617,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureModels(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingModels(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -631,7 +631,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureQuad3ds(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingQuad3ds(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -645,7 +645,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureText3ds(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingText3ds(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -659,7 +659,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->water_mustCaptureAabbs(_fe3d->water_getSelectedId());
+				const auto result = _fe3d->water_isCapturingAabbs(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}

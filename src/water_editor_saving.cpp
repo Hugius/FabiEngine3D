@@ -43,12 +43,12 @@ const bool WaterEditor::saveWatersToFile() const
 		const auto distortionSize = _fe3d->water_getDistortionSize(waterId);
 		const auto distortionFactor = _fe3d->water_getDistortionFactor(waterId);
 		const auto captureOffset = _fe3d->water_getCaptureOffset(waterId);
-		const auto mustCaptureSky = _fe3d->water_mustCaptureSky(waterId);
-		const auto mustCaptureTerrain = _fe3d->water_mustCaptureTerrain(waterId);
-		const auto mustCaptureModels = _fe3d->water_mustCaptureModels(waterId);
-		const auto mustCaptureQuad3ds = _fe3d->water_mustCaptureQuad3ds(waterId);
-		const auto mustCaptureText3ds = _fe3d->water_mustCaptureText3ds(waterId);
-		const auto mustCaptureAabbs = _fe3d->water_mustCaptureAabbs(waterId);
+		const auto isCapturingSky = _fe3d->water_isCapturingSky(waterId);
+		const auto isCapturingTerrain = _fe3d->water_isCapturingTerrain(waterId);
+		const auto isCapturingModels = _fe3d->water_isCapturingModels(waterId);
+		const auto isCapturingQuad3ds = _fe3d->water_isCapturingQuad3ds(waterId);
+		const auto isCapturingText3ds = _fe3d->water_isCapturingText3ds(waterId);
+		const auto isCapturingAabbs = _fe3d->water_isCapturingAabbs(waterId);
 
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
@@ -116,17 +116,17 @@ const bool WaterEditor::saveWatersToFile() const
 			<< " "
 			<< captureOffset
 			<< " "
-			<< mustCaptureSky
+			<< isCapturingSky
 			<< " "
-			<< mustCaptureTerrain
+			<< isCapturingTerrain
 			<< " "
-			<< mustCaptureModels
+			<< isCapturingModels
 			<< " "
-			<< mustCaptureQuad3ds
+			<< isCapturingQuad3ds
 			<< " "
-			<< mustCaptureText3ds
+			<< isCapturingText3ds
 			<< " "
-			<< mustCaptureAabbs
+			<< isCapturingAabbs
 			<< endl;
 	}
 

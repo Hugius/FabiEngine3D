@@ -92,12 +92,12 @@ public:
 	const bool isRefractive() const;
 	const bool isWireframed() const;
 	const bool isEdged() const;
-	const bool mustCaptureSky() const;
-	const bool mustCaptureTerrain() const;
-	const bool mustCaptureModels() const;
-	const bool mustCaptureQuad3ds() const;
-	const bool mustCaptureText3ds() const;
-	const bool mustCaptureAabbs() const;
+	const bool isCapturingSky() const;
+	const bool isCapturingTerrain() const;
+	const bool isCapturingModels() const;
+	const bool isCapturingQuad3ds() const;
+	const bool isCapturingText3ds() const;
+	const bool isCapturingAabbs() const;
 
 private:
 	const string _id;
@@ -140,10 +140,10 @@ private:
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireframed = false;
-	bool _mustCaptureSky = false;
-	bool _mustCaptureTerrain = false;
-	bool _mustCaptureModels = false;
-	bool _mustCaptureQuad3ds = false;
-	bool _mustCaptureText3ds = false;
-	bool _mustCaptureAabbs = false;
+	bool _isCapturingSky = false;
+	bool _isCapturingTerrain = false;
+	bool _isCapturingModels = false;
+	bool _isCapturingQuad3ds = false;
+	bool _isCapturingText3ds = false;
+	bool _isCapturingAabbs = false;
 };

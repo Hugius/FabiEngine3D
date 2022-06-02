@@ -140,6 +140,36 @@ void Water::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
+void Water::setCaptureSky(bool value)
+{
+	_mustCaptureSky = value;
+}
+
+void Water::setCaptureTerrain(bool value)
+{
+	_mustCaptureTerrain = value;
+}
+
+void Water::setCaptureModels(bool value)
+{
+	_mustCaptureModels = value;
+}
+
+void Water::setCaptureQuad3ds(bool value)
+{
+	_mustCaptureQuad3ds = value;
+}
+
+void Water::setCaptureText3ds(bool value)
+{
+	_mustCaptureText3ds = value;
+}
+
+void Water::setCaptureAabbs(bool value)
+{
+	_mustCaptureAabbs = value;
+}
+
 void Water::setSize(float value)
 {
 	_size = clamp(value, 0.0f, 1024.0f);
@@ -318,6 +348,36 @@ const float Water::getCaptureOffset() const
 const bool Water::isEdged() const
 {
 	return _isEdged;
+}
+
+const bool Water::mustCaptureSky() const
+{
+	return _mustCaptureSky;
+}
+
+const bool Water::mustCaptureTerrain() const
+{
+	return _mustCaptureTerrain;
+}
+
+const bool Water::mustCaptureModels() const
+{
+	return _mustCaptureModels;
+}
+
+const bool Water::mustCaptureQuad3ds() const
+{
+	return _mustCaptureQuad3ds;
+}
+
+const bool Water::mustCaptureText3ds() const
+{
+	return _mustCaptureText3ds;
+}
+
+const bool Water::mustCaptureAabbs() const
+{
+	return _mustCaptureAabbs;
 }
 
 const bool Water::isSpecular() const

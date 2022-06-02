@@ -114,6 +114,12 @@ void Duplicator::copyTemplateWater(const string & newId, const string & template
 	_fe3d->water_setDistortionSize(newId, _fe3d->water_getDistortionSize(templateId));
 	_fe3d->water_setDistortionFactor(newId, _fe3d->water_getDistortionFactor(templateId));
 	_fe3d->water_setCaptureOffset(newId, _fe3d->water_getCaptureOffset(templateId));
+	_fe3d->water_setCaptureSky(newId, _fe3d->water_mustCaptureSky(templateId));
+	_fe3d->water_setCaptureTerrain(newId, _fe3d->water_mustCaptureTerrain(templateId));
+	_fe3d->water_setCaptureModels(newId, _fe3d->water_mustCaptureModels(templateId));
+	_fe3d->water_setCaptureQuad3ds(newId, _fe3d->water_mustCaptureQuad3ds(templateId));
+	_fe3d->water_setCaptureText3ds(newId, _fe3d->water_mustCaptureText3ds(templateId));
+	_fe3d->water_setCaptureAabbs(newId, _fe3d->water_mustCaptureAabbs(templateId));
 
 	if(_fe3d->water_hasDudvMap(templateId))
 	{

@@ -63,6 +63,36 @@ void EngineInterface::water_setCaptureOffset(const string & waterId, float value
 	_core->getWaterManager()->getWater(waterId)->setCaptureOffset(value);
 }
 
+void EngineInterface::water_setCaptureSky(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureSky(value);
+}
+
+void EngineInterface::water_setCaptureTerrain(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureTerrain(value);
+}
+
+void EngineInterface::water_setCaptureModels(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureModels(value);
+}
+
+void EngineInterface::water_setCaptureQuad3ds(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureQuad3ds(value);
+}
+
+void EngineInterface::water_setCaptureText3ds(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureText3ds(value);
+}
+
+void EngineInterface::water_setCaptureAabbs(const string & waterId, bool value)
+{
+	_core->getWaterManager()->getWater(waterId)->setCaptureAabbs(value);
+}
+
 void EngineInterface::water_setReflective(const string & waterId, bool value)
 {
 	_core->getWaterManager()->getWater(waterId)->setReflective(value);
@@ -259,6 +289,36 @@ const bool EngineInterface::water_hasNormalMap(const string & waterId) const
 const bool EngineInterface::water_hasHeightMap(const string & waterId) const
 {
 	return (_core->getWaterManager()->getWater(waterId)->getHeightTextureBuffer() != nullptr);
+}
+
+const bool EngineInterface::water_mustCaptureSky(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureSky();
+}
+
+const bool EngineInterface::water_mustCaptureTerrain(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureTerrain();
+}
+
+const bool EngineInterface::water_mustCaptureModels(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureModels();
+}
+
+const bool EngineInterface::water_mustCaptureQuad3ds(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureQuad3ds();
+}
+
+const bool EngineInterface::water_mustCaptureText3ds(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureText3ds();
+}
+
+const bool EngineInterface::water_mustCaptureAabbs(const string & waterId) const
+{
+	return _core->getWaterManager()->getWater(waterId)->mustCaptureAabbs();
 }
 
 const string EngineInterface::water_getSelectedId() const

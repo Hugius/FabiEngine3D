@@ -97,3 +97,21 @@
 - **Edged**: the parts of the mesh that cross with the terrain mesh are transparent
   - Type: `boolean`
   - Constraints: none
+- **Capture Sky**: the sky is captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none
+- **Capture Terrain**: the terrain is captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none
+- **Capture Models**: models are captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none
+- **Capture Quad3ds**: quad3Ds are captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none
+- **Capture Text3ds**: text3Ds are captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none
+- **Capture AABBs**: AABBs are captured for reflections/refractions
+  - Type: `boolean`
+  - Constraints: none

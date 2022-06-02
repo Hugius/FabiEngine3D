@@ -93,15 +93,50 @@ void MasterRenderer::captureWaterReflections()
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	_renderSky();
-	_renderTerrain();
-	_renderOpaqueModels();
-	_renderOpaqueQuad3ds();
-	_renderOpaqueText3ds();
-	_renderAabbs();
-	_renderTransparentModels();
-	_renderTransparentQuad3ds();
-	_renderTransparentText3ds();
+	if(water->mustCaptureSky())
+	{
+		_renderSky();
+	}
+
+	if(water->mustCaptureTerrain())
+	{
+		_renderTerrain();
+	}
+
+	if(water->mustCaptureModels())
+	{
+		_renderOpaqueModels();
+	}
+
+	if(water->mustCaptureQuad3ds())
+	{
+		_renderOpaqueQuad3ds();
+	}
+
+	if(water->mustCaptureText3ds())
+	{
+		_renderOpaqueText3ds();
+	}
+
+	if(water->mustCaptureAabbs())
+	{
+		_renderAabbs();
+	}
+
+	if(water->mustCaptureModels())
+	{
+		_renderTransparentModels();
+	}
+
+	if(water->mustCaptureQuad3ds())
+	{
+		_renderTransparentQuad3ds();
+	}
+
+	if(water->mustCaptureText3ds())
+	{
+		_renderTransparentText3ds();
+	}
 
 	for(const auto & savedId : savedModelIds)
 	{
@@ -231,15 +266,50 @@ void MasterRenderer::captureWaterRefractions()
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
 
-	_renderSky();
-	_renderTerrain();
-	_renderOpaqueModels();
-	_renderOpaqueQuad3ds();
-	_renderOpaqueText3ds();
-	_renderAabbs();
-	_renderTransparentModels();
-	_renderTransparentQuad3ds();
-	_renderTransparentText3ds();
+	if(water->mustCaptureSky())
+	{
+		_renderSky();
+	}
+
+	if(water->mustCaptureTerrain())
+	{
+		_renderTerrain();
+	}
+
+	if(water->mustCaptureModels())
+	{
+		_renderOpaqueModels();
+	}
+
+	if(water->mustCaptureQuad3ds())
+	{
+		_renderOpaqueQuad3ds();
+	}
+
+	if(water->mustCaptureText3ds())
+	{
+		_renderOpaqueText3ds();
+	}
+
+	if(water->mustCaptureAabbs())
+	{
+		_renderAabbs();
+	}
+
+	if(water->mustCaptureModels())
+	{
+		_renderTransparentModels();
+	}
+
+	if(water->mustCaptureQuad3ds())
+	{
+		_renderTransparentQuad3ds();
+	}
+
+	if(water->mustCaptureText3ds())
+	{
+		_renderTransparentText3ds();
+	}
 
 	for(const auto & savedId : savedModelIds)
 	{

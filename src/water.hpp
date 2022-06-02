@@ -46,6 +46,12 @@ public:
 	void setWireframeColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
+	void setCaptureSky(bool value);
+	void setCaptureTerrain(bool value);
+	void setCaptureModels(bool value);
+	void setCaptureQuad3ds(bool value);
+	void setCaptureText3ds(bool value);
+	void setCaptureAabbs(bool value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
@@ -86,6 +92,12 @@ public:
 	const bool isRefractive() const;
 	const bool isWireframed() const;
 	const bool isEdged() const;
+	const bool mustCaptureSky() const;
+	const bool mustCaptureTerrain() const;
+	const bool mustCaptureModels() const;
+	const bool mustCaptureQuad3ds() const;
+	const bool mustCaptureText3ds() const;
+	const bool mustCaptureAabbs() const;
 
 private:
 	const string _id;
@@ -128,4 +140,10 @@ private:
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireframed = false;
+	bool _mustCaptureSky = false;
+	bool _mustCaptureTerrain = false;
+	bool _mustCaptureModels = false;
+	bool _mustCaptureQuad3ds = false;
+	bool _mustCaptureText3ds = false;
+	bool _mustCaptureAabbs = false;
 };

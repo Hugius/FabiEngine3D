@@ -188,6 +188,12 @@ public:
 	void water_setDistortionSize(const string & waterId, float value);
 	void water_setDistortionFactor(const string & waterId, float value);
 	void water_setCaptureOffset(const string & waterId, float value);
+	void water_setCaptureSky(const string & waterId, bool value);
+	void water_setCaptureTerrain(const string & waterId, bool value);
+	void water_setCaptureModels(const string & waterId, bool value);
+	void water_setCaptureQuad3ds(const string & waterId, bool value);
+	void water_setCaptureText3ds(const string & waterId, bool value);
+	void water_setCaptureAabbs(const string & waterId, bool value);
 
 	const vector<string> water_getIds() const;
 	const string & water_getDudvMapPath(const string & waterId) const;
@@ -220,6 +226,12 @@ public:
 	const bool water_hasDudvMap(const string & waterId) const;
 	const bool water_hasNormalMap(const string & waterId) const;
 	const bool water_hasHeightMap(const string & waterId) const;
+	const bool water_mustCaptureSky(const string & waterId) const;
+	const bool water_mustCaptureTerrain(const string & waterId) const;
+	const bool water_mustCaptureModels(const string & waterId) const;
+	const bool water_mustCaptureQuad3ds(const string & waterId) const;
+	const bool water_mustCaptureText3ds(const string & waterId) const;
+	const bool water_mustCaptureAabbs(const string & waterId) const;
 
 	void model_create(const string & modelId, const string & meshPath);
 	void model_delete(const string & modelId);

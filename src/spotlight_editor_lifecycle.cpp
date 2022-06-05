@@ -16,6 +16,7 @@ void SpotlightEditor::_load()
 	_fe3d->model_setShadowed(GRID_ID, false);
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
 	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
+	_fe3d->model_setLightness(BOX_ID, "", BOX_LIGHTNESS);
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 	_fe3d->model_create(TORCH_ID, TORCH_MESH_PATH);
 	_fe3d->model_setBasePosition(TORCH_ID, TORCH_POSITION);

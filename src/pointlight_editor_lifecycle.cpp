@@ -16,6 +16,7 @@ void PointlightEditor::_load()
 	_fe3d->model_setShadowed(GRID_ID, false);
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
 	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
+	_fe3d->model_setLightness(BOX_ID, "", BOX_LIGHTNESS);
 	_fe3d->model_setFaceCulled(BOX_ID, "", true);
 	_fe3d->model_create(LAMP_ID, LAMP_MESH_PATH);
 	_fe3d->model_setBasePosition(LAMP_ID, LAMP_POSITION);

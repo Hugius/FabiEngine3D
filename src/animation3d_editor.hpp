@@ -60,7 +60,7 @@ private:
 	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
 	static inline constexpr float GRID_SIZE = 50.0f;
 	static inline constexpr float GRID_MIN_ALPHA = 0.1f;
-	static inline constexpr float GRID_LIGHTNESS = 1.0f;
+	static inline constexpr float GRID_LIGHTNESS = 0.75f;
 	static inline constexpr float BOX_LIGHTNESS = 1.5f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
@@ -71,7 +71,7 @@ private:
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
 	static inline constexpr float SHADOW_BIAS = 0.000001f;
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
-	static inline constexpr float SPEED_FACTOR = 100.0f;
+	static inline constexpr float SPEED_FACTOR = 1000.0f;
 	static inline constexpr float ROTATION_ORIGIN_FACTOR = 100.0f;
 	static inline constexpr float MOVEMENT_FACTOR = 100.0f;
 	static inline constexpr float ROTATION_FACTOR = 1.0f;

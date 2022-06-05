@@ -48,7 +48,7 @@ private:
 	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
 	static inline constexpr float GRID_SIZE = 50.0f;
 	static inline constexpr float GRID_MIN_ALPHA = 0.1f;
-	static inline constexpr float GRID_LIGHTNESS = 1.0f;
+	static inline constexpr float GRID_LIGHTNESS = 0.75f;
 	static inline constexpr float BOX_LIGHTNESS = 1.5f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;

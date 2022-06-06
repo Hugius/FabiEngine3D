@@ -16,12 +16,14 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 	{
 		case 24:
 		{
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 
 			break;
 		}
 		case 32:
 		{
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 
 			break;
@@ -65,12 +67,14 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 				pixels[index] = 255;
 			}
 
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
 			delete[] pixels;
 		}
 		else
 		{
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[index]->getPixels());
 		}
 	}

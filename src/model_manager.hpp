@@ -34,11 +34,9 @@ public:
 	const bool isModelsExisting() const;
 
 private:
-	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
-	static inline constexpr float CUBE_REFRACTION_OVERLAP_SPEED = 0.01f;
+	static inline constexpr float CAPTOR_OVERLAP_SPEED = 0.01f;
 
-	static inline constexpr int CUBE_REFLECTION_OVERLAP_INTERVAL = 10;
-	static inline constexpr int CUBE_REFRACTION_OVERLAP_INTERVAL = 10;
+	static inline constexpr int CAPTOR_OVERLAP_INTERVAL = 10;
 
 	unordered_map<string, shared_ptr<Model>> _models = {};
 

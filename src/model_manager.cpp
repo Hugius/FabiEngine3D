@@ -184,7 +184,7 @@ void ModelManager::update()
 			model->setCubeRefractionMixValue(1.0f);
 		}
 
-		if((_timer->getPassedUpdateCount() % CUBE_REFLECTION_OVERLAP_INTERVAL) == 0)
+		if((_timer->getPassedUpdateCount() % CAPTOR_OVERLAP_INTERVAL) == 0)
 		{
 			map<float, shared_ptr<Captor>> orderedCaptors = {};
 
@@ -207,41 +207,13 @@ void ModelManager::update()
 					if(!model->getPreviousCaptorId().empty())
 					{
 						model->setCubeReflectionMixValue(0.0f);
-					}
-				}
-			}
-
-			model->setCubeReflectionMixValue(model->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
-		}
-
-		if((_timer->getPassedUpdateCount() % CUBE_REFRACTION_OVERLAP_INTERVAL) == 0)
-		{
-			map<float, shared_ptr<Captor>> orderedCaptors = {};
-
-			for(const auto & [captorId, captor] : _captorManager->getCaptors())
-			{
-				const auto absoluteDistance = Mathematics::calculateDistance(model->getBasePosition(), captor->getPosition());
-
-				orderedCaptors.insert({absoluteDistance, captor});
-			}
-
-			if(!orderedCaptors.empty())
-			{
-				const auto closestCaptorId = orderedCaptors.begin()->second->getId();
-
-				if(model->getCurrentCaptorId() != closestCaptorId)
-				{
-					model->setPreviousCaptorId(model->getCurrentCaptorId());
-					model->setCurrentCaptorId(closestCaptorId);
-
-					if(!model->getPreviousCaptorId().empty())
-					{
 						model->setCubeRefractionMixValue(0.0f);
 					}
 				}
 			}
 
-			model->setCubeRefractionMixValue(model->getCubeRefractionMixValue() + CUBE_REFRACTION_OVERLAP_SPEED);
+			model->setCubeReflectionMixValue(model->getCubeReflectionMixValue() + CAPTOR_OVERLAP_SPEED);
+			model->setCubeRefractionMixValue(model->getCubeRefractionMixValue() + CAPTOR_OVERLAP_SPEED);
 		}
 
 		model->updateTransformation();

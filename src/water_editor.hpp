@@ -61,8 +61,8 @@ private:
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float COLOR_FACTOR = 255.0f;
 	static inline constexpr float LIGHTNESS_FACTOR = 100.0f;
-	static inline constexpr float RIPPLE_SPEED_FACTOR = 100000.0f;
-	static inline constexpr float WAVE_SPEED_FACTOR = 100000.0f;
+	static inline constexpr float RIPPLE_SPEED_FACTOR = 10000.0f;
+	static inline constexpr float WAVE_SPEED_FACTOR = 10000.0f;
 	static inline constexpr float WAVE_HEIGHT_FACTOR = 100.0f;
 	static inline constexpr float SPECULAR_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float DISTORTION_SIZE_FACTOR = 100.0f;

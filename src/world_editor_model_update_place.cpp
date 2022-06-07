@@ -41,6 +41,8 @@ void WorldEditor::_updateModelPlacing()
 
 				_loadedModelIds.push_back(newModelId);
 
+				sort(_loadedModelIds.begin(), _loadedModelIds.end());
+
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 
 				_currentTemplateModelId = "";
@@ -105,6 +107,8 @@ void WorldEditor::_updateModelPlacing()
 				_originalModelSizes.insert({newModelId, _fe3d->model_getBaseSize(newModelId)});
 
 				_loadedModelIds.push_back(newModelId);
+
+				sort(_loadedModelIds.begin(), _loadedModelIds.end());
 			}
 		}
 	}

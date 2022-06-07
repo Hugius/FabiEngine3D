@@ -36,14 +36,12 @@ void WorldEditor::_updateSound3dPlacing()
 
 				_duplicator->copyTemplateSound3d(newSound3dId, _currentTemplateSound3dId);
 
-				_loadedSound3dIds.push_back(newSound3dId);
-
 				_fe3d->sound3d_setPosition(newSound3dId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->sound3d_setMaxVolume(newSound3dId, SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newSound3dId, SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newSound3dId, -1, 0);
 
 				_loadedSound3dIds.push_back(newSound3dId);
+
+				sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 
 				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
@@ -147,11 +145,11 @@ void WorldEditor::_updateSound3dPlacing()
 				_duplicator->copyTemplateSound3d(newSound3dId, _currentTemplateSound3dId);
 
 				_fe3d->sound3d_setPosition(newSound3dId, newPosition);
-				_fe3d->sound3d_setMaxVolume(newSound3dId, SOUND3D_MAX_VOLUME);
-				_fe3d->sound3d_setMaxDistance(newSound3dId, SOUND3D_MAX_DISTANCE);
 				_fe3d->sound3d_start(newSound3dId, -1, 0);
 
 				_loadedSound3dIds.push_back(newSound3dId);
+
+				sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 
 				_fe3d->model_create(newModelId, SPEAKER_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

@@ -226,8 +226,6 @@ private:
 	static inline constexpr float SOUND3D_DISTANCE_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_FACTOR = 100.0f;
 	static inline constexpr float SOUND3D_VOLUME_SPEED = 0.01f;
-	static inline constexpr float SOUND3D_MAX_VOLUME = 1.0f;
-	static inline constexpr float SOUND3D_MAX_DISTANCE = 25.0f;
 	static inline constexpr float GRID_SIZE = 1024.0f;
 	static inline constexpr float GRID_MIN_ALPHA = 0.1f;
 	static inline constexpr float GRID_LIGHTNESS = 0.75f;

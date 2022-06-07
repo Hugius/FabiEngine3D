@@ -37,6 +37,8 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_loadedQuad3dIds.push_back(newQuad3dId);
 
+				sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
+
 				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
 
 				_currentTemplateQuad3dId = "";
@@ -97,6 +99,8 @@ void WorldEditor::_updateQuad3dPlacing()
 				_fe3d->quad3d_setPosition(newQuad3dId, newPosition);
 
 				_loadedQuad3dIds.push_back(newQuad3dId);
+
+				sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 			}
 		}
 	}

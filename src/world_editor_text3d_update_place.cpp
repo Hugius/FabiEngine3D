@@ -37,6 +37,8 @@ void WorldEditor::_updateText3dPlacing()
 
 				_loadedText3dIds.push_back(newText3dId);
 
+				sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
+
 				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
 
 				_currentTemplateText3dId = "";
@@ -97,6 +99,8 @@ void WorldEditor::_updateText3dPlacing()
 				_fe3d->text3d_setPosition(newText3dId, newPosition);
 
 				_loadedText3dIds.push_back(newText3dId);
+
+				sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 			}
 		}
 	}

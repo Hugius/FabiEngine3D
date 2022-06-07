@@ -53,6 +53,8 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_loadedPointlightIds.push_back(newPointlightId);
 
+				sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
+
 				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseSize(newModelId, LAMP_SIZE);
@@ -145,6 +147,8 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->pointlight_setPosition(newPointlightId, newPosition);
 
 				_loadedPointlightIds.push_back(newPointlightId);
+
+				sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
 				_fe3d->model_create(newModelId, LAMP_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

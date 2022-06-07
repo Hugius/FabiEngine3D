@@ -40,6 +40,8 @@ void WorldEditor::_updateCaptorPlacing()
 
 				_loadedCaptorIds.push_back(newCaptorId);
 
+				sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
+
 				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
 				_fe3d->model_setBaseSize(newModelId, LENS_SIZE);
@@ -117,6 +119,8 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->captor_setPosition(newCaptorId, newPosition);
 
 				_loadedCaptorIds.push_back(newCaptorId);
+
+				sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
 
 				_fe3d->model_create(newModelId, LENS_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);

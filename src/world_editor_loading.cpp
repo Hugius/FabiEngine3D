@@ -259,6 +259,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedModelIds.push_back(modelId);
 
+			sort(_loadedModelIds.begin(), _loadedModelIds.end());
+
 			_originalModelPositions.insert({modelId, position});
 			_originalModelRotations.insert({modelId, rotation});
 			_originalModelSizes.insert({modelId, size});
@@ -304,6 +306,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			}
 
 			_loadedQuad3dIds.push_back(quad3dId);
+
+			sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 		}
 		else if(lineType == "TEXT3D")
 		{
@@ -340,6 +344,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->text3d_setSize(text3dId, size);
 
 			_loadedText3dIds.push_back(text3dId);
+
+			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 		}
 		else if(lineType == "AABB")
 		{
@@ -369,6 +375,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->aabb_setBaseSize(aabbId, size);
 
 			_loadedAabbIds.push_back(aabbId);
+
+			sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 		}
 		else if(lineType == "POINTLIGHT")
 		{
@@ -393,6 +401,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->pointlight_setPosition(pointlightId, position);
 
 			_loadedPointlightIds.push_back(pointlightId);
+
+			sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
 			if(isLoaded())
 			{
@@ -444,6 +454,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->spotlight_setPitch(spotlightId, pitch);
 
 			_loadedSpotlightIds.push_back(spotlightId);
+
+			sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 
 			if(isLoaded())
 			{
@@ -497,6 +509,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedCaptorIds.push_back(captorId);
 
+			sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
+
 			if(isLoaded())
 			{
 				const auto newModelId = ("@@lens_" + captorId);
@@ -541,6 +555,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->sound3d_start(sound3dId, -1, 0);
 
 			_loadedSound3dIds.push_back(sound3dId);
+
+			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
 
 			if(isLoaded())
 			{

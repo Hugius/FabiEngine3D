@@ -177,6 +177,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 		for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 		{
 			auto nameSize = (fileName.size() - string(".fe3d").size());
+
 			worldIds.push_back(fileName.substr(0, nameSize));
 		}
 	}

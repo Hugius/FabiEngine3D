@@ -37,6 +37,8 @@ void WorldEditor::_updateAabbPlacing()
 
 				_loadedAabbIds.push_back(newAabbId);
 
+				sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
+
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
 
 				_currentTemplateAabbId = "";
@@ -97,6 +99,8 @@ void WorldEditor::_updateAabbPlacing()
 				_fe3d->aabb_setBasePosition(newAabbId, newPosition);
 
 				_loadedAabbIds.push_back(newAabbId);
+
+				sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 			}
 		}
 	}

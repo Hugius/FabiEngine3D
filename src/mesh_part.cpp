@@ -1,8 +1,8 @@
 #include "mesh_part.hpp"
 
-MeshPart::MeshPart(const string & name)
+MeshPart::MeshPart(const string & id)
 	:
-	_name(name)
+	_id(id)
 {
 
 }
@@ -27,9 +27,9 @@ void MeshPart::addUv(const fvec2 & value)
 	_uvs.push_back(value);
 }
 
-const string & MeshPart::getName() const
+const string & MeshPart::getId() const
 {
-	return _name;
+	return _id;
 }
 
 const vector<fvec3> & MeshPart::getPositions() const

@@ -13,10 +13,10 @@ using std::array;
 
 shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 {
-	vector<shared_ptr<MeshPart>> meshParts;
-	vector<fvec3> temp_positions;
-	vector<fvec2> temp_uvs;
-	vector<fvec3> temp_normals;
+	vector<shared_ptr<MeshPart>> meshParts = {};
+	vector<fvec3> temp_positions = {};
+	vector<fvec2> temp_uvs = {};
+	vector<fvec3> temp_normals = {};
 	string selectedPartId = "";
 
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -142,7 +142,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 			for(const auto & meshPart : meshParts)
 			{
-				if(meshPart->getName() == selectedPartId)
+				if(meshPart->getId() == selectedPartId)
 				{
 					isAlreadyExisting = true;
 
@@ -210,12 +210,18 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 	{
 		return nullptr;
 	}
-
-	if(meshParts.size() > 1)
+	else if(meshParts.size() == 1)
+	{
+		if(!meshParts[0]->getId().empty())
+		{
+			return nullptr;
+		}
+	}
+	else if(meshParts.size() > 1)
 	{
 		for(const auto & meshPart : meshParts)
 		{
-			if(meshPart->getName().empty())
+			if(meshPart->getId().empty())
 			{
 				return nullptr;
 			}

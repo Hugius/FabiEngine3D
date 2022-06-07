@@ -90,18 +90,18 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 			bufferData.push_back(part->getTangents()[index].z);
 		}
 
-		model->createPart(part->getName());
+		model->createPart(part->getId());
 
-		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getName());
+		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getId());
 
 		if(vertexBuffer == nullptr)
 		{
 			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<int>(bufferData.size()));
 
-			_vertexBufferCache->storeBuffer(meshPath, part->getName(), vertexBuffer);
+			_vertexBufferCache->storeBuffer(meshPath, part->getId(), vertexBuffer);
 		}
 
-		model->setVertexBuffer(part->getName(), vertexBuffer);
+		model->setVertexBuffer(part->getId(), vertexBuffer);
 	}
 
 	model->setMeshPath(meshPath);

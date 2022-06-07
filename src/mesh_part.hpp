@@ -11,7 +11,7 @@ using std::string;
 class MeshPart final
 {
 public:
-	MeshPart(const string & name);
+	MeshPart(const string & id);
 
 	void addPosition(const fvec3 & value);
 	void addUv(const fvec2 & value);
@@ -23,10 +23,10 @@ public:
 	const vector<fvec3> & getNormals() const;
 	const vector<fvec3> & getTangents() const;
 
-	const string & getName() const;
+	const string & getId() const;
 
 private:
-	const string _name;
+	const string _id;
 
 	vector<fvec3> _positions = {};
 	vector<fvec2> _uvs = {};

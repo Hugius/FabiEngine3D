@@ -128,14 +128,24 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 				>> indices[7]
 				>> indices[8];
 
+			if((temp_positions.size() < indices[0]) || (temp_positions.size() < indices[3]) || (temp_positions.size() < indices[6]))
+			{
+				return nullptr;
+			}
+
+			if((temp_uvs.size() < indices[1]) || (temp_uvs.size() < indices[4]) || (temp_uvs.size() < indices[7]))
+			{
+				return nullptr;
+			}
+
+			if((temp_normals.size() < indices[2]) || (temp_normals.size() < indices[5]) || (temp_normals.size() < indices[8]))
+			{
+				return nullptr;
+			}
+
 			for(auto & index : indices)
 			{
 				index--;
-			}
-
-			if(temp_positions.empty() || temp_uvs.empty() || temp_normals.empty())
-			{
-				return nullptr;
 			}
 
 			bool isAlreadyExisting = false;

@@ -4,6 +4,7 @@
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 #define GAMMA_VALUE 2.2f
+#define CUBE_REFRACTION_RATIO 0.75f
 
 in vec4 f_shadowSpacePos;
 in vec3 f_worldSpacePos;
@@ -438,7 +439,7 @@ vec3 calculateCubeRefraction(vec3 refractionMapColor, vec3 color, vec3 normal)
 		if(refractionMapColor != vec3(0.0f))
 		{
 			vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
-			vec3 refractionDirection = refract(viewDirection, normal, 1.0f);
+			vec3 refractionDirection = refract(viewDirection, normal, CUBE_REFRACTION_RATIO);
 			vec3 previousCubeRefractionMapColor = texture(u_previousRefractionCubeMap, refractionDirection).rgb;
 			vec3 currentCubeRefractionMapColor = texture(u_currentRefractionCubeMap, refractionDirection).rgb;
 			vec3 cubeRefractionMapColor = mix(previousCubeRefractionMapColor, currentCubeRefractionMapColor, u_cubeRefractionMixValue);

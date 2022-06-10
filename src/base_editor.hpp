@@ -6,23 +6,24 @@
 class BaseEditor
 {
 public:
-	virtual void update() = 0;
-
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<GuiManager> gui);
-	void setCurrentProjectId(const string & currentProjectId);
 	void load();
+	void update();
 	void unload();
+	void setCurrentProjectId(const string & currentProjectId);
 
+	const string & getCurrentProjectId() const;
+
+	const bool isLoading() const;
 	const bool isLoaded() const;
 
 protected:
 	virtual void _load() = 0;
+	virtual void _update() = 0;
 	virtual void _unload() = 0;
 	virtual void _loadGUI() = 0;
 	virtual void _unloadGUI() = 0;
-
-	const string & getCurrentProjectId() const;
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
@@ -47,5 +48,6 @@ protected:
 private:
 	string _currentProjectId = "";
 
-	bool _isEditorLoaded = false;
+	bool _isLoading = false;
+	bool _isLoaded = false;
 };

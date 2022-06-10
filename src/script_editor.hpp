@@ -10,7 +10,6 @@ public:
 	using BaseEditor::inject;
 
 	void inject(shared_ptr<Script> script);
-	void update();
 
 	const bool loadScriptFiles(bool isLoggingEnabled);
 	const bool saveScriptFiles();
@@ -18,6 +17,7 @@ public:
 
 private:
 	void _load();
+	void _update();
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();

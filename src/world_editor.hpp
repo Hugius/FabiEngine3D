@@ -36,7 +36,6 @@ public:
 	void inject(shared_ptr<CaptorEditor> captorEditor);
 	void inject(shared_ptr<Sound3dEditor> sound3dEditor);
 	void inject(shared_ptr<Duplicator> duplicator);
-	void update();
 	void clearLoadedWorld();
 
 	const string & getLoadedWorldId() const;
@@ -46,6 +45,7 @@ public:
 
 private:
 	void _load();
+	void _update();
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();

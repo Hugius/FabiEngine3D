@@ -7,7 +7,6 @@ class SpotlightEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void update();
 	void deleteLoadedSpotlights();
 
 	const vector<string> & getLoadedSpotlightIds() const;
@@ -17,6 +16,7 @@ public:
 
 private:
 	void _load();
+	void _update();
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();

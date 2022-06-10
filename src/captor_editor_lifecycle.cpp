@@ -56,7 +56,7 @@ void CaptorEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void CaptorEditor::update()
+void CaptorEditor::_update()
 {
 	if(isLoaded())
 	{

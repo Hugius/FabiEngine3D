@@ -196,7 +196,7 @@ void ModelEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void ModelEditor::update()
+void ModelEditor::_update()
 {
 	if(isLoaded())
 	{

@@ -106,7 +106,7 @@ void AabbEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void AabbEditor::update()
+void AabbEditor::_update()
 {
 	if(isLoaded())
 	{

@@ -100,7 +100,7 @@ void ScriptEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void ScriptEditor::update()
+void ScriptEditor::_update()
 {
 	if(isLoaded())
 	{

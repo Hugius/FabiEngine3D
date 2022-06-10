@@ -17,10 +17,18 @@ void BaseEditor::setCurrentProjectId(const string & currentProjectId)
 
 void BaseEditor::load()
 {
+	_isLoading = true;
+
 	_loadGUI();
 	_load();
 
-	_isEditorLoaded = true;
+	_isLoading = false;
+	_isLoaded = true;
+}
+
+void BaseEditor::update()
+{
+	_update();
 }
 
 void BaseEditor::unload()
@@ -28,12 +36,17 @@ void BaseEditor::unload()
 	_unload();
 	_unloadGUI();
 
-	_isEditorLoaded = false;
+	_isLoaded = false;
+}
+
+const bool BaseEditor::isLoading() const
+{
+	return _isLoading;
 }
 
 const bool BaseEditor::isLoaded() const
 {
-	return _isEditorLoaded;
+	return _isLoaded;
 }
 
 const string & BaseEditor::getCurrentProjectId() const

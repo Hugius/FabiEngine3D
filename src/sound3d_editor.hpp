@@ -7,7 +7,6 @@ class Sound3dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void update();
 	void deleteLoadedSound3ds();
 
 	const vector<string> getAudioPathsFromFile() const;
@@ -18,6 +17,7 @@ public:
 
 private:
 	void _load();
+	void _update();
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();

@@ -63,7 +63,7 @@ void Text2dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Text2dEditor::update()
+void Text2dEditor::_update()
 {
 	if(isLoaded())
 	{

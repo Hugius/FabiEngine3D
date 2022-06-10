@@ -9,7 +9,6 @@ public:
 	using BaseEditor::inject;
 
 	void inject(shared_ptr<SkyEditor> skyEditor);
-	void update();
 	void deleteLoadedWaters();
 
 	const vector<string> getImagePathsFromFile() const;
@@ -20,6 +19,7 @@ public:
 
 private:
 	void _load();
+	void _update();
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();

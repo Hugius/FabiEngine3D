@@ -147,7 +147,7 @@ void WorldEditor::_unload()
 	_gui->getOverlay()->deleteTextField(ACTIVE_TITLE_ID);
 }
 
-void WorldEditor::update()
+void WorldEditor::_update()
 {
 	if(isLoaded())
 	{

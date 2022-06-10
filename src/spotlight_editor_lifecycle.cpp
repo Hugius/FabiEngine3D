@@ -116,7 +116,7 @@ void SpotlightEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void SpotlightEditor::update()
+void SpotlightEditor::_update()
 {
 	if(isLoaded())
 	{

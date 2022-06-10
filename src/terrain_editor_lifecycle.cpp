@@ -152,7 +152,7 @@ void TerrainEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void TerrainEditor::update()
+void TerrainEditor::_update()
 {
 	if(isLoaded())
 	{

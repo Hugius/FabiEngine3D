@@ -145,7 +145,7 @@ void Text3dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Text3dEditor::update()
+void Text3dEditor::_update()
 {
 	if(isLoaded())
 	{

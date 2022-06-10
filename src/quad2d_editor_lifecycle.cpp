@@ -65,7 +65,7 @@ void Quad2dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Quad2dEditor::update()
+void Quad2dEditor::_update()
 {
 	if(isLoaded())
 	{

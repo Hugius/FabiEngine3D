@@ -85,7 +85,7 @@ void SkyEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void SkyEditor::update()
+void SkyEditor::_update()
 {
 	if(isLoaded())
 	{

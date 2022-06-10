@@ -81,7 +81,7 @@ void Sound2dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Sound2dEditor::update()
+void Sound2dEditor::_update()
 {
 	if(isLoaded())
 	{

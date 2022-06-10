@@ -144,7 +144,7 @@ void Animation3dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Animation3dEditor::update()
+void Animation3dEditor::_update()
 {
 	if(isLoaded())
 	{

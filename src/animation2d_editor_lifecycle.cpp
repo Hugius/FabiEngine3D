@@ -69,7 +69,7 @@ void Animation2dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Animation2dEditor::update()
+void Animation2dEditor::_update()
 {
 	if(isLoaded())
 	{

@@ -155,7 +155,7 @@ void WaterEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void WaterEditor::update()
+void WaterEditor::_update()
 {
 	if(isLoaded())
 	{

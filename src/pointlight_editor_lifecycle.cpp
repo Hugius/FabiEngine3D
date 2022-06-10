@@ -115,7 +115,7 @@ void PointlightEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void PointlightEditor::update()
+void PointlightEditor::_update()
 {
 	if(isLoaded())
 	{

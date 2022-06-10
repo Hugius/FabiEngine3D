@@ -12,7 +12,6 @@ void AabbEditor::_updateCamera()
 
 		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, (_fe3d->camera_getThirdPersonDistance() - (distanceOffset * CAMERA_DISTANCE_SPEED))));
 		_fe3d->camera_setThirdPersonLookat(fvec3(cameraLookat.x, max(0.0f, (cameraLookat.y + (lookatOffset * CAMERA_LOOKAT_SPEED))), cameraLookat.z));
-
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), false);
 	}
 

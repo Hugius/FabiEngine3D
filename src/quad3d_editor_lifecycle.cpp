@@ -155,7 +155,7 @@ void Quad3dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Quad3dEditor::update()
+void Quad3dEditor::_update()
 {
 	if(isLoaded())
 	{

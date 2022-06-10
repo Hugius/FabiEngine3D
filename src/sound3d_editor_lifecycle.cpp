@@ -113,7 +113,7 @@ void Sound3dEditor::_unloadGUI()
 	rightWindow->setActiveScreen("main");
 }
 
-void Sound3dEditor::update()
+void Sound3dEditor::_update()
 {
 	if(isLoaded())
 	{

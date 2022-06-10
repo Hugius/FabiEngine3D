@@ -50,9 +50,9 @@ void EngineCore::_update()
 
 	_timer->startClock("renderUpdate");
 	_renderWindow->update();
-	if(_renderWindow->isClosed())
+	if(!_renderWindow->isExisting())
 	{
-		stop();
+		return stop();
 	}
 	_masterRenderer->update();
 	_timer->stopClock("renderUpdate");
@@ -88,17 +88,21 @@ void EngineCore::_render()
 	_timer->startClock("depthPreRender");
 	_masterRenderer->captureWorldDepth();
 	_timer->stopClock("depthPreRender");
+
 	_timer->startClock("shadowPreRender");
 	_masterRenderer->captureShadows();
 	_timer->stopClock("shadowPreRender");
+
 	_timer->startClock("reflectionPreRender");
 	_masterRenderer->captureCubeReflections();
 	_masterRenderer->capturePlanarReflections();
 	_timer->stopClock("reflectionPreRender");
+
 	_timer->startClock("refractionPreRender");
 	_masterRenderer->captureCubeRefractions();
 	_masterRenderer->capturePlanarRefractions();
 	_timer->stopClock("refractionPreRender");
+
 	_timer->startClock("waterPreRender");
 	_masterRenderer->captureWaterReflections();
 	_masterRenderer->captureWaterRefractions();
@@ -112,15 +116,19 @@ void EngineCore::_render()
 	_timer->startClock("antiAliasingPostRender");
 	_masterRenderer->captureAntiAliasing();
 	_timer->stopClock("antiAliasingPostRender");
+
 	_timer->startClock("bloomPreRender");
 	_masterRenderer->captureBloom();
 	_timer->stopClock("bloomPreRender");
+
 	_timer->startClock("dofPreRender");
 	_masterRenderer->captureDof();
 	_timer->stopClock("dofPreRender");
+
 	_timer->startClock("lensFlarePreRender");
 	_masterRenderer->captureLensFlare();
 	_timer->stopClock("lensFlarePreRender");
+
 	_timer->startClock("motionBlurPreRender");
 	_masterRenderer->captureMotionBlur();
 	_timer->stopClock("motionBlurPreRender");

@@ -200,7 +200,7 @@ void EngineCore::start()
 
 	float renderLag = 0.0f;
 
-	while(_isRunning)
+	while(true)
 	{
 		_timer->startClock("total");
 
@@ -211,6 +211,11 @@ void EngineCore::start()
 			_networkingServer->update();
 
 			_timer->increasePassedUpdateCount();
+
+			if(!_isRunning)
+			{
+				break;
+			}
 		}
 		else
 		{
@@ -229,6 +234,16 @@ void EngineCore::start()
 
 				renderLag -= millisecondsPerUpdate;
 				renderLag = max(0.0f, renderLag);
+
+				if(!_isRunning)
+				{
+					break;
+				}
+			}
+
+			if(!_isRunning)
+			{
+				break;
 			}
 
 			_render();

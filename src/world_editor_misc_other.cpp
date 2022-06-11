@@ -207,6 +207,8 @@ bool WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 		if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
 		{
 			value = 0.0f;
+
+			return true;
 		}
 		else
 		{
@@ -215,9 +217,9 @@ bool WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 			value = clamp((content / multiplier), minimum, maximum);
 
 			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
-		}
 
-		return true;
+			return true;
+		}
 	}
 	else
 	{
@@ -225,18 +227,22 @@ bool WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 		{
 			value = clamp((value - delta), minimum, maximum);
 
+			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
+
 			return true;
 		}
 		else if(_gui->getLeftViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value + delta), minimum, maximum);
 
+			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
+
 			return true;
 		}
-
-		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
-
-		return false;
+		else
+		{
+			return false;
+		}
 	}
 }
 

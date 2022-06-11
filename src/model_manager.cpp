@@ -158,9 +158,10 @@ void ModelManager::update()
 
 			const auto cameraPosition = _camera->getPosition();
 			const auto modelPosition = model->getBasePosition();
-			const auto absolsuteDistance = Mathematics::calculateDistance(cameraPosition, modelPosition);
+			const auto levelOfDetailDistance = model->getLevelOfDetailDistance();
+			const auto totalDistance = Mathematics::calculateDistance(cameraPosition, modelPosition);
 
-			model->setLevelOfDetailed((absolsuteDistance > model->getLevelOfDetailDistance()));
+			model->setLevelOfDetailed(totalDistance > levelOfDetailDistance);
 		}
 
 		if(_captorManager->getCaptors().find(model->getPreviousCaptorId()) == _captorManager->getCaptors().end())
@@ -190,9 +191,9 @@ void ModelManager::update()
 
 			for(const auto & [captorId, captor] : _captorManager->getCaptors())
 			{
-				const auto absoluteDistance = Mathematics::calculateDistance(model->getBasePosition(), captor->getPosition());
+				const auto distance = Mathematics::calculateDistance(model->getBasePosition(), captor->getPosition());
 
-				orderedCaptors.insert({absoluteDistance, captor});
+				orderedCaptors.insert({distance, captor});
 			}
 
 			if(!orderedCaptors.empty())

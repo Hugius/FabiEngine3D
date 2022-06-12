@@ -241,6 +241,8 @@ bool WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 		}
 		else
 		{
+			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
+
 			return false;
 		}
 	}

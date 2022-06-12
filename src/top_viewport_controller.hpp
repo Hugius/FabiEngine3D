@@ -82,7 +82,7 @@ private:
 	static inline constexpr float RCW = 0.075f;
 	static inline constexpr float RCH = 1.5f;
 
-	static inline constexpr int VALUE_FORM_SIZE = 10;
+	static inline constexpr int VALUE_FORM_SIZE = 15;
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;

@@ -40,7 +40,7 @@ protected:
 	static inline constexpr float CW = 0.11f;
 	static inline constexpr float CH = 0.085f;
 
-	static inline constexpr int VALUE_FORM_SIZE = 10;
+	static inline constexpr int VALUE_FORM_SIZE = 15;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiManager> _gui = nullptr;

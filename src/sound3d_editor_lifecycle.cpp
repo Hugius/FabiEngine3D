@@ -13,7 +13,6 @@ void Sound3dEditor::_load()
 	_fe3d->model_setTextureRepeat(GRID_ID, "", GRID_REPEAT);
 	_fe3d->model_setMinAlpha(GRID_ID, "", GRID_MIN_ALPHA);
 	_fe3d->model_setLightness(GRID_ID, "", GRID_LIGHTNESS);
-	_fe3d->model_setShadowed(GRID_ID, false);
 	_fe3d->model_create(BOX_ID, BOX_MESH_PATH);
 	_fe3d->model_setDiffuseMap(BOX_ID, "", BOX_TEXTURE_PATH);
 	_fe3d->model_setLightness(BOX_ID, "", BOX_LIGHTNESS);

@@ -410,7 +410,6 @@ void main()
 	vec4 diffuseColor = calculateDiffuseColor(dudvMapping, normalMapping);
 
 	float shadowLighting = calculateShadows();
-	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 
 	vec3 ambientLighting = calculateAmbientLighting();
 	vec3 diffuseDirectionalLighting;
@@ -425,8 +424,8 @@ void main()
 	calculateSpotLighting(normalMapping, diffuseSpotLighting, specularSpotLighting);
 
 	ambientLighting *= shadowLighting;
-	diffuseDirectionalLighting *= shadowOcclusion;
-	specularDirectionalLighting *= shadowOcclusion;
+	diffuseDirectionalLighting *= shadowLighting;
+	specularDirectionalLighting *= (shadowLighting * shadowLighting);
 
 	primaryColor += diffuseColor.rgb;
 	primaryColor *= u_color;

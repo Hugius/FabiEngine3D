@@ -295,7 +295,7 @@ float calculateShadows()
 	}
 }
 
-vec3 calculateAmbientLighting()
+vec3 calculateAmbientLighting(float shadowLighting)
 {
 	if(u_isAmbientLightingEnabled)
 	{
@@ -303,6 +303,7 @@ vec3 calculateAmbientLighting()
 
 		result += u_ambientLightingColor;
 		result *= u_ambientLightingIntensity;
+		result *= shadowLighting;
 
 		return result;
 	}
@@ -312,7 +313,7 @@ vec3 calculateAmbientLighting()
 	}
 }
 
-vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
+vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal, float shadowLighting)
 {
 	if(u_isDirectionalLightingEnabled)
 	{
@@ -322,8 +323,8 @@ vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(specularMapColor, lightDirection, normal);
 
-        result += vec3(diffuse);
-        result += vec3(specular);
+        result += vec3(diffuse * shadowLighting);
+        result += vec3(specular * (shadowLighting * shadowLighting));
         result *= u_directionalLightingColor;
         result *= u_directionalLightingIntensity;
 
@@ -535,10 +536,9 @@ void main()
     vec3 normalMapping = calculateNormalMapping();
 
 	float shadowLighting = calculateShadows();
-	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 
-	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
-	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
+	vec3 ambientLighting = calculateAmbientLighting(shadowLighting);
+	vec3 directionalLighting = calculateDirectionalLighting(specularMapping, normalMapping, shadowLighting);
 	vec3 pointLighting = calculatePointLighting(specularMapping, normalMapping);
 	vec3 spotLighting = calculateSpotLighting(specularMapping, normalMapping);
 

@@ -248,22 +248,29 @@ const bool TerrainManager::isInside(const string & terrainId, float x, float z)
 
 float TerrainManager::_getTerrainPixelHeight(float x, float z, float size, float maxHeight, const vector<float> & pixels)
 {
-	if(x == size)
+	auto xInt = static_cast<int>(x);
+	auto zInt = static_cast<int>(z);
+	auto sizeInt = static_cast<int>(size);
+
+	if(xInt < 0)
 	{
-		x -= 1.0f;
+		xInt = 0;
+	}
+	else if(xInt >= sizeInt)
+	{
+		xInt = (sizeInt - 1);
 	}
 
-	if(z == size)
+	if(zInt < 0)
 	{
-		z -= 1.0f;
+		zInt = 0;
+	}
+	else if(zInt >= sizeInt)
+	{
+		zInt = (sizeInt - 1);
 	}
 
-	if((x < 0) || (x > size) || (z < 0) || (z > size))
-	{
-		return 0.0f;
-	}
-
-	const auto index = (static_cast<int>(z) * static_cast<int>(size)) + static_cast<int>(x);
+	const auto index = ((zInt * sizeInt) + xInt);
 
 	return (pixels[index] * maxHeight);
 }

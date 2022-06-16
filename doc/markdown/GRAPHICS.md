@@ -138,7 +138,7 @@
   - Constraints: at least `0.0`
 - **Lightness**: the lightness of the shadows
   - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Constraints: between `0.0` and `1.0`
 - **Bias**: the bias of the shadows to prevent shadow acne
   - Type: `decimal`
   - Constraints: at least `0.0`

@@ -162,7 +162,7 @@ void RenderStorage::setShadowSize(float value)
 
 void RenderStorage::setShadowLightness(float value)
 {
-	_shadowLightness = max(0.0f, value);
+	_shadowLightness = clamp(value, 0.0f, 1.0f);
 }
 
 void RenderStorage::setShadowBias(float value)

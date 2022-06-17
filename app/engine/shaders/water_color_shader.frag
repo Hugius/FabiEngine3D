@@ -273,7 +273,7 @@ void calculateAmbientLighting(in float shadowLighting, out vec3 ambient)
 		ambient = vec3(1.0f);
 
 		ambient *= shadowLighting;
-		ambient += u_ambientLightingColor;
+		ambient *= u_ambientLightingColor;
 		ambient *= u_ambientLightingIntensity;
 	}
 	else

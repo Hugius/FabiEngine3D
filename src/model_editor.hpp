@@ -77,7 +77,7 @@ private:
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.1f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;
-	static inline constexpr float SHADOW_BIAS = 0.000001f;
+	static inline constexpr float SHADOW_BIAS = 0.0001f;
 	static inline constexpr float BLOOM_INTENSITY = 1.0f;
 	static inline constexpr float POSITION_FACTOR = 100.0f;
 	static inline constexpr float SIZE_FACTOR = 100.0f;

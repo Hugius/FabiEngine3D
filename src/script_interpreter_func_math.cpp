@@ -124,9 +124,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
-			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::INTEGER)
+			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::DECIMAL)
 			{
-				const auto result = static_cast<float>(pow(args[0]->getDecimal(), args[1]->getInteger()));
+				const auto result = static_cast<float>(pow(args[0]->getDecimal(), args[1]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

@@ -57,4 +57,8 @@ public:
 	static const bool deleteDirectory(const string & path);
 	static const bool deleteFile(const string & path);
 	static const bool isInteger(const string & valueString);
+
+private:
+	static inline constexpr int MIN_STRING_INTEGER = -999999999;
+	static inline constexpr int MAX_STRING_INTEGER = 999999999;
 };

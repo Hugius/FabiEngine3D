@@ -324,9 +324,14 @@ private:
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
 
+	static inline constexpr float MIN_STRING_DECIMAL = -999999999.0f;
+	static inline constexpr float MAX_STRING_DECIMAL = 999999999.0f;
+
 	static inline constexpr int SPACES_PER_INDENT = 4;
 	static inline constexpr int MAX_ITERATIONS_PER_LOOP = 1000;
 	static inline constexpr int MAX_EXECUTION_DEPTH = 10;
+	static inline constexpr int MIN_STRING_INTEGER = -999999999;
+	static inline constexpr int MAX_STRING_INTEGER = 999999999;
 
 	unordered_map<string, float> _debuggingTimes = {};
 	unordered_map<int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables = {};

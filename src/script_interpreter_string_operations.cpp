@@ -146,16 +146,16 @@ const string ScriptInterpreter::_limitIntegerString(const string & valueString) 
 {
 	if(valueString[0] == '-')
 	{
-		if(valueString.size() >= 11)
+		if(valueString.size() >= to_string(INT_MIN).size())
 		{
-			return "-1000000000";
+			return to_string(MIN_STRING_INTEGER);
 		}
 	}
 	else
 	{
-		if(valueString.size() >= 10)
+		if(valueString.size() >= to_string(INT_MAX).size())
 		{
-			return "1000000000";
+			return to_string(MAX_STRING_INTEGER);
 		}
 	}
 
@@ -169,16 +169,16 @@ const string ScriptInterpreter::_limitDecimalString(const string & valueString) 
 
 	if(valueString[0] == '-')
 	{
-		if(intString.size() >= 11)
+		if(intString.size() >= to_string(INT_MIN).size())
 		{
-			return "-1000000000.0";
+			return to_string(MIN_STRING_DECIMAL);
 		}
 	}
 	else
 	{
-		if(intString.size() >= 10)
+		if(intString.size() >= to_string(INT_MAX).size())
 		{
-			return "1000000000.0";
+			return to_string(MAX_STRING_DECIMAL);
 		}
 	}
 

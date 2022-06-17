@@ -265,7 +265,7 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 			result %= rightValue->getInteger();
 		}
 
-		result = ((result < 0) ? max(result, -1000000000) : min(result, 1000000000));
+		result = ((result < 0) ? max(result, MIN_STRING_INTEGER) : min(result, MAX_STRING_INTEGER));
 
 		leftValue->setInteger(result);
 	}
@@ -294,7 +294,7 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 			result = fmodf(result, rightValue->getDecimal());
 		}
 
-		result = ((result < 0) ? max(result, -1000000000.0f) : min(result, 1000000000.0f));
+		result = ((result < 0) ? max(result, MIN_STRING_DECIMAL) : min(result, MAX_STRING_DECIMAL));
 
 		leftValue->setDecimal(result);
 	}

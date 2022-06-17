@@ -186,6 +186,21 @@ const int Tools::parseInteger(const string & valueString)
 		abort();
 	}
 
+	if(valueString[0] == '-')
+	{
+		if(valueString.size() >= to_string(INT_MIN).size())
+		{
+			return MIN_STRING_INTEGER;
+		}
+	}
+	else
+	{
+		if(valueString.size() >= to_string(INT_MAX).size())
+		{
+			return MAX_STRING_INTEGER;
+		}
+	}
+
 	return stoi(valueString);
 }
 

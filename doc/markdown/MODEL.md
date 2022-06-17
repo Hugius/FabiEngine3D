@@ -107,7 +107,7 @@
   - Constraints: at least `0.0`
 - **Specular Shininess**: the shininess of the specular lighting
   - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Constraints: at least `1.0`
 - **Specular Intensity**: the intensity of the specular lighting
   - Type: `decimal`
   - Constraints: at least `0.0`

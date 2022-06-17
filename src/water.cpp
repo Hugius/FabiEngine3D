@@ -97,7 +97,7 @@ void Water::setWaveHeight(float value)
 
 void Water::setSpecularShininess(float value)
 {
-	_specularShininess = max(0.0f, value);
+	_specularShininess = max(1.0f, value);
 }
 
 void Water::setSpecularIntensity(float value)

@@ -190,7 +190,7 @@ void Terrain::setLightness(float value)
 
 void Terrain::setSpecularShininess(float value)
 {
-	_specularShininess = max(0.0f, value);
+	_specularShininess = max(1.0f, value);
 }
 
 void Terrain::setSpecularIntensity(float value)

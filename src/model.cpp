@@ -462,7 +462,7 @@ void Model::setLightness(const string & partId, float value)
 
 void Model::setSpecularShininess(const string & partId, float value)
 {
-	_parts.at(partId)->specularShininess = max(0.0f, value);
+	_parts.at(partId)->specularShininess = max(1.0f, value);
 }
 
 void Model::setSpecularIntensity(const string & partId, float value)

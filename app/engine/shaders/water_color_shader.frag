@@ -266,19 +266,23 @@ float calculateShadows()
 	}
 }
 
-vec3 calculateAmbientLighting()
+void calculateAmbientLighting(in float shadowLighting, out vec3 ambient)
 {
 	if(u_isAmbientLightingEnabled)
 	{
-		return (u_ambientLightingColor * u_ambientLightingIntensity);
+		ambient = vec3(1.0f);
+
+		ambient *= shadowLighting;
+		ambient += u_ambientLightingColor;
+		ambient *= u_ambientLightingIntensity;
 	}
 	else
 	{
-		return vec3(0.0f);
+		ambient = vec3(0.0f);
 	}
 }
 
-void calculateDirectionalLighting(in vec3 normal, out vec3 diffuse, out vec3 specular)
+void calculateDirectionalLighting(in vec3 normal, in float shadowLighting, out vec3 diffuse, out vec3 specular)
 {
 	if(u_isDirectionalLightingEnabled)
 	{
@@ -287,9 +291,11 @@ void calculateDirectionalLighting(in vec3 normal, out vec3 diffuse, out vec3 spe
 		diffuse = vec3(clamp(dot(normal, lightDirection), 0.0f, 1.0f));
 		specular = vec3(calculateSpecularLighting(lightDirection, normal));
 
+		diffuse *= shadowLighting;
         diffuse *= u_directionalLightingColor;
         diffuse *= u_directionalLightingIntensity;
 
+		specular *= (shadowLighting * shadowLighting);
         specular *= u_directionalLightingColor;
         specular *= u_directionalLightingIntensity;
 	}
@@ -411,7 +417,7 @@ void main()
 
 	float shadowLighting = calculateShadows();
 
-	vec3 ambientLighting = calculateAmbientLighting();
+	vec3 ambientLighting;
 	vec3 diffuseDirectionalLighting;
 	vec3 diffusePointLighting;
 	vec3 diffuseSpotLighting;
@@ -419,13 +425,10 @@ void main()
 	vec3 specularPointLighting;
 	vec3 specularSpotLighting;
 
-	calculateDirectionalLighting(normalMapping, diffuseDirectionalLighting, specularDirectionalLighting);
+	calculateAmbientLighting(shadowLighting, ambientLighting);
+	calculateDirectionalLighting(normalMapping, shadowLighting, diffuseDirectionalLighting, specularDirectionalLighting);
 	calculatePointLighting(normalMapping, diffusePointLighting, specularPointLighting);
 	calculateSpotLighting(normalMapping, diffuseSpotLighting, specularSpotLighting);
-
-	ambientLighting *= shadowLighting;
-	diffuseDirectionalLighting *= shadowLighting;
-	specularDirectionalLighting *= (shadowLighting * shadowLighting);
 
 	primaryColor += diffuseColor.rgb;
 	primaryColor *= u_color;

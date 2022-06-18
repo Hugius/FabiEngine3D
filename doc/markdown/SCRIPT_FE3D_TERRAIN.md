@@ -33,7 +33,7 @@
 
 ## Getters
 
-- `fe3d:terrain_find_ids` (`STR` terrain_id) -----> `LIST`
+- `fe3d:terrain_find_ids` (`STR` terrain_id) -----> `LST`
 - `fe3d:terrain_is_specular` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_is_wireframed` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_is_shadowed` (`STR` terrain_id) -----> `BOL`
@@ -66,7 +66,7 @@
 - `fe3d:terrain_get_max_clip_position_z` (`STR` terrain_id) -----> `DEC`
 - `fe3d:terrain_get_max_height` (`STR` terrain_id) -----> `DEC`
 - `fe3d:terrain_get_size` (`STR` terrain_id) -----> `DEC`
-- `fe3d:terrain_get_ids` () -----> `LIST`
+- `fe3d:terrain_get_ids` () -----> `LST`
 - `fe3d:terrain_get_lightness` (`STR` terrain_id) -----> `DEC`
 - `fe3d:terrain_get_specular_shininess` (`STR` terrain_id) -----> `DEC`
 - `fe3d:terrain_get_specular_intensity` (`STR` terrain_id) -----> `DEC`

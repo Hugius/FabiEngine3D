@@ -1,12 +1,12 @@
 # Miscellaneous Scripting functions
 
-- `misc:list_concat`(`STR` name, `STR` name) -----> `LIST`
+- `misc:list_concat`(`STR` name, `STR` name) -----> `LST`
 - `misc:list_size`(`STR` name) -----> `INT`
 - `misc:list_contains`(`STR` name, `STR` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `DEC` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `INT` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `BOL` value) -----> `BOL`
-- `misc:list_index`(`STR` name) -----> `LIST`
+- `misc:list_index`(`STR` name) -----> `LST`
 - `misc:list_min`(`STR` name) -----> `STR`
 - `misc:list_min`(`STR` name) -----> `DEC`
 - `misc:list_min`(`STR` name) -----> `INT`
@@ -15,12 +15,12 @@
 - `misc:list_max`(`STR` name) -----> `DEC`
 - `misc:list_max`(`STR` name) -----> `INT`
 - `misc:list_max`(`STR` name) -----> `BOL`
-- `misc:list_reverse`(`STR` name) -----> `LIST`
+- `misc:list_reverse`(`STR` name) -----> `LST`
 - `misc:string_concat`(`STR` value, `STR` value) -----> `STR`
 - `misc:string_size`(`STR` value) -----> `INT`
 - `misc:string_contains`(`STR` value, `STR` part) -----> `BOL`
 - `misc:string_part`(`STR` value, `INT` index, `INT` count) -----> `STR`
-- `misc:string_split`(`STR` value, `STR` delimiter) -----> `LIST`
+- `misc:string_split`(`STR` value, `STR` delimiter) -----> `LST`
 - `misc:string_reverse`(`STR` string) -----> `STR`
 - `misc:random_integer`(`INT` min, `INT` max) -----> `INT`
 - `misc:random_decimal`(`DEC` min, `DEC` max) -----> `DEC`

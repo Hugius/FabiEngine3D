@@ -40,7 +40,7 @@
 
 ## Getters
 
-- `fe3d:quad2d_find_ids` (`STR` quad_id) -----> `LIST`
+- `fe3d:quad2d_find_ids` (`STR` quad_id) -----> `LST`
 - `fe3d:quad2d_is_visible` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad2d_is_horizontally_flipped` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad2d_is_vertically_flipped` (`STR` quad_id) -----> `BOL`
@@ -64,7 +64,7 @@
 - `fe3d:quad2d_get_opacity` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_lightness` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_texture_repeat` (`STR` quad_id) -----> `INT`
-- `fe3d:quad2d_get_ids` () -----> `LIST`
+- `fe3d:quad2d_get_ids` () -----> `LST`
 - `fe3d:quad2d_get_diffuse_map_path` (`STR` quad_id) -----> `STR`
 - `fe3d:quad2d_get_uv_multiplier_x` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_uv_multiplier_y` (`STR` quad_id) -----> `DEC`

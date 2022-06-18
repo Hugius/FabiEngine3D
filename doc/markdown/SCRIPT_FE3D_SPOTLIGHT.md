@@ -18,7 +18,7 @@
 
 ## Getters
 
-- `fe3d:spotlight_find_ids` (`STR` spotlight_id) -----> `LIST`
+- `fe3d:spotlight_find_ids` (`STR` spotlight_id) -----> `LST`
 - `fe3d:spotlight_is_existing` (`STR` spotlight_id) -----> `BOL`
 - `fe3d:spotlight_is_visible` (`STR` spotlight_id) -----> `BOL`
 - `fe3d:spotlight_get_position_x` (`STR` spotlight_id) -----> `DEC`
@@ -32,7 +32,7 @@
 - `fe3d:spotlight_get_color_r` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_color_g` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_color_b` (`STR` spotlight_id) -----> `DEC`
-- `fe3d:spotlight_get_ids` () -----> `LIST`
+- `fe3d:spotlight_get_ids` () -----> `LST`
 - `fe3d:spotlight_get_intensity` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_yaw` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_pitch` (`STR` spotlight_id) -----> `DEC`

@@ -23,7 +23,7 @@
 
 ## Getters
 
-- `fe3d:sky_find_ids` (`STR` sky_id) -----> `LIST`
+- `fe3d:sky_find_ids` (`STR` sky_id) -----> `LST`
 - `fe3d:sky_is_wireframed` (`STR` sky_id) -----> `BOL`
 - `fe3d:sky_has_left_cube_map` (`STR` sky_id) -----> `BOL`
 - `fe3d:sky_has_right_cube_map` (`STR` sky_id) -----> `BOL`
@@ -42,7 +42,7 @@
 - `fe3d:sky_get_rotation_x` (`STR` sky_id) -----> `DEC`
 - `fe3d:sky_get_rotation_y` (`STR` sky_id) -----> `DEC`
 - `fe3d:sky_get_rotation_z` (`STR` sky_id) -----> `DEC`
-- `fe3d:sky_get_ids` () -----> `LIST`
+- `fe3d:sky_get_ids` () -----> `LST`
 - `fe3d:sky_get_left_cube_map_path` (`STR` sky_id) -----> `STR`
 - `fe3d:sky_get_right_cube_map_path` (`STR` sky_id) -----> `STR`
 - `fe3d:sky_get_bottom_cube_map_path` (`STR` sky_id) -----> `STR`

@@ -14,7 +14,7 @@
 ## Getters
 
 - `fe3d:vsync_is_enabled` () -----> `BOL`
-- `fe3d:time_is_passed` (`INT` update_count) -----> `BOOL`
+- `fe3d:time_is_passed` (`INT` update_count) -----> `BOL`
 - `fe3d:cursor_is_visible` () -----> `BOL`
 - `fe3d:cursor_get_position_x` () -----> `DEC`
 - `fe3d:cursor_get_position_y` () -----> `DEC`

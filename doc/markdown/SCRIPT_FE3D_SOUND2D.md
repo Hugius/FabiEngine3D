@@ -15,7 +15,7 @@
 
 ## Getters
 
-- `fe3d:sound2d_find_ids` (`STR` sound_id) -----> `LIST`
+- `fe3d:sound2d_find_ids` (`STR` sound_id) -----> `LST`
 - `fe3d:sound2d_is_device_connected` () -----> `BOL`
 - `fe3d:sound2d_is_existing` (`STR` sound_id) -----> `BOL`
 - `fe3d:sound2d_is_started` (`STR` sound_id, `INT` index) -----> `BOL`
@@ -26,5 +26,5 @@
 - `fe3d:sound2d_get_current_time` (`STR` sound_id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_play_count` (`STR` sound_id, `INT` index) -----> `INT`
 - `fe3d:sound2d_get_started_count` (`STR` sound_id) -----> `INT`
-- `fe3d:sound2d_get_ids` () -----> `LIST`
+- `fe3d:sound2d_get_ids` () -----> `LST`
 - `fe3d:sound2d_get_audio_path` (`STR` sound_id) -----> `STR`

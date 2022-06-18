@@ -72,7 +72,7 @@
 
 ## Getters
 
-- `fe3d:model_find_ids` (`STR` model_id) -----> `LIST`
+- `fe3d:model_find_ids` (`STR` model_id) -----> `LST`
 - `fe3d:model_is_existing` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_visible` (`STR` model_id) -----> `BOL`
 - `fe3d:model_is_shadowed` (`STR` model_id) -----> `BOL`
@@ -96,7 +96,7 @@
 - `fe3d:model_has_reflection_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_refraction_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_normal_map` (`STR` model_id, `STR` part_id) -----> `BOL`
-- `fe3d:model_get_ids` () -----> `LIST`
+- `fe3d:model_get_ids` () -----> `LST`
 - `fe3d:model_get_base_position_x` (`STR` model_id) -----> `DEC`
 - `fe3d:model_get_base_position_y` (`STR` model_id) -----> `DEC`
 - `fe3d:model_get_base_position_z` (`STR` model_id) -----> `DEC`

@@ -16,7 +16,7 @@
 
 ## Getters
 
-- `fe3d:pointlight_find_ids` (`STR` pointlight_id) -----> `LIST`
+- `fe3d:pointlight_find_ids` (`STR` pointlight_id) -----> `LST`
 - `fe3d:pointlight_is_existing` (`STR` pointlight_id) -----> `BOL`
 - `fe3d:pointlight_is_visible` (`STR` pointlight_id) -----> `BOL`
 - `fe3d:pointlight_get_position_x` (`STR` pointlight_id) -----> `DEC`
@@ -28,6 +28,6 @@
 - `fe3d:pointlight_get_color_r` (`STR` pointlight_id) -----> `DEC`
 - `fe3d:pointlight_get_color_g` (`STR` pointlight_id) -----> `DEC`
 - `fe3d:pointlight_get_color_b` (`STR` pointlight_id) -----> `DEC`
-- `fe3d:pointlight_get_ids` () -----> `LIST`
+- `fe3d:pointlight_get_ids` () -----> `LST`
 - `fe3d:pointlight_get_intensity` (`STR` pointlight_id) -----> `DEC`
 - `fe3d:pointlight_get_shape` (`STR` pointlight_id) -----> `STR`

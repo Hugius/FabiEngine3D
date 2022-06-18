@@ -28,7 +28,7 @@
 
 ## Getters
 
-- `fe3d:text2d_find_ids` (`STR` text_id) -----> `LIST`
+- `fe3d:text2d_find_ids` (`STR` text_id) -----> `LST`
 - `fe3d:text2d_is_visible` (`STR` text_id) -----> `BOL`
 - `fe3d:text2d_is_horizontally_flipped` (`STR` text_id) -----> `BOL`
 - `fe3d:text2d_is_vertically_flipped` (`STR` text_id) -----> `BOL`
@@ -47,7 +47,7 @@
 - `fe3d:text2d_get_wireframe_color_b` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_opacity` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_lightness` (`STR` text_id) -----> `DEC`
-- `fe3d:text2d_get_ids` () -----> `LIST`
+- `fe3d:text2d_get_ids` () -----> `LST`
 - `fe3d:text2d_get_content` (`STR` text_id) -----> `STR`
 - `fe3d:text2d_get_font_map_path` (`STR` text_id) -----> `STR`
 - `fe3d:text2d_get_min_clip_position_x` (`STR` text_id) -----> `DEC`

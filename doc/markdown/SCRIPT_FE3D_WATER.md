@@ -40,7 +40,7 @@
 
 ## Getters
 
-- `fe3d:water_find_ids` (`STR` water_id) -----> `LIST`
+- `fe3d:water_find_ids` (`STR` water_id) -----> `LST`
 - `fe3d:water_is_reflective` (`STR` water_id) -----> `BOL`
 - `fe3d:water_is_refractive` (`STR` water_id) -----> `BOL`
 - `fe3d:water_is_specular` (`STR` water_id) -----> `BOL`
@@ -82,7 +82,7 @@
 - `fe3d:water_get_wireframe_color_g` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_wireframe_color_b` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_size` (`STR` water_id) -----> `DEC`
-- `fe3d:water_get_ids` () -----> `LIST`
+- `fe3d:water_get_ids` () -----> `LST`
 - `fe3d:water_get_texture_repeat` (`STR` water_id) -----> `INT`
 - `fe3d:water_get_wave_height` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_specular_shininess` (`STR` water_id) -----> `DEC`

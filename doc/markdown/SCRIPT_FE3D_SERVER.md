@@ -19,8 +19,8 @@
 - `fe3d:server_get_new_username` () -----> `STR`
 - `fe3d:server_get_old_ip` () -----> `STR`
 - `fe3d:server_get_old_username` () -----> `STR`
-- `fe3d:server_get_connected_ips` () -----> `LIST`
-- `fe3d:server_get_connected_usernames` () -----> `LIST`
-- `fe3d:server_get_pending_protocols` () -----> `LIST`
-- `fe3d:server_get_pending_usernames` () -----> `LIST`
-- `fe3d:server_get_pending_contents` () -----> `LIST`
+- `fe3d:server_get_connected_ips` () -----> `LST`
+- `fe3d:server_get_connected_usernames` () -----> `LST`
+- `fe3d:server_get_pending_protocols` () -----> `LST`
+- `fe3d:server_get_pending_usernames` () -----> `LST`
+- `fe3d:server_get_pending_contents` () -----> `LST`

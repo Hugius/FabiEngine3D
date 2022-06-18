@@ -39,7 +39,7 @@
 
 ## Getters
 
-- `fe3d:text3d_find_ids` (`STR` text_id) -----> `LIST`
+- `fe3d:text3d_find_ids` (`STR` text_id) -----> `LST`
 - `fe3d:text3d_is_visible` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_facing_camera_horizontally` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_facing_camera_vertically` (`STR` text_id) -----> `BOL`
@@ -76,7 +76,7 @@
 - `fe3d:text3d_get_max_clip_position_z` (`STR` text_id) -----> `DEC`
 - `fe3d:text3d_get_opacity` (`STR` text_id) -----> `DEC`
 - `fe3d:text3d_get_lightness` (`STR` text_id) -----> `DEC`
-- `fe3d:text3d_get_ids` () -----> `LIST`
+- `fe3d:text3d_get_ids` () -----> `LST`
 - `fe3d:text3d_get_font_map_path` (`STR` text_id) -----> `STR`
 - `fe3d:text3d_get_content` (`STR` text_id) -----> `STR`
 - `fe3d:text3d_get_min_alpha` (`STR` text_id) -----> `DEC`

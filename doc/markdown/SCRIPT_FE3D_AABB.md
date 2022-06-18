@@ -20,7 +20,7 @@
 
 ## Getters
 
-- `fe3d:aabb_find_ids` (`STR` aabb_id) -----> `LIST`
+- `fe3d:aabb_find_ids` (`STR` aabb_id) -----> `LST`
 - `fe3d:aabb_is_existing` (`STR` aabb_id) -----> `BOL`
 - `fe3d:aabb_is_visible` (`STR` aabb_id) -----> `BOL`
 - `fe3d:aabb_is_collision_responsive` (`STR` aabb_id) -----> `BOL`
@@ -31,7 +31,7 @@
 - `fe3d:aabb_get_size_x` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_size_y` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_size_z` (`STR` aabb_id) -----> `DEC`
-- `fe3d:aabb_get_ids` () -----> `LIST`
+- `fe3d:aabb_get_ids` () -----> `LST`
 - `fe3d:aabb_get_color_r` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_color_g` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_color_b` (`STR` aabb_id) -----> `DEC`

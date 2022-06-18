@@ -15,7 +15,7 @@
 
 ## Getters
 
-- `fe3d:captor_find_ids` (`STR` captor_id) -----> `LIST`
+- `fe3d:captor_find_ids` (`STR` captor_id) -----> `LST`
 - `fe3d:captor_is_existing` (`STR` captor_id) -----> `BOL`
 - `fe3d:captor_get_position_x` (`STR` captor_id) -----> `DEC`
 - `fe3d:captor_get_position_y` (`STR` captor_id) -----> `DEC`
@@ -23,4 +23,4 @@
 - `fe3d:captor_get_exception_id` (`STR` captor_id) -----> `STR`
 - `fe3d:captor_get_reflection_quality` (`STR` captor_id) -----> `INT`
 - `fe3d:captor_get_refraction_quality` (`STR` captor_id) -----> `INT`
-- `fe3d:captor_get_ids` () -----> `LIST`
+- `fe3d:captor_get_ids` () -----> `LST`

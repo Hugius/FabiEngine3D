@@ -53,7 +53,7 @@
 
 ## Getters
 
-- `fe3d:quad3d_find_ids` (`STR` quad_id) -----> `LIST`
+- `fe3d:quad3d_find_ids` (`STR` quad_id) -----> `LST`
 - `fe3d:quad3d_is_visible` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_facing_camera_horizontally` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_is_facing_camera_vertically` (`STR` quad_id) -----> `BOL`
@@ -97,7 +97,7 @@
 - `fe3d:quad3d_get_emission_intensity` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad3d_get_texture_repeat` (`STR` quad_id) -----> `INT`
 - `fe3d:quad3d_get_lightness` (`STR` quad_id) -----> `DEC`
-- `fe3d:quad3d_get_ids` () -----> `LIST`
+- `fe3d:quad3d_get_ids` () -----> `LST`
 - `fe3d:quad3d_get_diffuse_map_path` (`STR` quad_id) -----> `STR`
 - `fe3d:quad3d_get_emission_map_path` (`STR` quad_id) -----> `STR`
 - `fe3d:quad3d_get_uv_multiplier_x` (`STR` quad_id) -----> `DEC`

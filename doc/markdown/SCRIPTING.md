@@ -232,7 +232,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 9.2 Example Code
 
 ```text
-1.  LIST myList = {"hello", "beautiful", "world"}
+1.  LST myList = {"hello", "beautiful", "world"}
 2.  INT index = 0
 3.  LOOP:
 4.      IF index IS 2:

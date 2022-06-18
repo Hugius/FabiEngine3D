@@ -262,7 +262,33 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		}
 		else if(leftVariable->getValue(leftValueIndex)->getType() == rightVariable->getValue(rightValueIndex)->getType())
 		{
-			leftVariable->setValue(rightVariable->getValue(rightValueIndex), leftValueIndex);
+			switch(rightVariable->getValue(rightValueIndex)->getType())
+			{
+				case ScriptValueType::STRING:
+				{
+					leftVariable->setValue(make_shared<ScriptValue>(ScriptValueType::STRING, rightVariable->getValue(rightValueIndex)->getString()), leftValueIndex);
+
+					break;
+				}
+				case ScriptValueType::DECIMAL:
+				{
+					leftVariable->setValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, rightVariable->getValue(rightValueIndex)->getDecimal()), leftValueIndex);
+
+					break;
+				}
+				case ScriptValueType::INTEGER:
+				{
+					leftVariable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, rightVariable->getValue(rightValueIndex)->getInteger()), leftValueIndex);
+
+					break;
+				}
+				case ScriptValueType::BOOLEAN:
+				{
+					leftVariable->setValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, rightVariable->getValue(rightValueIndex)->getBoolean()), leftValueIndex);
+
+					break;
+				}
+			}
 		}
 		else
 		{

@@ -231,10 +231,10 @@ void TopViewportController::_updateExtraScreenManagement()
 					file << "window_height=75";
 
 					file.close();
+
+					Logger::throwInfo("Project exported");
 				}
 			}
-
-			Logger::throwWarning("Project exported");
 		}
 	}
 	else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("documentation")->isHovered())

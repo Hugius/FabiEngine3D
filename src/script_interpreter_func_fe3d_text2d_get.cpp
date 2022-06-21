@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->text2d_getMinClipPosition(args[0]->getString())).x;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->text2d_getMinClipPosition(args[0]->getString())).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->text2d_getMinClipPosition(args[0]->getString())).y;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->text2d_getMinClipPosition(args[0]->getString())).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->text2d_getMaxClipPosition(args[0]->getString())).x;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->text2d_getMaxClipPosition(args[0]->getString())).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->text2d_getMaxClipPosition(args[0]->getString())).y;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->text2d_getMaxClipPosition(args[0]->getString())).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

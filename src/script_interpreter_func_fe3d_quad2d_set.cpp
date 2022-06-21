@@ -32,8 +32,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
 				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));
-				_fe3d->quad2d_setMinClipPosition(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(-1.0f)));
-				_fe3d->quad2d_setMaxClipPosition(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(1.0f)));
+				_fe3d->quad2d_setMinClipPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(-1.0f)));
+				_fe3d->quad2d_setMaxClipPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(1.0f)));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -160,7 +160,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
 				auto speed = Tools::convertSizeRelativeToDisplay(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
-				_fe3d->quad2d_moveTo(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
+
+				_fe3d->quad2d_moveTo(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -245,6 +246,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
 				auto speed = Tools::convertSizeRelativeToDisplay(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
+
 				_fe3d->quad2d_scaleTo(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

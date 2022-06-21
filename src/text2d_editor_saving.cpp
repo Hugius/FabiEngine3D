@@ -30,14 +30,16 @@ const bool Text2dEditor::saveText2dsToFile() const
 		const auto lightness = _fe3d->text2d_getLightness(text2dId);
 		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(text2dId);
 		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(text2dId);
-		const auto content = _fe3d->text2d_getContent(text2dId);
 
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(text2dId);
+		auto content = _fe3d->text2d_getContent(text2dId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
+		content = (content.empty()) ? "?" : content;
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
+		replace(content.begin(), content.end(), ' ', '?');
 
 		file
 			<< text2dId

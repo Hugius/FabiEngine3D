@@ -20,3 +20,4 @@
 - `fe3d:cursor_get_position_y` () -----> `DEC`
 - `fe3d:window_get_width` () -----> `INT`
 - `fe3d:window_get_height` () -----> `INT`
+- `fe3d:window_get_aspect_ratio` () -----> `DEC`

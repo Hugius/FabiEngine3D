@@ -90,6 +90,22 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
+	else if(functionName == "fe3d:window_get_aspect_ratio")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_fe3d->server_isRunning())
+			{
+				_throwRuntimeError("cannot access `fe3d:window` functionality as a networking server");
+
+				return true;
+			}
+
+			const auto result = Tools::getWindowAspectRatio();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
 	else if(functionName == "fe3d:time_is_passed")
 	{
 		const auto types = {SVT::INTEGER};

@@ -43,16 +43,56 @@ const bool TerrainEditor::saveTerrainsToFile() const
 		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainId);
 		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainId);
 
-		heightMapPath = (heightMapPath.empty() ? "" : heightMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		blendMapPath = (blendMapPath.empty() ? "" : blendMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		redDiffuseMapPath = (redDiffuseMapPath.empty() ? "" : redDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		greenDiffuseMapPath = (greenDiffuseMapPath.empty() ? "" : greenDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		blueDiffuseMapPath = (blueDiffuseMapPath.empty() ? "" : blueDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		redNormalMapPath = (redNormalMapPath.empty() ? "" : redNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		greenNormalMapPath = (greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-		blueNormalMapPath = (blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		if(heightMapPath.empty())
+		{
+			heightMapPath = heightMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(diffuseMapPath.empty())
+		{
+			diffuseMapPath = diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(normalMapPath.empty())
+		{
+			normalMapPath = normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(blendMapPath.empty())
+		{
+			blendMapPath = blendMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(redDiffuseMapPath.empty())
+		{
+			redDiffuseMapPath = redDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(greenDiffuseMapPath.empty())
+		{
+			greenDiffuseMapPath = greenDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(blueDiffuseMapPath.empty())
+		{
+			blueDiffuseMapPath = blueDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(redNormalMapPath.empty())
+		{
+			redNormalMapPath = redNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(greenNormalMapPath.empty())
+		{
+			greenNormalMapPath = greenNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
+		if(blueNormalMapPath.empty())
+		{
+			blueNormalMapPath = blueNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;

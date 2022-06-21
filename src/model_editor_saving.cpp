@@ -38,7 +38,11 @@ const bool ModelEditor::saveModelsToFile() const
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto levelOfDetailId = _fe3d->model_getLevelOfDetailId(modelId);
 
-		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		if(!meshPath.empty())
+		{
+			meshPath = meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailId = (levelOfDetailId.empty()) ? "?" : levelOfDetailId;
 
@@ -96,12 +100,36 @@ const bool ModelEditor::saveModelsToFile() const
 			auto refractionMapPath = _fe3d->model_getRefractionMapPath(modelId, partId);
 			auto normalMapPath = _fe3d->model_getNormalMapPath(modelId, partId);
 
-			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-			specularMapPath = (specularMapPath.empty() ? "" : specularMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-			reflectionMapPath = (reflectionMapPath.empty() ? "" : reflectionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-			refractionMapPath = (refractionMapPath.empty() ? "" : refractionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-			normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			if(!diffuseMapPath.empty())
+			{
+				diffuseMapPath = diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
+			if(!emissionMapPath.empty())
+			{
+				emissionMapPath = emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
+			if(!specularMapPath.empty())
+			{
+				specularMapPath = specularMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
+			if(!reflectionMapPath.empty())
+			{
+				reflectionMapPath = reflectionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
+			if(!refractionMapPath.empty())
+			{
+				refractionMapPath = refractionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
+			if(!normalMapPath.empty())
+			{
+				normalMapPath = normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+			}
+
 			partId = (partId.empty()) ? "?" : partId;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;

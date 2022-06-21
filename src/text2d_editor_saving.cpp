@@ -34,7 +34,11 @@ const bool Text2dEditor::saveText2dsToFile() const
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(text2dId);
 		auto content = _fe3d->text2d_getContent(text2dId);
 
-		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		if(fontMapPath.empty())
+		{
+			fontMapPath = fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
+		}
+
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 		content = (content.empty()) ? "?" : content;
 

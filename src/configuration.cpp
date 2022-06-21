@@ -87,6 +87,7 @@ void Configuration::_processOption(ifstream & file, const string & name, string 
 	}
 
 	option = line.substr(name.size() + 2);
+
 	option.pop_back();
 }
 

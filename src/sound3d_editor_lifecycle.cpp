@@ -2,7 +2,6 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "sound3d_editor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void Sound3dEditor::_load()

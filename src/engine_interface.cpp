@@ -1,6 +1,6 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 void EngineInterface::inject(shared_ptr<EngineCore> core)
 {

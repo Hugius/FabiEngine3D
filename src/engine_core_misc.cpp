@@ -231,11 +231,11 @@ void EngineCore::_initialize()
 {
 	const auto keyingColor = fvec3(0.1f);
 	const auto monitorSize = Tools::getMonitorSize();
-	const auto logoPath = (Configuration::getInst().isApplicationExported() ? "logo\\logo.tga" : "engine\\assets\\image\\diffuse_map\\logo.tga");
+	const auto logoPath = (Tools::isApplicationExported() ? "logo\\logo.tga" : "engine\\assets\\image\\diffuse_map\\logo.tga");
 	const auto logoSize = ivec2(static_cast<int>(static_cast<float>(monitorSize.x) * 0.4f), static_cast<int>(static_cast<float>(monitorSize.y) * 0.2f));
 	const auto logoPosition = ((monitorSize - logoSize) / 2);
-	const auto windowTitle = Configuration::getInst().getWindowTitle();
-	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto windowTitle = Tools::getWindowTitle();
+	const auto windowSize = Tools::getWindowSize();
 	const auto windowPosition = ((monitorSize - windowSize) / 2);
 
 	_imageLoader->cacheImage(logoPath, true);

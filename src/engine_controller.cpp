@@ -1,5 +1,4 @@
 #include "engine_controller.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 EngineController::EngineController()
@@ -179,7 +178,7 @@ void EngineController::initialize()
 	const auto diffuseMapDirectoryPath = string("engine\\assets\\image\\diffuse_map\\");
 	const auto fontMapDirectoryPath = string("engine\\assets\\image\\font_map\\");
 
-	if(Configuration::getInst().isApplicationExported())
+	if(Tools::isApplicationExported())
 	{
 		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
@@ -281,7 +280,7 @@ void EngineController::initialize()
 
 void EngineController::update()
 {
-	if(Configuration::getInst().isApplicationExported())
+	if(Tools::isApplicationExported())
 	{
 		if(_scriptExecutor->isStarted())
 		{

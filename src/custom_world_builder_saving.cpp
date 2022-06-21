@@ -1,6 +1,5 @@
 #include "custom_world_builder.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 #include "logger.hpp"
 
 using std::ofstream;
@@ -8,12 +7,12 @@ using std::endl;
 
 void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 {
-	if(!Configuration::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Tools::isApplicationExported() && _currentProjectId.empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 

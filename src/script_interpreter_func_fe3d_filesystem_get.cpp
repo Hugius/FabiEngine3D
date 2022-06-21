@@ -1,6 +1,5 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 
@@ -18,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 		{
 			if(_validateSavesDirectory())
 			{
-				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 				const auto newDirectoryPath = (directoryPath + args[0]->getString());
@@ -37,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 		{
 			if(_validateSavesDirectory())
 			{
-				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 				const auto filePath = (directoryPath + args[0]->getString());
@@ -56,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 		{
 			if(_validateSavesDirectory())
 			{
-				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 				const auto filePath = (directoryPath + args[0]->getString());

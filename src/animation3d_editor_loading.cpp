@@ -1,7 +1,6 @@
 #include "animation3d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 
@@ -10,12 +9,12 @@ using std::istringstream;
 
 const bool Animation3dEditor::loadAnimation3dsFromFile()
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\animation3d.fe3d");
 

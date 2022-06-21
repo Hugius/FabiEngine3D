@@ -1,5 +1,4 @@
 #include "script_executor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void ScriptExecutor::start()
@@ -58,7 +57,7 @@ void ScriptExecutor::update(bool isDebugging)
 			_mustSkipUpdate = false;
 		}
 
-		if(!Configuration::getInst().isApplicationExported())
+		if(!Tools::isApplicationExported())
 		{
 			if(Tools::isCursorInsideDisplay())
 			{

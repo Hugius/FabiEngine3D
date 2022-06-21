@@ -1,7 +1,6 @@
 #include "sky_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -11,12 +10,12 @@ using std::istringstream;
 
 const vector<string> SkyEditor::getImagePathsFromFile() const
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sky.fe3d");
 
@@ -56,7 +55,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 			if(!cubeMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					cubeMapPath = ("projects\\" + getCurrentProjectId() + "\\" + cubeMapPath);
 				}
@@ -73,12 +72,12 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 const bool SkyEditor::loadSkiesFromFile()
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sky.fe3d");
 
@@ -129,7 +128,7 @@ const bool SkyEditor::loadSkiesFromFile()
 
 			if(!cubeMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					cubeMapPath = ("projects\\" + getCurrentProjectId() + "\\" + cubeMapPath);
 				}

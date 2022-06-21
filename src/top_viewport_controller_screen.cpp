@@ -1,6 +1,5 @@
 #include "top_viewport_controller.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 #include "logger.hpp"
 
 #include <fstream>

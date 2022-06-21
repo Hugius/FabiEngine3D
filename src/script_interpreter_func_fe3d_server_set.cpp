@@ -1,5 +1,5 @@
 #include "script_interpreter.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -11,7 +11,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!Configuration::getInst().isApplicationExported())
+			if(!Tools::isApplicationExported())
 			{
 				_throwRuntimeError("networking server can only be started as exported application");
 

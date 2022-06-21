@@ -1,7 +1,6 @@
 #include "animation2d_editor.hpp"
-#include "configuration.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 #include <sstream>
 
@@ -9,12 +8,12 @@ using std::istringstream;
 
 const bool Animation2dEditor::loadAnimation2dsFromFile()
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\animation2d.fe3d");
 

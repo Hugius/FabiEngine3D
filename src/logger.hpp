@@ -1,7 +1,7 @@
 #pragma once
 
 #include "logger_message.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 #include <iostream>
 #include <windows.h>
@@ -33,7 +33,7 @@ public:
 	{
 		_print(LoggerMessageType::WARNING, first, rest...);
 
-		while(Configuration::getInst().isApplicationExported())
+		while(Tools::isApplicationExported())
 		{
 
 		}

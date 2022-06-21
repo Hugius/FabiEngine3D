@@ -18,7 +18,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2d> quad2d, const ivec2 & size)
 	_quad2dColorRenderer->render(quad2d);
 	_quad2dColorRenderer->unbind();
 
-	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
+	glViewport(0, 0, Tools::getWindowSize().x, Tools::getWindowSize().y);
 }
 
 void MasterRenderer::render3d()
@@ -52,11 +52,11 @@ void MasterRenderer::render3d()
 void MasterRenderer::render2d()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(Configuration::getInst().getDisplayPosition().x, Configuration::getInst().getDisplayPosition().y, Configuration::getInst().getDisplaySize().x, Configuration::getInst().getDisplaySize().y);
+	glViewport(Tools::getDisplayPosition().x, Tools::getDisplayPosition().y, Tools::getDisplaySize().x, Tools::getDisplaySize().y);
 
 	_renderFinalScene();
 
-	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
+	glViewport(0, 0, Tools::getWindowSize().x, Tools::getWindowSize().y);
 
 	_renderStorage->setTriangleCountingEnabled(true);
 

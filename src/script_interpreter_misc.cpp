@@ -1,7 +1,6 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <sstream>
 
@@ -109,7 +108,7 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 

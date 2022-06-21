@@ -1,5 +1,4 @@
 #include "custom_world_builder.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 #include "logger.hpp"
 
@@ -9,12 +8,12 @@ using std::istringstream;
 
 const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 {
-	if(!Configuration::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Tools::isApplicationExported() && _currentProjectId.empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
@@ -79,7 +78,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 				if(!cubeMapPath.empty())
 				{
-					if(!Configuration::getInst().isApplicationExported())
+					if(!Tools::isApplicationExported())
 					{
 						cubeMapPath = ("projects\\" + _currentProjectId + "\\" + cubeMapPath);
 					}
@@ -220,7 +219,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -230,7 +229,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -240,7 +239,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!redNormalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					redNormalMapPath = ("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
 				}
@@ -250,7 +249,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!greenNormalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					greenNormalMapPath = ("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
 				}
@@ -260,7 +259,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blueNormalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					blueNormalMapPath = ("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
 				}
@@ -270,7 +269,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blendMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					blendMapPath = ("projects\\" + _currentProjectId + "\\" + blendMapPath);
 				}
@@ -280,7 +279,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!redDiffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					redDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
 				}
@@ -290,7 +289,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!greenDiffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					greenDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
 				}
@@ -300,7 +299,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blueDiffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					blueDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
 				}
@@ -444,7 +443,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!dudvMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					dudvMapPath = ("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
@@ -454,7 +453,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -464,7 +463,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!heightMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					heightMapPath = ("projects\\" + _currentProjectId + "\\" + heightMapPath);
 				}
@@ -681,7 +680,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -691,7 +690,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!specularMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					specularMapPath = ("projects\\" + _currentProjectId + "\\" + specularMapPath);
 				}
@@ -701,7 +700,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
@@ -711,7 +710,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!reflectionMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					reflectionMapPath = ("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 				}
@@ -721,7 +720,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!refractionMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					refractionMapPath = ("projects\\" + _currentProjectId + "\\" + refractionMapPath);
 				}
@@ -731,7 +730,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -983,7 +982,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -993,7 +992,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
@@ -1597,7 +1596,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			if(!Configuration::getInst().isApplicationExported())
+			if(!Tools::isApplicationExported())
 			{
 				flareMapPath = ("projects\\" + _currentProjectId + "\\" + flareMapPath);
 			}

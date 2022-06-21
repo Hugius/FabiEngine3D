@@ -1,5 +1,4 @@
 #include "script_interpreter.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 #include <algorithm>
@@ -69,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 				return true;
 			}
 
-			const auto result = Configuration::getInst().getWindowSize().x;
+			const auto result = Tools::getWindowSize().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -85,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 				return true;
 			}
 
-			const auto result = Configuration::getInst().getWindowSize().y;
+			const auto result = Tools::getWindowSize().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}

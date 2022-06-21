@@ -1,5 +1,5 @@
 #include "quad3d_color_renderer.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 void Quad3dColorRenderer::bind()
 {

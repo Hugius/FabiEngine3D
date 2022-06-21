@@ -1,5 +1,5 @@
 #include "world_editor.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_load()
 {

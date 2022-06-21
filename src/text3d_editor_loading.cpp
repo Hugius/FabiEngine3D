@@ -1,7 +1,6 @@
 #include "text3d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -11,12 +10,12 @@ using std::istringstream;
 
 const vector<string> Text3dEditor::getImagePathsFromFile() const
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\text3d.fe3d");
 
@@ -55,7 +54,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 			if(!fontMapPath.empty())
 			{
-				if(!Configuration::getInst().isApplicationExported())
+				if(!Tools::isApplicationExported())
 				{
 					fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 				}
@@ -72,12 +71,12 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 const bool Text3dEditor::loadText3dsFromFile()
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\text3d.fe3d");
 
@@ -144,7 +143,7 @@ const bool Text3dEditor::loadText3dsFromFile()
 
 			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
 
-			if(!Configuration::getInst().isApplicationExported())
+			if(!Tools::isApplicationExported())
 			{
 				fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 			}

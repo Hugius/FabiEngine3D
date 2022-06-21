@@ -2,7 +2,6 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "text3d_editor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void Text3dEditor::_load()

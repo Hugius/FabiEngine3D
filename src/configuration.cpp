@@ -31,11 +31,11 @@ Configuration::Configuration()
 		_processOption(file, "window_width", width, 0, 100);
 		_processOption(file, "window_height", height, 0, 100);
 
+		const auto windowSizeMultiplier = fvec2((static_cast<float>(width) / 100.0f), (static_cast<float>(height) / 100.0f));
+
 		_windowTitle = title;
-		_windowSizeMultiplier.x = (static_cast<float>(width) / 100.0f);
-		_windowSizeMultiplier.y = (static_cast<float>(height) / 100.0f);
-		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
-		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
+		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * windowSizeMultiplier.x);
+		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * windowSizeMultiplier.y);
 		_displaySize.x = _windowSize.x;
 		_displaySize.y = _windowSize.y;
 		_displayPosition.x = 0;
@@ -44,10 +44,9 @@ Configuration::Configuration()
 	}
 	else
 	{
-		_windowTitle = "FabiEngine3D";
-		_windowSizeMultiplier = fvec2(1.0f);
-		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
-		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
+		_windowTitle = DEFAULT_WINDOW_TITLE;
+		_windowSize.x = monitorSize.x;
+		_windowSize.y = monitorSize.y;
 		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_SIZE_MULTIPLIER.x);
 		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_SIZE_MULTIPLIER.y);
 		_displayPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_POSITION_MULTIPLIER.x);
@@ -143,11 +142,6 @@ const ivec2 & Configuration::getDisplayPosition() const
 const string & Configuration::getWindowTitle() const
 {
 	return _windowTitle;
-}
-
-const fvec2 Configuration::getWindowSizeMultiplier() const
-{
-	return _windowSizeMultiplier;
 }
 
 const ivec2 & Configuration::getDisplaySize() const

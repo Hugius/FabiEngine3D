@@ -1,7 +1,6 @@
 #include "script_interpreter.hpp"
-#include "configuration.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 #include <sstream>
 

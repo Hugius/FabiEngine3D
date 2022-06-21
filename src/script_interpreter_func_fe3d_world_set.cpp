@@ -1,6 +1,5 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 using SVT = ScriptValueType;
 
@@ -324,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
+			const auto isExported = Tools::isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
 			const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");

@@ -1,6 +1,5 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <algorithm>
 

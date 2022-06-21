@@ -1,5 +1,4 @@
 #include "script_interpreter.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 using SVT = ScriptValueType;
@@ -413,7 +412,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 				abort();
 			}
 
-			const auto isExported = Configuration::getInst().isApplicationExported();
+			const auto isExported = Tools::isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto targetDirectoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "assets\\image\\misc\\flare_map\\");
 			const auto filePath = (targetDirectoryPath + args[0]->getString());

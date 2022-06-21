@@ -1,8 +1,8 @@
 #include "master_renderer.hpp"
 #include "master_renderer.hpp"
-#include "configuration.hpp"
-#include "render_storage.hpp"
 #include "tools.hpp"
+#include "render_storage.hpp"
+
 #include <algorithm>
 
 using std::make_unique;
@@ -11,7 +11,7 @@ using std::clamp;
 
 MasterRenderer::MasterRenderer()
 {
-	const auto viewportSize = Configuration::getInst().getDisplaySize();
+	const auto viewportSize = Tools::getDisplaySize();
 
 	_skyColorRenderer = make_unique<SkyColorRenderer>();
 	_terrainColorRenderer = make_unique<TerrainColorRenderer>();

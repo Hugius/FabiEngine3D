@@ -2,7 +2,6 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "sky_editor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void SkyEditor::_load()

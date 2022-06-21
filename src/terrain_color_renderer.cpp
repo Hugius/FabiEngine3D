@@ -1,5 +1,4 @@
 #include "terrain_color_renderer.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 using std::to_string;

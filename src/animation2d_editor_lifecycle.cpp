@@ -2,7 +2,7 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "animation2d_editor.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 void Animation2dEditor::_load()
 {

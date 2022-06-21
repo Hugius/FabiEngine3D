@@ -1,5 +1,5 @@
 #include "capture_buffer.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 #include "render_storage.hpp"
 
 using std::make_shared;
@@ -100,7 +100,7 @@ void CaptureBuffer::bind()
 void CaptureBuffer::unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
+	glViewport(0, 0, Tools::getWindowSize().x, Tools::getWindowSize().y);
 }
 
 const ivec2 & CaptureBuffer::getPosition() const

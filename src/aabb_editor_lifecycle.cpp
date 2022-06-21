@@ -2,7 +2,6 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "aabb_editor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void AabbEditor::_load()

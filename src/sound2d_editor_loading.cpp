@@ -1,7 +1,6 @@
 #include "sound2d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 
@@ -10,12 +9,12 @@ using std::istringstream;
 
 const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound2d.fe3d");
 
@@ -46,7 +45,7 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		if(!Configuration::getInst().isApplicationExported())
+		if(!Tools::isApplicationExported())
 		{
 			audioPath = ("projects\\" + getCurrentProjectId() + "\\" + audioPath);
 		}
@@ -61,14 +60,14 @@ const vector<string> Sound2dEditor::getAudioPathsFromFile() const
 
 const bool Sound2dEditor::loadSound2dsFromFile()
 {
-	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Tools::isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
 	_loadedSound2dIds.clear();
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "domain\\sound2d.fe3d");
 
@@ -97,7 +96,7 @@ const bool Sound2dEditor::loadSound2dsFromFile()
 
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		if(!Configuration::getInst().isApplicationExported())
+		if(!Tools::isApplicationExported())
 		{
 			audioPath = ("projects\\" + getCurrentProjectId() + "\\" + audioPath);
 		}

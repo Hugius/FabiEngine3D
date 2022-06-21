@@ -1,5 +1,5 @@
 #include "quad2d_color_renderer.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 #include "text2d.hpp"
 
 void Quad2dColorRenderer::bind()

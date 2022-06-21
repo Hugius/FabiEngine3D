@@ -1,7 +1,6 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <algorithm>
 
@@ -168,7 +167,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 {
 	vector<string> worldIds = {};
 
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\");
 
@@ -191,7 +190,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 
 void WorldEditor::_deleteWorldFile(const string & worldId)
 {
-	const auto isExported = Configuration::getInst().isApplicationExported();
+	const auto isExported = Tools::isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + worldId + ".fe3d");
 

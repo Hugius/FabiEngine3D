@@ -3,7 +3,6 @@
 
 #include "script_editor.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 void ScriptEditor::_load()
 {

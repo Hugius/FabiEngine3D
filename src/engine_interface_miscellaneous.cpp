@@ -1,6 +1,5 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 #include <chrono>

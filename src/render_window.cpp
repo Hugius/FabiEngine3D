@@ -1,7 +1,7 @@
 #define GLEW_STATIC
 
 #include "render_window.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 #include "logger.hpp"
 
 #include <glew.h>

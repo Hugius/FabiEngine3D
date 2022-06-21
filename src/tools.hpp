@@ -1,11 +1,14 @@
 #pragma once
 
 #include "mathematics.hpp"
+#include "configuration.hpp"
 
 #include <string>
 
 using std::string;
 using std::pair;
+using std::unique_ptr;
+using std::make_unique;
 
 class Tools final
 {
@@ -21,6 +24,7 @@ public:
 
 	static const pair<string, string> splitStringIntoTwo(const string & mergedString, char delimiter);
 
+	static const string & getWindowTitle();
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string & startingDirectory, const string & fileType);
 	static const string chooseExplorerDirectory(const string & startingDirectory);
@@ -36,6 +40,9 @@ public:
 	static const ivec2 convertFromNdc(const fvec2 & position);
 	static const ivec2 getCursorPosition();
 	static const ivec2 getMonitorSize();
+	static const ivec2 & getWindowSize();
+	static const ivec2 & getDisplaySize();
+	static const ivec2 & getDisplayPosition();
 
 	static const float getWindowAspectRatio();
 	static const float getDisplayAspectRatio();
@@ -44,6 +51,7 @@ public:
 
 	static const int parseInteger(const string & valueString);
 
+	static const bool isApplicationExported();
 	static const bool isCursorInsideDisplay();
 	static const bool isCursorInsideWindow();
 	static const bool isCursorVisible();
@@ -59,6 +67,8 @@ public:
 	static const bool isInteger(const string & valueString);
 
 private:
+	static inline unique_ptr<Configuration> _configuration = make_unique<Configuration>();
+
 	static inline constexpr int MIN_STRING_INTEGER = -999999999;
 	static inline constexpr int MAX_STRING_INTEGER = 999999999;
 };

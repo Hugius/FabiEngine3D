@@ -2,7 +2,7 @@
 
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 #include "texture_buffer.hpp"
 
 #include <string>

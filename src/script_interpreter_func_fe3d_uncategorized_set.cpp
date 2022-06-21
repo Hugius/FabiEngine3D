@@ -1,7 +1,6 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-#include "configuration.hpp"
 
 #include <algorithm>
 
@@ -15,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(Configuration::getInst().isApplicationExported())
+			if(Tools::isApplicationExported())
 			{
 				_fe3d->application_stop();
 			}

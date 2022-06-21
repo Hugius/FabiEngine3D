@@ -2,7 +2,6 @@
 #define POSITIONS(count) Mathematics::calculateDistributedPositions(count, CH, false)
 
 #include "quad3d_editor.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 
 void Quad3dEditor::_load()

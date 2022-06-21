@@ -1,6 +1,6 @@
 #include "blur_renderer.hpp"
 #include "render_storage.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 using std::make_shared;
 

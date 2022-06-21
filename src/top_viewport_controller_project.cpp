@@ -1,7 +1,6 @@
 #include "top_viewport_controller.hpp"
-#include "configuration.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 using std::ofstream;
 

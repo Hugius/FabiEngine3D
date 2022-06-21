@@ -102,7 +102,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 	text3d->setCentered(isCentered);
 	text3d->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	text3d->setFontMapPath(fontMapPath);
-	text3d->setContent("Text");
+	text3d->setContent(DEFAULT_TEXT_CONTENT);
 
 	_text3ds.insert({text3dId, text3d});
 }

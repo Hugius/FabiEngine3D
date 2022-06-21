@@ -15,6 +15,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		const auto opacity = _fe3d->text3d_getOpacity(_currentText3dId);
 		const auto minAlpha = _fe3d->text3d_getMinAlpha(_currentText3dId);
 		const auto rotationOrder = _fe3d->text3d_getRotationOrder(_currentText3dId);
+		const auto content = _fe3d->text3d_getContent(_currentText3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -26,6 +27,10 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * SIZE_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * SIZE_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("content")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("content", "Content", content, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
@@ -121,6 +126,10 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->text3d_setSize(_currentText3dId, fvec2(size.x, (value / SIZE_FACTOR)));
+		}
+		else if((_gui->getOverlay()->getValueFormId() == "content") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			_fe3d->text3d_setContent(_currentText3dId, _gui->getOverlay()->getValueFormContent());
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{

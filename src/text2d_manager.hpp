@@ -34,6 +34,8 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
+	const string DEFAULT_TEXT_CONTENT = "Text123";
+
 	unordered_map<string, shared_ptr<Text2d>> _text2ds = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;

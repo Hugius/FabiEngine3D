@@ -56,7 +56,7 @@ void Text2dManager::createText2d(const string & text2dId, const string & fontMap
 	text2d->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	text2d->setFontMapPath(fontMapPath);
 	text2d->setCentered(isCentered);
-	text2d->setContent("Text");
+	text2d->setContent(DEFAULT_TEXT_CONTENT);
 	text2d->setDepth(_renderStorage->getGuiDepth());
 
 	_text2ds.insert({text2dId, text2d});

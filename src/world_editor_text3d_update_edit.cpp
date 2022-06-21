@@ -92,10 +92,6 @@ void WorldEditor::_updateText3dEditing()
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("content")->isHovered())
-			{
-				_gui->getOverlay()->openValueForm("content", "Content", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
-			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))
 			{
 				_duplicator->deleteCopiedText3d(_activeText3dId);
@@ -107,11 +103,6 @@ void WorldEditor::_updateText3dEditing()
 				_activeText3dId = "";
 
 				return;
-			}
-
-			if((_gui->getOverlay()->getValueFormId() == "content") && _gui->getOverlay()->isValueFormConfirmed())
-			{
-				_fe3d->text3d_setContent(_activeText3dId, _gui->getOverlay()->getValueFormContent());
 			}
 
 			auto position = _fe3d->text3d_getPosition(_activeText3dId);

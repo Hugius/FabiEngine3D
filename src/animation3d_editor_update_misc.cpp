@@ -171,52 +171,52 @@ void Animation3dEditor::_updateAnimation3dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createAnimation3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newAnimation3dId = _gui->getOverlay()->getValueFormContent();
+		auto animation3dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newAnimation3dId.empty())
+		if(animation3dId.empty())
 		{
 			Logger::throwWarning("Animation3D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newAnimation3dId.begin(), newAnimation3dId.end(), isspace))
+		if(any_of(animation3dId.begin(), animation3dId.end(), isspace))
 		{
 			Logger::throwWarning("Animation3D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newAnimation3dId.begin(), newAnimation3dId.end(), isupper))
+		if(any_of(animation3dId.begin(), animation3dId.end(), isupper))
 		{
 			Logger::throwWarning("Animation3D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newAnimation3dId = ("@" + newAnimation3dId);
+		animation3dId = ("@" + animation3dId);
 
-		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), newAnimation3dId) != _loadedAnimation3dIds.end())
+		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), animation3dId) != _loadedAnimation3dIds.end())
 		{
 			Logger::throwWarning("Animation3D already exists");
 
 			return;
 		}
 
-		_fe3d->animation3d_create(newAnimation3dId);
-		_fe3d->animation3d_createPart(newAnimation3dId, "");
+		_fe3d->animation3d_create(animation3dId);
+		_fe3d->animation3d_createPart(animation3dId, "");
 
-		_loadedAnimation3dIds.push_back(newAnimation3dId);
+		_loadedAnimation3dIds.push_back(animation3dId);
 
 		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + newAnimation3dId);
+		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + animation3dId);
 		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 
-		_currentAnimation3dId = newAnimation3dId;
+		_currentAnimation3dId = animation3dId;
 	}
 }
 
@@ -267,16 +267,16 @@ void Animation3dEditor::_updatePartCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createPart") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newPartId = _gui->getOverlay()->getValueFormContent();
+		auto partId = _gui->getOverlay()->getValueFormContent();
 
-		if(newPartId.empty())
+		if(partId.empty())
 		{
 			_fe3d->animation3d_createFrame(_currentAnimation3dId, 0);
 
 			return;
 		}
 
-		if(any_of(newPartId.begin(), newPartId.end(), isspace))
+		if(any_of(partId.begin(), partId.end(), isspace))
 		{
 			Logger::throwWarning("Part ID cannot contain any spaces");
 
@@ -285,7 +285,7 @@ void Animation3dEditor::_updatePartCreating()
 			return;
 		}
 
-		if(any_of(newPartId.begin(), newPartId.end(), isupper))
+		if(any_of(partId.begin(), partId.end(), isupper))
 		{
 			Logger::throwWarning("Part ID cannot contain any capitals");
 
@@ -294,7 +294,7 @@ void Animation3dEditor::_updatePartCreating()
 			return;
 		}
 
-		if(_fe3d->animation3d_hasPart(_currentAnimation3dId, newPartId))
+		if(_fe3d->animation3d_hasPart(_currentAnimation3dId, partId))
 		{
 			Logger::throwWarning("Part already exists");
 
@@ -303,7 +303,7 @@ void Animation3dEditor::_updatePartCreating()
 			return;
 		}
 
-		_fe3d->animation3d_createPart(_currentAnimation3dId, newPartId);
+		_fe3d->animation3d_createPart(_currentAnimation3dId, partId);
 
 		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 	}

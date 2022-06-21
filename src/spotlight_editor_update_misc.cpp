@@ -59,43 +59,43 @@ void SpotlightEditor::_updateSpotlightCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createSpotlight") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newSpotlightId = _gui->getOverlay()->getValueFormContent();
+		auto spotlightId = _gui->getOverlay()->getValueFormContent();
 
-		if(newSpotlightId.empty())
+		if(spotlightId.empty())
 		{
 			Logger::throwWarning("Spotlight ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newSpotlightId.begin(), newSpotlightId.end(), isspace))
+		if(any_of(spotlightId.begin(), spotlightId.end(), isspace))
 		{
 			Logger::throwWarning("Spotlight ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newSpotlightId.begin(), newSpotlightId.end(), isupper))
+		if(any_of(spotlightId.begin(), spotlightId.end(), isupper))
 		{
 			Logger::throwWarning("Spotlight ID cannot contain any capitals");
 
 			return;
 		}
 
-		newSpotlightId = ("@" + newSpotlightId);
+		spotlightId = ("@" + spotlightId);
 
-		if(find(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), newSpotlightId) != _loadedSpotlightIds.end())
+		if(find(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), spotlightId) != _loadedSpotlightIds.end())
 		{
 			Logger::throwWarning("Spotlight already exists");
 
 			return;
 		}
 
-		_fe3d->spotlight_create(newSpotlightId);
-		_fe3d->spotlight_setPosition(newSpotlightId, SPOTLIGHT_POSITION);
-		_fe3d->spotlight_setPitch(newSpotlightId, SPOTLIGHT_PITCH);
+		_fe3d->spotlight_create(spotlightId);
+		_fe3d->spotlight_setPosition(spotlightId, SPOTLIGHT_POSITION);
+		_fe3d->spotlight_setPitch(spotlightId, SPOTLIGHT_PITCH);
 
-		_loadedSpotlightIds.push_back(newSpotlightId);
+		_loadedSpotlightIds.push_back(spotlightId);
 
 		sort(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end());
 
@@ -103,10 +103,10 @@ void SpotlightEditor::_updateSpotlightCreating()
 		_fe3d->model_setColor(TORCH_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
-		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + newSpotlightId.substr(1));
+		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + spotlightId.substr(1));
 		_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(true);
 
-		_currentSpotlightId = newSpotlightId;
+		_currentSpotlightId = spotlightId;
 	}
 }
 

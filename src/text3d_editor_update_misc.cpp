@@ -57,32 +57,32 @@ void Text3dEditor::_updateText3dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createText3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newText3dId = _gui->getOverlay()->getValueFormContent();
+		auto text3dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newText3dId.empty())
+		if(text3dId.empty())
 		{
 			Logger::throwWarning("Text3D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newText3dId.begin(), newText3dId.end(), isspace))
+		if(any_of(text3dId.begin(), text3dId.end(), isspace))
 		{
 			Logger::throwWarning("Text3D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newText3dId.begin(), newText3dId.end(), isupper))
+		if(any_of(text3dId.begin(), text3dId.end(), isupper))
 		{
 			Logger::throwWarning("Text3D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newText3dId = ("@" + newText3dId);
+		text3dId = ("@" + text3dId);
 
-		if(find(_loadedText3dIds.begin(), _loadedText3dIds.end(), newText3dId) != _loadedText3dIds.end())
+		if(find(_loadedText3dIds.begin(), _loadedText3dIds.end(), text3dId) != _loadedText3dIds.end())
 		{
 			Logger::throwWarning("Text3D already exists");
 
@@ -122,19 +122,19 @@ void Text3dEditor::_updateText3dCreating()
 
 		_fe3d->misc_clearImageCache(finalFilePath);
 
-		_fe3d->text3d_create(newText3dId, finalFilePath, false);
+		_fe3d->text3d_create(text3dId, finalFilePath, false);
 
-		if(_fe3d->text3d_isExisting(newText3dId))
+		if(_fe3d->text3d_isExisting(text3dId))
 		{
-			_loadedText3dIds.push_back(newText3dId);
+			_loadedText3dIds.push_back(text3dId);
 
 			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
-			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setTextContent("Text3D: " + newText3dId.substr(1));
+			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setTextContent("Text3D: " + text3dId.substr(1));
 			_gui->getOverlay()->getTextField(TEXT3D_TITLE_ID)->setVisible(true);
 
-			_currentText3dId = newText3dId;
+			_currentText3dId = text3dId;
 		}
 	}
 }

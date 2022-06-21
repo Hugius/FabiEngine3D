@@ -49,32 +49,32 @@ void Sound3dEditor::_updateSound3dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createSound3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newSound3dId = _gui->getOverlay()->getValueFormContent();
+		auto sound3dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newSound3dId.empty())
+		if(sound3dId.empty())
 		{
 			Logger::throwWarning("Sound3d ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newSound3dId.begin(), newSound3dId.end(), isspace))
+		if(any_of(sound3dId.begin(), sound3dId.end(), isspace))
 		{
 			Logger::throwWarning("Sound3d ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newSound3dId.begin(), newSound3dId.end(), isupper))
+		if(any_of(sound3dId.begin(), sound3dId.end(), isupper))
 		{
 			Logger::throwWarning("Sound3d ID cannot contain any capitals");
 
 			return;
 		}
 
-		newSound3dId = ("@" + newSound3dId);
+		sound3dId = ("@" + sound3dId);
 
-		if(find(_loadedSound3dIds.begin(), _loadedSound3dIds.end(), newSound3dId) != _loadedSound3dIds.end())
+		if(find(_loadedSound3dIds.begin(), _loadedSound3dIds.end(), sound3dId) != _loadedSound3dIds.end())
 		{
 			Logger::throwWarning("Sound3d already exists");
 
@@ -114,14 +114,14 @@ void Sound3dEditor::_updateSound3dCreating()
 
 		_fe3d->misc_clearAudioCache(finalFilePath);
 
-		_fe3d->sound3d_create(newSound3dId, finalFilePath);
+		_fe3d->sound3d_create(sound3dId, finalFilePath);
 
-		if(_fe3d->sound3d_isExisting(newSound3dId))
+		if(_fe3d->sound3d_isExisting(sound3dId))
 		{
-			_fe3d->sound3d_setPosition(newSound3dId, SOUND3D_POSITION);
-			_fe3d->sound3d_start(newSound3dId, -1, 0);
+			_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
+			_fe3d->sound3d_start(sound3dId, -1, 0);
 
-			_loadedSound3dIds.push_back(newSound3dId);
+			_loadedSound3dIds.push_back(sound3dId);
 
 			sort(_loadedSound3dIds.begin(), _loadedSound3dIds.end());
 
@@ -129,10 +129,10 @@ void Sound3dEditor::_updateSound3dCreating()
 			_fe3d->model_setColor(SPEAKER_ID, "", fvec3(1.0f));
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
-			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + newSound3dId.substr(1));
+			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + sound3dId.substr(1));
 			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(true);
 
-			_currentSound3dId = newSound3dId;
+			_currentSound3dId = sound3dId;
 		}
 	}
 }

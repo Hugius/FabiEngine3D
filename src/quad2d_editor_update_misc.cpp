@@ -20,32 +20,32 @@ void Quad2dEditor::_updateQuad2dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createQuad2d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newQuad2dId = _gui->getOverlay()->getValueFormContent();
+		auto quad2dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newQuad2dId.empty())
+		if(quad2dId.empty())
 		{
 			Logger::throwWarning("Quad2D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newQuad2dId.begin(), newQuad2dId.end(), isspace))
+		if(any_of(quad2dId.begin(), quad2dId.end(), isspace))
 		{
 			Logger::throwWarning("Quad2D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newQuad2dId.begin(), newQuad2dId.end(), isupper))
+		if(any_of(quad2dId.begin(), quad2dId.end(), isupper))
 		{
 			Logger::throwWarning("Quad2D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newQuad2dId = ("@" + newQuad2dId);
+		quad2dId = ("@" + quad2dId);
 
-		if(find(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), newQuad2dId) != _loadedQuad2dIds.end())
+		if(find(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), quad2dId) != _loadedQuad2dIds.end())
 		{
 			Logger::throwWarning("Quad2D already exists");
 
@@ -57,22 +57,22 @@ void Quad2dEditor::_updateQuad2dCreating()
 			abort();
 		}
 
-		_fe3d->quad2d_create(newQuad2dId, true);
+		_fe3d->quad2d_create(quad2dId, true);
 
-		if(_fe3d->quad2d_isExisting(newQuad2dId))
+		if(_fe3d->quad2d_isExisting(quad2dId))
 		{
-			_fe3d->quad2d_setPosition(newQuad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(newQuad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setPosition(quad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
-			_loadedQuad2dIds.push_back(newQuad2dId);
+			_loadedQuad2dIds.push_back(quad2dId);
 
 			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setTextContent("Quad2D: " + newQuad2dId.substr(1));
+			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setTextContent("Quad2D: " + quad2dId.substr(1));
 			_gui->getOverlay()->getTextField(QUAD2D_TITLE_ID)->setVisible(true);
 
-			_currentQuad2dId = newQuad2dId;
+			_currentQuad2dId = quad2dId;
 		}
 	}
 }

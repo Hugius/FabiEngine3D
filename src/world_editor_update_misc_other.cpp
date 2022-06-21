@@ -236,23 +236,23 @@ void WorldEditor::_updateWorldCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createWorld") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newWorldId = _gui->getOverlay()->getValueFormContent();
+		auto worldId = _gui->getOverlay()->getValueFormContent();
 
-		if(newWorldId.empty())
+		if(worldId.empty())
 		{
 			Logger::throwWarning("World ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newWorldId.begin(), newWorldId.end(), isspace))
+		if(any_of(worldId.begin(), worldId.end(), isspace))
 		{
 			Logger::throwWarning("World ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newWorldId.begin(), newWorldId.end(), isupper))
+		if(any_of(worldId.begin(), worldId.end(), isupper))
 		{
 			Logger::throwWarning("World ID cannot contain any capitals");
 
@@ -261,7 +261,7 @@ void WorldEditor::_updateWorldCreating()
 
 		const auto worldNames = _getWorldIds();
 
-		if(find(worldNames.begin(), worldNames.end(), newWorldId) != worldNames.end())
+		if(find(worldNames.begin(), worldNames.end(), worldId) != worldNames.end())
 		{
 			Logger::throwWarning("World already exists");
 
@@ -272,8 +272,8 @@ void WorldEditor::_updateWorldCreating()
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
-		_currentWorldId = newWorldId;
-		_loadedWorldId = newWorldId;
+		_currentWorldId = worldId;
+		_loadedWorldId = worldId;
 	}
 }
 

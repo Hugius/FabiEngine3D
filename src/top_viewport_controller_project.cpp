@@ -9,10 +9,10 @@ void TopViewportController::_updateProjectCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createProject") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto newProjectId = _gui->getOverlay()->getValueFormContent();
+		const auto projectId = _gui->getOverlay()->getValueFormContent();
 		const auto rootPath = Tools::getRootDirectoryPath();
 		const auto projectDirectoryPath = (rootPath + "projects\\");
-		const auto newProjectDirectoryPath = (projectDirectoryPath + newProjectId + "\\");
+		const auto newProjectDirectoryPath = (projectDirectoryPath + projectId + "\\");
 
 		if(!Tools::isDirectoryExisting(projectDirectoryPath))
 		{
@@ -21,21 +21,21 @@ void TopViewportController::_updateProjectCreating()
 			return;
 		}
 
-		if(newProjectId.empty())
+		if(projectId.empty())
 		{
 			Logger::throwWarning("Project ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newProjectId.begin(), newProjectId.end(), isspace))
+		if(any_of(projectId.begin(), projectId.end(), isspace))
 		{
 			Logger::throwWarning("Project ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
+		if(any_of(projectId.begin(), projectId.end(), isupper))
 		{
 			Logger::throwWarning("Project ID cannot contain any capitals");
 
@@ -123,7 +123,7 @@ void TopViewportController::_updateProjectCreating()
 		text3dFile.close();
 		waterFile.close();
 
-		_setProject(newProjectId);
+		_setProject(projectId);
 
 		Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
 	}

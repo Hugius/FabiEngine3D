@@ -79,23 +79,23 @@ void ScriptEditor::_updateScriptFileCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createScript") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto newScriptFileId = _gui->getOverlay()->getValueFormContent();
+		const auto scriptFileId = _gui->getOverlay()->getValueFormContent();
 
-		if(newScriptFileId.empty())
+		if(scriptFileId.empty())
 		{
 			Logger::throwWarning("Script file ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
+		if(any_of(scriptFileId.begin(), scriptFileId.end(), isspace))
 		{
 			Logger::throwWarning("Script file ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
+		if(any_of(scriptFileId.begin(), scriptFileId.end(), isupper))
 		{
 			Logger::throwWarning("Script file ID cannot contain any capitals");
 
@@ -104,17 +104,17 @@ void ScriptEditor::_updateScriptFileCreating()
 
 		const auto existingScriptFileIds = _script->getScriptFileIds();
 
-		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
+		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), scriptFileId) != existingScriptFileIds.end())
 		{
 			Logger::throwWarning("Script already exists");
 
 			return;
 		}
 
-		_script->createScriptFile(newScriptFileId);
-		_script->getScriptFile(newScriptFileId)->createLine(0, "");
+		_script->createScriptFile(scriptFileId);
+		_script->getScriptFile(scriptFileId)->createLine(0, "");
 
-		_currentScriptFileId = newScriptFileId;
+		_currentScriptFileId = scriptFileId;
 		_isWritingScript = true;
 
 		_deleteDisplayContent();
@@ -142,23 +142,23 @@ void ScriptEditor::_updateScriptFileRenaming()
 {
 	if((_gui->getOverlay()->getValueFormId() == "renameScript") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto newScriptFileId = _gui->getOverlay()->getValueFormContent();
+		const auto scriptFileId = _gui->getOverlay()->getValueFormContent();
 
-		if(newScriptFileId.empty())
+		if(scriptFileId.empty())
 		{
 			Logger::throwWarning("Script file ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
+		if(any_of(scriptFileId.begin(), scriptFileId.end(), isspace))
 		{
 			Logger::throwWarning("Script file ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
+		if(any_of(scriptFileId.begin(), scriptFileId.end(), isupper))
 		{
 			Logger::throwWarning("Script file ID cannot contain any capitals");
 
@@ -167,14 +167,14 @@ void ScriptEditor::_updateScriptFileRenaming()
 
 		const auto existingScriptFileIds = _script->getScriptFileIds();
 
-		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
+		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), scriptFileId) != existingScriptFileIds.end())
 		{
 			Logger::throwWarning("Script already exists");
 		}
 
-		_script->renameScriptFile(_currentScriptFileId, newScriptFileId);
+		_script->renameScriptFile(_currentScriptFileId, scriptFileId);
 
-		_currentScriptFileId = newScriptFileId;
+		_currentScriptFileId = scriptFileId;
 	}
 }
 

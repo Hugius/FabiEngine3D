@@ -59,42 +59,42 @@ void PointlightEditor::_updatePointlightCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createPointlight") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newPointlightId = _gui->getOverlay()->getValueFormContent();
+		auto pointlightId = _gui->getOverlay()->getValueFormContent();
 
-		if(newPointlightId.empty())
+		if(pointlightId.empty())
 		{
 			Logger::throwWarning("Pointlight ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newPointlightId.begin(), newPointlightId.end(), isspace))
+		if(any_of(pointlightId.begin(), pointlightId.end(), isspace))
 		{
 			Logger::throwWarning("Pointlight ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newPointlightId.begin(), newPointlightId.end(), isupper))
+		if(any_of(pointlightId.begin(), pointlightId.end(), isupper))
 		{
 			Logger::throwWarning("Pointlight ID cannot contain any capitals");
 
 			return;
 		}
 
-		newPointlightId = ("@" + newPointlightId);
+		pointlightId = ("@" + pointlightId);
 
-		if(find(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), newPointlightId) != _loadedPointlightIds.end())
+		if(find(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), pointlightId) != _loadedPointlightIds.end())
 		{
 			Logger::throwWarning("Pointlight already exists");
 
 			return;
 		}
 
-		_fe3d->pointlight_create(newPointlightId);
-		_fe3d->pointlight_setPosition(newPointlightId, POINTLIGHT_POSITION);
+		_fe3d->pointlight_create(pointlightId);
+		_fe3d->pointlight_setPosition(pointlightId, POINTLIGHT_POSITION);
 
-		_loadedPointlightIds.push_back(newPointlightId);
+		_loadedPointlightIds.push_back(pointlightId);
 
 		sort(_loadedPointlightIds.begin(), _loadedPointlightIds.end());
 
@@ -102,10 +102,10 @@ void PointlightEditor::_updatePointlightCreating()
 		_fe3d->model_setColor(LAMP_ID, "", fvec3(1.0f));
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
-		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + newPointlightId.substr(1));
+		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + pointlightId.substr(1));
 		_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(true);
 
-		_currentPointlightId = newPointlightId;
+		_currentPointlightId = pointlightId;
 	}
 }
 

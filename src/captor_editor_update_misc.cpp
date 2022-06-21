@@ -6,49 +6,49 @@ void CaptorEditor::_updateCaptorCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createCaptor") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newCaptorId = _gui->getOverlay()->getValueFormContent();
+		auto captorId = _gui->getOverlay()->getValueFormContent();
 
-		if(newCaptorId.empty())
+		if(captorId.empty())
 		{
 			Logger::throwWarning("Captor ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newCaptorId.begin(), newCaptorId.end(), isspace))
+		if(any_of(captorId.begin(), captorId.end(), isspace))
 		{
 			Logger::throwWarning("Captor ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newCaptorId.begin(), newCaptorId.end(), isupper))
+		if(any_of(captorId.begin(), captorId.end(), isupper))
 		{
 			Logger::throwWarning("Captor ID cannot contain any capitals");
 
 			return;
 		}
 
-		newCaptorId = ("@" + newCaptorId);
+		captorId = ("@" + captorId);
 
-		if(find(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), newCaptorId) != _loadedCaptorIds.end())
+		if(find(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), captorId) != _loadedCaptorIds.end())
 		{
 			Logger::throwWarning("Captor already exists");
 
 			return;
 		}
 
-		_fe3d->captor_create(newCaptorId);
+		_fe3d->captor_create(captorId);
 
-		_loadedCaptorIds.push_back(newCaptorId);
+		_loadedCaptorIds.push_back(captorId);
 
 		sort(_loadedCaptorIds.begin(), _loadedCaptorIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
-		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + newCaptorId.substr(1));
+		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + captorId.substr(1));
 		_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
 
-		_currentCaptorId = newCaptorId;
+		_currentCaptorId = captorId;
 	}
 }
 

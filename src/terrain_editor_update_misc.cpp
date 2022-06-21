@@ -54,32 +54,32 @@ void TerrainEditor::_updateTerrainCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createTerrain") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newTerrainId = _gui->getOverlay()->getValueFormContent();
+		auto terrainId = _gui->getOverlay()->getValueFormContent();
 
-		if(newTerrainId.empty())
+		if(terrainId.empty())
 		{
 			Logger::throwWarning("Terrain ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
+		if(any_of(terrainId.begin(), terrainId.end(), isspace))
 		{
 			Logger::throwWarning("Terrain ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newTerrainId.begin(), newTerrainId.end(), isupper))
+		if(any_of(terrainId.begin(), terrainId.end(), isupper))
 		{
 			Logger::throwWarning("Terrain ID cannot contain any capitals");
 
 			return;
 		}
 
-		newTerrainId = ("@" + newTerrainId);
+		terrainId = ("@" + terrainId);
 
-		if(find(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), newTerrainId) != _loadedTerrainIds.end())
+		if(find(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), terrainId) != _loadedTerrainIds.end())
 		{
 			Logger::throwWarning("Terrain already exists");
 
@@ -118,21 +118,21 @@ void TerrainEditor::_updateTerrainCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
-		_fe3d->terrain_create(newTerrainId, finalFilePath);
+		_fe3d->terrain_create(terrainId, finalFilePath);
 
-		if(_fe3d->terrain_isExisting(newTerrainId))
+		if(_fe3d->terrain_isExisting(terrainId))
 		{
-			_fe3d->terrain_select(newTerrainId);
+			_fe3d->terrain_select(terrainId);
 
-			_loadedTerrainIds.push_back(newTerrainId);
+			_loadedTerrainIds.push_back(terrainId);
 
 			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setTextContent("Terrain: " + newTerrainId.substr(1));
+			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setTextContent("Terrain: " + terrainId.substr(1));
 			_gui->getOverlay()->getTextField(TERRAIN_TITLE_ID)->setVisible(true);
 
-			_currentTerrainId = newTerrainId;
+			_currentTerrainId = terrainId;
 		}
 	}
 }

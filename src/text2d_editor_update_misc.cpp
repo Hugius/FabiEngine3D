@@ -20,32 +20,32 @@ void Text2dEditor::_updateText2dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createText2d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newText2dId = _gui->getOverlay()->getValueFormContent();
+		auto text2dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newText2dId.empty())
+		if(text2dId.empty())
 		{
 			Logger::throwWarning("Text2D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newText2dId.begin(), newText2dId.end(), isspace))
+		if(any_of(text2dId.begin(), text2dId.end(), isspace))
 		{
 			Logger::throwWarning("Text2D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newText2dId.begin(), newText2dId.end(), isupper))
+		if(any_of(text2dId.begin(), text2dId.end(), isupper))
 		{
 			Logger::throwWarning("Text2D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newText2dId = ("@" + newText2dId);
+		text2dId = ("@" + text2dId);
 
-		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), newText2dId) != _loadedText2dIds.end())
+		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), text2dId) != _loadedText2dIds.end())
 		{
 			Logger::throwWarning("Text2D already exists");
 
@@ -84,22 +84,22 @@ void Text2dEditor::_updateText2dCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearImageCache(finalFilePath);
-		_fe3d->text2d_create(newText2dId, finalFilePath, true);
+		_fe3d->text2d_create(text2dId, finalFilePath, true);
 
-		if(_fe3d->text2d_isExisting(newText2dId))
+		if(_fe3d->text2d_isExisting(text2dId))
 		{
-			_fe3d->text2d_setPosition(newText2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(newText2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setPosition(text2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
-			_loadedText2dIds.push_back(newText2dId);
+			_loadedText2dIds.push_back(text2dId);
 
 			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setTextContent("Text2D: " + newText2dId.substr(1));
+			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setTextContent("Text2D: " + text2dId.substr(1));
 			_gui->getOverlay()->getTextField(TEXT2D_TITLE_ID)->setVisible(true);
 
-			_currentText2dId = newText2dId;
+			_currentText2dId = text2dId;
 		}
 	}
 }

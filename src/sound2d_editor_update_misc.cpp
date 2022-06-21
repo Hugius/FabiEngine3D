@@ -31,32 +31,32 @@ void Sound2dEditor::_updateSound2dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createSound2d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newSound2dId = _gui->getOverlay()->getValueFormContent();
+		auto sound2dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newSound2dId.empty())
+		if(sound2dId.empty())
 		{
 			Logger::throwWarning("Sound2D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newSound2dId.begin(), newSound2dId.end(), isspace))
+		if(any_of(sound2dId.begin(), sound2dId.end(), isspace))
 		{
 			Logger::throwWarning("Sound2D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newSound2dId.begin(), newSound2dId.end(), isupper))
+		if(any_of(sound2dId.begin(), sound2dId.end(), isupper))
 		{
 			Logger::throwWarning("Sound2D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newSound2dId = ("@" + newSound2dId);
+		sound2dId = ("@" + sound2dId);
 
-		if(find(_loadedSound2dIds.begin(), _loadedSound2dIds.end(), newSound2dId) != _loadedSound2dIds.end())
+		if(find(_loadedSound2dIds.begin(), _loadedSound2dIds.end(), sound2dId) != _loadedSound2dIds.end())
 		{
 			Logger::throwWarning("Sound2D already exists");
 
@@ -96,19 +96,19 @@ void Sound2dEditor::_updateSound2dCreating()
 
 		_fe3d->misc_clearAudioCache(finalFilePath);
 
-		_fe3d->sound2d_create(newSound2dId, finalFilePath);
+		_fe3d->sound2d_create(sound2dId, finalFilePath);
 
-		if(_fe3d->sound2d_isExisting(newSound2dId))
+		if(_fe3d->sound2d_isExisting(sound2dId))
 		{
-			_loadedSound2dIds.push_back(newSound2dId);
+			_loadedSound2dIds.push_back(sound2dId);
 
 			sort(_loadedSound2dIds.begin(), _loadedSound2dIds.end());
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setTextContent("Sound2D: " + newSound2dId.substr(1));
+			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setTextContent("Sound2D: " + sound2dId.substr(1));
 			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setVisible(true);
 
-			_currentSound2dId = newSound2dId;
+			_currentSound2dId = sound2dId;
 		}
 	}
 }

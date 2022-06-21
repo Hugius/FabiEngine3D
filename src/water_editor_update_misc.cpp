@@ -54,50 +54,50 @@ void WaterEditor::_updateWaterCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createWater") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newWaterId = _gui->getOverlay()->getValueFormContent();
+		auto waterId = _gui->getOverlay()->getValueFormContent();
 
-		if(newWaterId.empty())
+		if(waterId.empty())
 		{
 			Logger::throwWarning("Water ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newWaterId.begin(), newWaterId.end(), isspace))
+		if(any_of(waterId.begin(), waterId.end(), isspace))
 		{
 			Logger::throwWarning("Water ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newWaterId.begin(), newWaterId.end(), isupper))
+		if(any_of(waterId.begin(), waterId.end(), isupper))
 		{
 			Logger::throwWarning("Water ID cannot contain any capitals");
 
 			return;
 		}
 
-		newWaterId = ("@" + newWaterId);
+		waterId = ("@" + waterId);
 
-		if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), newWaterId) != _loadedWaterIds.end())
+		if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), waterId) != _loadedWaterIds.end())
 		{
 			Logger::throwWarning("Water already exists");
 
 			return;
 		}
 
-		_fe3d->water_create(newWaterId);
-		_fe3d->water_select(newWaterId);
+		_fe3d->water_create(waterId);
+		_fe3d->water_select(waterId);
 
-		_loadedWaterIds.push_back(newWaterId);
+		_loadedWaterIds.push_back(waterId);
 
 		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setTextContent("Water: " + newWaterId.substr(1));
+		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setTextContent("Water: " + waterId.substr(1));
 		_gui->getOverlay()->getTextField(WATER_TITLE_ID)->setVisible(true);
 
-		_currentWaterId = newWaterId;
+		_currentWaterId = waterId;
 	}
 }
 

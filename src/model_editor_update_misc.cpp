@@ -90,32 +90,32 @@ void ModelEditor::_updateModelCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createModel") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newModelId = _gui->getOverlay()->getValueFormContent();
+		auto modelId = _gui->getOverlay()->getValueFormContent();
 
-		if(newModelId.empty())
+		if(modelId.empty())
 		{
 			Logger::throwWarning("Model ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newModelId.begin(), newModelId.end(), isspace))
+		if(any_of(modelId.begin(), modelId.end(), isspace))
 		{
 			Logger::throwWarning("Model ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newModelId.begin(), newModelId.end(), isupper))
+		if(any_of(modelId.begin(), modelId.end(), isupper))
 		{
 			Logger::throwWarning("Model ID cannot contain any capitals");
 
 			return;
 		}
 
-		newModelId = ("@" + newModelId);
+		modelId = ("@" + modelId);
 
-		if(find(_loadedModelIds.begin(), _loadedModelIds.end(), newModelId) != _loadedModelIds.end())
+		if(find(_loadedModelIds.begin(), _loadedModelIds.end(), modelId) != _loadedModelIds.end())
 		{
 			Logger::throwWarning("Model already exists");
 
@@ -154,19 +154,19 @@ void ModelEditor::_updateModelCreating()
 		const auto finalFilePath = filePath.substr(rootPath.size());
 
 		_fe3d->misc_clearMeshCache(finalFilePath);
-		_fe3d->model_create(newModelId, finalFilePath);
+		_fe3d->model_create(modelId, finalFilePath);
 
-		if(_fe3d->model_isExisting(newModelId))
+		if(_fe3d->model_isExisting(modelId))
 		{
-			_loadedModelIds.push_back(newModelId);
+			_loadedModelIds.push_back(modelId);
 
 			sort(_loadedModelIds.begin(), _loadedModelIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setTextContent("Model: " + newModelId.substr(1));
+			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setTextContent("Model: " + modelId.substr(1));
 			_gui->getOverlay()->getTextField(MODEL_TITLE_ID)->setVisible(true);
 
-			_currentModelId = newModelId;
+			_currentModelId = modelId;
 		}
 	}
 }
@@ -292,45 +292,45 @@ void ModelEditor::_updateAabbCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createAabb") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto newAabbId = _gui->getOverlay()->getValueFormContent();
+		const auto aabbId = _gui->getOverlay()->getValueFormContent();
 
-		if(newAabbId.empty())
+		if(aabbId.empty())
 		{
 			Logger::throwWarning("AABB ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
+		if(any_of(aabbId.begin(), aabbId.end(), isspace))
 		{
 			Logger::throwWarning("AABB ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newAabbId.begin(), newAabbId.end(), isupper))
+		if(any_of(aabbId.begin(), aabbId.end(), isupper))
 		{
 			Logger::throwWarning("AABB ID cannot contain any capitals");
 
 			return;
 		}
 
-		if(_fe3d->aabb_isExisting("model@" + _currentModelId + "@" + newAabbId))
+		if(_fe3d->aabb_isExisting("model@" + _currentModelId + "@" + aabbId))
 		{
 			Logger::throwWarning("AABB already exists");
 
 			return;
 		}
 
-		_fe3d->aabb_create(("model@" + _currentModelId + "@" + newAabbId), false);
-		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + newAabbId), _currentModelId);
-		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + newAabbId), AabbParentType::MODEL);
+		_fe3d->aabb_create(("model@" + _currentModelId + "@" + aabbId), false);
+		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + aabbId), _currentModelId);
+		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + aabbId), AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + newAabbId);
+		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + aabbId);
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
 
-		_currentAabbId = newAabbId;
+		_currentAabbId = aabbId;
 	}
 }
 

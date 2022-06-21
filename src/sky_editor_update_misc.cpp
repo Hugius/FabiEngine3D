@@ -40,50 +40,50 @@ void SkyEditor::_updateSkyCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createSky") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newSkyId = _gui->getOverlay()->getValueFormContent();
+		auto skyId = _gui->getOverlay()->getValueFormContent();
 
-		if(newSkyId.empty())
+		if(skyId.empty())
 		{
 			Logger::throwWarning("Sky ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
+		if(any_of(skyId.begin(), skyId.end(), isspace))
 		{
 			Logger::throwWarning("Sky ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newSkyId.begin(), newSkyId.end(), isupper))
+		if(any_of(skyId.begin(), skyId.end(), isupper))
 		{
 			Logger::throwWarning("Sky ID cannot contain any capitals");
 
 			return;
 		}
 
-		newSkyId = ("@" + newSkyId);
+		skyId = ("@" + skyId);
 
-		if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), newSkyId) != _loadedSkyIds.end())
+		if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), skyId) != _loadedSkyIds.end())
 		{
 			Logger::throwWarning("Sky already exists");
 
 			return;
 		}
 
-		_fe3d->sky_create(newSkyId);
-		_fe3d->sky_select(newSkyId);
+		_fe3d->sky_create(skyId);
+		_fe3d->sky_select(skyId);
 
-		_loadedSkyIds.push_back(newSkyId);
+		_loadedSkyIds.push_back(skyId);
 
 		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-		_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setTextContent("Sky: " + newSkyId.substr(1));
+		_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setTextContent("Sky: " + skyId.substr(1));
 		_gui->getOverlay()->getTextField(SKY_TITLE_ID)->setVisible(true);
 
-		_currentSkyId = newSkyId;
+		_currentSkyId = skyId;
 	}
 }
 

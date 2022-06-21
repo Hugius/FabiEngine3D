@@ -49,49 +49,49 @@ void AabbEditor::_updateAabbCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createAabb") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newAabbId = _gui->getOverlay()->getValueFormContent();
+		auto aabbId = _gui->getOverlay()->getValueFormContent();
 
-		if(newAabbId.empty())
+		if(aabbId.empty())
 		{
 			Logger::throwWarning("AABB ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
+		if(any_of(aabbId.begin(), aabbId.end(), isspace))
 		{
 			Logger::throwWarning("AABB ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newAabbId.begin(), newAabbId.end(), isupper))
+		if(any_of(aabbId.begin(), aabbId.end(), isupper))
 		{
 			Logger::throwWarning("AABB ID cannot contain any capitals");
 
 			return;
 		}
 
-		newAabbId = ("@" + newAabbId);
+		aabbId = ("@" + aabbId);
 
-		if(find(_loadedAabbIds.begin(), _loadedAabbIds.end(), newAabbId) != _loadedAabbIds.end())
+		if(find(_loadedAabbIds.begin(), _loadedAabbIds.end(), aabbId) != _loadedAabbIds.end())
 		{
 			Logger::throwWarning("AABB already exists");
 
 			return;
 		}
 
-		_fe3d->aabb_create(newAabbId, false);
+		_fe3d->aabb_create(aabbId, false);
 
-		_loadedAabbIds.push_back(newAabbId);
+		_loadedAabbIds.push_back(aabbId);
 
 		sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
-		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + newAabbId.substr(1));
+		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + aabbId.substr(1));
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
 
-		_currentAabbId = newAabbId;
+		_currentAabbId = aabbId;
 	}
 }
 

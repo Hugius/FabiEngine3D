@@ -18,51 +18,51 @@ void Animation2dEditor::_updateAnimation2dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createAnimation2d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newAnimation2dId = _gui->getOverlay()->getValueFormContent();
+		auto animation2dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newAnimation2dId.empty())
+		if(animation2dId.empty())
 		{
 			Logger::throwWarning("Animation2D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newAnimation2dId.begin(), newAnimation2dId.end(), isspace))
+		if(any_of(animation2dId.begin(), animation2dId.end(), isspace))
 		{
 			Logger::throwWarning("Animation2D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newAnimation2dId.begin(), newAnimation2dId.end(), isupper))
+		if(any_of(animation2dId.begin(), animation2dId.end(), isupper))
 		{
 			Logger::throwWarning("Animation2D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newAnimation2dId = ("@" + newAnimation2dId);
+		animation2dId = ("@" + animation2dId);
 
-		if(find(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), newAnimation2dId) != _loadedAnimation2dIds.end())
+		if(find(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), animation2dId) != _loadedAnimation2dIds.end())
 		{
 			Logger::throwWarning("Animation2D already exists");
 
 			return;
 		}
 
-		_fe3d->animation2d_create(newAnimation2dId);
+		_fe3d->animation2d_create(animation2dId);
 
-		_loadedAnimation2dIds.push_back(newAnimation2dId);
+		_loadedAnimation2dIds.push_back(animation2dId);
 
 		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
 
 		_fe3d->quad3d_setVisible(PREVIEW_QUAD3D_ID, true);
 
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-		_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setTextContent("Animation2D: " + newAnimation2dId);
+		_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setTextContent("Animation2D: " + animation2dId);
 		_gui->getOverlay()->getTextField(ANIMATION2D_TITLE_ID)->setVisible(true);
 
-		_currentAnimation2dId = newAnimation2dId;
+		_currentAnimation2dId = animation2dId;
 	}
 }
 

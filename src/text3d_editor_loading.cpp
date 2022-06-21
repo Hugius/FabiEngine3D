@@ -142,8 +142,10 @@ const bool Text3dEditor::loadText3dsFromFile()
 				>> content;
 
 			fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
+			content = (content == "?") ? "" : content;
 
 			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
+			replace(content.begin(), content.end(), '?', ' ');
 
 			if(!Tools::isApplicationExported())
 			{

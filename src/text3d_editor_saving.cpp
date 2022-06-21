@@ -27,7 +27,6 @@ const bool Text3dEditor::saveText3dsToFile() const
 	{
 		const auto aabbIds = _fe3d->text3d_getChildAabbIds(text3dId);
 		const auto size = _fe3d->text3d_getSize(text3dId);
-		const auto content = _fe3d->text3d_getContent(text3dId);
 		const auto color = _fe3d->text3d_getColor(text3dId);
 		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(text3dId);
 		const auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(text3dId);
@@ -43,11 +42,14 @@ const bool Text3dEditor::saveText3dsToFile() const
 		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
 
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
+		auto content = _fe3d->text3d_getContent(text3dId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
+		content = (content.empty()) ? "?" : content;
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
+		replace(content.begin(), content.end(), ' ', '?');
 
 		file
 			<< "TEXT3D "

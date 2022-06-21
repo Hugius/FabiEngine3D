@@ -64,13 +64,13 @@ private:
 	void _updateWindowClosing();
 	void _setProject(const string & projectId);
 
-	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.5f);
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.4f, 0.0f);
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 	static inline const fvec3 ROUND_BUTTON_COLOR = fvec3(1.0f);
-	static inline const fvec3 ROUND_BUTTON_HOVER_COLOR = fvec3(0.25f);
+	static inline const fvec3 ROUND_BUTTON_HOVER_COLOR = fvec3(0.5f);
 
 	static inline const fvec2 ROUND_BUTTON_SIZE = fvec2(0.2f, 1.75f);
 	static inline const fvec2 CHOICE_FORM_POSITION = fvec2(0.0f, 0.1f);

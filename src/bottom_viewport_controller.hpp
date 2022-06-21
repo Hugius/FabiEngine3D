@@ -21,8 +21,8 @@ private:
 	void _fillConsole();
 	void _clearConsole();
 
-	static inline const fvec3 FRAME_COLOR = fvec3(0.0025f, 0.0025f, 0.0025f);
-	static inline const fvec3 TIMESTAMP_COLOR = fvec3(0.8f, 0.4f, 0.1f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.05f, 0.05f, 0.05f);
+	static inline const fvec3 TIMESTAMP_COLOR = fvec3(1.0f, 0.7f, 0.25f);
 	static inline const fvec3 INFO_COLOR = fvec3(1.0f);
 	static inline const fvec3 WARN_COLOR = fvec3(1.0f, 0.0f, 0.0f);
 

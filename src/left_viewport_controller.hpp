@@ -27,9 +27,9 @@ public:
 	void update();
 
 private:
-	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.5f);
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.4f, 0.4f, 1.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.8f, 0.8f, 1.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 

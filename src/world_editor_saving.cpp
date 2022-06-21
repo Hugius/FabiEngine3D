@@ -562,7 +562,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
 
-		if(flareMapPath.empty())
+		if(!flareMapPath.empty())
 		{
 			flareMapPath = flareMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}

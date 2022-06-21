@@ -44,7 +44,7 @@ const bool Text3dEditor::saveText3dsToFile() const
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
 		auto content = _fe3d->text3d_getContent(text3dId);
 
-		if(fontMapPath.empty())
+		if(!fontMapPath.empty())
 		{
 			fontMapPath = fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}

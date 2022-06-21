@@ -84,8 +84,8 @@ private:
 	static inline const fvec3 CF_HOVERED_CANCEL_TEXT_COLOR = fvec3(0.0f);
 	static inline const fvec3 VF_TITLE_QUAD_COLOR = fvec3(0.2f);
 	static inline const fvec3 VF_TITLE_TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 VF_DEFAULT_BOX_QUAD_COLOR = fvec3(0.25f);
-	static inline const fvec3 VF_HOVERED_BOX_QUAD_COLOR = fvec3(0.5f);
+	static inline const fvec3 VF_DEFAULT_BOX_QUAD_COLOR = fvec3(0.4f);
+	static inline const fvec3 VF_HOVERED_BOX_QUAD_COLOR = fvec3(0.8f);
 	static inline const fvec3 VF_DEFAULT_BOX_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 VF_HOVERED_BOX_TEXT_COLOR = fvec3(0.0f);
 	static inline const fvec3 VF_DEFAULT_ENTER_QUAD_COLOR = fvec3(0.0f, 0.4f, 0.0f);

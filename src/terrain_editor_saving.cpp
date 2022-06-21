@@ -43,52 +43,52 @@ const bool TerrainEditor::saveTerrainsToFile() const
 		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainId);
 		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainId);
 
-		if(heightMapPath.empty())
+		if(!heightMapPath.empty())
 		{
 			heightMapPath = heightMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(diffuseMapPath.empty())
+		if(!diffuseMapPath.empty())
 		{
 			diffuseMapPath = diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(normalMapPath.empty())
+		if(!normalMapPath.empty())
 		{
 			normalMapPath = normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(blendMapPath.empty())
+		if(!blendMapPath.empty())
 		{
 			blendMapPath = blendMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(redDiffuseMapPath.empty())
+		if(!redDiffuseMapPath.empty())
 		{
 			redDiffuseMapPath = redDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(greenDiffuseMapPath.empty())
+		if(!greenDiffuseMapPath.empty())
 		{
 			greenDiffuseMapPath = greenDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(blueDiffuseMapPath.empty())
+		if(!blueDiffuseMapPath.empty())
 		{
 			blueDiffuseMapPath = blueDiffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(redNormalMapPath.empty())
+		if(!redNormalMapPath.empty())
 		{
 			redNormalMapPath = redNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(greenNormalMapPath.empty())
+		if(!greenNormalMapPath.empty())
 		{
 			greenNormalMapPath = greenNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(blueNormalMapPath.empty())
+		if(!blueNormalMapPath.empty())
 		{
 			blueNormalMapPath = blueNormalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}

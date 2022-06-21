@@ -53,17 +53,17 @@ const bool WaterEditor::saveWatersToFile() const
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
 		auto heightMapPath = _fe3d->water_getHeightMapPath(waterId);
 
-		if(dudvMapPath.empty())
+		if(!dudvMapPath.empty())
 		{
 			dudvMapPath = dudvMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(normalMapPath.empty())
+		if(!normalMapPath.empty())
 		{
 			normalMapPath = normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(heightMapPath.empty())
+		if(!heightMapPath.empty())
 		{
 			heightMapPath = heightMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}

@@ -34,7 +34,7 @@ const bool SkyEditor::saveSkiesToFile() const
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{
-			if(cubeMapPath.empty())
+			if(!cubeMapPath.empty())
 			{
 				cubeMapPath = cubeMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 			}

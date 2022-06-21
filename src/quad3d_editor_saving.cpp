@@ -46,12 +46,12 @@ const bool Quad3dEditor::saveQuad3dsToFile() const
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
 
-		if(diffuseMapPath.empty())
+		if(!diffuseMapPath.empty())
 		{
 			diffuseMapPath = diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}
 
-		if(emissionMapPath.empty())
+		if(!emissionMapPath.empty())
 		{
 			emissionMapPath = emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size());
 		}

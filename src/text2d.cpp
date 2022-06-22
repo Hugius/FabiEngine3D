@@ -95,7 +95,10 @@ void Text2d::updateQuad2ds()
 		quad2d->setRotation(_rotation);
 		quad2d->setSize(quad2dSize);
 
-		quad2d->updateTransformation();
+		if(_isVisible)
+		{
+			quad2d->updateTransformation();
+		}
 
 		index++;
 	}
@@ -129,17 +132,18 @@ void Text2d::setContent(const string & value)
 			quad2d->setVertexBuffer(_vertexBuffer);
 			quad2d->setDiffuseMapPath(_fontMapPath);
 			quad2d->setDiffuseMap(_fontTextureBuffer);
-			quad2d->setHorizontallyFlipped(_isHorizontallyFlipped);
-			quad2d->setVerticallyFlipped(_isVerticallyFlipped);
 			quad2d->setOpacity(_opacity);
 			quad2d->setWireframeColor(_wireframeColor);
 			quad2d->setColor(_color);
-			quad2d->setMinClipPosition(_minClipPosition);
-			quad2d->setMaxClipPosition(_maxClipPosition);
-			quad2d->setDepth(_depth);
 			quad2d->setWireframed(_isWireframed);
 			quad2d->setCentered(_isCentered);
 			quad2d->setVisible(_isVisible);
+			quad2d->setLightness(_lightness);
+			quad2d->setMinClipPosition(_minClipPosition);
+			quad2d->setMaxClipPosition(_maxClipPosition);
+			quad2d->setHorizontallyFlipped(_isHorizontallyFlipped);
+			quad2d->setVerticallyFlipped(_isVerticallyFlipped);
+			quad2d->setDepth(_depth);
 			quad2d->setUvMultiplier(uvMultiplier);
 			quad2d->setUvOffset(uvOffset);
 

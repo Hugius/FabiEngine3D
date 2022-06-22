@@ -13,8 +13,8 @@ using std::vector;
 class VertexBuffer final
 {
 public:
-	VertexBuffer(VertexBufferType type, const float data[], int dataCount);
-	VertexBuffer(float x, float y, float w, float h, bool isCentered);
+	VertexBuffer(VertexBufferType type, const float data[], int dataCount); // 3D
+	VertexBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~VertexBuffer();
 
 	const unsigned int getVaoId() const;

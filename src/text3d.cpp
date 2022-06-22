@@ -96,9 +96,15 @@ void Text3d::updateQuad3ds()
 
 	int index = 0;
 
+	if(_isHorizontallyFlipped)
+	{
+		reverse(_quad3ds.begin(), _quad3ds.end());
+	}
+
 	for(const auto & quad3d : _quad3ds)
 	{
 		auto offset = fvec2((static_cast<float>(index) * quad3dSize.x), 0.0f);
+
 		offset.x -= (this->getSize().x * 0.5f);
 		offset.x += (quad3dSize.x * 0.5f);
 
@@ -112,6 +118,11 @@ void Text3d::updateQuad3ds()
 		}
 
 		index++;
+	}
+
+	if(_isHorizontallyFlipped)
+	{
+		reverse(_quad3ds.begin(), _quad3ds.end());
 	}
 }
 
@@ -148,6 +159,8 @@ void Text3d::setContent(const string & value)
 			quad3d->setLightness(_lightness);
 			quad3d->setMinClipPosition(_minClipPosition);
 			quad3d->setMaxClipPosition(_maxClipPosition);
+			quad3d->setHorizontallyFlipped(_isHorizontallyFlipped);
+			quad3d->setVerticallyFlipped(_isVerticallyFlipped);
 			quad3d->setUvMultiplier(uvMultiplier);
 			quad3d->setUvOffset(uvOffset);
 

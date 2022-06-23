@@ -187,6 +187,7 @@ private:
 	static inline const fvec3 LENS_AABB_SIZE = fvec3(1.0f);
 	static inline const fvec3 SPEAKER_SIZE = fvec3(1.0f);
 	static inline const fvec3 SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
+	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.4f);
 
 	static inline constexpr float MODEL_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;

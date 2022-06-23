@@ -105,6 +105,7 @@ void Text3d::updateQuad3ds()
 	{
 		auto offset = fvec2((static_cast<float>(index) * quad3dSize.x), 0.0f);
 
+		// Text3D is always centered horizontally
 		offset.x -= (this->getSize().x * 0.5f);
 		offset.x += (quad3dSize.x * 0.5f);
 

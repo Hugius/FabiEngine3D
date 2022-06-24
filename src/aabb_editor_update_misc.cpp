@@ -72,6 +72,13 @@ void AabbEditor::_updateAabbCreating()
 			return;
 		}
 
+		if(aabbId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("AABB ID cannot contain any specials");
+
+			return;
+		}
+
 		aabbId = ("@" + aabbId);
 
 		if(find(_loadedAabbIds.begin(), _loadedAabbIds.end(), aabbId) != _loadedAabbIds.end())

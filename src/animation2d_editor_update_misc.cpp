@@ -41,6 +41,13 @@ void Animation2dEditor::_updateAnimation2dCreating()
 			return;
 		}
 
+		if(animation2dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Animation2D ID cannot contain any specials");
+
+			return;
+		}
+
 		animation2dId = ("@" + animation2dId);
 
 		if(find(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), animation2dId) != _loadedAnimation2dIds.end())

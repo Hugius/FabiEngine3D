@@ -26,7 +26,7 @@
       <Filter>Viewport Controller\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\entry.cpp">
-      <Filter>Miscellaneous\Icon\Entry</Filter>
+      <Filter>Miscellaneous\Entry</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_statistics.cpp">
       <Filter>Viewport Controller\Bottom</Filter>
@@ -83,7 +83,7 @@
     <Filter Include="Main">
       <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Miscellaneous\Icon\Entry">
+    <Filter Include="Miscellaneous\Entry">
       <UniqueIdentifier>{abd85b1f-6eba-43ca-8ab9-4770f0468c4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

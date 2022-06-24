@@ -82,6 +82,13 @@ void PointlightEditor::_updatePointlightCreating()
 			return;
 		}
 
+		if(pointlightId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Pointlight ID cannot contain any specials");
+
+			return;
+		}
+
 		pointlightId = ("@" + pointlightId);
 
 		if(find(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), pointlightId) != _loadedPointlightIds.end())

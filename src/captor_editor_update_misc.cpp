@@ -29,6 +29,13 @@ void CaptorEditor::_updateCaptorCreating()
 			return;
 		}
 
+		if(captorId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Captor ID cannot contain any specials");
+
+			return;
+		}
+
 		captorId = ("@" + captorId);
 
 		if(find(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), captorId) != _loadedCaptorIds.end())

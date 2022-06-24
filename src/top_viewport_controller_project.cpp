@@ -41,6 +41,13 @@ void TopViewportController::_updateProjectCreating()
 			return;
 		}
 
+		if(projectId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Project ID cannot contain any specials");
+
+			return;
+		}
+
 		if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 		{
 			Logger::throwWarning("Project already exists");

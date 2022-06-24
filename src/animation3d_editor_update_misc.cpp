@@ -194,6 +194,13 @@ void Animation3dEditor::_updateAnimation3dCreating()
 			return;
 		}
 
+		if(animation3dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Animation3D ID cannot contain any specials");
+
+			return;
+		}
+
 		animation3dId = ("@" + animation3dId);
 
 		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), animation3dId) != _loadedAnimation3dIds.end())
@@ -214,7 +221,7 @@ void Animation3dEditor::_updateAnimation3dCreating()
 		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + animation3dId);
 		_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 		_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);
-		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 
 		_currentAnimation3dId = animation3dId;
 	}
@@ -280,7 +287,7 @@ void Animation3dEditor::_updatePartCreating()
 		{
 			Logger::throwWarning("Part ID cannot contain any spaces");
 
-			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 
 			return;
 		}
@@ -289,7 +296,14 @@ void Animation3dEditor::_updatePartCreating()
 		{
 			Logger::throwWarning("Part ID cannot contain any capitals");
 
-			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+
+			return;
+		}
+
+		if(partId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Part ID cannot contain any specials");
 
 			return;
 		}
@@ -298,14 +312,14 @@ void Animation3dEditor::_updatePartCreating()
 		{
 			Logger::throwWarning("Part already exists");
 
-			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 
 			return;
 		}
 
 		_fe3d->animation3d_createPart(_currentAnimation3dId, partId);
 
-		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+		_gui->getOverlay()->openValueForm("createPart", "Create Part", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 	}
 }
 

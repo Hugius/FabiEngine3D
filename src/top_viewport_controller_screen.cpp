@@ -16,7 +16,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("createProject")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createProject", "Create Project", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("createProject", "Create Project", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
 		{

@@ -80,6 +80,13 @@ void Text3dEditor::_updateText3dCreating()
 			return;
 		}
 
+		if(text3dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Text3D ID cannot contain any specials");
+
+			return;
+		}
+
 		text3dId = ("@" + text3dId);
 
 		if(find(_loadedText3dIds.begin(), _loadedText3dIds.end(), text3dId) != _loadedText3dIds.end())

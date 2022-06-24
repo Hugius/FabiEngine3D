@@ -63,6 +63,13 @@ void SkyEditor::_updateSkyCreating()
 			return;
 		}
 
+		if(skyId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Sky ID cannot contain any specials");
+
+			return;
+		}
+
 		skyId = ("@" + skyId);
 
 		if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), skyId) != _loadedSkyIds.end())

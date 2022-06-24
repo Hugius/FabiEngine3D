@@ -54,6 +54,13 @@ void Sound2dEditor::_updateSound2dCreating()
 			return;
 		}
 
+		if(sound2dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Sound2D ID cannot contain any specials");
+
+			return;
+		}
+
 		sound2dId = ("@" + sound2dId);
 
 		if(find(_loadedSound2dIds.begin(), _loadedSound2dIds.end(), sound2dId) != _loadedSound2dIds.end())

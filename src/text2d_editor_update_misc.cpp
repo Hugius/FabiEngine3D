@@ -43,6 +43,13 @@ void Text2dEditor::_updateText2dCreating()
 			return;
 		}
 
+		if(text2dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Text2D ID cannot contain any specials");
+
+			return;
+		}
+
 		text2dId = ("@" + text2dId);
 
 		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), text2dId) != _loadedText2dIds.end())

@@ -113,6 +113,13 @@ void ModelEditor::_updateModelCreating()
 			return;
 		}
 
+		if(modelId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Model ID cannot contain any specials");
+
+			return;
+		}
+
 		modelId = ("@" + modelId);
 
 		if(find(_loadedModelIds.begin(), _loadedModelIds.end(), modelId) != _loadedModelIds.end())
@@ -311,6 +318,13 @@ void ModelEditor::_updateAabbCreating()
 		if(any_of(aabbId.begin(), aabbId.end(), isupper))
 		{
 			Logger::throwWarning("AABB ID cannot contain any capitals");
+
+			return;
+		}
+
+		if(aabbId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("AABB ID cannot contain any specials");
 
 			return;
 		}

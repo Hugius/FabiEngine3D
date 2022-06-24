@@ -77,6 +77,13 @@ void TerrainEditor::_updateTerrainCreating()
 			return;
 		}
 
+		if(terrainId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Terrain ID cannot contain any specials");
+
+			return;
+		}
+
 		terrainId = ("@" + terrainId);
 
 		if(find(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), terrainId) != _loadedTerrainIds.end())

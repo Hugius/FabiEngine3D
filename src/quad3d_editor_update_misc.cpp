@@ -80,6 +80,13 @@ void Quad3dEditor::_updateQuad3dCreating()
 			return;
 		}
 
+		if(quad3dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Quad3D ID cannot contain any specials");
+
+			return;
+		}
+
 		quad3dId = ("@" + quad3dId);
 
 		if(find(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end(), quad3dId) != _loadedQuad3dIds.end())

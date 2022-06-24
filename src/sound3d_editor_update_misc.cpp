@@ -53,21 +53,28 @@ void Sound3dEditor::_updateSound3dCreating()
 
 		if(sound3dId.empty())
 		{
-			Logger::throwWarning("Sound3d ID cannot be empty");
+			Logger::throwWarning("Sound3D ID cannot be empty");
 
 			return;
 		}
 
 		if(any_of(sound3dId.begin(), sound3dId.end(), isspace))
 		{
-			Logger::throwWarning("Sound3d ID cannot contain any spaces");
+			Logger::throwWarning("Sound3D ID cannot contain any spaces");
 
 			return;
 		}
 
 		if(any_of(sound3dId.begin(), sound3dId.end(), isupper))
 		{
-			Logger::throwWarning("Sound3d ID cannot contain any capitals");
+			Logger::throwWarning("Sound3D ID cannot contain any capitals");
+
+			return;
+		}
+
+		if(sound3dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Sound3D ID cannot contain any specials");
 
 			return;
 		}

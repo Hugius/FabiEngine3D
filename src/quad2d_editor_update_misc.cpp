@@ -43,6 +43,13 @@ void Quad2dEditor::_updateQuad2dCreating()
 			return;
 		}
 
+		if(quad2dId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Quad2D ID cannot contain any specials");
+
+			return;
+		}
+
 		quad2dId = ("@" + quad2dId);
 
 		if(find(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), quad2dId) != _loadedQuad2dIds.end())

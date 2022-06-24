@@ -82,6 +82,13 @@ void SpotlightEditor::_updateSpotlightCreating()
 			return;
 		}
 
+		if(spotlightId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Spotlight ID cannot contain any specials");
+
+			return;
+		}
+
 		spotlightId = ("@" + spotlightId);
 
 		if(find(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), spotlightId) != _loadedSpotlightIds.end())

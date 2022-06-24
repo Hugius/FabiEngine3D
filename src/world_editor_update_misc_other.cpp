@@ -259,6 +259,13 @@ void WorldEditor::_updateWorldCreating()
 			return;
 		}
 
+		if(worldId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("World ID cannot contain any specials");
+
+			return;
+		}
+
 		const auto worldNames = _getWorldIds();
 
 		if(find(worldNames.begin(), worldNames.end(), worldId) != worldNames.end())

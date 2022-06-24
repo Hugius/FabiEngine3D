@@ -22,7 +22,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -30,7 +30,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clear")->isHovered())
 		{
@@ -102,6 +102,13 @@ void ScriptEditor::_updateScriptFileCreating()
 			return;
 		}
 
+		if(scriptFileId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Script file ID cannot contain any specials");
+
+			return;
+		}
+
 		const auto existingScriptFileIds = _script->getScriptFileIds();
 
 		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), scriptFileId) != existingScriptFileIds.end())
@@ -161,6 +168,13 @@ void ScriptEditor::_updateScriptFileRenaming()
 		if(any_of(scriptFileId.begin(), scriptFileId.end(), isupper))
 		{
 			Logger::throwWarning("Script file ID cannot contain any capitals");
+
+			return;
+		}
+
+		if(scriptFileId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Script file ID cannot contain any specials");
 
 			return;
 		}

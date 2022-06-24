@@ -77,6 +77,13 @@ void WaterEditor::_updateWaterCreating()
 			return;
 		}
 
+		if(waterId.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != string::npos)
+		{
+			Logger::throwWarning("Water ID cannot contain any specials");
+
+			return;
+		}
+
 		waterId = ("@" + waterId);
 
 		if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), waterId) != _loadedWaterIds.end())

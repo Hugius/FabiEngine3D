@@ -53,11 +53,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			if(levelOfDetailId.empty())
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 			}
 			else
 			{
-				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", levelOfDetailId.substr(1, levelOfDetailId.size() - 1), VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+				_gui->getOverlay()->openValueForm("levelOfDetailId", "LOD Model ID", levelOfDetailId.substr(1, levelOfDetailId.size() - 1), VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())

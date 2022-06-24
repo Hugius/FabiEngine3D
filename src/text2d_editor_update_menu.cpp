@@ -112,7 +112,10 @@ void Text2dEditor::_updateChoiceMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "content") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->text2d_setContent(_currentText2dId, _gui->getOverlay()->getValueFormContent());
+			const auto content = _gui->getOverlay()->getValueFormContent();
+
+			_fe3d->text2d_setContent(_currentText2dId, content);
+			_fe3d->text2d_setSize(_currentText2dId, Tools::convertSizeRelativeToDisplay(fvec2((TEXT2D_SIZE.x * content.size()), _fe3d->text2d_getSize(_currentText2dId).y)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{

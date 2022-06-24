@@ -25,14 +25,14 @@
     <ClCompile Include="..\..\..\src\base_viewport_controller.cpp">
       <Filter>Viewport Controller\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\entry.cpp">
-      <Filter>Miscellaneous\Entry</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_statistics.cpp">
       <Filter>Viewport Controller\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\top_viewport_controller_screen.cpp">
       <Filter>Viewport Controller\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\entry.cpp">
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,24 +77,18 @@
     <Filter Include="Miscellaneous">
       <UniqueIdentifier>{4c4ee138-6869-4b50-b826-de5daeeb4e80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Miscellaneous\Icon">
-      <UniqueIdentifier>{9b7e7a8e-2c15-4311-a47f-8eb2271dfbfd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Miscellaneous\Entry">
-      <UniqueIdentifier>{abd85b1f-6eba-43ca-8ab9-4770f0468c4f}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Icon\logo.ico">
-      <Filter>Miscellaneous\Icon</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Icon\AppIcon.rc">
-      <Filter>Miscellaneous\Icon</Filter>
+      <Filter>Miscellaneous</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Icon\logo.ico">
+      <Filter>Miscellaneous</Filter>
+    </Image>
   </ItemGroup>
 </Project>

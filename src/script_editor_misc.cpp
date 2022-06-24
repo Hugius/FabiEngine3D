@@ -23,7 +23,7 @@ void ScriptEditor::_createDisplayContent()
 	{
 		const auto lineNumberId = ("number_" + to_string(lineIndex));
 		const auto lineNumberString = to_string(lineIndex + 1);
-		const auto lineNumberOffset = -fvec3((lineNumberString.size() - 1) * (CHAR_SIZE.x * 0.5f), VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
+		const auto lineNumberOffset = -fvec3(static_cast<float>(lineNumberString.size() - 1) * (CHAR_SIZE.x * 0.5f), (VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
 		const auto lineNumberPosition = (ROOT_TEXT_POSITION + lineNumberOffset);
 		const auto lineNumberSize = fvec2((lineNumberString.size() * CHAR_SIZE.x), CHAR_SIZE.y);
 
@@ -39,7 +39,7 @@ void ScriptEditor::_createDisplayContent()
 
 		const auto lineTextId = ("text_" + to_string(lineIndex));
 		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLine(lineIndex);
-		const auto lineTextOffset = fvec3((((lineTextString.size() - 1) * (CHAR_SIZE.x * 0.5f)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
+		const auto lineTextOffset = fvec3(((static_cast<float>(lineTextString.size() - 1) * (CHAR_SIZE.x * 0.5f)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
 		const auto lineTextPosition = (ROOT_TEXT_POSITION + lineTextOffset);
 		const auto lineTextSize = fvec2(lineTextString.size() * CHAR_SIZE.x, CHAR_SIZE.y);
 

@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 			continue;
 		}
-		else if(characterIndex == conditionString.size() - 1)
+		else if(characterIndex == (conditionString.size() - 1))
 		{
 			elementBuild += character;
 			elements.push_back(elementBuild);

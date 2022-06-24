@@ -30,7 +30,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
+			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clear")->isHovered())
 		{

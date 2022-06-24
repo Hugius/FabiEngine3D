@@ -8,8 +8,6 @@ void SkyEditor::_updateMiscellaneousMenu()
 	if(screen->getId() == "skyEditorMenuMiscellaneous")
 	{
 		const auto rotation = _fe3d->sky_getRotation(_currentSkyId);
-		const auto lightness = _fe3d->sky_getLightness(_currentSkyId);
-		const auto color = _fe3d->sky_getColor(_currentSkyId);
 		const auto rotationOrder = _fe3d->sky_getRotationOrder(_currentSkyId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -23,16 +21,6 @@ void SkyEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->openValueForm("rotationX", "X", rotation.x, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("rotationY", "Y", rotation.y, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 			_gui->getOverlay()->openValueForm("rotationZ", "Z", rotation.z, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * LIGHTNESS_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
@@ -97,34 +85,6 @@ void SkyEditor::_updateMiscellaneousMenu()
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
 			_fe3d->sky_setRotation(_currentSkyId, fvec3(rotation.x, rotation.y, value));
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sky_setLightness(_currentSkyId, (value / 100.0f));
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sky_setColor(_currentSkyId, fvec3((value / COLOR_FACTOR), color.g, color.b));
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, (value / COLOR_FACTOR), color.b));
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-
-			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, color.g, (value / COLOR_FACTOR)));
 		}
 
 		switch(rotationOrder)

@@ -24,6 +24,7 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateTexturingMenu();
+	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
 	void _updateSkyCreating();
 	void _updateSkyChoosing();

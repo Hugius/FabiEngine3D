@@ -38,10 +38,10 @@ void Quad2dEditor::_loadGUI()
 
 	leftWindow->createScreen("quad2dEditorMenuChoice");
 	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("diffuseMap", fvec2(0.0f, POSITIONS(8)[0]), TEXT_SIZE("Diffuse Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(8)[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("lightness", fvec2(0.0f, POSITIONS(8)[2]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, POSITIONS(8)[3]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(8)[4]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(8)[1]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(8)[2]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("lightness", fvec2(0.0f, POSITIONS(8)[3]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, POSITIONS(8)[4]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("isHorizontallyFlipped", fvec2(0.0f, POSITIONS(8)[5]), TEXT_SIZE("Flipped X: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped X: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("isVerticallyFlipped", fvec2(0.0f, POSITIONS(8)[6]), TEXT_SIZE("Flipped Y: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped Y: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(8)[7]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);

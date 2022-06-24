@@ -93,8 +93,8 @@ void SpotlightEditor::_loadGUI()
 	rightWindow->createScreen("spotlightEditorMenuChoice");
 	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("color", fvec2(0.0f, POSITIONS(5)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("intensity", fvec2(0.0f, POSITIONS(5)[1]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("angle", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Angle"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Angle", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("distance", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Distance"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distance", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("distance", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Distance"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distance", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("angle", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Angle"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Angle", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("spotlightEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");

@@ -219,13 +219,13 @@ void ModelEditor::_updateLightingMenu()
 		{
 			case ReflectionType::CUBE:
 			{
-				screen->getButton("reflectionType")->setTextContent("Type: CUBE");
+				screen->getButton("reflectionType")->setTextContent("Reflection: CUBE");
 
 				break;
 			}
 			case ReflectionType::PLANAR:
 			{
-				screen->getButton("reflectionType")->setTextContent("Type: PLANAR");
+				screen->getButton("reflectionType")->setTextContent("Reflection: PLANAR");
 
 				break;
 			}
@@ -235,13 +235,13 @@ void ModelEditor::_updateLightingMenu()
 		{
 			case RefractionType::CUBE:
 			{
-				screen->getButton("refractionType")->setTextContent("Type: CUBE");
+				screen->getButton("refractionType")->setTextContent("Refraction: CUBE");
 
 				break;
 			}
 			case RefractionType::PLANAR:
 			{
-				screen->getButton("refractionType")->setTextContent("Type: PLANAR");
+				screen->getButton("refractionType")->setTextContent("Refraction: PLANAR");
 
 				break;
 			}

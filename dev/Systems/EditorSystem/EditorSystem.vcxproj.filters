@@ -810,6 +810,9 @@
     <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp">
       <Filter>Captor Editor\Update</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sky_editor_update_lighting.cpp">
+      <Filter>Sky Editor\Update</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">

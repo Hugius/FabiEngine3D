@@ -51,6 +51,7 @@ public:
 private:
 	void _updateHovering(bool isInteractable);
 	void _updateScrolling();
+	void _updateMiscellaneous();
 
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;

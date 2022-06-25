@@ -30,6 +30,7 @@ void GuiScrollingList::update(bool isInteractable)
 {
 	_updateHovering(isInteractable);
 	_updateScrolling();
+	_updateMiscellaneous();
 
 	for(const auto & button : _buttons)
 	{
@@ -108,42 +109,22 @@ const fvec3 & GuiScrollingList::getHoveredTextColor()
 
 void GuiScrollingList::setDefaultQuadColor(const fvec3 & value)
 {
-	_hoveredQuadColor = value;
-
-	for(const auto & button : _buttons)
-	{
-		button->setDefaultQuadColor(value);
-	}
+	_defaultQuadColor = value;
 }
 
 void GuiScrollingList::setHoveredQuadColor(const fvec3 & value)
 {
-	_hoveredTextColor = value;
-
-	for(const auto & button : _buttons)
-	{
-		button->setHoveredQuadColor(value);
-	}
+	_hoveredQuadColor = value;
 }
 
 void GuiScrollingList::setDefaultTextColor(const fvec3 & value)
 {
-	_defaultQuadColor = value;
-
-	for(const auto & button : _buttons)
-	{
-		button->setDefaultTextColor(value);
-	}
+	_defaultTextColor = value;
 }
 
 void GuiScrollingList::setHoveredTextColor(const fvec3 & value)
 {
-	_defaultTextColor = value;
-
-	for(const auto & button : _buttons)
-	{
-		button->setHoveredTextColor(value);
-	}
+	_hoveredTextColor = value;
 }
 
 void GuiScrollingList::setCharacterSize(const fvec2 & value)
@@ -161,21 +142,11 @@ void GuiScrollingList::setHoverable(bool value)
 	_isHoverable = value;
 
 	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
-
-	for(const auto & button : _buttons)
-	{
-		button->setHoverable(value);
-	}
 }
 
 void GuiScrollingList::setVisible(bool value)
 {
 	_quadField->setVisible(value);
-
-	for(const auto & button : _buttons)
-	{
-		button->setVisible(value);
-	}
 }
 
 const vector<string> GuiScrollingList::getOptionIds() const
@@ -227,6 +198,11 @@ void GuiScrollingList::_updateHovering(bool isInteractable)
 			}
 		}
 	}
+
+	for(const auto & button : _buttons)
+	{
+		button->setHoverable(_isHoverable && _isHovered);
+	}
 }
 
 void GuiScrollingList::_updateScrolling()
@@ -265,6 +241,18 @@ void GuiScrollingList::_updateScrolling()
 
 			yOffset += (_characterSize.y * 1.5f);
 		}
+	}
+}
+
+void GuiScrollingList::_updateMiscellaneous()
+{
+	for(const auto & button : _buttons)
+	{
+		button->setDefaultQuadColor(_defaultQuadColor);
+		button->setHoveredQuadColor(_hoveredQuadColor);
+		button->setDefaultTextColor(_defaultTextColor);
+		button->setHoveredTextColor(_hoveredTextColor);
+		button->setVisible(isVisible());
 	}
 }
 

@@ -42,8 +42,8 @@ void Quad2d::updateTarget()
 	if(_rotation != _rotationTarget)
 	{
 		const auto difference = fabsf(_rotation - _rotationTarget);
-		const auto  multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
-		const auto  speed = (_rotationTargetSpeed * multiplier);
+		const auto multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
+		const auto speed = (_rotationTargetSpeed * multiplier);
 
 		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 		_rotation = Mathematics::limitAngle(_rotation);
@@ -75,9 +75,9 @@ void Quad2d::updateTarget()
 
 void Quad2d::updateTransformation()
 {
-	const auto  translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	const auto  rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
-	const auto  scalingMatrix = Mathematics::createScalingMatrix(_size.x, _size.y, 1.0f);
+	const auto translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	const auto rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
+	const auto scalingMatrix = Mathematics::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformation = (translationMatrix * rotationMatrix * scalingMatrix);
 }

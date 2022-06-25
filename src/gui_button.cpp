@@ -83,22 +83,22 @@ void GuiButton::setHoverable(bool value)
 
 void GuiButton::setDefaultQuadColor(const fvec3 & value)
 {
-	_hoveredQuadColor = value;
+	_defaultQuadColor = value;
 }
 
 void GuiButton::setHoveredQuadColor(const fvec3 & value)
 {
-	_hoveredTextColor = value;
+	_hoveredQuadColor = value;
 }
 
 void GuiButton::setDefaultTextColor(const fvec3 & value)
 {
-	_defaultQuadColor = value;
+	_defaultTextColor = value;
 }
 
 void GuiButton::setHoveredTextColor(const fvec3 & value)
 {
-	_defaultTextColor = value;
+	_hoveredTextColor = value;
 }
 
 void GuiButton::setPosition(const fvec2 & value)

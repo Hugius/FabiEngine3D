@@ -269,13 +269,13 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->model_setTextureRepeat(_currentModelId, _currentPartId, value);
 		}
 
-		screen->getButton("diffuseMap")->setHoverable(isPartSelected);
-		screen->getButton("emissionMap")->setHoverable(isPartSelected);
-		screen->getButton("specularMap")->setHoverable(isPartSelected);
-		screen->getButton("reflectionMap")->setHoverable(isPartSelected);
-		screen->getButton("refractionMap")->setHoverable(isPartSelected);
-		screen->getButton("normalMap")->setHoverable(isPartSelected);
-		screen->getButton("clearMaps")->setHoverable(isPartSelected);
-		screen->getButton("textureRepeat")->setHoverable(isPartSelected);
+		screen->getButton("diffuseMap")->setHoverable(isPartSelected, true);
+		screen->getButton("emissionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("specularMap")->setHoverable(isPartSelected, true);
+		screen->getButton("reflectionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("refractionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("normalMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearMaps")->setHoverable(isPartSelected, true);
+		screen->getButton("textureRepeat")->setHoverable(isPartSelected, true);
 	}
 }

@@ -12,7 +12,7 @@ public:
 	void setActive(bool value);
 	void setTextContent(const string & value);
 	void setVisible(bool value);
-	void setHoverable(bool value, bool mustBeTransparent = true);
+	void setHoverable(bool value, bool mustBeTransparent);
 	void setMaxCharacterCount(int value);
 
 	const string getId() const;

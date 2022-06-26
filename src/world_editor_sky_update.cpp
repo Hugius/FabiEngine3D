@@ -21,8 +21,8 @@ void WorldEditor::_updateSkyMenu()
 			_fe3d->sky_delete(_fe3d->sky_getSelectedId());
 		}
 
-		screen->getButton("place")->setHoverable(_fe3d->sky_getSelectedId().empty());
-		screen->getButton("delete")->setHoverable(!_fe3d->sky_getSelectedId().empty());
+		screen->getButton("place")->setHoverable(_fe3d->sky_getSelectedId().empty(), true);
+		screen->getButton("delete")->setHoverable(!_fe3d->sky_getSelectedId().empty(), true);
 	}
 }
 

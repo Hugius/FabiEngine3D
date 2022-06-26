@@ -37,7 +37,7 @@ void WorldEditor::_updateQuad3dMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateQuad3dId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateQuad3dId.empty(), true);
 	}
 }
 

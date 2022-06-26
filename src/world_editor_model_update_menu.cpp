@@ -37,7 +37,7 @@ void WorldEditor::_updateModelMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateModelId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateModelId.empty(), true);
 	}
 }
 

@@ -42,7 +42,7 @@ void WorldEditor::_updateSound3dMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateSound3dId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateSound3dId.empty(), true);
 	}
 }
 

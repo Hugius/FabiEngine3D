@@ -78,21 +78,21 @@ void WorldEditor::_updateModelEditing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(false);
-				screen->getButton("rotation")->setHoverable(true);
-				screen->getButton("size")->setHoverable(true);
+				screen->getButton("position")->setHoverable(false, true);
+				screen->getButton("rotation")->setHoverable(true, true);
+				screen->getButton("size")->setHoverable(true, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("rotation")->setHoverable(false);
-				screen->getButton("size")->setHoverable(true);
+				screen->getButton("position")->setHoverable(true, true);
+				screen->getButton("rotation")->setHoverable(false, true);
+				screen->getButton("size")->setHoverable(true, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("rotation")->setHoverable(true);
-				screen->getButton("size")->setHoverable(false);
+				screen->getButton("position")->setHoverable(true, true);
+				screen->getButton("rotation")->setHoverable(true, true);
+				screen->getButton("size")->setHoverable(false, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("addAnimation3d")->isHovered())
 			{
@@ -163,9 +163,9 @@ void WorldEditor::_updateModelEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER)));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX));
 
 				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
@@ -179,9 +179,9 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
-				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f, FLT_MAX));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f, FLT_MAX));
+				hasChanged = (hasChanged || _handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_SPEED_DIVIDER), MODEL_SIZE_FACTOR, 0.0f, FLT_MAX));
 
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
@@ -213,8 +213,8 @@ void WorldEditor::_updateModelEditing()
 				}
 			}
 
-			screen->getButton("addAnimation3d")->setHoverable(!isAnimations3dPlaying);
-			screen->getButton("startAnimation3d")->setHoverable(!animation3dIds.empty());
+			screen->getButton("addAnimation3d")->setHoverable(!isAnimations3dPlaying, true);
+			screen->getButton("startAnimation3d")->setHoverable(!animation3dIds.empty(), true);
 			screen->getButton("startAnimation3d")->setTextContent(isAnimations3dPlaying ? "Stop Animation3D" : "Start Animation3D");
 		}
 	}

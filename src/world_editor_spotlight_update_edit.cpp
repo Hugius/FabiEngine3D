@@ -92,11 +92,11 @@ void WorldEditor::_updateSpotlightEditing()
 			auto yaw = _fe3d->spotlight_getYaw(_activeSpotlightId);
 			auto pitch = _fe3d->spotlight_getPitch(_activeSpotlightId);
 
-			_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER));
-			_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER));
-			_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER));
-			_handleInputBox("spotlightPropertiesMenu", "yawMinus", "yaw", "yawPlus", yaw, SPOTLIGHT_YAW_SPEED);
-			_handleInputBox("spotlightPropertiesMenu", "pitchMinus", "pitch", "pitchPlus", pitch, SPOTLIGHT_PITCH_SPEED);
+			_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SPOTLIGHT_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("spotlightPropertiesMenu", "yawMinus", "yaw", "yawPlus", yaw, SPOTLIGHT_YAW_SPEED, 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("spotlightPropertiesMenu", "pitchMinus", "pitch", "pitchPlus", pitch, SPOTLIGHT_PITCH_SPEED, 1.0f, -FLT_MAX, FLT_MAX);
 
 			_fe3d->spotlight_setPosition(_activeSpotlightId, position);
 			_fe3d->spotlight_setYaw(_activeSpotlightId, yaw);

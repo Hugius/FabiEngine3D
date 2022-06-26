@@ -29,10 +29,10 @@ void WorldEditor::_updateWaterMenu()
 			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / 100.0f)));
 		}
 
-		screen->getButton("place")->setHoverable(_fe3d->water_getSelectedId().empty());
-		screen->getButton("up")->setHoverable(!_fe3d->water_getSelectedId().empty());
-		screen->getButton("down")->setHoverable(!_fe3d->water_getSelectedId().empty());
-		screen->getButton("delete")->setHoverable(!_fe3d->water_getSelectedId().empty());
+		screen->getButton("place")->setHoverable(_fe3d->water_getSelectedId().empty(), true);
+		screen->getButton("up")->setHoverable(!_fe3d->water_getSelectedId().empty(), true);
+		screen->getButton("down")->setHoverable(!_fe3d->water_getSelectedId().empty(), true);
+		screen->getButton("delete")->setHoverable(!_fe3d->water_getSelectedId().empty(), true);
 	}
 }
 

@@ -52,9 +52,9 @@ void TopViewportController::_updateProjectScreenManagement()
 	const auto isInMainMenu = (leftScreen->getId() == "main");
 	const auto isScriptStarted = _scriptExecutor->isStarted();
 
-	topScreen->getButton("createProject")->setHoverable(!isScriptStarted && isInMainMenu);
-	topScreen->getButton("loadProject")->setHoverable(!isScriptStarted && isInMainMenu);
-	topScreen->getButton("deleteProject")->setHoverable(!isScriptStarted && isInMainMenu && !_currentProjectId.empty());
+	topScreen->getButton("createProject")->setHoverable((!isScriptStarted && isInMainMenu), true);
+	topScreen->getButton("loadProject")->setHoverable((!isScriptStarted && isInMainMenu), true);
+	topScreen->getButton("deleteProject")->setHoverable((!isScriptStarted && isInMainMenu && !_currentProjectId.empty()), true);
 }
 
 void TopViewportController::_updateApplicationScreenManagement()
@@ -64,10 +64,10 @@ void TopViewportController::_updateApplicationScreenManagement()
 
 	if(_currentProjectId.empty())
 	{
-		topScreen->getButton("start")->setHoverable(false);
-		topScreen->getButton("debug")->setHoverable(false);
-		topScreen->getButton("restart")->setHoverable(false);
-		topScreen->getButton("stop")->setHoverable(false);
+		topScreen->getButton("start")->setHoverable(false, true);
+		topScreen->getButton("debug")->setHoverable(false, true);
+		topScreen->getButton("restart")->setHoverable(false, true);
+		topScreen->getButton("stop")->setHoverable(false, true);
 	}
 	else
 	{
@@ -101,10 +101,10 @@ void TopViewportController::_updateApplicationScreenManagement()
 		const auto isScriptEmpty = _script->isEmpty();
 		const auto isScriptStarted = _scriptExecutor->isStarted();
 
-		topScreen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptStarted);
-		topScreen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
-		topScreen->getButton("restart")->setHoverable(isInMainMenu && isScriptStarted);
-		topScreen->getButton("stop")->setHoverable(isInMainMenu && isScriptStarted);
+		topScreen->getButton("start")->setHoverable((isInMainMenu && !isScriptEmpty && !isScriptStarted), true);
+		topScreen->getButton("debug")->setHoverable((isInMainMenu && isScriptStarted), true);
+		topScreen->getButton("restart")->setHoverable((isInMainMenu && isScriptStarted), true);
+		topScreen->getButton("stop")->setHoverable((isInMainMenu && isScriptStarted), true);
 
 		if(isInMainMenu && !isScriptStarted && _script->isEmpty())
 		{
@@ -241,6 +241,6 @@ void TopViewportController::_updateExtraScreenManagement()
 		ShellExecute(0, 0, "https://github.com/Hugius/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	screen->getButton("uncache")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
-	screen->getButton("export")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
+	screen->getButton("uncache")->setHoverable((!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main")), true);
+	screen->getButton("export")->setHoverable((!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main")), true);
 }

@@ -39,7 +39,7 @@ void Text3dEditor::_updateAabbMenu()
 			_fe3d->aabb_setVisible(aabbId, true);
 		}
 
-		screen->getButton("create")->setHoverable(!_fe3d->aabb_isExisting(aabbId));
-		screen->getButton("delete")->setHoverable(_fe3d->aabb_isExisting(aabbId));
+		screen->getButton("create")->setHoverable(!_fe3d->aabb_isExisting(aabbId), true);
+		screen->getButton("delete")->setHoverable(_fe3d->aabb_isExisting(aabbId), true);
 	}
 }

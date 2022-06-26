@@ -209,14 +209,14 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		const auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimation3dStarted(_previewModelId, _currentAnimation3dId));
 
-		screen->getButton("preview")->setHoverable(!isStarted);
-		screen->getButton("start")->setHoverable(!isStarted && !_previewModelId.empty() && (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1));
-		screen->getButton("stop")->setHoverable(isStarted && !_previewModelId.empty());
-		screen->getButton("create")->setHoverable((_fe3d->animation3d_getFrameCount(_currentAnimation3dId) < MAX_FRAME_COUNT) && !isStarted && !_previewModelId.empty());
-		screen->getButton("edit")->setHoverable((_currentFrameIndex > 0) && !isStarted);
-		screen->getButton("delete")->setHoverable((_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1) && (_currentFrameIndex > 0) && !isStarted && !_previewModelId.empty());
-		screen->getButton("prev")->setHoverable((_currentFrameIndex > 0) && !isStarted);
-		screen->getButton("next")->setHoverable((_currentFrameIndex < (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) - 1)) && !isStarted && !_previewModelId.empty());
+		screen->getButton("preview")->setHoverable(!isStarted, true);
+		screen->getButton("start")->setHoverable((!isStarted && !_previewModelId.empty() && (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1)), true);
+		screen->getButton("stop")->setHoverable((isStarted && !_previewModelId.empty()), true);
+		screen->getButton("create")->setHoverable(((_fe3d->animation3d_getFrameCount(_currentAnimation3dId) < MAX_FRAME_COUNT) && !isStarted && !_previewModelId.empty()), true);
+		screen->getButton("edit")->setHoverable(((_currentFrameIndex > 0) && !isStarted), true);
+		screen->getButton("delete")->setHoverable(((_fe3d->animation3d_getFrameCount(_currentAnimation3dId) > 1) && (_currentFrameIndex > 0) && !isStarted && !_previewModelId.empty()), true);
+		screen->getButton("prev")->setHoverable(((_currentFrameIndex > 0) && !isStarted), true);
+		screen->getButton("next")->setHoverable(((_currentFrameIndex < (_fe3d->animation3d_getFrameCount(_currentAnimation3dId) - 1)) && !isStarted && !_previewModelId.empty()), true);
 
 		if(!isStarted)
 		{

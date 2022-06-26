@@ -37,7 +37,7 @@ void WorldEditor::_updateText3dMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateText3dId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateText3dId.empty(), true);
 	}
 }
 

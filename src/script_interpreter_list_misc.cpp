@@ -154,7 +154,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 			return;
 		}
 
-		listVariable->addValue(rightVariable->getValue());
+		listVariable->addValue(rightVariable->getValue(0));
 	}
 }
 
@@ -222,14 +222,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 	{
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if(indexVariable->getValue()->getType() != ScriptValueType::INTEGER)
+		if(indexVariable->getValue(0)->getType() != ScriptValueType::INTEGER)
 		{
 			_throwRuntimeError("LST index not of type INT");
 
 			return;
 		}
 
-		index = indexVariable->getValue()->getInteger();
+		index = indexVariable->getValue(0)->getInteger();
 	}
 
 	if(!_validateListIndex(listVariable, index))

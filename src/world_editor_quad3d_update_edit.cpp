@@ -77,21 +77,21 @@ void WorldEditor::_updateQuad3dEditing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(false);
-				screen->getButton("rotation")->setHoverable(true);
-				screen->getButton("size")->setHoverable(true);
+				screen->getButton("position")->setHoverable(false, true);
+				screen->getButton("rotation")->setHoverable(true, true);
+				screen->getButton("size")->setHoverable(true, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("rotation")->setHoverable(false);
-				screen->getButton("size")->setHoverable(true);
+				screen->getButton("position")->setHoverable(true, true);
+				screen->getButton("rotation")->setHoverable(false, true);
+				screen->getButton("size")->setHoverable(true, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 			{
-				screen->getButton("position")->setHoverable(true);
-				screen->getButton("rotation")->setHoverable(true);
-				screen->getButton("size")->setHoverable(false);
+				screen->getButton("position")->setHoverable(true, true);
+				screen->getButton("rotation")->setHoverable(true, true);
+				screen->getButton("size")->setHoverable(false, true);
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("startAnimation2d")->isHovered())
 			{
@@ -137,9 +137,9 @@ void WorldEditor::_updateQuad3dEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
-				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
-				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER));
+				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / QUAD3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -149,17 +149,17 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f);
-				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f);
+				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f, FLT_MAX);
+				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / QUAD3D_SIZE_SPEED_DIVIDER), QUAD3D_SIZE_FACTOR, 0.0f, FLT_MAX);
 			}
 
 			_fe3d->quad3d_setPosition(_activeQuad3dId, position);
 			_fe3d->quad3d_setRotation(_activeQuad3dId, rotation);
 			_fe3d->quad3d_setSize(_activeQuad3dId, size);
 
-			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
-			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
+			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable(), true);
+			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable(), true);
+			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable(), true);
 			screen->getButton("startAnimation2d")->setTextContent(currentAnimation2dId.empty() ? "Start Animation2D" : "Stop Animation2D");
 		}
 	}

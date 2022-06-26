@@ -37,7 +37,7 @@ void WorldEditor::_updateAabbMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateAabbId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateAabbId.empty(), true);
 	}
 }
 

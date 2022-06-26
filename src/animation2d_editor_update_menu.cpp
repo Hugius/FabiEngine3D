@@ -137,11 +137,11 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->animation2d_setInterval(_currentAnimation2dId, value);
 		}
 
-		screen->getButton("preview")->setHoverable(!isStarted);
-		screen->getButton("rowCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("columnCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("interval")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("start")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("stop")->setHoverable(_isPreviewTextureChosen && isStarted);
+		screen->getButton("preview")->setHoverable(!isStarted, true);
+		screen->getButton("rowCount")->setHoverable((_isPreviewTextureChosen && !isStarted), true);
+		screen->getButton("columnCount")->setHoverable((_isPreviewTextureChosen && !isStarted), true);
+		screen->getButton("interval")->setHoverable((_isPreviewTextureChosen && !isStarted), true);
+		screen->getButton("start")->setHoverable((_isPreviewTextureChosen && !isStarted), true);
+		screen->getButton("stop")->setHoverable((_isPreviewTextureChosen && isStarted), true);
 	}
 }

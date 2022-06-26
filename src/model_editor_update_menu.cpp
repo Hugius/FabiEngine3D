@@ -141,7 +141,7 @@ void ModelEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 		}
 
-		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId));
+		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId), true);
 		screen->getButton("part")->setTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
 	}
 }

@@ -7,9 +7,9 @@ void WorldEditor::_activateModel(const string & modelId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->model_getBasePosition(_activeModelId);
 
-	window->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	window->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false, true);
+	window->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true, true);
+	window->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true, true);
 
 	window->getScreen("modelPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("modelPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
@@ -25,9 +25,9 @@ void WorldEditor::_activateQuad3d(const string & quad3dId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->quad3d_getPosition(_activeQuad3dId);
 
-	window->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	window->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false, true);
+	window->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true, true);
+	window->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true, true);
 
 	window->getScreen("quad3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("quad3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
@@ -43,9 +43,9 @@ void WorldEditor::_activateText3d(const string & text3dId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->text3d_getPosition(_activeText3dId);
 
-	window->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	window->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false, true);
+	window->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true, true);
+	window->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true, true);
 
 	window->getScreen("text3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("text3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
@@ -61,8 +61,8 @@ void WorldEditor::_activateAabb(const string & aabbId)
 	const auto window = _gui->getLeftViewport()->getWindow("main");
 	const auto position = _fe3d->aabb_getBasePosition(_activeAabbId);
 
-	window->getScreen("aabbPropertiesMenu")->getButton("position")->setHoverable(false);
-	window->getScreen("aabbPropertiesMenu")->getButton("size")->setHoverable(true);
+	window->getScreen("aabbPropertiesMenu")->getButton("position")->setHoverable(false, true);
+	window->getScreen("aabbPropertiesMenu")->getButton("size")->setHoverable(true, true);
 
 	window->getScreen("aabbPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	window->getScreen("aabbPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));

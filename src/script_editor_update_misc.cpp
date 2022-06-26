@@ -67,9 +67,9 @@ void ScriptEditor::_updateMenu()
 			}
 		}
 
-		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty());
-		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty());
-		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty());
+		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty(), true);
+		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty(), true);
+		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty(), true);
 
 		screen->getTextField("totalLines")->setTextContent("Total Lines: " + to_string(_script->getTotalLineCount()));
 	}

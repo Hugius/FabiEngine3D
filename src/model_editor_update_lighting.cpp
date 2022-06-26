@@ -191,22 +191,22 @@ void ModelEditor::_updateLightingMenu()
 			_fe3d->model_setEmissionIntensity(_currentModelId, _currentPartId, (value / EMISSION_INTENSITY_FACTOR));
 		}
 
-		screen->getButton("color")->setHoverable(isPartSelected);
-		screen->getButton("lightness")->setHoverable(isPartSelected);
-		screen->getButton("isSpecular")->setHoverable(isPartSelected);
-		screen->getButton("specularShininess")->setHoverable(isPartSelected);
-		screen->getButton("specularIntensity")->setHoverable(isPartSelected);
-		screen->getButton("isReflective")->setHoverable(isPartSelected);
-		screen->getButton("isRefractive")->setHoverable(isPartSelected);
-		screen->getButton("reflectionType")->setHoverable(isPartSelected);
-		screen->getButton("refractionType")->setHoverable(isPartSelected);
-		screen->getButton("reflectivity")->setHoverable(isPartSelected);
-		screen->getButton("refractivity")->setHoverable(isPartSelected);
-		screen->getButton("isBright")->setHoverable(isPartSelected);
-		screen->getButton("isShadowed")->setHoverable(isNoPartSelected);
-		screen->getButton("isReflected")->setHoverable(isNoPartSelected);
-		screen->getButton("isRefracted")->setHoverable(isNoPartSelected);
-		screen->getButton("emissionIntensity")->setHoverable(isPartSelected);
+		screen->getButton("color")->setHoverable(isPartSelected, true);
+		screen->getButton("lightness")->setHoverable(isPartSelected, true);
+		screen->getButton("isSpecular")->setHoverable(isPartSelected, true);
+		screen->getButton("specularShininess")->setHoverable(isPartSelected, true);
+		screen->getButton("specularIntensity")->setHoverable(isPartSelected, true);
+		screen->getButton("isReflective")->setHoverable(isPartSelected, true);
+		screen->getButton("isRefractive")->setHoverable(isPartSelected, true);
+		screen->getButton("reflectionType")->setHoverable(isPartSelected, true);
+		screen->getButton("refractionType")->setHoverable(isPartSelected, true);
+		screen->getButton("reflectivity")->setHoverable(isPartSelected, true);
+		screen->getButton("refractivity")->setHoverable(isPartSelected, true);
+		screen->getButton("isBright")->setHoverable(isPartSelected, true);
+		screen->getButton("isShadowed")->setHoverable(isNoPartSelected, true);
+		screen->getButton("isReflected")->setHoverable(isNoPartSelected, true);
+		screen->getButton("isRefracted")->setHoverable(isNoPartSelected, true);
+		screen->getButton("emissionIntensity")->setHoverable(isPartSelected, true);
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");

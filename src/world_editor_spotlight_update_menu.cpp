@@ -38,7 +38,7 @@ void WorldEditor::_updateSpotlightMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateSpotlightId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateSpotlightId.empty(), true);
 	}
 }
 

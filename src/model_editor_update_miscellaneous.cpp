@@ -216,12 +216,12 @@ void ModelEditor::_updateMiscellaneousMenu()
 			}
 		}
 
-		screen->getButton("size")->setHoverable(isNoPartSelected);
-		screen->getButton("opacity")->setHoverable(isPartSelected);
-		screen->getButton("minAlpha")->setHoverable(isPartSelected);
-		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
-		screen->getButton("levelOfDetailId")->setHoverable(isNoPartSelected);
-		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);
-		screen->getButton("rotationOrder")->setHoverable(isNoPartSelected);
+		screen->getButton("size")->setHoverable(isNoPartSelected, true);
+		screen->getButton("opacity")->setHoverable(isPartSelected, true);
+		screen->getButton("minAlpha")->setHoverable(isPartSelected, true);
+		screen->getButton("isFaceCulled")->setHoverable(isPartSelected, true);
+		screen->getButton("levelOfDetailId")->setHoverable(isNoPartSelected, true);
+		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected, true);
+		screen->getButton("rotationOrder")->setHoverable(isNoPartSelected, true);
 	}
 }

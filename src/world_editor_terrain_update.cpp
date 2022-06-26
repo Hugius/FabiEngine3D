@@ -21,8 +21,8 @@ void WorldEditor::_updateTerrainMenu()
 			_fe3d->terrain_delete(_fe3d->terrain_getSelectedId());
 		}
 
-		screen->getButton("place")->setHoverable(_fe3d->terrain_getSelectedId().empty());
-		screen->getButton("delete")->setHoverable(!_fe3d->terrain_getSelectedId().empty());
+		screen->getButton("place")->setHoverable(_fe3d->terrain_getSelectedId().empty(), true);
+		screen->getButton("delete")->setHoverable(!_fe3d->terrain_getSelectedId().empty(), true);
 	}
 }
 

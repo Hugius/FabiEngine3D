@@ -69,25 +69,25 @@ void TopViewportController::_updateMiscellaneous()
 	const auto rightScreen = _gui->getRightViewport()->getWindow("main")->getScreen("main");
 	const auto isHoverable = (_currentProjectId.empty() ? false : !_scriptExecutor->isStarted());
 
-	leftScreen->getButton("skyEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("terrainEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("waterEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("modelEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("quad3dEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("quad2dEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("text3dEditor")->setHoverable(isHoverable);
-	leftScreen->getButton("text2dEditor")->setHoverable(isHoverable);
+	leftScreen->getButton("skyEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("terrainEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("waterEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("modelEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("quad3dEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("quad2dEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("text3dEditor")->setHoverable(isHoverable, true);
+	leftScreen->getButton("text2dEditor")->setHoverable(isHoverable, true);
 
-	rightScreen->getButton("animation3dEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("animation2dEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("aabbEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("pointlightEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("spotlightEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("captorEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("sound3dEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("sound2dEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("worldEditor")->setHoverable(isHoverable);
-	rightScreen->getButton("scriptEditor")->setHoverable(isHoverable);
+	rightScreen->getButton("animation3dEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("animation2dEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("aabbEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("pointlightEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("spotlightEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("captorEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("sound3dEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("sound2dEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("worldEditor")->setHoverable(isHoverable, true);
+	rightScreen->getButton("scriptEditor")->setHoverable(isHoverable, true);
 }
 
 void TopViewportController::_setProject(const string & projectId)

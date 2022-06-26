@@ -37,7 +37,7 @@ void WorldEditor::_updateCaptorMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateCaptorId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateCaptorId.empty(), true);
 	}
 }
 

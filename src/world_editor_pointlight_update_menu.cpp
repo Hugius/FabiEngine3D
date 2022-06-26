@@ -38,7 +38,7 @@ void WorldEditor::_updatePointlightMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplatePointlightId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplatePointlightId.empty(), true);
 	}
 }
 

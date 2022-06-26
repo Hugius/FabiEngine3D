@@ -11,11 +11,11 @@ public:
 
 	void addValue(shared_ptr<ScriptValue> value);
 	void setValues(const vector<shared_ptr<ScriptValue>> & values);
-	void setValue(shared_ptr<ScriptValue> value, int index = 0);
+	void setValue(shared_ptr<ScriptValue> value, int index);
 	void deleteValue(int index);
 	void deleteValues();
 
-	const shared_ptr<ScriptValue> getValue(int index = 0) const;
+	const shared_ptr<ScriptValue> getValue(int index) const;
 
 	const string & getId() const;
 

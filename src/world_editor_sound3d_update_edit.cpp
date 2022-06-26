@@ -90,9 +90,9 @@ void WorldEditor::_updateSound3dEditing()
 
 			auto position = _fe3d->sound3d_getPosition(_activeSound3dId);
 
-			_handleInputBox("sound3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER));
-			_handleInputBox("sound3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER));
-			_handleInputBox("sound3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER));
+			_handleInputBox("sound3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("sound3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
+			_handleInputBox("sound3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SOUND3D_POSITION_SPEED_DIVIDER), 1.0f, -FLT_MAX, FLT_MAX);
 
 			_fe3d->sound3d_setPosition(_activeSound3dId, position);
 			_fe3d->model_setBasePosition(("@@speaker_" + _activeSound3dId), position);

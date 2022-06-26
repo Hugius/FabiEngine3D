@@ -105,7 +105,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 
 		const auto variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue()->getType() != ScriptValueType::INTEGER)
+		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue(0)->getType() != ScriptValueType::INTEGER)
 		{
 			_throwRuntimeError("LST index must be of type INT");
 
@@ -114,7 +114,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 
 		isAccessingList = true;
 
-		return variable->getValue()->getInteger();
+		return variable->getValue(0)->getInteger();
 	}
 }
 

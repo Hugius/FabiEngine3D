@@ -95,9 +95,9 @@ void Sound2dEditor::_updateChoiceMenu()
 			_fe3d->sound2d_stop(_currentSound2dId, 0);
 		}
 
-		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSound2dId, 0));
-		screen->getButton("resume")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0) && _fe3d->sound2d_isPaused(_currentSound2dId, 0));
-		screen->getButton("pause")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0) && !_fe3d->sound2d_isPaused(_currentSound2dId, 0));
-		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0));
+		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSound2dId, 0), true);
+		screen->getButton("resume")->setHoverable((_fe3d->sound2d_isStarted(_currentSound2dId, 0) && _fe3d->sound2d_isPaused(_currentSound2dId, 0)), true);
+		screen->getButton("pause")->setHoverable((_fe3d->sound2d_isStarted(_currentSound2dId, 0) && !_fe3d->sound2d_isPaused(_currentSound2dId, 0)), true);
+		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSound2dId, 0), true);
 	}
 }

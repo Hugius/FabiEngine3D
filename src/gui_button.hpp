@@ -11,7 +11,7 @@ public:
 
 	void update(bool isInteractable);
 	void setVisible(bool value);
-	void setHoverable(bool value);
+	void setHoverable(bool value, bool mustBeTransparent = true);
 	void setDefaultQuadColor(const fvec3 & value);
 	void setHoveredQuadColor(const fvec3 & value);
 	void setDefaultTextColor(const fvec3 & value);

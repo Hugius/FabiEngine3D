@@ -137,13 +137,6 @@ void GuiScrollingList::setScrollingSpeed(float value)
 	_scrollingSpeed = value;
 }
 
-void GuiScrollingList::setHoverable(bool value)
-{
-	_isHoverable = value;
-
-	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
-}
-
 void GuiScrollingList::setVisible(bool value)
 {
 	_quadField->setVisible(value);
@@ -189,7 +182,7 @@ void GuiScrollingList::_updateHovering(bool isInteractable)
 				{
 					if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
 					{
-						if(isInteractable && _isHoverable)
+						if(isInteractable)
 						{
 							_isHovered = true;
 						}
@@ -201,7 +194,7 @@ void GuiScrollingList::_updateHovering(bool isInteractable)
 
 	for(const auto & button : _buttons)
 	{
-		button->setHoverable(_isHoverable && _isHovered);
+		button->setHoverable(_isHovered, false);
 	}
 }
 
@@ -308,11 +301,6 @@ const fvec3 & GuiScrollingList::getColor() const
 const bool GuiScrollingList::isHovered() const
 {
 	return _isHovered;
-}
-
-const bool GuiScrollingList::isHoverable() const
-{
-	return _isHoverable;
 }
 
 const bool GuiScrollingList::isVisible() const

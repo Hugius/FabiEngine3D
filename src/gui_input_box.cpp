@@ -711,12 +711,15 @@ void GuiInputBox::setVisible(bool value)
 	_textField->setVisible(value);
 }
 
-void GuiInputBox::setHoverable(bool value)
+void GuiInputBox::setHoverable(bool value, bool mustBeTransparent)
 {
 	_isHoverable = value;
 
-	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
-	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	if(mustBeTransparent)
+	{
+		_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+		_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	}
 }
 
 void GuiInputBox::setMaxCharacterCount(int value)

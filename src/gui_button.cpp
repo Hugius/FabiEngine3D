@@ -73,12 +73,15 @@ void GuiButton::_updateHovering(bool isInteractable)
 	}
 }
 
-void GuiButton::setHoverable(bool value)
+void GuiButton::setHoverable(bool value, bool mustBeTransparent)
 {
 	_isHoverable = value;
 
-	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
-	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	if(mustBeTransparent)
+	{
+		_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+		_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	}
 }
 
 void GuiButton::setDefaultQuadColor(const fvec3 & value)

@@ -93,12 +93,14 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const unordered_map<string, int> Script::findKeyword(const string & keyword) const
+const unordered_map<string, vector<int>> Script::findKeyword(const string & keyword) const
 {
-	unordered_map<string, int> result = {};
+	unordered_map<string, vector<int>> result = {};
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
+		result.insert({scriptFileId, {}});
+
 		for(int lineNumber = 0; lineNumber < static_cast<int>(scriptFile->getLines().size()); lineNumber++)
 		{
 			const auto line = scriptFile->getLines()[lineNumber];
@@ -107,7 +109,7 @@ const unordered_map<string, int> Script::findKeyword(const string & keyword) con
 			{
 				if(line.substr(index, keyword.size()) == keyword)
 				{
-					result.insert({scriptFileId, lineNumber + 1});
+					result.at(scriptFileId).push_back(lineNumber + 1);
 
 					break;
 				}

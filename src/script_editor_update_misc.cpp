@@ -198,16 +198,36 @@ void ScriptEditor::_updateScriptSearching()
 	{
 		const auto searchResult = _script->findKeyword(_gui->getOverlay()->getValueFormContent());
 
-		if(searchResult.empty())
-		{
-			Logger::throwWarning("Search result: not found in scripts");
+		bool isFound = false;
 
-			return;
+		for(const auto & [scriptId, lineNumbers] : searchResult)
+		{
+			if(!lineNumbers.empty())
+			{
+				isFound = true;
+
+				break;
+			}
 		}
 
-		for(const auto & [scriptId, lineNumber] : searchResult)
+		if(isFound)
 		{
-			Logger::throwInfo("Search result: found in script \"" + scriptId + "\" @ line " + to_string(lineNumber));
+			Logger::throwInfo("");
+			Logger::throwInfo("Search results:");
+
+			for(const auto & [scriptId, lineNumbers] : searchResult)
+			{
+				for(const auto & lineNumber : lineNumbers)
+				{
+					Logger::throwInfo("Script \"" + scriptId + "\" @ line " + to_string(lineNumber));
+				}
+			}
+
+			Logger::throwInfo("");
+		}
+		else
+		{
+			Logger::throwWarning("Search result: not found in scripts");
 		}
 	}
 }

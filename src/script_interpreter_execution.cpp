@@ -33,7 +33,8 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 				totalTime += time;
 			}
 
-			Logger::throwInfo("Debugging results:");
+			Logger::throwInfo("");
+			Logger::throwInfo("Debug results:");
 
 			for(const auto & [scriptId, time] : _debuggingTimes)
 			{

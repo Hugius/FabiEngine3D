@@ -8,7 +8,7 @@ void ScriptEditor::_createDisplayContent()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 	const auto separatorId = "separator";
-	const auto separatorPosition = (ROOT_TEXT_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
+	const auto separatorPosition = (ROOT_TEXT_POSITION + fvec3((HORIZONTAL_LINE_OFFSET * 0.5f), -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
 	const auto separatorSize = fvec2((CHAR_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
 
 	_fe3d->quad3d_create(separatorId, true);

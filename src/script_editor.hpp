@@ -47,7 +47,7 @@ private:
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.1f, 0.1f, 0.1f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
-	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-12.0f, 6.0, 0.0f);
+	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-11.75f, 6.0, 0.0f);
 
 	static inline const fvec2 CARET_SIZE = fvec2(0.25f, 0.75f);
 	static inline const fvec2 CHAR_SIZE = fvec2(0.25f, 0.75f);

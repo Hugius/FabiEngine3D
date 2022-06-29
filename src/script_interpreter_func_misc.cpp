@@ -575,6 +575,38 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "misc:string_zeroed_integer")
+	{
+		const auto types = {SVT::INTEGER, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			auto result = to_string(args[0]->getInteger());
+
+			bool isNegative = false;
+
+			if(result[0] == '-')
+			{
+				isNegative = true;
+
+				result.erase(result.begin());
+			}
+
+			const auto zeroCount = (args[1]->getInteger() - static_cast<int>(result.size()));
+
+			for(int index = 0; index < zeroCount; index++)
+			{
+				result.insert(result.begin(), '0');
+			}
+
+			if(isNegative)
+			{
+				result.insert(result.begin(), '-');
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+		}
+	}
 	else if(functionName == "misc:random_integer")
 	{
 		const auto types = {SVT::INTEGER, SVT::INTEGER};

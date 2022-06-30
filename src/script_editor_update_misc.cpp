@@ -277,6 +277,16 @@ void ScriptEditor::_updateCamera()
 	cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
 
 	_fe3d->camera_setPosition(cameraPosition);
+
+	for(int lineIndex = 0; lineIndex < lineCount; lineIndex++)
+	{
+		const auto lineTextId = ("text_" + to_string(lineIndex));
+		const auto lineTextPosition = _fe3d->text3d_getPosition(lineTextId);
+		const auto isVisible = ((lineTextPosition.y <= (cameraPosition.y + ROOT_TEXT_POSITION.y + VERTICAL_LINE_OFFSET)) &&
+								(lineTextPosition.y >= (cameraPosition.y - ROOT_TEXT_POSITION.y - VERTICAL_LINE_OFFSET)));
+
+		_fe3d->text3d_setVisible(lineTextId, isVisible);
+	}
 }
 
 void ScriptEditor::_updateCursor()

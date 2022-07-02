@@ -379,7 +379,7 @@ void ModelEditor::_updateAabbChoosing()
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteAabb")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
+					_gui->getOverlay()->openAnswerForm("deleteAabb", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
 				}
 				else
 				{

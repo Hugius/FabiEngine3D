@@ -308,7 +308,6 @@ const bool WorldEditor::saveWorldToFile() const
 			<< size.y
 			<< " "
 			<< size.z
-			<< " "
 			<< endl;
 	}
 

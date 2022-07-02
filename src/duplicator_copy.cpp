@@ -357,6 +357,7 @@ void Duplicator::copyTemplateAabb(const string & newId, const string & templateI
 	}
 
 	_fe3d->aabb_create(newId, false);
+	_fe3d->aabb_setVisible(newId, false);
 	_fe3d->aabb_setBaseSize(newId, _fe3d->aabb_getBaseSize(templateId));
 	_fe3d->aabb_setColor(newId, _fe3d->aabb_getColor(templateId));
 

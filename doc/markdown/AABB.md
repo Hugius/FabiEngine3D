@@ -8,6 +8,7 @@
 - AABBs can only rotate with angles of 90&deg;.
 - AABBs are used for collision and raycasting.
 - AABBs can be bound to a parent (model/quad3D).
+- AABBs are invisible by default.
 - Bound AABBs follow the transformation of their parent.
 - Bound AABBs are invisible and unresponsive if their parent is invisible.
 - Bound AABBs cannot directly be accessed or deleted.

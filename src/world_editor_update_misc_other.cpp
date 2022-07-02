@@ -149,6 +149,14 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
+	for(const auto & aabbId : _loadedAabbIds)
+	{
+		if((aabbId != _selectedAabbId) && (aabbId != _activeAabbId))
+		{
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+		}
+	}
+
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{
 		_fe3d->model_setWireframed("@@lamp_" + pointlightId, "", _isWireframeModeEnabled);

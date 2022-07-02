@@ -22,6 +22,6 @@
 - `misc:string_part`(`STR` value, `INT` index, `INT` count) -----> `STR`
 - `misc:string_split`(`STR` value, `STR` delimiter) -----> `LST`
 - `misc:string_reverse`(`STR` value) -----> `STR`
-- `misc:string_zeroed_integer`(`INT` value, `INT` decimals) -----> `STR`
+- `misc:string_zeroed_integer`(`INT` value, `INT` digits) -----> `STR`
 - `misc:random_integer`(`INT` min, `INT` max) -----> `INT`
 - `misc:random_decimal`(`DEC` min, `DEC` max) -----> `DEC`

@@ -40,6 +40,8 @@ void WorldEditor::_updateAabbPlacing()
 				sort(_loadedAabbIds.begin(), _loadedAabbIds.end());
 
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				_currentTemplateAabbId = "";
 			}
@@ -47,6 +49,8 @@ void WorldEditor::_updateAabbPlacing()
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				_currentTemplateAabbId = "";
 			}
@@ -56,6 +60,8 @@ void WorldEditor::_updateAabbPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				return;
 			}
@@ -63,6 +69,8 @@ void WorldEditor::_updateAabbPlacing()
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				return;
 			}
@@ -70,6 +78,8 @@ void WorldEditor::_updateAabbPlacing()
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				return;
 			}
@@ -77,6 +87,8 @@ void WorldEditor::_updateAabbPlacing()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				_currentTemplateAabbId = "";
 
@@ -86,6 +98,8 @@ void WorldEditor::_updateAabbPlacing()
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + AABB_TERRAIN_OFFSET);
 
 			_fe3d->aabb_setVisible(_currentTemplateAabbId, true);
+			_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, true);
+			_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, true);
 			_fe3d->aabb_setBasePosition(_currentTemplateAabbId, newPosition);
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))

@@ -14,6 +14,8 @@ void WorldEditor::_updateAabbMenu()
 			if(!_currentTemplateAabbId.empty())
 			{
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
 
 				_currentTemplateAabbId = "";
 			}
@@ -73,6 +75,8 @@ void WorldEditor::_updateAabbPlacingMenu()
 				_currentTemplateAabbId = hoveredOptionId;
 
 				_fe3d->aabb_setVisible(_currentTemplateAabbId, true);
+				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, true);
+				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, true);
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 

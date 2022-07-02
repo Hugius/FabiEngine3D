@@ -467,7 +467,6 @@ const bool ModelEditor::loadModelsFromFile()
 			}
 
 			_fe3d->aabb_create(aabbId, false);
-			_fe3d->aabb_setVisible(aabbId, false);
 			_fe3d->aabb_setParentId(aabbId, modelId);
 			_fe3d->aabb_setParentType(aabbId, AabbParentType::MODEL);
 			_fe3d->aabb_setLocalPosition(aabbId, position);

@@ -236,6 +236,12 @@ void AabbManager::update()
 						aabb->setRaycastResponsive(false);
 					}
 
+					if(!parentModel->getLevelOfDetailId().empty())
+					{
+						aabb->setCollisionResponsive(!parentModel->isLevelOfDetailed());
+						aabb->setRaycastResponsive(!parentModel->isLevelOfDetailed());
+					}
+
 					break;
 				}
 				case AabbParentType::QUAD3D:

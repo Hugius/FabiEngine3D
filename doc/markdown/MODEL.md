@@ -6,8 +6,8 @@
 - A variety of textures can be used for a more detailed mesh.
 - Each model can be the parent of multipe AABBs.
 - If the mesh is multiparted, each part has its own properties.
-- Models can be rendered as another model to achieve LOD.
-- The instead rendered LOD model uses the transformation and visibility of the main model.
+- Models can be rendered as another model to achieve level of detail.
+- The instead rendered level of detail version uses the transformation and visibility of the main model.
 
 ## 2. Assets
 
@@ -27,7 +27,7 @@
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed
-- **LOD ID**: the ID of another model representing the LOD version of the main model
+- **LOD ID**: the ID of another model representing the level of detail version of the main model
   - Type: `string`
   - Constraints: model must exist
 - **Position**: the XYZ position of the mesh
@@ -48,7 +48,7 @@
 - **Max Clip Position**: the maximum position to which the mesh is visible
   - Type: `decimal3`
   - Constraints: none
-- **LOD Distance**: the minimum distance by which the LOD model will appear/disappear
+- **LOD Distance**: the minimum distance by which the level of detail version of the main model will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Shadowed**: the mesh is captured for shadows

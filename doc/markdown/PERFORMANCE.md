@@ -36,7 +36,7 @@
 
 ## 4. Tips
 
-- Make use of LOD models to improve the performance on high-poly meshes.
+- Make use of level of detailed models to improve the performance on high-poly meshes.
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the logging console if a lot of messages are printed.
 - Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.

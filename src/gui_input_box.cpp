@@ -747,17 +747,39 @@ void GuiInputBox::_updateHovering(bool isInteractable)
 		const auto boxPosition = getPosition();
 		const auto boxSize = getSize();
 
-		if(cursorPosition.x > (boxPosition.x - (boxSize.x * 0.5f)))
+		if(isCentered())
 		{
-			if(cursorPosition.x < (boxPosition.x + (boxSize.x * 0.5f)))
+			if(cursorPosition.x > (boxPosition.x - (boxSize.x * 0.5f)))
 			{
-				if(cursorPosition.y > (boxPosition.y - (boxSize.y * 0.5f)))
+				if(cursorPosition.x < (boxPosition.x + (boxSize.x * 0.5f)))
 				{
-					if(cursorPosition.y < (boxPosition.y + (boxSize.y * 0.5f)))
+					if(cursorPosition.y > (boxPosition.y - (boxSize.y * 0.5f)))
 					{
-						if(isInteractable && _isHoverable)
+						if(cursorPosition.y < (boxPosition.y + (boxSize.y * 0.5f)))
 						{
-							_isHovered = true;
+							if(isInteractable && _isHoverable)
+							{
+								_isHovered = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(cursorPosition.x > boxPosition.x)
+			{
+				if(cursorPosition.x < (boxPosition.x + boxSize.x))
+				{
+					if(cursorPosition.y > boxPosition.y)
+					{
+						if(cursorPosition.y < (boxPosition.y + boxSize.y))
+						{
+							if(isInteractable && _isHoverable)
+							{
+								_isHovered = true;
+							}
 						}
 					}
 				}

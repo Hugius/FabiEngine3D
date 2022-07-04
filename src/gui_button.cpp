@@ -41,17 +41,39 @@ void GuiButton::_updateHovering(bool isInteractable)
 		const auto buttonPosition = _quadField->getPosition();
 		const auto buttonSize = _quadField->getSize();
 
-		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x * 0.5f)))
+		if(isCentered())
 		{
-			if(cursorPosition.x < (buttonPosition.x + (buttonSize.x * 0.5f)))
+			if(cursorPosition.x > (buttonPosition.x - (buttonSize.x * 0.5f)))
 			{
-				if(cursorPosition.y > (buttonPosition.y - (buttonSize.y * 0.5f)))
+				if(cursorPosition.x < (buttonPosition.x + (buttonSize.x * 0.5f)))
 				{
-					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
+					if(cursorPosition.y > (buttonPosition.y - (buttonSize.y * 0.5f)))
 					{
-						if(isInteractable && _isHoverable)
+						if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
 						{
-							_isHovered = true;
+							if(isInteractable && _isHoverable)
+							{
+								_isHovered = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(cursorPosition.x > buttonPosition.x)
+			{
+				if(cursorPosition.x < (buttonPosition.x + buttonSize.x))
+				{
+					if(cursorPosition.y > buttonPosition.y)
+					{
+						if(cursorPosition.y < (buttonPosition.y + buttonSize.y))
+						{
+							if(isInteractable && _isHoverable)
+							{
+								_isHovered = true;
+							}
 						}
 					}
 				}

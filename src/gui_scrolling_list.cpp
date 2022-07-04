@@ -174,17 +174,39 @@ void GuiScrollingList::_updateHovering(bool isInteractable)
 		const auto listPosition = getPosition();
 		const auto listSize = getSize();
 
-		if(cursorPosition.x > (listPosition.x - (listSize.x * 0.5f)))
+		if(isCentered())
 		{
-			if(cursorPosition.x < (listPosition.x + (listSize.x * 0.5f)))
+			if(cursorPosition.x > (listPosition.x - (listSize.x * 0.5f)))
 			{
-				if(cursorPosition.y > (listPosition.y - (listSize.y * 0.5f)))
+				if(cursorPosition.x < (listPosition.x + (listSize.x * 0.5f)))
 				{
-					if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
+					if(cursorPosition.y > (listPosition.y - (listSize.y * 0.5f)))
 					{
-						if(isInteractable)
+						if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
 						{
-							_isHovered = true;
+							if(isInteractable)
+							{
+								_isHovered = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(cursorPosition.x > listPosition.x)
+			{
+				if(cursorPosition.x < (listPosition.x + listSize.x))
+				{
+					if(cursorPosition.y > listPosition.y)
+					{
+						if(cursorPosition.y < (listPosition.y + listSize.y))
+						{
+							if(isInteractable)
+							{
+								_isHovered = true;
+							}
 						}
 					}
 				}

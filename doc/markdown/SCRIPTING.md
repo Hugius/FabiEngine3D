@@ -77,7 +77,7 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.7 Special Value
 
-- A list is a special type of value that holds 0 or more individual values. Example: `{42, "test", <false>}` (NOTE: the `<` and `>` are not placeholders).
+- A list is a special type of value that holds 0 or more individual values. Example: `{42, "test", <false>}`.
 - A list cannot hold another list value/variable.
 - You can access individual list components using: `<name>[<index>]`.
 - You can add a new value to the list using: `PUSH <name> <value>`.

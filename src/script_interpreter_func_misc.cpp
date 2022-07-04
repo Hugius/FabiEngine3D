@@ -575,6 +575,18 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "misc:string_capitalize")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto content = args[0]->getString();
+			const auto result = (static_cast<char>(toupper(content[0])) + content.substr(1));
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+		}
+	}
 	else if(functionName == "misc:string_zeroed_integer")
 	{
 		const auto types = {SVT::INTEGER, SVT::INTEGER};

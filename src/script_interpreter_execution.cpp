@@ -218,6 +218,10 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			return;
 		}
+		else if(scriptLineText == EXIT_KEYWORD)
+		{
+			break;
+		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
 		{
 			_processFe3dFunctionCall(scriptLineText);

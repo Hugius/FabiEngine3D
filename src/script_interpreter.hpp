@@ -314,12 +314,12 @@ private:
 	static inline const string OR_KEYWORD = "OR";
 	static inline const string MORE_KEYWORD = "MORE";
 	static inline const string LESS_KEYWORD = "LESS";
-	static inline const string INCREASE_KEYWORD = "INCR";
-	static inline const string DECREASE_KEYWORD = "DECR";
+	static inline const string ADD_KEYWORD = "ADD";
+	static inline const string SUBTRACT_KEYWORD = "SUB";
 	static inline const string MULTIPLY_KEYWORD = "MUL";
 	static inline const string DIVIDE_KEYWORD = "DIV";
 	static inline const string MODULO_KEYWORD = "MOD";
-	static inline const string NEGATION_KEYWORD = "NEG";
+	static inline const string NEGATE_KEYWORD = "NEG";
 	static inline const string CAST_KEYWORD = "CAST";
 	static inline const string PUSH_KEYWORD = "PUSH";
 	static inline const string PULL_KEYWORD = "PULL";

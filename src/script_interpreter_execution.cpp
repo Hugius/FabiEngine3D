@@ -319,7 +319,8 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
 
-			if((lastIndex != -1) && ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
+			if((lastIndex != -1) &&
+			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
 			{
 				const auto conditionString = scriptLineText.substr(ELIF_KEYWORD.size() + 1);
 
@@ -357,7 +358,8 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
 
-			if((lastIndex != -1) && ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
+			if((lastIndex != -1) &&
+			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
 			{
 				if(scriptLineText.size() == ELSE_KEYWORD.size())
 				{
@@ -411,12 +413,12 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else if
 			(
-			scriptLineText.substr(0, (INCREASE_KEYWORD.size() + 1)) == (INCREASE_KEYWORD + " ") ||
-			scriptLineText.substr(0, (DECREASE_KEYWORD.size() + 1)) == (DECREASE_KEYWORD + " ") ||
+			scriptLineText.substr(0, (ADD_KEYWORD.size() + 1)) == (ADD_KEYWORD + " ") ||
+			scriptLineText.substr(0, (SUBTRACT_KEYWORD.size() + 1)) == (SUBTRACT_KEYWORD + " ") ||
 			scriptLineText.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
 			scriptLineText.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
 			scriptLineText.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
-			scriptLineText.substr(0, (NEGATION_KEYWORD.size() + 1)) == (NEGATION_KEYWORD + " ")
+			scriptLineText.substr(0, (NEGATE_KEYWORD.size() + 1)) == (NEGATE_KEYWORD + " ")
 			)
 		{
 			_processVariableArithmetic(scriptLineText);

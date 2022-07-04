@@ -135,8 +135,8 @@ Line 2 of every script file must specify its state: entry or wait.
 ### General
 
 - There are 5 types of arithmetic: addition, subtraction, multiplication, division, negation.
-- Addition syntax: `INCR <name> <value>`.
-- Subtraction syntax: `DECR <name> <value>`.
+- Addition syntax: `ADD <name> <value>`.
+- Subtraction syntax: `SUB <name> <value>`.
 - Multiplication syntax: `MUL <name> <value>`.
 - Division syntax: `DIV <name> <value>`.
 - Negation syntax: `NEG <name>`.

@@ -65,7 +65,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 {
 	string nameString = "";
 
-	for(const auto & character : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(PUSH_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
 		{
@@ -84,7 +84,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 		return;
 	}
 
-	auto minLineSize = (PUSHING_KEYWORD.size() + nameString.size() + 3);
+	auto minLineSize = (PUSH_KEYWORD.size() + nameString.size() + 3);
 
 	if(scriptLine.size() < minLineSize)
 	{
@@ -162,7 +162,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 {
 	string nameString = "";
 
-	for(const auto & character : scriptLine.substr(PULLING_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(PULL_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
 		{
@@ -181,14 +181,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 		return;
 	}
 
-	if(scriptLine.size() < (PULLING_KEYWORD.size() + nameString.size() + 3))
+	if(scriptLine.size() < (PULL_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwRuntimeError("LST index missing");
 
 		return;
 	}
 
-	auto indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
+	auto indexString = scriptLine.substr(PULL_KEYWORD.size() + nameString.size() + 2);
 
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{

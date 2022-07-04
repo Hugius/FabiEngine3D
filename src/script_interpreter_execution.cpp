@@ -91,7 +91,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
-		_throwRuntimeError("maximum amount of execution layers reached, perhaps infinite recursion?");
+		_throwRuntimeError("maximum amount of execution layers reached");
 
 		return;
 	}
@@ -149,7 +149,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
-					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+					_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
 
 					return;
 				}
@@ -162,11 +162,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 					continue;
 				}
 			}
-			else if(lineIndex == scriptFile->getLineCount() - 1)
+			else if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
-					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+					_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
 
 					return;
 				}
@@ -199,26 +199,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		if(lineIndex == (scriptFile->getLineCount() - 1))
-		{
-			if(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD ||
-			   scriptLineText.substr(0, IF_KEYWORD.size()) == IF_KEYWORD ||
-			   scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD ||
-			   scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
-			{
-				_throwRuntimeError("no LOOP/IF/ELIF/ELSE statement allowed as last line");
-
-				return;
-			}
-		}
-
-		if(scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
-		{
-			_throwRuntimeError("META keyword is only allowed on line 1 and 2");
-
-			return;
-		}
-		else if(scriptLineText == EXIT_KEYWORD)
+		if(scriptLineText == EXIT_KEYWORD)
 		{
 			break;
 		}
@@ -234,23 +215,23 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			_processMiscFunctionCall(scriptLineText);
 		}
-		else if(scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (EXECUTE_KEYWORD.size() + 1)) == (EXECUTE_KEYWORD + " "))
 		{
 			const auto scriptToExecuteId = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
 
 			if
 				(
-				(scriptType == ScriptType::INITIALIZE &&
-				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end() ||
-				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end()))
+				((scriptType == ScriptType::INITIALIZE) &&
+				((find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end()) ||
+				(find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end())))
 				||
-				(scriptType == ScriptType::UPDATE &&
-				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end() ||
-				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end()))
+				((scriptType == ScriptType::UPDATE) &&
+				((find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end()) ||
+				(find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end())))
 				||
-				(scriptType == ScriptType::TERMINATE &&
-				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end() ||
-				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end()))
+				((scriptType == ScriptType::TERMINATE) &&
+				((find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end()) ||
+				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end())))
 				)
 			{
 				_throwRuntimeError("script is not of the same type");
@@ -283,175 +264,172 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 		}
-		else if(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD)
+		else if(scriptLineText == LOOP_KEYWORD)
 		{
-			if(scriptLineText == (LOOP_KEYWORD + ":"))
+			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				loopScopeDepths.push_back(scopeDepth);
-				loopLineIndices.push_back(lineIndex);
-				loopIterationCounts.push_back(0);
-				scopeDepth++;
-				_hasPassedLoopStatement = true;
-			}
-			else
-			{
-				_throwRuntimeError("LOOP statement must end with ':'");
+				_throwRuntimeError("no " + LOOP_KEYWORD + " statement allowed as last line");
 
 				return;
 			}
-		}
-		else if(scriptLineText.substr(0, IF_KEYWORD.size() + 1) == IF_KEYWORD + " ")
-		{
-			if(scriptLineText.back() == ':')
-			{
-				const auto conditionString = scriptLineText.substr((IF_KEYWORD.size() + 1), scriptLineText.size() - (IF_KEYWORD.size() + 2));
 
-				if(_checkConditionString(conditionString))
+			loopScopeDepths.push_back(scopeDepth);
+			loopLineIndices.push_back(lineIndex);
+			loopIterationCounts.push_back(0);
+
+			scopeDepth++;
+
+			_hasPassedLoopStatement = true;
+		}
+		else if(scriptLineText.substr(0, (IF_KEYWORD.size() + 1)) == (IF_KEYWORD + " "))
+		{
+			if(lineIndex == (scriptFile->getLineCount() - 1))
+			{
+				_throwRuntimeError("no " + IF_KEYWORD + " statement allowed as last line");
+
+				return;
+			}
+
+			const auto conditionString = scriptLineText.substr(IF_KEYWORD.size() + 1);
+
+			if(_checkConditionString(conditionString))
+			{
+				_hasPassedIfStatement = true;
+
+				conditionStatements.push_back(ScriptConditionStatement(scopeDepth, true));
+
+				scopeDepth++;
+			}
+			else
+			{
+				_hasPassedIfStatement = true;
+				_mustIgnoreDeeperScope = true;
+
+				conditionStatements.push_back(ScriptConditionStatement(scopeDepth, false));
+			}
+		}
+		else if(scriptLineText.substr(0, (ELIF_KEYWORD.size() + 1)) == (ELIF_KEYWORD + " "))
+		{
+			if(lineIndex == (scriptFile->getLineCount() - 1))
+			{
+				_throwRuntimeError("no " + ELIF_KEYWORD + " statement allowed as last line");
+
+				return;
+			}
+
+			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+
+			if((lastIndex != -1) && ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
+			{
+				const auto conditionString = scriptLineText.substr(ELIF_KEYWORD.size() + 1);
+
+				conditionStatements[lastIndex].setType(ScriptConditionType::ELIF);
+
+				if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
 				{
-					_hasPassedIfStatement = true;
-					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, true));
+					conditionStatements[lastIndex].setTrue();
+
 					scopeDepth++;
+
+					_hasPassedElifStatement = true;
 				}
 				else
 				{
-					_hasPassedIfStatement = true;
+					_hasPassedElifStatement = true;
 					_mustIgnoreDeeperScope = true;
-					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, false));
 				}
 			}
 			else
 			{
-				_throwRuntimeError("IF statement must end with ':'");
+				_throwRuntimeError(ELIF_KEYWORD + " statement can only come after " + IF_KEYWORD + " or " + ELIF_KEYWORD + " statement");
 
 				return;
 			}
 		}
-		else if(scriptLineText.substr(0, ELIF_KEYWORD.size() + 1) == ELIF_KEYWORD + " ")
+		else if(scriptLineText == ELSE_KEYWORD)
 		{
-			if(scriptLineText.back() == ':')
+			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+				_throwRuntimeError("no " + ELSE_KEYWORD + " statement allowed as last line");
 
-				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
+				return;
+			}
+
+			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+
+			if((lastIndex != -1) && ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
+			{
+				if(scriptLineText.size() == ELSE_KEYWORD.size())
 				{
-					const auto conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
+					conditionStatements[lastIndex].setType(ScriptConditionType::ELSE);
 
-					conditionStatements[lastIndex].setType(ScriptConditionType::ELIF);
-
-					if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
+					if(conditionStatements[lastIndex].isFalse())
 					{
-						conditionStatements[lastIndex].setTrue();
-
 						scopeDepth++;
 
-						_hasPassedElifStatement = true;
+						_hasPassedElseStatement = true;
 					}
 					else
 					{
-						_hasPassedElifStatement = true;
+						_hasPassedElseStatement = true;
 						_mustIgnoreDeeperScope = true;
 					}
 				}
 				else
 				{
-					_throwRuntimeError("ELIF statement can only come after IF or ELIF statement");
+					_throwRuntimeError(ELSE_KEYWORD + " statement cannot have condition");
 
 					return;
 				}
 			}
 			else
 			{
-				_throwRuntimeError("ELIF statement must end with ':'");
-
-				return;
-			}
-		}
-		else if(scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
-		{
-			if(scriptLineText.back() == ':')
-			{
-				const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
-
-				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
-				{
-					if(scriptLineText.size() == (ELSE_KEYWORD.size() + 1))
-					{
-						conditionStatements[lastIndex].setType(ScriptConditionType::ELSE);
-
-						if(conditionStatements[lastIndex].isFalse())
-						{
-							scopeDepth++;
-
-							_hasPassedElseStatement = true;
-						}
-						else
-						{
-							_hasPassedElseStatement = true;
-							_mustIgnoreDeeperScope = true;
-						}
-					}
-					else
-					{
-						_throwRuntimeError("ELSE statement cannot have condition");
-
-						return;
-					}
-				}
-				else
-				{
-					_throwRuntimeError("ELSE statement can only come after IF or ELIF statement");
-
-					return;
-				}
-			}
-			else
-			{
-				_throwRuntimeError("ELSE statement must end with ':'");
+				_throwRuntimeError(ELSE_KEYWORD + " statement can only come after " + IF_KEYWORD + " or " + ELIF_KEYWORD + " statement");
 
 				return;
 			}
 		}
 		else if
 			(
-			scriptLineText.substr(0, CONST_KEYWORD.size() + 1) == CONST_KEYWORD + " " ||
-			scriptLineText.substr(0, LIST_KEYWORD.size() + 1) == LIST_KEYWORD + " " ||
-			scriptLineText.substr(0, STRING_KEYWORD.size() + 1) == STRING_KEYWORD + " " ||
-			scriptLineText.substr(0, DECIMAL_KEYWORD.size() + 1) == DECIMAL_KEYWORD + " " ||
-			scriptLineText.substr(0, INTEGER_KEYWORD.size() + 1) == INTEGER_KEYWORD + " " ||
-			scriptLineText.substr(0, BOOLEAN_KEYWORD.size() + 1) == BOOLEAN_KEYWORD + " "
+			scriptLineText.substr(0, (CONST_KEYWORD.size() + 1)) == (CONST_KEYWORD + " ") ||
+			scriptLineText.substr(0, (LIST_KEYWORD.size() + 1)) == (LIST_KEYWORD + " ") ||
+			scriptLineText.substr(0, (STRING_KEYWORD.size() + 1)) == (STRING_KEYWORD + " ") ||
+			scriptLineText.substr(0, (DECIMAL_KEYWORD.size() + 1)) == (DECIMAL_KEYWORD + " ") ||
+			scriptLineText.substr(0, (INTEGER_KEYWORD.size() + 1)) == (INTEGER_KEYWORD + " ") ||
+			scriptLineText.substr(0, (BOOLEAN_KEYWORD.size() + 1)) == (BOOLEAN_KEYWORD + " ")
 			)
 		{
 			_processVariableCreation(scriptLineText, ScriptScopeType::LOCAL);
 		}
-		else if(scriptLineText.substr(0, GLOBAL_KEYWORD.size() + 1) == GLOBAL_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (GLOBAL_KEYWORD.size() + 1)) == (GLOBAL_KEYWORD + " "))
 		{
 			_processVariableCreation(scriptLineText, ScriptScopeType::GLOBAL);
 		}
-		else if(scriptLineText.substr(0, EDIT_KEYWORD.size() + 1) == EDIT_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (EDIT_KEYWORD.size() + 1)) == (EDIT_KEYWORD + " "))
 		{
 			_processVariableAlteration(scriptLineText);
 		}
 		else if
 			(
-			scriptLineText.substr(0, ADDITION_KEYWORD.size() + 1) == ADDITION_KEYWORD + " " ||
-			scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " " ||
-			scriptLineText.substr(0, MULTIPLICATION_KEYWORD.size() + 1) == MULTIPLICATION_KEYWORD + " " ||
-			scriptLineText.substr(0, DIVISION_KEYWORD.size() + 1) == DIVISION_KEYWORD + " " ||
-			scriptLineText.substr(0, MODULO_KEYWORD.size() + 1) == MODULO_KEYWORD + " " ||
-			scriptLineText.substr(0, NEGATION_KEYWORD.size() + 1) == NEGATION_KEYWORD + " "
+			scriptLineText.substr(0, (INCREASE_KEYWORD.size() + 1)) == (INCREASE_KEYWORD + " ") ||
+			scriptLineText.substr(0, (DECREASE_KEYWORD.size() + 1)) == (DECREASE_KEYWORD + " ") ||
+			scriptLineText.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
+			scriptLineText.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
+			scriptLineText.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
+			scriptLineText.substr(0, (NEGATION_KEYWORD.size() + 1)) == (NEGATION_KEYWORD + " ")
 			)
 		{
 			_processVariableArithmetic(scriptLineText);
 		}
-		else if(scriptLineText.substr(0, CASTING_KEYWORD.size() + 1) == CASTING_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (CAST_KEYWORD.size() + 1)) == (CAST_KEYWORD + " "))
 		{
 			_processVariableTypecast(scriptLineText);
 		}
-		else if(scriptLineText.substr(0, PUSHING_KEYWORD.size() + 1) == PUSHING_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (PUSH_KEYWORD.size() + 1)) == (PUSH_KEYWORD + " "))
 		{
 			_processListPush(scriptLineText);
 		}
-		else if(scriptLineText.substr(0, PULLING_KEYWORD.size() + 1) == PULLING_KEYWORD + " ")
+		else if(scriptLineText.substr(0, (PULL_KEYWORD.size() + 1)) == (PULL_KEYWORD + " "))
 		{
 			_processListPull(scriptLineText);
 		}
@@ -459,7 +437,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 			{
-				_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+				_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
 
 				return;
 			}

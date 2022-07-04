@@ -25,10 +25,10 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	const auto operatorString = words[0];
 
-	if(operatorString != ADDITION_KEYWORD &&
-	   operatorString != SUBTRACTION_KEYWORD &&
-	   operatorString != MULTIPLICATION_KEYWORD &&
-	   operatorString != DIVISION_KEYWORD &&
+	if(operatorString != INCREASE_KEYWORD &&
+	   operatorString != DECREASE_KEYWORD &&
+	   operatorString != MULTIPLY_KEYWORD &&
+	   operatorString != DIVIDE_KEYWORD &&
 	   operatorString != MODULO_KEYWORD &&
 	   operatorString != NEGATION_KEYWORD)
 	{
@@ -244,19 +244,19 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 	{
 		int result = leftValue->getInteger();
 
-		if(operatorString == ADDITION_KEYWORD)
+		if(operatorString == INCREASE_KEYWORD)
 		{
 			result += rightValue->getInteger();
 		}
-		else if(operatorString == SUBTRACTION_KEYWORD)
+		else if(operatorString == DECREASE_KEYWORD)
 		{
 			result -= rightValue->getInteger();
 		}
-		else if(operatorString == MULTIPLICATION_KEYWORD)
+		else if(operatorString == MULTIPLY_KEYWORD)
 		{
 			result *= rightValue->getInteger();
 		}
-		else if(operatorString == DIVISION_KEYWORD)
+		else if(operatorString == DIVIDE_KEYWORD)
 		{
 			result /= rightValue->getInteger();
 		}
@@ -273,19 +273,19 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 	{
 		float result = leftValue->getDecimal();
 
-		if(operatorString == ADDITION_KEYWORD)
+		if(operatorString == INCREASE_KEYWORD)
 		{
 			result += rightValue->getDecimal();
 		}
-		else if(operatorString == SUBTRACTION_KEYWORD)
+		else if(operatorString == DECREASE_KEYWORD)
 		{
 			result -= rightValue->getDecimal();
 		}
-		else if(operatorString == MULTIPLICATION_KEYWORD)
+		else if(operatorString == MULTIPLY_KEYWORD)
 		{
 			result *= rightValue->getDecimal();
 		}
-		else if(operatorString == DIVISION_KEYWORD)
+		else if(operatorString == DIVIDE_KEYWORD)
 		{
 			result /= rightValue->getDecimal();
 		}

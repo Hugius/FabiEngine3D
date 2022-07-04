@@ -199,7 +199,6 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 8.1 General
 
 - There are 3 types: `IF`, `ELIF`, `ELSE`.
-- Every logic statement must end with a `:`.
 - All code under a logic statement must must be indented with 4 spaces / 1 tab.
 - You can chain these condition operations, in the described order.
 - Condition statements can be nested infinitely.
@@ -209,11 +208,11 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ```text
 1.  INT age = 41
-2.  IF age IS 100:
+2.  IF age IS 100
 3.      fe3d:print("I am dead!")
-6.  ELIF age LESS 42:
+6.  ELIF age LESS 42
 7.      fe3d:print("I am younger than 42!")
-8.  ELSE:
+8.  ELSE
 9.      fe3d:print("I am older than 42!")
 10.
 11. /// Console output:
@@ -234,7 +233,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ```text
 1.  LST myList = {"hello", "beautiful", "world"}
 2.  INT index = 0
-3.  LOOP:
+3.  LOOP
 4.      IF index IS 2:
 5.          BREAK
 6.      fe3d:print(myList[index])

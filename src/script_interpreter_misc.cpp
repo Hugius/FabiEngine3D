@@ -54,25 +54,25 @@ const bool ScriptInterpreter::_validateScopeChange(int countedSpaces, const stri
 
 	if(_hasPassedLoopStatement && isScopeDepthInvalid)
 	{
-		_throwRuntimeError("incorrect indentation after LOOP statement");
+		_throwRuntimeError("incorrect indentation after " + LOOP_KEYWORD + " statement");
 
 		return false;
 	}
 	else if(_hasPassedIfStatement && isScopeDepthInvalid)
 	{
-		_throwRuntimeError("incorrect indentation after IF statement");
+		_throwRuntimeError("incorrect indentation after " + IF_KEYWORD + " statement");
 
 		return false;
 	}
 	else if(_hasPassedElifStatement && isScopeDepthInvalid)
 	{
-		_throwRuntimeError("incorrect indentation after ELIF statement");
+		_throwRuntimeError("incorrect indentation after " + ELIF_KEYWORD + " statement");
 
 		return false;
 	}
 	else if(_hasPassedElseStatement && isScopeDepthInvalid)
 	{
-		_throwRuntimeError("incorrect indentation after ELSE statement");
+		_throwRuntimeError("incorrect indentation after " + ELSE_KEYWORD + " statement");
 
 		return false;
 	}

@@ -5,7 +5,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 	string nameString = "";
 	string typeString = "";
 
-	for(const auto & character : scriptLine.substr(CASTING_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(CAST_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
 		{
@@ -24,14 +24,14 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 		return;
 	}
 
-	if(scriptLine.size() < (CASTING_KEYWORD.size() + nameString.size() + 3))
+	if(scriptLine.size() < (CAST_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwRuntimeError("type missing");
 
 		return;
 	}
 
-	typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
+	typeString = scriptLine.substr(CAST_KEYWORD.size() + nameString.size() + 2);
 
 	const auto variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 

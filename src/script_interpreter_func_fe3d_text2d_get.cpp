@@ -379,6 +379,38 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:text2d_is_hovered")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText2d(args[0]->getString(), false))
+			{
+				const auto cursorPosition = Tools::convertToNdc(Tools::getCursorPosition());
+				const auto text2dPosition = _fe3d->text2d_getPosition(args[0]->getString());
+				const auto text2dSize = _fe3d->text2d_getSize(args[0]->getString());
+
+				bool result = false;
+
+				if(cursorPosition.x > (text2dPosition.x - (text2dSize.x * 0.5f)))
+				{
+					if(cursorPosition.x < (text2dPosition.x + (text2dSize.x * 0.5f)))
+					{
+						if(cursorPosition.y > (text2dPosition.y - (text2dSize.y * 0.5f)))
+						{
+							if(cursorPosition.y < (text2dPosition.y + (text2dSize.y * 0.5f)))
+							{
+								result = true;
+							}
+						}
+					}
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

@@ -79,3 +79,4 @@
 - `fe3d:quad2d_get_min_clip_position_y` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_max_clip_position_x` (`STR` quad_id) -----> `DEC`
 - `fe3d:quad2d_get_max_clip_position_y` (`STR` quad_id) -----> `DEC`
+- `fe3d:quad2d_is_hovered` (`STR` quad_id) -----> `BOL`

@@ -139,7 +139,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			return;
 		}
 
-		const auto currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
+		const auto currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 
 		bool isEndOfLoop = false;
 

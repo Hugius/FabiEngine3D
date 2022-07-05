@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string & modelId, bool is
 
 const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, const string & partId)
 {
-	if(_fe3d->model_hasPart(modelId, partId))
+	if(!_fe3d->model_hasPart(modelId, partId))
 	{
 		_throwRuntimeError("model part does not exist");
 

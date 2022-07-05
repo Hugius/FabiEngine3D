@@ -42,11 +42,11 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.1 Creation Syntax
 
-- You can create a variable using: `<scope> <mutability> <type> <name> = <value>`.
+- You can create a variable using `<scope> <mutability> <type> <name> = <value>`.
 
 ### 4.2 Alteration Syntax
 
-- You can edit a variable using: `EDIT <name> = <value>`.
+- You can edit a variable using `EDIT <name> = <value>`.
 
 ### 4.3 Scope
 
@@ -79,9 +79,9 @@ Line 2 of every script file must specify its state: entry or wait.
 
 - A list is a special type of value that holds 0 or more individual values. Example: `{42, "test", <false>}`.
 - A list cannot hold another list value/variable.
-- You can access individual list components using: `<name>[<index>]`.
-- You can add a new value to the list using: `PUSH <name> <value>`.
-- You can delete an existing value from the list using: `PULL <name> <index>`.
+- You can access individual list components using `<name>[<index>]`.
+- You can add a new value to the list using `PUSH <name> <value>`.
+- You can delete an existing value from the list using `PULL <name> <index>`.
 - Remember: an index starts from 0!
 
 ### 4.8 Type Casting
@@ -134,11 +134,12 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### General
 
-- There are 5 types of arithmetic: addition, subtraction, multiplication, division, negation.
+- There are 5 types of arithmetic: addition, subtraction, multiplication, division, modulus, negation.
 - Addition syntax: `ADD <name> <value>`.
 - Subtraction syntax: `SUB <name> <value>`.
 - Multiplication syntax: `MUL <name> <value>`.
 - Division syntax: `DIV <name> <value>`.
+- Modulus syntax: `MOD <name> <value>`.
 - Negation syntax: `NEG <name>`.
 - The result of the arithmetic operation will be stored in the variable the operation was applied on.
 - Arithmetic can be applied on individual list elements, but not the list itself!
@@ -179,9 +180,9 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 7.1 General
 
-- To check if all the comparison statements are true: `<comparison> AND <comparison>`.
-- To check if any of the comparison statements are true: `<comparison> OR <comparison>`.
-- You cannot combine the `AND` and `OR` keywords in one logic statement.
+- To check if all the comparison operations are true: `<comparison> AND <comparison>`.
+- To check if any of the comparison operations are true: `<comparison> OR <comparison>`.
+- You cannot use both the `AND` and `OR` keywords in one logic operation.
 
 ### 7.2 Example Code
 
@@ -199,9 +200,9 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 8.1 General
 
 - There are 3 types: `IF`, `ELIF`, `ELSE`.
-- All code under a logic statement must must be indented with 4 spaces / 1 tab.
+- All code under a condition operation must must be indented with 4 spaces / 1 tab.
 - You can chain these condition operations, in the described order.
-- Condition statements can be nested infinitely.
+- Condition operations can be nested infinitely.
 - Works the same as in other programming languages.
 
 ### 8.2 Example Code
@@ -234,14 +235,14 @@ Line 2 of every script file must specify its state: entry or wait.
 1.  LST myList = {"hello", "beautiful", "world"}
 2.  INT index = 0
 3.  LOOP
-4.      IF index IS 2:
+4.      IF index IS 2
 5.          BREAK
 6.      fe3d:print(myList[index])
-7.  
-8.  /// Console output:
-9.  /// > hello
-10. /// > beautiful
-11. /// > world
+7.      ADD index 1
+8.  
+9.  /// Console output:
+10. /// > hello
+11. /// > beautiful
 ```
 
 ## 10. Executing Other Scripts
@@ -250,11 +251,12 @@ Line 2 of every script file must specify its state: entry or wait.
 
 - The scripts that have the `execution_entry` META defined run first.
 - From there you can decide the order of execution yourself.
-- You can execute another script file using: `EXECUTE <name>`.
+- You can execute another script file using `EXECUTE <name>`.
 - After the script is executed, the program will continue running the script where it left off.
 - The script that is executed must have the same type as the calling script.
 - This works the same as in other programming languages.
 - The maximum execution depth is 10.
+- You can exit the execution of a script file using `EXIT`.
 
 ### 10.2 Example Code
 
@@ -301,7 +303,7 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ## 12. Tips & Tricks
 
-- You can use the `PASS` statement as an empty placeholder for condition statements or loops.
+- You can use the `PASS` statement as an empty placeholder.
 - Be careful with loops as they can become infinite. Luckily this will get detected by the interpreter.
 - Integer values are clamped between `-999999999` and `999999999` to prevent overflow.
 - Decimal values are clamped between `-999999999.0` and `999999999.0` to prevent overflow.

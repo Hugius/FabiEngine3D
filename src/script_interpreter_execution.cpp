@@ -199,7 +199,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		if(scriptLineText == EXIT_KEYWORD)
+		if(scriptLineText == PASS_KEYWORD)
+		{
+			// Purposely left blank
+		}
+		else if(scriptLineText == EXIT_KEYWORD)
 		{
 			break;
 		}
@@ -462,10 +466,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			loopIterationCounts.pop_back();
 
 			_mustIgnoreDeeperScope = true;
-		}
-		else if(scriptLineText == PASS_KEYWORD)
-		{
-			// Purposely left blank
 		}
 		else
 		{

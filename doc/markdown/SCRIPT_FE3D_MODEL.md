@@ -34,9 +34,9 @@
 - `fe3d:model_set_part_size` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_min_clip_position` (`STR` model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_max_clip_position` (`STR` model_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_aabb_visible` (`STR` model_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_aabb_raycast_responsive` (`STR` model_id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_aabb_collision_responsive` (`STR` model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_aabbs_visible` (`STR` model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_aabbs_raycast_responsive` (`STR` model_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_aabbs_collision_responsive` (`STR` model_id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `INT` value) -----> `NONE`
 - `fe3d:model_set_diffuse_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_emission_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
@@ -87,9 +87,9 @@
 - `fe3d:model_is_animation3d_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation3d_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation3d_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
-- `fe3d:model_is_aabb_visible` (`STR` model_id) -----> `BOL`
-- `fe3d:model_is_aabb_raycast_responsive` (`STR` model_id) -----> `BOL`
-- `fe3d:model_is_aabb_collision_responsive` (`STR` model_id) -----> `BOL`
+- `fe3d:model_is_aabbs_visible` (`STR` model_id) -----> `BOL`
+- `fe3d:model_is_aabbs_raycast_responsive` (`STR` model_id) -----> `BOL`
+- `fe3d:model_is_aabbs_collision_responsive` (`STR` model_id) -----> `BOL`
 - `fe3d:model_has_diffuse_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_emission_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_specular_map` (`STR` model_id, `STR` part_id) -----> `BOL`
@@ -98,6 +98,7 @@
 - `fe3d:model_has_normal_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_get_ids` () -----> `LST`
 - `fe3d:model_get_part_ids` (`STR` model_id) -----> `LST`
+- `fe3d:model_get_aabb_ids` (`STR` model_id) -----> `LST`
 - `fe3d:model_get_base_position_x` (`STR` model_id) -----> `DEC`
 - `fe3d:model_get_base_position_y` (`STR` model_id) -----> `DEC`
 - `fe3d:model_get_base_position_z` (`STR` model_id) -----> `DEC`

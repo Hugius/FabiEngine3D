@@ -1452,7 +1452,22 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabb_visible")
+	else if(functionName == "fe3d:model_get_aabb_ids")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString(), false))
+			{
+				for(const auto & result : _fe3d->model_getChildAabbIds(args[0]->getString()))
+				{
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_is_aabbs_visible")
 	{
 		const auto types = {SVT::STRING};
 
@@ -1475,7 +1490,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabb_collision_responsive")
+	else if(functionName == "fe3d:model_is_aabbs_collision_responsive")
 	{
 		const auto types = {SVT::STRING};
 
@@ -1498,7 +1513,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabb_raycast_responsive")
+	else if(functionName == "fe3d:model_is_aabbs_raycast_responsive")
 	{
 		const auto types = {SVT::STRING};
 

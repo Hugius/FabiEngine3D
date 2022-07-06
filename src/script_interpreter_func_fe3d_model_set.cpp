@@ -429,7 +429,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabb_visible")
+	else if(functionName == "fe3d:model_set_aabbs_visible")
 	{
 		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -455,7 +455,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabb_raycast_responsive")
+	else if(functionName == "fe3d:model_set_aabbs_raycast_responsive")
 	{
 		const auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -481,7 +481,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabb_collision_responsive")
+	else if(functionName == "fe3d:model_set_aabbs_collision_responsive")
 	{
 		const auto types = {SVT::STRING, SVT::BOOLEAN};
 

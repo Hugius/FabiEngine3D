@@ -208,13 +208,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -229,13 +222,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -250,13 +236,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -271,13 +250,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -292,13 +264,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -313,13 +278,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString(), false))
 			{
-				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
-				{
-					_throwRuntimeError("cannot access a bound AABB");
-
-					return true;
-				}
-
 				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));

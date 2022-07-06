@@ -1458,7 +1458,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
 				for(const auto & result : _fe3d->model_getChildAabbIds(args[0]->getString()))
 				{
@@ -1473,7 +1473,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
 				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
 
@@ -1496,7 +1496,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
 				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
 
@@ -1519,7 +1519,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(args[0]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
 				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
 

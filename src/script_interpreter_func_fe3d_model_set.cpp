@@ -429,81 +429,54 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabbs_visible")
+	else if(functionName == "fe3d:model_set_aabb_visible")
 	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					_fe3d->aabb_setVisible("model@" + args[0]->getString() + "@" + args[1]->getString(), args[2]->getBoolean());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-
-				for(const auto & aabbId : aabbIds)
-				{
-					_fe3d->aabb_setVisible(aabbId, args[1]->getBoolean());
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabbs_raycast_responsive")
+	else if(functionName == "fe3d:model_set_aabb_raycast_responsive")
 	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					_fe3d->aabb_setRaycastResponsive("model@" + args[0]->getString() + "@" + args[1]->getString(), args[2]->getBoolean());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-
-				for(const auto & aabbId : aabbIds)
-				{
-					_fe3d->aabb_setRaycastResponsive(aabbId, args[1]->getBoolean());
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabbs_collision_responsive")
+	else if(functionName == "fe3d:model_set_aabb_collision_responsive")
 	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					_fe3d->aabb_setCollisionResponsive("model@" + args[0]->getString() + "@" + args[1]->getString(), args[2]->getBoolean());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-
-				for(const auto & aabbId : aabbIds)
-				{
-					_fe3d->aabb_setCollisionResponsive(aabbId, args[1]->getBoolean());
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}

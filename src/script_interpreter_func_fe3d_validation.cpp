@@ -245,6 +245,21 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, con
 	return true;
 }
 
+const bool ScriptInterpreter::_validateFe3dModelAabb(const string & modelId, const string & aabbId)
+{
+	for(const auto & fullAabbId : _fe3d->model_getChildAabbIds(modelId))
+	{
+		if(aabbId == fullAabbId.substr(string("model@" + modelId + "@").size()))
+		{
+			return true;
+		}
+	}
+
+	_throwRuntimeError("model AABB does not exist");
+
+	return false;
+}
+
 const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId, bool isTemplate)
 {
 	if(!_validateFe3dId(captorId))

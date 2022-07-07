@@ -1469,72 +1469,156 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabbs_visible")
+	else if(functionName == "fe3d:model_is_aabb_visible")
 	{
-		const auto types = {SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					const auto result = _fe3d->aabb_isVisible("model@" + args[0]->getString() + "@" + args[1]->getString());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
-
-				const auto result = _fe3d->aabb_isVisible(aabbIds[0]);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabbs_collision_responsive")
+	else if(functionName == "fe3d:model_is_aabb_collision_responsive")
 	{
-		const auto types = {SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					const auto result = _fe3d->aabb_isCollisionResponsive("model@" + args[0]->getString() + "@" + args[1]->getString());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
-
-				const auto result = _fe3d->aabb_isCollisionResponsive(aabbIds[0]);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabbs_raycast_responsive")
+	else if(functionName == "fe3d:model_is_aabb_raycast_responsive")
 	{
-		const auto types = {SVT::STRING};
+		const auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("model has no bound AABBs");
+					const auto result = _fe3d->aabb_isRaycastResponsive("model@" + args[0]->getString() + "@" + args[1]->getString());
 
-					return true;
+					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_position_x")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
 
-				const auto result = _fe3d->aabb_isRaycastResponsive(aabbIds[0]);
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBasePosition("model@" + args[0]->getString() + "@" + args[1]->getString()).x;
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_position_y")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBasePosition("model@" + args[0]->getString() + "@" + args[1]->getString()).y;
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_position_z")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBasePosition("model@" + args[0]->getString() + "@" + args[1]->getString()).z;
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_size_x")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBaseSize("model@" + args[0]->getString() + "@" + args[1]->getString()).x;
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_size_y")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBaseSize("model@" + args[0]->getString() + "@" + args[1]->getString()).y;
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_aabb_size_z")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
+				{
+					const auto result = _fe3d->aabb_getBaseSize("model@" + args[0]->getString() + "@" + args[1]->getString()).z;
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				}
 			}
 		}
 	}

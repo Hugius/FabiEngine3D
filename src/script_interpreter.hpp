@@ -153,6 +153,7 @@ private:
 	const bool _validateFe3dWater(const string & waterId, bool isTemplate);
 	const bool _validateFe3dModel(const string & modelId, bool isTemplate);
 	const bool _validateFe3dModelPart(const string & modelId, const string & partId);
+	const bool _validateFe3dModelAabb(const string & modelId, const string & aabbId);
 	const bool _validateFe3dQuad3d(const string & quad3dId, bool isTemplate);
 	const bool _validateFe3dQuad2d(const string & quad2dId, bool isTemplate);
 	const bool _validateFe3dText3d(const string & text3dId, bool isTemplate);

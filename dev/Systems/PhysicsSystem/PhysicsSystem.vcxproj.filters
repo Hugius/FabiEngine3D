@@ -19,10 +19,10 @@
     <Filter Include="Raycast\Intersector">
       <UniqueIdentifier>{03241045-adc3-428d-be86-ce814b4ecabf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collision\Responder">
+    <Filter Include="Collision\Camera">
       <UniqueIdentifier>{08df31da-49f1-4652-a099-82c7bef88d22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collision\Detector">
+    <Filter Include="Collision\AABB">
       <UniqueIdentifier>{e5a99923-9813-4e5a-a818-3f58048fdabb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,14 +30,11 @@
     <ClCompile Include="..\..\..\src\ray.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_detector.cpp">
-      <Filter>Collision\Detector</Filter>
+    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp">
+      <Filter>Collision\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_responder_update.cpp">
-      <Filter>Collision\Responder</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_responder_misc.cpp">
-      <Filter>Collision\Responder</Filter>
+    <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp">
+      <Filter>Collision\Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_lifecycle.cpp">
       <Filter>Camera</Filter>
@@ -54,16 +51,25 @@
     <ClCompile Include="..\..\..\src\box.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\camera_collision_handler_detection.cpp">
+      <Filter>Collision\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\camera_collision_handler_response.cpp">
+      <Filter>Collision\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_collision_handler.cpp">
+      <Filter>Collision\AABB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\ray.hpp">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\camera_collision_detector.hpp">
-      <Filter>Collision\Detector</Filter>
+    <ClInclude Include="..\..\..\src\aabb_collision_handler.hpp">
+      <Filter>Collision\AABB</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\camera_collision_responder.hpp">
-      <Filter>Collision\Responder</Filter>
+    <ClInclude Include="..\..\..\src\camera_collision_handler.hpp">
+      <Filter>Collision\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera.hpp">
       <Filter>Camera</Filter>

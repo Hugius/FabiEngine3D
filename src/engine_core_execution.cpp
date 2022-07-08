@@ -10,7 +10,7 @@ void EngineCore::_update()
 
 	_timer->startClock("physicsUpdate");
 	_camera->update();
-	_cameraCollisionResponder->update();
+	_cameraCollisionHandler->update();
 	_raycastCalculator->update();
 	_raycastIntersector->update();
 	_camera->updateMatrices();

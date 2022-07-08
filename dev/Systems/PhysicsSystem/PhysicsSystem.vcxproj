@@ -9,7 +9,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-      <ProjectGuid>{93206675-AA26-4F3D-9449-30CCC11E657F}</ProjectGuid>
+    <ProjectGuid>{93206675-AA26-4F3D-9449-30CCC11E657F}</ProjectGuid>
     <RootNamespace>PhysicsSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -57,10 +57,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\aabb_collision_handler.cpp" />
     <ClCompile Include="..\..\..\src\box.cpp" />
-    <ClCompile Include="..\..\..\src\camera_collision_detector.cpp" />
-    <ClCompile Include="..\..\..\src\camera_collision_responder_update.cpp" />
-    <ClCompile Include="..\..\..\src\camera_collision_responder_misc.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_detection.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_response.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp" />
     <ClCompile Include="..\..\..\src\camera_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\camera_misc.cpp" />
     <ClCompile Include="..\..\..\src\ray.cpp" />
@@ -70,8 +72,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\box.hpp" />
     <ClInclude Include="..\..\..\src\camera.hpp" />
-    <ClInclude Include="..\..\..\src\camera_collision_detector.hpp" />
-    <ClInclude Include="..\..\..\src\camera_collision_responder.hpp" />
+    <ClInclude Include="..\..\..\src\aabb_collision_handler.hpp" />
+    <ClInclude Include="..\..\..\src\camera_collision_handler.hpp" />
     <ClInclude Include="..\..\..\src\ray.hpp" />
     <ClInclude Include="..\..\..\src\raycast_calculator.hpp" />
     <ClInclude Include="..\..\..\src\raycast_intersector.hpp" />

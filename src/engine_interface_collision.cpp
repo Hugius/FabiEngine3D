@@ -3,27 +3,27 @@
 
 void EngineInterface::collision_setCameraBox(float left, float right, float bottom, float top, float back, float front)
 {
-	_core->getCameraCollisionResponder()->setCameraBox(make_shared<Box>(left, right, bottom, top, back, front));
+	_core->getCameraCollisionHandler()->setCameraBox(make_shared<Box>(left, right, bottom, top, back, front));
 }
 
 void EngineInterface::collision_setCameraAabbResponseEnabled(bool x, bool y, bool z)
 {
-	_core->getCameraCollisionResponder()->setCameraAabbResponseEnabled(x, y, z);
+	_core->getCameraCollisionHandler()->setCameraAabbResponseEnabled(x, y, z);
 }
 
 void EngineInterface::collision_setCameraTerrainResponseEnabled(bool value)
 {
-	_core->getCameraCollisionResponder()->setCameraTerrainResponseEnabled(value);
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseEnabled(value);
 }
 
 void EngineInterface::collision_setCameraTerrainResponseHeight(float value)
 {
-	_core->getCameraCollisionResponder()->setCameraTerrainResponseHeight(value);
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseHeight(value);
 }
 
 void EngineInterface::collision_setCameraTerrainResponseSpeed(float value)
 {
-	_core->getCameraCollisionResponder()->setCameraTerrainResponseSpeed(value);
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseSpeed(value);
 }
 
 const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
@@ -61,7 +61,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionTy
 
 const bool EngineInterface::collision_checkCameraWithTerrain() const
 {
-	return _core->getCameraCollisionResponder()->isCameraUnderTerrain();
+	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
 }
 
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId) const
@@ -71,27 +71,27 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId)
 
 const float EngineInterface::collision_getCameraTerrainResponseHeight() const
 {
-	return _core->getCameraCollisionResponder()->getCameraTerrainResponseHeight();
+	return _core->getCameraCollisionHandler()->getCameraTerrainResponseHeight();
 }
 
 const float EngineInterface::collision_getCameraTerrainResponseSpeed() const
 {
-	return _core->getCameraCollisionResponder()->getCameraTerrainResponseSpeed();
+	return _core->getCameraCollisionHandler()->getCameraTerrainResponseSpeed();
 }
 
 const bool EngineInterface::collision_isCameraAabbResponseEnabledX() const
 {
-	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledX();
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledX();
 }
 
 const bool EngineInterface::collision_isCameraAabbResponseEnabledY() const
 {
-	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledY();
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledY();
 }
 
 const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
 {
-	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledZ();
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledZ();
 }
 
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const
@@ -109,5 +109,5 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId,
 
 const bool EngineInterface::collision_isCameraTerrainResponseEnabled() const
 {
-	return _core->getCameraCollisionResponder()->isCameraTerrainResponseEnabled();
+	return _core->getCameraCollisionHandler()->isCameraTerrainResponseEnabled();
 }

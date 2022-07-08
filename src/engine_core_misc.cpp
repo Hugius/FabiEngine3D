@@ -137,14 +137,14 @@ const shared_ptr<RaycastIntersector> EngineCore::getRaycastIntersector() const
 	return _raycastIntersector;
 }
 
-const shared_ptr<CameraCollisionDetector> EngineCore::getCameraCollisionDetector() const
+const shared_ptr<AabbCollisionHandler> EngineCore::getAabbCollisionHandler() const
 {
-	return _cameraCollisionDetector;
+	return _aabbCollisionHandler;
 }
 
-const shared_ptr<CameraCollisionResponder> EngineCore::getCameraCollisionResponder() const
+const shared_ptr<CameraCollisionHandler> EngineCore::getCameraCollisionHandler() const
 {
-	return _cameraCollisionResponder;
+	return _cameraCollisionHandler;
 }
 
 const shared_ptr<Animation3dPlayer> EngineCore::getAnimation3dPlayer() const

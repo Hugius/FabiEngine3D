@@ -124,7 +124,7 @@ void TerrainColorRenderer::processSpotlights(const unordered_map<string, shared_
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void TerrainColorRenderer::render(const shared_ptr<Terrain> terrain)
+void TerrainColorRenderer::render(shared_ptr<Terrain> terrain)
 {
 	glEnable(GL_CULL_FACE);
 

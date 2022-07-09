@@ -34,7 +34,7 @@ void AabbColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbColorRenderer::render(const shared_ptr<Aabb> aabb)
+void AabbColorRenderer::render(shared_ptr<Aabb> aabb)
 {
 	if(!aabb->isVisible())
 	{

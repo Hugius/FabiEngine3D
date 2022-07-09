@@ -96,7 +96,7 @@ private:
 	const bool _checkConditionString(const string & conditionString);
 	const bool _validateCondition(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue);
 	const bool _compareValues(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const;
-	const bool _validateListIndex(const shared_ptr<ScriptVariable> list, int index);
+	const bool _validateListIndex(shared_ptr<ScriptVariable> list, int index);
 	const bool _validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, int count);
 	const bool _validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types);
 	const bool _executeFe3dSkySetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);

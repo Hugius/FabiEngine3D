@@ -165,7 +165,7 @@ void WaterColorRenderer::processSpotlights(const unordered_map<string, shared_pt
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void WaterColorRenderer::render(const shared_ptr<Water> water)
+void WaterColorRenderer::render(shared_ptr<Water> water)
 {
 	if(water->isWireframed())
 	{

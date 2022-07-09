@@ -30,7 +30,7 @@ void ModelShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelShadowRenderer::render(const shared_ptr<Model> model)
+void ModelShadowRenderer::render(shared_ptr<Model> model)
 {
 	if(!model->isVisible() || !model->isShadowed())
 	{

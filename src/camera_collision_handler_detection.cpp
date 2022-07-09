@@ -1,17 +1,19 @@
 #include "camera_collision_handler.hpp"
 
-const bool CameraCollisionHandler::_isInsideAabbX(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const
+const bool CameraCollisionHandler::_isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
 {
-	const auto left = box->getLeft();
-	const auto right = box->getRight();
+	const auto left = cameraBox->getLeft();
+	const auto right = cameraBox->getRight();
+	const auto aabbPosition = aabb->getBasePosition();
+	const auto aabbSize = aabb->getBaseSize();
 	const auto halfAabbSize = (aabbSize * 0.5f);
 
-	if(_isInsideAabb(aabbPosition, aabbSize, boxMiddle, box))
+	if(_isInsideAabb(aabb, cameraBoxMiddle, cameraBox))
 	{
-		const auto leftDifference = fabsf((aabbPosition.x - halfAabbSize.x) - (boxMiddle.x + right));
-		const auto rightDifference = fabsf((aabbPosition.x + halfAabbSize.x) - (boxMiddle.x - left));
-		const auto leftCollision = ((boxMiddleChange.x > 0.0f) && (leftDifference <= fabs(boxMiddleChange.x)));
-		const auto rightCollision = ((boxMiddleChange.x < 0.0f) && (rightDifference <= fabs(boxMiddleChange.x)));
+		const auto leftDifference = fabsf((aabbPosition.x - halfAabbSize.x) - (cameraBoxMiddle.x + right));
+		const auto rightDifference = fabsf((aabbPosition.x + halfAabbSize.x) - (cameraBoxMiddle.x - left));
+		const auto leftCollision = ((cameraBoxMiddleChange.x > 0.0f) && (leftDifference <= fabs(cameraBoxMiddleChange.x)));
+		const auto rightCollision = ((cameraBoxMiddleChange.x < 0.0f) && (rightDifference <= fabs(cameraBoxMiddleChange.x)));
 
 		if(leftCollision || rightCollision)
 		{
@@ -28,18 +30,20 @@ const bool CameraCollisionHandler::_isInsideAabbX(const fvec3 & aabbPosition, co
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabbY(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const
+const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
 {
-	const auto bottom = box->getBottom();
-	const auto top = box->getTop();
+	const auto bottom = cameraBox->getBottom();
+	const auto top = cameraBox->getTop();
+	const auto aabbPosition = aabb->getBasePosition();
+	const auto aabbSize = aabb->getBaseSize();
 	const auto halfAabbSize = (aabbSize * 0.5f);
 
-	if(_isInsideAabb(aabbPosition, aabbSize, boxMiddle, box))
+	if(_isInsideAabb(aabb, cameraBoxMiddle, cameraBox))
 	{
-		const auto bottomDifference = fabsf((aabbPosition.y) - (boxMiddle.y + top));
-		const auto topDifference = fabsf((aabbPosition.y + (halfAabbSize.y * 2.0f)) - (boxMiddle.y - bottom));
-		const auto bottomCollision = ((boxMiddleChange.y > 0.0f) && (bottomDifference <= fabs(boxMiddleChange.y)));
-		const auto topCollision = ((boxMiddleChange.y < 0.0f) && (topDifference <= fabs(boxMiddleChange.y)));
+		const auto bottomDifference = fabsf((aabbPosition.y) - (cameraBoxMiddle.y + top));
+		const auto topDifference = fabsf((aabbPosition.y + (halfAabbSize.y * 2.0f)) - (cameraBoxMiddle.y - bottom));
+		const auto bottomCollision = ((cameraBoxMiddleChange.y > 0.0f) && (bottomDifference <= fabs(cameraBoxMiddleChange.y)));
+		const auto topCollision = ((cameraBoxMiddleChange.y < 0.0f) && (topDifference <= fabs(cameraBoxMiddleChange.y)));
 
 		if(bottomCollision || topCollision)
 		{
@@ -56,18 +60,20 @@ const bool CameraCollisionHandler::_isInsideAabbY(const fvec3 & aabbPosition, co
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabbZ(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const
+const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
 {
-	const auto back = box->getBack();
-	const auto front = box->getFront();
+	const auto back = cameraBox->getBack();
+	const auto front = cameraBox->getFront();
+	const auto aabbPosition = aabb->getBasePosition();
+	const auto aabbSize = aabb->getBaseSize();
 	const auto halfAabbSize = (aabbSize * 0.5f);
 
-	if(_isInsideAabb(aabbPosition, aabbSize, boxMiddle, box))
+	if(_isInsideAabb(aabb, cameraBoxMiddle, cameraBox))
 	{
-		const auto frontDifference = fabsf((aabbPosition.z + halfAabbSize.z) - (boxMiddle.z - front));
-		const auto backDifference = fabsf((aabbPosition.z - halfAabbSize.z) - (boxMiddle.z + back));
-		const auto frontCollision = ((boxMiddleChange.z < 0.0f) && (frontDifference <= fabs(boxMiddleChange.z)));
-		const auto backCollision = ((boxMiddleChange.z > 0.0f) && (backDifference <= fabs(boxMiddleChange.z)));
+		const auto frontDifference = fabsf((aabbPosition.z + halfAabbSize.z) - (cameraBoxMiddle.z - front));
+		const auto backDifference = fabsf((aabbPosition.z - halfAabbSize.z) - (cameraBoxMiddle.z + back));
+		const auto frontCollision = ((cameraBoxMiddleChange.z < 0.0f) && (frontDifference <= fabs(cameraBoxMiddleChange.z)));
+		const auto backCollision = ((cameraBoxMiddleChange.z > 0.0f) && (backDifference <= fabs(cameraBoxMiddleChange.z)));
 
 		if(frontCollision || backCollision)
 		{
@@ -84,42 +90,44 @@ const bool CameraCollisionHandler::_isInsideAabbZ(const fvec3 & aabbPosition, co
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabb(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const shared_ptr<Box> box) const
+const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const shared_ptr<Box> cameraBox) const
 {
-	const auto left = box->getLeft();
-	const auto right = box->getRight();
-	const auto bottom = box->getBottom();
-	const auto top = box->getTop();
-	const auto back = box->getBack();
-	const auto front = box->getFront();
+	const auto left = cameraBox->getLeft();
+	const auto right = cameraBox->getRight();
+	const auto bottom = cameraBox->getBottom();
+	const auto top = cameraBox->getTop();
+	const auto back = cameraBox->getBack();
+	const auto front = cameraBox->getFront();
+	const auto aabbPosition = aabb->getBasePosition();
+	const auto aabbSize = aabb->getBaseSize();
 	const auto halfAabbSize = (aabbSize * 0.5f);
 
 	bool xInsideBox = false;
 	bool yInsideBox = false;
 	bool zInsideBox = false;
 
-	if(((boxMiddle.x + right) > (aabbPosition.x - halfAabbSize.x) && (boxMiddle.x + right) < (aabbPosition.x + halfAabbSize.x)) ||
-	   ((boxMiddle.x - left) < (aabbPosition.x + halfAabbSize.x) && (boxMiddle.x - left) > (aabbPosition.x - halfAabbSize.x)))
+	if(((cameraBoxMiddle.x + right) > (aabbPosition.x - halfAabbSize.x) && (cameraBoxMiddle.x + right) < (aabbPosition.x + halfAabbSize.x)) ||
+	   ((cameraBoxMiddle.x - left) < (aabbPosition.x + halfAabbSize.x) && (cameraBoxMiddle.x - left) > (aabbPosition.x - halfAabbSize.x)))
 	{
 		xInsideBox = true;
 	}
 
-	if(((boxMiddle.y + top) > (aabbPosition.y) && (boxMiddle.y + top) < (aabbPosition.y + (halfAabbSize.y * 2.0f))) ||
-	   ((boxMiddle.y - bottom) < (aabbPosition.y + (halfAabbSize.y * 2.0f)) && (boxMiddle.y - bottom) > (aabbPosition.y)))
+	if(((cameraBoxMiddle.y + top) > (aabbPosition.y) && (cameraBoxMiddle.y + top) < (aabbPosition.y + (halfAabbSize.y * 2.0f))) ||
+	   ((cameraBoxMiddle.y - bottom) < (aabbPosition.y + (halfAabbSize.y * 2.0f)) && (cameraBoxMiddle.y - bottom) > (aabbPosition.y)))
 	{
 		yInsideBox = true;
 
 	}
 
-	if(((boxMiddle.z + front) > (aabbPosition.z - halfAabbSize.z) && (boxMiddle.z + front) < (aabbPosition.z + halfAabbSize.z)) ||
-	   ((boxMiddle.z - back) < (aabbPosition.z + halfAabbSize.z) && (boxMiddle.z - back) > (aabbPosition.z - halfAabbSize.z)))
+	if(((cameraBoxMiddle.z + front) > (aabbPosition.z - halfAabbSize.z) && (cameraBoxMiddle.z + front) < (aabbPosition.z + halfAabbSize.z)) ||
+	   ((cameraBoxMiddle.z - back) < (aabbPosition.z + halfAabbSize.z) && (cameraBoxMiddle.z - back) > (aabbPosition.z - halfAabbSize.z)))
 	{
 		zInsideBox = true;
 	}
 
-	const auto xTooSmall = ((boxMiddle.x + right) >= (aabbPosition.x + halfAabbSize.x)) && ((boxMiddle.x - left) <= (aabbPosition.x - halfAabbSize.x));
-	const auto yTooSmall = ((boxMiddle.y + top) >= (aabbPosition.y + (halfAabbSize.y * 2.0f))) && ((boxMiddle.y - bottom) <= aabbPosition.y);
-	const auto zTooSmall = ((boxMiddle.z + front) >= (aabbPosition.z + halfAabbSize.z)) && ((boxMiddle.z - back) <= (aabbPosition.z - halfAabbSize.z));
+	const auto xTooSmall = ((cameraBoxMiddle.x + right) >= (aabbPosition.x + halfAabbSize.x)) && ((cameraBoxMiddle.x - left) <= (aabbPosition.x - halfAabbSize.x));
+	const auto yTooSmall = ((cameraBoxMiddle.y + top) >= (aabbPosition.y + (halfAabbSize.y * 2.0f))) && ((cameraBoxMiddle.y - bottom) <= aabbPosition.y);
+	const auto zTooSmall = ((cameraBoxMiddle.z + front) >= (aabbPosition.z + halfAabbSize.z)) && ((cameraBoxMiddle.z - back) <= (aabbPosition.z - halfAabbSize.z));
 
 	if((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
 	{

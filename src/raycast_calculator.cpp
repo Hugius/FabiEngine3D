@@ -50,7 +50,7 @@ const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4 & viewCoords) co
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-const fvec3 RaycastCalculator::calculatePointOnRay(const shared_ptr<Ray> ray, float distance) const
+const fvec3 RaycastCalculator::calculatePointOnRay(shared_ptr<Ray> ray, float distance) const
 {
 	return (ray->getPosition() + (ray->getDirection() * distance));
 }

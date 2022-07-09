@@ -38,7 +38,7 @@ void BloomRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void BloomRenderer::render(const shared_ptr<Quad2d> quad2d)
+void BloomRenderer::render(shared_ptr<Quad2d> quad2d)
 {
 	glBindVertexArray(quad2d->getVertexBuffer()->getVaoId());
 	glDrawArrays(GL_TRIANGLES, 0, quad2d->getVertexBuffer()->getVertexCount());

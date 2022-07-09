@@ -28,7 +28,7 @@ void WaterDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterDepthRenderer::render(const shared_ptr<Water> water)
+void WaterDepthRenderer::render(shared_ptr<Water> water)
 {
 	_shaderBuffer->uploadUniform("u_height", water->getHeight());
 	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, water->getMinClipPosition().x));

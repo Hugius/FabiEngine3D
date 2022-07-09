@@ -13,7 +13,7 @@ void SkyColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void SkyColorRenderer::render(const shared_ptr<Sky> sky)
+void SkyColorRenderer::render(shared_ptr<Sky> sky)
 {
 	if(sky->isWireframed())
 	{

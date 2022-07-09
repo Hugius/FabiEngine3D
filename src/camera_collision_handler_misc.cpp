@@ -22,7 +22,7 @@ void CameraCollisionHandler::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-void CameraCollisionHandler::setCameraBox(const shared_ptr<Box> value)
+void CameraCollisionHandler::setCameraBox(shared_ptr<Box> value)
 {
 	_cameraBox = value;
 }

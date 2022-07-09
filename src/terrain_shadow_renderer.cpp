@@ -29,7 +29,7 @@ void TerrainShadowRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainShadowRenderer::render(const shared_ptr<Terrain> terrain)
+void TerrainShadowRenderer::render(shared_ptr<Terrain> terrain)
 {
 	if(!terrain->isShadowed())
 	{

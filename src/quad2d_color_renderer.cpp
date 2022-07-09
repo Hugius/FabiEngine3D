@@ -25,7 +25,7 @@ void Quad2dColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad2dColorRenderer::render(const shared_ptr<Quad2d> quad2d)
+void Quad2dColorRenderer::render(shared_ptr<Quad2d> quad2d)
 {
 	if(!quad2d->isVisible())
 	{

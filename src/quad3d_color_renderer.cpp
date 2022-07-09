@@ -39,7 +39,7 @@ void Quad3dColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dColorRenderer::render(const shared_ptr<Quad3d> quad3d)
+void Quad3dColorRenderer::render(shared_ptr<Quad3d> quad3d)
 {
 	if(!quad3d->isVisible())
 	{

@@ -8,5 +8,5 @@ class WaterDepthRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<Water> water);
+	void render(shared_ptr<Water> water);
 };

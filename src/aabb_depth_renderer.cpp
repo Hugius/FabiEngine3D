@@ -28,7 +28,7 @@ void AabbDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void AabbDepthRenderer::render(const shared_ptr<Aabb> aabb)
+void AabbDepthRenderer::render(shared_ptr<Aabb> aabb)
 {
 	if(!aabb->isVisible())
 	{

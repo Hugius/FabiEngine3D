@@ -15,7 +15,7 @@ public:
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void setCameraBox(const shared_ptr<Box> value);
+	void setCameraBox(shared_ptr<Box> value);
 	void setCameraAabbResponseEnabled(bool x, bool y, bool z);
 	void setCameraTerrainResponseEnabled(bool value);
 	void setCameraTerrainResponseHeight(float value);
@@ -34,10 +34,10 @@ private:
 	void _handleTerrainCollision();
 
 	const bool _handleAabbCollision(DirectionType direction) const;
-	const bool _isInsideAabb(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const shared_ptr<Box> box) const;
-	const bool _isInsideAabbX(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const;
-	const bool _isInsideAabbY(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const;
-	const bool _isInsideAabbZ(const fvec3 & aabbPosition, const fvec3 & aabbSize, const fvec3 & boxMiddle, const fvec3 & boxMiddleChange, const shared_ptr<Box> box) const;
+	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
 
 	shared_ptr<Box> _cameraBox = nullptr;
 	shared_ptr<TerrainManager> _terrainManager = nullptr;

@@ -8,5 +8,5 @@ class TerrainShadowRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<Terrain> terrain);
+	void render(shared_ptr<Terrain> terrain);
 };

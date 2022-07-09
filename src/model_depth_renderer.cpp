@@ -29,7 +29,7 @@ void ModelDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelDepthRenderer::render(const shared_ptr<Model> model)
+void ModelDepthRenderer::render(shared_ptr<Model> model)
 {
 	if(!model->isVisible())
 	{

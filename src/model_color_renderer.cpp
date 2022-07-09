@@ -155,7 +155,7 @@ void ModelColorRenderer::processSpotlights(const unordered_map<string, shared_pt
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleSpotlights.size()));
 }
 
-void ModelColorRenderer::render(const shared_ptr<Model> model, const unordered_map<string, shared_ptr<Captor>> & captors)
+void ModelColorRenderer::render(shared_ptr<Model> model, const unordered_map<string, shared_ptr<Captor>> & captors)
 {
 	if(!model->isVisible())
 	{

@@ -29,7 +29,7 @@ void Quad3dDepthRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void Quad3dDepthRenderer::render(const shared_ptr<Quad3d> quad3d)
+void Quad3dDepthRenderer::render(shared_ptr<Quad3d> quad3d)
 {
 	if(!quad3d->isVisible())
 	{

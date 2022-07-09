@@ -16,5 +16,5 @@ public:
 	void unbind();
 	void processPointlights(const unordered_map<string, shared_ptr<Pointlight>> & pointlights);
 	void processSpotlights(const unordered_map<string, shared_ptr<Spotlight>> & spotlights);
-	void render(const shared_ptr<Water> water);
+	void render(shared_ptr<Water> water);
 };

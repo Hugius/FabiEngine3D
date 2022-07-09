@@ -13,7 +13,7 @@ public:
 
 	const shared_ptr<Ray> getCursorRay() const;
 
-	const fvec3 calculatePointOnRay(const shared_ptr<Ray> ray, float distance) const;
+	const fvec3 calculatePointOnRay(shared_ptr<Ray> ray, float distance) const;
 
 private:
 	const shared_ptr<Ray> _calculateCursorRay() const;

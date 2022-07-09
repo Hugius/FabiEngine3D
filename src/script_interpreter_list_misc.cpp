@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable> list, int index)
+const bool ScriptInterpreter::_validateListIndex(shared_ptr<ScriptVariable> list, int index)
 {
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{

@@ -38,7 +38,7 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
-					const auto hasCollided = _isInsideAabbX(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto hasCollided = _isInsideAabbX(aabb, middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -62,7 +62,7 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
-					const auto hasCollided = _isInsideAabbY(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto hasCollided = _isInsideAabbY(aabb, middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -89,7 +89,7 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
-					const auto hasCollided = _isInsideAabbZ(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
+					const auto hasCollided = _isInsideAabbZ(aabb, middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{

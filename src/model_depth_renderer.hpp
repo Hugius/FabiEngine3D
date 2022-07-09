@@ -8,5 +8,5 @@ class ModelDepthRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<Model> model);
+	void render(shared_ptr<Model> model);
 };

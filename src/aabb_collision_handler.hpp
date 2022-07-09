@@ -1,9 +1,9 @@
 #pragma once
 
-#include "mathematics.hpp"
+#include "aabb.hpp"
 
 class AabbCollisionHandler final
 {
 public:
-	const bool hasAabbsCollided(const fvec3 & firstAabbPosition, const fvec3 & firstAabbSize, const fvec3 & secondAabbPosition, const fvec3 & secondAabbSize) const;
+	const bool hasAabbsCollided(shared_ptr<Aabb> firstAabb, shared_ptr<Aabb> secondAabb) const;
 };

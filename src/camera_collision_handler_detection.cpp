@@ -40,8 +40,21 @@ const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const f
 
 	if(_isInsideAabb(aabb, cameraBoxMiddle, cameraBox))
 	{
-		const auto bottomDifference = fabsf((aabbPosition.y) - (cameraBoxMiddle.y + top));
-		const auto topDifference = fabsf((aabbPosition.y + (halfAabbSize.y * 2.0f)) - (cameraBoxMiddle.y - bottom));
+		float bottomDifference;
+		float topDifference;
+
+		if(aabb->isCentered())
+		{
+			bottomDifference = fabsf((aabbPosition.y - halfAabbSize.y) - (cameraBoxMiddle.y + top));
+			topDifference = fabsf((aabbPosition.y + halfAabbSize.y) - (cameraBoxMiddle.y - bottom));
+		}
+		else
+		{
+			bottomDifference = fabsf((aabbPosition.y) - (cameraBoxMiddle.y + top));
+			topDifference = fabsf((aabbPosition.y + (halfAabbSize.y * 2.0f)) - (cameraBoxMiddle.y - bottom));
+
+		}
+
 		const auto bottomCollision = ((cameraBoxMiddleChange.y > 0.0f) && (bottomDifference <= fabs(cameraBoxMiddleChange.y)));
 		const auto topCollision = ((cameraBoxMiddleChange.y < 0.0f) && (topDifference <= fabs(cameraBoxMiddleChange.y)));
 
@@ -105,6 +118,9 @@ const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fv
 	bool xInsideBox = false;
 	bool yInsideBox = false;
 	bool zInsideBox = false;
+	bool xTooSmall = false;
+	bool yTooSmall = false;
+	bool zTooSmall = false;
 
 	if(((cameraBoxMiddle.x + right) > (aabbPosition.x - halfAabbSize.x) && (cameraBoxMiddle.x + right) < (aabbPosition.x + halfAabbSize.x)) ||
 	   ((cameraBoxMiddle.x - left) < (aabbPosition.x + halfAabbSize.x) && (cameraBoxMiddle.x - left) > (aabbPosition.x - halfAabbSize.x)))
@@ -112,11 +128,21 @@ const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fv
 		xInsideBox = true;
 	}
 
-	if(((cameraBoxMiddle.y + top) > (aabbPosition.y) && (cameraBoxMiddle.y + top) < (aabbPosition.y + (halfAabbSize.y * 2.0f))) ||
-	   ((cameraBoxMiddle.y - bottom) < (aabbPosition.y + (halfAabbSize.y * 2.0f)) && (cameraBoxMiddle.y - bottom) > (aabbPosition.y)))
+	if(aabb->isCentered())
 	{
-		yInsideBox = true;
-
+		if(((cameraBoxMiddle.y + top) > (aabbPosition.y - halfAabbSize.y) && (cameraBoxMiddle.y + top) < (aabbPosition.y + halfAabbSize.y)) ||
+		   ((cameraBoxMiddle.y - bottom) < (aabbPosition.y + halfAabbSize.y) && (cameraBoxMiddle.y - bottom) > (aabbPosition.y - halfAabbSize.y)))
+		{
+			yInsideBox = true;
+		}
+	}
+	else
+	{
+		if(((cameraBoxMiddle.y + top) > (aabbPosition.y) && (cameraBoxMiddle.y + top) < (aabbPosition.y + (halfAabbSize.y * 2.0f))) ||
+		   ((cameraBoxMiddle.y - bottom) < (aabbPosition.y + (halfAabbSize.y * 2.0f)) && (cameraBoxMiddle.y - bottom) > (aabbPosition.y)))
+		{
+			yInsideBox = true;
+		}
 	}
 
 	if(((cameraBoxMiddle.z + front) > (aabbPosition.z - halfAabbSize.z) && (cameraBoxMiddle.z + front) < (aabbPosition.z + halfAabbSize.z)) ||
@@ -125,9 +151,18 @@ const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fv
 		zInsideBox = true;
 	}
 
-	const auto xTooSmall = ((cameraBoxMiddle.x + right) >= (aabbPosition.x + halfAabbSize.x)) && ((cameraBoxMiddle.x - left) <= (aabbPosition.x - halfAabbSize.x));
-	const auto yTooSmall = ((cameraBoxMiddle.y + top) >= (aabbPosition.y + (halfAabbSize.y * 2.0f))) && ((cameraBoxMiddle.y - bottom) <= aabbPosition.y);
-	const auto zTooSmall = ((cameraBoxMiddle.z + front) >= (aabbPosition.z + halfAabbSize.z)) && ((cameraBoxMiddle.z - back) <= (aabbPosition.z - halfAabbSize.z));
+	xTooSmall = ((cameraBoxMiddle.x + right) >= (aabbPosition.x + halfAabbSize.x)) && ((cameraBoxMiddle.x - left) <= (aabbPosition.x - halfAabbSize.x));
+
+	if(aabb->isCentered())
+	{
+		yTooSmall = ((cameraBoxMiddle.y + top) >= (aabbPosition.y + halfAabbSize.y)) && ((cameraBoxMiddle.y - bottom) <= (aabbPosition.y - halfAabbSize.y));
+	}
+	else
+	{
+		yTooSmall = ((cameraBoxMiddle.y + top) >= (aabbPosition.y + (halfAabbSize.y * 2.0f))) && ((cameraBoxMiddle.y - bottom) <= aabbPosition.y);
+	}
+
+	zTooSmall = ((cameraBoxMiddle.z + front) >= (aabbPosition.z + halfAabbSize.z)) && ((cameraBoxMiddle.z - back) <= (aabbPosition.z - halfAabbSize.z));
 
 	if((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
 	{

@@ -1,6 +1,6 @@
 #include "camera_collision_handler.hpp"
 
-const bool CameraCollisionHandler::_isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
+const bool CameraCollisionHandler::_isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const
 {
 	const auto left = cameraBox->getLeft();
 	const auto right = cameraBox->getRight();
@@ -30,7 +30,7 @@ const bool CameraCollisionHandler::_isInsideAabbX(shared_ptr<Aabb> aabb, const f
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
+const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const
 {
 	const auto bottom = cameraBox->getBottom();
 	const auto top = cameraBox->getTop();
@@ -60,7 +60,7 @@ const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const f
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const
+const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const
 {
 	const auto back = cameraBox->getBack();
 	const auto front = cameraBox->getFront();
@@ -90,7 +90,7 @@ const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const f
 	}
 }
 
-const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const shared_ptr<Box> cameraBox) const
+const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, shared_ptr<Box> cameraBox) const
 {
 	const auto left = cameraBox->getLeft();
 	const auto right = cameraBox->getRight();

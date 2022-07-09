@@ -37,7 +37,7 @@ private:
 
 	const float _calculateDistanceToTerrain() const;
 	const float _calculateDistanceToAabb(shared_ptr<Aabb> aabb) const;
-	const float _calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, const shared_ptr<Box> box) const;
+	const float _calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, shared_ptr<Box> box) const;
 
 	const bool _isUnderTerrain(float distance) const;
 

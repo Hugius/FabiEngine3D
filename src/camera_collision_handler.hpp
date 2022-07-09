@@ -34,10 +34,10 @@ private:
 	void _handleTerrainCollision();
 
 	const bool _handleAabbCollision(DirectionType direction) const;
-	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const shared_ptr<Box> cameraBox) const;
-	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
-	const bool _isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
-	const bool _isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, const shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
+	const bool _isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
 
 	shared_ptr<Box> _cameraBox = nullptr;
 	shared_ptr<TerrainManager> _terrainManager = nullptr;

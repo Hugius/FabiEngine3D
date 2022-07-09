@@ -158,7 +158,7 @@ const fvec3 & RaycastIntersector::getPointOnTerrain() const
 	return _pointOnTerrain;
 }
 
-const float RaycastIntersector::_calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, const shared_ptr<Box> box) const
+const float RaycastIntersector::_calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, shared_ptr<Box> box) const
 {
 	/*
 		https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms

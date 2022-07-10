@@ -30,11 +30,11 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 {
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
-		switch(direction)
+		if(aabb->isCollisionResponsive())
 		{
-			case DirectionType::X:
+			switch(direction)
 			{
-				if(aabb->isCollisionResponsive())
+				case DirectionType::X:
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
@@ -52,13 +52,10 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 
 						return true;
 					}
-				}
 
-				break;
-			}
-			case DirectionType::Y:
-			{
-				if(aabb->isCollisionResponsive())
+					break;
+				}
+				case DirectionType::Y:
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
@@ -79,13 +76,10 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 							return true;
 						}
 					}
-				}
 
-				break;
-			}
-			case DirectionType::Z:
-			{
-				if(aabb->isCollisionResponsive())
+					break;
+				}
+				case DirectionType::Z:
 				{
 					const auto middle = _camera->getPosition();
 					const auto middleChange = (middle - _lastCameraPosition);
@@ -103,9 +97,9 @@ const bool CameraCollisionHandler::_handleAabbCollision(DirectionType direction)
 
 						return true;
 					}
-				}
 
-				break;
+					break;
+				}
 			}
 		}
 	}

@@ -25,6 +25,7 @@ void CameraCollisionHandler::update()
 			case DirectionOrderType::XYZ:
 			{
 				xPriority = 3; yPriority = 2; zPriority = 1;
+
 				xPriority *= static_cast<int>(_handleAabbCollision(DirectionType::X));
 				yPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Y));
 				zPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Z));
@@ -34,6 +35,7 @@ void CameraCollisionHandler::update()
 			case DirectionOrderType::XZY:
 			{
 				xPriority = 3; zPriority = 2; yPriority = 1;
+
 				xPriority *= static_cast<int>(_handleAabbCollision(DirectionType::X));
 				zPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Z));
 				yPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Y));
@@ -43,6 +45,7 @@ void CameraCollisionHandler::update()
 			case DirectionOrderType::YXZ:
 			{
 				yPriority = 3; xPriority = 1; zPriority = 2;
+
 				yPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Y));
 				xPriority *= static_cast<int>(_handleAabbCollision(DirectionType::X));
 				zPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Z));
@@ -61,6 +64,7 @@ void CameraCollisionHandler::update()
 			case DirectionOrderType::ZXY:
 			{
 				zPriority = 3; xPriority = 2; yPriority = 1;
+
 				zPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Z));
 				xPriority *= static_cast<int>(_handleAabbCollision(DirectionType::X));
 				yPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Y));
@@ -70,6 +74,7 @@ void CameraCollisionHandler::update()
 			case DirectionOrderType::ZYX:
 			{
 				zPriority = 3; yPriority = 2; xPriority = 1;
+
 				zPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Z));
 				yPriority *= static_cast<int>(_handleAabbCollision(DirectionType::Y));
 				xPriority *= static_cast<int>(_handleAabbCollision(DirectionType::X));

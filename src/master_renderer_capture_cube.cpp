@@ -139,7 +139,7 @@ void MasterRenderer::captureCubeReflections()
 					}
 				}
 
-				_camera->updateMatrices();
+				_camera->calculateMatrices();
 
 				_updateShadows();
 
@@ -209,7 +209,7 @@ void MasterRenderer::captureCubeReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->setYaw(originalCameraYaw);
 	_camera->setPitch(originalCameraPitch);
-	_camera->updateMatrices();
+	_camera->calculateMatrices();
 
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
@@ -362,7 +362,7 @@ void MasterRenderer::captureCubeRefractions()
 					}
 				}
 
-				_camera->updateMatrices();
+				_camera->calculateMatrices();
 
 				_updateShadows();
 
@@ -432,7 +432,7 @@ void MasterRenderer::captureCubeRefractions()
 	_camera->setPosition(originalCameraPosition);
 	_camera->setYaw(originalCameraYaw);
 	_camera->setPitch(originalCameraPitch);
-	_camera->updateMatrices();
+	_camera->calculateMatrices();
 
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);

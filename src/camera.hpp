@@ -14,7 +14,7 @@ public:
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
 	void update();
-	void updateMatrices();
+	void calculateMatrices();
 	void move(const fvec3 & change);
 	void moveTo(const fvec3 & target, float speed);
 	void setPosition(const fvec3 & value);

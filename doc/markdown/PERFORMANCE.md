@@ -4,18 +4,18 @@
 
 - You can use the performance statistics in the bottom viewport to analyze your application's performance.
 - The amount of triangles is the realtime amount being rendered every frame.
-- `mainUpdate`: input handling + the execution of your update scripts
-- `physicsUpdate`: camera + raycasting + collision
+- `mainUpdate`: input handling + execution of your update scripts
+- `cameraUpdate`: camera transformation
 - `environmentUpdate`: sky + terrain + water
-- `modelUpdate`: model
-- `quadUpdate`: quad3D + quad2D
-- `textUpdate`: text3D + text2D
-- `aabbUpdate`: AABB
-- `lightUpdate`: pointlight + spotlight
-- `captorUpdate`: captor
+- `modelUpdate`: models
+- `quadUpdate`: quad3Ds + quad2Ds
+- `textUpdate`: text3Ds + text2Ds
+- `aabbUpdate`: AABBs
+- `lightUpdate`: pointlights + spotlights
+- `captorUpdate`: captors
 - `renderUpdate`: window + sky exposure + shadows + motion blur + lens flare
-- `animationUpdate`: animation3D + animation2D
-- `soundUpdate`: sound3D + sound2D
+- `animationUpdate`: animation3Ds + animation2Ds
+- `soundUpdate`: sound3Ds + sound2Ds
 - `networkUpdate`: server + client
 
 ## 3. Dangers

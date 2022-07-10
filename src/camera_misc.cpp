@@ -280,7 +280,7 @@ const fvec3 & Camera::getUp() const
 	return _up;
 }
 
-void Camera::updateMatrices()
+void Camera::calculateMatrices()
 {
 	if(_isUpInverted)
 	{

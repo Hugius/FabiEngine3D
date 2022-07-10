@@ -152,4 +152,6 @@ void Camera::update()
 
 	_yaw = Mathematics::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH, MAX_PITCH);
+
+	calculateMatrices();
 }

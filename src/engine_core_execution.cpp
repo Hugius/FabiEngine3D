@@ -8,13 +8,9 @@ void EngineCore::_update()
 	_engineController->update();
 	_timer->stopClock("mainUpdate");
 
-	_timer->startClock("physicsUpdate");
+	_timer->startClock("cameraUpdate");
 	_camera->update();
-	_cameraCollisionHandler->update();
-	_raycastCalculator->update();
-	_raycastIntersector->update();
-	_camera->updateMatrices();
-	_timer->stopClock("physicsUpdate");
+	_timer->stopClock("cameraUpdate");
 
 	_timer->startClock("environmentUpdate");
 	_skyManager->update();

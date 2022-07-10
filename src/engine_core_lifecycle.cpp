@@ -103,7 +103,7 @@ EngineCore::EngineCore()
 
 	_timer->createClock("total");
 	_timer->createClock("mainUpdate");
-	_timer->createClock("physicsUpdate");
+	_timer->createClock("cameraUpdate");
 	_timer->createClock("environmentUpdate");
 	_timer->createClock("modelUpdate");
 	_timer->createClock("quadUpdate");
@@ -130,7 +130,7 @@ EngineCore::EngineCore()
 	_timer->createClock("bufferSwap");
 
 	_updateDeltaTimes.push_back({"mainUpdate", 0.0f});
-	_updateDeltaTimes.push_back({"physicsUpdate", 0.0f});
+	_updateDeltaTimes.push_back({"cameraUpdate", 0.0f});
 	_updateDeltaTimes.push_back({"environmentUpdate", 0.0f});
 	_updateDeltaTimes.push_back({"modelUpdate", 0.0f});
 	_updateDeltaTimes.push_back({"quadUpdate", 0.0f});
@@ -159,7 +159,7 @@ EngineCore::EngineCore()
 
 	_reservedClockIds.push_back("total");
 	_reservedClockIds.push_back("mainUpdate");
-	_reservedClockIds.push_back("physicsUpdate");
+	_reservedClockIds.push_back("cameraUpdate");
 	_reservedClockIds.push_back("environmentUpdate");
 	_reservedClockIds.push_back("modelUpdate");
 	_reservedClockIds.push_back("quadUpdate");

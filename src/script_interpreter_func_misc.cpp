@@ -302,7 +302,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
-					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" not of same type");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" are not of the same type");
 
 					return {};
 				}
@@ -386,7 +386,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
-					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" not of same type");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" are not of the same type");
 
 					return {};
 				}

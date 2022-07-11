@@ -44,7 +44,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 
 	if(variable->isConstant())
 	{
-		_throwRuntimeError("CONST variables cannot be typecasted");
+		_throwRuntimeError(CONST_KEYWORD + " variables cannot be typecasted");
 
 		return;
 	}

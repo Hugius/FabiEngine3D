@@ -81,7 +81,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(leftVariable->isConstant())
 	{
-		_throwRuntimeError("CONST variables cannot be changed");
+		_throwRuntimeError(CONST_KEYWORD + " variables cannot be changed");
 
 		return;
 	}

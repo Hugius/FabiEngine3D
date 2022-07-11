@@ -37,6 +37,24 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:collision_clear_camera_terrain")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			_fe3d->collision_clearCameraWithTerrain();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:collision_clear_camera_aabb")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			_fe3d->collision_clearCameraWithAabb();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

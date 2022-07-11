@@ -5,6 +5,8 @@
 - `fe3d:raycast_calculate_cursor_ray` () -----> `NONE`
 - `fe3d:raycast_calculate_terrain_intersection` (`DEC` max_distance, `DEC` precision) -----> `NONE`
 - `fe3d:raycast_calculate_aabb_intersection` () -----> `NONE`
+- `fe3d:raycast_clear_terrain_intersection` () -----> `NONE`
+- `fe3d:raycast_clear_aabb_intersection` () -----> `NONE`
 
 ## Getters
 

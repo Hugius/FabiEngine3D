@@ -1009,19 +1009,15 @@ public:
 	const bool raycast_isPointOnTerrainValid() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
-	void collision_setCameraAabbResponseEnabled(bool x, bool y, bool z);
-	void collision_setCameraTerrainResponseEnabled(bool value);
 	void collision_setCameraTerrainResponseHeight(float value);
 	void collision_setCameraTerrainResponseSpeed(float value);
+	void collision_calculateCameraWithTerrain(bool mustRespondY);
+	void collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 
 	const vector<string> collision_checkCameraWithAabbs() const;
 	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;
 	const float collision_getCameraTerrainResponseHeight() const;
 	const float collision_getCameraTerrainResponseSpeed() const;
-	const bool collision_isCameraAabbResponseEnabledX() const;
-	const bool collision_isCameraAabbResponseEnabledY() const;
-	const bool collision_isCameraAabbResponseEnabledZ() const;
-	const bool collision_isCameraTerrainResponseEnabled() const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithAabb(const string & aabbId) const;
 	const bool collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const;

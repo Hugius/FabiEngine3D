@@ -4,16 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:collision_is_camera_terrain_response_enabled")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_isCameraTerrainResponseEnabled();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_get_camera_terrain_response_height")
+	if(functionName == "fe3d:collision_get_camera_terrain_response_height")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -29,33 +20,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			bool result = _fe3d->collision_getCameraTerrainResponseSpeed();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_is_camera_aabb_response_enabled_x")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_isCameraAabbResponseEnabledX();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_is_camera_aabb_response_enabled_y")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_isCameraAabbResponseEnabledY();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_is_camera_aabb_response_enabled_z")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_isCameraAabbResponseEnabledZ();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_terrain")

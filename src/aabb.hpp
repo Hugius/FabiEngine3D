@@ -32,10 +32,8 @@ public:
 	void scaleLocalTo(const fvec3 & target, float speed);
 	void setParentId(const string & value);
 	void setParentType(AabbParentType value);
-	void setCollisionDirection(DirectionType value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
-	void setCollided(bool value);
 	void setColor(const fvec3 & value);
 	void setCentered(bool value);
 	void setMinClipPosition(const fvec3 & value);
@@ -61,10 +59,8 @@ public:
 	const bool isCentered() const;
 	const bool isRaycastResponsive() const;
 	const bool isCollisionResponsive() const;
-	const bool hasCollided() const;
 
 	const AabbParentType getParentType() const;
-	const DirectionType getCollisionDirection() const;
 
 private:
 	const string _id;
@@ -95,9 +91,7 @@ private:
 	bool _isCentered = false;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
-	bool _hasCollided = false;
 	bool _isVisible = true;
 
 	AabbParentType _parentType = {};
-	DirectionType _collisionDirection = {};
 };

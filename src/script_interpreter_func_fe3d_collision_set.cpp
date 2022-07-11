@@ -15,28 +15,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:collision_set_camera_aabb_response_enabled")
-	{
-		const auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->collision_setCameraAabbResponseEnabled(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:collision_set_camera_terrain_response_enabled")
-	{
-		const auto types = {SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->collision_setCameraTerrainResponseEnabled(args[0]->getBoolean());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:collision_set_camera_terrain_response_height")
 	{
 		const auto types = {SVT::DECIMAL};
@@ -55,6 +33,28 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraTerrainResponseSpeed(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:collision_calculate_camera_terrain")
+	{
+		const auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->collision_calculateCameraWithTerrain(args[0]->getBoolean());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:collision_calculate_camera_aabb")
+	{
+		const auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->collision_calculateCameraWithAabb(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

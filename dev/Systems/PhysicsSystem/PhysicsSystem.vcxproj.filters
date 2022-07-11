@@ -30,9 +30,6 @@
     <ClCompile Include="..\..\..\src\ray.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp">
-      <Filter>Collision\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp">
       <Filter>Collision\Camera</Filter>
     </ClCompile>

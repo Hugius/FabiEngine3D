@@ -21,6 +21,7 @@ void RaycastIntersector::calculateTerrainIntersection()
 void RaycastIntersector::calculateAabbIntersection()
 {
 	_closestAabbId = "";
+
 	_aabbIntersections.clear();
 
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
@@ -83,27 +84,6 @@ void RaycastIntersector::setTerrainIntersectionDistance(float distance)
 void RaycastIntersector::setTerrainIntersectionPrecision(float precision)
 {
 	_terrainIntersectionPrecision = precision;
-}
-
-void RaycastIntersector::resetTerrainStatus(const string & terrainId)
-{
-	if(terrainId == _terrainId)
-	{
-		_terrainId = "";
-	}
-}
-
-void RaycastIntersector::resetAabbStatus(const string & aabbId)
-{
-	if(aabbId == _closestAabbId)
-	{
-		_closestAabbId = "";
-	}
-
-	if(_aabbIntersections.find(aabbId) != _aabbIntersections.end())
-	{
-		_aabbIntersections.erase(aabbId);
-	}
 }
 
 const string & RaycastIntersector::getTerrainId() const

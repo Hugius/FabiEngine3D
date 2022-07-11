@@ -15,8 +15,6 @@ public:
 	void calculateAabbIntersection();
 	void setTerrainIntersectionDistance(float distance);
 	void setTerrainIntersectionPrecision(float precision);
-	void resetTerrainStatus(const string & terrainId);
-	void resetAabbStatus(const string & aabbId);
 
 	const string & getTerrainId() const;
 	const string & getClosestAabbId() const;

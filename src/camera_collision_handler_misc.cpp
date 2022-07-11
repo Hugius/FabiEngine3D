@@ -27,18 +27,6 @@ void CameraCollisionHandler::setCameraBox(shared_ptr<Box> value)
 	_cameraBox = value;
 }
 
-void CameraCollisionHandler::setCameraAabbResponseEnabled(bool x, bool y, bool z)
-{
-	_isCameraAabbResponseEnabledX = x;
-	_isCameraAabbResponseEnabledY = y;
-	_isCameraAabbResponseEnabledZ = z;
-}
-
-void CameraCollisionHandler::setCameraTerrainResponseEnabled(bool value)
-{
-	_isCameraTerrainResponseEnabled = value;
-}
-
 void CameraCollisionHandler::setCameraTerrainResponseHeight(float value)
 {
 	_cameraTerrainResponseHeight = value;
@@ -47,6 +35,32 @@ void CameraCollisionHandler::setCameraTerrainResponseHeight(float value)
 void CameraCollisionHandler::setCameraTerrainResponseSpeed(float value)
 {
 	_cameraTerrainResponseSpeed = value;
+}
+
+void CameraCollisionHandler::resetTerrainStatus(const string & terrainId)
+{
+	if(terrainId == _terrainId)
+	{
+		_terrainId = "";
+	}
+}
+
+void CameraCollisionHandler::resetAabbStatus(const string & aabbId)
+{
+	if(_aabbCollisions.find(aabbId) != _aabbCollisions.end())
+	{
+		_aabbCollisions.erase(aabbId);
+	}
+}
+
+const pair<bool, DirectionType> & CameraCollisionHandler::getAabbCollision(const string & aabbId) const
+{
+	return _aabbCollisions.at(aabbId);
+}
+
+const string & CameraCollisionHandler::getTerrainId() const
+{
+	return _terrainId;
 }
 
 const float CameraCollisionHandler::getCameraTerrainResponseHeight() const
@@ -62,24 +76,4 @@ const float CameraCollisionHandler::getCameraTerrainResponseSpeed() const
 const bool CameraCollisionHandler::isCameraUnderTerrain() const
 {
 	return _isCameraUnderTerrain;
-}
-
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledX() const
-{
-	return _isCameraAabbResponseEnabledX;
-}
-
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledY() const
-{
-	return _isCameraAabbResponseEnabledY;
-}
-
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledZ() const
-{
-	return _isCameraAabbResponseEnabledZ;
-}
-
-const bool CameraCollisionHandler::isCameraTerrainResponseEnabled() const
-{
-	return _isCameraTerrainResponseEnabled;
 }

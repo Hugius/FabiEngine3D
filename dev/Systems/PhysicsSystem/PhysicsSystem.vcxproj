@@ -61,7 +61,6 @@
     <ClCompile Include="..\..\..\src\box.cpp" />
     <ClCompile Include="..\..\..\src\camera_collision_handler_detection.cpp" />
     <ClCompile Include="..\..\..\src\camera_collision_handler_response.cpp" />
-    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp" />
     <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp" />
     <ClCompile Include="..\..\..\src\camera_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\camera_misc.cpp" />

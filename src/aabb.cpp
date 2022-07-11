@@ -126,11 +126,6 @@ void Aabb::updateTransformation()
 	_transformation = (translationMatrix * scalingMatrix);
 }
 
-void Aabb::setCollisionDirection(DirectionType value)
-{
-	_collisionDirection = value;
-}
-
 void Aabb::setRaycastResponsive(bool value)
 {
 	_isRaycastResponsive = value;
@@ -139,11 +134,6 @@ void Aabb::setRaycastResponsive(bool value)
 void Aabb::setCollisionResponsive(bool value)
 {
 	_isCollisionResponsive = value;
-}
-
-void Aabb::setCollided(bool value)
-{
-	_hasCollided = value;
 }
 
 void Aabb::setColor(const fvec3 & value)
@@ -317,11 +307,6 @@ const AabbParentType Aabb::getParentType() const
 	return _parentType;
 }
 
-const DirectionType Aabb::getCollisionDirection() const
-{
-	return _collisionDirection;
-}
-
 const bool Aabb::isVisible() const
 {
 	return _isVisible;
@@ -340,9 +325,4 @@ const bool Aabb::isRaycastResponsive() const
 const bool Aabb::isCollisionResponsive() const
 {
 	return _isCollisionResponsive;
-}
-
-const bool Aabb::hasCollided() const
-{
-	return _hasCollided;
 }

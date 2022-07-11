@@ -27,8 +27,7 @@ void BottomViewportController::initialize()
 	statisticsWindow->getScreen("main")->createTextField("cameraPosition", fvec2(-1.0f, 0.25f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsWindow->getScreen("main")->createTextField("cameraYaw", fvec2(-1.0f, 0.1f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsWindow->getScreen("main")->createTextField("cameraPitch", fvec2(-1.0f, -0.05f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsWindow->getScreen("main")->createTextField("raycastDirection", fvec2(-1.0f, -0.2f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsWindow->getScreen("main")->createTextField("triangles", fvec2(-1.0f, -0.35f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsWindow->getScreen("main")->createTextField("triangles", fvec2(-1.0f, -0.2f), CHAR_SIZE, "", fvec3(1.0f), false);
 
 	int uCounter = 1;
 	for(const auto & [key, deltaTime] : _fe3d->misc_getUpdateDeltaTimes())

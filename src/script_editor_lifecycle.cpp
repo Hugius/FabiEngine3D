@@ -23,7 +23,6 @@ void ScriptEditor::_load()
 	_fe3d->camera_setYaw(CAMERA_YAW);
 	_fe3d->camera_setPitch(CAMERA_PITCH);
 	_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
-	_fe3d->raycast_setAabbIntersectionEnabled(true);
 }
 
 void ScriptEditor::_unload()
@@ -51,7 +50,8 @@ void ScriptEditor::_unload()
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomQuality(0);
 	_fe3d->camera_reset();
-	_fe3d->raycast_setAabbIntersectionEnabled(false);
+	_fe3d->raycast_calculateCursorRay();
+	_fe3d->raycast_calculateAabbIntersection();
 
 	_script->clear();
 

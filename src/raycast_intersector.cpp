@@ -2,27 +2,30 @@
 
 using std::make_shared;
 
-void RaycastIntersector::update()
+void RaycastIntersector::calculateTerrainIntersection()
 {
-	if(_isTerrainIntersectionEnabled && (_terrainManager->getSelectedTerrain() != nullptr))
-	{
-		_terrainId = _terrainManager->getSelectedTerrain()->getId();
-		_pointOnTerrain = _calculatePointOnTerrain();
-		_distanceToTerrain = _calculateDistanceToTerrain();
-	}
-	else
+	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
 		_terrainId = "";
 		_pointOnTerrain = fvec3(-1.0f);
 		_distanceToTerrain = -1.0f;
 	}
+	else
+	{
+		_terrainId = _terrainManager->getSelectedTerrain()->getId();
+		_pointOnTerrain = _calculatePointOnTerrain();
+		_distanceToTerrain = _calculateDistanceToTerrain();
+	}
+}
 
+void RaycastIntersector::calculateAabbIntersection()
+{
 	_closestAabbId = "";
 	_aabbIntersections.clear();
 
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
-		if(!_isAabbIntersectionEnabled || !aabb->isRaycastResponsive())
+		if(!aabb->isRaycastResponsive())
 		{
 			_aabbIntersections.insert({aabb->getId(), -1.0f});
 
@@ -31,7 +34,7 @@ void RaycastIntersector::update()
 
 		auto distanceToAabb = _calculateDistanceToAabb(aabb);
 
-		if(_isTerrainIntersectionEnabled)
+		if(!_terrainId.empty())
 		{
 			if(_distanceToTerrain != -1.0f)
 			{
@@ -72,11 +75,6 @@ void RaycastIntersector::inject(shared_ptr<AabbManager> aabbManager)
 	_aabbManager = aabbManager;
 }
 
-void RaycastIntersector::setTerrainIntersectionEnabled(bool value)
-{
-	_isTerrainIntersectionEnabled = value;
-}
-
 void RaycastIntersector::setTerrainIntersectionDistance(float distance)
 {
 	_terrainIntersectionDistance = distance;
@@ -85,11 +83,6 @@ void RaycastIntersector::setTerrainIntersectionDistance(float distance)
 void RaycastIntersector::setTerrainIntersectionPrecision(float precision)
 {
 	_terrainIntersectionPrecision = precision;
-}
-
-void RaycastIntersector::setAabbIntersectionEnabled(bool value)
-{
-	_isAabbIntersectionEnabled = value;
 }
 
 void RaycastIntersector::resetTerrainStatus(const string & terrainId)
@@ -121,16 +114,6 @@ const string & RaycastIntersector::getTerrainId() const
 const string & RaycastIntersector::getClosestAabbId() const
 {
 	return _closestAabbId;
-}
-
-const bool RaycastIntersector::isTerrainIntersectionEnabled() const
-{
-	return _isTerrainIntersectionEnabled;
-}
-
-const bool RaycastIntersector::isAabbIntersectionEnabled() const
-{
-	return _isAabbIntersectionEnabled;
 }
 
 const float RaycastIntersector::getTerrainIntersectionDistance() const

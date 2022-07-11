@@ -58,15 +58,6 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_is_terrain_intersection_enabled")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->raycast_isTerrainIntersectionEnabled();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-		}
-	}
 	else if(functionName == "fe3d:raycast_get_terrain_intersection_distance")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
@@ -83,15 +74,6 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			const auto result = _fe3d->raycast_getTerrainIntersectionPrecision();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_is_aabb_intersection_enabled")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->raycast_isAabbIntersectionEnabled();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")

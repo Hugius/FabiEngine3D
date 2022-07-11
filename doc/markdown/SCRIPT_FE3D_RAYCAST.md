@@ -2,10 +2,11 @@
 
 ## Setters
 
-- `fe3d:raycast_set_terrain_intersection_enabled` (`BOL` value) -----> `NONE`
+- `fe3d:raycast_calculate_cursor_ray` () -----> `NONE`
+- `fe3d:raycast_calculate_terrain_intersection` () -----> `NONE`
+- `fe3d:raycast_calculate_aabb_intersection` () -----> `NONE`
 - `fe3d:raycast_set_terrain_intersection_distance` (`DEC` value) -----> `NONE`
 - `fe3d:raycast_set_terrain_intersection_precision` (`DEC` value) -----> `NONE`
-- `fe3d:raycast_set_aabb_intersection_enabled` (`BOL` value) -----> `NONE`
 
 ## Getters
 

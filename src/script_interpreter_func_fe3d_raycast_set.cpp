@@ -4,18 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:raycast_set_terrain_intersection_enabled")
-	{
-		const auto types = {SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->raycast_setTerrainIntersectionEnabled(args[0]->getBoolean());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:raycast_set_terrain_intersection_distance")
+	if(functionName == "fe3d:raycast_set_terrain_intersection_distance")
 	{
 		const auto types = {SVT::DECIMAL};
 
@@ -37,13 +26,29 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:raycast_set_aabb_intersection_enabled")
+	else if(functionName == "fe3d:raycast_calculate_cursor_ray")
 	{
-		const auto types = {SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->raycast_setTerrainIntersectionEnabled(args[0]->getBoolean());
+			_fe3d->raycast_calculateCursorRay();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:raycast_calculate_terrain_intersection")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			_fe3d->raycast_calculateTerrainIntersection();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:raycast_calculate_aabb_intersection")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			_fe3d->raycast_calculateAabbIntersection();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

@@ -8,14 +8,13 @@
 class RaycastIntersector final
 {
 public:
-	void update();
 	void inject(shared_ptr<RaycastCalculator> raycastCalculator);
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<AabbManager> aabbManager);
-	void setTerrainIntersectionEnabled(bool value);
+	void calculateTerrainIntersection();
+	void calculateAabbIntersection();
 	void setTerrainIntersectionDistance(float distance);
 	void setTerrainIntersectionPrecision(float precision);
-	void setAabbIntersectionEnabled(bool value);
 	void resetTerrainStatus(const string & terrainId);
 	void resetAabbStatus(const string & aabbId);
 
@@ -28,9 +27,6 @@ public:
 	const float getTerrainIntersectionPrecision() const;
 	const float getDistanceToTerrain() const;
 	const float getDistanceToAabb(const string & aabbId) const;
-
-	const bool isTerrainIntersectionEnabled() const;
-	const bool isAabbIntersectionEnabled() const;
 
 private:
 	const fvec3 _calculatePointOnTerrain() const;
@@ -55,7 +51,4 @@ private:
 	float _terrainIntersectionDistance = 0.0f;
 	float _terrainIntersectionPrecision = 0.0f;
 	float _distanceToTerrain = 0.0f;
-
-	bool _isTerrainIntersectionEnabled = false;
-	bool _isAabbIntersectionEnabled = false;
 };

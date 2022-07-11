@@ -72,16 +72,6 @@ void BottomViewportController::_updateStatistics()
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
 	{
-		const auto text = ("Raycast Direction: " +
-						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().x * 100.0f)) + "% " +
-						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().y * 100.0f)) + "% " +
-						   to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().z * 100.0f)) + "% ");
-
-		statisticsScreen->getTextField("raycastDirection")->setTextContent(text);
-	}
-
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
-	{
 		const auto text = ("Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount())));
 
 		statisticsScreen->getTextField("triangles")->setTextContent(text);

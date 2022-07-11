@@ -1,9 +1,19 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::raycast_setTerrainIntersectionEnabled(bool value)
+void EngineInterface::raycast_calculateCursorRay()
 {
-	_core->getRaycastIntersector()->setTerrainIntersectionEnabled(value);
+	_core->getRaycastCalculator()->calculateCursorRay();
+}
+
+void EngineInterface::raycast_calculateTerrainIntersection()
+{
+	_core->getRaycastIntersector()->calculateTerrainIntersection();
+}
+
+void EngineInterface::raycast_calculateAabbIntersection()
+{
+	_core->getRaycastIntersector()->calculateAabbIntersection();
 }
 
 void EngineInterface::raycast_setTerrainIntersectionDistance(float value)
@@ -14,11 +24,6 @@ void EngineInterface::raycast_setTerrainIntersectionDistance(float value)
 void EngineInterface::raycast_setTerrainIntersectionPrecision(float value)
 {
 	_core->getRaycastIntersector()->setTerrainIntersectionPrecision(value);
-}
-
-void EngineInterface::raycast_setAabbIntersectionEnabled(bool value)
-{
-	_core->getRaycastIntersector()->setAabbIntersectionEnabled(value);
 }
 
 const string & EngineInterface::raycast_getClosestAabbId() const
@@ -64,14 +69,4 @@ const float EngineInterface::raycast_getDistanceToAabb(const string & aabbId)
 const bool EngineInterface::raycast_isPointOnTerrainValid() const
 {
 	return (_core->getRaycastIntersector()->getPointOnTerrain() != fvec3(-1.0f));
-}
-
-const bool EngineInterface::raycast_isTerrainIntersectionEnabled() const
-{
-	return _core->getRaycastIntersector()->isTerrainIntersectionEnabled();
-}
-
-const bool EngineInterface::raycast_isAabbIntersectionEnabled() const
-{
-	return _core->getRaycastIntersector()->isAabbIntersectionEnabled();
 }

@@ -107,11 +107,6 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId,
 	return false;
 }
 
-const bool EngineInterface::collision_checkAabbWithAabb(const string & firstAabbId, const string & secondAabbId) const
-{
-	return false;
-}
-
 const bool EngineInterface::collision_isCameraTerrainResponseEnabled() const
 {
 	return _core->getCameraCollisionHandler()->isCameraTerrainResponseEnabled();

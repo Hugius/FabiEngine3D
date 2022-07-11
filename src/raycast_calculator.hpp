@@ -9,15 +9,13 @@ public:
 	RaycastCalculator();
 
 	void inject(shared_ptr<Camera> camera);
-	void update();
+	void calculateCursorRay();
 
 	const shared_ptr<Ray> getCursorRay() const;
 
 	const fvec3 calculatePointOnRay(shared_ptr<Ray> ray, float distance) const;
 
 private:
-	const shared_ptr<Ray> _calculateCursorRay() const;
-
 	const fvec4 _convertToViewSpace(const fvec4 & clipCoords) const;
 
 	const fvec3 _convertToWorldSpace(const fvec4 & viewCoords) const;

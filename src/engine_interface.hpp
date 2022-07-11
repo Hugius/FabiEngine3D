@@ -992,10 +992,11 @@ public:
 	const bool camera_isThirdPersonEnabled() const;
 	const bool camera_isFirstPersonEnabled() const;
 
-	void raycast_setTerrainIntersectionEnabled(bool value);
 	void raycast_setTerrainIntersectionDistance(float value);
 	void raycast_setTerrainIntersectionPrecision(float value);
-	void raycast_setAabbIntersectionEnabled(bool value);
+	void raycast_calculateCursorRay();
+	void raycast_calculateTerrainIntersection();
+	void raycast_calculateAabbIntersection();
 
 	const string & raycast_getClosestAabbId() const;
 	const fvec3 & raycast_getCursorRayPosition() const;
@@ -1006,8 +1007,6 @@ public:
 	const float raycast_getDistanceToTerrain();
 	const float raycast_getDistanceToAabb(const string & aabbId);
 	const bool raycast_isPointOnTerrainValid() const;
-	const bool raycast_isTerrainIntersectionEnabled() const;
-	const bool raycast_isAabbIntersectionEnabled() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
 	void collision_setCameraAabbResponseEnabled(bool x, bool y, bool z);

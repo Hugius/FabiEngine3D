@@ -93,19 +93,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(!isAccessingLeftList && (leftVariable->getType() == ScriptVariableType::MULTIPLE))
 	{
-		_throwRuntimeError("arithmetic not allowed on LST values");
+		_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
 
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING)
 	{
-		_throwRuntimeError("arithmetic not allowed on STR values");
+		_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
 
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN)
 	{
-		_throwRuntimeError("arithmetic not allowed on BOL values");
+		_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
 
 		return;
 	}
@@ -147,13 +147,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(_isListValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on LST values");
+		_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
 
 		return;
 	}
 	else if(_isStringValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on STR values");
+		_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
 
 		return;
 	}
@@ -171,7 +171,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on BOL values");
+		_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
 
 		return;
 	}
@@ -217,19 +217,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		if(!isAccessingRightList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
-			_throwRuntimeError("arithmetic not allowed on LST values");
+			_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
 
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::STRING)
 		{
-			_throwRuntimeError("arithmetic not allowed on STR values");
+			_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
 
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::BOOLEAN)
 		{
-			_throwRuntimeError("arithmetic not allowed on BOL values");
+			_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
 
 			return;
 		}

@@ -37,7 +37,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 
 	if(variable->getType() == ScriptVariableType::MULTIPLE)
 	{
-		_throwRuntimeError("LST variables cannot be typecasted");
+		_throwRuntimeError(LIST_KEYWORD + " variables cannot be typecasted");
 
 		return;
 	}

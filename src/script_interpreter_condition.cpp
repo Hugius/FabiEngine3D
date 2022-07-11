@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		{
 			if(_isListValue(elementString))
 			{
-				_throwRuntimeError("LST value cannot be used in condition");
+				_throwRuntimeError(LIST_KEYWORD + " value cannot be used in condition");
 
 				return false;
 			}
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 				{
-					_throwRuntimeError("LST variable cannot be used in condition");
+					_throwRuntimeError(LIST_KEYWORD + " variable cannot be used in condition");
 
 					return false;
 				}
@@ -253,14 +253,14 @@ const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstVa
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::STRING))
 	{
-		_throwRuntimeError("invalid comparison operator for STR values");
+		_throwRuntimeError("invalid comparison operator for " + STRING_KEYWORD + " values");
 
 		return false;
 	}
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::BOOLEAN))
 	{
-		_throwRuntimeError("invalid comparison operator for BOL values");
+		_throwRuntimeError("invalid comparison operator for " + BOOLEAN_KEYWORD + " values");
 
 		return false;
 	}

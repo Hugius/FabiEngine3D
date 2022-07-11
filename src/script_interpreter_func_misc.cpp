@@ -61,7 +61,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(firstListVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + firstName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + firstName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
@@ -70,7 +70,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(secondListVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + secondName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + secondName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
@@ -105,7 +105,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
@@ -141,7 +141,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
@@ -216,7 +216,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
@@ -284,14 +284,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
 
 			if(listVariable->getValueCount() == 0)
 			{
-				_throwRuntimeError("LST \"" + listName + "\" is empty");
+				_throwRuntimeError(LIST_KEYWORD + " \"" + listName + "\" is empty");
 
 				return {};
 			}
@@ -302,7 +302,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
-					_throwRuntimeError("values inside LST \"" + listName + "\" not of same type");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" not of same type");
 
 					return {};
 				}
@@ -342,7 +342,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				}
 				default:
 				{
-					_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" must be " + INTEGER_KEYWORD + " or " + DECIMAL_KEYWORD);
 
 					return {};
 				}
@@ -368,14 +368,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}
 
 			if(listVariable->getValueCount() == 0)
 			{
-				_throwRuntimeError("LST \"" + listName + "\" is empty");
+				_throwRuntimeError(LIST_KEYWORD + " \"" + listName + "\" is empty");
 
 				return {};
 			}
@@ -386,7 +386,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
-					_throwRuntimeError("values inside LST \"" + listName + "\" not of same type");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" not of same type");
 
 					return {};
 				}
@@ -426,7 +426,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				}
 				default:
 				{
-					_throwRuntimeError("values inside LST \"" + listName + "\" must be INT or DEC");
+					_throwRuntimeError("values inside " + LIST_KEYWORD + " \"" + listName + "\" must be " + INTEGER_KEYWORD + " or " + DECIMAL_KEYWORD);
 
 					return {};
 				}
@@ -452,7 +452,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
-				_throwRuntimeError("variable \"" + listName + "\" is not of type LST");
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
 
 				return {};
 			}

@@ -6,7 +6,7 @@ using std::make_shared;
 
 RaycastCalculator::RaycastCalculator()
 {
-	_cursorRay = make_shared<Ray>(fvec3(0.0f), fvec3(0.0f));
+	clearCursorRay();
 }
 
 void RaycastCalculator::inject(shared_ptr<Camera> camera)
@@ -29,6 +29,11 @@ void RaycastCalculator::calculateCursorRay()
 	const auto worldSpaceCoords = _convertToWorldSpace(viewSpaceCoords);
 
 	_cursorRay = make_shared<Ray>(_camera->getPosition(), Mathematics::normalize(worldSpaceCoords));
+}
+
+void RaycastCalculator::clearCursorRay()
+{
+	_cursorRay = make_shared<Ray>(fvec3(0.0f), fvec3(0.0f));
 }
 
 const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4 & clipCoords) const

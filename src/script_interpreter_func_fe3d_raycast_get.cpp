@@ -58,24 +58,6 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_get_terrain_intersection_distance")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->raycast_getTerrainIntersectionDistance();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_get_terrain_intersection_precision")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->raycast_getTerrainIntersectionPrecision();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

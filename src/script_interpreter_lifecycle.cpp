@@ -375,14 +375,12 @@ void ScriptInterpreter::unload()
 	_fe3d->graphics_setPlanarRefractionQuality(0);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 	_fe3d->camera_reset();
-	_fe3d->raycast_setTerrainIntersectionDistance(0.0f);
-	_fe3d->raycast_setTerrainIntersectionPrecision(0.0f);
-	_fe3d->raycast_calculateCursorRay();
-	_fe3d->raycast_calculateTerrainIntersection();
-	_fe3d->raycast_calculateAabbIntersection();
+	_fe3d->raycast_clearCursorRay();
+	_fe3d->raycast_clearTerrainIntersection();
+	_fe3d->raycast_clearAabbIntersection();
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
-	_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
+	_fe3d->collision_clearCameraWithTerrain();
+	_fe3d->collision_clearCameraWithAabb();
 	_fe3d->misc_setVsyncEnabled(true);
 
 	if(_fe3d->server_isRunning())

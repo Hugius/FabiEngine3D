@@ -3,10 +3,8 @@
 ## Setters
 
 - `fe3d:collision_set_camera_box` (`DEC` left, `DEC` right, `DEC` bottom, `DEC` top, `DEC` back, `DEC` front) -----> `NONE`
-- `fe3d:collision_set_camera_terrain_response_height` (`DEC` value) -----> `NONE`
-- `fe3d:collision_set_camera_terrain_response_speed` (`DEC` value) -----> `NONE`
-- `fe3d:collision_calculate_camera_terrain` (`BOL` value) -----> `NONE`
-- `fe3d:collision_calculate_camera_aabb` (`BOL` x, `BOL` y, `BOL` z) -----> `NONE`
+- `fe3d:collision_calculate_camera_terrain` (`BOL` must_respond, `DEC` response_height, `DEC` response_speed) -----> `NONE`
+- `fe3d:collision_calculate_camera_aabb` (`BOL` must_respond_x, `BOL` must_respond_y, `BOL` must_respond_z) -----> `NONE`
 
 ## Getters
 
@@ -19,5 +17,3 @@
 - `fe3d:collision_check_camera_quad3ds` (`STR` xyz) -----> `DEC`
 - `fe3d:collision_check_camera_text3ds` (`STR` xyz) -----> `DEC`
 - `fe3d:collision_check_camera_aabbs` (`STR` xyz) -----> `DEC`
-- `fe3d:collision_get_camera_terrain_response_height` () -----> `DEC`
-- `fe3d:collision_get_camera_terrain_response_speed` () -----> `DEC`

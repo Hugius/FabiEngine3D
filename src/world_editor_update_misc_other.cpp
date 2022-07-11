@@ -197,25 +197,15 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	if(_fe3d->terrain_getSelectedId().empty())
+	_fe3d->raycast_calculateCursorRay();
+
+	if(!_fe3d->terrain_getSelectedId().empty())
 	{
-		_fe3d->raycast_setTerrainIntersectionDistance(0.0f);
-		_fe3d->raycast_setTerrainIntersectionPrecision(0.0f);
-		_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
-		_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
-	}
-	else
-	{
-		_fe3d->raycast_setTerrainIntersectionDistance(Mathematics::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
-		_fe3d->raycast_setTerrainIntersectionPrecision(0.1f);
-		_fe3d->collision_setCameraTerrainResponseHeight(1.0f);
-		_fe3d->collision_setCameraTerrainResponseSpeed(_editorSpeed);
+		_fe3d->raycast_calculateTerrainIntersection(Mathematics::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)), 0.1f);
+		_fe3d->collision_calculateCameraWithTerrain(true, 1.0f, _editorSpeed);
 	}
 
-	_fe3d->raycast_calculateCursorRay();
-	_fe3d->raycast_calculateTerrainIntersection();
 	_fe3d->raycast_calculateAabbIntersection();
-	_fe3d->collision_calculateCameraWithTerrain(true);
 	_fe3d->collision_calculateCameraWithAabb(true, true, true);
 
 	const auto isSelected = (!_selectedModelId.empty() ||

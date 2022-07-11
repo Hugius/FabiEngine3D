@@ -2,18 +2,16 @@
 
 using std::make_shared;
 
-void RaycastIntersector::calculateTerrainIntersection()
+void RaycastIntersector::calculateTerrainIntersection(float maxDistance, float precision)
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
-		_terrainId = "";
 		_pointOnTerrain = fvec3(-1.0f);
 		_distanceToTerrain = -1.0f;
 	}
 	else
 	{
-		_terrainId = _terrainManager->getSelectedTerrain()->getId();
-		_pointOnTerrain = _calculatePointOnTerrain();
+		_pointOnTerrain = _calculatePointOnTerrain(maxDistance, precision);
 		_distanceToTerrain = _calculateDistanceToTerrain();
 	}
 }
@@ -35,16 +33,13 @@ void RaycastIntersector::calculateAabbIntersection()
 
 		auto distanceToAabb = _calculateDistanceToAabb(aabb);
 
-		if(!_terrainId.empty())
+		if(_distanceToTerrain != -1.0f)
 		{
-			if(_distanceToTerrain != -1.0f)
+			if(distanceToAabb != -1.0f)
 			{
-				if(distanceToAabb != -1.0f)
+				if(_distanceToTerrain < distanceToAabb)
 				{
-					if(_distanceToTerrain < distanceToAabb)
-					{
-						distanceToAabb = -1.0f;
-					}
+					distanceToAabb = -1.0f;
 				}
 			}
 		}
@@ -59,6 +54,19 @@ void RaycastIntersector::calculateAabbIntersection()
 			}
 		}
 	}
+}
+
+void RaycastIntersector::clearTerrainIntersection()
+{
+	_pointOnTerrain = fvec3(-1.0f);
+	_distanceToTerrain = -1.0f;
+}
+
+void RaycastIntersector::clearAabbIntersection()
+{
+	_closestAabbId = "";
+
+	_aabbIntersections.clear();
 }
 
 void RaycastIntersector::inject(shared_ptr<RaycastCalculator> raycastCalculator)
@@ -76,34 +84,9 @@ void RaycastIntersector::inject(shared_ptr<AabbManager> aabbManager)
 	_aabbManager = aabbManager;
 }
 
-void RaycastIntersector::setTerrainIntersectionDistance(float distance)
-{
-	_terrainIntersectionDistance = distance;
-}
-
-void RaycastIntersector::setTerrainIntersectionPrecision(float precision)
-{
-	_terrainIntersectionPrecision = precision;
-}
-
-const string & RaycastIntersector::getTerrainId() const
-{
-	return _terrainId;
-}
-
 const string & RaycastIntersector::getClosestAabbId() const
 {
 	return _closestAabbId;
-}
-
-const float RaycastIntersector::getTerrainIntersectionDistance() const
-{
-	return _terrainIntersectionDistance;
-}
-
-const float RaycastIntersector::getTerrainIntersectionPrecision() const
-{
-	return _terrainIntersectionPrecision;
 }
 
 const float RaycastIntersector::getDistanceToTerrain() const
@@ -174,15 +157,15 @@ const bool RaycastIntersector::_isUnderTerrain(float distance) const
 	return (pointOnRay.y < terrainHeight);
 }
 
-const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
+const fvec3 RaycastIntersector::_calculatePointOnTerrain(float maxDistance, float precision) const
 {
 	float distance = 0.0f;
 
-	while(distance < _terrainIntersectionDistance)
+	while(distance < maxDistance)
 	{
 		if(_isUnderTerrain(distance))
 		{
-			distance -= (_terrainIntersectionPrecision * 0.5f);
+			distance -= (precision * 0.5f);
 
 			const auto endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 			const auto selectedTerrain = _terrainManager->getSelectedTerrain();
@@ -198,7 +181,7 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
 		}
 		else
 		{
-			distance += _terrainIntersectionPrecision;
+			distance += precision;
 		}
 	}
 

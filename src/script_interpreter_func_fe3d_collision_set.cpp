@@ -15,35 +15,13 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:collision_set_camera_terrain_response_height")
-	{
-		const auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->collision_setCameraTerrainResponseHeight(args[0]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:collision_set_camera_terrain_response_speed")
-	{
-		const auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->collision_setCameraTerrainResponseSpeed(args[0]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:collision_calculate_camera_terrain")
 	{
-		const auto types = {SVT::BOOLEAN};
+		const auto types = {SVT::BOOLEAN, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_calculateCameraWithTerrain(args[0]->getBoolean());
+			_fe3d->collision_calculateCameraWithTerrain(args[0]->getBoolean(), args[1]->getDecimal(), args[2]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

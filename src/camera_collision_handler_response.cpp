@@ -1,39 +1,14 @@
 #include "camera_collision_handler.hpp"
 
-void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY)
+void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed)
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
-		_terrainId = "";
 		_isCameraUnderTerrain = false;
 	}
 	else
 	{
-		_terrainId = _terrainManager->getSelectedTerrain()->getId();
-		_isCameraUnderTerrain = false;
-
-		auto cameraPosition = _camera->getPosition();
-
-		const auto terrainX = (cameraPosition.x + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
-		const auto terrainZ = (cameraPosition.z + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
-		const auto terrainY = (_terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), terrainX, terrainZ) + _cameraTerrainResponseHeight);
-
-		if(cameraPosition.y < terrainY)
-		{
-			_isCameraUnderTerrain = true;
-
-			if(mustRespondY)
-			{
-				_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainResponseSpeed, 0.0f));
-
-				cameraPosition.y = _camera->getPosition().y;
-
-				if(cameraPosition.y > terrainY)
-				{
-					_camera->setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
-				}
-			}
-		}
+		_isCameraUnderTerrain = _calculateTerrainCollision(mustRespondY, responseHeight, responseSpeed);
 	}
 }
 
@@ -45,7 +20,7 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 	int yPriority = 0;
 	int zPriority = 0;
 
-	switch(_responseDirectionOrder)
+	switch(_aabbResponseDirectionOrder)
 	{
 		case DirectionOrderType::XYZ:
 		{
@@ -110,30 +85,68 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 
 	if((xPriority > yPriority) && (xPriority > zPriority) && (yPriority >= zPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::XYZ;
+		_aabbResponseDirectionOrder = DirectionOrderType::XYZ;
 	}
 	else if((xPriority > yPriority) && (xPriority > zPriority) && (zPriority >= yPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::XZY;
+		_aabbResponseDirectionOrder = DirectionOrderType::XZY;
 	}
 	else if((yPriority > xPriority) && (yPriority > zPriority) && (xPriority >= zPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::YXZ;
+		_aabbResponseDirectionOrder = DirectionOrderType::YXZ;
 	}
 	else if((yPriority > xPriority) && (yPriority > zPriority) && (zPriority >= xPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::YZX;
+		_aabbResponseDirectionOrder = DirectionOrderType::YZX;
 	}
 	else if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::ZYX;
+		_aabbResponseDirectionOrder = DirectionOrderType::ZYX;
 	}
 	else if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 	{
-		_responseDirectionOrder = DirectionOrderType::ZXY;
+		_aabbResponseDirectionOrder = DirectionOrderType::ZXY;
 	}
 
 	_lastCameraPosition = _camera->getPosition();
+}
+
+void CameraCollisionHandler::clearTerrainCollision()
+{
+	_isCameraUnderTerrain = false;
+}
+
+void CameraCollisionHandler::clearAabbCollision()
+{
+	_aabbCollisions.clear();
+}
+
+const bool CameraCollisionHandler::_calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed) const
+{
+	auto cameraPosition = _camera->getPosition();
+
+	const auto terrainX = (cameraPosition.x + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
+	const auto terrainZ = (cameraPosition.z + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
+	const auto terrainY = (_terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), terrainX, terrainZ) + responseHeight);
+
+	if(cameraPosition.y < terrainY)
+	{
+		if(mustRespondY)
+		{
+			_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * responseSpeed, 0.0f));
+
+			cameraPosition.y = _camera->getPosition().y;
+
+			if(cameraPosition.y > terrainY)
+			{
+				_camera->setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
+			}
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 const bool CameraCollisionHandler::_calculateAabbCollision(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ)

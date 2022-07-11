@@ -4,25 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:collision_get_camera_terrain_response_height")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_getCameraTerrainResponseHeight();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_get_camera_terrain_response_speed")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			bool result = _fe3d->collision_getCameraTerrainResponseSpeed();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:collision_check_camera_terrain")
+	if(functionName == "fe3d:collision_check_camera_terrain")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

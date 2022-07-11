@@ -992,32 +992,29 @@ public:
 	const bool camera_isThirdPersonEnabled() const;
 	const bool camera_isFirstPersonEnabled() const;
 
-	void raycast_setTerrainIntersectionDistance(float value);
-	void raycast_setTerrainIntersectionPrecision(float value);
 	void raycast_calculateCursorRay();
-	void raycast_calculateTerrainIntersection();
+	void raycast_calculateTerrainIntersection(float maxDistance, float precision);
 	void raycast_calculateAabbIntersection();
+	void raycast_clearCursorRay();
+	void raycast_clearTerrainIntersection();
+	void raycast_clearAabbIntersection();
 
 	const string & raycast_getClosestAabbId() const;
 	const fvec3 & raycast_getCursorRayPosition() const;
 	const fvec3 & raycast_getCursorRayDirection() const;
 	const fvec3 & raycast_getPointOnTerrain() const;
-	const float raycast_getTerrainIntersectionDistance() const;
-	const float raycast_getTerrainIntersectionPrecision() const;
 	const float raycast_getDistanceToTerrain();
 	const float raycast_getDistanceToAabb(const string & aabbId);
 	const bool raycast_isPointOnTerrainValid() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
-	void collision_setCameraTerrainResponseHeight(float value);
-	void collision_setCameraTerrainResponseSpeed(float value);
-	void collision_calculateCameraWithTerrain(bool mustRespondY);
+	void collision_calculateCameraWithTerrain(bool mustRespondY, float responseHeight, float responseSpeed);
 	void collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
+	void collision_clearCameraWithTerrain();
+	void collision_clearCameraWithAabb();
 
 	const vector<string> collision_checkCameraWithAabbs() const;
 	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;
-	const float collision_getCameraTerrainResponseHeight() const;
-	const float collision_getCameraTerrainResponseSpeed() const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithAabb(const string & aabbId) const;
 	const bool collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const;

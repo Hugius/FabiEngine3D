@@ -6,24 +6,24 @@ void EngineInterface::collision_setCameraBox(float left, float right, float bott
 	_core->getCameraCollisionHandler()->setCameraBox(make_shared<Box>(left, right, bottom, top, back, front));
 }
 
-void EngineInterface::collision_setCameraTerrainResponseHeight(float value)
+void EngineInterface::collision_calculateCameraWithTerrain(bool mustRespondY, float responseHeight, float responseSpeed)
 {
-	_core->getCameraCollisionHandler()->setCameraTerrainResponseHeight(value);
-}
-
-void EngineInterface::collision_setCameraTerrainResponseSpeed(float value)
-{
-	_core->getCameraCollisionHandler()->setCameraTerrainResponseSpeed(value);
-}
-
-void EngineInterface::collision_calculateCameraWithTerrain(bool mustRespondY)
-{
-	_core->getCameraCollisionHandler()->calculateTerrainCollision(mustRespondY);
+	_core->getCameraCollisionHandler()->calculateTerrainCollision(mustRespondY, responseHeight, responseSpeed);
 }
 
 void EngineInterface::collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
 {
 	_core->getCameraCollisionHandler()->calculateAabbCollision(mustRespondX, mustRespondY, mustRespondZ);
+}
+
+void EngineInterface::collision_clearCameraWithTerrain()
+{
+	_core->getCameraCollisionHandler()->clearTerrainCollision();
+}
+
+void EngineInterface::collision_clearCameraWithAabb()
+{
+	_core->getCameraCollisionHandler()->clearAabbCollision();
 }
 
 const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
@@ -66,16 +66,6 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId) const
 {
 	return _core->getCameraCollisionHandler()->getAabbCollision(aabbId).first;
-}
-
-const float EngineInterface::collision_getCameraTerrainResponseHeight() const
-{
-	return _core->getCameraCollisionHandler()->getCameraTerrainResponseHeight();
-}
-
-const float EngineInterface::collision_getCameraTerrainResponseSpeed() const
-{
-	return _core->getCameraCollisionHandler()->getCameraTerrainResponseSpeed();
 }
 
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const

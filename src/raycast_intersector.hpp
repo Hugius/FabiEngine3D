@@ -11,23 +11,20 @@ public:
 	void inject(shared_ptr<RaycastCalculator> raycastCalculator);
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<AabbManager> aabbManager);
-	void calculateTerrainIntersection();
+	void calculateTerrainIntersection(float maxDistance, float precision);
 	void calculateAabbIntersection();
-	void setTerrainIntersectionDistance(float distance);
-	void setTerrainIntersectionPrecision(float precision);
+	void clearTerrainIntersection();
+	void clearAabbIntersection();
 
-	const string & getTerrainId() const;
 	const string & getClosestAabbId() const;
 
 	const fvec3 & getPointOnTerrain() const;
 
-	const float getTerrainIntersectionDistance() const;
-	const float getTerrainIntersectionPrecision() const;
 	const float getDistanceToTerrain() const;
 	const float getDistanceToAabb(const string & aabbId) const;
 
 private:
-	const fvec3 _calculatePointOnTerrain() const;
+	const fvec3 _calculatePointOnTerrain(float distance, float precision) const;
 
 	const float _calculateDistanceToTerrain() const;
 	const float _calculateDistanceToAabb(shared_ptr<Aabb> aabb) const;
@@ -41,12 +38,9 @@ private:
 	shared_ptr<TerrainManager> _terrainManager = nullptr;
 	shared_ptr<AabbManager> _aabbManager = nullptr;
 
-	string _terrainId = "";
 	string _closestAabbId = "";
 
 	fvec3 _pointOnTerrain = fvec3(0.0f);
 
-	float _terrainIntersectionDistance = 0.0f;
-	float _terrainIntersectionPrecision = 0.0f;
 	float _distanceToTerrain = 0.0f;
 };

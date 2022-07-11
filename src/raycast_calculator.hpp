@@ -10,6 +10,7 @@ public:
 
 	void inject(shared_ptr<Camera> camera);
 	void calculateCursorRay();
+	void clearCursorRay();
 
 	const shared_ptr<Ray> getCursorRay() const;
 

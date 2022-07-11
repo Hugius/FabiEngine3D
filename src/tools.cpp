@@ -2,7 +2,6 @@
 
 #include <filesystem>
 #include <shlobj_core.h>
-#include <iostream>
 
 using std::to_string;
 using std::filesystem::copy;
@@ -581,7 +580,12 @@ const ivec2 Tools::getCursorPosition()
 
 	GetCursorPos(&point);
 
-	return ivec2(point.x, (_configuration->getWindowSize().y - point.y));
+	const auto monitorSize = getMonitorSize();
+	const auto windowsize = getWindowSize();
+	const auto cursorOffset = ((monitorSize - windowsize) / 2);
+	const auto cursorPosition = ivec2(point.x, (monitorSize.y - point.y));
+
+	return (cursorPosition - cursorOffset);
 }
 
 const ivec2 Tools::getMonitorSize()

@@ -337,34 +337,6 @@ void RenderWindow::setVisible(bool value)
 	}
 }
 
-const ivec2 RenderWindow::getPosition() const
-{
-	if(_windowHandle == nullptr)
-	{
-		abort();
-	}
-
-	RECT rectangle = {};
-
-	GetWindowRect(GetDesktopWindow(), &rectangle);
-
-	return ivec2(rectangle.left, rectangle.top);
-}
-
-const ivec2 RenderWindow::getSize() const
-{
-	if(_windowHandle == nullptr)
-	{
-		abort();
-	}
-
-	RECT rectangle = {};
-
-	GetWindowRect(GetDesktopWindow(), &rectangle);
-
-	return ivec2(rectangle.right, rectangle.bottom);
-}
-
 const bool RenderWindow::isExisting() const
 {
 	return (_windowHandle != nullptr);

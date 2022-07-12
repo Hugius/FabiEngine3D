@@ -15,7 +15,7 @@ public:
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void setCameraBox(shared_ptr<Box> value);
-	void calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed);
+	void calculateTerrainCollision(bool mustRespondY, float responseSpeed);
 	void calculateAabbCollision(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 	void clearTerrainCollision();
 	void clearAabbCollision();
@@ -25,7 +25,7 @@ public:
 	const bool isCameraUnderTerrain() const;
 
 private:
-	const bool _calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed) const;
+	const bool _calculateTerrainCollision(bool mustRespondY, float responseSpeed) const;
 	const bool _calculateAabbCollision(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, shared_ptr<Box> cameraBox) const;
 	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;

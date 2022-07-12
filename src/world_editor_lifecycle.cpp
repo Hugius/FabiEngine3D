@@ -55,6 +55,7 @@ void WorldEditor::_load()
 	_fe3d->model_setBright(SPEAKER_ID, "", true);
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->collision_setCameraBox(0.0f, 0.0f, CAMERA_BOX_HEIGHT, 0.0f, 0.0f, 0.0f);
 
 	for(const auto & skyId : _skyEditor->getLoadedSkyIds())
 	{
@@ -138,6 +139,7 @@ void WorldEditor::_unload()
 	_fe3d->model_delete(SPEAKER_ID);
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
+	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0, 0.0f, 0.0f, 0.0f);
 
 	_gui->getOverlay()->deleteTextField(SELECTED_TITLE_ID);
 	_gui->getOverlay()->deleteTextField(ACTIVE_TITLE_ID);

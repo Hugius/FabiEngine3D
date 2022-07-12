@@ -6,9 +6,9 @@ void EngineInterface::collision_setCameraBox(float left, float right, float bott
 	_core->getCameraCollisionHandler()->setCameraBox(make_shared<Box>(left, right, bottom, top, back, front));
 }
 
-void EngineInterface::collision_calculateCameraWithTerrain(bool mustRespondY, float responseHeight, float responseSpeed)
+void EngineInterface::collision_calculateCameraWithTerrain(bool mustRespondY, float responseSpeed)
 {
-	_core->getCameraCollisionHandler()->calculateTerrainCollision(mustRespondY, responseHeight, responseSpeed);
+	_core->getCameraCollisionHandler()->calculateTerrainCollision(mustRespondY, responseSpeed);
 }
 
 void EngineInterface::collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ)

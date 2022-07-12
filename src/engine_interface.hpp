@@ -1008,7 +1008,7 @@ public:
 	const bool raycast_isPointOnTerrainValid() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
-	void collision_calculateCameraWithTerrain(bool mustRespondY, float responseHeight, float responseSpeed);
+	void collision_calculateCameraWithTerrain(bool mustRespondY, float responseSpeed);
 	void collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 	void collision_clearCameraWithTerrain();
 	void collision_clearCameraWithAabb();

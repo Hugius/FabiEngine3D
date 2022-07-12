@@ -202,7 +202,7 @@ void WorldEditor::_updateMiscellaneous()
 	if(!_fe3d->terrain_getSelectedId().empty())
 	{
 		_fe3d->raycast_calculateTerrainIntersection(Mathematics::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)), 0.1f);
-		_fe3d->collision_calculateCameraWithTerrain(true, 1.0f, _editorSpeed);
+		_fe3d->collision_calculateCameraWithTerrain(true, _editorSpeed);
 	}
 
 	_fe3d->raycast_calculateAabbIntersection();

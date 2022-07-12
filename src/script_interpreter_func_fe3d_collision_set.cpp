@@ -17,11 +17,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	}
 	else if(functionName == "fe3d:collision_calculate_camera_terrain")
 	{
-		const auto types = {SVT::BOOLEAN, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::BOOLEAN, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_calculateCameraWithTerrain(args[0]->getBoolean(), args[1]->getDecimal(), args[2]->getDecimal());
+			_fe3d->collision_calculateCameraWithTerrain(args[0]->getBoolean(), args[1]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

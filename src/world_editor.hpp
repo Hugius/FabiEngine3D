@@ -242,6 +242,7 @@ private:
 	static inline constexpr float SKY_EXPOSURE_SPEED_FACTOR = 10000.0f;
 	static inline constexpr float BLOOM_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float CAMERA_POSITION_SPEED_DIVIDER = 100.0f;
+	static inline constexpr float CAMERA_BOX_HEIGHT = 1.0f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 

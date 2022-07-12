@@ -1,6 +1,6 @@
 #include "camera_collision_handler.hpp"
 
-void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed)
+void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float responseSpeed)
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
@@ -8,7 +8,7 @@ void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float 
 	}
 	else
 	{
-		_isCameraUnderTerrain = _calculateTerrainCollision(mustRespondY, responseHeight, responseSpeed);
+		_isCameraUnderTerrain = _calculateTerrainCollision(mustRespondY, responseSpeed);
 	}
 }
 
@@ -121,19 +121,23 @@ void CameraCollisionHandler::clearAabbCollision()
 	_aabbCollisions.clear();
 }
 
-const bool CameraCollisionHandler::_calculateTerrainCollision(bool mustRespondY, float responseHeight, float responseSpeed) const
+const bool CameraCollisionHandler::_calculateTerrainCollision(bool mustRespondY, float responseSpeed) const
 {
 	auto cameraPosition = _camera->getPosition();
 
-	const auto terrainX = (cameraPosition.x + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
-	const auto terrainZ = (cameraPosition.z + (_terrainManager->getSelectedTerrain()->getSize() * 0.5f));
-	const auto terrainY = (_terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), terrainX, terrainZ) + responseHeight);
+	const auto terrainX = ((_terrainManager->getSelectedTerrain()->getSize() * 0.5f) + cameraPosition.x);
+	const auto terrainZ = ((_terrainManager->getSelectedTerrain()->getSize() * 0.5f) + cameraPosition.z);
+	const auto leftTerrainY = _terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), (terrainX - _cameraBox->getLeft()), terrainZ);
+	const auto rightTerrainY = _terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), (terrainX + _cameraBox->getRight()), terrainZ);
+	const auto backTerrainY = _terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), terrainX, (terrainZ - _cameraBox->getBack()));
+	const auto frontTerrainY = _terrainManager->getTerrainPixelHeight(_terrainManager->getSelectedTerrain()->getId(), terrainX, (terrainZ + _cameraBox->getFront()));
+	const auto terrainY = (max(max(max(leftTerrainY, rightTerrainY), backTerrainY), frontTerrainY) + _cameraBox->getBottom());
 
 	if(cameraPosition.y < terrainY)
 	{
 		if(mustRespondY)
 		{
-			_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * responseSpeed, 0.0f));
+			_camera->move(fvec3(0.0f, (fabsf(cameraPosition.y - terrainY) * responseSpeed), 0.0f));
 
 			cameraPosition.y = _camera->getPosition().y;
 

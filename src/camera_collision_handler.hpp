@@ -15,24 +15,24 @@ public:
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void setCameraBox(shared_ptr<Box> value);
-	void calculateTerrainCollision(bool mustRespondY, float responseSpeed);
-	void calculateAabbCollision(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
-	void clearTerrainCollision();
-	void clearAabbCollision();
+	void calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed);
+	void calculateCollisionWithAabbs(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
+	void clearCollisionWithTerrain();
+	void clearCollisionWithAabbs();
 
-	const pair<bool, DirectionType> & getAabbCollision(const string & aabbId) const;
+	const vector<pair<string, DirectionType>> & getAabbCollisions() const;
 
 	const bool isCameraUnderTerrain() const;
 
 private:
-	const bool _calculateTerrainCollision(bool mustRespondY, float responseSpeed) const;
-	const bool _calculateAabbCollision(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ);
+	const bool _calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed) const;
+	const bool _calculateCollisionWithAabbs(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, shared_ptr<Box> cameraBox) const;
 	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
 	const bool _isInsideAabbY(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
 	const bool _isInsideAabbZ(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;
 
-	unordered_map<string, pair<bool, DirectionType>> _aabbCollisions = {};
+	vector<pair<string, DirectionType>> _aabbCollisions = {};
 
 	shared_ptr<Box> _cameraBox = nullptr;
 	shared_ptr<TerrainManager> _terrainManager = nullptr;

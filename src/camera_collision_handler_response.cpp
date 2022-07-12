@@ -1,6 +1,6 @@
 #include "camera_collision_handler.hpp"
 
-void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float responseSpeed)
+void CameraCollisionHandler::calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed)
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
@@ -8,11 +8,11 @@ void CameraCollisionHandler::calculateTerrainCollision(bool mustRespondY, float 
 	}
 	else
 	{
-		_isCameraUnderTerrain = _calculateTerrainCollision(mustRespondY, responseSpeed);
+		_isCameraUnderTerrain = _calculateCollisionWithTerrain(mustRespondY, responseSpeed);
 	}
 }
 
-void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
+void CameraCollisionHandler::calculateCollisionWithAabbs(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
 {
 	_aabbCollisions.clear();
 
@@ -26,9 +26,9 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 		{
 			xPriority = 3; yPriority = 2; zPriority = 1;
 
-			xPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			xPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
@@ -36,9 +36,9 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 		{
 			xPriority = 3; zPriority = 2; yPriority = 1;
 
-			xPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			xPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
@@ -46,18 +46,18 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 		{
 			yPriority = 3; xPriority = 1; zPriority = 2;
 
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
-			xPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			xPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
 		case DirectionOrderType::YZX:
 		{
 			yPriority = 3; zPriority = 2; xPriority = 1;
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
@@ -65,9 +65,9 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 		{
 			zPriority = 3; xPriority = 2; yPriority = 1;
 
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
-			xPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			xPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
@@ -75,9 +75,9 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 		{
 			zPriority = 3; yPriority = 2; xPriority = 1;
 
-			zPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
-			yPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
-			xPriority *= static_cast<int>(_calculateAabbCollision(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
+			zPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Z, mustRespondX, mustRespondY, mustRespondZ));
+			yPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::Y, mustRespondX, mustRespondY, mustRespondZ));
+			xPriority *= static_cast<int>(_calculateCollisionWithAabbs(DirectionType::X, mustRespondX, mustRespondY, mustRespondZ));
 
 			break;
 		}
@@ -111,17 +111,7 @@ void CameraCollisionHandler::calculateAabbCollision(bool mustRespondX, bool must
 	_lastCameraPosition = _camera->getPosition();
 }
 
-void CameraCollisionHandler::clearTerrainCollision()
-{
-	_isCameraUnderTerrain = false;
-}
-
-void CameraCollisionHandler::clearAabbCollision()
-{
-	_aabbCollisions.clear();
-}
-
-const bool CameraCollisionHandler::_calculateTerrainCollision(bool mustRespondY, float responseSpeed) const
+const bool CameraCollisionHandler::_calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed) const
 {
 	auto cameraPosition = _camera->getPosition();
 
@@ -153,14 +143,12 @@ const bool CameraCollisionHandler::_calculateTerrainCollision(bool mustRespondY,
 	return false;
 }
 
-const bool CameraCollisionHandler::_calculateAabbCollision(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ)
+const bool CameraCollisionHandler::_calculateCollisionWithAabbs(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ)
 {
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
 		if(!aabb->isRaycastResponsive())
 		{
-			_aabbCollisions.insert({aabb->getId(), {false, DirectionType::X}});
-
 			continue;
 		}
 
@@ -174,7 +162,7 @@ const bool CameraCollisionHandler::_calculateAabbCollision(DirectionType directi
 
 				if(hasCollided)
 				{
-					_aabbCollisions.insert({aabb->getId(), {true, DirectionType::X}});
+					_aabbCollisions.push_back({aabb->getId(), DirectionType::X});
 
 					if(mustRespondX)
 					{
@@ -194,7 +182,7 @@ const bool CameraCollisionHandler::_calculateAabbCollision(DirectionType directi
 
 				if(hasCollided)
 				{
-					_aabbCollisions.insert({aabb->getId(), {true, DirectionType::Y}});
+					_aabbCollisions.push_back({aabb->getId(), DirectionType::Y});
 
 					if(mustRespondY)
 					{
@@ -217,7 +205,7 @@ const bool CameraCollisionHandler::_calculateAabbCollision(DirectionType directi
 
 				if(hasCollided)
 				{
-					_aabbCollisions.insert({aabb->getId(), {true, DirectionType::Z}});
+					_aabbCollisions.push_back({aabb->getId(), DirectionType::Z});
 
 					if(mustRespondZ)
 					{

@@ -26,13 +26,13 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:collision_calculate_camera_aabb")
+	else if(functionName == "fe3d:collision_calculate_camera_aabbs")
 	{
 		const auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_calculateCameraWithAabb(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
+			_fe3d->collision_calculateCameraWithAabbs(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->collision_clearCameraWithAabb();
+			_fe3d->collision_clearCameraWithAabbs();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

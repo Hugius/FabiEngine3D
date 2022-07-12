@@ -1009,9 +1009,11 @@ public:
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
 	void collision_calculateCameraWithTerrain(bool mustRespondY, float responseSpeed);
-	void collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
+	void collision_calculateCameraWithAabbs(bool mustRespondX, bool mustRespondY, bool mustRespondZ);
+	void collision_calculateAabbWithAabbs(const string & aabbId);
 	void collision_clearCameraWithTerrain();
-	void collision_clearCameraWithAabb();
+	void collision_clearCameraWithAabbs();
+	void collision_clearAabbWithAabbs();
 
 	const vector<string> collision_checkCameraWithAabbs() const;
 	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;

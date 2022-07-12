@@ -206,7 +206,7 @@ void WorldEditor::_updateMiscellaneous()
 	}
 
 	_fe3d->raycast_calculateAabbIntersection();
-	_fe3d->collision_calculateCameraWithAabb(true, true, true);
+	_fe3d->collision_calculateCameraWithAabbs(true, true, true);
 
 	const auto isSelected = (!_selectedModelId.empty() ||
 							 !_selectedQuad3dId.empty() ||

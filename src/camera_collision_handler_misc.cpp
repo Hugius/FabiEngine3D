@@ -27,12 +27,22 @@ void CameraCollisionHandler::setCameraBox(shared_ptr<Box> value)
 	_cameraBox = value;
 }
 
-const pair<bool, DirectionType> & CameraCollisionHandler::getAabbCollision(const string & aabbId) const
-{
-	return _aabbCollisions.at(aabbId);
-}
-
 const bool CameraCollisionHandler::isCameraUnderTerrain() const
 {
 	return _isCameraUnderTerrain;
+}
+
+void CameraCollisionHandler::clearCollisionWithTerrain()
+{
+	_isCameraUnderTerrain = false;
+}
+
+void CameraCollisionHandler::clearCollisionWithAabbs()
+{
+	_aabbCollisions.clear();
+}
+
+const vector<pair<string, DirectionType>> & CameraCollisionHandler::getAabbCollisions() const
+{
+	return _aabbCollisions;
 }

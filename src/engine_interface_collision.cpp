@@ -8,34 +8,41 @@ void EngineInterface::collision_setCameraBox(float left, float right, float bott
 
 void EngineInterface::collision_calculateCameraWithTerrain(bool mustRespondY, float responseSpeed)
 {
-	_core->getCameraCollisionHandler()->calculateTerrainCollision(mustRespondY, responseSpeed);
+	_core->getCameraCollisionHandler()->calculateCollisionWithTerrain(mustRespondY, responseSpeed);
 }
 
-void EngineInterface::collision_calculateCameraWithAabb(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
+void EngineInterface::collision_calculateCameraWithAabbs(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
 {
-	_core->getCameraCollisionHandler()->calculateAabbCollision(mustRespondX, mustRespondY, mustRespondZ);
+	_core->getCameraCollisionHandler()->calculateCollisionWithAabbs(mustRespondX, mustRespondY, mustRespondZ);
+}
+
+void EngineInterface::collision_calculateAabbWithAabbs(const string & aabbId)
+{
+	_core->getAabbCollisionHandler()->calculateCollisionWithAabbs(aabbId);
 }
 
 void EngineInterface::collision_clearCameraWithTerrain()
 {
-	_core->getCameraCollisionHandler()->clearTerrainCollision();
+	_core->getCameraCollisionHandler()->clearCollisionWithTerrain();
 }
 
-void EngineInterface::collision_clearCameraWithAabb()
+void EngineInterface::collision_clearCameraWithAabbs()
 {
-	_core->getCameraCollisionHandler()->clearAabbCollision();
+	_core->getCameraCollisionHandler()->clearCollisionWithAabbs();
+}
+
+void EngineInterface::collision_clearAabbWithAabbs()
+{
+	_core->getAabbCollisionHandler()->clearCollisionWithAabbs();
 }
 
 const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
 	vector<string> result = {};
 
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
+	for(const auto & [collidedAabbId, collidedDirection] : _core->getCameraCollisionHandler()->getAabbCollisions())
 	{
-		if(_core->getCameraCollisionHandler()->getAabbCollision(aabbId).first)
-		{
-			result.push_back(aabb->getId());
-		}
+		result.push_back(collidedAabbId);
 	}
 
 	return result;
@@ -45,13 +52,11 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionTy
 {
 	vector<string> result = {};
 
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
+	for(const auto & [collidedAabbId, collidedDirection] : _core->getCameraCollisionHandler()->getAabbCollisions())
 	{
-		const auto collision = _core->getCameraCollisionHandler()->getAabbCollision(aabbId);
-
-		if(collision.first && (direction == collision.second))
+		if(direction == collidedDirection)
 		{
-			result.push_back(aabb->getId());
+			result.push_back(collidedAabbId);
 		}
 	}
 
@@ -65,12 +70,26 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId) const
 {
-	return _core->getCameraCollisionHandler()->getAabbCollision(aabbId).first;
+	for(const auto & [collidedAabbId, direction] : _core->getCameraCollisionHandler()->getAabbCollisions())
+	{
+		if(aabbId == collidedAabbId)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const
 {
-	const auto collision = _core->getCameraCollisionHandler()->getAabbCollision(aabbId);
+	for(const auto & [collidedAabbId, collidedDirection] : _core->getCameraCollisionHandler()->getAabbCollisions())
+	{
+		if((aabbId == collidedAabbId) && (direction == collidedDirection))
+		{
+			return true;
+		}
+	}
 
-	return (collision.first && (direction == collision.second));
+	return false;
 }

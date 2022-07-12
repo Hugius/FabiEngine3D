@@ -112,7 +112,7 @@ void WorldEditor::_updateChoiceMenu()
 			_fe3d->raycast_clearTerrainIntersection();
 			_fe3d->raycast_clearAabbIntersection();
 			_fe3d->collision_clearCameraWithTerrain();
-			_fe3d->collision_clearCameraWithAabb();
+			_fe3d->collision_clearCameraWithAabbs();
 			_fe3d->misc_setVsyncEnabled(true);
 
 			_gui->getOverlay()->getTextField(SELECTED_TITLE_ID)->setVisible(false);

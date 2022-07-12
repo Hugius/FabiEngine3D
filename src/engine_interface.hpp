@@ -1014,6 +1014,7 @@ public:
 	void collision_clearCameraWithTerrain();
 	void collision_clearCameraWithAabbs();
 	void collision_clearAabbWithAabbs();
+	void collision_clearAabbWithAabbs(const string & aabbId);
 
 	const vector<string> collision_checkCameraWithAabbs() const;
 	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;

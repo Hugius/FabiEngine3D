@@ -9,6 +9,7 @@
 - `fe3d:collision_clear_camera_terrain` () -----> `NONE`
 - `fe3d:collision_clear_camera_aabbs` () -----> `NONE`
 - `fe3d:collision_clear_aabb_aabbs` () -----> `NONE`
+- `fe3d:collision_clear_aabb_aabbs` (`STR` aabb_id) -----> `NONE`
 
 ## Getters
 

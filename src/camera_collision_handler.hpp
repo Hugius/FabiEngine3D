@@ -25,7 +25,8 @@ public:
 	const bool isCameraUnderTerrain() const;
 
 private:
-	const bool _calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed) const;
+	void _calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed);
+
 	const bool _calculateCollisionWithAabbs(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ);
 	const bool _isInsideAabb(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, shared_ptr<Box> cameraBox) const;
 	const bool _isInsideAabbX(shared_ptr<Aabb> aabb, const fvec3 & cameraBoxMiddle, const fvec3 & cameraBoxMiddleChange, shared_ptr<Box> cameraBox) const;

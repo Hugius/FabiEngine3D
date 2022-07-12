@@ -15,14 +15,7 @@ const bool CameraCollisionHandler::_isInsideAabbX(shared_ptr<Aabb> aabb, const f
 		const auto leftCollision = ((cameraBoxMiddleChange.x > 0.0f) && (leftDifference <= fabs(cameraBoxMiddleChange.x)));
 		const auto rightCollision = ((cameraBoxMiddleChange.x < 0.0f) && (rightDifference <= fabs(cameraBoxMiddleChange.x)));
 
-		if(leftCollision || rightCollision)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return (leftCollision || rightCollision);
 	}
 	else
 	{
@@ -58,14 +51,7 @@ const bool CameraCollisionHandler::_isInsideAabbY(shared_ptr<Aabb> aabb, const f
 		const auto bottomCollision = ((cameraBoxMiddleChange.y > 0.0f) && (bottomDifference <= fabs(cameraBoxMiddleChange.y)));
 		const auto topCollision = ((cameraBoxMiddleChange.y < 0.0f) && (topDifference <= fabs(cameraBoxMiddleChange.y)));
 
-		if(bottomCollision || topCollision)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return (bottomCollision || topCollision);
 	}
 	else
 	{
@@ -88,14 +74,7 @@ const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const f
 		const auto backCollision = ((cameraBoxMiddleChange.z > 0.0f) && (backDifference <= fabs(cameraBoxMiddleChange.z)));
 		const auto frontCollision = ((cameraBoxMiddleChange.z < 0.0f) && (frontDifference <= fabs(cameraBoxMiddleChange.z)));
 
-		if(backCollision || frontCollision)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return (backCollision || frontCollision);
 	}
 	else
 	{
@@ -164,12 +143,5 @@ const bool CameraCollisionHandler::_isInsideAabb(shared_ptr<Aabb> aabb, const fv
 
 	zTooSmall = ((cameraBoxMiddle.z + front) >= (aabbPosition.z + halfAabbSize.z)) && ((cameraBoxMiddle.z - back) <= (aabbPosition.z - halfAabbSize.z));
 
-	if((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return ((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall));
 }

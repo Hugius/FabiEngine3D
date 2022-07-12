@@ -4,17 +4,17 @@ void CameraCollisionHandler::calculateCollisionWithTerrain(bool mustRespondY, fl
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
-		_isCameraUnderTerrain = false;
+		clearCollisionWithTerrain();
 	}
 	else
 	{
-		_isCameraUnderTerrain = _calculateCollisionWithTerrain(mustRespondY, responseSpeed);
+		_calculateCollisionWithTerrain(mustRespondY, responseSpeed);
 	}
 }
 
 void CameraCollisionHandler::calculateCollisionWithAabbs(bool mustRespondX, bool mustRespondY, bool mustRespondZ)
 {
-	_aabbCollisions.clear();
+	clearCollisionWithAabbs();
 
 	int xPriority = 0;
 	int yPriority = 0;
@@ -111,7 +111,7 @@ void CameraCollisionHandler::calculateCollisionWithAabbs(bool mustRespondX, bool
 	_lastCameraPosition = _camera->getPosition();
 }
 
-const bool CameraCollisionHandler::_calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed) const
+void CameraCollisionHandler::_calculateCollisionWithTerrain(bool mustRespondY, float responseSpeed)
 {
 	auto cameraPosition = _camera->getPosition();
 
@@ -137,10 +137,12 @@ const bool CameraCollisionHandler::_calculateCollisionWithTerrain(bool mustRespo
 			}
 		}
 
-		return true;
+		_isCameraUnderTerrain = true;
 	}
-
-	return false;
+	else
+	{
+		_isCameraUnderTerrain = false;
+	}
 }
 
 const bool CameraCollisionHandler::_calculateCollisionWithAabbs(DirectionType direction, bool mustRespondX, bool mustRespondY, bool mustRespondZ)

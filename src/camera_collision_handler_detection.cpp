@@ -83,12 +83,12 @@ const bool CameraCollisionHandler::_isInsideAabbZ(shared_ptr<Aabb> aabb, const f
 
 	if(_isInsideAabb(aabb, cameraBoxMiddle, cameraBox))
 	{
-		const auto frontDifference = fabsf((aabbPosition.z + halfAabbSize.z) - (cameraBoxMiddle.z - front));
-		const auto backDifference = fabsf((aabbPosition.z - halfAabbSize.z) - (cameraBoxMiddle.z + back));
-		const auto frontCollision = ((cameraBoxMiddleChange.z < 0.0f) && (frontDifference <= fabs(cameraBoxMiddleChange.z)));
+		const auto backDifference = fabsf((aabbPosition.z - halfAabbSize.z) - (cameraBoxMiddle.z + front));
+		const auto frontDifference = fabsf((aabbPosition.z + halfAabbSize.z) - (cameraBoxMiddle.z - back));
 		const auto backCollision = ((cameraBoxMiddleChange.z > 0.0f) && (backDifference <= fabs(cameraBoxMiddleChange.z)));
+		const auto frontCollision = ((cameraBoxMiddleChange.z < 0.0f) && (frontDifference <= fabs(cameraBoxMiddleChange.z)));
 
-		if(frontCollision || backCollision)
+		if(backCollision || frontCollision)
 		{
 			return true;
 		}

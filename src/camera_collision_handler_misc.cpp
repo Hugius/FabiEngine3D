@@ -5,6 +5,9 @@ using std::make_shared;
 CameraCollisionHandler::CameraCollisionHandler()
 {
 	_cameraBox = make_shared<Box>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+
+	clearCollisionWithTerrain();
+	clearCollisionWithAabbs();
 }
 
 void CameraCollisionHandler::inject(shared_ptr<TerrainManager> terrainManager)

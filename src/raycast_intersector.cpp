@@ -6,8 +6,7 @@ void RaycastIntersector::calculateTerrainIntersection(float maxDistance, float p
 {
 	if(_terrainManager->getSelectedTerrain() == nullptr)
 	{
-		_pointOnTerrain = fvec3(-1.0f);
-		_distanceToTerrain = -1.0f;
+		clearTerrainIntersection();
 	}
 	else
 	{
@@ -18,9 +17,7 @@ void RaycastIntersector::calculateTerrainIntersection(float maxDistance, float p
 
 void RaycastIntersector::calculateAabbsIntersection()
 {
-	_closestAabbId = "";
-
-	_aabbIntersections.clear();
+	clearAabbsIntersection();
 
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
@@ -67,6 +64,12 @@ void RaycastIntersector::clearAabbsIntersection()
 	_closestAabbId = "";
 
 	_aabbIntersections.clear();
+}
+
+RaycastIntersector::RaycastIntersector()
+{
+	clearTerrainIntersection();
+	clearAabbsIntersection();
 }
 
 void RaycastIntersector::inject(shared_ptr<RaycastCalculator> raycastCalculator)

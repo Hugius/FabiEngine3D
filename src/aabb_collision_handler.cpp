@@ -1,5 +1,10 @@
 #include "aabb_collision_handler.hpp"
 
+AabbCollisionHandler::AabbCollisionHandler()
+{
+	clearCollisionWithAabbs();
+}
+
 void AabbCollisionHandler::calculateCollisionWithAabbs(const string & aabbId)
 {
 	clearCollisionWithAabbs(aabbId);
@@ -151,5 +156,12 @@ void AabbCollisionHandler::inject(shared_ptr<AabbManager> aabbManager)
 
 const vector<string> AabbCollisionHandler::getAabbCollisions(const string & aabbId) const
 {
-	return _aabbCollisions.at(aabbId);
+	if(_aabbCollisions.find(aabbId) == _aabbCollisions.end())
+	{
+		return {};
+	}
+	else
+	{
+		return _aabbCollisions.at(aabbId);
+	}
 }

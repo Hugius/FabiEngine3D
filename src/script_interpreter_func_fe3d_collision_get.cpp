@@ -390,15 +390,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
+				bool result = false;
+
 				for(const auto & aabbId : _fe3d->model_getChildAabbIds(args[0]->getString()))
 				{
 					if(!_fe3d->collision_checkAabbWithAabbs(aabbId).empty())
 					{
-						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, true));
+						result = true;
 
 						break;
 					}
 				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}

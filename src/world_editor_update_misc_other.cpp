@@ -205,7 +205,7 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->collision_calculateCameraWithTerrain(true, _editorSpeed);
 	}
 
-	_fe3d->raycast_calculateAabbIntersection();
+	_fe3d->raycast_calculateAabbsIntersection();
 	_fe3d->collision_calculateCameraWithAabbs(true, true, true);
 
 	const auto isSelected = (!_selectedModelId.empty() ||

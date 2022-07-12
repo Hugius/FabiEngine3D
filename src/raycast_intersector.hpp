@@ -12,9 +12,9 @@ public:
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void calculateTerrainIntersection(float maxDistance, float precision);
-	void calculateAabbIntersection();
+	void calculateAabbsIntersection();
 	void clearTerrainIntersection();
-	void clearAabbIntersection();
+	void clearAabbsIntersection();
 
 	const string & getClosestAabbId() const;
 

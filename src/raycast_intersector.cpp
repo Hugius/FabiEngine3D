@@ -16,7 +16,7 @@ void RaycastIntersector::calculateTerrainIntersection(float maxDistance, float p
 	}
 }
 
-void RaycastIntersector::calculateAabbIntersection()
+void RaycastIntersector::calculateAabbsIntersection()
 {
 	_closestAabbId = "";
 
@@ -62,7 +62,7 @@ void RaycastIntersector::clearTerrainIntersection()
 	_distanceToTerrain = -1.0f;
 }
 
-void RaycastIntersector::clearAabbIntersection()
+void RaycastIntersector::clearAabbsIntersection()
 {
 	_closestAabbId = "";
 

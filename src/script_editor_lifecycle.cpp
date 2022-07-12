@@ -50,8 +50,8 @@ void ScriptEditor::_unload()
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomQuality(0);
 	_fe3d->camera_reset();
-	_fe3d->raycast_calculateCursorRay();
-	_fe3d->raycast_calculateAabbIntersection();
+	_fe3d->raycast_clearCursorRay();
+	_fe3d->raycast_clearAabbsIntersection();
 
 	_script->clear();
 

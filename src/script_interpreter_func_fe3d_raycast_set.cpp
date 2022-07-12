@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:raycast_calculate_aabb_intersection")
+	else if(functionName == "fe3d:raycast_calculate_aabbs_intersection")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->raycast_calculateAabbIntersection();
+			_fe3d->raycast_calculateAabbsIntersection();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -51,11 +51,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:raycast_clear_aabb_intersection")
+	else if(functionName == "fe3d:raycast_clear_aabbs_intersection")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->raycast_clearAabbIntersection();
+			_fe3d->raycast_clearAabbsIntersection();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

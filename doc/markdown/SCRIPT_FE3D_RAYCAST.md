@@ -4,14 +4,12 @@
 
 - `fe3d:raycast_calculate_cursor_ray` () -----> `NONE`
 - `fe3d:raycast_calculate_terrain_intersection` (`DEC` max_distance, `DEC` precision) -----> `NONE`
-- `fe3d:raycast_calculate_aabb_intersection` () -----> `NONE`
+- `fe3d:raycast_calculate_aabbs_intersection` () -----> `NONE`
 - `fe3d:raycast_clear_terrain_intersection` () -----> `NONE`
-- `fe3d:raycast_clear_aabb_intersection` () -----> `NONE`
+- `fe3d:raycast_clear_aabbs_intersection` () -----> `NONE`
 
 ## Getters
 
-- `fe3d:raycast_is_terrain_intersection_enabled` () -----> `BOL`
-- `fe3d:raycast_is_aabb_intersection_enabled` () -----> `BOL`
 - `fe3d:raycast_is_point_on_terrain_valid` () -----> `BOL`
 - `fe3d:raycast_get_cursor_ray_position_x` () -----> `DEC`
 - `fe3d:raycast_get_cursor_ray_position_y` () -----> `DEC`

@@ -11,7 +11,7 @@ void ScriptEditor::_updateTextSelector()
 	}
 
 	_fe3d->raycast_calculateCursorRay();
-	_fe3d->raycast_calculateAabbIntersection();
+	_fe3d->raycast_calculateAabbsIntersection();
 
 	const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);

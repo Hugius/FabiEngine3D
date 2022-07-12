@@ -110,7 +110,7 @@ void WorldEditor::_updateChoiceMenu()
 			_fe3d->camera_reset();
 			_fe3d->raycast_clearCursorRay();
 			_fe3d->raycast_clearTerrainIntersection();
-			_fe3d->raycast_clearAabbIntersection();
+			_fe3d->raycast_clearAabbsIntersection();
 			_fe3d->collision_clearCameraWithTerrain();
 			_fe3d->collision_clearCameraWithAabbs();
 			_fe3d->misc_setVsyncEnabled(true);

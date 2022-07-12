@@ -377,7 +377,7 @@ void ScriptInterpreter::unload()
 	_fe3d->camera_reset();
 	_fe3d->raycast_clearCursorRay();
 	_fe3d->raycast_clearTerrainIntersection();
-	_fe3d->raycast_clearAabbIntersection();
+	_fe3d->raycast_clearAabbsIntersection();
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_fe3d->collision_clearCameraWithTerrain();
 	_fe3d->collision_clearCameraWithAabbs();

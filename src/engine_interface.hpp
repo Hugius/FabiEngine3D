@@ -994,10 +994,10 @@ public:
 
 	void raycast_calculateCursorRay();
 	void raycast_calculateTerrainIntersection(float maxDistance, float precision);
-	void raycast_calculateAabbIntersection();
+	void raycast_calculateAabbsIntersection();
 	void raycast_clearCursorRay();
 	void raycast_clearTerrainIntersection();
-	void raycast_clearAabbIntersection();
+	void raycast_clearAabbsIntersection();
 
 	const string & raycast_getClosestAabbId() const;
 	const fvec3 & raycast_getCursorRayPosition() const;

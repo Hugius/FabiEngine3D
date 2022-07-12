@@ -11,9 +11,9 @@ void EngineInterface::raycast_calculateTerrainIntersection(float maxDistance, fl
 	_core->getRaycastIntersector()->calculateTerrainIntersection(maxDistance, precision);
 }
 
-void EngineInterface::raycast_calculateAabbIntersection()
+void EngineInterface::raycast_calculateAabbsIntersection()
 {
-	_core->getRaycastIntersector()->calculateAabbIntersection();
+	_core->getRaycastIntersector()->calculateAabbsIntersection();
 }
 
 void EngineInterface::raycast_clearCursorRay()
@@ -26,9 +26,9 @@ void EngineInterface::raycast_clearTerrainIntersection()
 	_core->getRaycastIntersector()->clearTerrainIntersection();
 }
 
-void EngineInterface::raycast_clearAabbIntersection()
+void EngineInterface::raycast_clearAabbsIntersection()
 {
-	_core->getRaycastIntersector()->clearAabbIntersection();
+	_core->getRaycastIntersector()->clearAabbsIntersection();
 }
 
 const string & EngineInterface::raycast_getClosestAabbId() const

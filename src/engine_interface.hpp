@@ -1018,9 +1018,11 @@ public:
 
 	const vector<string> collision_checkCameraWithAabbs() const;
 	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;
+	const vector<string> collision_checkAabbWithAabbs(const string & aabbId) const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithAabb(const string & aabbId) const;
 	const bool collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const;
+	const bool collision_checkAabbWithAabb(const string & firstAabbId, const string & secondAabbId) const;
 
 	void server_start(int maxClientCount);
 	void server_sendTcpMessageToClient(const string & username, const string & content);

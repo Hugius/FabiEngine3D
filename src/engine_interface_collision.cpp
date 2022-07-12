@@ -68,6 +68,11 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionTy
 	return result;
 }
 
+const vector<string> EngineInterface::collision_checkAabbWithAabbs(const string & aabbId) const
+{
+	return _core->getAabbCollisionHandler()->getAabbCollisions(aabbId);
+}
+
 const bool EngineInterface::collision_checkCameraWithTerrain() const
 {
 	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
@@ -91,6 +96,19 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId,
 	for(const auto & [collidedAabbId, collidedDirection] : _core->getCameraCollisionHandler()->getAabbCollisions())
 	{
 		if((aabbId == collidedAabbId) && (direction == collidedDirection))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+const bool EngineInterface::collision_checkAabbWithAabb(const string & firstAabbId, const string & secondAabbId) const
+{
+	for(const auto & collidedAabbId : _core->getAabbCollisionHandler()->getAabbCollisions(firstAabbId))
+	{
+		if(secondAabbId == collidedAabbId)
 		{
 			return true;
 		}

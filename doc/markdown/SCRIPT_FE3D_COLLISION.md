@@ -13,11 +13,15 @@
 ## Getters
 
 - `fe3d:collision_check_camera_terrain` () -----> `BOL`
+- `fe3d:collision_check_camera_models` (`STR` aabb_id, `STR` xyz) -----> `LST`
+- `fe3d:collision_check_camera_quad3ds` (`STR` xyz) -----> `LST`
+- `fe3d:collision_check_camera_text3ds` (`STR` xyz) -----> `LST`
+- `fe3d:collision_check_camera_aabbs` (`STR` xyz) -----> `LST`
 - `fe3d:collision_check_camera_model` (`STR` model_id, `STR` aabb_id, `STR` xyz) -----> `BOL`
-- `fe3d:collision_check_camera_quad3d` (`STR` quad_id, `STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_text3d` (`STR` text_id, `STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_aabb` (`STR` aabb_id, `STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_models` (`STR` aabb_id, `STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_quad3ds` (`STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_text3ds` (`STR` xyz) -----> `DEC`
-- `fe3d:collision_check_camera_aabbs` (`STR` xyz) -----> `DEC`
+- `fe3d:collision_check_camera_quad3d` (`STR` quad_id, `STR` xyz) -----> `BOL`
+- `fe3d:collision_check_camera_text3d` (`STR` text_id, `STR` xyz) -----> `BOL`
+- `fe3d:collision_check_camera_aabb` (`STR` aabb_id, `STR` xyz) -----> `BOL`
+- `fe3d:collision_check_model_model` (`STR` model_id, `STR` aabb_id, `STR` model_id, `STR` aabb_id) -----> `BOL`
+- `fe3d:collision_check_quad3d_quad3d` (`STR` quad_id, `STR` quad_id) -----> `BOL`
+- `fe3d:collision_check_text3d_text3d` (`STR` text_id, `STR` text_id) -----> `BOL`
+- `fe3d:collision_check_aabb_aabb` (`STR` aabb_id, `STR` aabb_id) -----> `BOL`

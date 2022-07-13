@@ -10,8 +10,8 @@
 - AABBs can be bound to a parent (model/quad3D).
 - AABBs are invisible by default.
 - Bound AABBs follow the transformation of their parent.
-- Bound AABBs become invisible and unresponsive if their parent is invisible.
-- Bound AABBs whose parent is level of detailed have their responsiveness managed automatically.
+- Bound AABBs become invisible if their parent is invisible.
+- Bound AABBs have their responsiveness managed automatically, based on parent visibility and parent level of detail.
 - Bound AABBs cannot directly be accessed.
 
 ## 2. Properties

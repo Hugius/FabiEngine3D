@@ -149,7 +149,7 @@ const bool CameraCollisionHandler::_calculateCollisionWithAabbs(DirectionType di
 {
 	for(const auto & [aabbId, aabb] : _aabbManager->getAabbs())
 	{
-		if(!aabb->isRaycastResponsive())
+		if(!aabb->isCollisionResponsive())
 		{
 			continue;
 		}

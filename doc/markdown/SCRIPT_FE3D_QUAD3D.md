@@ -31,8 +31,6 @@
 - `fe3d:quad3d_set_texture_repeat` (`STR` quad_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_lightness` (`STR` quad_id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_aabb_visible` (`STR` quad_id, `BOL` value) -----> `NONE`
-- `fe3d:quad3d_set_aabb_raycast_responsive` (`STR` quad_id, `BOL` value) -----> `NONE`
-- `fe3d:quad3d_set_aabb_collision_responsive` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_shadowed` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_reflected` (`STR` quad_id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_refracted` (`STR` quad_id, `BOL` value) -----> `NONE`
@@ -69,8 +67,6 @@
 - `fe3d:quad3d_is_animation2d_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation2d_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_aabb_visible` (`STR` quad_id) -----> `BOL`
-- `fe3d:quad3d_is_aabb_raycast_responsive` (`STR` quad_id) -----> `BOL`
-- `fe3d:quad3d_is_aabb_collision_responsive` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_has_diffuse_map` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_has_emission_map` (`STR` quad_id) -----> `BOL`
 - `fe3d:quad3d_get_position_x` (`STR` quad_id) -----> `DEC`

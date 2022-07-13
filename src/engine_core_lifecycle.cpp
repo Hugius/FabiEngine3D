@@ -33,8 +33,8 @@ EngineCore::EngineCore()
 	_camera = make_shared<Camera>();
 	_raycastCalculator = make_shared<RaycastCalculator>();
 	_raycastIntersector = make_shared<RaycastIntersector>();
-	_aabbCollisionHandler = make_shared<AabbCollisionHandler>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
+	_aabbCollisionHandler = make_shared<AabbCollisionHandler>();
 	_animation3dPlayer = make_shared<Animation3dPlayer>();
 	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
@@ -92,6 +92,7 @@ EngineCore::EngineCore()
 	_cameraCollisionHandler->inject(_terrainManager);
 	_cameraCollisionHandler->inject(_aabbManager);
 	_cameraCollisionHandler->inject(_camera);
+	_aabbCollisionHandler->inject(_aabbManager);
 	_animation3dPlayer->inject(_animation3dManager);
 	_animation3dPlayer->inject(_modelManager);
 	_animation2dPlayer->inject(_animation2dManager);

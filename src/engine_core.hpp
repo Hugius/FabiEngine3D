@@ -22,8 +22,8 @@
 #include "text2d_manager.hpp"
 #include "raycast_calculator.hpp"
 #include "raycast_intersector.hpp"
-#include "aabb_collision_handler.hpp"
 #include "camera_collision_handler.hpp"
+#include "aabb_collision_handler.hpp"
 #include "timer.hpp"
 #include "sound2d_manager.hpp"
 #include "sound3d_manager.hpp"
@@ -84,8 +84,8 @@ public:
 	const shared_ptr<Camera> getCamera() const;
 	const shared_ptr<RaycastCalculator> getRaycastCalculator() const;
 	const shared_ptr<RaycastIntersector> getRaycastIntersector() const;
-	const shared_ptr<AabbCollisionHandler> getAabbCollisionHandler() const;
 	const shared_ptr<CameraCollisionHandler> getCameraCollisionHandler() const;
+	const shared_ptr<AabbCollisionHandler> getAabbCollisionHandler() const;
 	const shared_ptr<Animation3dPlayer> getAnimation3dPlayer() const;
 	const shared_ptr<Animation2dPlayer> getAnimation2dPlayer() const;
 	const shared_ptr<Sound3dPlayer> getSound3dPlayer() const;
@@ -132,8 +132,8 @@ private:
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
-	shared_ptr<AabbCollisionHandler> _aabbCollisionHandler = nullptr;
 	shared_ptr<CameraCollisionHandler> _cameraCollisionHandler = nullptr;
+	shared_ptr<AabbCollisionHandler> _aabbCollisionHandler = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;

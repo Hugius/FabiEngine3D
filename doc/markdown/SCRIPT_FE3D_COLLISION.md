@@ -8,7 +8,9 @@
 - `fe3d:collision_calculate_aabb_aabbs` (`STR` aabb_id) -----> `NONE`
 - `fe3d:collision_clear_camera_terrain` () -----> `NONE`
 - `fe3d:collision_clear_camera_aabbs` () -----> `NONE`
-- `fe3d:collision_clear_aabb_aabbs` () -----> `NONE`
+- `fe3d:collision_clear_model_aabbs` (`STR` aabb_id) -----> `NONE`
+- `fe3d:collision_clear_quad3d_aabbs` (`STR` quad3d_id) -----> `NONE`
+- `fe3d:collision_clear_text3d_aabbs` (`STR` text3d_id) -----> `NONE`
 - `fe3d:collision_clear_aabb_aabbs` (`STR` aabb_id) -----> `NONE`
 
 ## Getters

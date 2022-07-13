@@ -23,8 +23,6 @@
 - `fe3d:text3d_set_opacity` (`STR` text_id, `DEC` value) -----> `NONE`
 - `fe3d:text3d_set_lightness` (`STR` text_id, `DEC` value) -----> `NONE`
 - `fe3d:text3d_set_aabb_visible` (`STR` text_id, `BOL` value) -----> `NONE`
-- `fe3d:text3d_set_aabb_raycast_responsive` (`STR` text_id, `BOL` value) -----> `NONE`
-- `fe3d:text3d_set_aabb_collision_responsive` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_shadowed` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_reflected` (`STR` text_id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_refracted` (`STR` text_id, `BOL` value) -----> `NONE`
@@ -52,8 +50,6 @@
 - `fe3d:text3d_is_horizontally_flipped` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_vertically_flipped` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_is_aabb_visible` (`STR` text_id) -----> `BOL`
-- `fe3d:text3d_is_aabb_raycast_responsive` (`STR` text_id) -----> `BOL`
-- `fe3d:text3d_is_aabb_collision_responsive` (`STR` text_id) -----> `BOL`
 - `fe3d:text3d_get_position_x` (`STR` text_id) -----> `DEC`
 - `fe3d:text3d_get_position_y` (`STR` text_id) -----> `DEC`
 - `fe3d:text3d_get_position_z` (`STR` text_id) -----> `DEC`

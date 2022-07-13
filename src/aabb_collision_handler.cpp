@@ -15,7 +15,12 @@ void AabbCollisionHandler::calculateCollisionWithAabbs(const string & aabbId)
 
 	for(const auto & [otherAabbId, otherAabb] : _aabbManager->getAabbs())
 	{
-		if(!aabb->isRaycastResponsive())
+		if(aabbId == otherAabbId)
+		{
+			continue;
+		}
+
+		if(!aabb->isCollisionResponsive())
 		{
 			continue;
 		}

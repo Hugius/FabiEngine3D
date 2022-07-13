@@ -395,58 +395,6 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad3d_set_aabb_raycast_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dQuad3d(args[0]->getString(), false))
-			{
-				auto aabbIds = _fe3d->quad3d_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
-				{
-					_throwRuntimeError("quad3D has no bound AABBs");
-
-					return true;
-				}
-
-				for(const auto & aabbId : aabbIds)
-				{
-					_fe3d->aabb_setRaycastResponsive(aabbId, args[1]->getBoolean());
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:quad3d_set_aabb_collision_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dQuad3d(args[0]->getString(), false))
-			{
-				auto aabbIds = _fe3d->quad3d_getChildAabbIds(args[0]->getString());
-
-				if(aabbIds.empty())
-				{
-					_throwRuntimeError("quad3D has no bound AABBs");
-
-					return true;
-				}
-
-				for(const auto & aabbId : aabbIds)
-				{
-					_fe3d->aabb_setCollisionResponsive(aabbId, args[1]->getBoolean());
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:quad3d_set_shadowed")
 	{
 		const auto types = {SVT::STRING, SVT::BOOLEAN};

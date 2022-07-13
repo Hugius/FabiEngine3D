@@ -1486,40 +1486,6 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_aabb_collision_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0]->getString(), false))
-			{
-				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
-				{
-					const auto result = _fe3d->aabb_isCollisionResponsive("model@" + args[0]->getString() + "@" + args[1]->getString());
-
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_is_aabb_raycast_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0]->getString(), false))
-			{
-				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
-				{
-					const auto result = _fe3d->aabb_isRaycastResponsive("model@" + args[0]->getString() + "@" + args[1]->getString());
-
-					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-				}
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_get_aabb_position_x")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};

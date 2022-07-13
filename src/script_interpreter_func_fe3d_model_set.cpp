@@ -446,40 +446,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_aabb_raycast_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0]->getString(), false))
-			{
-				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
-				{
-					_fe3d->aabb_setRaycastResponsive("model@" + args[0]->getString() + "@" + args[1]->getString(), args[2]->getBoolean());
-
-					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-				}
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_set_aabb_collision_responsive")
-	{
-		const auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0]->getString(), false))
-			{
-				if(_validateFe3dModelAabb(args[0]->getString(), args[1]->getString()))
-				{
-					_fe3d->aabb_setCollisionResponsive("model@" + args[0]->getString() + "@" + args[1]->getString(), args[2]->getBoolean());
-
-					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-				}
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_set_texture_repeat")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};

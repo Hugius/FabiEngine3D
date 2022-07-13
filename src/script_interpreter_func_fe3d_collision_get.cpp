@@ -406,6 +406,130 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			}
 		}
 	}
+	else if(functionName == "fe3d:collision_check_quad3d_quad3ds")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				bool result = false;
+
+				for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(args[0]->getString()))
+				{
+					if(!_fe3d->collision_checkAabbWithAabbs(aabbId).empty())
+					{
+						result = true;
+
+						break;
+					}
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:collision_check_text3d_text3ds")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				bool result = false;
+
+				for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(args[0]->getString()))
+				{
+					if(!_fe3d->collision_checkAabbWithAabbs(aabbId).empty())
+					{
+						result = true;
+
+						break;
+					}
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:collision_check_aabb_aabbs")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString(), false))
+			{
+				const auto result = !_fe3d->collision_checkAabbWithAabbs(args[0]->getString()).empty();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:collision_check_quad3d_quad3d")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				bool result = false;
+
+				for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(args[0]->getString()))
+				{
+					if(!_fe3d->collision_checkAabbWithAabbs(aabbId).empty())
+					{
+						result = true;
+
+						break;
+					}
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:collision_check_text3d_text3d")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				bool result = false;
+
+				for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(args[0]->getString()))
+				{
+					if(!_fe3d->collision_checkAabbWithAabbs(aabbId).empty())
+					{
+						result = true;
+
+						break;
+					}
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:collision_check_aabb_aabb")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString(), false))
+			{
+				const auto result = !_fe3d->collision_checkAabbWithAabbs(args[0]->getString()).empty();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:collision_check_model_model")
 	{
 		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::STRING};

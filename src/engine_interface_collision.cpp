@@ -36,11 +36,6 @@ void EngineInterface::collision_clearAabbWithAabbs()
 	_core->getAabbCollisionHandler()->clearCollisionWithAabbs();
 }
 
-void EngineInterface::collision_clearAabbWithAabbs(const string & aabbId)
-{
-	_core->getAabbCollisionHandler()->clearCollisionWithAabbs(aabbId);
-}
-
 const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
 	vector<string> result = {};

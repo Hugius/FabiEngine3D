@@ -5,13 +5,10 @@
 - `fe3d:collision_set_camera_box` (`DEC` left_size, `DEC` right_size, `DEC` bottom_size, `DEC` top_size, `DEC` back_size, `DEC` front_size) -----> `NONE`
 - `fe3d:collision_calculate_camera_terrain` (`BOL` must_respond, `DEC` response_speed) -----> `NONE`
 - `fe3d:collision_calculate_camera_aabbs` (`BOL` must_respond_x, `BOL` must_respond_y, `BOL` must_respond_z) -----> `NONE`
+- `fe3d:collision_calculate_model_aabbs` (`STR` model_id) -----> `NONE`
+- `fe3d:collision_calculate_quad3d_aabbs` (`STR` quad_id) -----> `NONE`
+- `fe3d:collision_calculate_text3d_aabbs` (`STR` text_id) -----> `NONE`
 - `fe3d:collision_calculate_aabb_aabbs` (`STR` aabb_id) -----> `NONE`
-- `fe3d:collision_clear_camera_terrain` () -----> `NONE`
-- `fe3d:collision_clear_camera_aabbs` () -----> `NONE`
-- `fe3d:collision_clear_model_aabbs` (`STR` aabb_id) -----> `NONE`
-- `fe3d:collision_clear_quad3d_aabbs` (`STR` quad3d_id) -----> `NONE`
-- `fe3d:collision_clear_text3d_aabbs` (`STR` text3d_id) -----> `NONE`
-- `fe3d:collision_clear_aabb_aabbs` (`STR` aabb_id) -----> `NONE`
 
 ## Getters
 

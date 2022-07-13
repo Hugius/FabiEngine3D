@@ -7,7 +7,7 @@ AabbCollisionHandler::AabbCollisionHandler()
 
 void AabbCollisionHandler::calculateCollisionWithAabbs(const string & aabbId)
 {
-	clearCollisionWithAabbs(aabbId);
+	_clearCollisionWithAabbs(aabbId);
 
 	_aabbCollisions.insert({aabbId, {}});
 
@@ -25,7 +25,7 @@ void AabbCollisionHandler::calculateCollisionWithAabbs(const string & aabbId)
 			continue;
 		}
 
-		if(_hasAabbsCollided(aabb, otherAabb))
+		if(_haveAabbsCollided(aabb, otherAabb))
 		{
 			_aabbCollisions.at(aabbId).push_back(otherAabbId);
 		}
@@ -37,7 +37,7 @@ void AabbCollisionHandler::clearCollisionWithAabbs()
 	_aabbCollisions.clear();
 }
 
-void AabbCollisionHandler::clearCollisionWithAabbs(const string & aabbId)
+void AabbCollisionHandler::_clearCollisionWithAabbs(const string & aabbId)
 {
 	if(_aabbCollisions.find(aabbId) != _aabbCollisions.end())
 	{
@@ -45,7 +45,7 @@ void AabbCollisionHandler::clearCollisionWithAabbs(const string & aabbId)
 	}
 }
 
-const bool AabbCollisionHandler::_hasAabbsCollided(shared_ptr<Aabb> firstAabb, shared_ptr<Aabb> secondAabb) const
+const bool AabbCollisionHandler::_haveAabbsCollided(shared_ptr<Aabb> firstAabb, shared_ptr<Aabb> secondAabb) const
 {
 	const auto aabbPosition1 = firstAabb->getBasePosition();
 	const auto aabbPosition2 = secondAabb->getBasePosition();

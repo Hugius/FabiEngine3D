@@ -102,44 +102,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 			}
 		}
 	}
-	else if(functionName == "fe3d:collision_clear_camera_terrain")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->collision_clearCameraWithTerrain();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:collision_clear_camera_aabbs")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->collision_clearCameraWithAabbs();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:collision_clear_camera_aabbs")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->collision_clearAabbWithAabbs();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:collision_clear_camera_aabbs")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->collision_clearAabbWithAabbs(args[0]->getString());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else
 	{
 		return false;

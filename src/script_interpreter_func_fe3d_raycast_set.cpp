@@ -33,33 +33,6 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:raycast_clear_cursor_ray")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->raycast_clearCursorRay();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:raycast_clear_terrain_intersection")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->raycast_clearTerrainIntersection();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:raycast_clear_aabbs_intersection")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->raycast_clearAabbsIntersection();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else
 	{
 		return false;

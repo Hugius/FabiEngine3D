@@ -56,7 +56,6 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, SPEAKER_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
 				_fe3d->model_setVisible(SPEAKER_ID, false);
@@ -164,7 +163,6 @@ void WorldEditor::_updateSound3dPlacing()
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, SPEAKER_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 	}

@@ -233,20 +233,20 @@ void AabbManager::update()
 					{
 						if(parentModel->getLevelOfDetailId().empty())
 						{
-							aabb->setCollisionResponsive(true);
 							aabb->setRaycastResponsive(true);
+							aabb->setCollisionResponsive(true);
 						}
 						else
 						{
-							aabb->setCollisionResponsive(!parentModel->isLevelOfDetailed());
 							aabb->setRaycastResponsive(!parentModel->isLevelOfDetailed());
+							aabb->setCollisionResponsive(!parentModel->isLevelOfDetailed());
 						}
 					}
 					else
 					{
 						aabb->setVisible(false);
-						aabb->setCollisionResponsive(false);
 						aabb->setRaycastResponsive(false);
+						aabb->setCollisionResponsive(false);
 					}
 
 					break;
@@ -321,14 +321,14 @@ void AabbManager::update()
 
 					if(parentQuad3d->isVisible())
 					{
-						aabb->setCollisionResponsive(true);
 						aabb->setRaycastResponsive(true);
+						aabb->setCollisionResponsive(true);
 					}
 					else
 					{
 						aabb->setVisible(false);
-						aabb->setCollisionResponsive(false);
 						aabb->setRaycastResponsive(false);
+						aabb->setCollisionResponsive(false);
 					}
 
 					break;
@@ -403,14 +403,14 @@ void AabbManager::update()
 
 					if(parentText3d->isVisible())
 					{
-						aabb->setCollisionResponsive(true);
 						aabb->setRaycastResponsive(true);
+						aabb->setCollisionResponsive(true);
 					}
 					else
 					{
 						aabb->setVisible(false);
-						aabb->setCollisionResponsive(false);
 						aabb->setRaycastResponsive(false);
+						aabb->setCollisionResponsive(false);
 					}
 
 					break;

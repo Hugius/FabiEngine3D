@@ -55,7 +55,6 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
 				_fe3d->model_setVisible(LENS_ID, false);
 
@@ -135,7 +134,6 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->aabb_setParentId(newModelId, newModelId);
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 	}

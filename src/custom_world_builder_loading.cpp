@@ -742,15 +742,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string modelId;
 			string aabbId;
-			bool isRaycastResponsive;
-			bool isCollisionResponsive;
 			bool isVisible;
 
 			iss
 				>> modelId
 				>> aabbId
-				>> isRaycastResponsive
-				>> isCollisionResponsive
 				>> isVisible;
 
 			if(!_fe3d->model_isExisting(modelId))
@@ -763,8 +759,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
-			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(aabbId, isVisible);
 		}
 		else if(lineType == "MODEL_ANIMATION3D")
@@ -1006,15 +1000,11 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string quad3dId;
 			string aabbId;
-			bool isRaycastResponsive;
-			bool isCollisionResponsive;
 			bool isVisible;
 
 			iss
 				>> quad3dId
 				>> aabbId
-				>> isRaycastResponsive
-				>> isCollisionResponsive
 				>> isVisible;
 
 			if(!_fe3d->quad3d_isExisting(quad3dId))
@@ -1027,8 +1017,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
-			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(aabbId, isVisible);
 		}
 		else if(lineType == "QUAD3D_ANIMATION2D")
@@ -1185,14 +1173,10 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			string text3dId;
 			string aabbId;
-			bool isRaycastResponsive;
-			bool isCollisionResponsive;
 			bool isVisible;
 
 			iss
 				>> text3dId
-				>> isRaycastResponsive
-				>> isCollisionResponsive
 				>> isVisible;
 
 			if(!_fe3d->text3d_isExisting(text3dId))
@@ -1205,8 +1189,6 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_fe3d->aabb_setRaycastResponsive(aabbId, isRaycastResponsive);
-			_fe3d->aabb_setCollisionResponsive(aabbId, isCollisionResponsive);
 			_fe3d->aabb_setVisible(aabbId, isVisible);
 		}
 		else if(lineType == "AABB")

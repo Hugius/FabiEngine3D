@@ -601,8 +601,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & aabbId : aabbIds)
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
@@ -610,10 +608,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				<< modelId
 				<< " "
 				<< aabbId
-				<< " "
-				<< isRaycastResponsive
-				<< " "
-				<< isCollisionResponsive
 				<< " "
 				<< isVisible
 				<< endl;
@@ -826,8 +820,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & aabbId : aabbIds)
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
@@ -835,10 +827,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				<< quad3dId
 				<< " "
 				<< aabbId
-				<< " "
-				<< isRaycastResponsive
-				<< " "
-				<< isCollisionResponsive
 				<< " "
 				<< isVisible
 				<< endl;
@@ -991,8 +979,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(const auto & aabbId : aabbIds)
 		{
-			const auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
-			const auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 			const auto isVisible = _fe3d->aabb_isVisible(aabbId);
 
 			file
@@ -1000,10 +986,6 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				<< text3dId
 				<< " "
 				<< aabbId
-				<< " "
-				<< isRaycastResponsive
-				<< " "
-				<< isCollisionResponsive
 				<< " "
 				<< isVisible
 				<< endl;

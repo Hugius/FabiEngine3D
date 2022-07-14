@@ -40,6 +40,7 @@ public:
 	void setThirdPersonEnabled(bool value);
 	void setNear(float value);
 	void setFar(float value);
+	void setAccelerationResistence(float value);
 	void invertUp();
 
 	const mat44 & getView() const;
@@ -67,6 +68,7 @@ public:
 	const float getNear() const;
 	const float getFar() const;
 	const float getCursorSensitivity() const;
+	const float getAccelerationResistence() const;
 
 	const bool isThirdPersonEnabled() const;
 	const bool isFirstPersonEnabled() const;
@@ -83,8 +85,6 @@ private:
 	static inline constexpr float MIN_PITCH = -89.0f;
 	static inline constexpr float MAX_PITCH = 89.0f;
 	static inline constexpr float MIN_THIRD_PERSON_DISTANCE = 0.01f;
-	static inline constexpr float MAX_ACCELERATION = 10.0f;
-	static inline constexpr float ACCELERATION_RESISTANCE = 0.75f;
 
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 
@@ -119,6 +119,7 @@ private:
 	float _maxThirdPersonPitch = 0.0f;
 	float _cursorSensitivity = 0.0f;
 	float _positionTargetSpeed = 0.0f;
+	float _accelerationResistance = 0.0f;
 
 	bool _isThirdPersonEnabled = false;
 	bool _isFirstPersonEnabled = false;

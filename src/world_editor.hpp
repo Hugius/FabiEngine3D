@@ -243,6 +243,7 @@ private:
 	static inline constexpr float BLOOM_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float CAMERA_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float CAMERA_BOX_HEIGHT = 1.0f;
+	static inline constexpr float CURSOR_SENSITIVITY = 0.05f;
 
 	static inline constexpr int GRID_REPEAT = 205;
 

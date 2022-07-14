@@ -61,6 +61,11 @@ void EngineInterface::camera_setCursorSensitivity(float value)
 	_core->getCamera()->setCursorSensitivity(value);
 }
 
+void EngineInterface::camera_setAccelerationResistence(float value)
+{
+	_core->getCamera()->setAccelerationResistence(value);
+}
+
 void EngineInterface::camera_setYaw(float value)
 {
 	_core->getCamera()->setYaw(value);
@@ -179,6 +184,11 @@ const float EngineInterface::camera_getMaxThirdPersonPitch() const
 const float EngineInterface::camera_getThirdPersonDistance() const
 {
 	return _core->getCamera()->getThirdPersonDistance();
+}
+
+const float EngineInterface::camera_getAccelerationResistence() const
+{
+	return _core->getCamera()->getAccelerationResistence();
 }
 
 const float EngineInterface::camera_getNear() const

@@ -292,6 +292,15 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:camera_get_acceleration_resistence")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->camera_getAccelerationResistence();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
 	else
 	{
 		return false;

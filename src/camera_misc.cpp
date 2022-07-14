@@ -59,6 +59,11 @@ void Camera::setFar(float value)
 	_far = max(0.0f, value);
 }
 
+void Camera::setAccelerationResistence(float value)
+{
+	_accelerationResistance = clamp(value, 0.0f, 1.0f);
+}
+
 void Camera::setFov(float value)
 {
 	_fov = clamp(value, 0.0f, MAX_FOV);
@@ -182,6 +187,11 @@ const float Camera::getFar() const
 const float Camera::getCursorSensitivity() const
 {
 	return _cursorSensitivity;
+}
+
+const float Camera::getAccelerationResistence() const
+{
+	return _accelerationResistance;
 }
 
 const float Camera::getThirdPersonYaw() const

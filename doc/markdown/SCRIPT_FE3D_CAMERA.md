@@ -26,6 +26,7 @@
 - `fe3d:camera_set_max_third_person_pitch` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_third_person_distance` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_third_person_lookat` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:camera_set_acceleration_resistence` (`DEC` value) -----> `NONE`
 
 ## Getters
 
@@ -61,3 +62,4 @@
 - `fe3d:camera_get_cursor_sensitivity` () -----> `DEC`
 - `fe3d:camera_get_near` () -----> `DEC`
 - `fe3d:camera_get_far` () -----> `DEC`
+- `fe3d:camera_get_acceleration_resistence` () -----> `DEC`

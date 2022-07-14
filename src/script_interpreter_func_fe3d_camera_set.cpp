@@ -268,6 +268,17 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:camera_set_acceleration_resistence")
+	{
+		const auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->camera_setAccelerationResistence(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

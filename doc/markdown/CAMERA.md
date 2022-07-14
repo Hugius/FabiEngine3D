@@ -94,6 +94,9 @@
 - **Cursor Sensitivity**: the speed with which the cursor moves the first/third person view
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Acceleration Resistence**: the resistence of the first/third person view acceleration speed
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **First Person Enabled**: first person view is enabled
   - Type: `boolean`
   - Constraints: none

@@ -53,7 +53,7 @@ private:
 	static inline const fvec2 FRAME_TITLE_POSITION = fvec2(0.0f, 0.75f);
 	static inline const fvec2 FRAME_TITLE_SIZE = fvec2(0.025f, 0.1f);
 
-	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float CURSOR_SENSITIVITY = 0.05f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;

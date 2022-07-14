@@ -968,6 +968,7 @@ public:
 	void camera_setMinThirdPersonPitch(float value);
 	void camera_setMaxThirdPersonPitch(float value);
 	void camera_setCursorSensitivity(float value);
+	void camera_setAccelerationResistence(float value);
 
 	const fvec3 & camera_getPosition() const;
 	const fvec3 & camera_getRight() const;
@@ -989,6 +990,7 @@ public:
 	const float camera_getMinThirdPersonPitch() const;
 	const float camera_getMaxThirdPersonPitch() const;
 	const float camera_getThirdPersonDistance() const;
+	const float camera_getAccelerationResistence() const;
 	const bool camera_isThirdPersonEnabled() const;
 	const bool camera_isFirstPersonEnabled() const;
 

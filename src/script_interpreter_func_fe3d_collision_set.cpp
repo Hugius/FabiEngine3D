@@ -62,9 +62,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(args[0]->getString()))
+				for(const auto & childAabbId : _fe3d->quad3d_getChildAabbIds(args[0]->getString()))
 				{
-					_fe3d->collision_calculateAabbWithAabbs(aabbId);
+					_fe3d->collision_calculateAabbWithAabbs(childAabbId);
 				}
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -79,9 +79,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
-				for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(args[0]->getString()))
+				for(const auto & childAabbId : _fe3d->text3d_getChildAabbIds(args[0]->getString()))
 				{
-					_fe3d->collision_calculateAabbWithAabbs(aabbId);
+					_fe3d->collision_calculateAabbWithAabbs(childAabbId);
 				}
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

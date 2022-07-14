@@ -116,9 +116,9 @@ void WorldEditor::_updateMiscellaneous()
 
 		if((modelId != _selectedModelId) && (modelId != _activeModelId))
 		{
-			for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
+			for(const auto & childAabbId : _fe3d->model_getChildAabbIds(modelId))
 			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+				_fe3d->aabb_setVisible(childAabbId, _isAabbModeEnabled);
 			}
 		}
 	}
@@ -129,9 +129,9 @@ void WorldEditor::_updateMiscellaneous()
 
 		if((quad3dId != _selectedQuad3dId) && (quad3dId != _activeQuad3dId))
 		{
-			for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
+			for(const auto & childAabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
 			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+				_fe3d->aabb_setVisible(childAabbId, _isAabbModeEnabled);
 			}
 		}
 	}
@@ -142,9 +142,9 @@ void WorldEditor::_updateMiscellaneous()
 
 		if((text3dId != _selectedText3dId) && (text3dId != _activeText3dId))
 		{
-			for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
+			for(const auto & childAabbId : _fe3d->text3d_getChildAabbIds(text3dId))
 			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+				_fe3d->aabb_setVisible(childAabbId, _isAabbModeEnabled);
 			}
 		}
 	}

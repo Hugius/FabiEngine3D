@@ -247,9 +247,9 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, con
 
 const bool ScriptInterpreter::_validateFe3dModelAabb(const string & modelId, const string & aabbId)
 {
-	for(const auto & fullAabbId : _fe3d->model_getChildAabbIds(modelId))
+	for(const auto & childAabbId : _fe3d->model_getChildAabbIds(modelId))
 	{
-		if(aabbId == fullAabbId.substr(string("model@" + modelId + "@").size()))
+		if(aabbId == childAabbId.substr(string("model@" + modelId + "@").size()))
 		{
 			return true;
 		}

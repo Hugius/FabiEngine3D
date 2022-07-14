@@ -6,9 +6,9 @@ void WorldEditor::_selectModel(const string & modelId)
 
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->model_getChildAabbIds(_selectedModelId))
+		for(const auto & childAabbId : _fe3d->model_getChildAabbIds(_selectedModelId))
 		{
-			_fe3d->aabb_setVisible(aabbId, true);
+			_fe3d->aabb_setVisible(childAabbId, true);
 		}
 	}
 
@@ -21,9 +21,9 @@ void WorldEditor::_selectQuad3d(const string & quad3dId)
 
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(_selectedQuad3dId))
+		for(const auto & childAabbId : _fe3d->quad3d_getChildAabbIds(_selectedQuad3dId))
 		{
-			_fe3d->aabb_setVisible(aabbId, true);
+			_fe3d->aabb_setVisible(childAabbId, true);
 		}
 	}
 
@@ -36,9 +36,9 @@ void WorldEditor::_selectText3d(const string & text3dId)
 
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(_selectedText3dId))
+		for(const auto & childAabbId : _fe3d->text3d_getChildAabbIds(_selectedText3dId))
 		{
-			_fe3d->aabb_setVisible(aabbId, true);
+			_fe3d->aabb_setVisible(childAabbId, true);
 		}
 	}
 
@@ -104,9 +104,9 @@ void WorldEditor::_deselectModel(const string & modelId)
 {
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
+		for(const auto & childAabbId : _fe3d->model_getChildAabbIds(modelId))
 		{
-			_fe3d->aabb_setVisible(aabbId, false);
+			_fe3d->aabb_setVisible(childAabbId, false);
 		}
 	}
 }
@@ -115,9 +115,9 @@ void WorldEditor::_deselectQuad3d(const string & quad3dId)
 {
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
+		for(const auto & childAabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
 		{
-			_fe3d->aabb_setVisible(aabbId, false);
+			_fe3d->aabb_setVisible(childAabbId, false);
 		}
 	}
 }
@@ -126,9 +126,9 @@ void WorldEditor::_deselectText3d(const string & text3dId)
 {
 	if(!_isAabbModeEnabled)
 	{
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
+		for(const auto & childAabbId : _fe3d->text3d_getChildAabbIds(text3dId))
 		{
-			_fe3d->aabb_setVisible(aabbId, false);
+			_fe3d->aabb_setVisible(childAabbId, false);
 		}
 	}
 }

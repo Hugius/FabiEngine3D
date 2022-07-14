@@ -1460,9 +1460,9 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				for(const auto & aabbId : _fe3d->model_getChildAabbIds(args[0]->getString()))
+				for(const auto & childAabbId : _fe3d->model_getChildAabbIds(args[0]->getString()))
 				{
-					const auto result = aabbId.substr(string("model@" + args[0]->getString() + "@").size());
+					const auto result = childAabbId.substr(string("model@" + args[0]->getString() + "@").size());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}

@@ -30,6 +30,20 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:aabb_get_editor_id")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString(), false))
+			{
+				const auto result = _duplicator->getTemplateAabbId(args[0]->getString()).substr(1);
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:aabb_is_existing")
 	{
 		const auto types = {SVT::STRING};

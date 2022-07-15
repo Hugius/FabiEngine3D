@@ -20,6 +20,20 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:sound2d_get_editor_id")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _duplicator->getTemplateSound2dId(args[0]->getString()).substr(1);
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:sound2d_find_ids")
 	{
 		const auto types = {SVT::STRING};

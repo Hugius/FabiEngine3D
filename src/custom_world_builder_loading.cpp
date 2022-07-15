@@ -38,7 +38,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		{
 			array<string, 6> cubeMapPaths{};
 			string skyId;
-			string templateSkyId;
+			string editorSkyId;
 			fvec3 color;
 			fvec3 rotation;
 			fvec3 wireframeColor;
@@ -49,7 +49,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> skyId
-				>> templateSkyId
+				>> editorSkyId
 				>> cubeMapPaths[0]
 				>> cubeMapPaths[1]
 				>> cubeMapPaths[2]
@@ -85,12 +85,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				}
 			}
 
-			if(!_fe3d->sky_isExisting(templateSkyId))
+			if(!_fe3d->sky_isExisting(editorSkyId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSky(skyId, templateSkyId);
+			_duplicator->copyEditorSky(skyId, editorSkyId);
 
 			_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
 			_fe3d->sky_setLightness(skyId, lightness);
@@ -110,7 +110,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "TERRAIN")
 		{
 			string terrainId;
-			string templateTerrainId;
+			string editorTerrainId;
 			string diffuseMapPath;
 			string normalMapPath;
 			string redNormalMapPath;
@@ -139,7 +139,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> terrainId
-				>> templateTerrainId
+				>> editorTerrainId
 				>> diffuseMapPath
 				>> blendMapPath
 				>> redDiffuseMapPath
@@ -194,12 +194,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(greenDiffuseMapPath.begin(), greenDiffuseMapPath.end(), '?', ' ');
 			replace(blueDiffuseMapPath.begin(), blueDiffuseMapPath.end(), '?', ' ');
 
-			if(!_fe3d->terrain_isExisting(templateTerrainId))
+			if(!_fe3d->terrain_isExisting(editorTerrainId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateTerrain(terrainId, templateTerrainId);
+			_duplicator->copyEditorTerrain(terrainId, editorTerrainId);
 
 			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
 			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);
@@ -317,7 +317,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "WATER")
 		{
 			string waterId;
-			string templateWaterId;
+			string editorWaterId;
 			string dudvMapPath;
 			string normalMapPath;
 			string heightMapPath;
@@ -353,7 +353,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> waterId
-				>> templateWaterId
+				>> editorWaterId
 				>> dudvMapPath
 				>> normalMapPath
 				>> heightMapPath
@@ -405,12 +405,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 			replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
-			if(!_fe3d->water_isExisting(templateWaterId))
+			if(!_fe3d->water_isExisting(editorWaterId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateWater(waterId, templateWaterId);
+			_duplicator->copyEditorWater(waterId, editorWaterId);
 
 			_fe3d->water_setSize(waterId, size);
 			_fe3d->water_setSpecular(waterId, isSpecular);
@@ -481,7 +481,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "MODEL")
 		{
 			string modelId;
-			string templateModelId;
+			string editorModelId;
 			string levelOfDetailId;
 			fvec3 position;
 			fvec3 rotation;
@@ -498,7 +498,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> modelId
-				>> templateModelId
+				>> editorModelId
 				>> levelOfDetailId
 				>> levelOfDetailDistance
 				>> rotationOrder
@@ -527,12 +527,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			levelOfDetailId = (levelOfDetailId == "?") ? "" : levelOfDetailId;
 
-			if(!_fe3d->model_isExisting(templateModelId))
+			if(!_fe3d->model_isExisting(editorModelId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateModel(modelId, templateModelId);
+			_duplicator->copyEditorModel(modelId, editorModelId);
 
 			_fe3d->model_setVisible(modelId, isVisible);
 			_fe3d->model_setBasePosition(modelId, position);
@@ -860,7 +860,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "QUAD3D")
 		{
 			string quad3dId;
-			string templateQuad3dId;
+			string editorQuad3dId;
 			string diffuseMapPath;
 			string emissionMapPath;
 			fvec3 color;
@@ -891,7 +891,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> quad3dId
-				>> templateQuad3dId
+				>> editorQuad3dId
 				>> diffuseMapPath
 				>> emissionMapPath
 				>> position.x
@@ -941,12 +941,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-			if(!_fe3d->quad3d_isExisting(templateQuad3dId))
+			if(!_fe3d->quad3d_isExisting(editorQuad3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateQuad3d(quad3dId, templateQuad3dId);
+			_duplicator->copyEditorQuad3d(quad3dId, editorQuad3dId);
 
 			_fe3d->quad3d_setVisible(quad3dId, isVisible);
 			_fe3d->quad3d_setPosition(quad3dId, position);
@@ -1074,7 +1074,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "TEXT3D")
 		{
 			string text3dId;
-			string templateText3dId;
+			string editorText3dId;
 			string content;
 			fvec3 color;
 			fvec3 position;
@@ -1100,7 +1100,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> text3dId
-				>> templateText3dId
+				>> editorText3dId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -1137,12 +1137,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxClipPosition.z
 				>> content;
 
-			if(!_fe3d->text3d_isExisting(templateText3dId))
+			if(!_fe3d->text3d_isExisting(editorText3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateText3d(text3dId, templateText3dId);
+			_duplicator->copyEditorText3d(text3dId, editorText3dId);
 
 			_fe3d->text3d_setVisible(text3dId, isVisible);
 			_fe3d->text3d_setPosition(text3dId, position);
@@ -1194,7 +1194,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "AABB")
 		{
 			string aabbId;
-			string templateAabbId;
+			string editorAabbId;
 			fvec3 position;
 			fvec3 size;
 			fvec3 color;
@@ -1206,7 +1206,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> aabbId
-				>> templateAabbId
+				>> editorAabbId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -1226,12 +1226,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxClipPosition.y
 				>> maxClipPosition.z;
 
-			if(!_fe3d->aabb_isExisting(templateAabbId))
+			if(!_fe3d->aabb_isExisting(editorAabbId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateAabb(aabbId, templateAabbId);
+			_duplicator->copyEditorAabb(aabbId, editorAabbId);
 
 			_fe3d->aabb_setVisible(aabbId, isVisible);
 			_fe3d->aabb_setBasePosition(aabbId, position);
@@ -1247,7 +1247,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "POINTLIGHT")
 		{
 			string pointlightId;
-			string templatePointlightId;
+			string editorPointlightId;
 			fvec3 position;
 			fvec3 radius;
 			fvec3 color;
@@ -1257,7 +1257,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> pointlightId
-				>> templatePointlightId
+				>> editorPointlightId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -1271,12 +1271,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> shape
 				>> isVisible;
 
-			if(!_fe3d->pointlight_isExisting(templatePointlightId))
+			if(!_fe3d->pointlight_isExisting(editorPointlightId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplatePointlight(pointlightId, templatePointlightId);
+			_duplicator->copyEditorPointlight(pointlightId, editorPointlightId);
 
 			_fe3d->pointlight_setVisible(pointlightId, isVisible);
 			_fe3d->pointlight_setPosition(pointlightId, position);
@@ -1290,7 +1290,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SPOTLIGHT")
 		{
 			string spotlightId;
-			string templateSpotlightId;
+			string editorSpotlightId;
 			fvec3 color;
 			fvec3 position;
 			float yaw;
@@ -1302,7 +1302,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> spotlightId
-				>> templateSpotlightId
+				>> editorSpotlightId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -1316,12 +1316,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> distance
 				>> isVisible;
 
-			if(!_fe3d->spotlight_isExisting(templateSpotlightId))
+			if(!_fe3d->spotlight_isExisting(editorSpotlightId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSpotlight(spotlightId, templateSpotlightId);
+			_duplicator->copyEditorSpotlight(spotlightId, editorSpotlightId);
 
 			_fe3d->spotlight_setVisible(spotlightId, isVisible);
 			_fe3d->spotlight_setPosition(spotlightId, position);
@@ -1337,13 +1337,13 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "CAPTOR")
 		{
 			string captorId;
-			string templateCaptorId;
+			string editorCaptorId;
 			string exceptionId;
 			fvec3 position;
 
 			iss
 				>> captorId
-				>> templateCaptorId
+				>> editorCaptorId
 				>> exceptionId
 				>> position.x
 				>> position.y
@@ -1351,12 +1351,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			exceptionId = (exceptionId == "?") ? "" : exceptionId;
 
-			if(!_fe3d->captor_isExisting(templateCaptorId))
+			if(!_fe3d->captor_isExisting(editorCaptorId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateCaptor(captorId, templateCaptorId);
+			_duplicator->copyEditorCaptor(captorId, editorCaptorId);
 
 			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
 			_fe3d->captor_setPosition(captorId, position);
@@ -1367,7 +1367,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
-			string templateSound3dId;
+			string editorSound3dId;
 			fvec3 position;
 			float maxVolume;
 			float maxDistance;
@@ -1375,7 +1375,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> sound3dId
-				>> templateSound3dId
+				>> editorSound3dId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -1383,12 +1383,12 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 				>> maxDistance
 				>> startedCount;
 
-			if(!_fe3d->sound3d_isExisting(templateSound3dId))
+			if(!_fe3d->sound3d_isExisting(editorSound3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSound3d(sound3dId, templateSound3dId);
+			_duplicator->copyEditorSound3d(sound3dId, editorSound3dId);
 
 			_fe3d->sound3d_setPosition(sound3dId, position);
 			_fe3d->sound3d_setMaxVolume(sound3dId, maxVolume);

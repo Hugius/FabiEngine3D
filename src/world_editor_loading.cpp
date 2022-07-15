@@ -141,56 +141,56 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SKY")
 		{
 			string skyId;
-			string templateSkyId;
+			string editorSkyId;
 
 			iss
 				>> skyId
-				>> templateSkyId;
+				>> editorSkyId;
 
-			if(!_fe3d->sky_isExisting(templateSkyId))
+			if(!_fe3d->sky_isExisting(editorSkyId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSky(skyId, templateSkyId);
+			_duplicator->copyEditorSky(skyId, editorSkyId);
 
 			_fe3d->sky_select(skyId);
 		}
 		else if(lineType == "TERRAIN")
 		{
 			string terrainId;
-			string templateTerrainId;
+			string editorTerrainId;
 
 			iss
 				>> terrainId
-				>> templateTerrainId;
+				>> editorTerrainId;
 
-			if(!_fe3d->terrain_isExisting(templateTerrainId))
+			if(!_fe3d->terrain_isExisting(editorTerrainId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateTerrain(terrainId, templateTerrainId);
+			_duplicator->copyEditorTerrain(terrainId, editorTerrainId);
 
 			_fe3d->terrain_select(terrainId);
 		}
 		else if(lineType == "WATER")
 		{
 			string waterId;
-			string templateWaterId;
+			string editorWaterId;
 			float height;
 
 			iss
 				>> waterId
-				>> templateWaterId
+				>> editorWaterId
 				>> height;
 
-			if(!_fe3d->water_isExisting(templateWaterId))
+			if(!_fe3d->water_isExisting(editorWaterId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateWater(waterId, templateWaterId);
+			_duplicator->copyEditorWater(waterId, editorWaterId);
 
 			_fe3d->water_setHeight(waterId, height);
 			_fe3d->water_select(waterId);
@@ -198,7 +198,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "MODEL")
 		{
 			string modelId;
-			string templateModelId;
+			string editorModelId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec3 size;
@@ -206,7 +206,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> modelId
-				>> templateModelId
+				>> editorModelId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -218,12 +218,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.z
 				>> animation3dCount;
 
-			if(!_fe3d->model_isExisting(templateModelId))
+			if(!_fe3d->model_isExisting(editorModelId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateModel(modelId, templateModelId);
+			_duplicator->copyEditorModel(modelId, editorModelId);
 
 			_fe3d->model_setBasePosition(modelId, position);
 			_fe3d->model_setBaseRotation(modelId, rotation);
@@ -267,7 +267,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "QUAD3D")
 		{
 			string quad3dId;
-			string templateQuad3dId;
+			string editorQuad3dId;
 			string animation2dId;
 			fvec3 position;
 			fvec3 rotation;
@@ -275,7 +275,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> quad3dId
-				>> templateQuad3dId
+				>> editorQuad3dId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -288,12 +288,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			animation2dId = (animation2dId == "?") ? "" : animation2dId;
 
-			if(!_fe3d->quad3d_isExisting(templateQuad3dId))
+			if(!_fe3d->quad3d_isExisting(editorQuad3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateQuad3d(quad3dId, templateQuad3dId);
+			_duplicator->copyEditorQuad3d(quad3dId, editorQuad3dId);
 
 			_fe3d->quad3d_setPosition(quad3dId, position);
 			_fe3d->quad3d_setRotation(quad3dId, rotation);
@@ -311,7 +311,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "TEXT3D")
 		{
 			string text3dId;
-			string templateText3dId;
+			string editorText3dId;
 			string content;
 			fvec3 position;
 			fvec3 rotation;
@@ -319,7 +319,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			iss
 				>> text3dId
-				>> templateText3dId
+				>> editorText3dId
 				>> content
 				>> position.x
 				>> position.y
@@ -330,12 +330,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.x
 				>> size.y;
 
-			if(!_fe3d->text3d_isExisting(templateText3dId))
+			if(!_fe3d->text3d_isExisting(editorText3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateText3d(text3dId, templateText3dId);
+			_duplicator->copyEditorText3d(text3dId, editorText3dId);
 
 			_fe3d->text3d_setContent(text3dId, content);
 			_fe3d->text3d_setPosition(text3dId, position);
@@ -349,13 +349,13 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "AABB")
 		{
 			string aabbId;
-			string templateAabbId;
+			string editorAabbId;
 			fvec3 position;
 			fvec3 size;
 
 			iss
 				>> aabbId
-				>> templateAabbId
+				>> editorAabbId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -363,12 +363,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.y
 				>> size.z;
 
-			if(!_fe3d->aabb_isExisting(templateAabbId))
+			if(!_fe3d->aabb_isExisting(editorAabbId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateAabb(aabbId, templateAabbId);
+			_duplicator->copyEditorAabb(aabbId, editorAabbId);
 
 			_fe3d->aabb_setBasePosition(aabbId, position);
 			_fe3d->aabb_setBaseSize(aabbId, size);
@@ -380,22 +380,22 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "POINTLIGHT")
 		{
 			string pointlightId;
-			string templatePointlightId;
+			string editorPointlightId;
 			fvec3 position;
 
 			iss
 				>> pointlightId
-				>> templatePointlightId
+				>> editorPointlightId
 				>> position.x
 				>> position.y
 				>> position.z;
 
-			if(!_fe3d->pointlight_isExisting(templatePointlightId))
+			if(!_fe3d->pointlight_isExisting(editorPointlightId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplatePointlight(pointlightId, templatePointlightId);
+			_duplicator->copyEditorPointlight(pointlightId, editorPointlightId);
 
 			_fe3d->pointlight_setPosition(pointlightId, position);
 
@@ -426,26 +426,26 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SPOTLIGHT")
 		{
 			string spotlightId;
-			string templateSpotlightId;
+			string editorSpotlightId;
 			fvec3 position;
 			float yaw;
 			float pitch;
 
 			iss
 				>> spotlightId
-				>> templateSpotlightId
+				>> editorSpotlightId
 				>> position.x
 				>> position.y
 				>> position.z
 				>> yaw
 				>> pitch;
 
-			if(!_fe3d->spotlight_isExisting(templateSpotlightId))
+			if(!_fe3d->spotlight_isExisting(editorSpotlightId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSpotlight(spotlightId, templateSpotlightId);
+			_duplicator->copyEditorSpotlight(spotlightId, editorSpotlightId);
 
 			_fe3d->spotlight_setPosition(spotlightId, position);
 			_fe3d->spotlight_setYaw(spotlightId, yaw);
@@ -479,13 +479,13 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "CAPTOR")
 		{
 			string captorId;
-			string templateCaptorId;
+			string editorCaptorId;
 			string exceptionId;
 			fvec3 position;
 
 			iss
 				>> captorId
-				>> templateCaptorId
+				>> editorCaptorId
 				>> exceptionId
 				>> position.x
 				>> position.y
@@ -493,12 +493,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			exceptionId = (exceptionId == "?") ? "" : exceptionId;
 
-			if(!_fe3d->captor_isExisting(templateCaptorId))
+			if(!_fe3d->captor_isExisting(editorCaptorId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateCaptor(captorId, templateCaptorId);
+			_duplicator->copyEditorCaptor(captorId, editorCaptorId);
 
 			_fe3d->captor_setExceptionId(captorId, (_fe3d->model_isExisting(exceptionId) ? exceptionId : ""));
 			_fe3d->captor_setPosition(captorId, position);
@@ -530,22 +530,22 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "SOUND3D")
 		{
 			string sound3dId;
-			string templateSound3dId;
+			string editorSound3dId;
 			fvec3 position;
 
 			iss
 				>> sound3dId
-				>> templateSound3dId
+				>> editorSound3dId
 				>> position.x
 				>> position.y
 				>> position.z;
 
-			if(!_fe3d->sound3d_isExisting(templateSound3dId))
+			if(!_fe3d->sound3d_isExisting(editorSound3dId))
 			{
 				continue;
 			}
 
-			_duplicator->copyTemplateSound3d(sound3dId, templateSound3dId);
+			_duplicator->copyEditorSound3d(sound3dId, editorSound3dId);
 
 			_fe3d->sound3d_setPosition(sound3dId, position);
 			_fe3d->sound3d_start(sound3dId, -1, 0);

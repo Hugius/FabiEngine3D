@@ -1,17 +1,17 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateFe3dAabb(const string & aabbId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dAabb(const string & aabbId, bool isEditor)
 {
 	if(!_validateFe3dId(aabbId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->aabb_isExisting("@" + aabbId))
 		{
-			_throwRuntimeError("template AABB does not exist");
+			_throwRuntimeError("editor AABB does not exist");
 
 			return false;
 		}
@@ -29,18 +29,18 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string & aabbId, bool isTe
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dQuad3d(const string & quad3dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dQuad3d(const string & quad3dId, bool isEditor)
 {
 	if(!_validateFe3dId(quad3dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->quad3d_isExisting("@" + quad3dId))
 		{
-			_throwRuntimeError("template quad3D does not exist");
+			_throwRuntimeError("editor quad3D does not exist");
 
 			return false;
 		}
@@ -58,18 +58,18 @@ const bool ScriptInterpreter::_validateFe3dQuad3d(const string & quad3dId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dText3d(const string & text3dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dText3d(const string & text3dId, bool isEditor)
 {
 	if(!_validateFe3dId(text3dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->text3d_isExisting("@" + text3dId))
 		{
-			_throwRuntimeError("template text3D does not exist");
+			_throwRuntimeError("editor text3D does not exist");
 
 			return false;
 		}
@@ -87,18 +87,18 @@ const bool ScriptInterpreter::_validateFe3dText3d(const string & text3dId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dQuad2d(const string & quad2dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dQuad2d(const string & quad2dId, bool isEditor)
 {
 	if(!_validateFe3dId(quad2dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->quad2d_isExisting("@" + quad2dId))
 		{
-			_throwRuntimeError("template quad2D does not exist");
+			_throwRuntimeError("editor quad2D does not exist");
 
 			return false;
 		}
@@ -116,18 +116,18 @@ const bool ScriptInterpreter::_validateFe3dQuad2d(const string & quad2dId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dText2d(const string & text2dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dText2d(const string & text2dId, bool isEditor)
 {
 	if(!_validateFe3dId(text2dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->text2d_isExisting("@" + text2dId))
 		{
-			_throwRuntimeError("template text2D does not exist");
+			_throwRuntimeError("editor text2D does not exist");
 
 			return false;
 		}
@@ -145,18 +145,18 @@ const bool ScriptInterpreter::_validateFe3dText2d(const string & text2dId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightId, bool isEditor)
 {
 	if(!_validateFe3dId(pointlightId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->pointlight_isExisting("@" + pointlightId))
 		{
-			_throwRuntimeError("template pointlight does not exist");
+			_throwRuntimeError("editor pointlight does not exist");
 
 			return false;
 		}
@@ -174,18 +174,18 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string & pointlightI
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSpotlight(const string & spotlightId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSpotlight(const string & spotlightId, bool isEditor)
 {
 	if(!_validateFe3dId(spotlightId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->spotlight_isExisting("@" + spotlightId))
 		{
-			_throwRuntimeError("template spotlight does not exist");
+			_throwRuntimeError("editor spotlight does not exist");
 
 			return false;
 		}
@@ -203,18 +203,18 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string & spotlightId,
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dModel(const string & modelId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dModel(const string & modelId, bool isEditor)
 {
 	if(!_validateFe3dId(modelId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->model_isExisting("@" + modelId))
 		{
-			_throwRuntimeError("template model does not exist");
+			_throwRuntimeError("editor model does not exist");
 
 			return false;
 		}
@@ -260,18 +260,18 @@ const bool ScriptInterpreter::_validateFe3dModelAabb(const string & modelId, con
 	return false;
 }
 
-const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId, bool isEditor)
 {
 	if(!_validateFe3dId(captorId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->captor_isExisting("@" + captorId))
 		{
-			_throwRuntimeError("template captor does not exist");
+			_throwRuntimeError("editor captor does not exist");
 
 			return false;
 		}
@@ -289,18 +289,18 @@ const bool ScriptInterpreter::_validateFe3dCaptor(const string & captorId, bool 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSky(const string & skyId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSky(const string & skyId, bool isEditor)
 {
 	if(!_validateFe3dId(skyId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->sky_isExisting("@" + skyId))
 		{
-			_throwRuntimeError("template sky does not exist");
+			_throwRuntimeError("editor sky does not exist");
 
 			return false;
 		}
@@ -318,18 +318,18 @@ const bool ScriptInterpreter::_validateFe3dSky(const string & skyId, bool isTemp
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dTerrain(const string & terrainId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dTerrain(const string & terrainId, bool isEditor)
 {
 	if(!_validateFe3dId(terrainId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->terrain_isExisting("@" + terrainId))
 		{
-			_throwRuntimeError("template terrain does not exist");
+			_throwRuntimeError("editor terrain does not exist");
 
 			return false;
 		}
@@ -381,18 +381,18 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string & animation3
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dWater(const string & waterId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dWater(const string & waterId, bool isEditor)
 {
 	if(!_validateFe3dId(waterId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->water_isExisting("@" + waterId))
 		{
-			_throwRuntimeError("template water does not exist");
+			_throwRuntimeError("editor water does not exist");
 
 			return false;
 		}
@@ -410,18 +410,18 @@ const bool ScriptInterpreter::_validateFe3dWater(const string & waterId, bool is
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound2d(const string & sound2dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSound2d(const string & sound2dId, bool isEditor)
 {
 	if(!_validateFe3dId(sound2dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->sound2d_isExisting("@" + sound2dId))
 		{
-			_throwRuntimeError("template sound2D does not exist");
+			_throwRuntimeError("editor sound2D does not exist");
 
 			return false;
 		}
@@ -439,18 +439,18 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string & sound2dId, boo
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound3d(const string & sound3dId, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSound3d(const string & sound3dId, bool isEditor)
 {
 	if(!_validateFe3dId(sound3dId))
 	{
 		return false;
 	}
 
-	if(isTemplate)
+	if(isEditor)
 	{
 		if(!_fe3d->sound3d_isExisting("@" + sound3dId))
 		{
-			_throwRuntimeError("template sound3D does not exist");
+			_throwRuntimeError("editor sound3D does not exist");
 
 			return false;
 		}

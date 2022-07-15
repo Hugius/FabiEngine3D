@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateSpotlightPlacing()
 {
-	if(!_currentTemplateSpotlightId.empty())
+	if(!_currentEditorSpotlightId.empty())
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
@@ -15,7 +15,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->spotlight_setPosition(_currentTemplateSpotlightId, fvec3(value, newPosition.y, newPosition.z));
+				_fe3d->spotlight_setPosition(_currentEditorSpotlightId, fvec3(value, newPosition.y, newPosition.z));
 				_fe3d->model_setBasePosition(TORCH_ID, fvec3(value, newPosition.y, newPosition.z));
 			}
 			else if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
@@ -23,7 +23,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-				_fe3d->spotlight_setPosition(_currentTemplateSpotlightId, fvec3(newPosition.x, value, newPosition.z));
+				_fe3d->spotlight_setPosition(_currentEditorSpotlightId, fvec3(newPosition.x, value, newPosition.z));
 				_fe3d->model_setBasePosition(TORCH_ID, fvec3(newPosition.x, value, newPosition.z));
 			}
 			else if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
@@ -32,22 +32,22 @@ void WorldEditor::_updateSpotlightPlacing()
 				{
 					Logger::throwWarning("spotlight maximum is reached");
 
-					_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+					_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 					_fe3d->model_setVisible(TORCH_ID, false);
 
-					_currentTemplateSpotlightId = "";
+					_currentEditorSpotlightId = "";
 
 					return;
 				}
 
 				const auto content = _gui->getOverlay()->getValueFormContent();
 				const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
-				const auto newSpotlightId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
+				const auto newSpotlightId = (_currentEditorSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
 				const auto newModelId = ("@@torch_" + newSpotlightId);
 
 				_spotlightIdCounter++;
 
-				_duplicator->copyTemplateSpotlight(newSpotlightId, _currentTemplateSpotlightId);
+				_duplicator->copyEditorSpotlight(newSpotlightId, _currentEditorSpotlightId);
 
 				_fe3d->spotlight_setPosition(newSpotlightId, fvec3(newPosition.x, newPosition.y, value));
 
@@ -71,25 +71,25 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, TORCH_AABB_SIZE);
 
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
-				_currentTemplateSpotlightId = "";
+				_currentEditorSpotlightId = "";
 			}
 
 			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
-				_currentTemplateSpotlightId = "";
+				_currentEditorSpotlightId = "";
 			}
 		}
 		else
 		{
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
 				return;
@@ -97,7 +97,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
 				return;
@@ -105,17 +105,17 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
-				_currentTemplateSpotlightId = "";
+				_currentEditorSpotlightId = "";
 
 				return;
 			}
 
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
-				_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, false);
+				_fe3d->spotlight_setVisible(_currentEditorSpotlightId, false);
 				_fe3d->model_setVisible(TORCH_ID, false);
 
 				return;
@@ -123,8 +123,8 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET);
 
-			_fe3d->spotlight_setVisible(_currentTemplateSpotlightId, true);
-			_fe3d->spotlight_setPosition(_currentTemplateSpotlightId, newPosition);
+			_fe3d->spotlight_setVisible(_currentEditorSpotlightId, true);
+			_fe3d->spotlight_setPosition(_currentEditorSpotlightId, newPosition);
 			_fe3d->model_setVisible(TORCH_ID, true);
 			_fe3d->model_setBasePosition(TORCH_ID, newPosition);
 
@@ -137,12 +137,12 @@ void WorldEditor::_updateSpotlightPlacing()
 					return;
 				}
 
-				const auto newSpotlightId = (_currentTemplateSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
+				const auto newSpotlightId = (_currentEditorSpotlightId.substr(1) + "_" + to_string(_spotlightIdCounter));
 				const auto newModelId = ("@@torch_" + newSpotlightId);
 
 				_spotlightIdCounter++;
 
-				_duplicator->copyTemplateSpotlight(newSpotlightId, _currentTemplateSpotlightId);
+				_duplicator->copyEditorSpotlight(newSpotlightId, _currentEditorSpotlightId);
 
 				_fe3d->spotlight_setPosition(newSpotlightId, newPosition);
 

@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				const auto result = _duplicator->getTemplateSound3dId(args[0]->getString()).substr(1);
+				const auto result = _duplicator->getEditorSound3dId(args[0]->getString()).substr(1);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

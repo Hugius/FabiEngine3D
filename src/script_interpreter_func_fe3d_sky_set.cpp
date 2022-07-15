@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 
 			if(_validateFe3dSky(args[0]->getString(), true))
 			{
-				_duplicator->copyTemplateSky(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorSky(args[0]->getString(), ("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

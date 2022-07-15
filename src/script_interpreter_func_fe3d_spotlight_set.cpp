@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 
 			if(_validateFe3dSpotlight(args[1]->getString(), true))
 			{
-				_duplicator->copyTemplateSpotlight(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorSpotlight(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->spotlight_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 

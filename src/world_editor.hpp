@@ -277,14 +277,14 @@ private:
 
 	string _loadedWorldId = "";
 	string _currentWorldId = "";
-	string _currentTemplateModelId = "";
-	string _currentTemplateQuad3dId = "";
-	string _currentTemplateText3dId = "";
-	string _currentTemplateAabbId = "";
-	string _currentTemplatePointlightId = "";
-	string _currentTemplateSpotlightId = "";
-	string _currentTemplateCaptorId = "";
-	string _currentTemplateSound3dId = "";
+	string _currentEditorModelId = "";
+	string _currentEditorQuad3dId = "";
+	string _currentEditorText3dId = "";
+	string _currentEditorAabbId = "";
+	string _currentEditorPointlightId = "";
+	string _currentEditorSpotlightId = "";
+	string _currentEditorCaptorId = "";
+	string _currentEditorSound3dId = "";
 	string _selectedModelId = "";
 	string _selectedQuad3dId = "";
 	string _selectedText3dId = "";

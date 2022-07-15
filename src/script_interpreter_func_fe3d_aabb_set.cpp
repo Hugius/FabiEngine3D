@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 
 			if(_validateFe3dAabb(args[1]->getString(), true))
 			{
-				_duplicator->copyTemplateAabb(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorAabb(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->aabb_setBasePosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 

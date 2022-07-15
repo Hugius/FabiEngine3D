@@ -3,14 +3,14 @@
 
 void WorldEditor::_updateSpotlightEditing()
 {
-	if(_currentTemplateModelId.empty() &&
-	   _currentTemplateQuad3dId.empty() &&
-	   _currentTemplateText3dId.empty() &&
-	   _currentTemplateAabbId.empty() &&
-	   _currentTemplatePointlightId.empty() &&
-	   _currentTemplateSpotlightId.empty() &&
-	   _currentTemplateCaptorId.empty() &&
-	   _currentTemplateSound3dId.empty())
+	if(_currentEditorModelId.empty() &&
+	   _currentEditorQuad3dId.empty() &&
+	   _currentEditorText3dId.empty() &&
+	   _currentEditorAabbId.empty() &&
+	   _currentEditorPointlightId.empty() &&
+	   _currentEditorSpotlightId.empty() &&
+	   _currentEditorCaptorId.empty() &&
+	   _currentEditorSound3dId.empty())
 	{
 		const auto window = _gui->getLeftViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();

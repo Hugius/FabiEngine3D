@@ -40,11 +40,11 @@ void WorldEditor::_updateSkyPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templateSkies")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorSkies")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
-				_duplicator->copyTemplateSky(hoveredOptionId.substr(1), hoveredOptionId);
+				_duplicator->copyEditorSky(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->sky_select(hoveredOptionId.substr(1));
 

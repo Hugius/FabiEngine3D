@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string & functionName,
 		{
 			if(_validateFe3dSky(args[0]->getString(), false))
 			{
-				const auto result = _duplicator->getTemplateSkyId(args[0]->getString()).substr(1);
+				const auto result = _duplicator->getEditorSkyId(args[0]->getString()).substr(1);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

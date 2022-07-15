@@ -11,11 +11,11 @@ void WorldEditor::_updateQuad3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateQuad3dId.empty())
+			if(!_currentEditorQuad3dId.empty())
 			{
-				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
+				_fe3d->quad3d_setVisible(_currentEditorQuad3dId, false);
 
-				_currentTemplateQuad3dId = "";
+				_currentEditorQuad3dId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -37,7 +37,7 @@ void WorldEditor::_updateQuad3dMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateQuad3dId.empty(), true);
+		screen->getButton("choice")->setHoverable(_currentEditorQuad3dId.empty(), true);
 	}
 }
 
@@ -55,7 +55,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templateQuad3ds")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorQuad3ds")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -70,15 +70,15 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 				_deactivateCaptor();
 				_deactivateSound3d();
 
-				_currentTemplateQuad3dId = hoveredOptionId;
+				_currentEditorQuad3dId = hoveredOptionId;
 
-				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, true);
+				_fe3d->quad3d_setVisible(_currentEditorQuad3dId, true);
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->quad3d_setPosition(_currentTemplateQuad3dId, fvec3(0.0f));
+					_fe3d->quad3d_setPosition(_currentEditorQuad3dId, fvec3(0.0f));
 
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);

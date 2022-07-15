@@ -11,16 +11,16 @@ void WorldEditor::_updateSound3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateSound3dId.empty())
+			if(!_currentEditorSound3dId.empty())
 			{
-				if(_fe3d->sound3d_isStarted(_currentTemplateSound3dId, 0))
+				if(_fe3d->sound3d_isStarted(_currentEditorSound3dId, 0))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSound3dId, 0);
+					_fe3d->sound3d_stop(_currentEditorSound3dId, 0);
 				}
 
 				_fe3d->model_setVisible(SPEAKER_ID, false);
 
-				_currentTemplateSound3dId = "";
+				_currentEditorSound3dId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -42,7 +42,7 @@ void WorldEditor::_updateSound3dMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateSound3dId.empty(), true);
+		screen->getButton("choice")->setHoverable(_currentEditorSound3dId.empty(), true);
 	}
 }
 
@@ -60,7 +60,7 @@ void WorldEditor::_updateSound3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templateSound3ds")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorSound3ds")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -75,16 +75,16 @@ void WorldEditor::_updateSound3dPlacingMenu()
 				_deactivateCaptor();
 				_deactivateSound3d();
 
-				_currentTemplateSound3dId = hoveredOptionId;
+				_currentEditorSound3dId = hoveredOptionId;
 
-				_fe3d->sound3d_start(_currentTemplateSound3dId, -1, 0);
+				_fe3d->sound3d_start(_currentEditorSound3dId, -1, 0);
 				_fe3d->model_setVisible(SPEAKER_ID, true);
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->sound3d_setPosition(_currentTemplateSound3dId, fvec3(0.0f));
+					_fe3d->sound3d_setPosition(_currentEditorSound3dId, fvec3(0.0f));
 
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);

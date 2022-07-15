@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 		{
 			if(_validateFe3dSpotlight(args[0]->getString(), false))
 			{
-				const auto result = _duplicator->getTemplateSpotlightId(args[0]->getString()).substr(1);
+				const auto result = _duplicator->getEditorSpotlightId(args[0]->getString()).substr(1);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

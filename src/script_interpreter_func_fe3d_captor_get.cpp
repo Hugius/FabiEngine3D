@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 		{
 			if(_validateFe3dCaptor(args[0]->getString(), false))
 			{
-				const auto result = _duplicator->getTemplateCaptorId(args[0]->getString()).substr(1);
+				const auto result = _duplicator->getEditorCaptorId(args[0]->getString()).substr(1);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

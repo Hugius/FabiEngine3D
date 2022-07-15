@@ -103,7 +103,7 @@ void Duplicator::deleteCopiedSound2d(const string & sound2dId)
 	_copiedSound2dIds.erase(sound2dId);
 }
 
-const string & Duplicator::getTemplateSkyId(const string & skyId) const
+const string & Duplicator::getEditorSkyId(const string & skyId) const
 {
 	if(_copiedSkyIds.find(skyId) == _copiedSkyIds.end())
 	{
@@ -113,7 +113,7 @@ const string & Duplicator::getTemplateSkyId(const string & skyId) const
 	return _copiedSkyIds.at(skyId);
 }
 
-const string & Duplicator::getTemplateTerrainId(const string & terrainId) const
+const string & Duplicator::getEditorTerrainId(const string & terrainId) const
 {
 	if(_copiedTerrainIds.find(terrainId) == _copiedTerrainIds.end())
 	{
@@ -123,7 +123,7 @@ const string & Duplicator::getTemplateTerrainId(const string & terrainId) const
 	return _copiedTerrainIds.at(terrainId);
 }
 
-const string & Duplicator::getTemplateWaterId(const string & waterId) const
+const string & Duplicator::getEditorWaterId(const string & waterId) const
 {
 	if(_copiedWaterIds.find(waterId) == _copiedWaterIds.end())
 	{
@@ -133,7 +133,7 @@ const string & Duplicator::getTemplateWaterId(const string & waterId) const
 	return _copiedWaterIds.at(waterId);
 }
 
-const string & Duplicator::getTemplateModelId(const string & modelId) const
+const string & Duplicator::getEditorModelId(const string & modelId) const
 {
 	if(_copiedModelIds.find(modelId) == _copiedModelIds.end())
 	{
@@ -143,7 +143,7 @@ const string & Duplicator::getTemplateModelId(const string & modelId) const
 	return _copiedModelIds.at(modelId);
 }
 
-const string & Duplicator::getTemplateQuad3dId(const string & quad3dId) const
+const string & Duplicator::getEditorQuad3dId(const string & quad3dId) const
 {
 	if(_copiedQuad3dIds.find(quad3dId) == _copiedQuad3dIds.end())
 	{
@@ -153,7 +153,7 @@ const string & Duplicator::getTemplateQuad3dId(const string & quad3dId) const
 	return _copiedQuad3dIds.at(quad3dId);
 }
 
-const string & Duplicator::getTemplateQuad2dId(const string & quad2dId) const
+const string & Duplicator::getEditorQuad2dId(const string & quad2dId) const
 {
 	if(_copiedQuad2dIds.find(quad2dId) == _copiedQuad2dIds.end())
 	{
@@ -163,7 +163,7 @@ const string & Duplicator::getTemplateQuad2dId(const string & quad2dId) const
 	return _copiedQuad2dIds.at(quad2dId);
 }
 
-const string & Duplicator::getTemplateText3dId(const string & text3dId) const
+const string & Duplicator::getEditorText3dId(const string & text3dId) const
 {
 	if(_copiedText3dIds.find(text3dId) == _copiedText3dIds.end())
 	{
@@ -173,7 +173,7 @@ const string & Duplicator::getTemplateText3dId(const string & text3dId) const
 	return _copiedText3dIds.at(text3dId);
 }
 
-const string & Duplicator::getTemplateText2dId(const string & text2dId) const
+const string & Duplicator::getEditorText2dId(const string & text2dId) const
 {
 	if(_copiedText2dIds.find(text2dId) == _copiedText2dIds.end())
 	{
@@ -183,7 +183,7 @@ const string & Duplicator::getTemplateText2dId(const string & text2dId) const
 	return _copiedText2dIds.at(text2dId);
 }
 
-const string & Duplicator::getTemplateAabbId(const string & aabbId) const
+const string & Duplicator::getEditorAabbId(const string & aabbId) const
 {
 	if(_copiedAabbIds.find(aabbId) == _copiedAabbIds.end())
 	{
@@ -193,7 +193,7 @@ const string & Duplicator::getTemplateAabbId(const string & aabbId) const
 	return _copiedAabbIds.at(aabbId);
 }
 
-const string & Duplicator::getTemplatePointlightId(const string & pointlightId) const
+const string & Duplicator::getEditorPointlightId(const string & pointlightId) const
 {
 	if(_copiedPointlightIds.find(pointlightId) == _copiedPointlightIds.end())
 	{
@@ -203,7 +203,7 @@ const string & Duplicator::getTemplatePointlightId(const string & pointlightId) 
 	return _copiedPointlightIds.at(pointlightId);
 }
 
-const string & Duplicator::getTemplateSpotlightId(const string & spotlightId) const
+const string & Duplicator::getEditorSpotlightId(const string & spotlightId) const
 {
 	if(_copiedSpotlightIds.find(spotlightId) == _copiedSpotlightIds.end())
 	{
@@ -213,7 +213,7 @@ const string & Duplicator::getTemplateSpotlightId(const string & spotlightId) co
 	return _copiedSpotlightIds.at(spotlightId);
 }
 
-const string & Duplicator::getTemplateCaptorId(const string & captorId) const
+const string & Duplicator::getEditorCaptorId(const string & captorId) const
 {
 	if(_copiedCaptorIds.find(captorId) == _copiedCaptorIds.end())
 	{
@@ -223,7 +223,7 @@ const string & Duplicator::getTemplateCaptorId(const string & captorId) const
 	return _copiedCaptorIds.at(captorId);
 }
 
-const string & Duplicator::getTemplateSound3dId(const string & sound3dId) const
+const string & Duplicator::getEditorSound3dId(const string & sound3dId) const
 {
 	if(_copiedSound3dIds.find(sound3dId) == _copiedSound3dIds.end())
 	{
@@ -233,7 +233,7 @@ const string & Duplicator::getTemplateSound3dId(const string & sound3dId) const
 	return _copiedSound3dIds.at(sound3dId);
 }
 
-const string & Duplicator::getTemplateSound2dId(const string & sound2dId) const
+const string & Duplicator::getEditorSound2dId(const string & sound2dId) const
 {
 	if(_copiedSound2dIds.find(sound2dId) == _copiedSound2dIds.end())
 	{

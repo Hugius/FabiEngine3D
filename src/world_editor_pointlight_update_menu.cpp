@@ -11,12 +11,12 @@ void WorldEditor::_updatePointlightMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplatePointlightId.empty())
+			if(!_currentEditorPointlightId.empty())
 			{
-				_fe3d->pointlight_setVisible(_currentTemplatePointlightId, false);
+				_fe3d->pointlight_setVisible(_currentEditorPointlightId, false);
 				_fe3d->model_setVisible(LAMP_ID, false);
 
-				_currentTemplatePointlightId = "";
+				_currentEditorPointlightId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -38,7 +38,7 @@ void WorldEditor::_updatePointlightMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplatePointlightId.empty(), true);
+		screen->getButton("choice")->setHoverable(_currentEditorPointlightId.empty(), true);
 	}
 }
 
@@ -56,7 +56,7 @@ void WorldEditor::_updatePointlightPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templatePointlights")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorPointlights")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -71,17 +71,17 @@ void WorldEditor::_updatePointlightPlacingMenu()
 				_deactivateCaptor();
 				_deactivateSound3d();
 
-				_currentTemplatePointlightId = hoveredOptionId;
+				_currentEditorPointlightId = hoveredOptionId;
 
-				_fe3d->pointlight_setVisible(_currentTemplatePointlightId, true);
+				_fe3d->pointlight_setVisible(_currentEditorPointlightId, true);
 				_fe3d->model_setVisible(LAMP_ID, true);
-				_fe3d->model_setColor(LAMP_ID, "", _fe3d->pointlight_getColor(_currentTemplatePointlightId));
+				_fe3d->model_setColor(LAMP_ID, "", _fe3d->pointlight_getColor(_currentEditorPointlightId));
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->pointlight_setPosition(_currentTemplatePointlightId, fvec3(0.0f));
+					_fe3d->pointlight_setPosition(_currentEditorPointlightId, fvec3(0.0f));
 
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);

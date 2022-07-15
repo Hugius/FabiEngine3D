@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 			if(_validateFe3dQuad2d(args[1]->getString(), true))
 			{
-				_duplicator->copyTemplateQuad2d(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorQuad2d(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
 				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));

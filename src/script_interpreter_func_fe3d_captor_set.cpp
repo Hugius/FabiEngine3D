@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 
 			if(_validateFe3dCaptor(args[1]->getString(), true))
 			{
-				_duplicator->copyTemplateCaptor(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorCaptor(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->captor_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 

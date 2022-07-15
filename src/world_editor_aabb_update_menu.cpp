@@ -11,13 +11,13 @@ void WorldEditor::_updateAabbMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateAabbId.empty())
+			if(!_currentEditorAabbId.empty())
 			{
-				_fe3d->aabb_setVisible(_currentTemplateAabbId, false);
-				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, false);
-				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, false);
+				_fe3d->aabb_setVisible(_currentEditorAabbId, false);
+				_fe3d->aabb_setRaycastResponsive(_currentEditorAabbId, false);
+				_fe3d->aabb_setCollisionResponsive(_currentEditorAabbId, false);
 
-				_currentTemplateAabbId = "";
+				_currentEditorAabbId = "";
 			}
 
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -39,7 +39,7 @@ void WorldEditor::_updateAabbMenu()
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateAabbId.empty(), true);
+		screen->getButton("choice")->setHoverable(_currentEditorAabbId.empty(), true);
 	}
 }
 
@@ -57,7 +57,7 @@ void WorldEditor::_updateAabbPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templateAabbs")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorAabbs")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -72,17 +72,17 @@ void WorldEditor::_updateAabbPlacingMenu()
 				_deactivateCaptor();
 				_deactivateSound3d();
 
-				_currentTemplateAabbId = hoveredOptionId;
+				_currentEditorAabbId = hoveredOptionId;
 
-				_fe3d->aabb_setVisible(_currentTemplateAabbId, true);
-				_fe3d->aabb_setRaycastResponsive(_currentTemplateAabbId, true);
-				_fe3d->aabb_setCollisionResponsive(_currentTemplateAabbId, true);
+				_fe3d->aabb_setVisible(_currentEditorAabbId, true);
+				_fe3d->aabb_setRaycastResponsive(_currentEditorAabbId, true);
+				_fe3d->aabb_setCollisionResponsive(_currentEditorAabbId, true);
 
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->aabb_setBasePosition(_currentTemplateAabbId, fvec3(0.0f));
+					_fe3d->aabb_setBasePosition(_currentEditorAabbId, fvec3(0.0f));
 
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);

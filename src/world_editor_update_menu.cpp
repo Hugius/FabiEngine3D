@@ -121,14 +121,14 @@ void WorldEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("empty");
 
 			_currentWorldId = "";
-			_currentTemplateModelId = "";
-			_currentTemplateQuad3dId = "";
-			_currentTemplateText3dId = "";
-			_currentTemplateAabbId = "";
-			_currentTemplatePointlightId = "";
-			_currentTemplateSpotlightId = "";
-			_currentTemplateCaptorId = "";
-			_currentTemplateSound3dId = "";
+			_currentEditorModelId = "";
+			_currentEditorQuad3dId = "";
+			_currentEditorText3dId = "";
+			_currentEditorAabbId = "";
+			_currentEditorPointlightId = "";
+			_currentEditorSpotlightId = "";
+			_currentEditorCaptorId = "";
+			_currentEditorSound3dId = "";
 			_selectedModelId = "";
 			_selectedQuad3dId = "";
 			_selectedText3dId = "";

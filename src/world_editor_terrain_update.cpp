@@ -40,11 +40,11 @@ void WorldEditor::_updateTerrainPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("templateTerrains")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("editorTerrains")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
-				_duplicator->copyTemplateTerrain(hoveredOptionId.substr(1), hoveredOptionId);
+				_duplicator->copyEditorTerrain(hoveredOptionId.substr(1), hoveredOptionId);
 
 				_fe3d->terrain_select(hoveredOptionId.substr(1));
 

@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string & functionNa
 		{
 			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _duplicator->getTemplateText2dId(args[0]->getString()).substr(1);
+				const auto result = _duplicator->getEditorText2dId(args[0]->getString()).substr(1);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

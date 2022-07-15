@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 
 			if(_validateFe3dWater(args[0]->getString(), true))
 			{
-				_duplicator->copyTemplateWater(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorWater(args[0]->getString(), ("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

@@ -25,7 +25,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateSkyId = _duplicator->getTemplateSkyId(skyId);
+		const auto editorSkyId = _duplicator->getEditorSkyId(skyId);
 		const auto rotation = _fe3d->sky_getRotation(skyId);
 		const auto lightness = _fe3d->sky_getLightness(skyId);
 		const auto color = _fe3d->sky_getColor(skyId);
@@ -48,7 +48,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "SKY "
 			<< skyId
 			<< " "
-			<< templateSkyId;
+			<< editorSkyId;
 
 		for(const auto & cubeMapPath : cubeMapPaths)
 		{
@@ -94,7 +94,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateTerrainId = _duplicator->getTemplateTerrainId(terrainId);
+		const auto editorTerrainId = _duplicator->getEditorTerrainId(terrainId);
 		const auto maxHeight = _fe3d->terrain_getMaxHeight(terrainId);
 		const auto textureRepeat = _fe3d->terrain_getTextureRepeat(terrainId);
 		const auto lightness = _fe3d->terrain_getLightness(terrainId);
@@ -155,7 +155,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "TERRAIN "
 			<< terrainId
 			<< " "
-			<< templateTerrainId
+			<< editorTerrainId
 			<< " "
 			<< diffuseMapPath
 			<< " "
@@ -232,7 +232,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateWaterId = _duplicator->getTemplateWaterId(waterId);
+		const auto editorWaterId = _duplicator->getEditorWaterId(waterId);
 		const auto color = _fe3d->water_getColor(waterId);
 		const auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
 		const auto waveSpeed = _fe3d->water_getWaveSpeed(waterId);
@@ -282,7 +282,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "WATER "
 			<< waterId
 			<< " "
-			<< templateWaterId
+			<< editorWaterId
 			<< " "
 			<< dudvMapPath
 			<< " "
@@ -377,7 +377,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateModelId = _duplicator->getTemplateModelId(modelId);
+		const auto editorModelId = _duplicator->getEditorModelId(modelId);
 		const auto partIds = _fe3d->model_getPartIds(modelId);
 		const auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
 		const auto animation3dIds = _fe3d->model_getAnimation3dIds(modelId);
@@ -402,7 +402,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "MODEL "
 			<< modelId
 			<< " "
-			<< templateModelId
+			<< editorModelId
 			<< " "
 			<< levelOfDetailId
 			<< " "
@@ -687,7 +687,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateQuad3dId = _duplicator->getTemplateQuad3dId(quad3dId);
+		const auto editorQuad3dId = _duplicator->getEditorQuad3dId(quad3dId);
 		const auto aabbIds = _fe3d->quad3d_getChildAabbIds(quad3dId);
 		const auto position = _fe3d->quad3d_getPosition(quad3dId);
 		const auto rotation = _fe3d->quad3d_getRotation(quad3dId);
@@ -731,7 +731,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "QUAD3D "
 			<< quad3dId
 			<< " "
-			<< templateQuad3dId
+			<< editorQuad3dId
 			<< " "
 			<< diffuseMapPath
 			<< " "
@@ -875,7 +875,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateText3dId = _duplicator->getTemplateText3dId(text3dId);
+		const auto editorText3dId = _duplicator->getEditorText3dId(text3dId);
 		const auto aabbIds = _fe3d->text3d_getChildAabbIds(text3dId);
 		const auto position = _fe3d->text3d_getPosition(text3dId);
 		const auto rotation = _fe3d->text3d_getRotation(text3dId);
@@ -904,7 +904,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "TEXT3D "
 			<< text3dId
 			<< " "
-			<< templateText3dId
+			<< editorText3dId
 			<< " "
 			<< position.x
 			<< " "
@@ -999,7 +999,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateAabbId = _duplicator->getTemplateAabbId(aabbId);
+		const auto editorAabbId = _duplicator->getEditorAabbId(aabbId);
 		const auto position = _fe3d->aabb_getBasePosition(aabbId);
 		const auto size = _fe3d->aabb_getBaseSize(aabbId);
 		const auto color = _fe3d->aabb_getColor(aabbId);
@@ -1013,7 +1013,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "AABB "
 			<< aabbId
 			<< " "
-			<< templateAabbId
+			<< editorAabbId
 			<< " "
 			<< position.x
 			<< " "
@@ -1060,7 +1060,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templatePointlightId = _duplicator->getTemplatePointlightId(pointlightId);
+		const auto editorPointlightId = _duplicator->getEditorPointlightId(pointlightId);
 		const auto position = _fe3d->pointlight_getPosition(pointlightId);
 		const auto radius = _fe3d->pointlight_getRadius(pointlightId);
 		const auto color = _fe3d->pointlight_getColor(pointlightId);
@@ -1072,7 +1072,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "POINTLIGHT "
 			<< pointlightId
 			<< " "
-			<< templatePointlightId
+			<< editorPointlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -1107,7 +1107,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateSpotlightId = _duplicator->getTemplateSpotlightId(spotlightId);
+		const auto editorSpotlightId = _duplicator->getEditorSpotlightId(spotlightId);
 		const auto position = _fe3d->spotlight_getPosition(spotlightId);
 		const auto yaw = _fe3d->spotlight_getYaw(spotlightId);
 		const auto pitch = _fe3d->spotlight_getPitch(spotlightId);
@@ -1121,7 +1121,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "SPOTLIGHT "
 			<< spotlightId
 			<< " "
-			<< templateSpotlightId
+			<< editorSpotlightId
 			<< " "
 			<< position.x
 			<< " "
@@ -1156,7 +1156,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateCaptorId = _duplicator->getTemplateCaptorId(captorId);
+		const auto editorCaptorId = _duplicator->getEditorCaptorId(captorId);
 		const auto position = _fe3d->captor_getPosition(captorId);
 
 		auto exceptionId = _fe3d->captor_getExceptionId(captorId);
@@ -1167,7 +1167,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "CAPTOR "
 			<< captorId
 			<< " "
-			<< templateCaptorId
+			<< editorCaptorId
 			<< " "
 			<< exceptionId
 			<< " "
@@ -1186,7 +1186,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			continue;
 		}
 
-		const auto templateSound3dId = _duplicator->getTemplateSound3dId(sound3dId);
+		const auto editorSound3dId = _duplicator->getEditorSound3dId(sound3dId);
 		const auto position = _fe3d->sound3d_getPosition(sound3dId);
 		const auto maxVolume = _fe3d->sound3d_getMaxVolume(sound3dId);
 		const auto maxDistance = _fe3d->sound3d_getMaxDistance(sound3dId);
@@ -1196,7 +1196,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			<< "SOUND3D "
 			<< sound3dId
 			<< " "
-			<< templateSound3dId
+			<< editorSound3dId
 			<< " "
 			<< position.x
 			<< " "

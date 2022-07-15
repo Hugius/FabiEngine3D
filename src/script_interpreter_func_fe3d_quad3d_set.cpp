@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 
 			if(_validateFe3dQuad3d(args[1]->getString(), true))
 			{
-				_duplicator->copyTemplateQuad3d(args[0]->getString(), ("@" + args[1]->getString()));
+				_duplicator->copyEditorQuad3d(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->quad3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 

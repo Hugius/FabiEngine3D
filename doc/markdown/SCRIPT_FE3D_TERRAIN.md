@@ -80,3 +80,4 @@
 - `fe3d:terrain_get_red_repeat` (`STR` terrain_id) -----> `INT`
 - `fe3d:terrain_get_green_repeat` (`STR` terrain_id) -----> `INT`
 - `fe3d:terrain_get_blue_repeat` (`STR` terrain_id) -----> `INT`
+- `fe3d:terrain_get_editor_id` (`STR` terrain_id) -----> `STR`

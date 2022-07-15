@@ -36,3 +36,4 @@
 - `fe3d:spotlight_get_intensity` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_yaw` (`STR` spotlight_id) -----> `DEC`
 - `fe3d:spotlight_get_pitch` (`STR` spotlight_id) -----> `DEC`
+- `fe3d:spotlight_get_editor_id` (`STR` spotlight_id) -----> `STR`

@@ -50,3 +50,4 @@
 - `fe3d:sky_get_back_cube_map_path` (`STR` sky_id) -----> `STR`
 - `fe3d:sky_get_front_cube_map_path` (`STR` sky_id) -----> `STR`
 - `fe3d:sky_get_rotation_order` (`STR` sky_id) -----> `STR`
+- `fe3d:sky_get_editor_id` (`STR` sky_id) -----> `STR`

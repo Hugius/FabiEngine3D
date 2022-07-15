@@ -107,3 +107,4 @@
 - `fe3d:quad3d_get_animation2d_interval_multiplier` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation2d_interval_divider` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_rotation_order` (`STR` quad_id) -----> `STR`
+- `fe3d:quad3d_get_editor_id` (`STR` quad_id) -----> `STR`

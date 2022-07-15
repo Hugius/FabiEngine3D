@@ -31,3 +31,4 @@
 - `fe3d:pointlight_get_ids` () -----> `LST`
 - `fe3d:pointlight_get_intensity` (`STR` pointlight_id) -----> `DEC`
 - `fe3d:pointlight_get_shape` (`STR` pointlight_id) -----> `STR`
+- `fe3d:pointlight_get_editor_id` (`STR` pointlight_id) -----> `STR`

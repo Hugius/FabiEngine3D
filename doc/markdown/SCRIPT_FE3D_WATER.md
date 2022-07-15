@@ -87,3 +87,4 @@
 - `fe3d:water_get_wave_height` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_specular_shininess` (`STR` water_id) -----> `DEC`
 - `fe3d:water_get_specular_intensity` (`STR` water_id) -----> `DEC`
+- `fe3d:water_get_editor_id` (`STR` water_id) -----> `STR`

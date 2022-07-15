@@ -28,3 +28,4 @@
 - `fe3d:sound2d_get_started_count` (`STR` sound_id) -----> `INT`
 - `fe3d:sound2d_get_ids` () -----> `LST`
 - `fe3d:sound2d_get_audio_path` (`STR` sound_id) -----> `STR`
+- `fe3d:sound2d_get_editor_id` (`STR` sound_id) -----> `STR`

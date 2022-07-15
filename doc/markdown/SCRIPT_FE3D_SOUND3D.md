@@ -35,3 +35,4 @@
 - `fe3d:sound3d_get_position_z` (`STR` sound_id) -----> `DEC`
 - `fe3d:sound3d_get_max_volume` (`STR` sound_id) -----> `DEC`
 - `fe3d:sound3d_get_max_distance` (`STR` sound_id) -----> `DEC`
+- `fe3d:sound3d_get_editor_id` (`STR` sound_id) -----> `STR`

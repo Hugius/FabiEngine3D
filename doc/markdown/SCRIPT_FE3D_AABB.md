@@ -41,3 +41,4 @@
 - `fe3d:aabb_get_max_clip_position_x` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_max_clip_position_y` (`STR` aabb_id) -----> `DEC`
 - `fe3d:aabb_get_max_clip_position_z` (`STR` aabb_id) -----> `DEC`
+- `fe3d:aabb_get_editor_id` (`STR` aabb_id) -----> `STR`

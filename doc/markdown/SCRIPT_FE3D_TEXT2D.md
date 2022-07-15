@@ -55,3 +55,4 @@
 - `fe3d:text2d_get_max_clip_position_x` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_get_max_clip_position_y` (`STR` text_id) -----> `DEC`
 - `fe3d:text2d_is_hovered` (`STR` text_id) -----> `BOL`
+- `fe3d:text2d_get_editor_id` (`STR` text_id) -----> `STR`

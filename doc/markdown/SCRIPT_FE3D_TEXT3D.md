@@ -77,3 +77,4 @@
 - `fe3d:text3d_get_content` (`STR` text_id) -----> `STR`
 - `fe3d:text3d_get_min_alpha` (`STR` text_id) -----> `DEC`
 - `fe3d:text3d_get_rotation_order` (`STR` text_id) -----> `STR`
+- `fe3d:text3d_get_editor_id` (`STR` text3d_id) -----> `STR`

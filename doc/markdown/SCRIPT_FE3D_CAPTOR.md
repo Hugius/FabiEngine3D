@@ -24,3 +24,4 @@
 - `fe3d:captor_get_reflection_quality` (`STR` captor_id) -----> `INT`
 - `fe3d:captor_get_refraction_quality` (`STR` captor_id) -----> `INT`
 - `fe3d:captor_get_ids` () -----> `LST`
+- `fe3d:captor_get_editor_id` (`STR` captor_id) -----> `STR`

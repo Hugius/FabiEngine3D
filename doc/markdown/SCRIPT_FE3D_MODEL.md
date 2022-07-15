@@ -161,3 +161,4 @@
 - `fe3d:model_get_animation3d_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
 - `fe3d:model_get_animation3d_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`
 - `fe3d:model_get_animation3d_frame_index` (`STR` model_id, `STR` animation_id) -----> `INT`
+- `fe3d:model_get_editor_id` (`STR` model_id) -----> `STR`

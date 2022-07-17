@@ -175,9 +175,9 @@ const mat44 Mathematics::createOrthographicProjectionMatrix(float leftX, float r
 {
 	mat44 result = {};
 
-	result.m[0][0] = 2.0f / (rightX - leftX);
-	result.m[1][1] = 2.0f / (topY - bottomY);
-	result.m[2][2] = -2.0f / (farZ - nearZ);
+	result.m[0][0] = (2.0f / (rightX - leftX));
+	result.m[1][1] = (2.0f / (topY - bottomY));
+	result.m[2][2] = (-2.0f / (farZ - nearZ));
 	result.m[3][0] = -((rightX + leftX) / (rightX - leftX));
 	result.m[3][1] = -((topY + bottomY) / (topY - bottomY));
 	result.m[3][2] = -((farZ + nearZ) / (farZ - nearZ));
@@ -215,8 +215,8 @@ const mat44 Mathematics::createPerspectiveProjectionMatrix(float fov, float aspe
 
 	auto result = mat44(0.0f);
 
-	result.m[0][0] = 1.0f / (aspect * tanHalfFovY);
-	result.m[1][1] = 1.0f / tanHalfFovY;
+	result.m[0][0] = (1.0f / (aspect * tanHalfFovY));
+	result.m[1][1] = (1.0f / tanHalfFovY);
 	result.m[2][2] = -((far + near) / (far - near));
 	result.m[2][3] = -1.0f;
 	result.m[3][2] = -((2.0f * far * near) / (far - near));

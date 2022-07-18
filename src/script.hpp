@@ -8,9 +8,10 @@ public:
 	void createScriptFile(const string & scriptId);
 	void renameScriptFile(const string & scriptId, const string & newScriptId);
 	void deleteScriptFile(const string & scriptId);
+	void replaceKeyword(const string & oldKeyword, const string & newKeyword);
 	void clear();
 
-	const unordered_map<string, vector<int>> findKeyword(const string & keyword) const;
+	const unordered_map<string, vector<int>> searchKeyword(const string & keyword) const;
 
 	const vector<string> getScriptFileIds() const;
 

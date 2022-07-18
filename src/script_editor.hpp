@@ -25,6 +25,7 @@ private:
 	void _updateTextWriter();
 	void _updateTextSelector();
 	void _updateScriptSearching();
+	void _updateScriptReplacing();
 	void _updateScriptFileCreating();
 	void _updateScriptFileChoosing();
 	void _updateScriptFileRenaming();
@@ -79,6 +80,7 @@ private:
 	string _firstSelectionAabbId = "";
 	string _secondSelectionAabbId = "";
 	string _selectionClipboard = "";
+	string _searchKeyword = "";
 
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;

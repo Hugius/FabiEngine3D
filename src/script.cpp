@@ -1,5 +1,7 @@
 #include "script.hpp"
 
+#include <regex>
+
 void Script::createScriptFile(const string & scriptId)
 {
 	if(isScriptFileExisting(scriptId))
@@ -37,6 +39,21 @@ void Script::deleteScriptFile(const string & id)
 	}
 
 	_scriptFiles.erase(id);
+}
+
+void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword)
+{
+	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
+	{
+		auto lines = scriptFile->getLines();
+
+		for(auto & line : lines)
+		{
+			line = regex_replace(line, std::regex(oldKeyword), newKeyword);
+		}
+
+		scriptFile->setLines(lines);
+	}
 }
 
 void Script::clear()
@@ -93,7 +110,7 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const unordered_map<string, vector<int>> Script::findKeyword(const string & keyword) const
+const unordered_map<string, vector<int>> Script::searchKeyword(const string & keyword) const
 {
 	unordered_map<string, vector<int>> result = {};
 

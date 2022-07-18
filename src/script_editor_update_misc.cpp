@@ -20,6 +20,10 @@ void ScriptEditor::_updateMenu()
 		{
 			_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("replace")->isHovered())
+		{
+			_gui->getOverlay()->openValueForm("replaceScripts", "Replace Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
@@ -67,6 +71,7 @@ void ScriptEditor::_updateMenu()
 			}
 		}
 
+		screen->getButton("replace")->setHoverable(!_searchKeyword.empty(), true);
 		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty(), true);
 		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty(), true);
 		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty(), true);
@@ -196,7 +201,9 @@ void ScriptEditor::_updateScriptSearching()
 {
 	if((_gui->getOverlay()->getValueFormId() == "searchScripts") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		const auto searchResult = _script->findKeyword(_gui->getOverlay()->getValueFormContent());
+		_searchKeyword = _gui->getOverlay()->getValueFormContent();
+
+		const auto searchResult = _script->searchKeyword(_searchKeyword);
 
 		bool isFound = false;
 
@@ -229,6 +236,14 @@ void ScriptEditor::_updateScriptSearching()
 		{
 			Logger::throwWarning("Search result: not found in scripts");
 		}
+	}
+}
+
+void ScriptEditor::_updateScriptReplacing()
+{
+	if((_gui->getOverlay()->getValueFormId() == "replaceScripts") && _gui->getOverlay()->isValueFormConfirmed())
+	{
+		_script->replaceKeyword(_searchKeyword, _gui->getOverlay()->getValueFormContent());
 	}
 }
 

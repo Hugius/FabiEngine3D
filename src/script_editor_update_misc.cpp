@@ -244,6 +244,9 @@ void ScriptEditor::_updateScriptReplacing()
 	if((_gui->getOverlay()->getValueFormId() == "replaceScripts") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		_script->replaceKeyword(_searchKeyword, _gui->getOverlay()->getValueFormContent());
+
+		_deleteDisplayContent();
+		_createDisplayContent();
 	}
 }
 

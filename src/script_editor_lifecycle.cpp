@@ -62,7 +62,7 @@ void ScriptEditor::_unload()
 	_currentScriptFileId = "";
 	_firstSelectionAabbId = "";
 	_secondSelectionAabbId = "";
-	string _selectionClipboard = "";
+	_selectionClipboard = "";
 	_searchKeyword = "";
 	_isWritingScript = false;
 	_hasTextChanged = false;

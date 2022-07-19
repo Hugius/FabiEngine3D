@@ -103,7 +103,7 @@ RenderWindow::RenderWindow()
 		abort();
 	}
 
-	SetCursor(LoadCursor(nullptr, IDC_ARROW));
+	Tools::setCursorType(CursorType::ARROW);
 
 	const auto glewStatus = glewInit();
 

@@ -18,11 +18,11 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+			_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, SEARCH_VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("replace")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("replaceScripts", "Replace Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+			_gui->getOverlay()->openValueForm("replaceScripts", "Replace Scripts", "", VALUE_FORM_POSITION, REPLACE_VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{

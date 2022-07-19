@@ -2,6 +2,7 @@
 
 #include "mathematics.hpp"
 #include "configuration.hpp"
+#include "cursor_type.hpp"
 
 #include <string>
 
@@ -15,8 +16,9 @@ class Tools final
 public:
 	Tools() = delete;
 
-	static void setCursorPosition(const ivec2 & value);
 	static void setCursorVisible(bool value);
+	static void setCursorPosition(const ivec2 & value);
+	static void setCursorType(CursorType type);
 
 	static const vector<string> getFileNamesFromDirectory(const string & path);
 	static const vector<string> getDirectoryNamesFromDirectory(const string & path);

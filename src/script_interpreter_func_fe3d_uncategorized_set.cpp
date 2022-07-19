@@ -92,6 +92,37 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:cursor_set_type")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_fe3d->server_isRunning())
+			{
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
+
+				return true;
+			}
+
+			if(args[0]->getString() == "ARROW")
+			{
+				Tools::setCursorType(CursorType::ARROW);
+			}
+			else if(args[0]->getString() == "HAND")
+			{
+				Tools::setCursorType(CursorType::HAND);
+			}
+			else
+			{
+				_throwRuntimeError("cursor type is invalid");
+
+				return true;
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:vsync_set_enabled")
 	{
 		const auto types = {SVT::BOOLEAN};

@@ -105,6 +105,9 @@
     <ClInclude Include="..\..\..\src\custom_world_builder.hpp">
       <Filter>Custom World Builder</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\cursor_type.hpp">
+      <Filter>Enumeration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">

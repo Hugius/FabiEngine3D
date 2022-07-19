@@ -58,6 +58,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_parent_type.hpp" />
+    <ClInclude Include="..\..\..\src\cursor_type.hpp" />
     <ClInclude Include="..\..\..\src\custom_world_builder.hpp" />
     <ClInclude Include="..\..\..\src\logger_message.hpp" />
     <ClInclude Include="..\..\..\src\mouse_button_type.hpp" />

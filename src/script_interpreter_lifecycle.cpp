@@ -420,4 +420,6 @@ void ScriptInterpreter::unload()
 	_isExecutingInitialization = false;
 	_isExecutingUpdate = false;
 	_isExecutingTerminate = false;
+
+	Tools::setCursorType(CursorType::ARROW);
 }

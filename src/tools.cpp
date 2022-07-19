@@ -69,6 +69,25 @@ void Tools::setCursorPosition(const ivec2 & value)
 	SetCursorPos(point.x, (_configuration->getWindowSize().y - point.y));
 }
 
+void Tools::setCursorType(CursorType type)
+{
+	switch(type)
+	{
+		case CursorType::ARROW:
+		{
+			SetCursor(LoadCursor(nullptr, IDC_ARROW));
+
+			break;
+		}
+		case CursorType::HAND:
+		{
+			SetCursor(LoadCursor(nullptr, IDC_HAND));
+
+			break;
+		}
+	}
+}
+
 void Tools::setCursorVisible(bool value)
 {
 	if(value)

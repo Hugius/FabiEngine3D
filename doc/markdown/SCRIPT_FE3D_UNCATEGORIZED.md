@@ -7,8 +7,9 @@
 - `fe3d:print` (`DEC` value) -----> `NONE`
 - `fe3d:print` (`INT` value) -----> `NONE`
 - `fe3d:print` (`BOL` value) -----> `NONE`
-- `fe3d:cursor_center` () -----> `NONE`
 - `fe3d:cursor_set_visible` (`BOL` value) -----> `NONE`
+- `fe3d:cursor_set_position` (`DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:cursor_set_type` (`STR` type) -----> `NONE`
 - `fe3d:vsync_set_enabled` (`BOL` value) -----> `NONE`
 
 ## Getters

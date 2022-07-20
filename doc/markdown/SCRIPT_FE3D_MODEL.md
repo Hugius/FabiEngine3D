@@ -85,7 +85,7 @@
 - `fe3d:model_is_animation3d_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation3d_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation3d_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
-- `fe3d:model_is_aabbs_visible` (`STR` model_id, `STR` aabb_id) -----> `BOL`
+- `fe3d:model_is_aabb_visible` (`STR` model_id, `STR` aabb_id) -----> `BOL`
 - `fe3d:model_has_diffuse_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_emission_map` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_has_specular_map` (`STR` model_id, `STR` part_id) -----> `BOL`

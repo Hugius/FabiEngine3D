@@ -71,6 +71,17 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:world_is_custom_aabb_added")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _customWorldBuilder->isAabbAdded(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
 	else if(functionName == "fe3d:world_is_custom_pointlight_added")
 	{
 		const auto types = {SVT::STRING};

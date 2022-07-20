@@ -65,6 +65,13 @@ void Water::setTextureRepeat(int value)
 	_textureRepeat = max(1, value);
 }
 
+void Water::updateOffsets()
+{
+	_rippleOffset = fvec2(fmodf((_rippleOffset.x + _rippleSpeed.x), 1.0f), fmodf((_rippleOffset.y - _rippleSpeed.y), 1.0f));
+
+	_waveOffset += _waveSpeed;
+}
+
 void Water::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_lowQualityVertexBuffer = value;

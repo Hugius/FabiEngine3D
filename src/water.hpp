@@ -14,6 +14,7 @@ class Water final
 public:
 	Water(const string & id);
 
+	void updateOffsets();
 	void setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setRippleSpeed(const fvec2 & value);

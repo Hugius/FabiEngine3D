@@ -178,7 +178,6 @@ void WaterManager::update()
 
 	if(water != nullptr)
 	{
-		water->setRippleOffset(fvec2(fmodf((water->getRippleOffset().x + water->getRippleSpeed().x), 1.0f), fmodf((water->getRippleOffset().y - water->getRippleSpeed().y), 1.0f)));
-		water->setWaveOffset(water->getWaveOffset() + (water->getWaveSpeed()));
+		water->updateOffsets();
 	}
 }

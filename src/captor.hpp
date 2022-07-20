@@ -14,8 +14,8 @@ class Captor final
 public:
 	Captor(const string & id);
 
-	void updateTarget();
 	void capture();
+	void updateTarget();
 	void setReflectionsCaptured();
 	void setRefractionsCaptured();
 	void setPosition(const fvec3 & value);

@@ -15,9 +15,9 @@ class Aabb final
 public:
 	Aabb(const string & id);
 
-	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
 	void updateTransformation();
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setLocalPosition(const fvec3 & value);
 	void setLocalSize(const fvec3 & value);
 	void setBasePosition(const fvec3 & value);

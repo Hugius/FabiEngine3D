@@ -12,7 +12,6 @@ public:
 	Spotlight(const string & id);
 
 	void updateTarget();
-	void updateFront();
 	void setPosition(const fvec3 & value);
 	void move(const fvec3 & change);
 	void moveTo(const fvec3 & target, float speed);
@@ -39,6 +38,8 @@ public:
 	const bool isVisible() const;
 
 private:
+	void _calculateFront();
+
 	const string _id;
 
 	fvec3 _position = fvec3(0.0f);

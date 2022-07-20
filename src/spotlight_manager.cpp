@@ -41,11 +41,6 @@ void SpotlightManager::update()
 	for(const auto & [spotlightId, spotlight] : _spotlights)
 	{
 		spotlight->updateTarget();
-
-		if(spotlight->isVisible())
-		{
-			spotlight->updateFront();
-		}
 	}
 }
 

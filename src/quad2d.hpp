@@ -14,9 +14,9 @@ class Quad2d final
 public:
 	Quad2d(const string & id);
 
-	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
 	void updateTransformation();
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setDiffuseMapPath(const string & value);
 	void setHorizontallyFlipped(bool value);

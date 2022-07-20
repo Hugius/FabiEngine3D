@@ -13,6 +13,8 @@ Spotlight::Spotlight(const string & id)
 	{
 		abort();
 	}
+
+	_calculateFront();
 }
 
 void Spotlight::updateTarget()
@@ -40,7 +42,7 @@ void Spotlight::updateTarget()
 	}
 }
 
-void Spotlight::updateFront()
+void Spotlight::_calculateFront()
 {
 	_front.x = (cos(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
 	_front.y = sin(Mathematics::convertToRadians(_pitch));
@@ -74,11 +76,15 @@ void Spotlight::setColor(const fvec3 & value)
 void Spotlight::setYaw(float value)
 {
 	_yaw = Mathematics::limitAngle(value);
+
+	_calculateFront();
 }
 
 void Spotlight::setPitch(float value)
 {
 	_pitch = Mathematics::limitAngle(value);
+
+	_calculateFront();
 }
 
 void Spotlight::setIntensity(float value)

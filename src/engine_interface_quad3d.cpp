@@ -35,22 +35,50 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 
 void EngineInterface::quad3d_setVisible(const string & quad3dId, bool value)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setVisible(value);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->setVisible(value);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentVisibility(quad3d->isVisible());
+	}
 }
 
 void EngineInterface::quad3d_move(const string & quad3dId, const fvec3 & change)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->move(change);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->move(change);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_rotate(const string & quad3dId, const fvec3 & change)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->rotate(change);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->rotate(change);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_scale(const string & quad3dId, const fvec2 & change)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->scale(change);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->scale(change);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_moveTo(const string & quad3dId, const fvec3 & target, float speed)
@@ -70,17 +98,38 @@ void EngineInterface::quad3d_scaleTo(const string & quad3dId, const fvec2 & targ
 
 void EngineInterface::quad3d_setPosition(const string & quad3dId, const fvec3 & value)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setPosition(value);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->setPosition(value);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_setRotation(const string & quad3dId, const fvec3 & value)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setRotation(value);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->setRotation(value);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_setSize(const string & quad3dId, const fvec2 & value)
 {
-	_core->getQuad3dManager()->getQuad3d(quad3dId)->setSize(value);
+	const auto quad3d = _core->getQuad3dManager()->getQuad3d(quad3dId);
+
+	quad3d->setSize(value);
+
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+	}
 }
 
 void EngineInterface::quad3d_setColor(const string & quad3dId, const fvec3 & value)

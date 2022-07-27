@@ -17,6 +17,12 @@ public:
 
 	void updateTarget();
 	void updateTransformation();
+	void followModelParentTransformation(const fvec3 & parentPosition, const fvec3 & parentRotation, const fvec3 & parentSize);
+	void followModelParentVisibility(bool isParentVisible, const string & parentLevelOfDetailId, bool isParentLevelOfDetailed);
+	void followQuad3dParentTransformation(const fvec3 & parentPosition, const fvec3 & parentRotation, const fvec3 & parentSize);
+	void followQuad3dParentVisibility(bool isParentVisible);
+	void followText3dParentTransformation(const fvec3 & parentPosition, const fvec3 & parentRotation, const fvec3 & parentSize);
+	void followText3dParentVisibility(bool isParentVisible);
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setLocalPosition(const fvec3 & value);
 	void setLocalSize(const fvec3 & value);
@@ -63,6 +69,8 @@ public:
 	const AabbParentType getParentType() const;
 
 private:
+	static inline constexpr float MIN_SIZE = 0.1f;
+
 	const string _id;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;

@@ -32,22 +32,50 @@ void EngineInterface::text3d_delete(const string & text3dId)
 
 void EngineInterface::text3d_setVisible(const string & text3dId, bool value)
 {
-	_core->getText3dManager()->getText3d(text3dId)->setVisible(value);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->setVisible(value);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentVisibility(text3d->isVisible());
+	}
 }
 
 void EngineInterface::text3d_move(const string & text3dId, const fvec3 & change)
 {
-	_core->getText3dManager()->getText3d(text3dId)->move(change);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->move(change);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_rotate(const string & text3dId, const fvec3 & change)
 {
-	_core->getText3dManager()->getText3d(text3dId)->rotate(change);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->rotate(change);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_scale(const string & text3dId, const fvec2 & change)
 {
-	_core->getText3dManager()->getText3d(text3dId)->scale(change);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->scale(change);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_moveTo(const string & text3dId, const fvec3 & target, float speed)
@@ -67,17 +95,38 @@ void EngineInterface::text3d_scaleTo(const string & text3dId, const fvec2 & targ
 
 void EngineInterface::text3d_setPosition(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dManager()->getText3d(text3dId)->setPosition(value);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->setPosition(value);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_setRotation(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dManager()->getText3d(text3dId)->setRotation(value);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->setRotation(value);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_setSize(const string & text3dId, const fvec2 & value)
 {
-	_core->getText3dManager()->getText3d(text3dId)->setSize(value);
+	const auto text3d = _core->getText3dManager()->getText3d(text3dId);
+
+	text3d->setSize(value);
+
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+	}
 }
 
 void EngineInterface::text3d_setColor(const string & text3dId, const fvec3 & value)

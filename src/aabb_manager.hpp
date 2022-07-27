@@ -31,8 +31,6 @@ public:
 	const bool isAabbsExisting() const;
 
 private:
-	static inline constexpr float MIN_SIZE = 0.1f;
-
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 

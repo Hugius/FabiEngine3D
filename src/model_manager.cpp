@@ -140,11 +140,6 @@ void ModelManager::update()
 	{
 		model->updateTarget();
 
-		if(!model->isVisible())
-		{
-			continue;
-		}
-
 		if(model->getLevelOfDetailId().empty())
 		{
 			model->setLevelOfDetailed(false);
@@ -217,6 +212,9 @@ void ModelManager::update()
 			model->setCubeRefractionMixValue(model->getCubeRefractionMixValue() + CAPTOR_OVERLAP_SPEED);
 		}
 
-		model->updateTransformation();
+		if(model->isVisible())
+		{
+			model->updateTransformation();
+		}
 	}
 }

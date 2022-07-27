@@ -16,18 +16,9 @@ void EngineInterface::model_delete(const string & modelId)
 		}
 	}
 
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
 	{
-		if(!aabb->getParentId().empty())
-		{
-			if(modelId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::MODEL)
-				{
-					aabb_delete(aabbId);
-				}
-			}
-		}
+		aabb_delete(aabbId);
 	}
 
 	for(const auto & captorId : captor_getIds())
@@ -43,7 +34,14 @@ void EngineInterface::model_delete(const string & modelId)
 
 void EngineInterface::model_setVisible(const string & modelId, bool value)
 {
-	_core->getModelManager()->getModel(modelId)->setVisible(value);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->setVisible(value);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentVisibility(model->isVisible(), model->getLevelOfDetailId(), model->isLevelOfDetailed());
+	}
 }
 
 void EngineInterface::model_setDiffuseMap(const string & modelId, const string & partId, const string & value)
@@ -269,12 +267,26 @@ void EngineInterface::model_setRefractive(const string & modelId, const string &
 
 void EngineInterface::model_setBasePosition(const string & modelId, const fvec3 & value)
 {
-	_core->getModelManager()->getModel(modelId)->setBasePosition(value);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->setBasePosition(value);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_setBaseRotation(const string & modelId, const fvec3 & value)
 {
-	_core->getModelManager()->getModel(modelId)->setBaseRotation(value);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->setBaseRotation(value);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_setBaseRotationOrigin(const string & modelId, const fvec3 & value)
@@ -284,7 +296,14 @@ void EngineInterface::model_setBaseRotationOrigin(const string & modelId, const 
 
 void EngineInterface::model_setBaseSize(const string & modelId, const fvec3 & value)
 {
-	_core->getModelManager()->getModel(modelId)->setBaseSize(value);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->setBaseSize(value);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_setPartPosition(const string & modelId, const string & partId, const fvec3 & value)
@@ -309,17 +328,38 @@ void EngineInterface::model_setPartSize(const string & modelId, const string & p
 
 void EngineInterface::model_moveBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelManager()->getModel(modelId)->moveBase(change);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->moveBase(change);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_rotateBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelManager()->getModel(modelId)->rotateBase(change);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->rotateBase(change);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_scaleBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelManager()->getModel(modelId)->scaleBase(change);
+	const auto model = _core->getModelManager()->getModel(modelId);
+
+	model->scaleBase(change);
+
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		_core->getAabbManager()->getAabb(aabbId)->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+	}
 }
 
 void EngineInterface::model_movePart(const string & modelId, const string & partId, const fvec3 & change)

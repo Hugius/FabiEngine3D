@@ -12,7 +12,7 @@
 - Bound AABBs follow the transformation of their parent.
 - Bound AABBs become invisible if their parent is invisible.
 - Bound AABBs have their responsiveness managed automatically, based on parent visibility and parent level of detail.
-- Bound AABBs cannot directly be accessed.
+- Bound AABBs cannot be accessed directly.
 
 ## 2. Properties
 

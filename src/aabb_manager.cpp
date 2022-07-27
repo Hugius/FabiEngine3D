@@ -108,310 +108,36 @@ void AabbManager::update()
 	{
 		aabb->updateTarget();
 
-		if(!aabb->getParentId().empty())
+		const auto parentId = aabb->getParentId();
+
+		if(!parentId.empty())
 		{
 			switch(aabb->getParentType())
 			{
 				case AabbParentType::MODEL:
 				{
-					auto foundPair = _modelManager->getModels().find(aabb->getParentId());
+					const auto model = _modelManager->getModel(parentId);
 
-					if(foundPair == _modelManager->getModels().end())
-					{
-						abort();
-					}
-
-					const auto parentModel = foundPair->second;
-					const auto newAabbSize = (aabb->getLocalSize() * parentModel->getBaseSize());
-					const auto parentRotation = parentModel->getBaseRotation();
-
-					float rotation;
-					DirectionType rotationDirection;
-
-					if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
-					{
-						rotation = parentRotation.x;
-						rotationDirection = DirectionType::X;
-					}
-					else if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
-					{
-						rotation = parentRotation.y;
-						rotationDirection = DirectionType::Y;
-					}
-					else if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
-					{
-						rotation = parentRotation.z;
-						rotationDirection = DirectionType::Z;
-					}
-					else
-					{
-						rotation = 0.0f;
-					}
-
-					const auto is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
-					const auto is180Degrees = ((rotation >= 135.0f) && (rotation <= 225.0f));
-					const auto is270Degrees = ((rotation > 225.0f) && (rotation < 315.0f));
-					const auto roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);
-
-					if(is90Degrees || is270Degrees)
-					{
-						switch(rotationDirection)
-						{
-							case DirectionType::X:
-							{
-								aabb->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
-
-								break;
-							}
-							case DirectionType::Y:
-							{
-								aabb->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
-
-								break;
-							}
-							case DirectionType::Z:
-							{
-								aabb->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
-
-								break;
-							}
-						}
-					}
-					else
-					{
-						aabb->setBaseSize(newAabbSize);
-					}
-
-					if((roundedRotation == 0.0f) || aabb->isCentered())
-					{
-						const auto localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
-
-						aabb->setBasePosition(parentModel->getBasePosition() + localPosition);
-					}
-					else
-					{
-						fvec3 localPosition;
-
-						if(rotationDirection == DirectionType::Y)
-						{
-							localPosition = (aabb->getLocalPosition() * parentModel->getBaseSize());
-						}
-						else
-						{
-							const auto offset = fvec3(0.0f, (aabb->getLocalSize().y * 0.5f), 0.0f);
-
-							localPosition = (aabb->getLocalPosition() + offset) * parentModel->getBaseSize();
-						}
-
-						mat44 rotationMatrix;
-						fvec3 rotationOffset;
-
-						if(rotationDirection == DirectionType::X)
-						{
-							rotationMatrix = Mathematics::createRotationMatrixX(Mathematics::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) * 0.5f), 0.0f);
-						}
-						else if(rotationDirection == DirectionType::Y)
-						{
-							rotationMatrix = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f);
-						}
-						else if(rotationDirection == DirectionType::Z)
-						{
-							rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) * 0.5f), 0.0f);
-						}
-
-						auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
-
-						rotatedLocalPosition += rotationOffset;
-
-						aabb->setBasePosition(parentModel->getBasePosition() + rotatedLocalPosition);
-					}
-
-					if(parentModel->isVisible())
-					{
-						if(parentModel->getLevelOfDetailId().empty())
-						{
-							aabb->setRaycastResponsive(true);
-							aabb->setCollisionResponsive(true);
-						}
-						else
-						{
-							aabb->setRaycastResponsive(!parentModel->isLevelOfDetailed());
-							aabb->setCollisionResponsive(!parentModel->isLevelOfDetailed());
-						}
-					}
-					else
-					{
-						aabb->setVisible(false);
-						aabb->setRaycastResponsive(false);
-						aabb->setCollisionResponsive(false);
-					}
+					aabb->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
+					aabb->followModelParentVisibility(model->isVisible(), model->getLevelOfDetailId(), model->isLevelOfDetailed());
 
 					break;
 				}
 				case AabbParentType::QUAD3D:
 				{
-					auto foundPair = _quad3dManager->getQuad3ds().find(aabb->getParentId());
+					const auto quad3d = _quad3dManager->getQuad3d(parentId);
 
-					if(foundPair == _quad3dManager->getQuad3ds().end())
-					{
-						abort();
-					}
-
-					const auto parentQuad3d = foundPair->second;
-					const auto parentPosition = parentQuad3d->getPosition();
-					const auto parentRotation = parentQuad3d->getRotation();
-					const auto parentSize = parentQuad3d->getSize();
-
-					auto refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
-					auto refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
-					auto refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
-
-					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
-					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
-					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
-
-					fvec3 newAabbSize;
-
-					if(refRotationX > refRotationY && refRotationX > refRotationZ)
-					{
-						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
-
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
-						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
-					}
-					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
-					{
-						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
-
-						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
-					}
-					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
-					{
-						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
-
-						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
-						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
-						newAabbSize.z = MIN_SIZE;
-					}
-					else
-					{
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = MIN_SIZE;
-					}
-
-					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
-
-					if(!aabb->isCentered())
-					{
-						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
-					}
-
-					aabb->setBasePosition(newAabbPosition);
-					aabb->setBaseSize(newAabbSize);
-
-					if(parentQuad3d->isVisible())
-					{
-						aabb->setRaycastResponsive(true);
-						aabb->setCollisionResponsive(true);
-					}
-					else
-					{
-						aabb->setVisible(false);
-						aabb->setRaycastResponsive(false);
-						aabb->setCollisionResponsive(false);
-					}
+					aabb->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
+					aabb->followQuad3dParentVisibility(quad3d->isVisible());
 
 					break;
 				}
 				case AabbParentType::TEXT3D:
 				{
-					auto foundPair = _text3dManager->getText3ds().find(aabb->getParentId());
+					const auto text3d = _text3dManager->getText3d(parentId);
 
-					if(foundPair == _text3dManager->getText3ds().end())
-					{
-						abort();
-					}
-
-					const auto parentText3d = foundPair->second;
-					const auto parentPosition = parentText3d->getPosition();
-					const auto parentRotation = parentText3d->getRotation();
-					const auto parentSize = parentText3d->getSize();
-
-					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
-
-					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
-					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
-					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
-
-					fvec3 newAabbSize;
-
-					if(refRotationX > refRotationY && refRotationX > refRotationZ)
-					{
-						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
-
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
-						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
-					}
-					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
-					{
-						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
-
-						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
-					}
-					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
-					{
-						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
-
-						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
-						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
-						newAabbSize.z = MIN_SIZE;
-					}
-					else
-					{
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = MIN_SIZE;
-					}
-
-					auto newAabbPosition = (parentPosition + aabb->getLocalPosition());
-
-					if(!aabb->isCentered())
-					{
-						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
-					}
-
-					aabb->setBasePosition(newAabbPosition);
-					aabb->setBaseSize(newAabbSize);
-
-					if(parentText3d->isVisible())
-					{
-						aabb->setRaycastResponsive(true);
-						aabb->setCollisionResponsive(true);
-					}
-					else
-					{
-						aabb->setVisible(false);
-						aabb->setRaycastResponsive(false);
-						aabb->setCollisionResponsive(false);
-					}
+					aabb->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
+					aabb->followText3dParentVisibility(text3d->isVisible());
 
 					break;
 				}

@@ -105,6 +105,17 @@ void ScriptEditor::_updateTextWriter()
 
 			_script->getScriptFile(_currentScriptFileId)->setCursorLineIndex(cursorLineIndex);
 			_script->getScriptFile(_currentScriptFileId)->setCursorCharacterIndex(cursorCharacterIndex);
+
+			const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
+
+			if(cursorLineIndex == (lineCount - 1))
+			{
+				auto cameraPosition = _fe3d->camera_getPosition();
+
+				cameraPosition.y -= VERTICAL_LINE_OFFSET;
+
+				_fe3d->camera_setPosition(cameraPosition);
+			}
 		}
 	}
 	else if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))

@@ -212,8 +212,7 @@ void Duplicator::copyEditorModel(const string & newId, const string & editorId)
 
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setVisible(newAabbId, false);
-		_fe3d->aabb_setParentId(newAabbId, newId);
-		_fe3d->aabb_setParentType(newAabbId, AabbParentType::MODEL);
+		_fe3d->aabb_bindToParent(newAabbId, newId, AabbParentType::MODEL);
 		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getLocalPosition(editorAabbId));
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getLocalSize(editorAabbId));
 	}
@@ -262,8 +261,7 @@ void Duplicator::copyEditorQuad3d(const string & newId, const string & editorId)
 
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setVisible(newAabbId, false);
-		_fe3d->aabb_setParentId(newAabbId, newId);
-		_fe3d->aabb_setParentType(newAabbId, AabbParentType::QUAD3D);
+		_fe3d->aabb_bindToParent(newAabbId, newId, AabbParentType::QUAD3D);
 	}
 
 	_copiedQuad3dIds.insert({newId, editorId});
@@ -323,8 +321,7 @@ void Duplicator::copyEditorText3d(const string & newId, const string & editorId)
 
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setVisible(newAabbId, false);
-		_fe3d->aabb_setParentId(newAabbId, newId);
-		_fe3d->aabb_setParentType(newAabbId, AabbParentType::TEXT3D);
+		_fe3d->aabb_bindToParent(newAabbId, newId, AabbParentType::TEXT3D);
 	}
 
 	_copiedText3dIds.insert({newId, editorId});

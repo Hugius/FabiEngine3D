@@ -22,8 +22,11 @@ public:
 	void update();
 	void deleteAabb(const string & aabbId);
 	void deleteAabbs();
+	void bindAabbToParent(const string & aabbId, const string & parentId, AabbParentType parentType);
 
 	const unordered_map<string, shared_ptr<Aabb>> & getAabbs() const;
+
+	const vector<string> getChildAabbIds(const string & parentId, AabbParentType parentType) const;
 
 	const shared_ptr<Aabb> getAabb(const string & aabbId) const;
 
@@ -35,6 +38,9 @@ private:
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
 	unordered_map<string, shared_ptr<Aabb>> _aabbs = {};
+	unordered_map<string, vector<string>> _modelChildAabbIds = {};
+	unordered_map<string, vector<string>> _quad3dChildAabbIds = {};
+	unordered_map<string, vector<string>> _text3dChildAabbIds = {};
 
 	shared_ptr<ModelManager> _modelManager = nullptr;
 	shared_ptr<Quad3dManager> _quad3dManager = nullptr;

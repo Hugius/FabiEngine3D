@@ -288,23 +288,7 @@ const vector<string> EngineInterface::text3d_getIds() const
 
 const vector<string> EngineInterface::text3d_getChildAabbIds(const string & text3dId) const
 {
-	vector<string> result = {};
-
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
-	{
-		if(!aabb->getParentId().empty())
-		{
-			if(text3dId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::TEXT3D)
-				{
-					result.push_back(aabb->getId());
-				}
-			}
-		}
-	}
-
-	return result;
+	return _core->getAabbManager()->getChildAabbIds(text3dId, AabbParentType::TEXT3D);
 }
 
 const string & EngineInterface::text3d_getFontMapPath(const string & text3dId) const

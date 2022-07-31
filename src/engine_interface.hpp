@@ -664,8 +664,7 @@ public:
 
 	void aabb_create(const string & aabbId, bool isCentered);
 	void aabb_delete(const string & aabbId);
-	void aabb_setParentId(const string & aabbId, const string & value);
-	void aabb_setParentType(const string & aabbId, AabbParentType value);
+	void aabb_bindToParent(const string & aabbId, const string & parentId, AabbParentType parentType);
 	void aabb_setVisible(const string & aabbId, bool value);
 	void aabb_setColor(const string & aabbId, const fvec3 & value);
 	void aabb_setRaycastResponsive(const string & aabbId, bool value);

@@ -486,23 +486,7 @@ const string EngineInterface::quad3d_getAnimation2dId(const string & quad3dId) c
 
 const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & quad3dId) const
 {
-	vector<string> result = {};
-
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
-	{
-		if(!aabb->getParentId().empty())
-		{
-			if(quad3dId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::QUAD3D)
-				{
-					result.push_back(aabb->getId());
-				}
-			}
-		}
-	}
-
-	return result;
+	return _core->getAabbManager()->getChildAabbIds(quad3dId, AabbParentType::QUAD3D);
 }
 
 const bool EngineInterface::quad3d_isFacingCameraHorizontally(const string & quad3dId) const

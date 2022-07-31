@@ -6,19 +6,14 @@ void EngineInterface::aabb_create(const string & aabbId, bool isCentered)
 	_core->getAabbManager()->createAabb(aabbId, isCentered);
 }
 
-void EngineInterface::aabb_setParentId(const string & aabbId, const string & value)
-{
-	_core->getAabbManager()->getAabb(aabbId)->setParentId(value);
-}
-
-void EngineInterface::aabb_setParentType(const string & aabbId, AabbParentType value)
-{
-	_core->getAabbManager()->getAabb(aabbId)->setParentType(value);
-}
-
 void EngineInterface::aabb_delete(const string & aabbId)
 {
 	_core->getAabbManager()->deleteAabb(aabbId);
+}
+
+void EngineInterface::aabb_bindToParent(const string & aabbId, const string & parentId, AabbParentType parentType)
+{
+	_core->getAabbManager()->bindAabbToParent(aabbId, parentId, parentType);
 }
 
 void EngineInterface::aabb_setVisible(const string & aabbId, bool value)

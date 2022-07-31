@@ -337,8 +337,7 @@ void ModelEditor::_updateAabbCreating()
 		}
 
 		_fe3d->aabb_create(("model@" + _currentModelId + "@" + aabbId), false);
-		_fe3d->aabb_setParentId(("model@" + _currentModelId + "@" + aabbId), _currentModelId);
-		_fe3d->aabb_setParentType(("model@" + _currentModelId + "@" + aabbId), AabbParentType::MODEL);
+		_fe3d->aabb_bindToParent(("model@" + _currentModelId + "@" + aabbId), _currentModelId, AabbParentType::MODEL);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 		_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + aabbId);

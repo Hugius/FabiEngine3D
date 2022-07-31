@@ -418,8 +418,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
-				_fe3d->aabb_setParentId(newModelId, newModelId);
-				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
+				_fe3d->aabb_bindToParent(newModelId, newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, LAMP_AABB_SIZE);
 			}
 		}
@@ -471,8 +470,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
-				_fe3d->aabb_setParentId(newModelId, newModelId);
-				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
+				_fe3d->aabb_bindToParent(newModelId, newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, TORCH_AABB_SIZE);
 			}
 		}
@@ -522,8 +520,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
-				_fe3d->aabb_setParentId(newModelId, newModelId);
-				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
+				_fe3d->aabb_bindToParent(newModelId, newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, LENS_AABB_SIZE);
 			}
 		}
@@ -568,8 +565,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 				_fe3d->aabb_create(newModelId, true);
 				_fe3d->aabb_setVisible(newModelId, false);
-				_fe3d->aabb_setParentId(newModelId, newModelId);
-				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
+				_fe3d->aabb_bindToParent(newModelId, newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, SPEAKER_AABB_SIZE);
 			}
 		}

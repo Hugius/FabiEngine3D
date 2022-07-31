@@ -914,21 +914,5 @@ const vector<string> EngineInterface::model_getIds() const
 
 const vector<string> EngineInterface::model_getChildAabbIds(const string & modelId)
 {
-	vector<string> result = {};
-
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
-	{
-		if(!aabb->getParentId().empty())
-		{
-			if(modelId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::MODEL)
-				{
-					result.push_back(aabb->getId());
-				}
-			}
-		}
-	}
-
-	return result;
+	return _core->getAabbManager()->getChildAabbIds(modelId, AabbParentType::MODEL);
 }

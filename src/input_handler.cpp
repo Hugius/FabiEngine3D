@@ -35,28 +35,12 @@ void InputHandler::update()
 
 	for(const auto & button : _mouseUpEvents)
 	{
-		for(int index = 0; index < static_cast<int>(_heldMouseButtons.size()); index++)
-		{
-			if(button == _heldMouseButtons[index])
-			{
-				_heldMouseButtons.erase(_heldMouseButtons.begin() + index);
-
-				break;
-			}
-		}
+		_heldMouseButtons.erase(find(_heldMouseButtons.begin(), _heldMouseButtons.end(), button));
 	}
 
 	for(const auto & key : _keyboardUpEvents)
 	{
-		for(int index = 0; index < static_cast<int>(_heldKeyboardKeyTypes.size()); index++)
-		{
-			if(key == _heldKeyboardKeyTypes[index])
-			{
-				_heldKeyboardKeyTypes.erase(_heldKeyboardKeyTypes.begin() + index);
-
-				break;
-			}
-		}
+		_heldKeyboardKeyTypes.erase(find(_heldKeyboardKeyTypes.begin(), _heldKeyboardKeyTypes.end(), key));
 	}
 
 	for(const auto & button : _mouseButtons)

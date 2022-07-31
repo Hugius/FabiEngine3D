@@ -99,6 +99,8 @@ const vector<string> AabbManager::getChildAabbIds(const string & parentId, AabbP
 			{
 				return iterator->second;
 			}
+
+			break;
 		}
 		case AabbParentType::QUAD3D:
 		{
@@ -108,6 +110,8 @@ const vector<string> AabbManager::getChildAabbIds(const string & parentId, AabbP
 			{
 				return iterator->second;
 			}
+
+			break;
 		}
 		case AabbParentType::TEXT3D:
 		{
@@ -117,6 +121,8 @@ const vector<string> AabbManager::getChildAabbIds(const string & parentId, AabbP
 			{
 				return iterator->second;
 			}
+
+			break;
 		}
 	}
 
@@ -238,6 +244,13 @@ void AabbManager::registerParent(const string & parentId, AabbParentType parentT
 	{
 		case AabbParentType::MODEL:
 		{
+			const auto parents = _modelManager->getModels();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _modelChildAabbIds.find(parentId);
 
 			if(iterator != _modelChildAabbIds.end())
@@ -246,9 +259,18 @@ void AabbManager::registerParent(const string & parentId, AabbParentType parentT
 			}
 
 			_modelChildAabbIds.insert({parentId, {}});
+
+			break;
 		}
 		case AabbParentType::QUAD3D:
 		{
+			const auto parents = _quad3dManager->getQuad3ds();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _quad3dChildAabbIds.find(parentId);
 
 			if(iterator != _quad3dChildAabbIds.end())
@@ -257,9 +279,18 @@ void AabbManager::registerParent(const string & parentId, AabbParentType parentT
 			}
 
 			_quad3dChildAabbIds.insert({parentId, {}});
+
+			break;
 		}
 		case AabbParentType::TEXT3D:
 		{
+			const auto parents = _text3dManager->getText3ds();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _text3dChildAabbIds.find(parentId);
 
 			if(iterator != _text3dChildAabbIds.end())
@@ -268,6 +299,8 @@ void AabbManager::registerParent(const string & parentId, AabbParentType parentT
 			}
 
 			_text3dChildAabbIds.insert({parentId, {}});
+
+			break;
 		}
 	}
 }
@@ -278,6 +311,13 @@ void AabbManager::unregisterParent(const string & parentId, AabbParentType paren
 	{
 		case AabbParentType::MODEL:
 		{
+			const auto parents = _modelManager->getModels();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _modelChildAabbIds.find(parentId);
 
 			if(iterator == _modelChildAabbIds.end())
@@ -286,9 +326,18 @@ void AabbManager::unregisterParent(const string & parentId, AabbParentType paren
 			}
 
 			_modelChildAabbIds.erase(parentId);
+
+			break;
 		}
 		case AabbParentType::QUAD3D:
 		{
+			const auto parents = _quad3dManager->getQuad3ds();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _quad3dChildAabbIds.find(parentId);
 
 			if(iterator == _quad3dChildAabbIds.end())
@@ -297,9 +346,18 @@ void AabbManager::unregisterParent(const string & parentId, AabbParentType paren
 			}
 
 			_quad3dChildAabbIds.erase(parentId);
+
+			break;
 		}
 		case AabbParentType::TEXT3D:
 		{
+			const auto parents = _text3dManager->getText3ds();
+
+			if(parents.find(parentId) == parents.end())
+			{
+				abort();
+			}
+
 			const auto iterator = _text3dChildAabbIds.find(parentId);
 
 			if(iterator == _text3dChildAabbIds.end())
@@ -308,6 +366,8 @@ void AabbManager::unregisterParent(const string & parentId, AabbParentType paren
 			}
 
 			_text3dChildAabbIds.erase(parentId);
+
+			break;
 		}
 	}
 }
@@ -319,8 +379,10 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 		abort();
 	}
 
-	getAabb(aabbId)->setParentId(parentId);
-	getAabb(aabbId)->setParentType(parentType);
+	if(!getAabb(aabbId)->getParentId().empty())
+	{
+		abort();
+	}
 
 	switch(parentType)
 	{
@@ -334,6 +396,8 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 			}
 
 			iterator->second.push_back(aabbId);
+
+			break;
 		}
 		case AabbParentType::QUAD3D:
 		{
@@ -345,6 +409,8 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 			}
 
 			iterator->second.push_back(aabbId);
+
+			break;
 		}
 		case AabbParentType::TEXT3D:
 		{
@@ -356,22 +422,32 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 			}
 
 			iterator->second.push_back(aabbId);
+
+			break;
 		}
 	}
+
+	getAabb(aabbId)->setParentId(parentId);
+	getAabb(aabbId)->setParentType(parentType);
 }
 
-void AabbManager::unbindAabbFromParent(const string & aabbId, const string & parentId, AabbParentType parentType)
+void AabbManager::unbindAabbFromParent(const string & aabbId)
 {
 	if(_aabbs.find(aabbId) == _aabbs.end())
 	{
 		abort();
 	}
 
-	switch(parentType)
+	if(getAabb(aabbId)->getParentId().empty())
+	{
+		abort();
+	}
+
+	switch(getAabb(aabbId)->getParentType())
 	{
 		case AabbParentType::MODEL:
 		{
-			const auto iterator = _modelChildAabbIds.find(parentId);
+			const auto iterator = _modelChildAabbIds.find(getAabb(aabbId)->getParentId());
 
 			if(iterator != _modelChildAabbIds.end())
 			{
@@ -379,10 +455,12 @@ void AabbManager::unbindAabbFromParent(const string & aabbId, const string & par
 			}
 
 			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
+
+			break;
 		}
 		case AabbParentType::QUAD3D:
 		{
-			const auto iterator = _quad3dChildAabbIds.find(parentId);
+			const auto iterator = _quad3dChildAabbIds.find(getAabb(aabbId)->getParentId());
 
 			if(iterator != _quad3dChildAabbIds.end())
 			{
@@ -390,10 +468,12 @@ void AabbManager::unbindAabbFromParent(const string & aabbId, const string & par
 			}
 
 			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
+
+			break;
 		}
 		case AabbParentType::TEXT3D:
 		{
-			const auto iterator = _text3dChildAabbIds.find(parentId);
+			const auto iterator = _text3dChildAabbIds.find(getAabb(aabbId)->getParentId());
 
 			if(iterator != _text3dChildAabbIds.end())
 			{
@@ -401,8 +481,13 @@ void AabbManager::unbindAabbFromParent(const string & aabbId, const string & par
 			}
 
 			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
+
+			break;
 		}
 	}
+
+	getAabb(aabbId)->setParentId("");
+	getAabb(aabbId)->setParentType({});
 }
 
 const bool AabbManager::isAabbExisting(const string & aabbId) const

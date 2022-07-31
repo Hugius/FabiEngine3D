@@ -102,6 +102,7 @@ void Animation3dEditor::_updateFrameMenu()
 				case SpeedType::INSTANTLY:
 				{
 					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::LINEAR);
+
 					break;
 				}
 			}

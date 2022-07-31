@@ -16,9 +16,9 @@ void EngineInterface::aabb_bindToParent(const string & aabbId, const string & pa
 	_core->getAabbManager()->bindAabbToParent(aabbId, parentId, parentType);
 }
 
-void EngineInterface::aabb_unbindFromParent(const string & aabbId, const string & parentId, AabbParentType parentType)
+void EngineInterface::aabb_unbindFromParent(const string & aabbId)
 {
-	_core->getAabbManager()->unbindAabbFromParent(aabbId, parentId, parentType);
+	_core->getAabbManager()->unbindAabbFromParent(aabbId);
 }
 
 void EngineInterface::aabb_setVisible(const string & aabbId, bool value)

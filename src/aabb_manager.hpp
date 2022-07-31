@@ -25,7 +25,7 @@ public:
 	void registerParent(const string & parentId, AabbParentType parentType);
 	void unregisterParent(const string & parentId, AabbParentType parentType);
 	void bindAabbToParent(const string & aabbId, const string & parentId, AabbParentType parentType);
-	void unbindAabbFromParent(const string & aabbId, const string & parentId, AabbParentType parentType);
+	void unbindAabbFromParent(const string & aabbId);
 
 	const unordered_map<string, shared_ptr<Aabb>> & getAabbs() const;
 

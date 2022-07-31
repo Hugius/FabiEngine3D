@@ -17,11 +17,6 @@ void EngineInterface::model_delete(const string & modelId)
 		}
 	}
 
-	for(const auto & aabbId : model_getChildAabbIds(modelId))
-	{
-		aabb_delete(aabbId);
-	}
-
 	for(const auto & captorId : captor_getIds())
 	{
 		if(modelId == captor_getExceptionId(captorId))
@@ -30,8 +25,13 @@ void EngineInterface::model_delete(const string & modelId)
 		}
 	}
 
-	_core->getModelManager()->deleteModel(modelId);
+	for(const auto & aabbId : model_getChildAabbIds(modelId))
+	{
+		aabb_delete(aabbId);
+	}
+
 	_core->getAabbManager()->unregisterParent(modelId, AabbParentType::MODEL);
+	_core->getModelManager()->deleteModel(modelId);
 }
 
 void EngineInterface::model_setVisible(const string & modelId, bool value)

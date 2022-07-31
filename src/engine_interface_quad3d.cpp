@@ -22,8 +22,8 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 		aabb_delete(aabbId);
 	}
 
-	_core->getQuad3dManager()->deleteQuad3d(quad3dId);
 	_core->getAabbManager()->unregisterParent(quad3dId, AabbParentType::QUAD3D);
+	_core->getQuad3dManager()->deleteQuad3d(quad3dId);
 }
 
 void EngineInterface::quad3d_setVisible(const string & quad3dId, bool value)

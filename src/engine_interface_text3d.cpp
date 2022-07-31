@@ -19,8 +19,8 @@ void EngineInterface::text3d_delete(const string & text3dId)
 		aabb_delete(aabbId);
 	}
 
-	_core->getText3dManager()->deleteText3d(text3dId);
 	_core->getAabbManager()->unregisterParent(text3dId, AabbParentType::TEXT3D);
+	_core->getText3dManager()->deleteText3d(text3dId);
 }
 
 void EngineInterface::text3d_setVisible(const string & text3dId, bool value)

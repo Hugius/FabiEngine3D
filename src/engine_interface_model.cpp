@@ -9,19 +9,19 @@ void EngineInterface::model_create(const string & modelId, const string & meshPa
 
 void EngineInterface::model_delete(const string & modelId)
 {
-	for(const auto & [startedAnimation3dId, startedModelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
-	{
-		if(modelId == startedModelId)
-		{
-			model_stopAnimation3d(startedModelId, startedAnimation3dId);
-		}
-	}
-
 	for(const auto & captorId : captor_getIds())
 	{
 		if(modelId == captor_getExceptionId(captorId))
 		{
 			captor_setExceptionId(captorId, "");
+		}
+	}
+
+	for(const auto & [startedAnimation3dId, startedModelId] : _core->getAnimation3dPlayer()->getStartedModelAnimation3dIds())
+	{
+		if(modelId == startedModelId)
+		{
+			model_stopAnimation3d(startedModelId, startedAnimation3dId);
 		}
 	}
 

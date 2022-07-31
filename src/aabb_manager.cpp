@@ -158,28 +158,28 @@ void AabbManager::update()
 			{
 				case AabbParentType::MODEL:
 				{
-					const auto model = _modelManager->getModel(parentId);
+					const auto parent = _modelManager->getModel(parentId);
 
-					aabb->followModelParentTransformation(model->getBasePosition(), model->getBaseRotation(), model->getBaseSize());
-					aabb->followModelParentVisibility(model->isVisible(), model->getLevelOfDetailId(), model->isLevelOfDetailed());
+					aabb->followModelParentTransformation(parent->getBasePosition(), parent->getBaseRotation(), parent->getBaseSize());
+					aabb->followModelParentVisibility(parent->isVisible(), parent->getLevelOfDetailId(), parent->isLevelOfDetailed());
 
 					break;
 				}
 				case AabbParentType::QUAD3D:
 				{
-					const auto quad3d = _quad3dManager->getQuad3d(parentId);
+					const auto parent = _quad3dManager->getQuad3d(parentId);
 
-					aabb->followQuad3dParentTransformation(quad3d->getPosition(), quad3d->getRotation(), quad3d->getSize());
-					aabb->followQuad3dParentVisibility(quad3d->isVisible());
+					aabb->followQuad3dParentTransformation(parent->getPosition(), parent->getRotation(), parent->getSize());
+					aabb->followQuad3dParentVisibility(parent->isVisible());
 
 					break;
 				}
 				case AabbParentType::TEXT3D:
 				{
-					const auto text3d = _text3dManager->getText3d(parentId);
+					const auto parent = _text3dManager->getText3d(parentId);
 
-					aabb->followText3dParentTransformation(text3d->getPosition(), text3d->getRotation(), text3d->getSize());
-					aabb->followText3dParentVisibility(text3d->isVisible());
+					aabb->followText3dParentTransformation(parent->getPosition(), parent->getRotation(), parent->getSize());
+					aabb->followText3dParentVisibility(parent->isVisible());
 
 					break;
 				}

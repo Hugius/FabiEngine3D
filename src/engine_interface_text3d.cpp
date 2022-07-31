@@ -4,6 +4,7 @@
 void EngineInterface::text3d_create(const string & text3dId, const string & fontMapPath, bool isCentered)
 {
 	_core->getText3dManager()->createText3d(text3dId, fontMapPath, isCentered);
+	_core->getAabbManager()->registerParent(text3dId, AabbParentType::TEXT3D);
 }
 
 void EngineInterface::text3d_setContent(const string & text3dId, const string & value)
@@ -13,21 +14,13 @@ void EngineInterface::text3d_setContent(const string & text3dId, const string & 
 
 void EngineInterface::text3d_delete(const string & text3dId)
 {
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
+	for(const auto & aabbId : text3d_getChildAabbIds(text3dId))
 	{
-		if(!aabb->getParentId().empty())
-		{
-			if(text3dId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::TEXT3D)
-				{
-					aabb_delete(aabbId);
-				}
-			}
-		}
+		aabb_delete(aabbId);
 	}
 
 	_core->getText3dManager()->deleteText3d(text3dId);
+	_core->getAabbManager()->unregisterParent(text3dId, AabbParentType::TEXT3D);
 }
 
 void EngineInterface::text3d_setVisible(const string & text3dId, bool value)

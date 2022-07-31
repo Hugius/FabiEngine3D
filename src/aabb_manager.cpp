@@ -198,30 +198,127 @@ void AabbManager::deleteAabb(const string & aabbId)
 
 	for(auto & [parentId, childAabbIds] : _modelChildAabbIds)
 	{
-		childAabbIds.erase(find(childAabbIds.begin(), childAabbIds.end(), aabbId));
+		childAabbIds.erase(remove(childAabbIds.begin(), childAabbIds.end(), aabbId), childAabbIds.end());
 	}
 
 	for(auto & [parentId, childAabbIds] : _quad3dChildAabbIds)
 	{
-		childAabbIds.erase(find(childAabbIds.begin(), childAabbIds.end(), aabbId));
+		childAabbIds.erase(remove(childAabbIds.begin(), childAabbIds.end(), aabbId), childAabbIds.end());
 	}
 
 	for(auto & [parentId, childAabbIds] : _text3dChildAabbIds)
 	{
-		childAabbIds.erase(find(childAabbIds.begin(), childAabbIds.end(), aabbId));
+		childAabbIds.erase(remove(childAabbIds.begin(), childAabbIds.end(), aabbId), childAabbIds.end());
 	}
 }
 
 void AabbManager::deleteAabbs()
 {
 	_aabbs.clear();
-	_modelChildAabbIds.clear();
-	_quad3dChildAabbIds.clear();
-	_text3dChildAabbIds.clear();
+
+	for(auto & [parentId, childAabbIds] : _modelChildAabbIds)
+	{
+		childAabbIds.clear();
+	}
+
+	for(auto & [parentId, childAabbIds] : _quad3dChildAabbIds)
+	{
+		childAabbIds.clear();
+	}
+
+	for(auto & [parentId, childAabbIds] : _text3dChildAabbIds)
+	{
+		childAabbIds.clear();
+	}
+}
+
+void AabbManager::registerParent(const string & parentId, AabbParentType parentType)
+{
+	switch(parentType)
+	{
+		case AabbParentType::MODEL:
+		{
+			const auto iterator = _modelChildAabbIds.find(parentId);
+
+			if(iterator != _modelChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_modelChildAabbIds.insert({parentId, {}});
+		}
+		case AabbParentType::QUAD3D:
+		{
+			const auto iterator = _quad3dChildAabbIds.find(parentId);
+
+			if(iterator != _quad3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_quad3dChildAabbIds.insert({parentId, {}});
+		}
+		case AabbParentType::TEXT3D:
+		{
+			const auto iterator = _text3dChildAabbIds.find(parentId);
+
+			if(iterator != _text3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_text3dChildAabbIds.insert({parentId, {}});
+		}
+	}
+}
+
+void AabbManager::unregisterParent(const string & parentId, AabbParentType parentType)
+{
+	switch(parentType)
+	{
+		case AabbParentType::MODEL:
+		{
+			const auto iterator = _modelChildAabbIds.find(parentId);
+
+			if(iterator == _modelChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_modelChildAabbIds.erase(parentId);
+		}
+		case AabbParentType::QUAD3D:
+		{
+			const auto iterator = _quad3dChildAabbIds.find(parentId);
+
+			if(iterator == _quad3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_quad3dChildAabbIds.erase(parentId);
+		}
+		case AabbParentType::TEXT3D:
+		{
+			const auto iterator = _text3dChildAabbIds.find(parentId);
+
+			if(iterator == _text3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			_text3dChildAabbIds.erase(parentId);
+		}
+	}
 }
 
 void AabbManager::bindAabbToParent(const string & aabbId, const string & parentId, AabbParentType parentType)
 {
+	if(_aabbs.find(aabbId) == _aabbs.end())
+	{
+		abort();
+	}
+
 	getAabb(aabbId)->setParentId(parentId);
 	getAabb(aabbId)->setParentType(parentType);
 
@@ -233,7 +330,7 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 
 			if(iterator == _modelChildAabbIds.end())
 			{
-				_modelChildAabbIds.insert({parentId, {}});
+				abort();
 			}
 
 			iterator->second.push_back(aabbId);
@@ -244,7 +341,7 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 
 			if(iterator == _quad3dChildAabbIds.end())
 			{
-				_quad3dChildAabbIds.insert({parentId, {}});
+				abort();
 			}
 
 			iterator->second.push_back(aabbId);
@@ -255,10 +352,55 @@ void AabbManager::bindAabbToParent(const string & aabbId, const string & parentI
 
 			if(iterator == _text3dChildAabbIds.end())
 			{
-				_text3dChildAabbIds.insert({parentId, {}});
+				abort();
 			}
 
 			iterator->second.push_back(aabbId);
+		}
+	}
+}
+
+void AabbManager::unbindAabbFromParent(const string & aabbId, const string & parentId, AabbParentType parentType)
+{
+	if(_aabbs.find(aabbId) == _aabbs.end())
+	{
+		abort();
+	}
+
+	switch(parentType)
+	{
+		case AabbParentType::MODEL:
+		{
+			const auto iterator = _modelChildAabbIds.find(parentId);
+
+			if(iterator != _modelChildAabbIds.end())
+			{
+				abort();
+			}
+
+			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
+		}
+		case AabbParentType::QUAD3D:
+		{
+			const auto iterator = _quad3dChildAabbIds.find(parentId);
+
+			if(iterator != _quad3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
+		}
+		case AabbParentType::TEXT3D:
+		{
+			const auto iterator = _text3dChildAabbIds.find(parentId);
+
+			if(iterator != _text3dChildAabbIds.end())
+			{
+				abort();
+			}
+
+			iterator->second.erase(remove(iterator->second.begin(), iterator->second.end(), aabbId), iterator->second.end());
 		}
 	}
 }

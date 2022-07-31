@@ -4,6 +4,7 @@
 void EngineInterface::quad3d_create(const string & quad3dId, bool isCentered)
 {
 	_core->getQuad3dManager()->createQuad3d(quad3dId, isCentered);
+	_core->getAabbManager()->registerParent(quad3dId, AabbParentType::QUAD3D);
 }
 
 void EngineInterface::quad3d_delete(const string & quad3dId)
@@ -16,21 +17,13 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 		}
 	}
 
-	for(const auto & [aabbId, aabb] : _core->getAabbManager()->getAabbs())
+	for(const auto & aabbId : quad3d_getChildAabbIds(quad3dId))
 	{
-		if(!aabb->getParentId().empty())
-		{
-			if(quad3dId == aabb->getParentId())
-			{
-				if(aabb->getParentType() == AabbParentType::QUAD3D)
-				{
-					aabb_delete(aabbId);
-				}
-			}
-		}
+		aabb_delete(aabbId);
 	}
 
 	_core->getQuad3dManager()->deleteQuad3d(quad3dId);
+	_core->getAabbManager()->unregisterParent(quad3dId, AabbParentType::QUAD3D);
 }
 
 void EngineInterface::quad3d_setVisible(const string & quad3dId, bool value)

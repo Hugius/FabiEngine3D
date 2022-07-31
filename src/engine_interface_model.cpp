@@ -4,6 +4,7 @@
 void EngineInterface::model_create(const string & modelId, const string & meshPath)
 {
 	_core->getModelManager()->createModel(modelId, meshPath);
+	_core->getAabbManager()->registerParent(modelId, AabbParentType::MODEL);
 }
 
 void EngineInterface::model_delete(const string & modelId)
@@ -30,6 +31,7 @@ void EngineInterface::model_delete(const string & modelId)
 	}
 
 	_core->getModelManager()->deleteModel(modelId);
+	_core->getAabbManager()->unregisterParent(modelId, AabbParentType::MODEL);
 }
 
 void EngineInterface::model_setVisible(const string & modelId, bool value)

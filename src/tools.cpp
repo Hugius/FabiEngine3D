@@ -86,6 +86,8 @@ void Tools::setCursorType(CursorType type)
 			break;
 		}
 	}
+
+	_cursorType = type;
 }
 
 void Tools::setCursorVisible(bool value)
@@ -481,6 +483,11 @@ const bool Tools::isInteger(const string & valueString)
 	}
 
 	return true;
+}
+
+const CursorType Tools::getCursorType()
+{
+	return _cursorType;
 }
 
 const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2 & position)

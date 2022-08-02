@@ -19,6 +19,7 @@
 - `fe3d:cursor_is_visible` () -----> `BOL`
 - `fe3d:cursor_get_position_x` () -----> `DEC`
 - `fe3d:cursor_get_position_y` () -----> `DEC`
+- `fe3d:cursor_get_type` () -----> `STR`
 - `fe3d:window_get_width` () -----> `INT`
 - `fe3d:window_get_height` () -----> `INT`
 - `fe3d:window_get_aspect_ratio` () -----> `DEC`

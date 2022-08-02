@@ -31,3 +31,4 @@
 - The messages of the logging console work like a FIFO (First In First Out) system.
 - The maximum amount of messages in the logging console is 100.
 - If a message is too long for the logging console, the full message can be found in the external console window.
+- There are two types of cursors: ARROW & HAND.

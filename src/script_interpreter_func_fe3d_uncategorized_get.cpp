@@ -57,6 +57,38 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:cursor_get_type")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_fe3d->server_isRunning())
+			{
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
+
+				return true;
+			}
+
+			switch(Tools::getCursorType())
+			{
+				case CursorType::ARROW:
+				{
+					const auto result = "ARROW";
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+					break;
+				}
+				case CursorType::HAND:
+				{
+					const auto result = "HAND";
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+					break;
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:window_get_width")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

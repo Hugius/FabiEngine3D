@@ -68,9 +68,13 @@ public:
 	static const bool deleteFile(const string & path);
 	static const bool isInteger(const string & valueString);
 
+	static const CursorType getCursorType();
+
 private:
 	static inline unique_ptr<Configuration> _configuration = make_unique<Configuration>();
 
 	static inline constexpr int MIN_STRING_INTEGER = -999999999;
 	static inline constexpr int MAX_STRING_INTEGER = 999999999;
+
+	static inline CursorType _cursorType = CursorType::ARROW;
 };

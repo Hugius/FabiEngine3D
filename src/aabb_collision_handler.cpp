@@ -103,8 +103,8 @@ const bool AabbCollisionHandler::_haveAabbsCollided(shared_ptr<Aabb> firstAabb, 
 		}
 		else
 		{
-			if((((aabbPosition1.y + halfAabbSize1.y) > (aabbPosition2.y - halfAabbSize2.y)) && ((aabbPosition1.y + halfAabbSize1.y) < (aabbPosition2.y + halfAabbSize2.y))) ||
-			   (((aabbPosition1.y - halfAabbSize1.y) < (aabbPosition2.y + halfAabbSize2.y)) && ((aabbPosition1.y - halfAabbSize1.y) > (aabbPosition2.y - halfAabbSize2.y))))
+			if((((aabbPosition1.y + aabbSize1.y) > aabbPosition2.y) && ((aabbPosition1.y + aabbSize1.y) < (aabbPosition2.y + aabbSize2.y))) ||
+			   ((aabbPosition1.y < (aabbPosition2.y + aabbSize2.y)) && (aabbPosition1.y > aabbPosition2.y)))
 			{
 				yInsideBox = true;
 			}

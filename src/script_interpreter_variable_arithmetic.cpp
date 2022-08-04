@@ -134,7 +134,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		}
 	}
 
-	const auto minLineSize = (operatorString.size() + nameString.size() + (isAccessingLeftList ? (to_string(leftListIndex).size() + 2) : 0) + 3);
+	const auto minLineSize = (words[0].size() + words[1].size() + 3);
 
 	if(scriptLine.size() < minLineSize)
 	{

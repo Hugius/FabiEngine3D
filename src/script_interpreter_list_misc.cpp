@@ -84,7 +84,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 		return;
 	}
 
-	auto minLineSize = (PUSH_KEYWORD.size() + nameString.size() + 3);
+	const auto minLineSize = (PUSH_KEYWORD.size() + nameString.size() + 3);
 
 	if(scriptLine.size() < minLineSize)
 	{

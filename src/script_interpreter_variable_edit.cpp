@@ -42,7 +42,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		return;
 	}
 
-	auto minLineSize = (scriptLine.find('=') + 3);
+	const auto minLineSize = (scriptLine.find('=') + 3);
 
 	if(scriptLine.size() < minLineSize)
 	{

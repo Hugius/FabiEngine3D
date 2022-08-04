@@ -302,7 +302,7 @@ private:
 	static inline const string ELIF_KEYWORD = "ELIF";
 	static inline const string ELSE_KEYWORD = "ELSE";
 	static inline const string GLOBAL_KEYWORD = "GLOB";
-	static inline const string CONST_KEYWORD = "CONST";
+	static inline const string CONST_KEYWORD = "CNST";
 	static inline const string EDIT_KEYWORD = "EDIT";
 	static inline const string LIST_KEYWORD = "LST";
 	static inline const string STRING_KEYWORD = "STR";

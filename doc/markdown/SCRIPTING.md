@@ -58,8 +58,8 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.4 Mutability
 
-- A variable can be immutable (`CONST` keyword) or mutable (no extra keyword).
-- If you try to change a `CONST` variable, you will get an error!
+- A variable can be immutable (`CNST` keyword) or mutable (no extra keyword).
+- If you try to change an immutable variable, you will get an error!
 
 ### 4.5 Naming Conventions
 
@@ -115,14 +115,14 @@ Line 2 of every script file must specify its state: entry or wait.
 16. PUSH myList "newValue"
 17. PULL myList 2
 18.
-19. /// Constant variable
-20. CONST STR immutableString = "i cannot be changed"
+19. /// Immutable variable
+20. CNST STR immutableString = "i cannot be changed"
 21. STR mutableString = "try to change me"
 22. EDIT mutableString = "i changed you"
 23.
 24. /// Global variable
 25. GLOB INT _someInteger = 5
-26. GLOB CONST INT _constInteger = 5
+26. GLOB CNST INT _anotherInteger = 5
 27.
 28. /// Variable casting
 29. CAST myDecimal INT

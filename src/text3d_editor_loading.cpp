@@ -103,7 +103,6 @@ const bool Text3dEditor::loadText3dsFromFile()
 		{
 			string text3dId;
 			string fontMapPath;
-			string content;
 			fvec2 size;
 			fvec3 color;
 			float lightness;
@@ -138,14 +137,11 @@ const bool Text3dEditor::loadText3dsFromFile()
 				>> isBright
 				>> opacity
 				>> minAlpha
-				>> rotationOrder
-				>> content;
+				>> rotationOrder;
 
 			fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-			content = (content == "?") ? "" : content;
 
 			replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-			replace(content.begin(), content.end(), '?', ' ');
 
 			if(!Tools::isApplicationExported())
 			{
@@ -171,7 +167,6 @@ const bool Text3dEditor::loadText3dsFromFile()
 				_fe3d->text3d_setOpacity(text3dId, opacity);
 				_fe3d->text3d_setMinAlpha(text3dId, minAlpha);
 				_fe3d->text3d_setRotationOrder(text3dId, DirectionOrderType(rotationOrder));
-				_fe3d->text3d_setContent(text3dId, content);
 
 				_loadedText3dIds.push_back(text3dId);
 

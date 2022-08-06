@@ -42,7 +42,6 @@ const bool Text3dEditor::saveText3dsToFile() const
 		const auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
 
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
-		auto content = _fe3d->text3d_getContent(text3dId);
 
 		if(!fontMapPath.empty())
 		{
@@ -50,10 +49,8 @@ const bool Text3dEditor::saveText3dsToFile() const
 		}
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
-		content = (content.empty()) ? "?" : content;
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
-		replace(content.begin(), content.end(), ' ', '?');
 
 		file
 			<< "TEXT3D "
@@ -94,8 +91,6 @@ const bool Text3dEditor::saveText3dsToFile() const
 			<< minAlpha
 			<< " "
 			<< rotationOrder
-			<< " "
-			<< content
 			<< endl;
 
 		for(const auto & aabbId : aabbIds)

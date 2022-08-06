@@ -245,8 +245,7 @@ void ScriptEditor::_updateScriptReplacing()
 	{
 		_script->replaceKeyword(_searchKeyword, _gui->getOverlay()->getValueFormContent());
 
-		_deleteDisplayContent();
-		_createDisplayContent();
+		_hasTextChanged = true;
 	}
 }
 

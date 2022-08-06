@@ -53,6 +53,13 @@ void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword
 		}
 
 		scriptFile->setLines(lines);
+
+		const auto cursorLineLength = static_cast<int>(scriptFile->getLine(scriptFile->getCursorLineIndex()).size());
+
+		if(scriptFile->getCursorCharacterIndex() > cursorLineLength)
+		{
+			scriptFile->setCursorCharacterIndex(cursorLineLength);
+		}
 	}
 }
 

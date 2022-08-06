@@ -219,7 +219,6 @@ void ScriptEditor::_updateScriptSearching()
 
 		if(isFound)
 		{
-			Logger::throwInfo("");
 			Logger::throwInfo("Search results:");
 
 			for(const auto & [scriptId, lineNumbers] : searchResult)
@@ -229,8 +228,6 @@ void ScriptEditor::_updateScriptSearching()
 					Logger::throwInfo("Script \"" + scriptId + "\" @ line " + to_string(lineNumber));
 				}
 			}
-
-			Logger::throwInfo("");
 		}
 		else
 		{

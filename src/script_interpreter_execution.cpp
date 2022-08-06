@@ -33,7 +33,6 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 				totalTime += time;
 			}
 
-			Logger::throwInfo("");
 			Logger::throwInfo("Debug results:");
 
 			for(const auto & [scriptId, time] : _debuggingTimes)
@@ -44,8 +43,6 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 
 				Logger::throwInfo("Script \"" + scriptId + "\" ---> " + fixedPercentageString + "%");
 			}
-
-			Logger::throwInfo("");
 		}
 
 		_isExecutingUpdate = false;

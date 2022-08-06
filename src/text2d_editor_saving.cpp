@@ -32,7 +32,6 @@ const bool Text2dEditor::saveText2dsToFile() const
 		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(text2dId);
 
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(text2dId);
-		auto content = _fe3d->text2d_getContent(text2dId);
 
 		if(!fontMapPath.empty())
 		{
@@ -40,10 +39,8 @@ const bool Text2dEditor::saveText2dsToFile() const
 		}
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
-		content = (content.empty()) ? "?" : content;
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
-		replace(content.begin(), content.end(), ' ', '?');
 
 		file
 			<< text2dId
@@ -63,8 +60,6 @@ const bool Text2dEditor::saveText2dsToFile() const
 			<< isVerticallyFlipped
 			<< " "
 			<< lightness
-			<< " "
-			<< content
 			<< endl;
 	}
 

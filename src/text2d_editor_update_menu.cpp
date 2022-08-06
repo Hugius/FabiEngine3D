@@ -69,7 +69,6 @@ void Text2dEditor::_updateChoiceMenu()
 		const auto lightness = _fe3d->text2d_getLightness(_currentText2dId);
 		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(_currentText2dId);
 		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(_currentText2dId);
-		const auto content = _fe3d->text2d_getContent(_currentText2dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -82,10 +81,6 @@ void Text2dEditor::_updateChoiceMenu()
 			_currentText2dId = "";
 
 			return;
-		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("content")->isHovered())
-		{
-			_gui->getOverlay()->openValueForm("content", "Content", content, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -110,14 +105,7 @@ void Text2dEditor::_updateChoiceMenu()
 			_fe3d->text2d_setVerticallyFlipped(_currentText2dId, !isVerticallyFlipped);
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "content") && _gui->getOverlay()->isValueFormConfirmed())
-		{
-			const auto content = _gui->getOverlay()->getValueFormContent();
-
-			_fe3d->text2d_setContent(_currentText2dId, content);
-			_fe3d->text2d_setSize(_currentText2dId, Tools::convertSizeRelativeToDisplay(fvec2((TEXT2D_SIZE.x * content.size()), _fe3d->text2d_getSize(_currentText2dId).y)));
-		}
-		else if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);

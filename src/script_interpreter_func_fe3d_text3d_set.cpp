@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 {
 	if(functionName == "fe3d:text3d_place")
 	{
-		const auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		const auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -26,7 +26,8 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 			{
 				_duplicator->copyEditorText3d(args[0]->getString(), ("@" + args[1]->getString()));
 
-				_fe3d->text3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
+				_fe3d->text3d_setPosition(args[0]->getString(), fvec3(args[3]->getDecimal(), args[4]->getDecimal(), args[5]->getDecimal()));
+				_fe3d->text3d_setContent(args[0]->getString(), args[2]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

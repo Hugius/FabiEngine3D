@@ -87,7 +87,6 @@ const bool Text2dEditor::loadText2dsFromFile()
 	{
 		string text2dId;
 		string fontMapPath;
-		string content;
 		fvec3 color;
 		float opacity;
 		float lightness;
@@ -105,14 +104,11 @@ const bool Text2dEditor::loadText2dsFromFile()
 			>> opacity
 			>> isHorizontallyFlipped
 			>> isVerticallyFlipped
-			>> lightness
-			>> content;
+			>> lightness;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-		content = (content == "?") ? "" : content;
 
 		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-		replace(content.begin(), content.end(), '?', ' ');
 
 		if(!Tools::isApplicationExported())
 		{
@@ -125,13 +121,12 @@ const bool Text2dEditor::loadText2dsFromFile()
 		{
 			_fe3d->text2d_setVisible(text2dId, false);
 			_fe3d->text2d_setPosition(text2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2((TEXT2D_SIZE.x * content.size()), (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT2D_SIZE.x, (TEXT2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(text2dId, color);
 			_fe3d->text2d_setOpacity(text2dId, opacity);
 			_fe3d->text2d_setLightness(text2dId, lightness);
 			_fe3d->text2d_setHorizontallyFlipped(text2dId, isHorizontallyFlipped);
 			_fe3d->text2d_setVerticallyFlipped(text2dId, isVerticallyFlipped);
-			_fe3d->text2d_setContent(text2dId, content);
 
 			_loadedText2dIds.push_back(text2dId);
 

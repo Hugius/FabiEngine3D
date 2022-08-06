@@ -30,7 +30,7 @@ private:
 
 	static inline const string TEXT2D_TITLE_ID = "text2d_title";
 
-	static inline const fvec2 TEXT2D_SIZE = fvec2(0.1f, 0.25f);
+	static inline const fvec2 TEXT2D_SIZE = fvec2(0.7f, 0.25f);
 	static inline const fvec2 TEXT2D_TITLE_POSITION = fvec2(0.0f, 0.85f);
 	static inline const fvec2 TEXT2D_TITLE_SIZE = fvec2(0.025f, 0.1f);
 

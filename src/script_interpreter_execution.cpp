@@ -77,7 +77,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 	vector<int> loopScopeDepths = {};
 	vector<int> loopLineIndices = {};
 	vector<int> loopIterationCounts = {};
-	int scopeDepth = 0;
+	int targetScopeDepth = 0;
 
 	_executionDepth++;
 
@@ -136,13 +136,13 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			return;
 		}
 
-		const auto currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
+		const auto currentScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 
 		bool isEndOfLoop = false;
 
 		if(!loopLineIndices.empty())
 		{
-			if(currentLineScopeDepth <= loopScopeDepths.back())
+			if(currentScopeDepth <= loopScopeDepths.back())
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
@@ -153,7 +153,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				else
 				{
 					lineIndex = loopLineIndices.back();
-					scopeDepth = (loopScopeDepths.back() + 1);
+					targetScopeDepth = (loopScopeDepths.back() + 1);
 					loopIterationCounts.back()++;
 
 					continue;
@@ -174,7 +174,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			}
 		}
 
-		const auto isScopeChangeValid = _validateScopeChange(countedSpaces, scriptLineText, scopeDepth);
+		const auto isScopeChangeValid = _validateScopeDepth(currentScopeDepth, targetScopeDepth);
 
 		_hasPassedLoopStatement = false;
 		_hasPassedIfStatement = false;
@@ -274,11 +274,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 
-			loopScopeDepths.push_back(scopeDepth);
+			loopScopeDepths.push_back(targetScopeDepth);
 			loopLineIndices.push_back(lineIndex);
 			loopIterationCounts.push_back(0);
 
-			scopeDepth++;
+			targetScopeDepth++;
 
 			_hasPassedLoopStatement = true;
 		}
@@ -297,16 +297,16 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				_hasPassedIfStatement = true;
 
-				conditionStatements.push_back(ScriptConditionStatement(scopeDepth, true));
+				conditionStatements.push_back(ScriptConditionStatement(targetScopeDepth, true));
 
-				scopeDepth++;
+				targetScopeDepth++;
 			}
 			else
 			{
 				_hasPassedIfStatement = true;
 				_mustIgnoreDeeperScope = true;
 
-				conditionStatements.push_back(ScriptConditionStatement(scopeDepth, false));
+				conditionStatements.push_back(ScriptConditionStatement(targetScopeDepth, false));
 			}
 		}
 		else if(scriptLineText.substr(0, (ELIF_KEYWORD.size() + 1)) == (ELIF_KEYWORD + " "))
@@ -318,7 +318,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 
-			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, targetScopeDepth);
 
 			if((lastIndex != -1) &&
 			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
@@ -331,7 +331,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				{
 					conditionStatements[lastIndex].setTrue();
 
-					scopeDepth++;
+					targetScopeDepth++;
 
 					_hasPassedElifStatement = true;
 				}
@@ -357,7 +357,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 
-			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+			const auto lastIndex = _getLastConditionStatementIndex(conditionStatements, targetScopeDepth);
 
 			if((lastIndex != -1) &&
 			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
@@ -368,7 +368,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 					if(conditionStatements[lastIndex].isFalse())
 					{
-						scopeDepth++;
+						targetScopeDepth++;
 
 						_hasPassedElseStatement = true;
 					}
@@ -447,7 +447,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			else
 			{
 				lineIndex = loopLineIndices.back();
-				scopeDepth = (loopScopeDepths.back() + 1);
+				targetScopeDepth = (loopScopeDepths.back() + 1);
 
 				loopIterationCounts.back()++;
 
@@ -456,7 +456,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else if(scriptLineText == BREAK_KEYWORD)
 		{
-			scopeDepth = loopScopeDepths.back();
+			targetScopeDepth = loopScopeDepths.back();
 
 			loopScopeDepths.pop_back();
 			loopLineIndices.pop_back();
@@ -481,7 +481,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		if(isEndOfLoop)
 		{
 			lineIndex = loopLineIndices.back();
-			scopeDepth = (loopScopeDepths.back() + 1);
+			targetScopeDepth = (loopScopeDepths.back() + 1);
 
 			loopIterationCounts.back()++;
 		}

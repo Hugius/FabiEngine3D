@@ -6,15 +6,14 @@
 - `misc:list_contains`(`STR` name, `DEC` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `INT` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `BOL` value) -----> `BOL`
-- `misc:list_index`(`STR` name) -----> `LST`
-- `misc:list_min`(`STR` name) -----> `STR`
+- `misc:list_index`(`STR` name, `STR` value) -----> `INT`
+- `misc:list_index`(`STR` name, `DEC` value) -----> `INT`
+- `misc:list_index`(`STR` name, `INT` value) -----> `INT`
+- `misc:list_index`(`STR` name, `BOL` value) -----> `INT`
 - `misc:list_min`(`STR` name) -----> `DEC`
 - `misc:list_min`(`STR` name) -----> `INT`
-- `misc:list_min`(`STR` name) -----> `BOL`
-- `misc:list_max`(`STR` name) -----> `STR`
 - `misc:list_max`(`STR` name) -----> `DEC`
 - `misc:list_max`(`STR` name) -----> `INT`
-- `misc:list_max`(`STR` name) -----> `BOL`
 - `misc:list_reverse`(`STR` name) -----> `LST`
 - `misc:string_concat`(`STR` value, `STR` value) -----> `STR`
 - `misc:string_size`(`STR` value) -----> `INT`

@@ -47,40 +47,41 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 	return countedSpaces;
 }
 
-const bool ScriptInterpreter::_validateScopeChange(int countedSpaces, const string & scriptLineText, int & scopeDepth)
+const bool ScriptInterpreter::_validateScopeDepth(int currentLineScopeDepth, int & targetScopeDepth)
 {
-	const auto currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
-	const auto isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
+	const auto isScopeDepthValid = (currentLineScopeDepth == (targetScopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
-	if(_hasPassedLoopStatement && isScopeDepthInvalid)
+	if(_hasPassedLoopStatement && !isScopeDepthValid)
 	{
 		_throwRuntimeError("incorrect indentation after " + LOOP_KEYWORD + " statement");
 
 		return false;
 	}
-	else if(_hasPassedIfStatement && isScopeDepthInvalid)
+	else if(_hasPassedIfStatement && !isScopeDepthValid)
 	{
 		_throwRuntimeError("incorrect indentation after " + IF_KEYWORD + " statement");
 
 		return false;
 	}
-	else if(_hasPassedElifStatement && isScopeDepthInvalid)
+	else if(_hasPassedElifStatement && !isScopeDepthValid)
 	{
 		_throwRuntimeError("incorrect indentation after " + ELIF_KEYWORD + " statement");
 
 		return false;
 	}
-	else if(_hasPassedElseStatement && isScopeDepthInvalid)
+	else if(_hasPassedElseStatement && !isScopeDepthValid)
 	{
 		_throwRuntimeError("incorrect indentation after " + ELSE_KEYWORD + " statement");
 
 		return false;
 	}
-	else if(currentLineScopeDepth < scopeDepth)
+	else if(currentLineScopeDepth < targetScopeDepth)
 	{
-		scopeDepth = currentLineScopeDepth;
+		targetScopeDepth = currentLineScopeDepth;
+
+		_mustIgnoreDeeperScope = false;
 	}
-	else if(currentLineScopeDepth > scopeDepth)
+	else if(currentLineScopeDepth > targetScopeDepth)
 	{
 		if(_mustIgnoreDeeperScope)
 		{

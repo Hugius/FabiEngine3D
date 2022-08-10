@@ -117,8 +117,6 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_contains")
 	{
-		const auto types = {SVT::STRING};
-
 		if(_validateArgumentCount(args, 2))
 		{
 			if(args[0]->getType() != SVT::STRING)
@@ -192,8 +190,6 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else if(functionName == "misc:list_index")
 	{
-		const auto types = {SVT::STRING};
-
 		if(_validateArgumentCount(args, 2))
 		{
 			if(args[0]->getType() != SVT::STRING)
@@ -259,6 +255,79 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 					result = index;
 
 					break;
+				}
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+		}
+	}
+	else if(functionName == "misc:list_count")
+	{
+		if(_validateArgumentCount(args, 2))
+		{
+			if(args[0]->getType() != SVT::STRING)
+			{
+				_throwRuntimeError("incorrect argument type");
+
+				return {};
+			}
+
+			const auto listName = args[0]->getString();
+
+			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+			{
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
+				return {};
+			}
+
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
+			{
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
+
+				return {};
+			}
+
+			int result = 0;
+
+			for(int index = 0; index < listVariable->getValueCount(); index++)
+			{
+				if((args[1]->getType() == SVT::STRING) &&
+				   (listVariable->getValue(index)->getType() == SVT::STRING) &&
+				   (listVariable->getValue(index)->getString() == args[1]->getString()))
+				{
+					result++;
+
+					continue;
+				}
+
+				if((args[1]->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(index)->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(index)->getDecimal() == args[1]->getDecimal()))
+				{
+					result++;
+
+					continue;
+				}
+
+				if((args[1]->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(index)->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(index)->getInteger() == args[1]->getInteger()))
+				{
+					result++;
+
+					continue;
+				}
+
+				if((args[1]->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(index)->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(index)->getBoolean() == args[1]->getBoolean()))
+				{
+					result++;
+
+					continue;
 				}
 			}
 

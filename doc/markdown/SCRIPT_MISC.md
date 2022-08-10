@@ -10,6 +10,10 @@
 - `misc:list_index`(`STR` name, `DEC` value) -----> `INT`
 - `misc:list_index`(`STR` name, `INT` value) -----> `INT`
 - `misc:list_index`(`STR` name, `BOL` value) -----> `INT`
+- `misc:list_count`(`STR` name, `STR` value) -----> `INT`
+- `misc:list_count`(`STR` name, `DEC` value) -----> `INT`
+- `misc:list_count`(`STR` name, `INT` value) -----> `INT`
+- `misc:list_count`(`STR` name, `BOL` value) -----> `INT`
 - `misc:list_min`(`STR` name) -----> `DEC`
 - `misc:list_min`(`STR` name) -----> `INT`
 - `misc:list_max`(`STR` name) -----> `DEC`

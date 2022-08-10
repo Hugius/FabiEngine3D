@@ -30,16 +30,19 @@ void BottomViewportController::initialize()
 	statisticsWindow->getScreen("main")->createTextField("triangles", fvec2(-1.0f, -0.2f), CHAR_SIZE, "", fvec3(1.0f), false);
 
 	int uCounter = 1;
+	int rCounter = 1;
+
 	for(const auto & [key, deltaTime] : _fe3d->misc_getUpdateDeltaTimes())
 	{
 		statisticsWindow->getScreen("main")->createTextField(key, fvec2(0.0f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), CHAR_SIZE, "", fvec3(1.0f), false);
+
 		uCounter++;
 	}
 
-	int rCounter = 1;
 	for(const auto & [key, deltaTime] : _fe3d->misc_getRenderDeltaTimes())
 	{
-		statisticsWindow->getScreen("main")->createTextField(key, fvec2(0.45f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), CHAR_SIZE, "", fvec3(1.0f), false);
+		statisticsWindow->getScreen("main")->createTextField(key, fvec2(0.4475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), CHAR_SIZE, "", fvec3(1.0f), false);
+
 		rCounter++;
 	}
 

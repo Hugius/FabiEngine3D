@@ -67,8 +67,8 @@ private:
 	static inline constexpr int MAX_LINE_COUNT = 999;
 	static inline constexpr int BLOOM_BLUR_COUNT = 3;
 	static inline constexpr int BLOOM_QUALITY = 1;
-	static inline constexpr int SEARCH_VALUE_FORM_SIZE = 30;
-	static inline constexpr int REPLACE_VALUE_FORM_SIZE = 30;
+	static inline constexpr int SEARCH_VALUE_FORM_SIZE = 50;
+	static inline constexpr int REPLACE_VALUE_FORM_SIZE = 50;
 
 	static inline const BloomType BLOOM_TYPE = BloomType::PARTS;
 

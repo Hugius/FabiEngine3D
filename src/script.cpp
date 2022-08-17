@@ -2,6 +2,8 @@
 
 #include <regex>
 
+using std::regex;
+
 void Script::createScriptFile(const string & scriptId)
 {
 	if(isScriptFileExisting(scriptId))
@@ -49,7 +51,7 @@ void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword
 
 		for(auto & line : lines)
 		{
-			line = regex_replace(line, std::regex(oldKeyword), newKeyword);
+			line = regex_replace(line, regex(oldKeyword), newKeyword);
 		}
 
 		scriptFile->setLines(lines);

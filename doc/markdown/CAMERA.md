@@ -9,7 +9,7 @@
 - The Z axis is depth (back & front).
 - The 3D coordinate system works with decimal values with XYZ(0,0,0) as the center coordinate. The range is infinite in both positive/negative directions.
 - The 2D coordinate system works with decimal values with XY(0,0) as the center coordinate. The range is between -1.0 and 1.0.
-- The reference box used in FabiEngine3D editors has a size of 1.0.
+- The reference box used in the editors has a size of 1.0.
 
 ## 2. Camera angles
 

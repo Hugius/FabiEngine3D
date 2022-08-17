@@ -15,7 +15,7 @@
 
 - You can create your own custom subfolders within the subfolders of `~\projects\<your_project>\assets\`.
 - The top viewport has a button called `UNCACHE` which deletes the chosen asset from the cache (if it was cached).
-- The top viewport has a button called `DOCS` that redirects you instantly to the FabiEngine3D documentation.
+- The top viewport has a button called `DOCS` that redirects you instantly to the documentation.
 - You can cancel any form by pressing `ESC`.
 - You can enter a value form by pressing `ENTER`.
 

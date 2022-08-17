@@ -32,21 +32,33 @@ void BottomViewportController::_updateConsole()
 	{
 		const auto totalHeight = (static_cast<float>(_messageQueue.size()) * CHAR_SIZE.y);
 
-		if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD))
+		if(totalHeight > 2.0f)
 		{
-			_scrollingOffset -= CHAR_SIZE.y;
-			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
+			if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD))
+			{
+				_scrollingOffset -= CHAR_SIZE.y;
+				_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
 
-			_clearConsole();
-			_fillConsole();
-		}
-		else if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD))
-		{
-			_scrollingOffset += CHAR_SIZE.y;
-			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
+				_clearConsole();
+				_fillConsole();
+			}
+			else if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD))
+			{
+				_scrollingOffset += CHAR_SIZE.y;
+				_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
 
-			_clearConsole();
-			_fillConsole();
+				_clearConsole();
+				_fillConsole();
+			}
+
+			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_C))
+			{
+				_clearConsole();
+
+				_messageQueue.clear();
+
+				_scrollingOffset = 0.0f;
+			}
 		}
 	}
 }

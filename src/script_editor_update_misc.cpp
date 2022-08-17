@@ -51,6 +51,11 @@ void ScriptEditor::_updateMenu()
 			{
 				_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, SEARCH_VALUE_FORM_SIZE, true, true, true);
 			}
+
+			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_H) && !_gui->getOverlay()->isFocused())
+			{
+				_gui->getOverlay()->openValueForm("replaceScripts", "Replace Scripts", "", VALUE_FORM_POSITION, REPLACE_VALUE_FORM_SIZE, true, true, true);
+			}
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -295,11 +295,18 @@ void ScriptEditor::_updateCamera()
 	for(int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
 		const auto lineTextId = ("text_" + to_string(lineIndex));
+		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLine(lineIndex);
 		const auto lineTextPosition = _fe3d->text3d_getPosition(lineTextId);
 		const auto isVisible = ((lineTextPosition.y <= (cameraPosition.y + ROOT_TEXT_POSITION.y + VERTICAL_LINE_OFFSET)) &&
 								(lineTextPosition.y >= (cameraPosition.y - ROOT_TEXT_POSITION.y - VERTICAL_LINE_OFFSET)));
 
 		_fe3d->text3d_setVisible(lineTextId, isVisible);
+		_fe3d->aabb_setRaycastResponsive(to_string(lineIndex), isVisible);
+
+		for(int charIndex = 0; charIndex < static_cast<int>(lineTextString.size()); charIndex++)
+		{
+			_fe3d->aabb_setRaycastResponsive((to_string(lineIndex) + "_" + to_string(charIndex)), isVisible);
+		}
 	}
 }
 

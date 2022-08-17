@@ -26,7 +26,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", VALUE_FORM_POSITION, CREATE_VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -34,7 +34,7 @@ void ScriptEditor::_updateMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, RENAME_VALUE_FORM_SIZE, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clear")->isHovered())
 		{
@@ -49,7 +49,7 @@ void ScriptEditor::_updateMenu()
 		{
 			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, VALUE_FORM_SIZE, true, true, true);
+				_gui->getOverlay()->openValueForm("searchScripts", "Search Scripts", "", VALUE_FORM_POSITION, SEARCH_VALUE_FORM_SIZE, true, true, true);
 			}
 		}
 

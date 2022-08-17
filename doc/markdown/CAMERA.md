@@ -21,8 +21,8 @@
 - The camera is always looking in a certain direction.
 - This direction is defined with 3 camera angles.
 - These angles can be manually adjusted.
-- FabiEngine3D supports a first person view system.
-- FabiEngine3D supports a third person view system.
+- The engine supports a first person view system.
+- The engine supports a third person view system.
 
 ## 3. Camera Vectors
 

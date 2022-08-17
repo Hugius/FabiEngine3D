@@ -39,6 +39,6 @@
 - Make use of level of detailed models to improve the performance on high-poly meshes.
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the logging console (press `C` while hovering) to improve performance if necessary.
-- Make sure your GPU is giving the maximum computing power to FabiEngine3D, so check your graphics card settings.
+- Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.
 - Capturing a captor can take some time (especially when loading a world with multiple captors).
 - Use the face culling optimization in models as much as possible.

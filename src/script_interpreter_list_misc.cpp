@@ -138,23 +138,52 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 	}
 	else
 	{
+		bool isAccessingList = false;
+
+		const auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
+
+		if(_hasThrownError)
+		{
+			return;
+		}
+
+		if(isAccessingList)
+		{
+			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+
+			valueString = valueString.substr(0, bracketIndex);
+		}
+
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("invalid value");
+			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
 
 			return;
 		}
 
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		if(rightVariable->getType() == ScriptVariableType::MULTIPLE)
+		if(!isAccessingList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			_throwRuntimeError("cannot push " + LIST_KEYWORD + " to " + LIST_KEYWORD);
 
 			return;
 		}
 
-		listVariable->addValue(rightVariable->getValue(0));
+		int valueIndex = 0;
+
+		if(isAccessingList)
+		{
+			if(!_validateListIndex(rightVariable, listIndex))
+			{
+				return;
+			}
+
+			valueIndex = listIndex;
+		}
+
+		listVariable->addValue(rightVariable->getValue(valueIndex));
 	}
 }
 

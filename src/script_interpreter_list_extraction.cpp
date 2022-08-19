@@ -233,7 +233,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 						valueIndex = listIndex;
 					}
 
-					if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
+					if(!isAccessingList && (variable->getType() == ScriptVariableType::MULTIPLE))
 					{
 						_throwRuntimeError(LIST_KEYWORD + " cannot be used inside " + LIST_KEYWORD);
 

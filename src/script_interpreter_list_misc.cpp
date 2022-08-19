@@ -164,13 +164,6 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		if(!isAccessingList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
-		{
-			_throwRuntimeError("cannot push " + LIST_KEYWORD + " to " + LIST_KEYWORD);
-
-			return;
-		}
-
 		int valueIndex = 0;
 
 		if(isAccessingList)
@@ -181,6 +174,13 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 			}
 
 			valueIndex = listIndex;
+		}
+
+		if(!isAccessingList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
+		{
+			_throwRuntimeError("cannot push " + LIST_KEYWORD + " to " + LIST_KEYWORD);
+
+			return;
 		}
 
 		listVariable->addValue(rightVariable->getValue(valueIndex));

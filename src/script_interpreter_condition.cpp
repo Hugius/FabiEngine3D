@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(!_isLocalVariableExisting(elementString) && !_isGlobalVariableExisting(elementString))
 				{
-					_throwRuntimeError("invalid comparison value");
+					_throwRuntimeError("variable \"" + elementString + "\" does not exist");
 
 					return false;
 				}
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 					valueIndex = listIndex;
 				}
 
-				if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
+				if(!isAccessingList && (variable->getType() == ScriptVariableType::MULTIPLE))
 				{
 					_throwRuntimeError(LIST_KEYWORD + " variable cannot be used in condition");
 

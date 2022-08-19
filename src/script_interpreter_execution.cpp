@@ -265,6 +265,50 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 		}
+		else if(scriptLineText.substr(0, (GLOBAL_KEYWORD.size() + 1)) == (GLOBAL_KEYWORD + " "))
+		{
+			_processVariableCreation(scriptLineText, ScriptScopeType::GLOBAL);
+		}
+		else if
+			(
+			scriptLineText.substr(0, (CONST_KEYWORD.size() + 1)) == (CONST_KEYWORD + " ") ||
+			scriptLineText.substr(0, (LIST_KEYWORD.size() + 1)) == (LIST_KEYWORD + " ") ||
+			scriptLineText.substr(0, (STRING_KEYWORD.size() + 1)) == (STRING_KEYWORD + " ") ||
+			scriptLineText.substr(0, (DECIMAL_KEYWORD.size() + 1)) == (DECIMAL_KEYWORD + " ") ||
+			scriptLineText.substr(0, (INTEGER_KEYWORD.size() + 1)) == (INTEGER_KEYWORD + " ") ||
+			scriptLineText.substr(0, (BOOLEAN_KEYWORD.size() + 1)) == (BOOLEAN_KEYWORD + " ")
+			)
+		{
+			_processVariableCreation(scriptLineText, ScriptScopeType::LOCAL);
+		}
+		else if(scriptLineText.substr(0, (EDIT_KEYWORD.size() + 1)) == (EDIT_KEYWORD + " "))
+		{
+			_processVariableAlteration(scriptLineText);
+		}
+		else if
+			(
+			scriptLineText.substr(0, (ADD_KEYWORD.size() + 1)) == (ADD_KEYWORD + " ") ||
+			scriptLineText.substr(0, (SUBTRACT_KEYWORD.size() + 1)) == (SUBTRACT_KEYWORD + " ") ||
+			scriptLineText.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
+			scriptLineText.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
+			scriptLineText.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
+			scriptLineText.substr(0, (NEGATE_KEYWORD.size() + 1)) == (NEGATE_KEYWORD + " ")
+			)
+		{
+			_processVariableArithmetic(scriptLineText);
+		}
+		else if(scriptLineText.substr(0, (CAST_KEYWORD.size() + 1)) == (CAST_KEYWORD + " "))
+		{
+			_processVariableTypecast(scriptLineText);
+		}
+		else if(scriptLineText.substr(0, (PUSH_KEYWORD.size() + 1)) == (PUSH_KEYWORD + " "))
+		{
+			_processListPush(scriptLineText);
+		}
+		else if(scriptLineText.substr(0, (PULL_KEYWORD.size() + 1)) == (PULL_KEYWORD + " "))
+		{
+			_processListPull(scriptLineText);
+		}
 		else if(scriptLineText == LOOP_KEYWORD)
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
@@ -281,6 +325,34 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			targetScopeDepth++;
 
 			_hasPassedLoopStatement = true;
+		}
+		else if(scriptLineText == CONTINUE_KEYWORD)
+		{
+			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
+			{
+				_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
+
+				return;
+			}
+			else
+			{
+				lineIndex = loopLineIndices.back();
+				targetScopeDepth = (loopScopeDepths.back() + 1);
+
+				loopIterationCounts.back()++;
+
+				continue;
+			}
+		}
+		else if(scriptLineText == BREAK_KEYWORD)
+		{
+			targetScopeDepth = loopScopeDepths.back();
+
+			loopScopeDepths.pop_back();
+			loopLineIndices.pop_back();
+			loopIterationCounts.pop_back();
+
+			_mustIgnoreDeeperScope = true;
 		}
 		else if(scriptLineText.substr(0, (IF_KEYWORD.size() + 1)) == (IF_KEYWORD + " "))
 		{
@@ -391,78 +463,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 				return;
 			}
-		}
-		else if
-			(
-			scriptLineText.substr(0, (CONST_KEYWORD.size() + 1)) == (CONST_KEYWORD + " ") ||
-			scriptLineText.substr(0, (LIST_KEYWORD.size() + 1)) == (LIST_KEYWORD + " ") ||
-			scriptLineText.substr(0, (STRING_KEYWORD.size() + 1)) == (STRING_KEYWORD + " ") ||
-			scriptLineText.substr(0, (DECIMAL_KEYWORD.size() + 1)) == (DECIMAL_KEYWORD + " ") ||
-			scriptLineText.substr(0, (INTEGER_KEYWORD.size() + 1)) == (INTEGER_KEYWORD + " ") ||
-			scriptLineText.substr(0, (BOOLEAN_KEYWORD.size() + 1)) == (BOOLEAN_KEYWORD + " ")
-			)
-		{
-			_processVariableCreation(scriptLineText, ScriptScopeType::LOCAL);
-		}
-		else if(scriptLineText.substr(0, (GLOBAL_KEYWORD.size() + 1)) == (GLOBAL_KEYWORD + " "))
-		{
-			_processVariableCreation(scriptLineText, ScriptScopeType::GLOBAL);
-		}
-		else if(scriptLineText.substr(0, (EDIT_KEYWORD.size() + 1)) == (EDIT_KEYWORD + " "))
-		{
-			_processVariableAlteration(scriptLineText);
-		}
-		else if
-			(
-			scriptLineText.substr(0, (ADD_KEYWORD.size() + 1)) == (ADD_KEYWORD + " ") ||
-			scriptLineText.substr(0, (SUBTRACT_KEYWORD.size() + 1)) == (SUBTRACT_KEYWORD + " ") ||
-			scriptLineText.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
-			scriptLineText.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
-			scriptLineText.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
-			scriptLineText.substr(0, (NEGATE_KEYWORD.size() + 1)) == (NEGATE_KEYWORD + " ")
-			)
-		{
-			_processVariableArithmetic(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (CAST_KEYWORD.size() + 1)) == (CAST_KEYWORD + " "))
-		{
-			_processVariableTypecast(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (PUSH_KEYWORD.size() + 1)) == (PUSH_KEYWORD + " "))
-		{
-			_processListPush(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (PULL_KEYWORD.size() + 1)) == (PULL_KEYWORD + " "))
-		{
-			_processListPull(scriptLineText);
-		}
-		else if(scriptLineText == CONTINUE_KEYWORD)
-		{
-			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
-			{
-				_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
-
-				return;
-			}
-			else
-			{
-				lineIndex = loopLineIndices.back();
-				targetScopeDepth = (loopScopeDepths.back() + 1);
-
-				loopIterationCounts.back()++;
-
-				continue;
-			}
-		}
-		else if(scriptLineText == BREAK_KEYWORD)
-		{
-			targetScopeDepth = loopScopeDepths.back();
-
-			loopScopeDepths.pop_back();
-			loopLineIndices.pop_back();
-			loopIterationCounts.pop_back();
-
-			_mustIgnoreDeeperScope = true;
 		}
 		else
 		{

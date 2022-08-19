@@ -249,16 +249,16 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 	}
 	else
 	{
-		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
+		auto variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if(indexVariable->getValue(0)->getType() != ScriptValueType::INTEGER)
+		if(variable->getValue(0)->getType() != ScriptValueType::INTEGER)
 		{
 			_throwRuntimeError(LIST_KEYWORD + " index is not of type " + INTEGER_KEYWORD);
 
 			return;
 		}
 
-		index = indexVariable->getValue(0)->getInteger();
+		index = variable->getValue(0)->getInteger();
 	}
 
 	if(!_validateListIndex(listVariable, index))

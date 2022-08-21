@@ -225,9 +225,9 @@ void TopViewportController::_updateExtraScreenManagement()
 
 					file << "window_title=\"My Game\"";
 					file << endl;
-					file << "window_width=75";
+					file << "window_width=100";
 					file << endl;
-					file << "window_height=75";
+					file << "window_height=100";
 
 					file.close();
 

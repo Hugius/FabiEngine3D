@@ -694,28 +694,6 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "misc:random_integer")
-	{
-		const auto types = {SVT::INTEGER, SVT::INTEGER};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			const auto result = Mathematics::getRandomNumber(args[0]->getInteger(), args[1]->getInteger());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
-	else if(functionName == "misc:random_decimal")
-	{
-		const auto types = {SVT::DECIMAL, SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			const auto result = Mathematics::getRandomNumber(args[0]->getDecimal(), args[1]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
 	else
 	{
 		_throwRuntimeError("misc function does not exist");

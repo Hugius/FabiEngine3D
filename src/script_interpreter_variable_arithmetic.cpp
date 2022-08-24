@@ -258,7 +258,10 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 		}
 		else if(operatorString == DIVIDE_KEYWORD)
 		{
-			result /= rightValue->getInteger();
+			if(rightValue->getInteger() != 0)
+			{
+				result /= rightValue->getInteger();
+			}
 		}
 		else if(operatorString == MODULO_KEYWORD)
 		{

@@ -457,7 +457,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 							{
 								if(_fe3d->aabb_getParentType(collidedAabbId) == AabbParentType::MODEL)
 								{
-									modelIds.insert(_fe3d->aabb_getParentId(collidedAabbId));
+									if(_fe3d->aabb_getParentId(collidedAabbId) != args[0]->getString())
+									{
+										modelIds.insert(_fe3d->aabb_getParentId(collidedAabbId));
+									}
 								}
 							}
 						}

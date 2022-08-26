@@ -26,3 +26,5 @@
 - `math:angle_difference`(`DEC` value, `DEC` value) -----> `DEC`
 - `math:reference_angle`(`DEC` value) -----> `DEC`
 - `math:vector_distance`(`DEC` x, `DEC` y, `DEC` z, `DEC` x, `DEC` y, `DEC` z) -----> `DEC`
+- `math:random_integer`(`INT` min, `INT` max) -----> `INT`
+- `math:random_decimal`(`DEC` min, `DEC` max) -----> `DEC`

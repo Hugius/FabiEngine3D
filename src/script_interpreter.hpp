@@ -294,6 +294,7 @@ private:
 
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXIT_KEYWORD = "EXIT";
+	static inline const string CRASH_KEYWORD = "CRASH";
 	static inline const string EXECUTE_KEYWORD = "EXECUTE";
 	static inline const string LOOP_KEYWORD = "LOOP";
 	static inline const string CONTINUE_KEYWORD = "CONTINUE";

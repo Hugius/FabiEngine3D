@@ -257,6 +257,7 @@ Line 2 of every script file must specify its state: entry or wait.
 - This works the same as in other programming languages.
 - The maximum execution depth is 10.
 - You can exit the execution of a script file using `EXIT`.
+- You can crash the execution of a script file using `CRASH`.
 
 ### 10.2 Example Code
 

@@ -204,6 +204,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			break;
 		}
+		else if(scriptLineText == CRASH_KEYWORD)
+		{
+			_throwRuntimeError("");
+			break;
+		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
 		{
 			_processFe3dFunctionCall(scriptLineText);

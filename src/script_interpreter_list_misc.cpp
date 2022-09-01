@@ -183,7 +183,33 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 			return;
 		}
 
-		listVariable->addValue(rightVariable->getValue(valueIndex));
+		switch(rightVariable->getValue(valueIndex)->getType())
+		{
+			case ScriptValueType::STRING:
+			{
+				listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::STRING, rightVariable->getValue(valueIndex)->getString()));
+
+				break;
+			}
+			case ScriptValueType::DECIMAL:
+			{
+				listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, rightVariable->getValue(valueIndex)->getDecimal()));
+
+				break;
+			}
+			case ScriptValueType::INTEGER:
+			{
+				listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, rightVariable->getValue(valueIndex)->getInteger()));
+
+				break;
+			}
+			case ScriptValueType::BOOLEAN:
+			{
+				listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, rightVariable->getValue(valueIndex)->getBoolean()));
+
+				break;
+			}
+		}
 	}
 }
 

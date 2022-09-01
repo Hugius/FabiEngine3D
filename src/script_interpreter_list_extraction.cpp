@@ -240,7 +240,35 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 						return {};
 					}
 
-					valueList.push_back(variable->getValue(valueIndex));
+					const auto value = variable->getValue(valueIndex);
+
+					switch(value->getType())
+					{
+						case ScriptValueType::STRING:
+						{
+							valueList.push_back(make_shared<ScriptValue>(ScriptValueType::STRING, value->getString()));
+
+							break;
+						}
+						case ScriptValueType::DECIMAL:
+						{
+							valueList.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, value->getDecimal()));
+
+							break;
+						}
+						case ScriptValueType::INTEGER:
+						{
+							valueList.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, value->getInteger()));
+
+							break;
+						}
+						case ScriptValueType::BOOLEAN:
+						{
+							valueList.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, value->getBoolean()));
+
+							break;
+						}
+					}
 
 					isBuildingVariable = false;
 

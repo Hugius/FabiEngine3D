@@ -346,7 +346,35 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 
 			for(int index = 0; index < rightVariable->getValueCount(); index++)
 			{
-				values.push_back(rightVariable->getValue(index));
+				const auto value = rightVariable->getValue(index);
+
+				switch(value->getType())
+				{
+					case ScriptValueType::STRING:
+					{
+						values.push_back(make_shared<ScriptValue>(ScriptValueType::STRING, value->getString()));
+
+						break;
+					}
+					case ScriptValueType::DECIMAL:
+					{
+						values.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, value->getDecimal()));
+
+						break;
+					}
+					case ScriptValueType::INTEGER:
+					{
+						values.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, value->getInteger()));
+
+						break;
+					}
+					case ScriptValueType::BOOLEAN:
+					{
+						values.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, value->getBoolean()));
+
+						break;
+					}
+				}
 			}
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)});

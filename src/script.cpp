@@ -51,7 +51,18 @@ void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword
 
 		for(auto & line : lines)
 		{
-			line = regex_replace(line, regex(oldKeyword), newKeyword);
+			for(int index = 0; index < static_cast<int>(line.size()); index++)
+			{
+				if(line.substr(index, oldKeyword.size()) == oldKeyword)
+				{
+					const auto firstPart = line.substr(0, index);
+					const auto secondPart = line.substr(index + oldKeyword.size());
+
+					line = (firstPart + newKeyword + secondPart);
+
+					break;
+				}
+			}
 		}
 
 		scriptFile->setLines(lines);

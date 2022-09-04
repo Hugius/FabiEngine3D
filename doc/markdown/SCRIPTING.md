@@ -42,7 +42,7 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.1 Creation Syntax
 
-- You can create a variable using `<scope> <mutability> <type> <name> = <value>`.
+- You can define a variable using `<scope> <mutability> <type> <name> = <value>`.
 
 ### 4.2 Alteration Syntax
 

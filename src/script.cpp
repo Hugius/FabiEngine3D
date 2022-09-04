@@ -130,9 +130,9 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const unordered_map<string, vector<int>> Script::searchKeyword(const string & keyword) const
+const map<string, vector<int>> Script::searchKeyword(const string & keyword) const
 {
-	unordered_map<string, vector<int>> result = {};
+	map<string, vector<int>> result = {};
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{

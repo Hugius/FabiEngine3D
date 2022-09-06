@@ -227,7 +227,6 @@ Line 2 of every script file must specify its state: entry or wait.
 - Use a `LOOP` statement if you want to run a block of code multiple times.
 - You can exit a loop using the `BREAK` statement.
 - You can skip a loop iteration by using the `CONTINUE` statement.
-- the maximum iterations per loop is 1000.
 
 ### 9.2 Example Code
 
@@ -255,7 +254,6 @@ Line 2 of every script file must specify its state: entry or wait.
 - After the script is executed, the program will continue running the script where it left off.
 - The script that is executed must have the same type as the calling script.
 - This works the same as in other programming languages.
-- The maximum execution depth is 10.
 - You can exit the execution of a script file using `EXIT`.
 - You can crash the execution of a script file using `CRASH`.
 

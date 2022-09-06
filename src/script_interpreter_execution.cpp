@@ -86,13 +86,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 	_localVariables[_executionDepth] = {};
 
-	if(_executionDepth >= MAX_EXECUTION_DEPTH)
-	{
-		_throwRuntimeError("maximum amount of execution layers reached");
-
-		return;
-	}
-
 	if(_hasThrownError || _mustStopApplication)
 	{
 		return;
@@ -144,33 +137,15 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(currentScopeDepth <= loopScopeDepths.back())
 			{
-				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
-				{
-					_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
+				lineIndex = loopLineIndices.back();
+				targetScopeDepth = (loopScopeDepths.back() + 1);
+				loopIterationCounts.back()++;
 
-					return;
-				}
-				else
-				{
-					lineIndex = loopLineIndices.back();
-					targetScopeDepth = (loopScopeDepths.back() + 1);
-					loopIterationCounts.back()++;
-
-					continue;
-				}
+				continue;
 			}
 			else if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
-				{
-					_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
-
-					return;
-				}
-				else
-				{
-					isEndOfLoop = true;
-				}
+				isEndOfLoop = true;
 			}
 		}
 
@@ -333,21 +308,12 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else if(scriptLineText == CONTINUE_KEYWORD)
 		{
-			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
-			{
-				_throwRuntimeError("maximum amount of " + LOOP_KEYWORD + " iterations reached");
+			lineIndex = loopLineIndices.back();
+			targetScopeDepth = (loopScopeDepths.back() + 1);
 
-				return;
-			}
-			else
-			{
-				lineIndex = loopLineIndices.back();
-				targetScopeDepth = (loopScopeDepths.back() + 1);
+			loopIterationCounts.back()++;
 
-				loopIterationCounts.back()++;
-
-				continue;
-			}
+			continue;
 		}
 		else if(scriptLineText == BREAK_KEYWORD)
 		{

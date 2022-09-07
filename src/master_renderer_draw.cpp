@@ -331,7 +331,7 @@ void MasterRenderer::_renderGUI()
 	{
 		_quad2dColorRenderer->bind();
 
-		map<int, vector<shared_ptr<Quad2d>>> orderedQuad2ds;
+		map<int, vector<shared_ptr<Quad2d>>> orderedQuad2ds = {};
 
 		for(const auto & [quad2dId, quad2d] : _quad2dManager->getQuad2ds())
 		{

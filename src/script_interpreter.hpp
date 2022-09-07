@@ -334,7 +334,8 @@ private:
 	static inline constexpr int MIN_STRING_INTEGER = -999999999;
 	static inline constexpr int MAX_STRING_INTEGER = 999999999;
 
-	unordered_map<string, float> _debuggingTimes = {};
+	map<string, float> _debuggingTimes = {};
+
 	unordered_map<int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables = {};
 	unordered_map<string, shared_ptr<ScriptVariable>> _globalVariables = {};
 

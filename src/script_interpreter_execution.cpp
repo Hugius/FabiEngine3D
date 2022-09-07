@@ -140,11 +140,13 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				lineIndex = loopLineIndices.back();
 				targetScopeDepth = (loopScopeDepths.back() + 1);
+
 				loopIterationCounts.back()++;
 
 				continue;
 			}
-			else if(lineIndex == (scriptFile->getLineCount() - 1))
+
+			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
 				isEndOfLoop = true;
 			}
@@ -164,6 +166,14 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 		if(!isScopeChangeValid)
 		{
+			if(isEndOfLoop)
+			{
+				lineIndex = loopLineIndices.back();
+				targetScopeDepth = (loopScopeDepths.back() + 1);
+
+				loopIterationCounts.back()++;
+			}
+
 			continue;
 		}
 

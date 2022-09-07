@@ -167,7 +167,7 @@ private:
 	const bool _validateFe3dSound3d(const string & sound3dId, bool isEditor);
 	const bool _validateFe3dSound2d(const string & sound2dId, bool isEditor);
 	const bool _validateFe3dId(const string & id);
-	const bool _validateScopeDepth(int currentLineScopeDepth, int & targetScopeDepth);
+	const bool _validateScopeDepth(int currentScopeDepth, int & targetScopeDepth);
 	const bool _validateKeyInputString(const string & inputString);
 	const bool _validateMouseInputString(const string & inputString);
 	const bool _validateSavesDirectory();

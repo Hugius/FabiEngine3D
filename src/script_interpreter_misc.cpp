@@ -47,9 +47,9 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 	return countedSpaces;
 }
 
-const bool ScriptInterpreter::_validateScopeDepth(int currentLineScopeDepth, int & targetScopeDepth)
+const bool ScriptInterpreter::_validateScopeDepth(int currentScopeDepth, int & targetScopeDepth)
 {
-	const auto isScopeDepthValid = (currentLineScopeDepth == (targetScopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
+	const auto isScopeDepthValid = (currentScopeDepth == (targetScopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
 	if(_hasPassedLoopStatement && !isScopeDepthValid)
 	{
@@ -75,13 +75,13 @@ const bool ScriptInterpreter::_validateScopeDepth(int currentLineScopeDepth, int
 
 		return false;
 	}
-	else if(currentLineScopeDepth < targetScopeDepth)
+	else if(currentScopeDepth < targetScopeDepth)
 	{
-		targetScopeDepth = currentLineScopeDepth;
+		targetScopeDepth = currentScopeDepth;
 
 		_mustIgnoreDeeperScope = false;
 	}
-	else if(currentLineScopeDepth > targetScopeDepth)
+	else if(currentScopeDepth > targetScopeDepth)
 	{
 		if(_mustIgnoreDeeperScope)
 		{

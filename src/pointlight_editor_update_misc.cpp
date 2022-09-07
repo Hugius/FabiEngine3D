@@ -156,7 +156,6 @@ void PointlightEditor::_updatePointlightChoosing()
 				else
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("pointlightEditorMenuChoice");
-
 					_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setTextContent("Pointlight: " + _currentPointlightId.substr(1));
 					_gui->getOverlay()->getTextField(POINTLIGHT_TITLE_ID)->setVisible(true);
 				}

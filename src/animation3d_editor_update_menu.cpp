@@ -97,7 +97,6 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(false);
 			_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(false);
-
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
 			_previewModelId = "";

@@ -156,12 +156,12 @@ void TopViewportController::_updateExtraScreenManagement()
 	}
 	else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{
-		const string chosenDirectoryPath = Tools::chooseExplorerDirectory("");
+		const auto chosenDirectoryPath = Tools::chooseExplorerDirectory("");
 
 		if(!chosenDirectoryPath.empty())
 		{
-			const string rootPath = Tools::getRootDirectoryPath();
-			const string exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
 
 			if(Tools::isDirectoryExisting(exportDirectoryPath))
 			{

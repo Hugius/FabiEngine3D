@@ -78,7 +78,6 @@ void CaptorEditor::_updateCaptorChoosing()
 				else
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("captorEditorMenuChoice");
-
 					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setTextContent("Captor: " + _currentCaptorId.substr(1));
 					_gui->getOverlay()->getTextField(CAPTOR_TITLE_ID)->setVisible(true);
 				}

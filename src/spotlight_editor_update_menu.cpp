@@ -75,11 +75,9 @@ void SpotlightEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->spotlight_setVisible(_currentSpotlightId, false);
-
 			_fe3d->model_setVisible(TORCH_ID, false);
 
 			_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(false);
-
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuMain");
 
 			_currentSpotlightId = "";

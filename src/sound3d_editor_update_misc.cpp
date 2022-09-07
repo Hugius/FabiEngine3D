@@ -184,7 +184,6 @@ void Sound3dEditor::_updateSound3dChoosing()
 				else
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound3dEditorMenuChoice");
-
 					_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setTextContent("Sound3d: " + _currentSound3dId.substr(1));
 					_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(true);
 				}

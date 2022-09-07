@@ -77,6 +77,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 	vector<int> loopScopeDepths = {};
 	vector<int> loopLineIndices = {};
 	vector<int> loopIterationCounts = {};
+
 	int targetScopeDepth = 0;
 
 	_executionDepth++;

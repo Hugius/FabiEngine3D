@@ -71,7 +71,6 @@ void Sound2dEditor::_updateChoiceMenu()
 			}
 
 			_gui->getOverlay()->getTextField(SOUND2D_TITLE_ID)->setVisible(false);
-
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("sound2dEditorMenuMain");
 
 			_currentSound2dId = "";

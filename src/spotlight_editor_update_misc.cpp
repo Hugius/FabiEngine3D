@@ -157,7 +157,6 @@ void SpotlightEditor::_updateSpotlightChoosing()
 				else
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("spotlightEditorMenuChoice");
-
 					_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setTextContent("Spotlight: " + _currentSpotlightId.substr(1));
 					_gui->getOverlay()->getTextField(SPOTLIGHT_TITLE_ID)->setVisible(true);
 				}

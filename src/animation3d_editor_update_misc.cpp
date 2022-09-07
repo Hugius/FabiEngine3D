@@ -242,7 +242,6 @@ void Animation3dEditor::_updateAnimation3dChoosing()
 			else
 			{
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-
 				_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + _currentAnimation3dId.substr(1));
 				_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 				_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);

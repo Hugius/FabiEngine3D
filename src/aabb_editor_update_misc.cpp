@@ -138,7 +138,6 @@ void AabbEditor::_updateAabbChoosing()
 				else
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("aabbEditorMenuChoice");
-
 					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setTextContent("AABB: " + _currentAabbId.substr(1));
 					_gui->getOverlay()->getTextField(AABB_TITLE_ID)->setVisible(true);
 				}

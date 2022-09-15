@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
+void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 {
 	string nameString = "";
 	string typeString = "";
@@ -37,14 +37,14 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 
 	if(variable->getType() == ScriptVariableType::MULTIPLE)
 	{
-		_throwRuntimeError(LIST_KEYWORD + " variables cannot be typecasted");
+		_throwRuntimeError(LIST_KEYWORD + " variables cannot be casted");
 
 		return;
 	}
 
-	if(variable->isConstant())
+	if(variable->isFinal())
 	{
-		_throwRuntimeError(CONST_KEYWORD + " variables cannot be typecasted");
+		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be casted");
 
 		return;
 	}

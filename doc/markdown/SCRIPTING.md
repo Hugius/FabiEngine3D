@@ -42,15 +42,15 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.1 Creation Syntax
 
-- You can define a variable using `<scope> <mutability> <type> <name> = <value>`.
+- You can define a variable using `DEF <scope> <mutability> <type> <name> = <value>`.
 
 ### 4.2 Alteration Syntax
 
-- You can edit a variable using `EDIT <name> = <value>`.
+- You can alter a variable using `ALT <name> = <value>`.
 
 ### 4.3 Scope
 
-- A variable scope can be global (`GLOB` keyword) or local (no extra keyword).
+- A variable scope can be global (`GLB` keyword) or local (no extra keyword).
 - A local variable can only be accessed in the same script file.
 - A global variable can be accessed by ALL script files.
 - A local variable will be deleted at the end of a script file execution.
@@ -58,7 +58,7 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.4 Mutability
 
-- A variable can be immutable (`CNST` keyword) or mutable (no extra keyword).
+- A variable can be immutable (`FIN` keyword) or mutable (no extra keyword).
 - If you try to change an immutable variable, you will get an error!
 
 ### 4.5 Naming Conventions
@@ -98,35 +98,35 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ```text
 1.  /// String variable
-2.  STR myString = "hello world"
+2.  DEF STR myString = "hello world"
 3.
 4.  /// Decimal variable
-5.  DEC myDecimal = 42.94858
+5.  DEF DEC myDecimal = 42.94858
 6.
 7.  /// Integer variable
-8.  INT myInteger = 42
+8.  DEF INT myInteger = 42
 9.
 10. /// Boolean variable
-11. BOL myBoolean = <false>
+11. DEF BOL myBoolean = <false>
 12.
 13. /// List variable
-14. LST myList = {42, myBoolean, "test123", 45.0}
-15. STR firstElement = myList[0]
+14. DEF LST myList = {42, myBoolean, "test123", 45.0}
+15. DEF STR firstElement = myList[0]
 16. PUSH myList "newValue"
 17. PULL myList 2
 18.
 19. /// Immutable variable
-20. CNST STR immutableString = "i cannot be changed"
-21. STR mutableString = "try to change me"
-22. EDIT mutableString = "i changed you"
+20. DEF FIN STR immutableString = "i cannot be changed"
+21. DEF STR mutableString = "try to change me"
+22. ALT mutableString = "i changed you"
 23.
 24. /// Global variable
-25. GLOB INT _someInteger = 5
-26. GLOB CNST INT _anotherInteger = 5
+25. DEF GLB INT _someInteger = 5
+26. DEF GLB FIN INT _anotherInteger = 5
 27.
 28. /// Variable casting
 29. CAST myDecimal INT
-30. STR intString = "123"
+30. DEF STR intString = "123"
 31. CAST intString INT
 ```
 
@@ -147,7 +147,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 5.2 Example Code
 
 ```text
-1. INT myInteger = 40
+1. DEF INT myInteger = 40
 2. DIV myInteger 5
 3. NEG myInteger
 4.
@@ -168,8 +168,8 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 6.2 Example Code
 
 ```text
-1. INT age = 12
-2. BOL isUnderAge = (age LESS 18)
+1. DEF INT age = 12
+2. DEF BOL isUnderAge = (age LESS 18)
 3. fe3d:print(isUnderAge)
 4.
 5. /// Console output:
@@ -187,8 +187,8 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 7.2 Example Code
 
 ```text
-1. INT age = 999
-2. BOL isValidAge = (age MORE 0 AND age LESS 100)
+1. DEF INT age = 999
+2. DEF BOL isValidAge = (age MORE 0 AND age LESS 100)
 3. fe3d:print(isValidAge)
 4.
 5. /// Console output:
@@ -208,7 +208,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 8.2 Example Code
 
 ```text
-1.  INT age = 41
+1.  DEF INT age = 41
 2.  IF age IS 100
 3.      fe3d:print("I am dead!")
 6.  ELIF age LESS 42
@@ -231,8 +231,8 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 9.2 Example Code
 
 ```text
-1.  LST myList = {"hello", "beautiful", "world"}
-2.  INT index = 0
+1.  DEF LST myList = {"hello", "beautiful", "world"}
+2.  DEF INT index = 0
 3.  LOOP
 4.      IF index IS 2
 5.          BREAK
@@ -287,7 +287,7 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ```text
 1. fe3d:camera_set_position(1.0, 2.0, 3.0)
-2. DEC z = fe3d:camera_get_position_z()
+2. DEF DEC z = fe3d:camera_get_position_z()
 3. fe3d:print(z)
 4.
 5. /// Console output:

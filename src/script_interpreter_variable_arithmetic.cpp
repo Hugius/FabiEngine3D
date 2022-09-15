@@ -84,9 +84,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		leftValueIndex = leftListIndex;
 	}
 
-	if(leftVariable->isConstant())
+	if(leftVariable->isFinal())
 	{
-		_throwRuntimeError(CONST_KEYWORD + " variables cannot be changed");
+		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be changed");
 
 		return;
 	}

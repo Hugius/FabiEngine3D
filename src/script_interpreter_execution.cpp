@@ -100,19 +100,19 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 		const auto lastLoggerMessageCount = Logger::getMessageCount();
 
-		auto scriptLineText = scriptFile->getLine(lineIndex);
+		auto scriptLine = scriptFile->getLine(lineIndex);
 
 		if(lineIndex == 0 || lineIndex == 1)
 		{
 			continue;
 		}
 
-		if(scriptLineText.substr(0, 3) == "///")
+		if(scriptLine.substr(0, 3) == "///")
 		{
 			continue;
 		}
 
-		const auto countedSpaces = _countLeadingSpaces(scriptLineText);
+		const auto countedSpaces = _countLeadingSpaces(scriptLine);
 
 		if(_hasThrownError)
 		{
@@ -121,7 +121,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 		if((countedSpaces % SPACES_PER_INDENT) == 0)
 		{
-			scriptLineText.erase(0, countedSpaces);
+			scriptLine.erase(0, countedSpaces);
 		}
 		else
 		{
@@ -177,39 +177,27 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		if(scriptLineText.empty())
+		if(scriptLine.empty())
 		{
 			continue;
 		}
 
-		if(scriptLineText == PASS_KEYWORD)
+		if(scriptLine == PASS_KEYWORD)
 		{
 			// Purposely left blank
 		}
-		else if(scriptLineText == EXIT_KEYWORD)
+		else if(scriptLine == EXIT_KEYWORD)
 		{
 			break;
 		}
-		else if(scriptLineText == CRASH_KEYWORD)
+		else if(scriptLine == CRASH_KEYWORD)
 		{
 			_throwRuntimeError("");
 			break;
 		}
-		else if(scriptLineText.substr(0, 5) == "fe3d:")
+		else if(scriptLine.substr(0, (EXECUTE_KEYWORD.size() + 1)) == (EXECUTE_KEYWORD + " "))
 		{
-			_processFe3dFunctionCall(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, 5) == "math:")
-		{
-			_processMathFunctionCall(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, 5) == "misc:")
-		{
-			_processMiscFunctionCall(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (EXECUTE_KEYWORD.size() + 1)) == (EXECUTE_KEYWORD + " "))
-		{
-			const auto scriptToExecuteId = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
+			const auto scriptToExecuteId = scriptLine.substr(EXECUTE_KEYWORD.size() + 1);
 
 			if
 				(
@@ -256,51 +244,39 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 		}
-		else if(scriptLineText.substr(0, (GLOBAL_KEYWORD.size() + 1)) == (GLOBAL_KEYWORD + " "))
+		else if(scriptLine.substr(0, (DEFINE_KEYWORD.size() + 1)) == (DEFINE_KEYWORD + " "))
 		{
-			_processVariableCreation(scriptLineText, ScriptScopeType::GLOBAL);
+			_processVariableDefinition(scriptLine);
+		}
+		else if(scriptLine.substr(0, (ALTER_KEYWORD.size() + 1)) == (ALTER_KEYWORD + " "))
+		{
+			_processVariableAlteration(scriptLine);
+		}
+		else if(scriptLine.substr(0, (CAST_KEYWORD.size() + 1)) == (CAST_KEYWORD + " "))
+		{
+			_processVariableCasting(scriptLine);
+		}
+		else if(scriptLine.substr(0, (PUSH_KEYWORD.size() + 1)) == (PUSH_KEYWORD + " "))
+		{
+			_processListPush(scriptLine);
+		}
+		else if(scriptLine.substr(0, (PULL_KEYWORD.size() + 1)) == (PULL_KEYWORD + " "))
+		{
+			_processListPull(scriptLine);
 		}
 		else if
 			(
-			scriptLineText.substr(0, (CONST_KEYWORD.size() + 1)) == (CONST_KEYWORD + " ") ||
-			scriptLineText.substr(0, (LIST_KEYWORD.size() + 1)) == (LIST_KEYWORD + " ") ||
-			scriptLineText.substr(0, (STRING_KEYWORD.size() + 1)) == (STRING_KEYWORD + " ") ||
-			scriptLineText.substr(0, (DECIMAL_KEYWORD.size() + 1)) == (DECIMAL_KEYWORD + " ") ||
-			scriptLineText.substr(0, (INTEGER_KEYWORD.size() + 1)) == (INTEGER_KEYWORD + " ") ||
-			scriptLineText.substr(0, (BOOLEAN_KEYWORD.size() + 1)) == (BOOLEAN_KEYWORD + " ")
+			scriptLine.substr(0, (ADD_KEYWORD.size() + 1)) == (ADD_KEYWORD + " ") ||
+			scriptLine.substr(0, (SUBTRACT_KEYWORD.size() + 1)) == (SUBTRACT_KEYWORD + " ") ||
+			scriptLine.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
+			scriptLine.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
+			scriptLine.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
+			scriptLine.substr(0, (NEGATE_KEYWORD.size() + 1)) == (NEGATE_KEYWORD + " ")
 			)
 		{
-			_processVariableCreation(scriptLineText, ScriptScopeType::LOCAL);
+			_processVariableArithmetic(scriptLine);
 		}
-		else if(scriptLineText.substr(0, (EDIT_KEYWORD.size() + 1)) == (EDIT_KEYWORD + " "))
-		{
-			_processVariableAlteration(scriptLineText);
-		}
-		else if
-			(
-			scriptLineText.substr(0, (ADD_KEYWORD.size() + 1)) == (ADD_KEYWORD + " ") ||
-			scriptLineText.substr(0, (SUBTRACT_KEYWORD.size() + 1)) == (SUBTRACT_KEYWORD + " ") ||
-			scriptLineText.substr(0, (MULTIPLY_KEYWORD.size() + 1)) == (MULTIPLY_KEYWORD + " ") ||
-			scriptLineText.substr(0, (DIVIDE_KEYWORD.size() + 1)) == (DIVIDE_KEYWORD + " ") ||
-			scriptLineText.substr(0, (MODULO_KEYWORD.size() + 1)) == (MODULO_KEYWORD + " ") ||
-			scriptLineText.substr(0, (NEGATE_KEYWORD.size() + 1)) == (NEGATE_KEYWORD + " ")
-			)
-		{
-			_processVariableArithmetic(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (CAST_KEYWORD.size() + 1)) == (CAST_KEYWORD + " "))
-		{
-			_processVariableTypecast(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (PUSH_KEYWORD.size() + 1)) == (PUSH_KEYWORD + " "))
-		{
-			_processListPush(scriptLineText);
-		}
-		else if(scriptLineText.substr(0, (PULL_KEYWORD.size() + 1)) == (PULL_KEYWORD + " "))
-		{
-			_processListPull(scriptLineText);
-		}
-		else if(scriptLineText == LOOP_KEYWORD)
+		else if(scriptLine == LOOP_KEYWORD)
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
@@ -317,7 +293,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			_hasPassedLoopStatement = true;
 		}
-		else if(scriptLineText == CONTINUE_KEYWORD)
+		else if(scriptLine == CONTINUE_KEYWORD)
 		{
 			lineIndex = loopLineIndices.back();
 			targetScopeDepth = (loopScopeDepths.back() + 1);
@@ -326,7 +302,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			continue;
 		}
-		else if(scriptLineText == BREAK_KEYWORD)
+		else if(scriptLine == BREAK_KEYWORD)
 		{
 			targetScopeDepth = loopScopeDepths.back();
 
@@ -336,7 +312,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			_mustIgnoreDeeperScope = true;
 		}
-		else if(scriptLineText.substr(0, (IF_KEYWORD.size() + 1)) == (IF_KEYWORD + " "))
+		else if(scriptLine.substr(0, (IF_KEYWORD.size() + 1)) == (IF_KEYWORD + " "))
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
@@ -345,7 +321,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 
-			const auto conditionString = scriptLineText.substr(IF_KEYWORD.size() + 1);
+			const auto conditionString = scriptLine.substr(IF_KEYWORD.size() + 1);
 
 			if(_checkConditionString(conditionString))
 			{
@@ -363,7 +339,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				conditionStatements.push_back(ScriptConditionStatement(targetScopeDepth, false));
 			}
 		}
-		else if(scriptLineText.substr(0, (ELIF_KEYWORD.size() + 1)) == (ELIF_KEYWORD + " "))
+		else if(scriptLine.substr(0, (ELIF_KEYWORD.size() + 1)) == (ELIF_KEYWORD + " "))
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
@@ -377,7 +353,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			if((lastIndex != -1) &&
 			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
 			{
-				const auto conditionString = scriptLineText.substr(ELIF_KEYWORD.size() + 1);
+				const auto conditionString = scriptLine.substr(ELIF_KEYWORD.size() + 1);
 
 				conditionStatements[lastIndex].setType(ScriptConditionType::ELIF);
 
@@ -402,7 +378,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				return;
 			}
 		}
-		else if(scriptLineText == ELSE_KEYWORD)
+		else if(scriptLine == ELSE_KEYWORD)
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
@@ -416,7 +392,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			if((lastIndex != -1) &&
 			   ((conditionStatements[lastIndex].getType() == ScriptConditionType::IF) || (conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF)))
 			{
-				if(scriptLineText.size() == ELSE_KEYWORD.size())
+				if(scriptLine.size() == ELSE_KEYWORD.size())
 				{
 					conditionStatements[lastIndex].setType(ScriptConditionType::ELSE);
 
@@ -445,6 +421,18 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 				return;
 			}
+		}
+		else if(scriptLine.substr(0, 5) == "fe3d:")
+		{
+			_processFe3dFunctionCall(scriptLine);
+		}
+		else if(scriptLine.substr(0, 5) == "math:")
+		{
+			_processMathFunctionCall(scriptLine);
+		}
+		else if(scriptLine.substr(0, 5) == "misc:")
+		{
+			_processMiscFunctionCall(scriptLine);
 		}
 		else
 		{

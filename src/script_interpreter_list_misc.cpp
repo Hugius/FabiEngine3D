@@ -104,9 +104,9 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	const auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(listVariable->isConstant())
+	if(listVariable->isFinal())
 	{
-		_throwRuntimeError("cannot push to constant " + LIST_KEYWORD);
+		_throwRuntimeError("cannot push to final " + LIST_KEYWORD);
 
 		return;
 	}
@@ -261,9 +261,9 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	const auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(listVariable->isConstant())
+	if(listVariable->isFinal())
 	{
-		_throwRuntimeError("cannot push to constant " + LIST_KEYWORD);
+		_throwRuntimeError("cannot push to final " + LIST_KEYWORD);
 
 		return;
 	}

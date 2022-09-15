@@ -1,11 +1,11 @@
 #include "script_variable.hpp"
 
-ScriptVariable::ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values)
+ScriptVariable::ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isFinal, const vector<shared_ptr<ScriptValue>> & values)
 	:
 	_scope(scope),
 	_type(type),
 	_id(id),
-	_isConstant(isConstant)
+	_isFinal(isFinal)
 {
 	if(_id.empty())
 	{
@@ -30,9 +30,9 @@ const ScriptVariableType ScriptVariable::getType() const
 	return _type;
 }
 
-const bool ScriptVariable::isConstant() const
+const bool ScriptVariable::isFinal() const
 {
-	return _isConstant;
+	return _isFinal;
 }
 
 void ScriptVariable::setValues(const vector<shared_ptr<ScriptValue>> & values)
@@ -47,7 +47,7 @@ void ScriptVariable::setValue(shared_ptr<ScriptValue> value, int index)
 		abort();
 	}
 
-	if(_isConstant)
+	if(_isFinal)
 	{
 		abort();
 	}

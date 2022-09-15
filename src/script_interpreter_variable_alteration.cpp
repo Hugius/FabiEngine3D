@@ -7,7 +7,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	int wordIndex = 0;
 
-	for(const auto & character : scriptLine.substr(EDIT_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(ALTER_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
 		{
@@ -79,9 +79,9 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	const auto leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(leftVariable->isConstant())
+	if(leftVariable->isFinal())
 	{
-		_throwRuntimeError(CONST_KEYWORD + " variables cannot be changed");
+		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be changed");
 
 		return;
 	}

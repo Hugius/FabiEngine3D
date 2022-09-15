@@ -96,13 +96,13 @@
     <ClCompile Include="..\..\..\src\script_interpreter_variable_arithmetic.cpp">
       <Filter>Interpreter\Variable</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_variable_create.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_definition.cpp">
       <Filter>Interpreter\Variable</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_variable_misc.cpp">
       <Filter>Interpreter\Variable</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_variable_edit.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_alteration.cpp">
       <Filter>Interpreter\Variable</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_condition.cpp">

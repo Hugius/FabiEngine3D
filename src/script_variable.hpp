@@ -7,7 +7,7 @@
 class ScriptVariable final
 {
 public:
-	ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values);
+	ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isFinal, const vector<shared_ptr<ScriptValue>> & values);
 
 	void addValue(shared_ptr<ScriptValue> value);
 	void setValues(const vector<shared_ptr<ScriptValue>> & values);
@@ -21,7 +21,7 @@ public:
 
 	const int getValueCount() const;
 
-	const bool isConstant() const;
+	const bool isFinal() const;
 
 	const ScriptScopeType getScope() const;
 	const ScriptVariableType getType() const;
@@ -29,7 +29,7 @@ public:
 private:
 	const string _id;
 
-	const bool _isConstant;
+	const bool _isFinal;
 
 	const ScriptScopeType _scope;
 	const ScriptVariableType _type;

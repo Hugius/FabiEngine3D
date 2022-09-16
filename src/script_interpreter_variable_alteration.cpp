@@ -3,30 +3,30 @@
 
 void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 {
-	string words[2] = {"", ""};
+	string parts[2] = {"", ""};
 
-	int wordIndex = 0;
+	int partIndex = 0;
 
 	for(const auto & character : scriptLine.substr(ALTER_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
 		{
-			wordIndex++;
+			partIndex++;
 
-			if(wordIndex == 2)
+			if(partIndex == 2)
 			{
 				break;
 			}
 		}
 		else
 		{
-			words[wordIndex] += character;
+			parts[partIndex] += character;
 		}
 	}
 
-	auto nameString = words[0];
+	auto nameString = parts[0];
 
-	const auto equalSignString = words[1];
+	const auto equalSignString = parts[1];
 
 	if(nameString.empty())
 	{

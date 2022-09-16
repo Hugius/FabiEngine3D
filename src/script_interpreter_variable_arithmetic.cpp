@@ -2,28 +2,28 @@
 
 void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 {
-	string words[2] = {"", ""};
+	string parts[2] = {"", ""};
 
-	int wordIndex = 0;
+	int partIndex = 0;
 
 	for(const auto & character : scriptLine)
 	{
 		if(character == ' ')
 		{
-			wordIndex++;
+			partIndex++;
 
-			if(wordIndex == 2)
+			if(partIndex == 2)
 			{
 				break;
 			}
 		}
 		else
 		{
-			words[wordIndex] += character;
+			parts[partIndex] += character;
 		}
 	}
 
-	const auto operatorString = words[0];
+	const auto operatorString = parts[0];
 
 	if(operatorString != ADD_KEYWORD &&
 	   operatorString != SUBTRACT_KEYWORD &&
@@ -37,7 +37,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		return;
 	}
 
-	auto nameString = words[1];
+	auto nameString = parts[1];
 
 	if(nameString.empty())
 	{
@@ -134,7 +134,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		}
 	}
 
-	const auto minLineSize = (words[0].size() + words[1].size() + 3);
+	const auto minLineSize = (parts[0].size() + parts[1].size() + 3);
 
 	if(scriptLine.size() < minLineSize)
 	{

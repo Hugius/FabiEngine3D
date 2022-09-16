@@ -115,8 +115,8 @@ Line 2 of every script file must specify its state: entry or wait.
 16. PUSH myList "newValue"
 17. PULL myList 2
 18.
-19. /// Immutable variable
-20. DEF FIN STR immutableString = "i cannot be changed"
+19. /// Final variable
+20. DEF FIN STR finalString = "i cannot be changed"
 21. DEF STR mutableString = "try to change me"
 22. ALT mutableString = "i changed you"
 23.

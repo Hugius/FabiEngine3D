@@ -44,7 +44,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		BREAK_KEYWORD,
 	};
 
-	const auto possibleGlobalKeyword = scriptLine.substr(0, (GLOBAL_KEYWORD.size() + 1));
+	const auto possibleGlobalKeyword = scriptLine.substr((DEFINE_KEYWORD.size() + 1), (GLOBAL_KEYWORD.size() + 1));
 	const auto scope = ((possibleGlobalKeyword == (GLOBAL_KEYWORD + " ")) ? ScriptScopeType::GLOBAL : ScriptScopeType::LOCAL);
 
 	bool isFinal;
@@ -53,50 +53,51 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 	{
 		case ScriptScopeType::GLOBAL:
 		{
-			const auto possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), FINAL_KEYWORD.size() + 2);
+			const auto possibleFinalKeyword = scriptLine.substr((DEFINE_KEYWORD.size() + GLOBAL_KEYWORD.size() + 2), (FINAL_KEYWORD.size() + 1));
 
-			isFinal = (possibleConstKeyword == (" " + FINAL_KEYWORD + " "));
+			isFinal = (possibleFinalKeyword == (FINAL_KEYWORD + " "));
 
 			break;
 		}
 		case ScriptScopeType::LOCAL:
 		{
-			const auto possibleConstKeyword = scriptLine.substr(0, FINAL_KEYWORD.size() + 1);
+			const auto possibleFinalKeyword = scriptLine.substr((DEFINE_KEYWORD.size() + 1), (FINAL_KEYWORD.size() + 1));
 
-			isFinal = (possibleConstKeyword == (FINAL_KEYWORD + " "));
+			isFinal = (possibleFinalKeyword == (FINAL_KEYWORD + " "));
 
 			break;
 		}
 	}
 
-	string words[3] = {"", "", ""};
+	string parts[3] = {"", "", ""};
 
-	int typeIndex = 0;
-	int wordIndex = 0;
+	int startIndex = 0;
+	int partIndex = 0;
 
-	typeIndex += ((scope == ScriptScopeType::GLOBAL) ? static_cast<int>(GLOBAL_KEYWORD.size() + 1) : 0);
-	typeIndex += (isFinal ? static_cast<int>(FINAL_KEYWORD.size() + 1) : 0);
+	startIndex += static_cast<int>(DEFINE_KEYWORD.size() + 1);
+	startIndex += ((scope == ScriptScopeType::GLOBAL) ? static_cast<int>(GLOBAL_KEYWORD.size() + 1) : 0);
+	startIndex += (isFinal ? static_cast<int>(FINAL_KEYWORD.size() + 1) : 0);
 
-	for(const auto & character : scriptLine.substr(typeIndex))
+	for(const auto & character : scriptLine.substr(startIndex))
 	{
 		if(character == ' ')
 		{
-			wordIndex++;
+			partIndex++;
 
-			if(wordIndex == 3)
+			if(partIndex == 3)
 			{
 				break;
 			}
 		}
 		else
 		{
-			words[wordIndex] += character;
+			parts[partIndex] += character;
 		}
 	}
 
-	const auto typeString = words[0];
-	const auto nameString = words[1];
-	const auto equalSignString = words[2];
+	const auto typeString = parts[0];
+	const auto nameString = parts[1];
+	const auto equalSignString = parts[2];
 
 	if(typeString.empty())
 	{

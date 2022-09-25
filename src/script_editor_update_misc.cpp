@@ -147,6 +147,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 		_createDisplayContent();
 
 		_fe3d->text3d_setVisible(CARET_ID, true);
+		_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
 	}
 }
 

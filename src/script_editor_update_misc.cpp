@@ -36,10 +36,6 @@ void ScriptEditor::_updateMenu()
 		{
 			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", _currentScriptFileId, VALUE_FORM_POSITION, RENAME_VALUE_FORM_SIZE, true, true, true);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clear")->isHovered())
-		{
-			_clearDisplay();
-		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_gui->getOverlay()->openAnswerForm("deleteScript", "Are You Sure?", "Yes", "No", ANSWER_FORM_POSITION);
@@ -78,7 +74,6 @@ void ScriptEditor::_updateMenu()
 
 		screen->getButton("replace")->setHoverable(!_searchKeyword.empty(), true);
 		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty(), true);
-		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty(), true);
 		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty(), true);
 
 		screen->getTextField("totalLines")->setTextContent("Total Lines: " + to_string(_script->getTotalLineCount()));

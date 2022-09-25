@@ -75,15 +75,14 @@ void ScriptEditor::_loadGUI()
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	rightWindow->createScreen("scriptEditorMenuMain");
-	rightWindow->getScreen("scriptEditorMenuMain")->createTextField("totalLines", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Total Lines: 0"), "Total Lines: 0", fvec3(1.0f), true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("search", fvec2(0.0f, POSITIONS(9)[1]), TEXT_SIZE("Search Scripts"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Search Scripts", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("replace", fvec2(0.0f, POSITIONS(9)[2]), TEXT_SIZE("Replace Scripts"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Replace Scripts", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("Create Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Edit Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("rename", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Rename Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rename Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("clear", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Clear Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Delete Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("scriptEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createTextField("totalLines", fvec2(0.0f, POSITIONS(8)[0]), TEXT_SIZE("Total Lines: 0"), "Total Lines: 0", fvec3(1.0f), true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("search", fvec2(0.0f, POSITIONS(8)[1]), TEXT_SIZE("Search Scripts"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Search Scripts", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("replace", fvec2(0.0f, POSITIONS(8)[2]), TEXT_SIZE("Replace Scripts"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Replace Scripts", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("create", fvec2(0.0f, POSITIONS(8)[3]), TEXT_SIZE("Create Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("edit", fvec2(0.0f, POSITIONS(8)[4]), TEXT_SIZE("Edit Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("rename", fvec2(0.0f, POSITIONS(8)[5]), TEXT_SIZE("Rename Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rename Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("delete", fvec2(0.0f, POSITIONS(8)[6]), TEXT_SIZE("Delete Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("scriptEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(8)[7]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
 

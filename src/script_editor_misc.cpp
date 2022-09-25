@@ -119,11 +119,10 @@ void ScriptEditor::_clearDisplay()
 	_deleteDisplayContent();
 
 	_fe3d->quad3d_setVisible(SELECTION_ID, false);
-
 	_fe3d->text3d_setVisible(CARET_ID, false);
 
-	_isWritingScript = false;
 	_currentScriptFileId = "";
+	_isWritingScript = false;
 }
 
 void ScriptEditor::_clearSelection()

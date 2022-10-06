@@ -101,10 +101,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	}
 
 	const auto isSingleVariable = (leftVariable->getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
-	const auto isStringVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING);
-	const auto isDecimalVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::DECIMAL);
-	const auto isIntegerVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER);
-	const auto isBooleanVariable = (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN);
+	const auto isStringVariable = (isSingleVariable && (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING));
+	const auto isDecimalVariable = (isSingleVariable && (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::DECIMAL));
+	const auto isIntegerVariable = (isSingleVariable && (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER));
+	const auto isBooleanVariable = (isSingleVariable && (leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN));
 
 	if(leftVariable->getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
@@ -113,26 +113,26 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 		leftVariable->setValues(values);
 	}
-	else if(isSingleVariable && isStringVariable && _isStringValue(valueString))
+	else if(isStringVariable && _isStringValue(valueString))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
 		leftVariable->getValue(leftValueIndex)->setString(valueString);
 	}
-	else if(isSingleVariable && isDecimalVariable && _isDecimalValue(valueString))
+	else if(isDecimalVariable && _isDecimalValue(valueString))
 	{
 		leftVariable->getValue(leftValueIndex)->setDecimal(stof(_limitDecimalString(valueString)));
 	}
-	else if(isSingleVariable && isIntegerVariable && _isIntegerValue(valueString))
+	else if(isIntegerVariable && _isIntegerValue(valueString))
 	{
 		leftVariable->getValue(leftValueIndex)->setInteger(stoi(_limitIntegerString(valueString)));
 	}
-	else if(isSingleVariable && isBooleanVariable && _isBooleanValue(valueString))
+	else if(isBooleanVariable && _isBooleanValue(valueString))
 	{
 		leftVariable->getValue(leftValueIndex)->setBoolean(valueString == "<true>");
 	}
-	else if(isSingleVariable && isBooleanVariable && ((valueString.front() == '(') && (valueString.back() == ')')))
+	else if(isBooleanVariable && ((valueString.front() == '(') && (valueString.back() == ')')))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
@@ -186,19 +186,19 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 			return;
 		}
-		else if(isSingleVariable && isStringVariable && (returnValues[0]->getType() == ScriptValueType::STRING))
+		else if(isStringVariable && (returnValues[0]->getType() == ScriptValueType::STRING))
 		{
 			leftVariable->getValue(leftValueIndex)->setString(returnValues[0]->getString());
 		}
-		else if(isSingleVariable && isDecimalVariable && (returnValues[0]->getType() == ScriptValueType::DECIMAL))
+		else if(isDecimalVariable && (returnValues[0]->getType() == ScriptValueType::DECIMAL))
 		{
 			leftVariable->getValue(leftValueIndex)->setDecimal(returnValues[0]->getDecimal());
 		}
-		else if(isSingleVariable && isIntegerVariable && (returnValues[0]->getType() == ScriptValueType::INTEGER))
+		else if(isIntegerVariable && (returnValues[0]->getType() == ScriptValueType::INTEGER))
 		{
 			leftVariable->getValue(leftValueIndex)->setInteger(returnValues[0]->getInteger());
 		}
-		else if(isSingleVariable && isBooleanVariable && (returnValues[0]->getType() == ScriptValueType::BOOLEAN))
+		else if(isBooleanVariable && (returnValues[0]->getType() == ScriptValueType::BOOLEAN))
 		{
 			leftVariable->getValue(leftValueIndex)->setBoolean(returnValues[0]->getBoolean());
 		}

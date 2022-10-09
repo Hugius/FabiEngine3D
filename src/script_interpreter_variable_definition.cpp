@@ -101,14 +101,14 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 	if(typeString.empty())
 	{
-		_throwRuntimeError("variable type missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("variable name missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -119,7 +119,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 	   typeString != INTEGER_KEYWORD &&
 	   typeString != BOOLEAN_KEYWORD)
 	{
-		_throwRuntimeError("invalid variable type");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -149,21 +149,21 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 	if(scope == ScriptScopeType::GLOBAL && nameString[0] != '_')
 	{
-		_throwRuntimeError("global variables must start with '_'");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(scope == ScriptScopeType::LOCAL && nameString[0] == '_')
 	{
-		_throwRuntimeError("local variables cannot start with '_'");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(!isValidName)
 	{
-		_throwRuntimeError("forbidden variable name");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -174,14 +174,14 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 	   ||
 	   ((scope == ScriptScopeType::GLOBAL) && _isGlobalVariableExisting(nameString)))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" already defined");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(equalSignString != "=")
 	{
-		_throwRuntimeError("equal sign missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -190,7 +190,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwRuntimeError("value missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -259,7 +259,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		{
 			if(value->getType() == ScriptValueType::EMPTY)
 			{
-				_throwRuntimeError("function returned empty value");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -271,19 +271,19 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		}
 		else if(returnValues.empty())
 		{
-			_throwRuntimeError("function returned no values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(returnValues.size() > 1)
 		{
-			_throwRuntimeError("function returned too many values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(returnValues[0]->getType() == ScriptValueType::EMPTY)
 		{
-			_throwRuntimeError("function must return value");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -305,7 +305,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("function returned incorrect value type");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -331,7 +331,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -417,7 +417,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("value types not matching");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}

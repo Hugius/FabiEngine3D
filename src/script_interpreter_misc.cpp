@@ -29,7 +29,7 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 		{
 			if(index == (scriptLineText.size() - 1))
 			{
-				_throwRuntimeError("unnecessary indentation");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return 0;
 			}
@@ -53,25 +53,25 @@ const bool ScriptInterpreter::_validateScopeDepth(int currentScopeDepth, int & t
 
 	if(_hasPassedLoopStatement && !isScopeDepthValid)
 	{
-		_throwRuntimeError("incorrect indentation after " + LOOP_KEYWORD + " statement");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 	else if(_hasPassedIfStatement && !isScopeDepthValid)
 	{
-		_throwRuntimeError("incorrect indentation after " + IF_KEYWORD + " statement");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 	else if(_hasPassedElifStatement && !isScopeDepthValid)
 	{
-		_throwRuntimeError("incorrect indentation after " + ELIF_KEYWORD + " statement");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 	else if(_hasPassedElseStatement && !isScopeDepthValid)
 	{
-		_throwRuntimeError("incorrect indentation after " + ELSE_KEYWORD + " statement");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_validateScopeDepth(int currentScopeDepth, int & t
 		}
 		else
 		{
-			_throwRuntimeError("unnecessary indentation before statement");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return false;
 		}

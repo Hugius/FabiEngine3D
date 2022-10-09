@@ -13,14 +13,14 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 	if((openingParanthesisFound == scriptLine.end()) || (closingParanthesisFound == scriptLine.end()))
 	{
-		_throwRuntimeError("invalid syntax");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
-		_throwRuntimeError("invalid syntax");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return {};
 	}

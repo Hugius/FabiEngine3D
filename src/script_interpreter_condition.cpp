@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 	if(conditionString.empty())
 	{
-		_throwRuntimeError("no condition found");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 	if(elements.size() < 3)
 	{
-		_throwRuntimeError("not enough elements in condition");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		{
 			if(_isListValue(elementString))
 			{
-				_throwRuntimeError(LIST_KEYWORD + " value cannot be used in condition");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return false;
 			}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(!_isLocalVariableExisting(elementString) && !_isGlobalVariableExisting(elementString))
 				{
-					_throwRuntimeError("variable \"" + elementString + "\" does not exist");
+					_throwRuntimeError("invalid syntax or statement");
 
 					return false;
 				}
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(!isAccessingList && (variable->getType() == ScriptVariableType::MULTIPLE))
 				{
-					_throwRuntimeError(LIST_KEYWORD + " variable cannot be used in condition");
+					_throwRuntimeError("invalid syntax or statement");
 
 					return false;
 				}
@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			}
 			else
 			{
-				_throwRuntimeError("invalid comparison operator");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return false;
 			}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			}
 			else
 			{
-				_throwRuntimeError("invalid logic operator");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return false;
 			}
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 	if(mustBeValue || mustBeComparisonOperator)
 	{
-		_throwRuntimeError("condition incomplete");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -224,7 +224,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		}
 		else if(currentLogicOperator != logicOperators[previousIndex])
 		{
-			_throwRuntimeError("cannot use different logic operators");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return false;
 		}
@@ -246,21 +246,21 @@ const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstVa
 {
 	if(firstValue->getType() != secondValue->getType())
 	{
-		_throwRuntimeError("compared values not of the same type");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::STRING))
 	{
-		_throwRuntimeError("invalid comparison operator for " + STRING_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::BOOLEAN))
 	{
-		_throwRuntimeError("invalid comparison operator for " + BOOLEAN_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}

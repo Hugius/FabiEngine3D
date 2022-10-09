@@ -98,7 +98,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 	{
 		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 		{
-			_throwRuntimeError("variable \"" + indexString + "\" does not exist");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return -1;
 		}
@@ -107,7 +107,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 
 		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue(0)->getType() != ScriptValueType::INTEGER)
 		{
-			_throwRuntimeError(LIST_KEYWORD + " index must be of type " + INTEGER_KEYWORD);
+			_throwRuntimeError("invalid syntax or statement");
 
 			return -1;
 		}

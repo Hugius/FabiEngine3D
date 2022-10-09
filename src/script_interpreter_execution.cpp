@@ -125,7 +125,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else
 		{
-			_throwRuntimeError("invalid indentation");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -193,6 +193,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		else if(scriptLine == CRASH_KEYWORD)
 		{
 			_throwRuntimeError("");
+
 			break;
 		}
 		else if(scriptLine.substr(0, (EXECUTE_KEYWORD.size() + 1)) == (EXECUTE_KEYWORD + " "))
@@ -214,7 +215,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end())))
 				)
 			{
-				_throwRuntimeError("script is not of the same type");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -239,7 +240,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			}
 			else
 			{
-				_throwRuntimeError("script does not exist");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -280,7 +281,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				_throwRuntimeError("no " + LOOP_KEYWORD + " statement allowed as last line");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -316,7 +317,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				_throwRuntimeError("no " + IF_KEYWORD + " statement allowed as last line");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -343,7 +344,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				_throwRuntimeError("no " + ELIF_KEYWORD + " statement allowed as last line");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -373,7 +374,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			}
 			else
 			{
-				_throwRuntimeError(ELIF_KEYWORD + " statement can only come after " + IF_KEYWORD + " or " + ELIF_KEYWORD + " statement");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -382,7 +383,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			if(lineIndex == (scriptFile->getLineCount() - 1))
 			{
-				_throwRuntimeError("no " + ELSE_KEYWORD + " statement allowed as last line");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -410,14 +411,14 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				}
 				else
 				{
-					_throwRuntimeError(ELSE_KEYWORD + " statement cannot have condition");
+					_throwRuntimeError("invalid syntax or statement");
 
 					return;
 				}
 			}
 			else
 			{
-				_throwRuntimeError(ELSE_KEYWORD + " statement can only come after " + IF_KEYWORD + " or " + ELIF_KEYWORD + " statement");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -436,7 +437,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else
 		{
-			_throwRuntimeError("invalid statement");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}

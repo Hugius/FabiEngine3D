@@ -30,14 +30,14 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("variable name missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(equalSignString != "=")
 	{
-		_throwRuntimeError("equal sign missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -46,7 +46,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwRuntimeError("value missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -72,7 +72,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -81,7 +81,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(leftVariable->isFinal())
 	{
-		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be changed");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -158,7 +158,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		{
 			if(value->getType() == ScriptValueType::EMPTY)
 			{
-				_throwRuntimeError("function returned empty value");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return;
 			}
@@ -170,19 +170,19 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		}
 		else if(returnValues.empty())
 		{
-			_throwRuntimeError("function returned no values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(returnValues.size() > 1)
 		{
-			_throwRuntimeError("function returned too many values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(returnValues[0]->getType() == ScriptValueType::EMPTY)
 		{
-			_throwRuntimeError("function must return value");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -204,7 +204,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("function returned incorrect value type");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -230,7 +230,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -323,7 +323,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("value types not matching");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}

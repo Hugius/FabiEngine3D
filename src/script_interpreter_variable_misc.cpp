@@ -19,14 +19,14 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(scriptLine.size() < (CAST_KEYWORD.size() + nameString.size() + 3))
 	{
-		_throwRuntimeError("type missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -37,14 +37,14 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 
 	if(variable->getType() == ScriptVariableType::MULTIPLE)
 	{
-		_throwRuntimeError(LIST_KEYWORD + " variables cannot be casted");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(variable->isFinal())
 	{
-		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be casted");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -83,7 +83,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 	{
 		if(!_isBooleanValue(variable->getValue(0)->getString()))
 		{
-			_throwRuntimeError("invalid boolean string");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -96,7 +96,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 	{
 		if(!_isIntegerValue(variable->getValue(0)->getString()))
 		{
-			_throwRuntimeError("invalid integer string");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -107,7 +107,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 	{
 		if(!_isDecimalValue(variable->getValue(0)->getString()))
 		{
-			_throwRuntimeError("invalid decimal string");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -116,7 +116,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 	}
 	else
 	{
-		_throwRuntimeError("invalid casting type");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}

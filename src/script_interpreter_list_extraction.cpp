@@ -20,7 +20,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 	if(listString[0] == ',')
 	{
-		_throwRuntimeError("cannot start value with ','");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return {};
 	}
@@ -37,7 +37,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 			}
 			else if(character != ' ')
 			{
-				_throwRuntimeError("values must be separated by ','");
+				_throwRuntimeError("invalid syntax or statement");
 
 				return {};
 			}
@@ -103,7 +103,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				{
 					if(!currentValueString.empty())
 					{
-						_throwRuntimeError("invalid syntax");
+						_throwRuntimeError("invalid syntax or statement");
 
 						return {};
 					}
@@ -122,7 +122,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(character != ',' && character != ' ')
 				{
-					_throwRuntimeError("invalid syntax");
+					_throwRuntimeError("invalid syntax or statement");
 
 					return {};
 				}
@@ -133,7 +133,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					{
 						if(currentValueString.back() == '.')
 						{
-							_throwRuntimeError("invalid syntax");
+							_throwRuntimeError("invalid syntax or statement");
 
 							return {};
 						}
@@ -181,7 +181,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(currentValueString.size() >= string("<false>").size())
 				{
-					_throwRuntimeError("invalid syntax");
+					_throwRuntimeError("invalid syntax or statement");
 
 					return {};
 				}
@@ -214,7 +214,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
-						_throwRuntimeError("variable \"" + currentValueString + "\" does not exist");
+						_throwRuntimeError("invalid syntax or statement");
 
 						return {};
 					}
@@ -235,7 +235,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!isAccessingList && (variable->getType() == ScriptVariableType::MULTIPLE))
 					{
-						_throwRuntimeError(LIST_KEYWORD + " cannot be used inside " + LIST_KEYWORD);
+						_throwRuntimeError("invalid syntax or statement");
 
 						return {};
 					}
@@ -285,7 +285,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
-		_throwRuntimeError("invalid syntax");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return {};
 	}

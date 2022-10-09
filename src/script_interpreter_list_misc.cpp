@@ -4,21 +4,21 @@ const bool ScriptInterpreter::_validateListIndex(shared_ptr<ScriptVariable> list
 {
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{
-		_throwRuntimeError("variable \"" + list->getId() + "\" is not of type " + LIST_KEYWORD);
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 
 	if(index < 0)
 	{
-		_throwRuntimeError(LIST_KEYWORD + " index negative");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 
 	if(index >= list->getValueCount())
 	{
-		_throwRuntimeError(LIST_KEYWORD + " index out of range");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -34,13 +34,13 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 	}
 	else if(values.size() < count)
 	{
-		_throwRuntimeError("not enough arguments");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
 	else
 	{
-		_throwRuntimeError("too many arguments");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return false;
 	}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<Scr
 	{
 		if(values[index]->getType() != types[index])
 		{
-			_throwRuntimeError("incorrect argument type");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return false;
 		}
@@ -79,7 +79,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError(LIST_KEYWORD + " name missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -88,7 +88,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwRuntimeError("value missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -97,7 +97,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError(LIST_KEYWORD + " does not exist");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -106,14 +106,14 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 	if(listVariable->isFinal())
 	{
-		_throwRuntimeError("cannot push to final " + LIST_KEYWORD);
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(_isListValue(valueString))
 	{
-		_throwRuntimeError("cannot push " + LIST_KEYWORD + " to " + LIST_KEYWORD);
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -157,7 +157,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -178,7 +178,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 
 		if(!isAccessingList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
-			_throwRuntimeError("cannot push " + LIST_KEYWORD + " to " + LIST_KEYWORD);
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -231,14 +231,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError(LIST_KEYWORD + " name missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(scriptLine.size() < (PULL_KEYWORD.size() + nameString.size() + 3))
 	{
-		_throwRuntimeError(LIST_KEYWORD + " index missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -247,14 +247,14 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
-		_throwRuntimeError("invalid " + LIST_KEYWORD + " index");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError(LIST_KEYWORD + " does not exist");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -263,7 +263,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 	if(listVariable->isFinal())
 	{
-		_throwRuntimeError("cannot push to final " + LIST_KEYWORD);
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -279,7 +279,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 
 		if(variable->getValue(0)->getType() != ScriptValueType::INTEGER)
 		{
-			_throwRuntimeError(LIST_KEYWORD + " index is not of type " + INTEGER_KEYWORD);
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}

@@ -32,7 +32,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	   operatorString != MODULO_KEYWORD &&
 	   operatorString != NEGATE_KEYWORD)
 	{
-		_throwRuntimeError("invalid arithmetic operator");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -41,7 +41,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("variable name missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -65,7 +65,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -86,26 +86,26 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(leftVariable->isFinal())
 	{
-		_throwRuntimeError(FINAL_KEYWORD + " variables cannot be changed");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 
 	if(!isAccessingLeftList && (leftVariable->getType() == ScriptVariableType::MULTIPLE))
 	{
-		_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING)
 	{
-		_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN)
 	{
-		_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -138,7 +138,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwRuntimeError("value missing");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -147,13 +147,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	if(_isListValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
 	else if(_isStringValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -171,7 +171,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}
@@ -196,7 +196,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -217,19 +217,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		if(!isAccessingRightList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
-			_throwRuntimeError("arithmetic not allowed on " + LIST_KEYWORD + " values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::STRING)
 		{
-			_throwRuntimeError("arithmetic not allowed on " + STRING_KEYWORD + " values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::BOOLEAN)
 		{
-			_throwRuntimeError("arithmetic not allowed on " + BOOLEAN_KEYWORD + " values");
+			_throwRuntimeError("invalid syntax or statement");
 
 			return;
 		}
@@ -303,7 +303,7 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 	}
 	else
 	{
-		_throwRuntimeError("value types not matching");
+		_throwRuntimeError("invalid syntax or statement");
 
 		return;
 	}

@@ -35,7 +35,7 @@ Line 2 of every script file must specify its state: entry or wait.
 1. META script_type_initialize
 2. META script_execution_entry
 3. 
-4. /// Your code goes here
+4. /// This script gets executed first
 ```
 
 ## 4. Variables & Values
@@ -51,7 +51,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 4.3 Scope
 
 - A variable scope can be global (`GLB` keyword) or local (no extra keyword).
-- A local variable can only be accessed in the same script file.
+- A local variable can only be accessed within the same script file.
 - A global variable can be accessed by ALL script files.
 - A local variable will be deleted at the end of a script file execution.
 - A global variable will never be deleted.
@@ -63,7 +63,8 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.5 Naming Conventions
 
-- A variable name must be unique and not conflict with FabScript keywords.
+- A variable name must be unique.
+- A variable name must not conflict with FabScript keywords.
 - A variable name must start with an alphabetic character (abc...).
 - A global variable name must start with `_`
 
@@ -77,21 +78,22 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 4.7 Special Value
 
-- A list is a special type of value that holds 0 or more individual values. Example: `{42, "test", <false>}`.
-- A list cannot hold another list value/variable.
-- You can access individual list components using `<name>[<index>]`.
-- You can add a new value to the list using `PUSH <name> <value>`.
-- You can delete an existing value from the list using `PULL <name> <index>`.
-- Remember: an index starts from 0!
+- A list is a special type of value that holds zero or more individual values. Example: `{42, "test", <false>}`.
+- A list value/variable cannot hold another list value/variable.
+- You can access individual list variable elements using `<name>[<index>]`.
+- You can add a new value to the list variable using `PUSH <name> <value>`.
+- You can delete an existing value from the list variable using `PULL <name> <index>`.
+- A list index starts from 0.
 
 ### 4.8 Type Casting
 
 - You can cast a variable to a different type using: `CAST <name> <type>`.
 - You can cast from `INT` to `DEC` and vice versa.
 - You can cast from `INT` to `BOL` and vice versa.
-- You can cast from `BOL` to `STR` and vice versa (if possible).
-- You can cast from `INT` to `STR` and vice versa (if possible).
-- You can cast from `DEC` to `STR` and vice versa (if possible).
+- You can cast from `STR` to `BOL` and vice versa (if possible).
+- You can cast from `STR` to `INT` and vice versa (if possible).
+- You can cast from `STR` to `DEC` and vice versa (if possible).
+- You cannot cast a final variable.
 - You cannot cast (an element of) a `LST` variable.
 
 ### 4.9 Example Code
@@ -111,28 +113,55 @@ Line 2 of every script file must specify its state: entry or wait.
 12.
 13. /// List variable
 14. DEF LST myList = {42, myBoolean, "test123", 45.0}
-15. DEF STR firstElement = myList[0]
-16. PUSH myList "newValue"
-17. PULL myList 2
-18.
-19. /// Final variable
-20. DEF FIN STR finalString = "i cannot be changed"
-21. DEF STR mutableString = "try to change me"
-22. ALT mutableString = "i changed you"
-23.
-24. /// Global variable
-25. DEF GLB INT _someInteger = 5
-26. DEF GLB FIN INT _anotherInteger = 5
+15. DEF LST copiedList = myList
+16. DEF DEC firstElement = myList[0]
+17. PUSH myList "newValue"
+18. PULL myList 2
+19.
+20. /// Final variable
+21. DEF FIN STR immutableString = "i cannot be changed"
+22. DEF STR mutableString = "try to change me"
+23. ALT mutableString = "i changed you"
+24.
+25. /// Global variable
+26. DEF GLB FIN INT _globalInteger = 5
 27.
 28. /// Variable casting
-29. CAST myDecimal INT
-30. DEF STR intString = "123"
-31. CAST intString INT
+29. DEF STR integerString = "123"
+30. CAST integerString INT
 ```
 
-## 5. Arithmetic Operations
+## 5. Functions
 
-### General
+### 5.1 General
+
+- You can call functions defined by the engine.
+- There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions.
+- Functions can return a value, which can be saved in a variable.
+- Functions can have "parameters", which are values expected to be passed to the function.
+- Actual values that are passed to functions are called "arguments".
+- List values/variables cannot be used as arguments.
+
+### 5.2 Example Code
+
+```text
+1. fe3d:camera_set_position(1.0, 2.0, 3.0)
+2. DEF DEC z = fe3d:camera_get_position_z()
+3. fe3d:print(z)
+4.
+5. /// Console output:
+6. /// 3.0
+```
+
+### 11.3 Types
+
+- [Engine Functions](SCRIPT_FE3D.md)
+- [Mathematics Functions](SCRIPT_MATH.md)
+- [Miscellaneous Functions](SCRIPT_MISC.md)
+
+## 6. Arithmetic Operations
+
+### 6.1 General
 
 - There are 5 types of arithmetic: addition, subtraction, multiplication, division, modulus, negation.
 - Addition syntax: `ADD <name> <value>`.
@@ -142,30 +171,34 @@ Line 2 of every script file must specify its state: entry or wait.
 - Modulus syntax: `MOD <name> <value>`.
 - Negation syntax: `NEG <name>`.
 - The result of the arithmetic operation will be stored in the variable the operation was applied on.
-- Arithmetic can be applied on individual list elements, but not the list itself!
+- Arithmetic can be applied only on `INT` and `DEC` variables.
+- Arithmetic can be applied on individual list variable elements, but not on the list variable itself!
 
-### 5.2 Example Code
+### 6.2 Example Code
 
 ```text
 1. DEF INT myInteger = 40
 2. DIV myInteger 5
 3. NEG myInteger
-4.
-5. /// Now myInteger will be -8
+4. fe3d:print(myInteger)
+5.
+6. /// Console output:
+7. /// -8
 ```
 
-## 6. Comparison Operations
+## 7. Comparison Operations
 
-### 6.1 General
+### 7.1 General
 
 - To check if two values are the same: `<value> IS <value>`.
 - To check if two values are different: `<value> NOT <value>`.
 - To check if one value is higher than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values).
 - To check if one value is lower than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values).
-- You cannot use different comparison value types (example: `5 IS 5.0` will not work, but `5 IS 5` will).
-- You can set the value of a `BOL` variable to the result of a condition using: `... <name> = (<condition>)`.
+- You cannot compare different value types (example: `5 IS 5.0` will not work, but `5 IS 5` will).
+- You cannot use list values/variables in a comparison operation.
+- You can set the value of a `BOL` variable to the result of a comparison operation using: `... <name> = (<comparison>)`.
 
-### 6.2 Example Code
+### 7.2 Example Code
 
 ```text
 1. DEF INT age = 12
@@ -173,18 +206,18 @@ Line 2 of every script file must specify its state: entry or wait.
 3. fe3d:print(isUnderAge)
 4.
 5. /// Console output:
-6. /// > true
+6. /// true
 ```
 
-## 7. Logic Operations
+## 8. Logic Operations
 
-### 7.1 General
+### 8.1 General
 
 - To check if all the comparison operations are true: `<comparison> AND <comparison>`.
 - To check if any of the comparison operations are true: `<comparison> OR <comparison>`.
 - You cannot use both the `AND` and `OR` keywords in one logic operation.
 
-### 7.2 Example Code
+### 8.2 Example Code
 
 ```text
 1. DEF INT age = 999
@@ -192,20 +225,20 @@ Line 2 of every script file must specify its state: entry or wait.
 3. fe3d:print(isValidAge)
 4.
 5. /// Console output:
-6. /// > false
+6. /// false
 ```
 
-## 8. Condition Operations
+## 9. Condition Operations
 
-### 8.1 General
+### 9.1 General
 
 - There are 3 types: `IF`, `ELIF`, `ELSE`.
-- All code under a condition operation must must be indented with 4 spaces / 1 tab.
+- All code under a condition operation must must be indented with 4 spaces or 1 tab.
 - You can chain these condition operations, in the described order.
 - Condition operations can be nested infinitely.
 - Works the same as in other programming languages.
 
-### 8.2 Example Code
+### 9.2 Example Code
 
 ```text
 1.  DEF INT age = 41
@@ -217,90 +250,65 @@ Line 2 of every script file must specify its state: entry or wait.
 9.      fe3d:print("I am older than 42!")
 10.
 11. /// Console output:
-12. /// > I am younger than 42!
+12. /// I am younger than 42!
 ```
 
-## 9. Loops
+## 10. Loops
 
-### 9.1 General
+### 10.1 General
 
 - Use a `LOOP` statement if you want to run a block of code multiple times.
 - You can exit a loop using the `BREAK` statement.
 - You can skip a loop iteration by using the `CONTINUE` statement.
 
-### 9.2 Example Code
+### 10.2 Example Code
 
 ```text
 1.  DEF LST myList = {"hello", "beautiful", "world"}
-2.  DEF INT index = 0
-3.  LOOP
-4.      IF index IS 2
-5.          BREAK
-6.      fe3d:print(myList[index])
-7.      ADD index 1
-8.  
-9.  /// Console output:
-10. /// > hello
-11. /// > beautiful
+2.  DEF INT maxIndex = misc:list_size("myList")
+3.  DEF INT index = 0
+4.  LOOP
+5.      IF index IS maxIndex
+6.          BREAK
+7.      fe3d:print(myList[index])
+8.      ADD index 1
+9.  
+10. /// Console output:
+11. /// hello
+12. /// beautiful
+13. /// world
 ```
 
-## 10. Executing Other Scripts
+## 11. Executing Other Scripts
 
-### 10.1 General
+### 11.1 General
 
 - The scripts that have the `execution_entry` META defined run first.
 - From there you can decide the order of execution yourself.
 - You can execute another script file using `EXECUTE <name>`.
+- The script type of the caller needs to be the same as the callee.
 - After the script is executed, the program will continue running the script where it left off.
 - The script that is executed must have the same type as the calling script.
 - This works the same as in other programming languages.
 - You can exit the execution of a script file using `EXIT`.
 - You can crash the execution of a script file using `CRASH`.
 
-### 10.2 Example Code
-
-```text
-1.  /// Code in main_script.fe3d
-2.  EXECUTE print_script
-3.  fe3d:print("goodbye world!")
-4.
-5.  /// Code in print_script.fe3d
-6.  fe3d:print("hello world!")
-7.
-8.  /// Console output:
-9.  /// > hello world!
-10. /// > goodbye world!
-```
-
-## 11. Functions
-
-### 11.1 General
-
-- You can call functions defined by the engine.
-- There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions.
-- Functions can return a value, which can be saved in a variable.
-- Functions can have "parameters", which are values expected to be passed to the function.
-- Actual values that are passed to functions are called "arguments".
-- List values cannot be used as parameters/arguments.
-
 ### 11.2 Example Code
 
 ```text
-1. fe3d:camera_set_position(1.0, 2.0, 3.0)
-2. DEF DEC z = fe3d:camera_get_position_z()
-3. fe3d:print(z)
+1.  /// Code in script1.fe3d
+2.  EXECUTE script2
+3.  fe3d:print("goodbye world!")
 4.
-5. /// Console output:
-6. /// > 3.0
+5.  /// Code in script2.fe3d
+6.  fe3d:print("hello world!")
+7.
+8.  /// Console output:
+9.  /// hello world!
+10. /// goodbye world!
 ```
 
-### 11.3 Types
-
-- [Engine Functions](SCRIPT_FE3D.md)
-- [Mathematics Functions](SCRIPT_MATH.md)
-- [Miscellaneous Functions](SCRIPT_MISC.md)
-
-## 12. Tips & Tricks
+## 12. Miscellaneous
 
 - You can use the `PASS` statement as an empty placeholder.
 - Be careful with loops as they can become infinite. Luckily this will get detected by the interpreter.

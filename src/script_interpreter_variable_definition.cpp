@@ -350,7 +350,9 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 			valueIndex = listIndex;
 		}
 
-		if((typeString == LIST_KEYWORD) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
+		const auto isListValue = ((rightVariable->getType() == ScriptVariableType::MULTIPLE) && !isAccessingList);
+
+		if((typeString == LIST_KEYWORD) && isListValue)
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
 
@@ -389,25 +391,25 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isFinal, values)});
 		}
-		else if((typeString == STRING_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::STRING))
+		else if((typeString == STRING_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::STRING) && !isListValue)
 		{
 			const auto values = initializer_list{make_shared<ScriptValue>(ScriptValueType::STRING, rightVariable->getValue(valueIndex)->getString())};
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, values)});
 		}
-		else if((typeString == DECIMAL_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::DECIMAL))
+		else if((typeString == DECIMAL_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::DECIMAL) && !isListValue)
 		{
 			const auto values = initializer_list{make_shared<ScriptValue>(ScriptValueType::DECIMAL, rightVariable->getValue(valueIndex)->getDecimal())};
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, values)});
 		}
-		else if((typeString == INTEGER_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::INTEGER))
+		else if((typeString == INTEGER_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::INTEGER) && !isListValue)
 		{
 			const auto values = initializer_list{make_shared<ScriptValue>(ScriptValueType::INTEGER, rightVariable->getValue(valueIndex)->getInteger())};
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, values)});
 		}
-		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::BOOLEAN))
+		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable->getValue(valueIndex)->getType() == ScriptValueType::BOOLEAN) && !isListValue)
 		{
 			const auto values = initializer_list{make_shared<ScriptValue>(ScriptValueType::BOOLEAN, rightVariable->getValue(valueIndex)->getBoolean())};
 

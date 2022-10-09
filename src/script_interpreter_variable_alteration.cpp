@@ -249,7 +249,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 			rightValueIndex = rightListIndex;
 		}
 
-		if((leftVariable->getType() == ScriptVariableType::MULTIPLE) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
+		const auto isLeftListValue = ((leftVariable->getType() == ScriptVariableType::MULTIPLE) && !isAccessingLeftList);
+		const auto isRightListValue = ((rightVariable->getType() == ScriptVariableType::MULTIPLE) && !isAccessingRightList);
+
+		if(isLeftListValue && isRightListValue)
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
 
@@ -288,9 +291,9 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 			leftVariable->setValues(values);
 		}
-		else if(leftVariable->getValue(leftValueIndex)->getType() == rightVariable->getValue(rightValueIndex)->getType())
+		else if((leftVariable->getValue(leftValueIndex)->getType() == rightVariable->getValue(rightValueIndex)->getType()) && !isLeftListValue && !isRightListValue)
 		{
-			switch(rightVariable->getValue(rightValueIndex)->getType())
+			switch(leftVariable->getValue(leftValueIndex)->getType())
 			{
 				case ScriptValueType::STRING:
 				{

@@ -74,13 +74,13 @@ Line 2 of every script file must specify its state: entry or wait.
 - A string is a concatenation of any characters, as long as they are surrounded with `"` `"`. Example: `"hello world"`.
 - A decimal is a floating point number which can also be negative. Example: `-42.536`.
 - An integer is a whole number which can also be negative. Example: `-42`.
-- A boolean can only be true or false. Example: `<true>` or `<false>` (NOTE: the `<` and `>` are not placeholders).
+- A boolean can only be true or false. Example: `<true>` or `<false>` (`<` and `>` are not placeholders).
 
 ### 4.7 Special Value
 
 - A list is a special type of value that holds zero or more individual values. Example: `{42, "test", <false>}`.
 - A list value/variable cannot hold another list value/variable.
-- You can access individual list variable elements using `<name>[<index>]`.
+- You can access an individual list variable element using `<name>[<index>]`.
 - You can add a new value to the list variable using `PUSH <name> <value>`.
 - You can delete an existing value from the list variable using `PULL <name> <index>`.
 - A list index starts from 0.
@@ -135,12 +135,12 @@ Line 2 of every script file must specify its state: entry or wait.
 
 ### 5.1 General
 
-- You can call functions defined by the engine.
-- There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions.
+- You can call pre-defined functions.
+- There are 3 types of functions: `fe3d`, `math`, `misc`.
 - Functions can return a value, which can be saved in a variable.
 - Functions can have "parameters", which are values expected to be passed to the function.
 - Actual values that are passed to functions are called "arguments".
-- List values/variables cannot be used as arguments.
+- A list value/variable cannot be used as an argument.
 
 ### 5.2 Example Code
 
@@ -156,7 +156,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 11.3 Types
 
 - [Engine Functions](SCRIPT_FE3D.md)
-- [Mathematics Functions](SCRIPT_MATH.md)
+- [Mathematicical Functions](SCRIPT_MATH.md)
 - [Miscellaneous Functions](SCRIPT_MISC.md)
 
 ## 6. Arithmetic Operations
@@ -171,7 +171,7 @@ Line 2 of every script file must specify its state: entry or wait.
 - Modulus syntax: `MOD <name> <value>`.
 - Negation syntax: `NEG <name>`.
 - The result of the arithmetic operation will be stored in the variable the operation was applied on.
-- Arithmetic can be applied only on `INT` and `DEC` variables.
+- Arithmetic can be applied only on a `INT` variable or a `DEC` variable.
 - Arithmetic can be applied on individual list variable elements, but not on the list variable itself!
 
 ### 6.2 Example Code
@@ -195,7 +195,7 @@ Line 2 of every script file must specify its state: entry or wait.
 - To check if one value is higher than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values).
 - To check if one value is lower than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values).
 - You cannot compare different value types (example: `5 IS 5.0` will not work, but `5 IS 5` will).
-- You cannot use list values/variables in a comparison operation.
+- You cannot use a list value/variable in a comparison operation.
 - You can set the value of a `BOL` variable to the result of a comparison operation using: `... <name> = (<comparison>)`.
 
 ### 7.2 Example Code
@@ -312,6 +312,6 @@ Line 2 of every script file must specify its state: entry or wait.
 
 - You can use the `PASS` statement as an empty placeholder.
 - Be careful with loops as they can become infinite. Luckily this will get detected by the interpreter.
-- Integer values are clamped between `-999999999` and `999999999` to prevent overflow.
-- Decimal values are clamped between `-999999999.0` and `999999999.0` to prevent overflow.
-- Decimal values have a fixed precision of 5 decimals after the dot.
+- An integer value is clamped between `-999999999` and `999999999` to prevent overflow.
+- A decimal value is clamped between `-999999999.0` and `999999999.0` to prevent overflow.
+- A decimal value has a fixed precision of 5 decimals after the dot.

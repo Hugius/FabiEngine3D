@@ -107,10 +107,10 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				if(isAccessingList)
 				{
-					const auto isOpeningBracketFound = find(elementString.begin(), elementString.end(), '[');
-					const auto bracketIndex = static_cast<int>(distance(elementString.begin(), isOpeningBracketFound));
+					const auto openingBracketIterator = find(elementString.begin(), elementString.end(), '[');
+					const auto openingBracketIndex = static_cast<int>(distance(elementString.begin(), openingBracketIterator));
 
-					elementString = elementString.substr(0, bracketIndex);
+					elementString = elementString.substr(0, openingBracketIndex);
 				}
 
 				if(!_isLocalVariableExisting(elementString) && !_isGlobalVariableExisting(elementString))

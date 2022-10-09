@@ -323,10 +323,10 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 		if(isAccessingList)
 		{
-			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+			const auto openingBracketIterator = find(valueString.begin(), valueString.end(), '[');
+			const auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), openingBracketIterator));
 
-			valueString = valueString.substr(0, bracketIndex);
+			valueString = valueString.substr(0, openingBracketIndex);
 		}
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))

@@ -64,10 +64,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(isAccessingLeftList)
 	{
-		const auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
-		const auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
+		const auto openingBracketIterator = find(nameString.begin(), nameString.end(), '[');
+		const auto openingBracketIndex = static_cast<int>(distance(nameString.begin(), openingBracketIterator));
 
-		nameString = nameString.substr(0, bracketIndex);
+		nameString = nameString.substr(0, openingBracketIndex);
 	}
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
@@ -222,10 +222,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 		if(isAccessingRightList)
 		{
-			const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			const auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+			const auto openingBracketIterator = find(valueString.begin(), valueString.end(), '[');
+			const auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), openingBracketIterator));
 
-			valueString = valueString.substr(0, bracketIndex);
+			valueString = valueString.substr(0, openingBracketIndex);
 		}
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))

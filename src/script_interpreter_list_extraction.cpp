@@ -206,10 +206,10 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(isAccessingList)
 					{
-						const auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
-						const auto bracketIndex = static_cast<int>(distance(currentValueString.begin(), isOpeningBracketFound));
+						const auto openingBracketIterator = find(currentValueString.begin(), currentValueString.end(), '[');
+						const auto openingBracketIndex = static_cast<int>(distance(currentValueString.begin(), openingBracketIterator));
 
-						currentValueString = currentValueString.substr(0, bracketIndex);
+						currentValueString = currentValueString.substr(0, openingBracketIndex);
 					}
 
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))

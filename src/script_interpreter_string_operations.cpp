@@ -70,16 +70,16 @@ const bool ScriptInterpreter::_isBooleanValue(const string & valueString) const
 
 const int ScriptInterpreter::_extractListIndexFromString(const string & valueString, bool & isAccessingList)
 {
-	const auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-	const auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
+	const auto openingBracketIterator = find(valueString.begin(), valueString.end(), '[');
+	const auto closingBracketIterator = find(valueString.begin(), valueString.end(), ']');
 
-	if(isOpeningBracketFound == valueString.end() || closingBracketFound == valueString.end())
+	if(openingBracketIterator == valueString.end() || closingBracketIterator == valueString.end())
 	{
 		return -1;
 	}
 
-	const auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
-	const auto closingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+	const auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), openingBracketIterator));
+	const auto closingBracketIndex = static_cast<int>(distance(valueString.begin(), closingBracketIterator));
 
 	if((openingBracketIndex == 0) || (closingBracketIndex == 0) || (openingBracketIndex > closingBracketIndex))
 	{

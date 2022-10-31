@@ -50,15 +50,6 @@ void BottomViewportController::_updateConsole()
 				_clearConsole();
 				_fillConsole();
 			}
-
-			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_C))
-			{
-				_clearConsole();
-
-				_messageQueue.clear();
-
-				_scrollingOffset = 0.0f;
-			}
 		}
 	}
 }

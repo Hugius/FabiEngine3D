@@ -275,8 +275,6 @@ void WorldEditor::_updateWorldCreating()
 			return;
 		}
 
-		_fe3d->misc_setVsyncEnabled(false);
-
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 		_currentWorldId = worldId;
@@ -305,7 +303,6 @@ void WorldEditor::_updateWorldChoosing()
 					if(loadWorldFromFile(_currentWorldId))
 					{
 						_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
-						_fe3d->misc_setVsyncEnabled(false);
 
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}

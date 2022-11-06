@@ -2,6 +2,7 @@
 
 - `misc:list_concat`(`STR` name, `STR` name) -----> `LST`
 - `misc:list_size`(`STR` name) -----> `INT`
+- `misc:list_empty`(`STR` name) -----> `BOL`
 - `misc:list_contains`(`STR` name, `STR` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `DEC` value) -----> `BOL`
 - `misc:list_contains`(`STR` name, `INT` value) -----> `BOL`
@@ -21,6 +22,7 @@
 - `misc:list_reverse`(`STR` name) -----> `LST`
 - `misc:string_concat`(`STR` value, `STR` value) -----> `STR`
 - `misc:string_size`(`STR` value) -----> `INT`
+- `misc:string_empty`(`STR` value) -----> `BOL`
 - `misc:string_contains`(`STR` value, `STR` part) -----> `BOL`
 - `misc:string_part`(`STR` value, `INT` index, `INT` count) -----> `STR`
 - `misc:string_split`(`STR` value, `STR` delimiter) -----> `LST`

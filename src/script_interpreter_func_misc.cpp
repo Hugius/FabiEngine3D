@@ -115,6 +115,35 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
+	else if(functionName == "misc:list_empty")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto listName = args[0]->getString();
+
+			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+			{
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
+
+				return {};
+			}
+
+			const auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
+			{
+				_throwRuntimeError("variable \"" + listName + "\" is not of type " + LIST_KEYWORD);
+
+				return {};
+			}
+
+			const auto result = (listVariable->getValueCount() == 0);
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
 	else if(functionName == "misc:list_contains")
 	{
 		if(_validateArgumentCount(args, 2))
@@ -552,6 +581,17 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto result = static_cast<int>(args[0]->getString().size());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+		}
+	}
+	else if(functionName == "misc:string_empty")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = args[0]->getString().empty();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "misc:string_contains")

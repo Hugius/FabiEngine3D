@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void TerrainEditor::_updateBlendMapMenu()
+void TerrainEditor::_updateBlendTexturingMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 

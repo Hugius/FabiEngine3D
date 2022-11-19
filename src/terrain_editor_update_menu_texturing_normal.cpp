@@ -2,11 +2,11 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void TerrainEditor::_updateDiffuseMapMenu()
+void TerrainEditor::_updateNormalTexturingMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "terrainEditorMenuDiffuseTexturing")
+	if(screen->getId() == "terrainEditorMenuNormalTexturing")
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -14,7 +14,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -22,7 +22,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -49,9 +49,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->terrain_setDiffuseMap(_currentTerrainId, finalFilePath);
+			_fe3d->terrain_setNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("redDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -59,7 +59,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -86,9 +86,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->terrain_setRedDiffuseMap(_currentTerrainId, finalFilePath);
+			_fe3d->terrain_setRedNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("greenDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -96,7 +96,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -123,9 +123,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainId, finalFilePath);
+			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blueDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -133,7 +133,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\terrain\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -160,14 +160,14 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 			_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, finalFilePath);
+			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d->terrain_setDiffuseMap(_currentTerrainId, "");
-			_fe3d->terrain_setRedDiffuseMap(_currentTerrainId, "");
-			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainId, "");
-			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, "");
+			_fe3d->terrain_setNormalMap(_currentTerrainId, "");
+			_fe3d->terrain_setRedNormalMap(_currentTerrainId, "");
+			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, "");
+			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, "");
 		}
 	}
 }

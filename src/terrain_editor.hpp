@@ -23,9 +23,9 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateDiffuseMapMenu();
-	void _updateBlendMapMenu();
-	void _updateNormalMapMenu();
+	void _updateDiffuseTexturingMenu();
+	void _updateBlendTexturingMenu();
+	void _updateNormalTexturingMenu();
 	void _updateGraphicsMenu();
 	void _updateMiscellaneousMenu();
 	void _updateTerrainCreating();

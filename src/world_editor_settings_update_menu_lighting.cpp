@@ -6,7 +6,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
 	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "worldEditorMenuSettingsAmbient")
+	if(screen->getId() == "worldEditorMenuSettingsAmbientLighting")
 	{
 		const auto color = _fe3d->graphics_getAmbientLightingColor();
 		const auto intensity = _fe3d->graphics_getAmbientLightingIntensity();
@@ -70,7 +70,7 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 {
 	const auto screen = _gui->getRightViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "worldEditorMenuSettingsDirectional")
+	if(screen->getId() == "worldEditorMenuSettingsDirectionalLighting")
 	{
 		const auto isEnabled = _fe3d->graphics_isDirectionalLightingEnabled();
 		const auto color = _fe3d->graphics_getDirectionalLightingColor();

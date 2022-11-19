@@ -165,17 +165,17 @@ void TerrainEditor::_update()
 
 	if(isLoaded())
 	{
-		_updateDiffuseMapMenu();
+		_updateDiffuseTexturingMenu();
 	}
 
 	if(isLoaded())
 	{
-		_updateNormalMapMenu();
+		_updateNormalTexturingMenu();
 	}
 
 	if(isLoaded())
 	{
-		_updateBlendMapMenu();
+		_updateBlendTexturingMenu();
 	}
 
 	if(isLoaded())

@@ -15,13 +15,13 @@ void WorldEditor::_updateSettingsMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("ambient")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("ambientLighting")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsAmbient");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsAmbientLighting");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("directional")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("directionalLighting")->isHovered())
 		{
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsDirectional");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsDirectionalLighting");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shadows")->isHovered())
 		{

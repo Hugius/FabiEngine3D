@@ -98,10 +98,9 @@ private:
 	void _updateSound3dPlacing();
 	void _updateSound3dEditing();
 	void _updateSettingsMenu();
-	void _updateLightingSettingsMenu();
-	void _updateAmbientLightingSettingsMenu();
-	void _updateDirectionalLightingSettingsMenu();
 	void _updateGraphicsSettingsMenu();
+	void _updateAmbientGraphicsSettingsMenu();
+	void _updateDirectionalGraphicsSettingsMenu();
 	void _updateShadowsGraphicsSettingsMenu();
 	void _updateReflectionsGraphicsSettingsMenu();
 	void _updateRefractionsGraphicsSettingsMenu();

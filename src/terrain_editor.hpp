@@ -26,7 +26,7 @@ private:
 	void _updateDiffuseMapMenu();
 	void _updateBlendMapMenu();
 	void _updateNormalMapMenu();
-	void _updateLightingMenu();
+	void _updateGraphicsMenu();
 	void _updateMiscellaneousMenu();
 	void _updateTerrainCreating();
 	void _updateTerrainChoosing();

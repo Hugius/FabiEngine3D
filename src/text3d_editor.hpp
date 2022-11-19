@@ -23,7 +23,7 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateLightingMenu();
+	void _updateGraphicsMenu();
 	void _updateMiscellaneousMenu();
 	void _updateAabbMenu();
 	void _updateText3dCreating();

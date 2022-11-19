@@ -76,9 +76,9 @@ void Text3dEditor::_updateChoiceMenu()
 
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("graphics")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuLighting");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuGraphics");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{

@@ -164,39 +164,35 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("worldEditorMenuSound3dChoice")->createButton("back", fvec2(0.0f, -0.9f), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("worldEditorMenuSettings");
-	rightWindow->getScreen("worldEditorMenuSettings")->createButton("lighting", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSettings")->createButton("graphics", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Graphics"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Graphics", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSettings")->createButton("editorSpeed", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Editor Speed"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Editor Speed", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("worldEditorMenuSettings")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	rightWindow->createScreen("worldEditorMenuSettingsLighting");
-	rightWindow->getScreen("worldEditorMenuSettingsLighting")->createButton("ambient", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Ambient"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Ambient", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLighting")->createButton("directional", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Directional"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Directional", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLighting")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
-	rightWindow->createScreen("worldEditorMenuSettingsLightingAmbient");
-	rightWindow->getScreen("worldEditorMenuSettingsLightingAmbient")->createButton("isEnabled", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Enabled: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingAmbient")->createButton("color", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingAmbient")->createButton("intensity", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingAmbient")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
-	rightWindow->createScreen("worldEditorMenuSettingsLightingDirectional");
-	rightWindow->getScreen("worldEditorMenuSettingsLightingDirectional")->createButton("isEnabled", fvec2(0.0f, POSITIONS(5)[0]), TEXT_SIZE("Enabled: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingDirectional")->createButton("position", fvec2(0.0f, POSITIONS(5)[1]), TEXT_SIZE("Position"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Position", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingDirectional")->createButton("color", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingDirectional")->createButton("intensity", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsLightingDirectional")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-
 	rightWindow->createScreen("worldEditorMenuSettingsGraphics");
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("shadows", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Shadows"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadows", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("reflections", fvec2(0.0f, POSITIONS(9)[1]), TEXT_SIZE("Reflections"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflections", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("refractions", fvec2(0.0f, POSITIONS(9)[2]), TEXT_SIZE("Refractions"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractions", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("dof", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("DOF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("fog", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Fog"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Fog", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("lensFlare", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Lens Flare"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lens Flare", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("skyExposure", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Sky Exposure"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sky Exposure", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("bloom", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Bloom"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bloom", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("ambient", fvec2(0.0f, POSITIONS(11)[0]), TEXT_SIZE("Ambient"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Ambient", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("directional", fvec2(0.0f, POSITIONS(11)[1]), TEXT_SIZE("Directional"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Directional", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("shadows", fvec2(0.0f, POSITIONS(11)[2]), TEXT_SIZE("Shadows"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadows", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("reflections", fvec2(0.0f, POSITIONS(11)[3]), TEXT_SIZE("Reflections"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflections", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("refractions", fvec2(0.0f, POSITIONS(11)[4]), TEXT_SIZE("Refractions"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractions", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("dof", fvec2(0.0f, POSITIONS(11)[5]), TEXT_SIZE("DOF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("fog", fvec2(0.0f, POSITIONS(11)[6]), TEXT_SIZE("Fog"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Fog", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("lensFlare", fvec2(0.0f, POSITIONS(11)[7]), TEXT_SIZE("Lens Flare"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lens Flare", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("skyExposure", fvec2(0.0f, POSITIONS(11)[8]), TEXT_SIZE("Sky Exposure"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sky Exposure", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("bloom", fvec2(0.0f, POSITIONS(11)[9]), TEXT_SIZE("Bloom"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bloom", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("back", fvec2(0.0f, POSITIONS(11)[10]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	rightWindow->createScreen("worldEditorMenuSettingsGraphicsAmbient");
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsAmbient")->createButton("isEnabled", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Enabled: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsAmbient")->createButton("color", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsAmbient")->createButton("intensity", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsAmbient")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	rightWindow->createScreen("worldEditorMenuSettingsGraphicsDirectional");
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsDirectional")->createButton("isEnabled", fvec2(0.0f, POSITIONS(5)[0]), TEXT_SIZE("Enabled: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsDirectional")->createButton("position", fvec2(0.0f, POSITIONS(5)[1]), TEXT_SIZE("Position"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Position", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsDirectional")->createButton("color", fvec2(0.0f, POSITIONS(5)[2]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsDirectional")->createButton("intensity", fvec2(0.0f, POSITIONS(5)[3]), TEXT_SIZE("Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("worldEditorMenuSettingsGraphicsDirectional")->createButton("back", fvec2(0.0f, POSITIONS(5)[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("worldEditorMenuSettingsGraphicsShadows");
 	rightWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("isEnabled", fvec2(0.0f, POSITIONS(13)[0]), TEXT_SIZE("Enabled: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -464,10 +460,9 @@ void WorldEditor::_unloadGUI()
 	rightWindow->deleteScreen("worldEditorMenuSound3dPlace");
 	rightWindow->deleteScreen("worldEditorMenuSound3dChoice");
 	rightWindow->deleteScreen("worldEditorMenuSettings");
-	rightWindow->deleteScreen("worldEditorMenuSettingsLighting");
-	rightWindow->deleteScreen("worldEditorMenuSettingsLightingAmbient");
-	rightWindow->deleteScreen("worldEditorMenuSettingsLightingDirectional");
 	rightWindow->deleteScreen("worldEditorMenuSettingsGraphics");
+	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsAmbient");
+	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsDirectional");
 	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsShadows");
 	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsReflections");
 	rightWindow->deleteScreen("worldEditorMenuSettingsGraphicsRefractions");

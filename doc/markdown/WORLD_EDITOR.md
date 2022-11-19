@@ -90,13 +90,10 @@
 
 ## 14. Settings
 
-### 14.1 Lighting
+### 14.1 Graphics
 
 - You can configure ambient lighting in the world.
 - You can configure directional lighting in the world.
-
-### 14.2 Graphics
-
 - You can configure shadows in the world.
 - You can configure reflections in the world.
 - You can configure refractions in the world.
@@ -106,7 +103,7 @@
 - You can configure sky exposure in the world.
 - You can configure bloom in the world.
 
-### 14.3 Properties
+### 14.2 Properties
 
 - **Editor Speed**: the speed with which the camera moves and the XYZ fields change
   - Type: `decimal`

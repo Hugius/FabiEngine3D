@@ -86,7 +86,7 @@ void TerrainEditor::_loadGUI()
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("diffuseTexturing", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Diffuse Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("normalTexturing", fvec2(0.0f, POSITIONS(6)[1]), TEXT_SIZE("Normal Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Normal Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("blendTexturing", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Blend Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Blend Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("lighting", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("graphics", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Graphics"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Graphics", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
@@ -111,14 +111,14 @@ void TerrainEditor::_loadGUI()
 	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("clearMaps", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("terrainEditorMenuLighting");
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("color", fvec2(0.0f, POSITIONS(7)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("lightness", fvec2(0.0f, POSITIONS(7)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("specularShininess", fvec2(0.0f, POSITIONS(7)[2]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(7)[3]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("isSpecular", fvec2(0.0f, POSITIONS(7)[4]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("isShadowed", fvec2(0.0f, POSITIONS(7)[5]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuLighting")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("terrainEditorMenuGraphics");
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("color", fvec2(0.0f, POSITIONS(7)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("lightness", fvec2(0.0f, POSITIONS(7)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("specularShininess", fvec2(0.0f, POSITIONS(7)[2]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(7)[3]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("isSpecular", fvec2(0.0f, POSITIONS(7)[4]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("isShadowed", fvec2(0.0f, POSITIONS(7)[5]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuGraphics")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("terrainEditorMenuMiscellaneous");
 	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("maxHeight", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Max Height"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Max Height", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -143,7 +143,7 @@ void TerrainEditor::_unloadGUI()
 	leftWindow->deleteScreen("terrainEditorMenuDiffuseTexturing");
 	leftWindow->deleteScreen("terrainEditorMenuBlendTexturing");
 	leftWindow->deleteScreen("terrainEditorMenuNormalTexturing");
-	leftWindow->deleteScreen("terrainEditorMenuLighting");
+	leftWindow->deleteScreen("terrainEditorMenuGraphics");
 	leftWindow->deleteScreen("terrainEditorMenuMiscellaneous");
 
 	leftWindow->setActiveScreen("main");
@@ -180,7 +180,7 @@ void TerrainEditor::_update()
 
 	if(isLoaded())
 	{
-		_updateLightingMenu();
+		_updateGraphicsMenu();
 	}
 
 	if(isLoaded())

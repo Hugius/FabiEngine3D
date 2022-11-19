@@ -116,7 +116,7 @@ void ModelEditor::_loadGUI()
 	leftWindow->createScreen("modelEditorMenuChoice");
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("part", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Select Part"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Select Part", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("texturing", fvec2(0.0f, POSITIONS(6)[1]), TEXT_SIZE("Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuChoice")->createButton("lighting", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuChoice")->createButton("graphics", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Graphics"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Graphics", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("aabb", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -132,24 +132,24 @@ void ModelEditor::_loadGUI()
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("modelEditorMenuLighting");
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("color", fvec2(0.0f, POSITIONS(17)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("lightness", fvec2(0.0f, POSITIONS(17)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("reflectionType", fvec2(0.0f, POSITIONS(17)[2]), TEXT_SIZE("Reflection: CUBE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflection: CUBE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("refractionType", fvec2(0.0f, POSITIONS(17)[3]), TEXT_SIZE("Refraction: CUBE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refraction: CUBE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("reflectivity", fvec2(0.0f, POSITIONS(17)[4]), TEXT_SIZE("Reflectivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflectivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("refractivity", fvec2(0.0f, POSITIONS(17)[5]), TEXT_SIZE("Refractivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("specularShininess", fvec2(0.0f, POSITIONS(17)[6]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(17)[7]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("emissionIntensity", fvec2(0.0f, POSITIONS(17)[8]), TEXT_SIZE("Emission Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Emission Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isReflective", fvec2(0.0f, POSITIONS(17)[9]), TEXT_SIZE("Reflective: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflective: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isRefractive", fvec2(0.0f, POSITIONS(17)[10]), TEXT_SIZE("Refractive: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractive: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isSpecular", fvec2(0.0f, POSITIONS(17)[11]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isBright", fvec2(0.0f, POSITIONS(17)[12]), TEXT_SIZE("Bright: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bright: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isShadowed", fvec2(0.0f, POSITIONS(17)[13]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isReflected", fvec2(0.0f, POSITIONS(17)[14]), TEXT_SIZE("Reflected: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflected: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("isRefracted", fvec2(0.0f, POSITIONS(17)[15]), TEXT_SIZE("Refracted: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refracted: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuLighting")->createButton("back", fvec2(0.0f, POSITIONS(17)[16]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("modelEditorMenuGraphics");
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("color", fvec2(0.0f, POSITIONS(17)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("lightness", fvec2(0.0f, POSITIONS(17)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("reflectionType", fvec2(0.0f, POSITIONS(17)[2]), TEXT_SIZE("Reflection: CUBE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflection: CUBE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("refractionType", fvec2(0.0f, POSITIONS(17)[3]), TEXT_SIZE("Refraction: CUBE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refraction: CUBE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("reflectivity", fvec2(0.0f, POSITIONS(17)[4]), TEXT_SIZE("Reflectivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflectivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("refractivity", fvec2(0.0f, POSITIONS(17)[5]), TEXT_SIZE("Refractivity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractivity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("specularShininess", fvec2(0.0f, POSITIONS(17)[6]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(17)[7]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("emissionIntensity", fvec2(0.0f, POSITIONS(17)[8]), TEXT_SIZE("Emission Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Emission Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isReflective", fvec2(0.0f, POSITIONS(17)[9]), TEXT_SIZE("Reflective: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflective: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isRefractive", fvec2(0.0f, POSITIONS(17)[10]), TEXT_SIZE("Refractive: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractive: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isSpecular", fvec2(0.0f, POSITIONS(17)[11]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isBright", fvec2(0.0f, POSITIONS(17)[12]), TEXT_SIZE("Bright: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bright: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isShadowed", fvec2(0.0f, POSITIONS(17)[13]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isReflected", fvec2(0.0f, POSITIONS(17)[14]), TEXT_SIZE("Reflected: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflected: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("isRefracted", fvec2(0.0f, POSITIONS(17)[15]), TEXT_SIZE("Refracted: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refracted: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("back", fvec2(0.0f, POSITIONS(17)[16]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("modelEditorMenuMiscellaneous");
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("size", fvec2(0.0f, POSITIONS(8)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -185,7 +185,7 @@ void ModelEditor::_unloadGUI()
 	leftWindow->deleteScreen("modelEditorMenuMain");
 	leftWindow->deleteScreen("modelEditorMenuChoice");
 	leftWindow->deleteScreen("modelEditorMenuTexturing");
-	leftWindow->deleteScreen("modelEditorMenuLighting");
+	leftWindow->deleteScreen("modelEditorMenuGraphics");
 	leftWindow->deleteScreen("modelEditorMenuMiscellaneous");
 	leftWindow->deleteScreen("modelEditorMenuAabbMain");
 	leftWindow->deleteScreen("modelEditorMenuAabbChoice");
@@ -214,7 +214,7 @@ void ModelEditor::_update()
 
 	if(isLoaded())
 	{
-		_updateLightingMenu();
+		_updateGraphicsMenu();
 	}
 
 	if(isLoaded())

@@ -93,19 +93,19 @@ void Text3dEditor::_loadGUI()
 	leftWindow->getScreen("text3dEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("text3dEditorMenuChoice");
-	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("lighting", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("graphics", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Graphics"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Graphics", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("aabb", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("text3dEditorMenuLighting");
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("color", fvec2(0.0f, POSITIONS(7)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("lightness", fvec2(0.0f, POSITIONS(7)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("isBright", fvec2(0.0f, POSITIONS(7)[2]), TEXT_SIZE("Bright: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bright: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("isShadowed", fvec2(0.0f, POSITIONS(7)[3]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("isReflected", fvec2(0.0f, POSITIONS(7)[4]), TEXT_SIZE("Reflected: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflected: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("isRefracted", fvec2(0.0f, POSITIONS(7)[5]), TEXT_SIZE("Refracted: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refracted: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuLighting")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("text3dEditorMenuGraphics");
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("color", fvec2(0.0f, POSITIONS(7)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("lightness", fvec2(0.0f, POSITIONS(7)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("isBright", fvec2(0.0f, POSITIONS(7)[2]), TEXT_SIZE("Bright: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bright: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("isShadowed", fvec2(0.0f, POSITIONS(7)[3]), TEXT_SIZE("Shadowed: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Shadowed: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("isReflected", fvec2(0.0f, POSITIONS(7)[4]), TEXT_SIZE("Reflected: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflected: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("isRefracted", fvec2(0.0f, POSITIONS(7)[5]), TEXT_SIZE("Refracted: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refracted: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuGraphics")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("text3dEditorMenuMiscellaneous");
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("size", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -135,7 +135,7 @@ void Text3dEditor::_unloadGUI()
 
 	leftWindow->deleteScreen("text3dEditorMenuMain");
 	leftWindow->deleteScreen("text3dEditorMenuChoice");
-	leftWindow->deleteScreen("text3dEditorMenuLighting");
+	leftWindow->deleteScreen("text3dEditorMenuGraphics");
 	leftWindow->deleteScreen("text3dEditorMenuMiscellaneous");
 	leftWindow->deleteScreen("text3dEditorMenuAabb");
 
@@ -158,7 +158,7 @@ void Text3dEditor::_update()
 
 	if(isLoaded())
 	{
-		_updateLightingMenu();
+		_updateGraphicsMenu();
 	}
 
 	if(isLoaded())

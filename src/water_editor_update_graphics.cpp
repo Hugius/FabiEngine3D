@@ -1,11 +1,11 @@
 #include "water_editor.hpp"
 #include "tools.hpp"
 
-void WaterEditor::_updateLightingMenu()
+void WaterEditor::_updateGraphicsMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "waterEditorMenuLighting")
+	if(screen->getId() == "waterEditorMenuGraphics")
 	{
 		const auto color = _fe3d->water_getColor(_currentWaterId);
 		const auto lightness = _fe3d->water_getLightness(_currentWaterId);

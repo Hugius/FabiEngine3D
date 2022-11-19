@@ -99,7 +99,7 @@
   - Type: `integer`
   - Constraints: between `128` and `1024`
 
-### 1.98 Planar Refractions
+### 1.9 Planar Refractions
 
 #### 1.9.1 General
 
@@ -164,26 +164,32 @@
   - Type: `boolean`
   - Constraints: none
 
-## 2. Post Processing
+## 2. Post-processing
 
-### 2.1 Motion Blur
+### 2.1 Bloom
 
 #### 2.1.1 General
 
-- Motion blur is an effect that blurs the screen in the camera view move direction.
-- Blurring is either horizontal or vertical.
+- Bloom is an effect that adds a glow to very bright objects.
+- Emission maps can be used to specify bloomed fragments.
 
 #### 2.1.2 Properties
 
-- **Intensity**: the intensity of the motion blur movement
+- **Intensity**: the intensity of the bloom effect
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Quality**: the quality of the motion blur effect
+- **Quality**: the quality of the bloom effect
   - Type: `integer`
   - Constraints: between `1` and `5`
-- **Enabled**: the motion blur effect is enabled
+- **Blur Count**: the amount of blurs used for the bloom effect
+  - Type: `integer`
+  - Constraints: at least `0`
+- **Enabled**: the bloom effect is enabled
   - Type: `boolean`
   - Constraints: none
+- **Type**: the type of the bloom effect
+  - Type: `enumeration`
+  - Constraints: `PARTS` or `EVERYTHING`
 
 ### 2.2 DOF
 
@@ -210,18 +216,50 @@
   - Type: `boolean`
   - Constraints: none
 
-### 2.4 Lens Flare
+### 2.3 Motion Blur
+
+#### 2.3.1 General
+
+- Motion blur is an effect that blurs the screen in the camera view move direction.
+- Blurring is either horizontal or vertical.
+
+#### 2.3.2 Properties
+
+- **Intensity**: the intensity of the motion blur movement
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Quality**: the quality of the motion blur effect
+  - Type: `integer`
+  - Constraints: between `1` and `5`
+- **Enabled**: the motion blur effect is enabled
+  - Type: `boolean`
+  - Constraints: none
+
+### 2.4 Anti Aliasing
 
 #### 2.4.1 General
+
+- Anti aliasing is an effect that smoothes out jagged edges.
+- FXAA is the technique used for this effect.
+
+#### 2.4.2 Properties
+
+- **Enabled**: the anti aliasing effect is enabled
+  - Type: `boolean`
+  - Constraints: none
+
+### 2.5 Lens Flare
+
+#### 2.5.1 General
 
 - Lens flare is an effect that mimics camera lens flares.
 - Flare maps are used to render this type of effect.
 
-#### 2.4.2 Assets
+#### 2.5.2 Assets
 
 - Flare map
 
-#### 2.4.3 Properties
+#### 2.5.3 Properties
 
 - **Flare Map Path**: the path of the flare map file
   - Type: `string`
@@ -236,43 +274,12 @@
   - Type: `boolean`
   - Constraints: none
 
-### 2.5 Bloom
+### 2.6 Gamma Correction
 
-#### 2.5.1 General
-
-- Bloom is an effect that adds a glow to very bright objects.
-- Emission maps can be used to specify bloomed fragments.
-
-#### 2.5.2 Properties
-
-- **Intensity**: the intensity of the bloom effect
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Quality**: the quality of the bloom effect
-  - Type: `integer`
-  - Constraints: between `1` and `5`
-- **Blur Count**: the amount of blurs used for the bloom effect
-  - Type: `integer`
-  - Constraints: at least `0`
-- **Enabled**: the bloom effect is enabled
-  - Type: `boolean`
-  - Constraints: none
-- **Type**: the type of the bloom effect
-  - Type: `enumeration`
-  - Constraints: `PARTS` or `EVERYTHING`
-
-### 2.6 Anti Aliasing
-
-#### 2.6.1 General
-
-- Anti aliasing is an effect that smoothes out jagged edges.
-- FXAA is the technique used for this effect.
-
-#### 2.6.2 Properties
-
-- **Enabled**: the anti aliasing effect is enabled
-  - Type: `boolean`
-  - Constraints: none
+- Gamma correction is the reverse process of monitors displaying colors in a non-linear space.
+- Lighting calculations are done in linear space.
+- After gamma correction the lighting looks smoother.
+- Gamma correction is always enabled.
 
 ## 3. Miscellaneous
 
@@ -334,27 +341,16 @@
   - Type: `integer`
   - Constraints: between `1` and `16`
 
-### 3.4 Gamma Correction
-
-- Gamma correction is the reverse process of monitors displaying colors in a non-linear space.
-- Lighting calculations are done in linear space.
-- After gamma correction the lighting looks smoother.
-- Gamma correction is always enabled.
-
-### 3.5 Normal Mapping
+### 3.4 Normal Mapping
 
 - Normal mapping is the process of increasing the lighting details by distorting normal vectors.
 - A normal map is used to calculate distorted normal vectors.
 - Flat surfaces look detailed with normal mapping.
 - Applicable to terrain, water and models.
 
-### 3.6 Transparent Water Edges
+### 3.5 Water effects
 
 - The transparent water edges effect makes fragments transparent that are undeep.
-- Applicable only to water.
-
-### 3.7 Water Fresnel Effect
-
 - The water fresnel effect mixes the reflection and refraction colors automatically based on the camera position.
 - The water fresnel effect is always enabled.
 - Applicable only to water.

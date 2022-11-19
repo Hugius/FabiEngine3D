@@ -13,9 +13,9 @@
 
 - **Drawables**: sky, terrain, water, model, quad3D, text3D, AABB, quad2D, text2D
 - **Textures**: blend, cube, diffuse, dudv, emission, flare, font, height, normal, reflection, refraction, specular
-- **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
-- **Post-Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare, gamma correction
-- **Miscellaneous**: shadows, cube reflections, cube refractions, planar reflections, planar refractions fog, sky exposure, anisotropic filtering
+- **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, cube reflections, cube refractions, planar reflections, planar refractions, shadows
+- **Post-processing**: bloom, DOF, motion blur, anti-aliasing, lens flare, gamma correction
+- **Miscellaneous**: fog, sky exposure, anisotropic filtering, normal mapping, water effects
 
 ### 1.3 Physics
 

@@ -1,11 +1,11 @@
 #include "sky_editor.hpp"
 #include "tools.hpp"
 
-void SkyEditor::_updateLightingMenu()
+void SkyEditor::_updateGraphicsMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "skyEditorMenuLighting")
+	if(screen->getId() == "skyEditorMenuGraphics")
 	{
 		const auto lightness = _fe3d->sky_getLightness(_currentSkyId);
 		const auto color = _fe3d->sky_getColor(_currentSkyId);

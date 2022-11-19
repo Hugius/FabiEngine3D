@@ -26,7 +26,7 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateTexturingMenu();
-	void _updateLightingMenu();
+	void _updateGraphicsMenu();
 	void _updateMiscellaneousMenu();
 	void _updateWaterCreating();
 	void _updateWaterChoosing();

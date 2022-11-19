@@ -5,11 +5,11 @@
 
 using std::clamp;
 
-void TerrainEditor::_updateLightingMenu()
+void TerrainEditor::_updateGraphicsMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "terrainEditorMenuLighting")
+	if(screen->getId() == "terrainEditorMenuGraphics")
 	{
 		const auto isSpecular = _fe3d->terrain_isSpecular(_currentTerrainId);
 		const auto specularShininess = _fe3d->terrain_getSpecularShininess(_currentTerrainId);

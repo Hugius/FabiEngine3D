@@ -63,7 +63,7 @@
     <ClCompile Include="..\..\..\src\captor_editor_saving.cpp" />
     <ClCompile Include="..\..\..\src\captor_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp" />
-    <ClCompile Include="..\..\..\src\sky_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\sky_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_editor_misc.cpp" />
@@ -109,7 +109,7 @@
     <ClCompile Include="..\..\..\src\text3d_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_saving.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_update_aabb.cpp" />
-    <ClCompile Include="..\..\..\src\text3d_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\text3d_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\text3d_editor_update_miscellaneous.cpp" />
@@ -123,7 +123,7 @@
     <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_misc.cpp" />
@@ -150,7 +150,6 @@
     <ClCompile Include="..\..\..\src\world_editor_captor_update_edit.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_captor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_captor_update_place.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_sky_update.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_spotlight_update_edit.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_spotlight_update_menu.cpp" />
@@ -177,19 +176,19 @@
     <ClCompile Include="..\..\..\src\sky_editor_update_miscellaneous.cpp" />
     <ClCompile Include="..\..\..\src\sky_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\terrain_editor_update_diffuse.cpp" />
-    <ClCompile Include="..\..\..\src\terrain_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\terrain_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\terrain_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\terrain_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\water_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\water_editor_update_texturing.cpp" />
-    <ClCompile Include="..\..\..\src\water_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\water_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\water_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_saving.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_aabb.cpp" />
-    <ClCompile Include="..\..\..\src\model_editor_update_lighting.cpp" />
+    <ClCompile Include="..\..\..\src\model_editor_update_graphics.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_texturing.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_misc.cpp" />

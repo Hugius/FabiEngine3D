@@ -366,7 +366,7 @@
     <ClCompile Include="..\..\..\src\model_editor_update_aabb.cpp">
       <Filter>Model Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_update_graphics.cpp">
       <Filter>Model Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_editor_update_misc.cpp">
@@ -465,7 +465,7 @@
     <ClCompile Include="..\..\..\src\terrain_editor_update_diffuse.cpp">
       <Filter>Terrain Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_update_graphics.cpp">
       <Filter>Terrain Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_update_menu.cpp">
@@ -483,7 +483,7 @@
     <ClCompile Include="..\..\..\src\water_editor_update_menu.cpp">
       <Filter>Water Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\water_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_update_graphics.cpp">
       <Filter>Water Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_editor_update_misc.cpp">
@@ -516,14 +516,11 @@
     <ClCompile Include="..\..\..\src\world_editor_terrain_update.cpp">
       <Filter>World Editor\Update\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_graphics.cpp">
       <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous.cpp">
       <Filter>Quad3D Editor\Update</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp">
-      <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_captor_update_menu.cpp">
       <Filter>World Editor\Update\Captor</Filter>
@@ -672,7 +669,7 @@
     <ClCompile Include="..\..\..\src\text3d_editor_saving.cpp">
       <Filter>Text3D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\text3d_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\text3d_editor_update_graphics.cpp">
       <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text3d_editor_update_menu.cpp">
@@ -810,7 +807,7 @@
     <ClCompile Include="..\..\..\src\captor_editor_update_misc.cpp">
       <Filter>Captor Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sky_editor_update_lighting.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_update_graphics.cpp">
       <Filter>Sky Editor\Update</Filter>
     </ClCompile>
   </ItemGroup>

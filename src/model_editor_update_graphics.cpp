@@ -1,11 +1,11 @@
 #include "model_editor.hpp"
 #include "tools.hpp"
 
-void ModelEditor::_updateLightingMenu()
+void ModelEditor::_updateGraphicsMenu()
 {
 	const auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getId() == "modelEditorMenuLighting")
+	if(screen->getId() == "modelEditorMenuGraphics")
 	{
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || !_currentPartId.empty());
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || _currentPartId.empty());

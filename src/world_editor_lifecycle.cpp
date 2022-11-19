@@ -409,17 +409,12 @@ void WorldEditor::_update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateLightingSettingsMenu();
+		_updateAmbientGraphicsSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateAmbientLightingSettingsMenu();
-	}
-
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateDirectionalLightingSettingsMenu();
+		_updateDirectionalGraphicsSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())

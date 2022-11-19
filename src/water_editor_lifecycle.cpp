@@ -93,7 +93,7 @@ void WaterEditor::_loadGUI()
 
 	leftWindow->createScreen("waterEditorMenuChoice");
 	leftWindow->getScreen("waterEditorMenuChoice")->createButton("texturing", fvec2(0.0f, POSITIONS(4)[0]), TEXT_SIZE("Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("lighting", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuChoice")->createButton("graphics", fvec2(0.0f, POSITIONS(4)[1]), TEXT_SIZE("Graphics"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Graphics", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("waterEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, POSITIONS(4)[2]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("waterEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
@@ -105,18 +105,18 @@ void WaterEditor::_loadGUI()
 	leftWindow->getScreen("waterEditorMenuTexturing")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("waterEditorMenuTexturing")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("waterEditorMenuLighting");
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("color", fvec2(0.0f, POSITIONS(11)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("lightness", fvec2(0.0f, POSITIONS(11)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("specularShininess", fvec2(0.0f, POSITIONS(11)[2]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(11)[3]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("distortionSize", fvec2(0.0f, POSITIONS(11)[4]), TEXT_SIZE("Distortion size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distortion size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("distortionFactor", fvec2(0.0f, POSITIONS(11)[5]), TEXT_SIZE("Distortion Factor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distortion Factor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("isReflective", fvec2(0.0f, POSITIONS(11)[6]), TEXT_SIZE("Reflective: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflective: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("isRefractive", fvec2(0.0f, POSITIONS(11)[7]), TEXT_SIZE("Refractive: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractive: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("isSpecular", fvec2(0.0f, POSITIONS(11)[8]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("isEdged", fvec2(0.0f, POSITIONS(11)[9]), TEXT_SIZE("Edged: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edged: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("waterEditorMenuLighting")->createButton("back", fvec2(0.0f, POSITIONS(11)[10]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("waterEditorMenuGraphics");
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("color", fvec2(0.0f, POSITIONS(11)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("lightness", fvec2(0.0f, POSITIONS(11)[1]), TEXT_SIZE("Lightness"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("specularShininess", fvec2(0.0f, POSITIONS(11)[2]), TEXT_SIZE("Specular Shininess"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Shininess", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("specularIntensity", fvec2(0.0f, POSITIONS(11)[3]), TEXT_SIZE("Specular Intensity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Intensity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("distortionSize", fvec2(0.0f, POSITIONS(11)[4]), TEXT_SIZE("Distortion size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distortion size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("distortionFactor", fvec2(0.0f, POSITIONS(11)[5]), TEXT_SIZE("Distortion Factor"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Distortion Factor", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("isReflective", fvec2(0.0f, POSITIONS(11)[6]), TEXT_SIZE("Reflective: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflective: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("isRefractive", fvec2(0.0f, POSITIONS(11)[7]), TEXT_SIZE("Refractive: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refractive: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("isSpecular", fvec2(0.0f, POSITIONS(11)[8]), TEXT_SIZE("Specular: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("isEdged", fvec2(0.0f, POSITIONS(11)[9]), TEXT_SIZE("Edged: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edged: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("waterEditorMenuGraphics")->createButton("back", fvec2(0.0f, POSITIONS(11)[10]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("waterEditorMenuMiscellaneous");
 	leftWindow->getScreen("waterEditorMenuMiscellaneous")->createButton("size", fvec2(0.0f, POSITIONS(13)[0]), TEXT_SIZE("Size"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -146,7 +146,7 @@ void WaterEditor::_unloadGUI()
 	leftWindow->deleteScreen("waterEditorMenuMain");
 	leftWindow->deleteScreen("waterEditorMenuChoice");
 	leftWindow->deleteScreen("waterEditorMenuTexturing");
-	leftWindow->deleteScreen("waterEditorMenuLighting");
+	leftWindow->deleteScreen("waterEditorMenuGraphics");
 	leftWindow->deleteScreen("waterEditorMenuMiscellaneous");
 
 	leftWindow->setActiveScreen("main");
@@ -173,7 +173,7 @@ void WaterEditor::_update()
 
 	if(isLoaded())
 	{
-		_updateLightingMenu();
+		_updateGraphicsMenu();
 	}
 
 	if(isLoaded())

@@ -2,8 +2,8 @@
 
 ## Setters
 
-- `fe3d:world_load_editor` (`STR` world_id) -----> `NONE`
 - `fe3d:world_clear_editor` () -----> `NONE`
+- `fe3d:world_load_editor` (`STR` world_id) -----> `NONE`
 - `fe3d:world_add_custom_sky` (`STR` sky_id) -----> `NONE`
 - `fe3d:world_add_custom_terrain` (`STR` terrain_id) -----> `NONE`
 - `fe3d:world_add_custom_water` (`STR` water_id) -----> `NONE`
@@ -16,10 +16,10 @@
 - `fe3d:world_add_custom_captor` (`STR` captor_id) -----> `NONE`
 - `fe3d:world_add_custom_sound3d` (`STR` sound_id) -----> `NONE`
 - `fe3d:world_add_custom_graphics` () -----> `NONE`
-- `fe3d:world_reset_custom_build` () -----> `NONE`
+- `fe3d:world_reset_custom` () -----> `NONE`
+- `fe3d:world_clear_custom` () -----> `NONE`
 - `fe3d:world_save_custom` (`STR` world_id) -----> `NONE`
 - `fe3d:world_load_custom` (`STR` world_id) -----> `NONE`
-- `fe3d:world_clear_custom` () -----> `NONE`
 - `fe3d:world_delete_custom` (`STR` world_id) -----> `NONE`
 
 ## Getters

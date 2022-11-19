@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_reset_custom_build")
+	else if(functionName == "fe3d:world_reset_custom")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

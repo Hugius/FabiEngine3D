@@ -1321,26 +1321,26 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 	}
 
 	{
-		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
-		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+		const auto height = _fe3d->graphics_getPlanarReflectionHeight();
+		const auto quality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_PLANAR_REFLECTIONS "
-			<< planarHeight
+			<< height
 			<< " "
-			<< planarQuality
+			<< quality
 			<< endl;
 	}
 
 	{
-		const auto planarHeight = _fe3d->graphics_getPlanarRefractionHeight();
-		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+		const auto height = _fe3d->graphics_getPlanarRefractionHeight();
+		const auto quality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_PLANAR_REFRACTIONS "
-			<< planarHeight
+			<< height
 			<< " "
-			<< planarQuality
+			<< quality
 			<< endl;
 	}
 

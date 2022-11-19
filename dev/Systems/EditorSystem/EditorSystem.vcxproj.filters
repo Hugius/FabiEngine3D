@@ -399,10 +399,10 @@
     <ClCompile Include="..\..\..\src\world_editor_pointlight_update_menu.cpp">
       <Filter>World Editor\Update\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_settings_updates_menu.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_settings_update_menu.cpp">
       <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_settings_update_graphics.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_settings_update_menu_lighting.cpp">
       <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_misc_select.cpp">
@@ -809,6 +809,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_update_graphics.cpp">
       <Filter>Sky Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_settings_update_menu_post.cpp">
+      <Filter>World Editor\Update\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_settings_update_menu_misc.cpp">
+      <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

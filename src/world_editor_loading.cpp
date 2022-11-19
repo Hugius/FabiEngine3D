@@ -650,27 +650,27 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_PLANAR_REFLECTIONS")
 		{
-			float planarHeight;
-			int planarQuality;
+			float height;
+			int quality;
 
 			iss
-				>> planarHeight
-				>> planarQuality;
+				>> height
+				>> quality;
 
-			_fe3d->graphics_setPlanarReflectionHeight(planarHeight);
-			_fe3d->graphics_setPlanarReflectionQuality(planarQuality);
+			_fe3d->graphics_setPlanarReflectionHeight(height);
+			_fe3d->graphics_setPlanarReflectionQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_PLANAR_REFRACTIONS")
 		{
-			float planarHeight;
-			int planarQuality;
+			float height;
+			int quality;
 
 			iss
-				>> planarHeight
-				>> planarQuality;
+				>> height
+				>> quality;
 
-			_fe3d->graphics_setPlanarRefractionHeight(planarHeight);
-			_fe3d->graphics_setPlanarRefractionQuality(planarQuality);
+			_fe3d->graphics_setPlanarRefractionHeight(height);
+			_fe3d->graphics_setPlanarRefractionQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{

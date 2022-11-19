@@ -409,57 +409,52 @@ void WorldEditor::_update()
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateAmbientGraphicsSettingsMenu();
+		_updateAmbientLightingSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateDirectionalGraphicsSettingsMenu();
+		_updateDirectionalLightingSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateGraphicsSettingsMenu();
+		_updateShadowsSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateShadowsGraphicsSettingsMenu();
+		_updatePlanarReflectionsSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateReflectionsGraphicsSettingsMenu();
+		_updatePlanarRefractionsSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateRefractionsGraphicsSettingsMenu();
+		_updateBloomSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateDofGraphicsSettingsMenu();
+		_updateDofSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateFogGraphicsSettingsMenu();
+		_updateLensFlareSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateLensFlareGraphicsSettingsMenu();
+		_updateFogSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSkyExposureGraphicsSettingsMenu();
-	}
-
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateBloomGraphicsSettingsMenu();
+		_updateSkyExposureSettingsMenu();
 	}
 
 	if(isLoaded() && !_currentWorldId.empty())

@@ -493,7 +493,7 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
-			<< "GRAPHICS_REFLECTIONS "
+			<< "GRAPHICS_PLANAR_REFLECTIONS "
 			<< planarHeight
 			<< " "
 			<< planarQuality
@@ -505,7 +505,7 @@ const bool WorldEditor::saveWorldToFile() const
 		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
-			<< "GRAPHICS_REFRACTIONS "
+			<< "GRAPHICS_PLANAR_REFRACTIONS "
 			<< planarHeight
 			<< " "
 			<< planarQuality

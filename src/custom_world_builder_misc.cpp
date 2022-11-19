@@ -15,16 +15,6 @@ void CustomWorldBuilder::setCurrentProjectId(const string & currentProjectId)
 	_currentProjectId = currentProjectId;
 }
 
-void CustomWorldBuilder::addGraphics()
-{
-	if(_isGraphicsAdded)
-	{
-		abort();
-	}
-
-	_isGraphicsAdded = true;
-}
-
 void CustomWorldBuilder::addSky(const string & skyId)
 {
 	if(find(_addedSkyIds.begin(), _addedSkyIds.end(), skyId) != _addedSkyIds.end())
@@ -197,55 +187,52 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_duplicator->deleteCopiedSound3d(sound3dId);
 	}
 
-	if(_isGraphicsLoaded)
-	{
-		_fe3d->graphics_setAmbientLightingEnabled(false);
-		_fe3d->graphics_setDirectionalLightingEnabled(false);
-		_fe3d->graphics_setFogEnabled(false);
-		_fe3d->graphics_setShadowsEnabled(false);
-		_fe3d->graphics_setSkyExposureEnabled(false);
-		_fe3d->graphics_setDofEnabled(false);
-		_fe3d->graphics_setLensFlareEnabled(false);
-		_fe3d->graphics_setBloomEnabled(false);
-		_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-		_fe3d->graphics_setAmbientLightingIntensity(1.0f);
-		_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
-		_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
-		_fe3d->graphics_setDirectionalLightingIntensity(1.0f);
-		_fe3d->graphics_setFogColor(fvec3(1.0f));
-		_fe3d->graphics_setFogThickness(1.0f);
-		_fe3d->graphics_setFogMinDistance(0.0f);
-		_fe3d->graphics_setFogMaxDistance(0.0f);
-		_fe3d->graphics_setShadowCircleEnabled(false);
-		_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
-		_fe3d->graphics_setShadowLookatOffset(fvec3(0.0f));
-		_fe3d->graphics_setShadowSize(0.0f);
-		_fe3d->graphics_setShadowLightness(0.0f);
-		_fe3d->graphics_setShadowQuality(0);
-		_fe3d->graphics_setShadowInterval(0);
-		_fe3d->graphics_setShadowBias(0.0f);
-		_fe3d->graphics_setShadowPcfCount(0);
-		_fe3d->graphics_setShadowFollowingCameraX(false);
-		_fe3d->graphics_setShadowFollowingCameraY(false);
-		_fe3d->graphics_setShadowFollowingCameraZ(false);
-		_fe3d->graphics_setBloomIntensity(1.0f);
-		_fe3d->graphics_setBloomBlurCount(0);
-		_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
-		_fe3d->graphics_setBloomQuality(0);
-		_fe3d->graphics_setSkyExposureIntensity(1.0f);
-		_fe3d->graphics_setSkyExposureSpeed(0.0f);
-		_fe3d->graphics_setDofDynamicDistance(0.0f);
-		_fe3d->graphics_setDofBlurDistance(0.0f);
-		_fe3d->graphics_setDofDynamic(false);
-		_fe3d->graphics_setDofQuality(0);
-		_fe3d->graphics_setLensFlareMap("");
-		_fe3d->graphics_setLensFlareIntensity(1.0f);
-		_fe3d->graphics_setLensFlareSensitivity(1.0f);
-		_fe3d->graphics_setPlanarReflectionHeight(0.0f);
-		_fe3d->graphics_setPlanarReflectionQuality(0);
-		_fe3d->graphics_setPlanarRefractionHeight(0.0f);
-		_fe3d->graphics_setPlanarRefractionQuality(0);
-	}
+	_fe3d->graphics_setAmbientLightingEnabled(false);
+	_fe3d->graphics_setDirectionalLightingEnabled(false);
+	_fe3d->graphics_setFogEnabled(false);
+	_fe3d->graphics_setShadowsEnabled(false);
+	_fe3d->graphics_setSkyExposureEnabled(false);
+	_fe3d->graphics_setDofEnabled(false);
+	_fe3d->graphics_setLensFlareEnabled(false);
+	_fe3d->graphics_setBloomEnabled(false);
+	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
+	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setDirectionalLightingIntensity(1.0f);
+	_fe3d->graphics_setFogColor(fvec3(1.0f));
+	_fe3d->graphics_setFogThickness(1.0f);
+	_fe3d->graphics_setFogMinDistance(0.0f);
+	_fe3d->graphics_setFogMaxDistance(0.0f);
+	_fe3d->graphics_setShadowCircleEnabled(false);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(0.0f));
+	_fe3d->graphics_setShadowLookatOffset(fvec3(0.0f));
+	_fe3d->graphics_setShadowSize(0.0f);
+	_fe3d->graphics_setShadowLightness(0.0f);
+	_fe3d->graphics_setShadowQuality(0);
+	_fe3d->graphics_setShadowInterval(0);
+	_fe3d->graphics_setShadowBias(0.0f);
+	_fe3d->graphics_setShadowPcfCount(0);
+	_fe3d->graphics_setShadowFollowingCameraX(false);
+	_fe3d->graphics_setShadowFollowingCameraY(false);
+	_fe3d->graphics_setShadowFollowingCameraZ(false);
+	_fe3d->graphics_setBloomIntensity(1.0f);
+	_fe3d->graphics_setBloomBlurCount(0);
+	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+	_fe3d->graphics_setBloomQuality(0);
+	_fe3d->graphics_setSkyExposureIntensity(1.0f);
+	_fe3d->graphics_setSkyExposureSpeed(0.0f);
+	_fe3d->graphics_setDofDynamicDistance(0.0f);
+	_fe3d->graphics_setDofBlurDistance(0.0f);
+	_fe3d->graphics_setDofDynamic(false);
+	_fe3d->graphics_setDofQuality(0);
+	_fe3d->graphics_setLensFlareMap("");
+	_fe3d->graphics_setLensFlareIntensity(1.0f);
+	_fe3d->graphics_setLensFlareSensitivity(1.0f);
+	_fe3d->graphics_setPlanarReflectionHeight(0.0f);
+	_fe3d->graphics_setPlanarReflectionQuality(0);
+	_fe3d->graphics_setPlanarRefractionHeight(0.0f);
+	_fe3d->graphics_setPlanarRefractionQuality(0);
 
 	_loadedSkyIds.clear();
 	_loadedTerrainIds.clear();
@@ -260,7 +247,6 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedSound3dIds.clear();
 
 	_loadedWorldId = "";
-	_isGraphicsLoaded = false;
 }
 
 const string & CustomWorldBuilder::getLoadedWorldId() const
@@ -323,11 +309,6 @@ const bool CustomWorldBuilder::isSound3dAdded(const string & sound3dId) const
 	return find(_addedSound3dIds.begin(), _addedSound3dIds.end(), sound3dId) != _addedSound3dIds.end();
 }
 
-const bool CustomWorldBuilder::isGraphicsAdded() const
-{
-	return _isGraphicsAdded;
-}
-
 void CustomWorldBuilder::resetBuild()
 {
 	_addedSkyIds.clear();
@@ -341,6 +322,4 @@ void CustomWorldBuilder::resetBuild()
 	_addedSpotlightIds.clear();
 	_addedCaptorIds.clear();
 	_addedSound3dIds.clear();
-
-	_isGraphicsAdded = false;
 }

@@ -15,7 +15,6 @@
 - `fe3d:world_add_custom_spotlight` (`STR` spotlight_id) -----> `NONE`
 - `fe3d:world_add_custom_captor` (`STR` captor_id) -----> `NONE`
 - `fe3d:world_add_custom_sound3d` (`STR` sound_id) -----> `NONE`
-- `fe3d:world_add_custom_graphics` () -----> `NONE`
 - `fe3d:world_reset_custom` () -----> `NONE`
 - `fe3d:world_clear_custom` () -----> `NONE`
 - `fe3d:world_save_custom` (`STR` world_id) -----> `NONE`

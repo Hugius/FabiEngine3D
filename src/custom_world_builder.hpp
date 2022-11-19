@@ -21,7 +21,6 @@ public:
 	void addSpotlight(const string & spotlightId);
 	void addCaptor(const string & captorId);
 	void addSound3d(const string & sound3dId);
-	void addGraphics();
 	void clearLoadedWorld();
 	void saveWorldToFile(const string & fileName);
 
@@ -39,7 +38,6 @@ public:
 	const bool isSpotlightAdded(const string & spotlightId) const;
 	const bool isCaptorAdded(const string & captorId) const;
 	const bool isSound3dAdded(const string & sound3dId) const;
-	const bool isGraphicsAdded() const;
 
 private:
 	vector<string> _addedSkyIds = {};
@@ -70,7 +68,4 @@ private:
 
 	string _currentProjectId = "";
 	string _loadedWorldId = "";
-
-	bool _isGraphicsAdded = false;
-	bool _isGraphicsLoaded = false;
 };

@@ -648,7 +648,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setShadowQuality(quality);
 			_fe3d->graphics_setShadowBias(bias);
 		}
-		else if(lineType == "GRAPHICS_REFLECTIONS")
+		else if(lineType == "GRAPHICS_PLANAR_REFLECTIONS")
 		{
 			float planarHeight;
 			int planarQuality;
@@ -660,7 +660,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->graphics_setPlanarReflectionHeight(planarHeight);
 			_fe3d->graphics_setPlanarReflectionQuality(planarQuality);
 		}
-		else if(lineType == "GRAPHICS_REFRACTIONS")
+		else if(lineType == "GRAPHICS_PLANAR_REFRACTIONS")
 		{
 			float planarHeight;
 			int planarQuality;

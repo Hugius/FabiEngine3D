@@ -251,22 +251,6 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_graphics")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_customWorldBuilder->isGraphicsAdded())
-			{
-				_throwRuntimeError("graphics already added to custom world");
-
-				return true;
-			}
-
-			_customWorldBuilder->addGraphics();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:world_save_custom")
 	{
 		const auto types = {SVT::STRING};

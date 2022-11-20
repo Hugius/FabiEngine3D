@@ -108,6 +108,8 @@ private:
 	void _renderFinalScene();
 	void _renderGUI();
 
+	static inline float SKY_EXPOSURE_UP_MULTIPLIER = 5.0f;
+
 	shared_ptr<Quad2d> _renderSurface = nullptr;
 	shared_ptr<ShaderBuffer> _skyColorShaderBuffer = nullptr;
 	shared_ptr<ShaderBuffer> _terrainColorShaderBuffer = nullptr;

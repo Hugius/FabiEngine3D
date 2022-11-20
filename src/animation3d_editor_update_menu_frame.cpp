@@ -89,17 +89,17 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				case SpeedType::LINEAR:
 				{
-					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::EXPONENTIAL);
+					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::TRIANGULAR);
 
 					break;
 				}
-				case SpeedType::EXPONENTIAL:
+				case SpeedType::TRIANGULAR:
 				{
-					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::INSTANTLY);
+					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::INSTANT);
 
 					break;
 				}
-				case SpeedType::INSTANTLY:
+				case SpeedType::INSTANT:
 				{
 					_fe3d->animation3d_setSpeedType(_currentAnimation3dId, _currentFrameIndex, _currentPartId, SpeedType::LINEAR);
 
@@ -201,6 +201,7 @@ void Animation3dEditor::_updateFrameMenu()
 				break;
 			}
 		}
+
 		switch(speedType)
 		{
 			case SpeedType::LINEAR:
@@ -209,13 +210,13 @@ void Animation3dEditor::_updateFrameMenu()
 
 				break;
 			}
-			case SpeedType::EXPONENTIAL:
+			case SpeedType::TRIANGULAR:
 			{
-				screen->getButton("speedType")->setTextContent("Type: EXPONENT");
+				screen->getButton("speedType")->setTextContent("Type: TRIANGULAR");
 
 				break;
 			}
-			case SpeedType::INSTANTLY:
+			case SpeedType::INSTANT:
 			{
 				screen->getButton("speedType")->setTextContent("Type: INSTANT");
 

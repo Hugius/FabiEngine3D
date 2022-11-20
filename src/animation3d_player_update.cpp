@@ -1,5 +1,6 @@
 #include "animation3d_player.hpp"
 #include "tools.hpp"
+#include <iostream>
 
 #include <set>
 
@@ -41,7 +42,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 			const auto isScaling = (transformationType == TransformationType::SCALING);
 			const auto speedType = animation3d->getSpeedType(startedAnimation3d->getFrameIndex(), partId);
 			const auto rotationOrigin = animation3d->getRotationOrigin(startedAnimation3d->getFrameIndex(), partId);
-			const auto speed = (animation3d->getSpeed(startedAnimation3d->getFrameIndex(), partId) * startedAnimation3d->getSpeedMultiplier());
+			const auto speed = (animation3d->getSpeed(startedAnimation3d->getFrameIndex(), partId) * startedAnimation3d->getSpeedMultiplier() * totalSpeed);
 			const auto targetMovement = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
 			const auto targetRotation = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
 			const auto targetScaling = animation3d->getTargetTransformation(startedAnimation3d->getFrameIndex(), partId);
@@ -66,48 +67,71 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.x, targetRotation.x, speed.x)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.x, targetScaling.x, speed.x)))
 				{
-					auto finalSpeed = speed.x;
+					float finalSpeed;
+
+					switch(speedType)
+					{
+						case SpeedType::LINEAR:
+						{
+							finalSpeed = speed.x;
+
+							break;
+						}
+						case SpeedType::TRIANGULAR:
+						{
+							finalSpeed = speed.x;
+							totalSpeed.x += 1.0f;
+
+							break;
+						}
+						case SpeedType::INSTANT:
+						{
+							switch(transformationType)
+							{
+								case TransformationType::MOVEMENT:
+								{
+									finalSpeed = (targetMovement.x - totalMovement.x);
+
+									break;
+								}
+								case TransformationType::ROTATION:
+								{
+									finalSpeed = (targetRotation.x - totalRotation.x);
+
+									break;
+								}
+								case TransformationType::SCALING:
+								{
+									finalSpeed = (targetScaling.x - totalScaling.x);
+
+									break;
+								}
+							}
+
+							break;
+						}
+					}
 
 					switch(transformationType)
 					{
 						case TransformationType::MOVEMENT:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetMovement.x - totalMovement.x);
-							}
-
 							totalMovement.x += finalSpeed;
 
 							break;
 						}
 						case TransformationType::ROTATION:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetRotation.x - totalRotation.x);
-							}
-
 							totalRotation.x += finalSpeed;
 
 							break;
 						}
 						case TransformationType::SCALING:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetScaling.x - totalScaling.x);
-							}
-
 							totalScaling.x += finalSpeed;
 
 							break;
 						}
-					}
-
-					if(speedType == SpeedType::EXPONENTIAL)
-					{
-						totalSpeed.x += pow(2.0f, speed.x);
 					}
 
 					float difference = 0.0f;
@@ -192,48 +216,71 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.y, targetRotation.y, speed.y)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.y, targetScaling.y, speed.y)))
 				{
-					auto finalSpeed = speed.y;
+					float finalSpeed;
+
+					switch(speedType)
+					{
+						case SpeedType::LINEAR:
+						{
+							finalSpeed = speed.y;
+
+							break;
+						}
+						case SpeedType::TRIANGULAR:
+						{
+							finalSpeed = speed.y;
+							totalSpeed.y += 1.0f;
+
+							break;
+						}
+						case SpeedType::INSTANT:
+						{
+							switch(transformationType)
+							{
+								case TransformationType::MOVEMENT:
+								{
+									finalSpeed = (targetMovement.y - totalMovement.y);
+
+									break;
+								}
+								case TransformationType::ROTATION:
+								{
+									finalSpeed = (targetRotation.y - totalRotation.y);
+
+									break;
+								}
+								case TransformationType::SCALING:
+								{
+									finalSpeed = (targetScaling.y - totalScaling.y);
+
+									break;
+								}
+							}
+
+							break;
+						}
+					}
 
 					switch(transformationType)
 					{
 						case TransformationType::MOVEMENT:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetMovement.y - totalMovement.y);
-							}
-
 							totalMovement.y += finalSpeed;
 
 							break;
 						}
 						case TransformationType::ROTATION:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetRotation.y - totalRotation.y);
-							}
-
 							totalRotation.y += finalSpeed;
 
 							break;
 						}
 						case TransformationType::SCALING:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetScaling.y - totalScaling.y);
-							}
-
 							totalScaling.y += finalSpeed;
 
 							break;
 						}
-					}
-
-					if(speedType == SpeedType::EXPONENTIAL)
-					{
-						totalSpeed.y += pow(2.0f, speed.y);
 					}
 
 					float difference = 0.0f;
@@ -318,48 +365,71 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 				   (isRotation && !_hasReachedTarget(totalRotation.z, targetRotation.z, speed.z)) ||
 				   (isScaling && !_hasReachedTarget(totalScaling.z, targetScaling.z, speed.z)))
 				{
-					auto finalSpeed = speed.z;
+					float finalSpeed;
+
+					switch(speedType)
+					{
+						case SpeedType::LINEAR:
+						{
+							finalSpeed = speed.z;
+
+							break;
+						}
+						case SpeedType::TRIANGULAR:
+						{
+							finalSpeed = speed.z;
+							totalSpeed.z += 1.0f;
+
+							break;
+						}
+						case SpeedType::INSTANT:
+						{
+							switch(transformationType)
+							{
+								case TransformationType::MOVEMENT:
+								{
+									finalSpeed = (targetMovement.z - totalMovement.z);
+
+									break;
+								}
+								case TransformationType::ROTATION:
+								{
+									finalSpeed = (targetRotation.z - totalRotation.z);
+
+									break;
+								}
+								case TransformationType::SCALING:
+								{
+									finalSpeed = (targetScaling.z - totalScaling.z);
+
+									break;
+								}
+							}
+
+							break;
+						}
+					}
 
 					switch(transformationType)
 					{
 						case TransformationType::MOVEMENT:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetMovement.z - totalMovement.z);
-							}
-
 							totalMovement.z += finalSpeed;
 
 							break;
 						}
 						case TransformationType::ROTATION:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetRotation.z - totalRotation.z);
-							}
-
 							totalRotation.z += finalSpeed;
 
 							break;
 						}
 						case TransformationType::SCALING:
 						{
-							if(speedType == SpeedType::INSTANTLY)
-							{
-								finalSpeed = (targetScaling.z - totalScaling.z);
-							}
-
 							totalScaling.z += finalSpeed;
 
 							break;
 						}
-					}
-
-					if(speedType == SpeedType::EXPONENTIAL)
-					{
-						totalSpeed.z += pow(2.0f, speed.z);
 					}
 
 					float difference = 0.0f;

@@ -3,6 +3,6 @@
 enum class SpeedType
 {
 	LINEAR,
-	EXPONENTIAL,
-	INSTANTLY
+	TRIANGULAR,
+	INSTANT
 };

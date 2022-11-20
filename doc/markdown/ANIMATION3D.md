@@ -35,7 +35,7 @@
   - Constraints: `MOVE` or `ROTATE` or `SCALE`
 - **Speed Type**: the type of speed
   - Type: `enumeration`
-  - Constraints: `LINEAR` or `EXPONENT` or `INSTANT`
+  - Constraints: `LINEAR` or `TRIANGULAR` or `INSTANT`
 
 ## 4. Started Properties
 

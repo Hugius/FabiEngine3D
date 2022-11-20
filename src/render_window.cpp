@@ -111,8 +111,6 @@ RenderWindow::RenderWindow()
 	{
 		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<const char *>(glewGetErrorString(glewStatus)));
 	}
-
-	setVsyncEnabled(false);
 }
 
 void RenderWindow::inject(shared_ptr<InputHandler> inputHandler)

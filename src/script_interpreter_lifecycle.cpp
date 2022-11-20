@@ -198,6 +198,7 @@ void ScriptInterpreter::load()
 	_sound2dEditor->loadSound2dsFromFile();
 
 	_fe3d->clock_create("@@scriptDebug");
+	_fe3d->misc_setVsyncEnabled(false);
 
 	_checkEngineWarnings(lastLoggerMessageCount);
 }
@@ -381,7 +382,7 @@ void ScriptInterpreter::unload()
 	_fe3d->collision_clearCameraWithTerrain();
 	_fe3d->collision_clearCameraWithAabbs();
 	_fe3d->collision_clearAabbWithAabbs();
-	_fe3d->misc_setVsyncEnabled(false);
+	_fe3d->misc_setVsyncEnabled(true);
 
 	if(_fe3d->server_isRunning())
 	{

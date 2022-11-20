@@ -59,7 +59,7 @@ void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword
 					const auto secondPart = line.substr(index + oldKeyword.size());
 
 					line = (firstPart + newKeyword + secondPart);
-					index = 0;
+					index += static_cast<int>(newKeyword.size());
 				}
 			}
 		}

@@ -16,19 +16,20 @@ void ScriptInterpreter::load()
 
 		if(scriptFile->getLineCount() == 0)
 		{
-			_throwStartupError("no`script_type` found in script \"" + scriptId + "\"");
+			_throwStartupError("no `script_type` found in script \"" + scriptId + "\"");
 
 			return;
 		}
 
 		if(scriptFile->getLineCount() < 2)
 		{
-			_throwStartupError("no`script_state` found in script \"" + scriptId + "\"");
+			_throwStartupError("no `script_state` found in script \"" + scriptId + "\"");
 
 			return;
 		}
 
 		string scriptType;
+
 		if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_initialize"))
 		{
 			_initializeScriptIds.push_back(scriptId);
@@ -96,7 +97,7 @@ void ScriptInterpreter::load()
 				}
 			}
 		}
-		else if(scriptFile->getLine(1) == (META_KEYWORD + " script_state_wait"))
+		else if(scriptFile->getLine(1) == (META_KEYWORD + " script_state_waiting"))
 		{
 			// Purposely left blank
 		}
@@ -110,42 +111,42 @@ void ScriptInterpreter::load()
 
 	if(_initializeScriptIds.empty())
 	{
-		_throwStartupError("no`script_type_initialize` scripts found");
+		_throwStartupError("no `script_type_initialize` scripts found");
 
 		return;
 	}
 
 	if(_updateScriptIds.empty())
 	{
-		_throwStartupError("no`script_type_update` scripts found");
+		_throwStartupError("no `script_type_update` scripts found");
 
 		return;
 	}
 
 	if(_terminateScriptIds.empty())
 	{
-		_throwStartupError("no`script_type_terminate` scripts found");
+		_throwStartupError("no `script_type_terminate` scripts found");
 
 		return;
 	}
 
 	if(_initEntryId.empty())
 	{
-		_throwStartupError("no`script_state_entry` found for `script_type_initialize` scripts");
+		_throwStartupError("no `script_state_entry` found for `script_type_initialize` scripts");
 
 		return;
 	}
 
 	if(_updateEntryId.empty())
 	{
-		_throwStartupError("no`script_state_entry` found for `script_type_update` scripts");
+		_throwStartupError("no `script_state_entry` found for `script_type_update` scripts");
 
 		return;
 	}
 
 	if(_terminateEntryId.empty())
 	{
-		_throwStartupError("no`script_state_entry` found for `script_type_terminate` scripts");
+		_throwStartupError("no `script_state_entry` found for `script_type_terminate` scripts");
 
 		return;
 	}

@@ -135,7 +135,7 @@ private:
 	static inline const fvec2 AF_CANCEL_SIZE = fvec2(0.18f, 0.1f);
 	static inline const fvec2 AF_RIGHT_CHAR_SIZE = fvec2(0.03f, 0.1f);
 
-	static inline constexpr float CF_SCROLLING_SPEED = 0.25f;
+	static inline constexpr float CF_SCROLLING_SPEED = 0.5f;
 
 	unordered_map<string, shared_ptr<GuiScrollingList>> _scrollingLists = {};
 	unordered_map<string, shared_ptr<GuiInputBox>> _inputBoxes = {};

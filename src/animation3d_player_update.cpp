@@ -107,7 +107,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					if(speedType == SpeedType::EXPONENTIAL)
 					{
-						totalSpeed.x += (speed.x / 100.0f);
+						totalSpeed.x += pow(2.0f, speed.x);
 					}
 
 					float difference = 0.0f;
@@ -233,7 +233,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					if(speedType == SpeedType::EXPONENTIAL)
 					{
-						totalSpeed.y += (speed.y / 100.0f);
+						totalSpeed.y += pow(2.0f, speed.y);
 					}
 
 					float difference = 0.0f;
@@ -359,7 +359,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 
 					if(speedType == SpeedType::EXPONENTIAL)
 					{
-						totalSpeed.z += (speed.z / 100.0f);
+						totalSpeed.z += pow(2.0f, speed.z);
 					}
 
 					float difference = 0.0f;

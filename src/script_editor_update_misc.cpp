@@ -325,7 +325,7 @@ void ScriptEditor::_updateCursor()
 		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorId(), CURSOR_TEXTURE_PATH);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / CARET_UPDATE_DIVIDER)) == 0)
 	{
 		if(_fe3d->text3d_getContent(CARET_ID) == "|")
 		{

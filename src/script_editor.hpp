@@ -64,6 +64,7 @@ private:
 	static inline constexpr float BLOOM_INTENSITY = 0.975f;
 	static inline constexpr float CARET_MIN_ALPHA = 0.05f;
 
+	static inline constexpr int CARET_UPDATE_DIVIDER = 2;
 	static inline constexpr int MAX_LINE_COUNT = 999;
 	static inline constexpr int BLOOM_BLUR_COUNT = 3;
 	static inline constexpr int BLOOM_QUALITY = 2;

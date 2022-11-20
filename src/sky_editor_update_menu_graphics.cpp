@@ -53,7 +53,7 @@ void SkyEditor::_updateGraphicsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->sky_setLightness(_currentSkyId, (value / 100.0f));
+			_fe3d->sky_setLightness(_currentSkyId, (value / LIGHTNESS_FACTOR));
 		}
 	}
 }

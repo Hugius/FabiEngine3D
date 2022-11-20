@@ -57,7 +57,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, value));
-				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, SPOTLIGHT_PITCH));
+				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
 				_fe3d->model_setBaseSize(newModelId, TORCH_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
@@ -151,7 +151,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				_fe3d->model_create(newModelId, TORCH_MESH_PATH);
 				_fe3d->model_setBasePosition(newModelId, newPosition);
-				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, SPOTLIGHT_PITCH));
+				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
 				_fe3d->model_setBaseSize(newModelId, TORCH_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);

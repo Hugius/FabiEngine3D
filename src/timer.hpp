@@ -35,7 +35,7 @@ public:
 	const bool isClockPaused(const string & clockId) const;
 
 private:
-	static inline constexpr int UPDATES_PER_SECOND = 144;
+	static inline constexpr int UPDATES_PER_SECOND = 75;
 
 	unordered_map<string, unique_ptr<Clock>> _clocks;
 

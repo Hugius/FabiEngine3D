@@ -34,7 +34,7 @@ public:
 	const bool isModelsExisting() const;
 
 private:
-	static inline constexpr float CAPTOR_OVERLAP_SPEED = 0.05f;
+	static inline constexpr float CAPTOR_OVERLAP_SPEED = 0.1f;
 
 	static inline constexpr int CAPTOR_OVERLAP_INTERVAL = 10;
 

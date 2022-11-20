@@ -104,6 +104,8 @@ private:
 	void _update();
 	void _render();
 
+	static inline const float MAX_RENDER_LAG_MULTIPLIER = 100.0f;
+
 	vector<pair<string, float>> _updateDeltaTimes = {};
 	vector<pair<string, float>> _renderDeltaTimes = {};
 	vector<string> _reservedClockIds = {};

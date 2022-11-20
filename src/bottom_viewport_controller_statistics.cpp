@@ -25,28 +25,28 @@ void BottomViewportController::_updateStatistics()
 		fpsList.push_back(1000.0f / _fe3d->misc_getTotalDeltaTime());
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)
 	{
 		const auto text = ("CPU: " + _fe3d->misc_getCpuName());
 
 		statisticsScreen->getTextField("cpu")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)
 	{
 		const auto text = ("GPU: " + _fe3d->misc_getGpuName());
 
 		statisticsScreen->getTextField("gpu")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)
 	{
 		const auto text = ("OpenGL Version: " + _fe3d->misc_getOpenglVersion());
 
 		statisticsScreen->getTextField("openglVersion")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % 1) == 0)
 	{
 		const auto text = ("Camera Position: " +
 						   to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
@@ -56,21 +56,21 @@ void BottomViewportController::_updateStatistics()
 		statisticsScreen->getTextField("cameraPosition")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % 1) == 0)
 	{
 		const auto text = ("Camera Yaw: " + to_string(static_cast<int>(_fe3d->camera_getYaw())));
 
 		statisticsScreen->getTextField("cameraYaw")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % 1) == 0)
 	{
 		const auto text = ("Camera Pitch: " + to_string(static_cast<int>(_fe3d->camera_getPitch())));
 
 		statisticsScreen->getTextField("cameraPitch")->setTextContent(text);
 	}
 
-	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / STATISTICS_UPDATE_DIVIDER)) == 0)
+	if((_fe3d->misc_getPassedUpdateCount() % 1) == 0)
 	{
 		const auto text = ("Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount())));
 

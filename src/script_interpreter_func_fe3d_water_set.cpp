@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setRippleSpeed(_fe3d->water_getSelectedId(), fvec2((args[10]->getDecimal() / 100000.0f), (args[2]->getDecimal() / 100000.0f)));
+				_fe3d->water_setRippleSpeed(_fe3d->water_getSelectedId(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setWaveSpeed(_fe3d->water_getSelectedId(), fvec2((args[1]->getDecimal() / 100000.0f), (args[2]->getDecimal() / 100000.0f)));
+				_fe3d->water_setWaveSpeed(_fe3d->water_getSelectedId(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

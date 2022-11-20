@@ -22,11 +22,11 @@ void WorldEditor::_updateWaterMenu()
 		}
 		else if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT) && screen->getButton("up")->isHovered())
 		{
-			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) + (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) + (_editorSpeed / WATER_HEIGHT_SPEED_DIVIDER)));
 		}
 		else if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_LEFT) && screen->getButton("down")->isHovered())
 		{
-			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / WATER_HEIGHT_SPEED_DIVIDER)));
 		}
 
 		screen->getButton("place")->setHoverable(_fe3d->water_getSelectedId().empty(), true);

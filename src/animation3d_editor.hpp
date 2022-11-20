@@ -63,9 +63,9 @@ private:
 	static inline constexpr float GRID_LIGHTNESS = 0.75f;
 	static inline constexpr float BOX_LIGHTNESS = 1.5f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
-	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;
-	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
-	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.1f;
+	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.05f;
+	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.05f;
 	static inline constexpr float AMBIENT_LIGHTING_INTENSITY = 0.1f;
 	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY = 1.0f;
 	static inline constexpr float SHADOW_LIGHTNESS = 0.25f;

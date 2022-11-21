@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	{
 		const auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, 2))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateSavesDirectory())
 			{
@@ -117,8 +117,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	}
 	else if(functionName == "fe3d:file_write")
 	{
-		const auto types = {SVT::STRING};
-
 		if(_validateArgumentCount(args, 2))
 		{
 			if(_validateSavesDirectory())

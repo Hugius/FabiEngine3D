@@ -10,7 +10,6 @@
 - `fe3d:file_write` (`STR` path, `DEC` value) -----> `NONE`
 - `fe3d:file_write` (`STR` path, `INT` value) -----> `NONE`
 - `fe3d:file_write` (`STR` path, `BOL` value) -----> `NONE`
-- `fe3d:file_add_new_line` (`STR` path) -----> `NONE`
 - `fe3d:file_clear` (`STR` path) -----> `NONE`
 
 ## Getters

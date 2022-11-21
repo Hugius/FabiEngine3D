@@ -154,34 +154,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 					file << (args[1]->getBoolean() ? "<true>" : "<false>");
 				}
 
-				file.close();
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:file_add_new_line")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateSavesDirectory())
-			{
-				const auto isExported = Tools::isApplicationExported();
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
-
-				auto file = ofstream(filePath, ios::app);
-
-				if(!file)
-				{
-					_throwRuntimeError("cannot open file");
-
-					return true;
-				}
-
 				file << endl;
 
 				file.close();

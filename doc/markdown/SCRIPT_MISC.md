@@ -20,6 +20,8 @@
 - `misc:list_max`(`STR` name) -----> `DEC`
 - `misc:list_max`(`STR` name) -----> `INT`
 - `misc:list_reverse`(`STR` name) -----> `LST`
+- `misc:list_to_string`(`STR` name) -----> `STR`
+- `misc:string_to_list`(`STR` value) -----> `LST`
 - `misc:string_concat`(`STR` value, `STR` value) -----> `STR`
 - `misc:string_size`(`STR` value) -----> `INT`
 - `misc:string_empty`(`STR` value) -----> `BOL`

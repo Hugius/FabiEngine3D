@@ -108,10 +108,10 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	if(leftVariable->getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
-		const auto listString = valueString.substr(1, (valueString.size() - 2));
-		const auto values = _extractValuesFromListString(listString);
+		valueString.erase(valueString.begin());
+		valueString.pop_back();
 
-		leftVariable->setValues(values);
+		leftVariable->setValues(_extractValuesFromListString(valueString));
 	}
 	else if(isStringVariable && _isStringValue(valueString))
 	{

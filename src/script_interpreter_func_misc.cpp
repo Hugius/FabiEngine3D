@@ -638,6 +638,30 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "misc:string_to_list")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			auto valueString = args[0]->getString();
+
+			if(valueString.size() < 2)
+			{
+				_throwRuntimeError("invalid syntax or statement");
+
+				return {};
+			}
+
+			valueString.erase(valueString.begin());
+			valueString.pop_back();
+
+			for(auto value : _extractValuesFromListString(valueString))
+			{
+				returnValues.push_back(value);
+			}
+		}
+	}
 	else if(functionName == "misc:string_concat")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};

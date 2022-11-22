@@ -199,10 +199,10 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 
 	if((typeString == LIST_KEYWORD) && _isListValue(valueString))
 	{
-		const auto listString = valueString.substr(1, (valueString.size() - 2));
-		const auto values = _extractValuesFromListString(listString);
+		valueString.erase(valueString.begin());
+		valueString.pop_back();
 
-		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isFinal, values)});
+		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isFinal, _extractValuesFromListString(valueString))});
 	}
 	else if((typeString == STRING_KEYWORD) && _isStringValue(valueString))
 	{

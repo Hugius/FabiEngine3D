@@ -200,7 +200,6 @@ void EngineController::initialize()
 		const auto sound2dAudioPaths = _sound2dEditor->getAudioPathsFromFile();
 
 		vector<string> imagePaths = {};
-
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
@@ -211,7 +210,6 @@ void EngineController::initialize()
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
 
 		vector<string> audioPaths = {};
-
 		audioPaths.insert(audioPaths.end(), sound3dAudioPaths.begin(), sound3dAudioPaths.end());
 		audioPaths.insert(audioPaths.end(), sound2dAudioPaths.begin(), sound2dAudioPaths.end());
 
@@ -220,7 +218,6 @@ void EngineController::initialize()
 		_fe3d->misc_cacheAudios(audioPaths, false);
 
 		_scriptEditor->loadScriptFiles(true);
-
 		_scriptExecutor->start();
 
 		if(!_scriptExecutor->isStarted())
@@ -262,13 +259,11 @@ void EngineController::initialize()
 
 		_fe3d->misc_cacheMeshes(meshPaths, true);
 		_fe3d->misc_cacheImages(imagePaths, true);
-
-		Tools::setCursorVisible(false);
-
 		_fe3d->quad2d_create(CURSOR_ID, true);
 		_fe3d->quad2d_setSize(CURSOR_ID, fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
-
 		_fe3d->misc_setCursorId(CURSOR_ID);
+
+		Tools::setCursorVisible(false);
 
 		_guiManager->initialize();
 		_leftViewportController->initialize();
@@ -298,12 +293,10 @@ void EngineController::update()
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorId(), Tools::isCursorInsideWindow());
 
 		_guiManager->updateOverlay();
-
 		_leftViewportController->update();
 		_rightViewportController->update();
 		_bottomViewportController->update();
 		_topViewportController->update();
-
 		_guiManager->updateViewports();
 	}
 }

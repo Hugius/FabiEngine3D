@@ -11,15 +11,9 @@ void ScriptExecutor::start()
 	_scriptInterpreter->load();
 	_scriptInterpreter->executeInitializeScripts();
 
-	if(_scriptInterpreter->hasThrownError())
+	if(_scriptInterpreter->hasThrownError() || _scriptInterpreter->mustStopApplication())
 	{
-		_stop(false);
-
-		return;
-	}
-	else if(_scriptInterpreter->mustStopApplication())
-	{
-		_stop(true);
+		_stop();
 
 		return;
 	}
@@ -38,15 +32,9 @@ void ScriptExecutor::update(bool isDebugging)
 		{
 			_scriptInterpreter->executeUpdateScripts(isDebugging);
 
-			if(_scriptInterpreter->hasThrownError())
+			if(_scriptInterpreter->hasThrownError() || _scriptInterpreter->mustStopApplication())
 			{
-				_stop(false);
-
-				return;
-			}
-			else if(_scriptInterpreter->mustStopApplication())
-			{
-				_stop(true);
+				_stop();
 
 				return;
 			}
@@ -92,7 +80,7 @@ void ScriptExecutor::stop()
 		abort();
 	}
 
-	_stop(true);
+	_stop();
 }
 
 void ScriptExecutor::inject(shared_ptr<EngineInterface> fe3d)
@@ -115,9 +103,9 @@ const bool ScriptExecutor::isStarted() const
 	return _isStarted;
 }
 
-void ScriptExecutor::_stop(bool mustExecuteTerminationScripts)
+void ScriptExecutor::_stop()
 {
-	if(mustExecuteTerminationScripts)
+	if(!_scriptInterpreter->hasThrownError())
 	{
 		_scriptInterpreter->executeTerminateScripts();
 	}

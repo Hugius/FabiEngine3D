@@ -15,7 +15,7 @@ public:
 	const bool isStarted() const;
 
 private:
-	void _stop(bool mustExecuteTerminationScripts);
+	void _stop();
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;

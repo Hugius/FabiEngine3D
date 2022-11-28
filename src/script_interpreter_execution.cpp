@@ -5,11 +5,11 @@ void ScriptInterpreter::executeInitializeScripts()
 {
 	if(!_initEntryId.empty())
 	{
-		_isExecutingInitialization = true;
+		_isExecutingInitializeScripts = true;
 
 		_executeScript(_initEntryId, ScriptType::INITIALIZE);
 
-		_isExecutingInitialization = false;
+		_isExecutingInitializeScripts = false;
 	}
 }
 
@@ -17,7 +17,7 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 {
 	if(!_updateEntryId.empty())
 	{
-		_isExecutingUpdate = true;
+		_isExecutingUpdateScripts = true;
 		_isDebugging = isDebugging;
 
 		_debuggingTimes.clear();
@@ -45,7 +45,7 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 			}
 		}
 
-		_isExecutingUpdate = false;
+		_isExecutingUpdateScripts = false;
 	}
 }
 
@@ -53,11 +53,11 @@ void ScriptInterpreter::executeTerminateScripts()
 {
 	if(!_terminateEntryId.empty())
 	{
-		_isExecutingTerminate = true;
+		_isExecutingTerminateScripts = true;
 
 		_executeScript(_terminateEntryId, ScriptType::TERMINATE);
 
-		_isExecutingTerminate = false;
+		_isExecutingTerminateScripts = false;
 	}
 }
 
@@ -87,7 +87,12 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 	_localVariables[_executionDepth] = {};
 
-	if(_hasThrownError || _mustStopApplication)
+	if(_hasThrownError)
+	{
+		return;
+	}
+
+	if(_mustStopApplication && !_isExecutingTerminateScripts)
 	{
 		return;
 	}
@@ -444,7 +449,12 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 		_checkEngineWarnings(lastLoggerMessageCount);
 
-		if(_hasThrownError || _mustStopApplication)
+		if(_hasThrownError)
+		{
+			return;
+		}
+
+		if(_mustStopApplication && !_isExecutingTerminateScripts)
 		{
 			return;
 		}

@@ -385,7 +385,7 @@ private:
 	bool _hasPassedElseStatement = false;
 	bool _mustIgnoreDeeperScope = false;
 	bool _isDebugging = false;
-	bool _isExecutingInitialization = false;
-	bool _isExecutingUpdate = false;
-	bool _isExecutingTerminate = false;
+	bool _isExecutingInitializeScripts = false;
+	bool _isExecutingUpdateScripts = false;
+	bool _isExecutingTerminateScripts = false;
 };

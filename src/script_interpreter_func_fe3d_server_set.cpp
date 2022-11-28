@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 				return true;
 			}
 
-			if(!_isExecutingInitialization)
+			if(!_isExecutingInitializeScripts)
 			{
 				_throwRuntimeError("networking server can only be started in an initialization script");
 

@@ -419,9 +419,9 @@ void ScriptInterpreter::unload()
 	_hasPassedElseStatement = false;
 	_mustIgnoreDeeperScope = false;
 	_isDebugging = false;
-	_isExecutingInitialization = false;
-	_isExecutingUpdate = false;
-	_isExecutingTerminate = false;
+	_isExecutingInitializeScripts = false;
+	_isExecutingUpdateScripts = false;
+	_isExecutingTerminateScripts = false;
 
 	Tools::setCursorType(CursorType::ARROW);
 }

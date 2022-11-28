@@ -19,7 +19,6 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 	{
 		_isExecutingUpdateScripts = true;
 		_isDebugging = isDebugging;
-
 		_debuggingTimes.clear();
 
 		_executeScript(_updateEntryId, ScriptType::UPDATE);
@@ -81,21 +80,9 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 	int targetScopeDepth = 0;
 
 	_executionDepth++;
-
 	_currentScriptIdsStack.push_back(scriptId);
 	_currentLineIndexStack.push_back(0);
-
 	_localVariables[_executionDepth] = {};
-
-	if(_hasThrownError)
-	{
-		return;
-	}
-
-	if(_mustStopApplication && !_isExecutingTerminateScripts)
-	{
-		return;
-	}
 
 	const auto scriptFile = _script->getScriptFile(scriptId);
 
@@ -145,7 +132,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				lineIndex = loopLineIndices.back();
 				targetScopeDepth = (loopScopeDepths.back() + 1);
-
 				loopIterationCounts.back()++;
 
 				continue;
@@ -175,7 +161,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			{
 				lineIndex = loopLineIndices.back();
 				targetScopeDepth = (loopScopeDepths.back() + 1);
-
 				loopIterationCounts.back()++;
 			}
 
@@ -303,7 +288,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			lineIndex = loopLineIndices.back();
 			targetScopeDepth = (loopScopeDepths.back() + 1);
-
 			loopIterationCounts.back()++;
 
 			continue;
@@ -334,7 +318,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				_hasPassedIfStatement = true;
 
 				conditionStatements.push_back(ScriptConditionStatement(targetScopeDepth, true));
-
 				targetScopeDepth++;
 			}
 			else
@@ -366,7 +349,6 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
 				{
 					conditionStatements[lastIndex].setTrue();
-
 					targetScopeDepth++;
 
 					_hasPassedElifStatement = true;
@@ -463,16 +445,13 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			lineIndex = loopLineIndices.back();
 			targetScopeDepth = (loopScopeDepths.back() + 1);
-
 			loopIterationCounts.back()++;
 		}
 	}
 
 	_currentScriptIdsStack.pop_back();
 	_currentLineIndexStack.pop_back();
-
 	_localVariables.erase(_executionDepth);
-
 	_executionDepth--;
 
 	if(_isDebugging)

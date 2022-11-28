@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				if(Tools::isFileExisting(filePath))
 				{
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				if(!Tools::deleteFile(filePath))
 				{
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				auto file = ofstream(filePath, ios::app);
 
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				auto file = ofstream(filePath, ios::trunc);
 

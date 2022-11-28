@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				const auto result = Tools::isFileExisting(filePath);
 
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 				const auto isExported = Tools::isApplicationExported();
 				const auto rootPath = Tools::getRootDirectoryPath();
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto filePath = (directoryPath + args[0]->getString());
+				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 				auto file = ifstream(filePath);
 

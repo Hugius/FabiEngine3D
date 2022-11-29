@@ -78,7 +78,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 				if(!cubeMapPath.empty())
 				{
-					if(!Tools::isApplicationExported())
+					if(!isExported)
 					{
 						cubeMapPath = ("projects\\" + _currentProjectId + "\\" + cubeMapPath);
 					}
@@ -219,7 +219,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -229,7 +229,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -239,7 +239,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!redNormalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					redNormalMapPath = ("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
 				}
@@ -249,7 +249,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!greenNormalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					greenNormalMapPath = ("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
 				}
@@ -259,7 +259,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blueNormalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					blueNormalMapPath = ("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
 				}
@@ -269,7 +269,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blendMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					blendMapPath = ("projects\\" + _currentProjectId + "\\" + blendMapPath);
 				}
@@ -279,7 +279,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!redDiffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					redDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
 				}
@@ -289,7 +289,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!greenDiffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					greenDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
 				}
@@ -299,7 +299,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!blueDiffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					blueDiffuseMapPath = ("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
 				}
@@ -443,7 +443,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!dudvMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					dudvMapPath = ("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
@@ -453,7 +453,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -463,7 +463,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!heightMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					heightMapPath = ("projects\\" + _currentProjectId + "\\" + heightMapPath);
 				}
@@ -680,7 +680,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -690,7 +690,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!specularMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					specularMapPath = ("projects\\" + _currentProjectId + "\\" + specularMapPath);
 				}
@@ -700,7 +700,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
@@ -710,7 +710,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!reflectionMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					reflectionMapPath = ("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 				}
@@ -720,7 +720,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!refractionMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					refractionMapPath = ("projects\\" + _currentProjectId + "\\" + refractionMapPath);
 				}
@@ -730,7 +730,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!normalMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					normalMapPath = ("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
@@ -976,7 +976,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					diffuseMapPath = ("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
@@ -986,7 +986,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Tools::isApplicationExported())
+				if(!isExported)
 				{
 					emissionMapPath = ("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 				}
@@ -1578,7 +1578,7 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			if(!Tools::isApplicationExported())
+			if(!isExported)
 			{
 				flareMapPath = ("projects\\" + _currentProjectId + "\\" + flareMapPath);
 			}

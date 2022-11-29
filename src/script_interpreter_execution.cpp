@@ -184,7 +184,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		{
 			_throwRuntimeError("");
 
-			break;
+			return;
 		}
 		else if(scriptLine.substr(0, (EXECUTE_KEYWORD.size() + 1)) == (EXECUTE_KEYWORD + " "))
 		{

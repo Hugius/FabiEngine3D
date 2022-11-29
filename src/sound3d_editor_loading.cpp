@@ -121,7 +121,7 @@ const bool Sound3dEditor::loadSound3dsFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Sound3d editor data loaded");
+	Logger::throwInfo("Sound3D editor data loaded");
 
 	return true;
 }

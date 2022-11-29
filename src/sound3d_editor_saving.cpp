@@ -52,7 +52,7 @@ const bool Sound3dEditor::saveSound3dsToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Sound3d editor data saved");
+	Logger::throwInfo("Sound3D editor data saved");
 
 	return true;
 }

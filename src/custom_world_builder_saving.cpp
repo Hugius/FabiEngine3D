@@ -38,7 +38,11 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{
-			cubeMapPath = (cubeMapPath.empty() ? "" : cubeMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+			if(!cubeMapPath.empty() && !isExported)
+			{
+				cubeMapPath = cubeMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
 			cubeMapPath = (cubeMapPath.empty()) ? "?" : cubeMapPath;
 
 			replace(cubeMapPath.begin(), cubeMapPath.end(), ' ', '?');
@@ -122,15 +126,51 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainId);
 		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainId);
 
-		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		blendMapPath = (blendMapPath.empty() ? "" : blendMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		redDiffuseMapPath = (redDiffuseMapPath.empty() ? "" : redDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		greenDiffuseMapPath = (greenDiffuseMapPath.empty() ? "" : greenDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		blueDiffuseMapPath = (blueDiffuseMapPath.empty() ? "" : blueDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		redNormalMapPath = (redNormalMapPath.empty() ? "" : redNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		greenNormalMapPath = (greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		blueNormalMapPath = (blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+		if(!diffuseMapPath.empty() && !isExported)
+		{
+			diffuseMapPath = diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!normalMapPath.empty() && !isExported)
+		{
+			normalMapPath = normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!blendMapPath.empty() && !isExported)
+		{
+			blendMapPath = blendMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!redDiffuseMapPath.empty() && !isExported)
+		{
+			redDiffuseMapPath = redDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!greenDiffuseMapPath.empty() && !isExported)
+		{
+			greenDiffuseMapPath = greenDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!blueDiffuseMapPath.empty() && !isExported)
+		{
+			blueDiffuseMapPath = blueDiffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!redNormalMapPath.empty() && !isExported)
+		{
+			redNormalMapPath = redNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!greenNormalMapPath.empty() && !isExported)
+		{
+			greenNormalMapPath = greenNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!blueNormalMapPath.empty() && !isExported)
+		{
+			blueNormalMapPath = blueNormalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 		blendMapPath = (blendMapPath.empty()) ? "?" : blendMapPath;
@@ -267,9 +307,21 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
 		auto heightMapPath = _fe3d->water_getHeightMapPath(waterId);
 
-		dudvMapPath = (dudvMapPath.empty() ? "" : dudvMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		heightMapPath = (heightMapPath.empty() ? "" : heightMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+		if(!dudvMapPath.empty() && !isExported)
+		{
+			dudvMapPath = dudvMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!dudvMapPath.empty() && !isExported)
+		{
+			normalMapPath = normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!heightMapPath.empty() && !isExported)
+		{
+			heightMapPath = heightMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);
 		heightMapPath = (heightMapPath.empty() ? "?" : heightMapPath);
@@ -488,12 +540,36 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			auto refractionMapPath = _fe3d->model_getRefractionMapPath(modelId, partId);
 			auto normalMapPath = _fe3d->model_getNormalMapPath(modelId, partId);
 
-			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-			specularMapPath = (specularMapPath.empty() ? "" : specularMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-			reflectionMapPath = (reflectionMapPath.empty() ? "" : reflectionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-			refractionMapPath = (refractionMapPath.empty() ? "" : refractionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-			normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+			if(!diffuseMapPath.empty() && !isExported)
+			{
+				diffuseMapPath = diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
+			if(!emissionMapPath.empty() && !isExported)
+			{
+				emissionMapPath = emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
+			if(!specularMapPath.empty() && !isExported)
+			{
+				specularMapPath = specularMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
+			if(!reflectionMapPath.empty() && !isExported)
+			{
+				reflectionMapPath = reflectionMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
+			if(!refractionMapPath.empty() && !isExported)
+			{
+				refractionMapPath = refractionMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
+			if(!normalMapPath.empty() && !isExported)
+			{
+				normalMapPath = normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+			}
+
 			partId = (partId.empty()) ? "?" : partId;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
@@ -719,8 +795,16 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dId);
 
-		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
-		emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+		if(!diffuseMapPath.empty() && !isExported)
+		{
+			diffuseMapPath = diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
+		if(!emissionMapPath.empty() && !isExported)
+		{
+			emissionMapPath = emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
+
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 
@@ -1393,7 +1477,10 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 
 		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
 
-		flareMapPath = (flareMapPath.empty() ? "" : flareMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
+		if(!flareMapPath.empty() && !isExported)
+		{
+			flareMapPath = flareMapPath.substr(("projects\\" + _currentProjectId + "\\").size());
+		}
 
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 

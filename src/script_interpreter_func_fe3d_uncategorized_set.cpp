@@ -14,14 +14,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(Tools::isApplicationExported())
-			{
-				_fe3d->application_stop();
-			}
-			else
-			{
-				_mustStopApplication = true;
-			}
+			_mustStopApplication = true;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

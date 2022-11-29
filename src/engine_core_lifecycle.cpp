@@ -253,8 +253,6 @@ void EngineCore::start()
 
 		_totalDeltaTime = _timer->getClockDeltaTime("total");
 	}
-
-	_engineController->terminate();
 }
 
 void EngineCore::stop()

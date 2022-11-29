@@ -15,7 +15,6 @@ public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void initialize();
 	void update();
-	void terminate();
 
 private:
 	static inline const string CURSOR_ID = "@@cursor";

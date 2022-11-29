@@ -300,11 +300,3 @@ void EngineController::update()
 		_guiManager->updateViewports();
 	}
 }
-
-void EngineController::terminate()
-{
-	if(_scriptExecutor->isStarted())
-	{
-		_scriptExecutor->stop();
-	}
-}

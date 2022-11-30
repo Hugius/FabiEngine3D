@@ -407,7 +407,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_currentProjectId.empty())
+			if(!Tools::isApplicationExported() && _currentProjectId.empty())
 			{
 				abort();
 			}

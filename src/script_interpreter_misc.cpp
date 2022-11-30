@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_validateScopeDepth(int currentScopeDepth, int & t
 
 const bool ScriptInterpreter::_validateSavesDirectory()
 {
-	if(_currentProjectId.empty())
+	if(!Tools::isApplicationExported() && _currentProjectId.empty())
 	{
 		abort();
 	}

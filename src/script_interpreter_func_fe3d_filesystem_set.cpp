@@ -13,88 +13,14 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:directory_create")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(args[0]->getString().find('/') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
-			}
-
-			if(_validateSavesDirectory())
-			{
-				const auto isExported = Tools::isApplicationExported();
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto newDirectoryPath = (directoryPath + args[0]->getString());
-
-				if(Tools::isDirectoryExisting(newDirectoryPath))
-				{
-					_throwRuntimeError("cannot create directory");
-
-					return true;
-				}
-
-				Tools::createDirectory(newDirectoryPath);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:directory_delete")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(args[0]->getString().find('/') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
-			}
-
-			if(_validateSavesDirectory())
-			{
-				const auto isExported = Tools::isApplicationExported();
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto newDirectoryPath = (directoryPath + args[0]->getString());
-
-				if(!Tools::deleteDirectory(newDirectoryPath))
-				{
-					_throwRuntimeError("cannot delete directory");
-
-					return true;
-				}
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:file_write")
+	if(functionName == "fe3d:file_write")
 	{
 		if(_validateArgumentCount(args, 2))
 		{
-			if(args[0]->getString().find('/') != string::npos)
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos)
 			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
+				_throwRuntimeError("path cannot contain '/' or '\\'");
 			}
 
 			if(_validateSavesDirectory())
@@ -131,20 +57,82 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:file_copy")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos ||
+			   args[1]->getString().find('/') != string::npos ||
+			   args[1]->getString().find('\\') != string::npos)
+			{
+				_throwRuntimeError("paths cannot contain '/' or '\\'");
+			}
+
+			if(_validateSavesDirectory())
+			{
+				const auto isExported = Tools::isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto fromFilePath = (directoryPath + args[0]->getString() + ".fe3d");
+				const auto toFilePath = (directoryPath + args[1]->getString() + ".fe3d");
+
+				if(!Tools::copyFile(fromFilePath, toFilePath))
+				{
+					_throwRuntimeError("cannot copy file");
+
+					return true;
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:file_rename")
+	{
+		const auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos ||
+			   args[1]->getString().find('/') != string::npos ||
+			   args[1]->getString().find('\\') != string::npos)
+			{
+				_throwRuntimeError("paths cannot contain '/' or '\\'");
+			}
+
+			if(_validateSavesDirectory())
+			{
+				const auto isExported = Tools::isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto oldFilePath = (directoryPath + args[0]->getString() + ".fe3d");
+				const auto newFilePath = (directoryPath + args[1]->getString() + ".fe3d");
+
+				if(!Tools::renameFile(oldFilePath, newFilePath))
+				{
+					_throwRuntimeError("cannot rename file");
+
+					return true;
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:file_delete")
 	{
 		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString().find('/') != string::npos)
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos)
 			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
+				_throwRuntimeError("path cannot contain '/' or '\\'");
 			}
 
 			if(_validateSavesDirectory())

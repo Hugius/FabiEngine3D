@@ -9,49 +9,16 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
-	if(functionName == "fe3d:directory_is_existing")
+	if(functionName == "fe3d:file_is_existing")
 	{
 		const auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString().find('/') != string::npos)
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos)
 			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
-			}
-
-			if(_validateSavesDirectory())
-			{
-				const auto isExported = Tools::isApplicationExported();
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-				const auto newDirectoryPath = (directoryPath + args[0]->getString());
-
-				const auto result = Tools::isDirectoryExisting(newDirectoryPath);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:file_is_existing")
-	{
-		const auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(args[0]->getString().find('/') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
+				_throwRuntimeError("path cannot contain '/' or '\\'");
 			}
 
 			if(_validateSavesDirectory())
@@ -73,14 +40,10 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString().find('/') != string::npos)
+			if(args[0]->getString().find('/') != string::npos ||
+			   args[0]->getString().find('\\') != string::npos)
 			{
-				_throwRuntimeError("path cannot contain '/'");
-			}
-
-			if(args[0]->getString().find('\\') != string::npos)
-			{
-				_throwRuntimeError("path cannot contain '\\'");
+				_throwRuntimeError("path cannot contain '/' or '\\'");
 			}
 
 			if(_validateSavesDirectory())

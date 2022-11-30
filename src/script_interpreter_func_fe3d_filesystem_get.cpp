@@ -15,6 +15,16 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(args[0]->getString().find('/') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '/'");
+			}
+
+			if(args[0]->getString().find('\\') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '\\'");
+			}
+
 			if(_validateSavesDirectory())
 			{
 				const auto isExported = Tools::isApplicationExported();
@@ -34,6 +44,16 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(args[0]->getString().find('/') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '/'");
+			}
+
+			if(args[0]->getString().find('\\') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '\\'");
+			}
+
 			if(_validateSavesDirectory())
 			{
 				const auto isExported = Tools::isApplicationExported();
@@ -53,6 +73,16 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(args[0]->getString().find('/') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '/'");
+			}
+
+			if(args[0]->getString().find('\\') != string::npos)
+			{
+				_throwRuntimeError("path cannot contain '\\'");
+			}
+
 			if(_validateSavesDirectory())
 			{
 				const auto isExported = Tools::isApplicationExported();
@@ -70,6 +100,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 				}
 
 				string result;
+
 				while(!file.eof())
 				{
 					getline(file, result);

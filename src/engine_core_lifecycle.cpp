@@ -223,7 +223,7 @@ void EngineCore::start()
 
 			renderLag += _totalDeltaTime;
 
-			if(renderLag > (millisecondsPerUpdate * MAX_RENDER_LAG_MULTIPLIER))
+			if(renderLag > MAX_RENDER_LAG)
 			{
 				renderLag = millisecondsPerUpdate;
 			}

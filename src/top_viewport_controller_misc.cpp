@@ -51,18 +51,6 @@ void TopViewportController::update()
 	_updateMiscellaneous();
 }
 
-const bool TopViewportController::isScriptStarted() const
-{
-	if(_currentProjectId.empty())
-	{
-		return false;
-	}
-	else
-	{
-		return _scriptExecutor->isStarted();
-	}
-}
-
 void TopViewportController::_updateMiscellaneous()
 {
 	const auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getScreen("main");

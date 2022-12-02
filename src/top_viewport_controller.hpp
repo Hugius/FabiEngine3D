@@ -50,7 +50,6 @@ public:
 	void initialize();
 	void update();
 
-	const bool isScriptStarted() const;
 	const bool isProjectCorrupted(const string & projectDirectoryPath) const;
 
 private:

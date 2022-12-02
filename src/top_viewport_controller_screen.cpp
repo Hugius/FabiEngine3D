@@ -106,7 +106,7 @@ void TopViewportController::_updateApplicationScreenManagement()
 		topScreen->getButton("restart")->setHoverable((isInMainMenu && isScriptStarted), true);
 		topScreen->getButton("stop")->setHoverable((isInMainMenu && isScriptStarted), true);
 
-		if(isInMainMenu && !isScriptStarted && _script->isEmpty())
+		if(isInMainMenu && !isScriptStarted && isScriptEmpty)
 		{
 			_scriptEditor->loadScriptFiles(false);
 		}
@@ -117,130 +117,142 @@ void TopViewportController::_updateApplicationScreenManagement()
 
 void TopViewportController::_updateExtraScreenManagement()
 {
-	const auto screen = _gui->getTopViewport()->getWindow("extraWindow")->getActiveScreen();
+	const auto topScreen = _gui->getTopViewport()->getWindow("extraWindow")->getActiveScreen();
+	const auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
+	if(_currentProjectId.empty())
 	{
-		if(_currentProjectId.empty())
-		{
-			abort();
-		}
-
-		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = ("projects\\" + _currentProjectId + "\\assets\\");
-
-		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-		{
-			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-		}
-		else
-		{
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
-
-			if(!filePath.empty())
-			{
-				if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-				{
-					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				}
-				else
-				{
-					const auto finalFilePath = filePath.substr(rootPath.size());
-
-					_fe3d->misc_clearMeshCache(finalFilePath);
-					_fe3d->misc_clearImageCache(finalFilePath);
-					_fe3d->misc_clearAudioCache(finalFilePath);
-				}
-			}
-		}
+		topScreen->getButton("uncache")->setHoverable(false, true);
+		topScreen->getButton("export")->setHoverable(false, true);
 	}
-	else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("export")->isHovered())
+	else
 	{
-		const auto chosenDirectoryPath = Tools::chooseExplorerDirectory("");
-
-		if(!chosenDirectoryPath.empty())
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && topScreen->getButton("uncache")->isHovered())
 		{
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
-
-			if(Tools::isDirectoryExisting(exportDirectoryPath))
+			if(_currentProjectId.empty())
 			{
-				Logger::throwWarning("Project already exported to that location");
+				abort();
+			}
+
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto targetDirectoryPath = ("projects\\" + _currentProjectId + "\\assets\\");
+
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 			}
 			else
 			{
-				bool hasFailed = false;
+				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
 
-				if(!Tools::createDirectory(exportDirectoryPath))
+				if(!filePath.empty())
 				{
-					hasFailed = true;
-				}
+					if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+					{
+						Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+					}
+					else
+					{
+						const auto finalFilePath = filePath.substr(rootPath.size());
 
-				if(!Tools::createDirectory(exportDirectoryPath + "logo\\"))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::createDirectory(exportDirectoryPath + "shaders\\"))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\")))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\")))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga")))
-				{
-					hasFailed = true;
-				}
-
-				if(!Tools::renameFile((exportDirectoryPath + "binaries\\fe3d.exe"), (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe")))
-				{
-					hasFailed = true;
-				}
-
-				if(hasFailed)
-				{
-					Tools::deleteDirectory(exportDirectoryPath);
-
-					Logger::throwWarning("Project exportation failed");
-				}
-				else
-				{
-					const auto filePath = (exportDirectoryPath + "configuration.fe3d");
-
-					auto file = ofstream(filePath);
-
-					file << "window_title=\"My Game\"";
-					file << endl;
-					file << "window_width=100";
-					file << endl;
-					file << "window_height=100";
-
-					file.close();
-
-					Logger::throwInfo("Project exported");
+						_fe3d->misc_clearMeshCache(finalFilePath);
+						_fe3d->misc_clearImageCache(finalFilePath);
+						_fe3d->misc_clearAudioCache(finalFilePath);
+					}
 				}
 			}
 		}
-	}
-	else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("documentation")->isHovered())
-	{
-		ShellExecute(0, 0, "https://github.com/Hugius/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
-	}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && topScreen->getButton("export")->isHovered())
+		{
+			const auto chosenDirectoryPath = Tools::chooseExplorerDirectory("");
 
-	screen->getButton("uncache")->setHoverable((!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main")), true);
-	screen->getButton("export")->setHoverable((!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main")), true);
+			if(!chosenDirectoryPath.empty())
+			{
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
+
+				if(Tools::isDirectoryExisting(exportDirectoryPath))
+				{
+					Logger::throwWarning("Project already exported to that location");
+				}
+				else
+				{
+					bool hasFailed = false;
+
+					if(!Tools::createDirectory(exportDirectoryPath))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::createDirectory(exportDirectoryPath + "logo\\"))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::createDirectory(exportDirectoryPath + "shaders\\"))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\")))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\")))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga")))
+					{
+						hasFailed = true;
+					}
+
+					if(!Tools::renameFile((exportDirectoryPath + "binaries\\fe3d.exe"), (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe")))
+					{
+						hasFailed = true;
+					}
+
+					if(hasFailed)
+					{
+						Tools::deleteDirectory(exportDirectoryPath);
+
+						Logger::throwWarning("Project exportation failed");
+					}
+					else
+					{
+						const auto filePath = (exportDirectoryPath + "configuration.fe3d");
+
+						auto file = ofstream(filePath);
+
+						file << "window_title=\"My Game\"";
+						file << endl;
+						file << "window_width=100";
+						file << endl;
+						file << "window_height=100";
+
+						file.close();
+
+						Logger::throwInfo("Project exported");
+					}
+				}
+			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && topScreen->getButton("documentation")->isHovered())
+		{
+			ShellExecute(0, 0, "https://github.com/Hugius/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
+		}
+
+		const auto isInMainMenu = (leftScreen->getId() == "main");
+		const auto isScriptStarted = _scriptExecutor->isStarted();
+
+		topScreen->getButton("uncache")->setHoverable((!isScriptStarted && isInMainMenu), true);
+		topScreen->getButton("export")->setHoverable((!isScriptStarted && isInMainMenu), true);
+	}
 }

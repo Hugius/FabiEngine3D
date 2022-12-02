@@ -45,8 +45,8 @@ void TopViewportController::initialize()
 
 void TopViewportController::update()
 {
-	_updateProjectScreenManagement();
 	_updateApplicationScreenManagement();
+	_updateProjectScreenManagement();
 	_updateExtraScreenManagement();
 	_updateMiscellaneous();
 }

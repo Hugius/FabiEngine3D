@@ -241,11 +241,6 @@ void EngineCore::start()
 				}
 			}
 
-			if(!_isRunning)
-			{
-				break;
-			}
-
 			_render();
 		}
 

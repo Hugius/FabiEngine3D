@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto fromFilePath = (directoryPath + args[0]->getString() + ".fe3d");
 				const auto toFilePath = (directoryPath + args[1]->getString() + ".fe3d");
 
-				if(!Tools::copyFile(fromFilePath, toFilePath))
+				if(!Tools::isFileExisting(fromFilePath) || !Tools::copyFile(fromFilePath, toFilePath))
 				{
 					_throwRuntimeError("cannot copy file");
 
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto oldFilePath = (directoryPath + args[0]->getString() + ".fe3d");
 				const auto newFilePath = (directoryPath + args[1]->getString() + ".fe3d");
 
-				if(!Tools::renameFile(oldFilePath, newFilePath))
+				if(!Tools::isFileExisting(oldFilePath) || !Tools::renameFile(oldFilePath, newFilePath))
 				{
 					_throwRuntimeError("cannot rename file");
 
@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 				const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
-				if(!Tools::deleteFile(filePath))
+				if(!Tools::isFileExisting(filePath) || !Tools::deleteFile(filePath))
 				{
 					_throwRuntimeError("cannot delete file");
 

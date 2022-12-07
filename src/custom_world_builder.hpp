@@ -9,7 +9,6 @@ public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<Duplicator> duplicator);
 	void setCurrentProjectId(const string & currentProjectId);
-	void resetBuild();
 	void addSky(const string & skyId);
 	void addTerrain(const string & terrainId);
 	void addWater(const string & waterId);
@@ -21,6 +20,7 @@ public:
 	void addSpotlight(const string & spotlightId);
 	void addCaptor(const string & captorId);
 	void addSound3d(const string & sound3dId);
+	void resetBuild();
 	void clearLoadedWorld();
 	void saveWorldToFile(const string & fileName);
 

@@ -134,57 +134,90 @@ void CustomWorldBuilder::clearLoadedWorld()
 
 	for(const auto & skyId : _loadedSkyIds)
 	{
-		_duplicator->deleteCopiedSky(skyId);
+		if(_fe3d->sky_isExisting(skyId))
+		{
+			_duplicator->deleteCopiedSky(skyId);
+		}
 	}
 
 	for(const auto & terrainId : _loadedTerrainIds)
 	{
-		_duplicator->deleteCopiedTerrain(terrainId);
+		if(_fe3d->terrain_isExisting(terrainId))
+		{
+			_duplicator->deleteCopiedTerrain(terrainId);
+		}
 	}
 
 	for(const auto & waterId : _loadedWaterIds)
 	{
-		_duplicator->deleteCopiedWater(waterId);
+		if(_fe3d->water_isExisting(waterId))
+		{
+			_duplicator->deleteCopiedWater(waterId);
+		}
 	}
 
 	for(const auto & modelId : _loadedModelIds)
 	{
-		_duplicator->deleteCopiedModel(modelId);
+		if(_fe3d->model_isExisting(modelId))
+		{
+			_duplicator->deleteCopiedModel(modelId);
+		}
 	}
 
 	for(const auto & quad3dId : _loadedQuad3dIds)
 	{
-		_duplicator->deleteCopiedQuad3d(quad3dId);
+		if(_fe3d->quad3d_isExisting(quad3dId))
+		{
+			_duplicator->deleteCopiedQuad3d(quad3dId);
+		}
 	}
 
 	for(const auto & text3dId : _loadedText3dIds)
 	{
-		_duplicator->deleteCopiedText3d(text3dId);
+		if(_fe3d->text3d_isExisting(text3dId))
+		{
+			_duplicator->deleteCopiedText3d(text3dId);
+		}
 	}
 
 	for(const auto & aabbId : _loadedAabbIds)
 	{
-		_duplicator->deleteCopiedAabb(aabbId);
+		if(_fe3d->aabb_isExisting(aabbId))
+		{
+			_duplicator->deleteCopiedAabb(aabbId);
+		}
 	}
 
 	for(const auto & pointlightId : _loadedPointlightIds)
 	{
-		_duplicator->deleteCopiedPointlight(pointlightId);
+		if(_fe3d->pointlight_isExisting(pointlightId))
+		{
+			_duplicator->deleteCopiedPointlight(pointlightId);
+		}
 	}
 
 	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
-		_duplicator->deleteCopiedSpotlight(spotlightId);
+		if(_fe3d->spotlight_isExisting(spotlightId))
+		{
+			_duplicator->deleteCopiedSpotlight(spotlightId);
+		}
 	}
 
 	for(const auto & captorId : _loadedCaptorIds)
 	{
-		_fe3d->captor_delete(captorId);
+		if(_fe3d->captor_isExisting(captorId))
+		{
+			_fe3d->captor_delete(captorId);
+		}
 	}
 
 	for(const auto & sound3dId : _loadedSound3dIds)
 	{
-		_duplicator->deleteCopiedSound3d(sound3dId);
+		if(_fe3d->sound3d_isExisting(sound3dId))
+		{
+			_duplicator->deleteCopiedSound3d(sound3dId);
+		}
 	}
 
 	_fe3d->graphics_setAmbientLightingEnabled(false);

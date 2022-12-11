@@ -195,16 +195,9 @@ void TopViewportController::_updateProjectDeleting()
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + "projects\\" + _currentProjectId);
 
-			if(!Tools::isDirectoryExisting(directoryPath))
+			if(!Tools::isDirectoryExisting(directoryPath) || !Tools::deleteDirectory(directoryPath))
 			{
-				Logger::throwWarning("Project does not exist");
-
-				return;
-			}
-
-			if(!Tools::deleteDirectory(directoryPath))
-			{
-				Logger::throwWarning("Project deletion failed");
+				Logger::throwWarning("Cannot delete project");
 
 				return;
 			}

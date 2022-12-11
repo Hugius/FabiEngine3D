@@ -223,7 +223,7 @@ void TopViewportController::_updateExtraScreenManagement()
 					{
 						Tools::deleteDirectory(exportDirectoryPath);
 
-						Logger::throwWarning("Project exportation failed");
+						Logger::throwWarning("Cannot export project");
 					}
 					else
 					{

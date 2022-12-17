@@ -60,6 +60,7 @@ void Script::replaceKeyword(const string & oldKeyword, const string & newKeyword
 
 					line = (firstPart + newKeyword + secondPart);
 					index += static_cast<int>(newKeyword.size());
+					index--;
 				}
 			}
 		}

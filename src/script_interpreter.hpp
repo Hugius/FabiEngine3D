@@ -331,7 +331,7 @@ private:
 	static inline constexpr float MIN_STRING_DECIMAL = -999999999.0f;
 	static inline constexpr float MAX_STRING_DECIMAL = 999999999.0f;
 
-	static inline constexpr int SPACES_PER_INDENT = 4;
+	static inline constexpr int SPACES_PER_INDENT = 2;
 	static inline constexpr int MIN_STRING_INTEGER = -999999999;
 	static inline constexpr int MAX_STRING_INTEGER = 999999999;
 

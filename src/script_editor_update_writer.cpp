@@ -204,8 +204,6 @@ void ScriptEditor::_updateTextWriter()
 			{
 				newCharacters += ' ';
 				newCharacters += ' ';
-				newCharacters += ' ';
-				newCharacters += ' ';
 			}
 
 			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_SPACEBAR))

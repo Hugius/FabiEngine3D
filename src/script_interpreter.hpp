@@ -174,8 +174,8 @@ private:
 
 	static inline const unordered_map<string, MouseWheelType> mouse_wheel_types =
 	{
-		{"WHEEL_FORWARD", MouseWheelType::WHEEL_FORWARD},
-		{"WHEEL_BACKWARD", MouseWheelType::WHEEL_BACKWARD},
+		{"WHEEL_UP", MouseWheelType::WHEEL_UP},
+		{"WHEEL_DOWN", MouseWheelType::WHEEL_DOWN},
 	};
 	static inline const unordered_map<string, MouseButtonType> mouse_button_types =
 	{

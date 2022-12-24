@@ -271,7 +271,7 @@ void ScriptEditor::_updateCamera()
 	}
 
 	const auto isControlDown = _fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_CONTROL);
-	const auto scrollSpeed = (_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD) ? VERTICAL_LINE_OFFSET : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD) ? -VERTICAL_LINE_OFFSET : 0.0f);
+	const auto scrollSpeed = (_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_UP) ? VERTICAL_LINE_OFFSET : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_DOWN) ? -VERTICAL_LINE_OFFSET : 0.0f);
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 	const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
 	const auto minCameraOffset = fvec2(0.0f, min(0.0f, (lastLineHeight + ROOT_TEXT_POSITION.y)));

@@ -12,8 +12,8 @@
   
 ## Mouse wheel
 
-- WHEEL_FORWARD
-- WHEEL_BACKWARD
+- WHEEL_UP
+- WHEEL_DOWN
 
 ## Mouse button
 

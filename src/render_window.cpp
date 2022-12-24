@@ -180,11 +180,11 @@ void RenderWindow::update()
 
 				if(direction > 0)
 				{
-					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_FORWARD);
+					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_UP);
 				}
 				else if(direction < 0)
 				{
-					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_BACKWARD);
+					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_DOWN);
 				}
 
 				break;

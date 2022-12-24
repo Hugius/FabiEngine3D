@@ -198,7 +198,7 @@ void EngineCore::start()
 
 	_initialize();
 
-	float renderLag = 0.0f;
+	float runtimeLag = 0.0f;
 
 	while(true)
 	{
@@ -207,9 +207,7 @@ void EngineCore::start()
 		if(_networkingServer->isRunning())
 		{
 			_engineController->update();
-
 			_networkingServer->update();
-
 			_timer->increasePassedUpdateCount();
 
 			if(!_isRunning)
@@ -221,19 +219,18 @@ void EngineCore::start()
 		{
 			const auto millisecondsPerUpdate = (1000.0f / _timer->getUpdateCountPerSecond());
 
-			renderLag += _totalDeltaTime;
+			runtimeLag += _totalDeltaTime;
 
-			if(renderLag > MAX_RENDER_LAG)
+			if(runtimeLag > MAX_RUNTIME_LAG)
 			{
-				renderLag = millisecondsPerUpdate;
+				runtimeLag = MAX_RUNTIME_LAG;
 			}
 
-			while(renderLag >= millisecondsPerUpdate)
+			while(runtimeLag >= millisecondsPerUpdate)
 			{
 				_update();
 
-				renderLag -= millisecondsPerUpdate;
-				renderLag = max(0.0f, renderLag);
+				runtimeLag = max(0.0f, (runtimeLag - millisecondsPerUpdate));
 
 				if(!_isRunning)
 				{

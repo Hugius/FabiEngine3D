@@ -23,7 +23,7 @@
 
 - All quad2Ds/text2Ds are rendered on top of each other.
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
-- The engine updates all logic at a fixed speed (75 updates per second), even if the FPS is higher/lower.
+- The engine processes all logic at a fixed speed (75 updates per second), even if the FPS is higher/lower (minimum of 10 FPS).
 - Transparency in 2D space is based on the order of placed quad2Ds/text2Ds.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
 - Graphical effects that are set to low quality can flicker.

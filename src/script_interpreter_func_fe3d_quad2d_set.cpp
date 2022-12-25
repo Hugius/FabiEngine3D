@@ -398,7 +398,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -426,7 +426,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -455,7 +455,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -483,7 +483,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -511,7 +511,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -532,7 +532,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -541,7 +541,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 					return true;
 				}
 
-				_fe3d->quad2d_setAnimation2dRowIndex(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad2d_setAnimation2dRowIndex(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -553,7 +553,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -562,7 +562,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 					return true;
 				}
 
-				_fe3d->quad2d_setAnimation2dColumnIndex(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad2d_setAnimation2dColumnIndex(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -574,7 +574,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -583,7 +583,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 					return true;
 				}
 
-				_fe3d->quad2d_setAnimation2dIntervalMultiplier(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad2d_setAnimation2dIntervalMultiplier(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -595,7 +595,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			if(_validateFe3dQuad2d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad2d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -604,7 +604,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 					return true;
 				}
 
-				_fe3d->quad2d_setAnimation2dIntervalDivider(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad2d_setAnimation2dIntervalDivider(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

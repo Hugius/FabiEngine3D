@@ -1336,7 +1336,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				const auto result = _fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString());
 
@@ -1350,7 +1350,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -1371,7 +1371,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -1392,7 +1392,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -1413,7 +1413,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -1434,7 +1434,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false) && _validateFe3dAnimation3d(args[1]->getString()))
 			{
 				if(!_fe3d->model_isAnimation3dStarted(args[0]->getString(), args[1]->getString()))
 				{

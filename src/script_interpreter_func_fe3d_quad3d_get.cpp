@@ -677,7 +677,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				const auto result = _fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString());
 
@@ -691,7 +691,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -712,7 +712,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -733,7 +733,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -754,7 +754,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -775,7 +775,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -796,7 +796,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{
@@ -817,7 +817,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false) && _validateFe3dAnimation2d(args[1]->getString()))
 			{
 				if(!_fe3d->quad3d_isAnimation2dStarted(args[0]->getString(), args[1]->getString()))
 				{

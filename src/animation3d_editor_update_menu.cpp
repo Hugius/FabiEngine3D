@@ -18,25 +18,11 @@ void Animation3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto animation3dIds = _loadedAnimation3dIds;
-
-			for(auto & animation3dId : animation3dIds)
-			{
-				animation3dId = animation3dId.substr(1);
-			}
-
-			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
+			_gui->getOverlay()->openChoiceForm("editAnimation3d", "Edit Animation3D", CENTER_CHOICE_FORM_POSITION, _loadedAnimation3dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto animation3dIds = _loadedAnimation3dIds;
-
-			for(auto & animation3dId : animation3dIds)
-			{
-				animation3dId = animation3dId.substr(1);
-			}
-
-			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation3d", "Delete Animation3D", CENTER_CHOICE_FORM_POSITION, _loadedAnimation3dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

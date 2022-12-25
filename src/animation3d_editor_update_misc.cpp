@@ -201,8 +201,6 @@ void Animation3dEditor::_updateAnimation3dCreating()
 			return;
 		}
 
-		animation3dId = ("@" + animation3dId);
-
 		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), animation3dId) != _loadedAnimation3dIds.end())
 		{
 			Logger::throwWarning("Animation3D already exists");
@@ -233,7 +231,7 @@ void Animation3dEditor::_updateAnimation3dChoosing()
 	{
 		if(_gui->getOverlay()->isChoiceFormConfirmed())
 		{
-			_currentAnimation3dId = ("@" + _gui->getOverlay()->getChoiceFormOptionId());
+			_currentAnimation3dId = _gui->getOverlay()->getChoiceFormOptionId();
 
 			if(_gui->getOverlay()->getChoiceFormId() == "deleteAnimation3d")
 			{
@@ -242,7 +240,7 @@ void Animation3dEditor::_updateAnimation3dChoosing()
 			else
 			{
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-				_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + _currentAnimation3dId.substr(1));
+				_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setTextContent("Animation3D: " + _currentAnimation3dId);
 				_gui->getOverlay()->getTextField(ANIMATION3D_TITLE_ID)->setVisible(true);
 				_gui->getOverlay()->getTextField(FRAME_TITLE_ID)->setVisible(true);
 			}
@@ -380,7 +378,6 @@ void Animation3dEditor::_updateModelChoosing()
 		}
 		else
 		{
-
 			if(_hoveredModelId.empty())
 			{
 				_hoveredModelId = ("@" + selectedOptionId);

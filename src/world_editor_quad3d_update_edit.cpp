@@ -97,14 +97,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				if(currentAnimation2dId.empty())
 				{
-					auto animation2dIds = _animation2dEditor->getLoadedAnimation2dIds();
-
-					for(auto & animation2dId : animation2dIds)
-					{
-						animation2dId = animation2dId.substr(1);
-					}
-
-					_gui->getOverlay()->openChoiceForm("selectAnimation2d", "Select Animation2D", CENTER_CHOICE_FORM_POSITION, animation2dIds);
+					_gui->getOverlay()->openChoiceForm("selectAnimation2d", "Select Animation2D", CENTER_CHOICE_FORM_POSITION, _animation2dEditor->getLoadedAnimation2dIds());
 				}
 				else
 				{

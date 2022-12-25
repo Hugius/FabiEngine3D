@@ -96,14 +96,7 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("addAnimation3d")->isHovered())
 			{
-				auto animation3dIds = _animation3dEditor->getLoadedAnimation3dIds();
-
-				for(auto & animation3dId : animation3dIds)
-				{
-					animation3dId = animation3dId.substr(1);
-				}
-
-				_gui->getOverlay()->openChoiceForm("selectAnimation3d", "Select Animation3D", CENTER_CHOICE_FORM_POSITION, animation3dIds);
+				_gui->getOverlay()->openChoiceForm("selectAnimation3d", "Select Animation3D", CENTER_CHOICE_FORM_POSITION, _animation3dEditor->getLoadedAnimation3dIds());
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("startAnimation3d")->isHovered())
 			{

@@ -18,25 +18,11 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto animation2dIds = _loadedAnimation2dIds;
-
-			for(auto & animation2dId : animation2dIds)
-			{
-				animation2dId = animation2dId.substr(1);
-			}
-
-			_gui->getOverlay()->openChoiceForm("editAnimation2d", "Edit Animation2D", CENTER_CHOICE_FORM_POSITION, animation2dIds);
+			_gui->getOverlay()->openChoiceForm("editAnimation2d", "Edit Animation2D", CENTER_CHOICE_FORM_POSITION, _loadedAnimation2dIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto animation2dIds = _loadedAnimation2dIds;
-
-			for(auto & animation2dId : animation2dIds)
-			{
-				animation2dId = animation2dId.substr(1);
-			}
-
-			_gui->getOverlay()->openChoiceForm("deleteAnimation2d", "Delete Animation2D", CENTER_CHOICE_FORM_POSITION, animation2dIds);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation2d", "Delete Animation2D", CENTER_CHOICE_FORM_POSITION, _loadedAnimation2dIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

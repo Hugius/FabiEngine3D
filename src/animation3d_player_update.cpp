@@ -533,7 +533,7 @@ void Animation3dPlayer::_updateModelAnimation3dExecution()
 					startedAnimation3d->setTotalMovement(partId, fvec3(0.0f));
 					startedAnimation3d->setTotalRotation(partId, fvec3(0.0f));
 					startedAnimation3d->setTotalScaling(partId, fvec3(0.0f));
-					startedAnimation3d->setTotalSpeed(partId, fvec3(0.0f));
+					startedAnimation3d->setTotalSpeed(partId, fvec3(1.0f));
 				}
 
 				if(startedAnimation3d->getPlayCount() != -1)

@@ -66,7 +66,7 @@ void WorldEditor::_updateSettingsMenu()
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 
-			_editorSpeed = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
+			_editorSpeed = max(0.0f, (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f));
 		}
 	}
 }

@@ -3,7 +3,6 @@
 #include <algorithm>
 
 using std::clamp;
-using std::max;
 
 Sound3d::Sound3d(const string & id)
 	:

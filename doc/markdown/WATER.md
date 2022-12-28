@@ -64,9 +64,6 @@
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Opacity**: the opacity of the mesh
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
 - **Distortion Size**: the size of the DUDV map distortion
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`

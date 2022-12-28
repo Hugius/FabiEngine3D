@@ -140,7 +140,7 @@ void Terrain::setBlueTextureRepeat(int value)
 
 void Terrain::setSize(float value)
 {
-	_size = max(0.0f, value);
+	_size = clamp(value, 0.0f, 1024.0f);
 }
 
 void Terrain::setMaxHeight(float value)

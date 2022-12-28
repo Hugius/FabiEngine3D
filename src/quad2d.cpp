@@ -192,12 +192,12 @@ void Quad2d::setDepth(int value)
 
 void Quad2d::setUvMultiplier(const fvec2 & value)
 {
-	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvMultiplier = fvec2(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f));
 }
 
 void Quad2d::setUvOffset(const fvec2 & value)
 {
-	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvOffset = fvec2(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f));
 }
 
 const shared_ptr<VertexBuffer> Quad2d::getVertexBuffer() const

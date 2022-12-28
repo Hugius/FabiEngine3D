@@ -125,7 +125,7 @@
   - Constraints: between `0.0` and `1.0`
 - **Emission Intensity**: the intensity of the emission map
   - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `integer`
   - Constraints: at least `1`

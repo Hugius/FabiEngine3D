@@ -17,7 +17,7 @@ Water::Water(const string & id)
 
 void Water::setHeight(float value)
 {
-	_height = value;
+	_height = max(0.0f, value);
 }
 
 void Water::setColor(const fvec3 & value)

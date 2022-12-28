@@ -16,7 +16,7 @@
   - Constraints: none
 - **Front**: the normalized vector of the light direction
   - Type: `decimal3`
-  - Constraints: at least `0.0`
+  - Constraints: between `-1.0` and `1.0`
 - **Color**: the RGB color multiplier of the light
   - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`

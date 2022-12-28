@@ -342,7 +342,7 @@ void Text3d::setMaxClipPosition(const fvec3 & value)
 
 void Text3d::setMinAlpha(float value)
 {
-	_minAlpha = value;
+	_minAlpha = clamp(value, 0.0f, 1.0f);
 
 	for(const auto & quad3d : _quad3ds)
 	{

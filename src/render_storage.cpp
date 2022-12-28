@@ -390,7 +390,7 @@ void RenderStorage::setSkyExposureIntensity(float value)
 
 void RenderStorage::setSkyExposureSpeed(float value)
 {
-	_skyExposureSpeed = value;
+	_skyExposureSpeed = max(0.0f, value);
 }
 
 void RenderStorage::setSkyExposureLightness(float value)

@@ -1,8 +1,9 @@
 #include "script_editor.hpp"
+#include "tools.hpp"
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused() || _fe3d->quad3d_isVisible(SELECTION_ID))
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !Tools::isCursorInsideDisplay() || _fe3d->quad3d_isVisible(SELECTION_ID))
 	{
 		return;
 	}

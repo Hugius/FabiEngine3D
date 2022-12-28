@@ -844,6 +844,8 @@ const bool CustomWorldBuilder::loadWorldFromFile(const string & fileName)
 					>> totalSpeed.y
 					>> totalSpeed.z;
 
+				partId = (partId == "?") ? "" : partId;
+
 				if(!_fe3d->animation3d_hasPart(animation3dId, partId))
 				{
 					_fe3d->model_stopAnimation3d(modelId, animation3dId);

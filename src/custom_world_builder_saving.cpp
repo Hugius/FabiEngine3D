@@ -696,6 +696,7 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 			const auto playCount = _fe3d->model_getAnimation3dPlayCount(modelId, animation3dId);
 			const auto frameIndex = _fe3d->model_getAnimation3dFrameIndex(modelId, animation3dId);
 			const auto speedMultiplier = _fe3d->model_getAnimation3dSpeedMultiplier(modelId, animation3dId);
+			const auto partIds = _fe3d->animation3d_getPartIds(animation3dId);
 			const auto partCount = partIds.size();
 
 			file
@@ -722,6 +723,8 @@ void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 				const auto totalRotation = _fe3d->model_getAnimation3dTotalRotation(modelId, partId, animation3dId);
 				const auto totalScaling = _fe3d->model_getAnimation3dTotalScaling(modelId, partId, animation3dId);
 				const auto totalSpeed = _fe3d->model_getAnimation3dTotalSpeed(modelId, partId, animation3dId);
+
+				partId = (partId.empty()) ? "?" : partId;
 
 				file
 					<< " "

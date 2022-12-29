@@ -8,7 +8,7 @@ using std::clamp;
 
 void Sound3dPlayer::update()
 {
-	vector<pair<string, int>> sound3dsToStop = {};
+	unordered_map<string, vector<int>> sound3dsToStop = {};
 	vector<pair<string, int>> sound3dsToStart = {};
 
 	for(auto & [sound3dId, startedSound3ds] : _startedSound3ds)
@@ -37,13 +37,23 @@ void Sound3dPlayer::update()
 
 				if(startedSound3ds[index]->getPlayCount() == 0)
 				{
-					sound3dsToStop.push_back({sound3dId, index});
+					if(sound3dsToStop.find(sound3dId) == sound3dsToStop.end())
+					{
+						sound3dsToStop.insert({sound3dId, {}});
+					}
+
+					sound3dsToStop.at(sound3dId).push_back(index);
 				}
 				else
 				{
 					if(startedSound3ds[index]->getHeader()->dwBufferLength < _sound3dManager->getSound3d(sound3dId)->getWaveBuffer()->getHeader()->dwBufferLength)
 					{
-						sound3dsToStop.push_back({sound3dId, index});
+						if(sound3dsToStop.find(sound3dId) == sound3dsToStop.end())
+						{
+							sound3dsToStop.insert({sound3dId, {}});
+						}
+
+						sound3dsToStop.at(sound3dId).push_back(index);
 
 						sound3dsToStart.push_back({sound3dId, startedSound3ds[index]->getPlayCount()});
 					}
@@ -78,45 +88,56 @@ void Sound3dPlayer::update()
 		}
 	}
 
-	for(const auto & [sound3dId, index] : sound3dsToStop)
+	for(auto & [sound3dId, indices] : sound3dsToStop)
 	{
-		const auto unprepareResult = waveOutUnprepareHeader(_startedSound3ds.at(sound3dId)[index]->getHandle(), _startedSound3ds.at(sound3dId)[index]->getHeader(), sizeof(WAVEHDR));
+		sort(indices.begin(), indices.end());
 
-		if(unprepareResult != MMSYSERR_NOERROR)
+		int totalTerminations = 0;
+
+		for(auto & index : indices)
 		{
-			if(unprepareResult == MMSYSERR_NODRIVER)
-			{
-				_terminateSound3ds();
+			index -= totalTerminations;
 
-				return;
-			}
-			else
-			{
-				Logger::throwDebug(unprepareResult);
+			const auto unprepareResult = waveOutUnprepareHeader(_startedSound3ds.at(sound3dId)[index]->getHandle(), _startedSound3ds.at(sound3dId)[index]->getHeader(), sizeof(WAVEHDR));
 
-				abort();
+			if(unprepareResult != MMSYSERR_NOERROR)
+			{
+				if(unprepareResult == MMSYSERR_NODRIVER)
+				{
+					_terminateSound3ds();
+
+					return;
+				}
+				else
+				{
+					Logger::throwDebug(unprepareResult);
+
+					abort();
+				}
 			}
+
+			const auto closeResult = waveOutClose(_startedSound3ds.at(sound3dId)[index]->getHandle());
+
+			if(closeResult != MMSYSERR_NOERROR)
+			{
+				if(closeResult == MMSYSERR_NODRIVER)
+				{
+					_terminateSound3ds();
+
+					return;
+				}
+				else
+				{
+					Logger::throwDebug(closeResult);
+
+					abort();
+				}
+			}
+
+			_terminateSound3d(sound3dId, index);
+
+			totalTerminations++;
 		}
-
-		const auto closeResult = waveOutClose(_startedSound3ds.at(sound3dId)[index]->getHandle());
-
-		if(closeResult != MMSYSERR_NOERROR)
-		{
-			if(closeResult == MMSYSERR_NODRIVER)
-			{
-				_terminateSound3ds();
-
-				return;
-			}
-			else
-			{
-				Logger::throwDebug(closeResult);
-
-				abort();
-			}
-		}
-
-		_terminateSound3d(sound3dId, index);
 	}
 
 	for(const auto & [sound3dId, playCount] : sound3dsToStart)

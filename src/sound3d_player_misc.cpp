@@ -130,7 +130,7 @@ void Sound3dPlayer::_terminateSound3ds()
 	{
 		for(int index = 0; index < static_cast<int>(startedSound3ds.size()); index++)
 		{
-			_terminateSound3d(sound3dId, index);
+			_terminateSound3d(sound3dId, 0);
 		}
 	}
 }

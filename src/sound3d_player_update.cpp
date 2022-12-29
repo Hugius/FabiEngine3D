@@ -28,7 +28,7 @@ void Sound3dPlayer::update()
 
 		for(int index = 0; index < static_cast<int>(startedSound3ds.size()); index++)
 		{
-			if((startedSound3ds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if(startedSound3ds[index]->getHeader()->dwFlags == (WHDR_PREPARED | WHDR_DONE))
 			{
 				if(startedSound3ds[index]->getPlayCount() != -1)
 				{

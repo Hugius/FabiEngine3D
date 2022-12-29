@@ -7,14 +7,14 @@ using std::chrono::seconds;
 
 void Sound2dPlayer::update()
 {
-	vector<pair<string, int>> sound2dsToStop = {};
+	unordered_map<string, vector<int>> sound2dsToStop = {};
 	vector<pair<string, int>> sound2dsToStart = {};
 
 	for(auto & [sound2dId, startedSound2ds] : _startedSound2ds)
 	{
 		for(int index = 0; index < static_cast<int>(startedSound2ds.size()); index++)
 		{
-			if((startedSound2ds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if(startedSound2ds[index]->getHeader()->dwFlags == (WHDR_PREPARED | WHDR_DONE))
 			{
 				if(startedSound2ds[index]->getPlayCount() != -1)
 				{
@@ -23,13 +23,23 @@ void Sound2dPlayer::update()
 
 				if(startedSound2ds[index]->getPlayCount() == 0)
 				{
-					sound2dsToStop.push_back({sound2dId, index});
+					if(sound2dsToStop.find(sound2dId) == sound2dsToStop.end())
+					{
+						sound2dsToStop.insert({sound2dId, {}});
+					}
+
+					sound2dsToStop.at(sound2dId).push_back(index);
 				}
 				else
 				{
 					if(startedSound2ds[index]->getHeader()->dwBufferLength < _sound2dManager->getSound2d(sound2dId)->getWaveBuffer()->getHeader()->dwBufferLength)
 					{
-						sound2dsToStop.push_back({sound2dId, index});
+						if(sound2dsToStop.find(sound2dId) == sound2dsToStop.end())
+						{
+							sound2dsToStop.insert({sound2dId, {}});
+						}
+
+						sound2dsToStop.at(sound2dId).push_back(index);
 
 						sound2dsToStart.push_back({sound2dId, startedSound2ds[index]->getPlayCount()});
 					}
@@ -60,45 +70,56 @@ void Sound2dPlayer::update()
 		}
 	}
 
-	for(const auto & [sound2dId, index] : sound2dsToStop)
+	for(auto & [sound2dId, indices] : sound2dsToStop)
 	{
-		const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
+		sort(indices.begin(), indices.end());
 
-		if(unprepareResult != MMSYSERR_NOERROR)
+		int totalTerminations = 0;
+
+		for(auto & index : indices)
 		{
-			if(unprepareResult == MMSYSERR_NODRIVER)
-			{
-				_terminateSound2ds();
+			index -= totalTerminations;
 
-				return;
-			}
-			else
-			{
-				Logger::throwDebug(unprepareResult);
+			const auto unprepareResult = waveOutUnprepareHeader(_startedSound2ds.at(sound2dId)[index]->getHandle(), _startedSound2ds.at(sound2dId)[index]->getHeader(), sizeof(WAVEHDR));
 
-				abort();
+			if(unprepareResult != MMSYSERR_NOERROR)
+			{
+				if(unprepareResult == MMSYSERR_NODRIVER)
+				{
+					_terminateSound2ds();
+
+					return;
+				}
+				else
+				{
+					Logger::throwDebug(unprepareResult);
+
+					abort();
+				}
 			}
+
+			const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
+
+			if(closeResult != MMSYSERR_NOERROR)
+			{
+				if(closeResult == MMSYSERR_NODRIVER)
+				{
+					_terminateSound2ds();
+
+					return;
+				}
+				else
+				{
+					Logger::throwDebug(closeResult);
+
+					abort();
+				}
+			}
+
+			_terminateSound2d(sound2dId, index);
+
+			totalTerminations++;
 		}
-
-		const auto closeResult = waveOutClose(_startedSound2ds.at(sound2dId)[index]->getHandle());
-
-		if(closeResult != MMSYSERR_NOERROR)
-		{
-			if(closeResult == MMSYSERR_NODRIVER)
-			{
-				_terminateSound2ds();
-
-				return;
-			}
-			else
-			{
-				Logger::throwDebug(closeResult);
-
-				abort();
-			}
-		}
-
-		_terminateSound2d(sound2dId, index);
 	}
 
 	for(const auto & [sound2dId, playCount] : sound2dsToStart)

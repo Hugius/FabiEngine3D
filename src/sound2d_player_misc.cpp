@@ -19,7 +19,7 @@ void Sound2dPlayer::_terminateSound2ds()
 	{
 		for(int index = 0; index < static_cast<int>(startedSound2ds.size()); index++)
 		{
-			_terminateSound2d(sound2dId, index);
+			_terminateSound2d(sound2dId, 0);
 		}
 	}
 }

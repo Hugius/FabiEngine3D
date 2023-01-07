@@ -192,7 +192,7 @@ void WorldEditor::_updateLensFlareSettingsMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\misc\\flare_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\miscellaneous\\flare_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

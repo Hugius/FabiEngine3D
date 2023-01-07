@@ -59,8 +59,8 @@ void TopViewportController::_updateProjectCreating()
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\");
-		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc");
-		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc\\flare_map\\");
+		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\miscellaneous");
+		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\miscellaneous\\flare_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\diffuse_map\\");
 		Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\model\\emission_map\\");

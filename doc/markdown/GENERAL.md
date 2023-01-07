@@ -72,7 +72,7 @@
       └── assets
         └── audio
         └── image
-          └── misc
+          └── miscellaneous
             └── flare_map
           └── model
             └── diffuse_map

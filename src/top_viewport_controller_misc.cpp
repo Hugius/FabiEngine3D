@@ -113,8 +113,8 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	directoryPaths.push_back(projectDirectoryPath + "assets\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\audio\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\");
-	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\misc\\");
-	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\misc\\flare_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\miscellaneous\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\miscellaneous\\flare_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\diffuse_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\model\\emission_map\\");

@@ -16,13 +16,13 @@ Starvation is a singleplayer medieval first person survival game, in which you h
 
 ### White Noise
 
-White Noise is a multiplayer science fiction first person shooter game, where you will find yourself in a small space station. You can join a server with up to three other players to see who is the best at shooting each other. Be careful, because one bullet is enough to make the endless void of space your final resting place...
+White Noise is a multiplayer science fiction first person shooter game, where you will find yourself in a small space station, together with three other players. You are armed with a pistol and some bullets, which means you must shoot the others. Be careful however, because one bullet is enough to instantly kill you. Make sure you take enough cover, otherwise the endless void of space will be your final resting place...
 
 <img src="doc/image/white_noise.png" width="100%"/>
 
 ### 992
 
-992 is a singleplayer medieval city builder game, which takes place in 992 AD on some small islands in Western Europe. Your goal is to ensure the existence of your population by making the right choices regarding the placement of buildings. You need be smart about the use of your resources and the production of food. Do not forget that death is always lurking; hypothermia, suicide, childbirth, dehydration, starvation and sickness will devastate your population if you are not careful...
+992 is a singleplayer medieval city builder game, which takes place in 992 AD on some small islands in Western Europe. Your goal is to ensure the existence of your population by making the right choices regarding the placement of buildings, the use of resources and the production of food. Think wisely, as death is lurking; hypothermia, suicide, childbirth, dehydration, starvation and sickness can destroy your population...
 
 <img src="doc/image/992.png" width="100%"/>
 

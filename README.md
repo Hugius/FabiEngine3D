@@ -22,7 +22,7 @@ White Noise is a multiplayer science fiction first person shooter game, where yo
 
 ### 992
 
-992 is a singleplayer medieval city builder game, which takes place in 992 AD on some small islands in Western Europe. Your goal is to ensure the existence of your population by making the right choices regarding the placement of buildings, the use of resources and the production of food. Think wisely, as death is lurking; hypothermia, suicide, childbirth, dehydration, starvation and sickness can destroy your population...
+992 is a singleplayer medieval city builder game, which takes place in 992 AD on some small islands in Western Europe. Your goal is to ensure the existence of your population by making the right choices regarding the placement of buildings, the use of resources and the production of food. Think wisely, as death is lurking; suicide, childbirth, starvation, dehydration, hypothermia and sickness can destroy your population...
 
 <img src="doc/image/992.png" width="100%"/>
 

@@ -3,7 +3,6 @@
 
 EngineCore::EngineCore()
 {
-	_renderWindow = make_shared<RenderWindow>();
 	_timer = make_shared<Timer>();
 	_inputHandler = make_shared<InputHandler>();
 	_meshLoader = make_shared<MeshLoader>();
@@ -25,16 +24,17 @@ EngineCore::EngineCore()
 	_captorManager = make_shared<CaptorManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
 	_sound2dManager = make_shared<Sound2dManager>();
-	_vertexBufferCache = make_shared<VertexBufferCache>();
-	_textureBufferCache = make_shared<TextureBufferCache>();
-	_waveBufferCache = make_shared<WaveBufferCache>();
-	_renderStorage = make_shared<RenderStorage>();
-	_masterRenderer = make_shared<MasterRenderer>();
 	_camera = make_shared<Camera>();
 	_raycastCalculator = make_shared<RaycastCalculator>();
 	_raycastIntersector = make_shared<RaycastIntersector>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
 	_aabbCollisionHandler = make_shared<AabbCollisionHandler>();
+	_renderWindow = make_shared<RenderWindow>();
+	_vertexBufferCache = make_shared<VertexBufferCache>();
+	_textureBufferCache = make_shared<TextureBufferCache>();
+	_waveBufferCache = make_shared<WaveBufferCache>();
+	_renderStorage = make_shared<RenderStorage>();
+	_masterRenderer = make_shared<MasterRenderer>();
 	_animation3dPlayer = make_shared<Animation3dPlayer>();
 	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();

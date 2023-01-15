@@ -86,9 +86,6 @@
 - **Blue Texture Repeat**: the amount of times the textures of the blue blend map channel are repeated
   - Type: `integer`
   - Constraints: at least `1`
-- **Visible**: the visibility of the terrain in the world
-  - Type: `boolean`
-  - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

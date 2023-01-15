@@ -76,9 +76,6 @@
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `integer`
   - Constraints: at least `1`
-- **Visible**: the visibility of the water in the world
-  - Type: `boolean`
-  - Constraints: none
 - **Reflective**: planar reflections are rendered if the camera is above the mesh
   - Type: `boolean`
   - Constraints: none

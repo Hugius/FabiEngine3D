@@ -46,9 +46,6 @@
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Visible**: the visibility of the sky in the world
-  - Type: `boolean`
-  - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none

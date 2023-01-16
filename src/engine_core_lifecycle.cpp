@@ -43,7 +43,23 @@ EngineCore::EngineCore()
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
 
-	_renderWindow->inject(_inputHandler);
+	_renderWindow->initialize(); // Initialize OpenGL first
+	_skyManager->initialize();
+	_quad3dManager->initialize();
+	_quad2dManager->initialize();
+	_text3dManager->initialize();
+	_text2dManager->initialize();
+	_aabbManager->initialize();
+	_camera->initialize();
+	_raycastCalculator->initialize();
+	_raycastIntersector->initialize();
+	_cameraCollisionHandler->initialize();
+	_aabbCollisionHandler->initialize();
+	_masterRenderer->initialize();
+	_networkingHelper->initialize();
+	_networkingServer->initialize();
+	_networkingClient->initialize();
+
 	_skyManager->inject(_renderStorage);
 	_terrainManager->inject(_imageLoader);
 	_modelManager->inject(_renderStorage);
@@ -69,6 +85,16 @@ EngineCore::EngineCore()
 	_sound3dManager->inject(_waveBufferCache);
 	_sound2dManager->inject(_audioLoader);
 	_sound2dManager->inject(_waveBufferCache);
+	_camera->inject(_renderWindow);
+	_raycastCalculator->inject(_camera);
+	_raycastIntersector->inject(_raycastCalculator);
+	_raycastIntersector->inject(_terrainManager);
+	_raycastIntersector->inject(_aabbManager);
+	_cameraCollisionHandler->inject(_terrainManager);
+	_cameraCollisionHandler->inject(_aabbManager);
+	_cameraCollisionHandler->inject(_camera);
+	_aabbCollisionHandler->inject(_aabbManager);
+	_renderWindow->inject(_inputHandler);
 	_masterRenderer->inject(_renderStorage);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_timer);
@@ -84,15 +110,6 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_pointlightManager);
 	_masterRenderer->inject(_spotlightManager);
 	_masterRenderer->inject(_captorManager);
-	_camera->inject(_renderWindow);
-	_raycastCalculator->inject(_camera);
-	_raycastIntersector->inject(_raycastCalculator);
-	_raycastIntersector->inject(_terrainManager);
-	_raycastIntersector->inject(_aabbManager);
-	_cameraCollisionHandler->inject(_terrainManager);
-	_cameraCollisionHandler->inject(_aabbManager);
-	_cameraCollisionHandler->inject(_camera);
-	_aabbCollisionHandler->inject(_aabbManager);
 	_animation3dPlayer->inject(_animation3dManager);
 	_animation3dPlayer->inject(_modelManager);
 	_animation2dPlayer->inject(_animation2dManager);
@@ -185,6 +202,13 @@ EngineCore::EngineCore()
 	_reservedClockIds.push_back("motionBlurPreRender");
 	_reservedClockIds.push_back("2dRender");
 	_reservedClockIds.push_back("bufferSwap");
+}
+
+EngineCore::~EngineCore()
+{
+	_networkingHelper->cleanup();
+	_networkingServer->cleanup();
+	_networkingClient->cleanup();
 }
 
 void EngineCore::start()

@@ -10,8 +10,7 @@ using std::unordered_map;
 class SkyManager final
 {
 public:
-	SkyManager();
-
+	void initialize();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
 	void createSky(const string & skyId);
@@ -28,10 +27,9 @@ public:
 	const bool isSkiesExisting() const;
 
 private:
-	const shared_ptr<VertexBuffer> _vertexBuffer;
-
 	unordered_map<string, shared_ptr<Sky>> _skies = {};
 
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 
 	string _selectedSkyId = "";

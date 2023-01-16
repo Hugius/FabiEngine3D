@@ -13,8 +13,7 @@ using std::unordered_map;
 class Text3dManager final
 {
 public:
-	Text3dManager();
-
+	void initialize();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ImageLoader> imageLoader);
@@ -32,13 +31,12 @@ public:
 	const bool isText3dsExisting() const;
 
 private:
-	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
-	const shared_ptr<VertexBuffer> _standingVertexBuffer;
-
 	const string DEFAULT_TEXT_CONTENT = "Text123";
 
 	unordered_map<string, shared_ptr<Text3d>> _text3ds = {};
 
+	shared_ptr<VertexBuffer> _centeredVertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _standingVertexBuffer = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;

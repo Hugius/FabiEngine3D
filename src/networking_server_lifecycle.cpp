@@ -7,13 +7,13 @@
 
 using std::launch;
 
-NetworkingServer::NetworkingServer()
+void NetworkingServer::initialize()
 {
 	_tcpSocket = INVALID_SOCKET;
 	_udpSocket = INVALID_SOCKET;
 }
 
-NetworkingServer::~NetworkingServer()
+void NetworkingServer::cleanup()
 {
 	if(_isRunning)
 	{

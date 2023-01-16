@@ -5,7 +5,7 @@
 
 using std::clamp;
 
-Camera::Camera()
+void Camera::initialize()
 {
 	reset();
 }

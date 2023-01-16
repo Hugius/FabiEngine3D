@@ -47,12 +47,10 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 
-AabbManager::AabbManager()
-	:
-	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, centeredBufferData, centeredBufferDataCount)),
-	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, standingBufferData, standingBufferDataCount))
+void AabbManager::initialize()
 {
-
+	_centeredVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS, centeredBufferData, centeredBufferDataCount);
+	_standingVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS, standingBufferData, standingBufferDataCount);
 }
 
 void AabbManager::inject(shared_ptr<ModelManager> modelManager)

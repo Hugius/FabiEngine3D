@@ -46,6 +46,7 @@ class EngineCore final
 {
 public:
 	EngineCore();
+	~EngineCore();
 
 	void inject(shared_ptr<EngineController> engineController);
 	void start();

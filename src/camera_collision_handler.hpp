@@ -9,8 +9,7 @@
 class CameraCollisionHandler final
 {
 public:
-	CameraCollisionHandler();
-
+	void initialize();
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);

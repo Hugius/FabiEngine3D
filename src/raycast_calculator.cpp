@@ -4,7 +4,7 @@
 
 using std::make_shared;
 
-RaycastCalculator::RaycastCalculator()
+void RaycastCalculator::initialize()
 {
 	clearCursorRay();
 }

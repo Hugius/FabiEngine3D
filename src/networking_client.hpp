@@ -20,9 +20,8 @@ using std::tuple;
 class NetworkingClient final
 {
 public:
-	NetworkingClient();
-	~NetworkingClient();
-
+	void initialize();
+	void cleanup();
 	void start(const string & username);
 	void update();
 	void connectToServer(const string & ip);

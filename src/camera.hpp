@@ -9,8 +9,7 @@ using std::shared_ptr;
 class Camera final
 {
 public:
-	Camera();
-
+	void initialize();
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
 	void update();

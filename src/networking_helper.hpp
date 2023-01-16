@@ -14,8 +14,8 @@ class NetworkingHelper final
 	friend class NetworkingClient;
 
 public:
-	NetworkingHelper();
-	~NetworkingHelper();
+	void initialize();
+	void cleanup();
 
 	const int getMaxUsernameSize() const;
 	const int getMaxMessageSize() const;

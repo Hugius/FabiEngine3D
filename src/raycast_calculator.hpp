@@ -6,7 +6,8 @@
 class RaycastCalculator final
 {
 public:
-	void construct();
+	RaycastCalculator();
+
 	void inject(shared_ptr<Camera> camera);
 	void calculateCursorRay();
 	void clearCursorRay();

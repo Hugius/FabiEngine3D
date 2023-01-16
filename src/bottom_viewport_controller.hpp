@@ -12,7 +12,7 @@ public:
 
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
-	void construct();
+	void initialize();
 	void update();
 
 private:

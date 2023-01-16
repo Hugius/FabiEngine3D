@@ -46,7 +46,6 @@ class EngineCore final
 {
 public:
 	EngineCore();
-	~EngineCore();
 
 	void inject(shared_ptr<EngineController> engineController);
 	void start();
@@ -101,7 +100,7 @@ public:
 	const bool isRunning() const;
 
 private:
-	void _construct();
+	void _initialize();
 	void _update();
 	void _render();
 

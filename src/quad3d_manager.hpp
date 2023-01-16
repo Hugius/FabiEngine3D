@@ -11,7 +11,8 @@ using std::unordered_map;
 class Quad3dManager final
 {
 public:
-	void construct();
+	Quad3dManager();
+
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void update();
@@ -27,10 +28,11 @@ public:
 	const bool isQuad3dsExisting() const;
 
 private:
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _standingVertexBuffer;
+
 	unordered_map<string, shared_ptr<Quad3d>> _quad3ds = {};
 
-	shared_ptr<VertexBuffer> _centeredVertexBuffer = nullptr;
-	shared_ptr<VertexBuffer> _standingVertexBuffer = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 };

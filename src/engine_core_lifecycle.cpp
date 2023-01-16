@@ -3,6 +3,7 @@
 
 EngineCore::EngineCore()
 {
+	_renderWindow = make_shared<RenderWindow>(); // Initialize OpenGL first
 	_timer = make_shared<Timer>();
 	_inputHandler = make_shared<InputHandler>();
 	_meshLoader = make_shared<MeshLoader>();
@@ -29,7 +30,6 @@ EngineCore::EngineCore()
 	_raycastIntersector = make_shared<RaycastIntersector>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
 	_aabbCollisionHandler = make_shared<AabbCollisionHandler>();
-	_renderWindow = make_shared<RenderWindow>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_waveBufferCache = make_shared<WaveBufferCache>();
@@ -42,23 +42,6 @@ EngineCore::EngineCore()
 	_networkingHelper = make_shared<NetworkingHelper>();
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
-
-	_renderWindow->construct(); // Initialize OpenGL first
-	_skyManager->construct();
-	_quad3dManager->construct();
-	_quad2dManager->construct();
-	_text3dManager->construct();
-	_text2dManager->construct();
-	_aabbManager->construct();
-	_camera->construct();
-	_raycastCalculator->construct();
-	_raycastIntersector->construct();
-	_cameraCollisionHandler->construct();
-	_aabbCollisionHandler->construct();
-	_masterRenderer->construct();
-	_networkingHelper->construct();
-	_networkingServer->construct();
-	_networkingClient->construct();
 
 	_skyManager->inject(_renderStorage);
 	_terrainManager->inject(_imageLoader);
@@ -204,13 +187,6 @@ EngineCore::EngineCore()
 	_reservedClockIds.push_back("bufferSwap");
 }
 
-EngineCore::~EngineCore()
-{
-	_networkingHelper->destruct();
-	_networkingServer->destruct();
-	_networkingClient->destruct();
-}
-
 void EngineCore::start()
 {
 	if(_isRunning)
@@ -220,7 +196,7 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-	_construct();
+	_initialize();
 
 	float runtimeLag = 0.0f;
 

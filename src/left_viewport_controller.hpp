@@ -23,7 +23,7 @@ public:
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
-	void construct();
+	void initialize();
 	void update();
 
 private:

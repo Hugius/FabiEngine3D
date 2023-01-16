@@ -13,7 +13,8 @@ using std::unordered_map;
 class AabbManager final
 {
 public:
-	void construct();
+	AabbManager();
+
 	void inject(shared_ptr<ModelManager> modelManager);
 	void inject(shared_ptr<Quad3dManager> quad3dManager);
 	void inject(shared_ptr<Text3dManager> text3dManager);
@@ -36,13 +37,14 @@ public:
 	const bool isAabbsExisting() const;
 
 private:
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _standingVertexBuffer;
+
 	unordered_map<string, shared_ptr<Aabb>> _aabbs = {};
 	unordered_map<string, vector<string>> _modelChildAabbIds = {};
 	unordered_map<string, vector<string>> _quad3dChildAabbIds = {};
 	unordered_map<string, vector<string>> _text3dChildAabbIds = {};
 
-	shared_ptr<VertexBuffer> _centeredVertexBuffer = nullptr;
-	shared_ptr<VertexBuffer> _standingVertexBuffer = nullptr;
 	shared_ptr<ModelManager> _modelManager = nullptr;
 	shared_ptr<Quad3dManager> _quad3dManager = nullptr;
 	shared_ptr<Text3dManager> _text3dManager = nullptr;

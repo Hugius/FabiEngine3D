@@ -18,8 +18,9 @@ using std::tuple;
 class NetworkingServer final
 {
 public:
-	void construct();
-	void destruct();
+	NetworkingServer();
+	~NetworkingServer();
+
 	void start(int maxClientCount);
 	void update();
 	void sendTcpMessageToClient(const string & username, const string & content);

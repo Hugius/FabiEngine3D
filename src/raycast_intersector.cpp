@@ -66,7 +66,7 @@ void RaycastIntersector::clearAabbsIntersection()
 	_aabbIntersections.clear();
 }
 
-void RaycastIntersector::construct()
+RaycastIntersector::RaycastIntersector()
 {
 	clearTerrainIntersection();
 	clearAabbsIntersection();

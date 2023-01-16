@@ -13,7 +13,8 @@ using std::unordered_map;
 class Text2dManager final
 {
 public:
-	void construct();
+	Text2dManager();
+
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
@@ -30,12 +31,13 @@ public:
 	const bool isText2dsExisting() const;
 
 private:
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
+
 	const string DEFAULT_TEXT_CONTENT = "Text123";
 
 	unordered_map<string, shared_ptr<Text2d>> _text2ds = {};
 
-	shared_ptr<VertexBuffer> _centeredVertexBuffer = nullptr;
-	shared_ptr<VertexBuffer> _corneredVertexBuffer = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;

@@ -26,10 +26,12 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(standingBufferData) / sizeof(float));
 
-void Text3dManager::construct()
+Text3dManager::Text3dManager()
+	:
+	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
-	_centeredVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount);
-	_standingVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount);
+
 }
 
 void Text3dManager::inject(shared_ptr<RenderStorage> renderStorage)

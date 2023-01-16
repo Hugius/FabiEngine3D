@@ -2,6 +2,14 @@
 
 using std::make_shared;
 
+Text2dManager::Text2dManager()
+	:
+	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+{
+
+}
+
 const shared_ptr<Text2d> Text2dManager::getText2d(const string & text2dId) const
 {
 	const auto iterator = _text2ds.find(text2dId);
@@ -79,12 +87,6 @@ const bool Text2dManager::isText2dExisting(const string & text2dId) const
 const bool Text2dManager::isText2dsExisting() const
 {
 	return !_text2ds.empty();
-}
-
-void Text2dManager::construct()
-{
-	_centeredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true);
-	_corneredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false);
 }
 
 void Text2dManager::inject(shared_ptr<RenderStorage> renderStorage)

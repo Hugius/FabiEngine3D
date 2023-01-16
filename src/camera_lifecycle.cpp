@@ -5,7 +5,7 @@
 
 using std::clamp;
 
-void Camera::construct()
+Camera::Camera()
 {
 	reset();
 }

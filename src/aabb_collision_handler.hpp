@@ -5,7 +5,8 @@
 class AabbCollisionHandler final
 {
 public:
-	void construct();
+	AabbCollisionHandler();
+
 	void inject(shared_ptr<AabbManager> aabbManager);
 	void calculateCollisionWithAabbs(const string & aabbId);
 	void clearCollisionWithAabbs();

@@ -9,7 +9,7 @@ using std::make_unique;
 using std::make_shared;
 using std::clamp;
 
-void MasterRenderer::construct()
+MasterRenderer::MasterRenderer()
 {
 	const auto viewportSize = Tools::getDisplaySize();
 

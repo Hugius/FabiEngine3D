@@ -82,7 +82,7 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 	return 0;
 }
 
-void RenderWindow::construct()
+RenderWindow::RenderWindow()
 {
 	WNDCLASS windowClass = {};
 

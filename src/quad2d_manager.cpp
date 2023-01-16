@@ -2,6 +2,14 @@
 
 using std::make_shared;
 
+Quad2dManager::Quad2dManager()
+	:
+	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+{
+
+}
+
 const shared_ptr<Quad2d> Quad2dManager::getQuad2d(const string & quad2dId) const
 {
 	const auto iterator = _quad2ds.find(quad2dId);
@@ -60,12 +68,6 @@ const bool Quad2dManager::isQuad2dExisting(const string & quad2dId) const
 const bool Quad2dManager::isQuad2dsExisting() const
 {
 	return !_quad2ds.empty();
-}
-
-void Quad2dManager::construct()
-{
-	_centeredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true);
-	_corneredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false);
 }
 
 void Quad2dManager::inject(shared_ptr<RenderStorage> renderStorage)

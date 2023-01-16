@@ -41,7 +41,8 @@ using std::unique_ptr;
 class MasterRenderer final
 {
 public:
-	void construct();
+	MasterRenderer();
+
 	void inject(shared_ptr<SkyManager> skyManager);
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<WaterManager> waterManager);

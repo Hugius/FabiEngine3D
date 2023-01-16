@@ -50,9 +50,11 @@ constexpr float bufferData[] =
 
 constexpr int bufferDataCount = static_cast<int>(sizeof(bufferData) / sizeof(float));
 
-void SkyManager::construct()
+SkyManager::SkyManager()
+	:
+	_vertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount))
 {
-	_vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount);
+
 }
 
 void SkyManager::inject(shared_ptr<RenderStorage> renderStorage)

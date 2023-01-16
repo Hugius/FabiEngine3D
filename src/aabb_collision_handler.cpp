@@ -1,5 +1,10 @@
 #include "aabb_collision_handler.hpp"
 
+AabbCollisionHandler::AabbCollisionHandler()
+{
+	clearCollisionWithAabbs();
+}
+
 void AabbCollisionHandler::calculateCollisionWithAabbs(const string & aabbId)
 {
 	_clearCollisionWithAabbs(aabbId);
@@ -152,11 +157,6 @@ const bool AabbCollisionHandler::_haveAabbsCollided(shared_ptr<Aabb> firstAabb, 
 		 ((aabbPosition1.z - halfAabbSize1.z) <= (aabbPosition2.z - halfAabbSize2.z)));
 
 	return ((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall));
-}
-
-void AabbCollisionHandler::construct()
-{
-	clearCollisionWithAabbs();
 }
 
 void AabbCollisionHandler::inject(shared_ptr<AabbManager> aabbManager)

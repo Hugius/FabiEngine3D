@@ -12,7 +12,8 @@ using std::string;
 class RenderWindow final
 {
 public:
-	void construct();
+	RenderWindow();
+
 	void inject(shared_ptr<InputHandler> inputHandler);
 	void update();
 	void setPosition(const ivec2 & value);

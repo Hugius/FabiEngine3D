@@ -9,7 +9,7 @@
 
 using std::ofstream;
 
-void TopViewportController::construct()
+void TopViewportController::initialize()
 {
 	_gui->getTopViewport()->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), FRAME_COLOR);
 	_gui->getTopViewport()->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);

@@ -62,7 +62,7 @@ const bool Quad2dManager::isQuad2dsExisting() const
 	return !_quad2ds.empty();
 }
 
-void Quad2dManager::initialize()
+void Quad2dManager::construct()
 {
 	_centeredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true);
 	_corneredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false);

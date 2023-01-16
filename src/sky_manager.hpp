@@ -10,7 +10,7 @@ using std::unordered_map;
 class SkyManager final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
 	void createSky(const string & skyId);

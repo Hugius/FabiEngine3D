@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-void CameraCollisionHandler::initialize()
+void CameraCollisionHandler::construct()
 {
 	_cameraBox = make_shared<Box>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 

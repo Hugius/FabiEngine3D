@@ -101,7 +101,7 @@ public:
 	const bool isRunning() const;
 
 private:
-	void _initialize();
+	void _construct();
 	void _update();
 	void _render();
 

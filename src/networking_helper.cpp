@@ -8,7 +8,7 @@
 
 using std::to_string;
 
-void NetworkingHelper::initialize()
+void NetworkingHelper::construct()
 {
 	WSADATA winsockData;
 
@@ -20,7 +20,7 @@ void NetworkingHelper::initialize()
 	}
 }
 
-void NetworkingHelper::cleanup()
+void NetworkingHelper::destruct()
 {
 	WSACleanup();
 }

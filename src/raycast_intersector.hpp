@@ -8,7 +8,7 @@
 class RaycastIntersector final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<RaycastCalculator> raycastCalculator);
 	void inject(shared_ptr<TerrainManager> terrainManager);
 	void inject(shared_ptr<AabbManager> aabbManager);

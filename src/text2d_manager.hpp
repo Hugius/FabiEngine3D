@@ -13,7 +13,7 @@ using std::unordered_map;
 class Text2dManager final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);

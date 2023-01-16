@@ -13,7 +13,7 @@ using std::unordered_map;
 class AabbManager final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<ModelManager> modelManager);
 	void inject(shared_ptr<Quad3dManager> quad3dManager);
 	void inject(shared_ptr<Text3dManager> text3dManager);

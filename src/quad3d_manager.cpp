@@ -26,7 +26,7 @@ constexpr float standingBufferData[] =
 constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr int standingBufferDataCount = static_cast<int>(sizeof(standingBufferData) / sizeof(float));
 
-void Quad3dManager::initialize()
+void Quad3dManager::construct()
 {
 	_centeredVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount);
 	_standingVertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount);

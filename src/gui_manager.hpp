@@ -8,7 +8,7 @@ class GuiManager final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
-	void initialize();
+	void construct();
 	void updateOverlay();
 	void updateViewports();
 

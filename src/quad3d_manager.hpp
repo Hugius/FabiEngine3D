@@ -11,7 +11,7 @@ using std::unordered_map;
 class Quad3dManager final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void update();

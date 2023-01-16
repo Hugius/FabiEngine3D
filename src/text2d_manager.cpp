@@ -81,7 +81,7 @@ const bool Text2dManager::isText2dsExisting() const
 	return !_text2ds.empty();
 }
 
-void Text2dManager::initialize()
+void Text2dManager::construct()
 {
 	_centeredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true);
 	_corneredVertexBuffer = make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false);

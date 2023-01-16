@@ -171,7 +171,7 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_scriptInterpreter->inject(_fe3d);
 }
 
-void EngineController::initialize()
+void EngineController::construct()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto meshDirectoryPath = string("engine\\assets\\mesh\\");
@@ -265,11 +265,11 @@ void EngineController::initialize()
 
 		Tools::setCursorVisible(false);
 
-		_guiManager->initialize();
-		_leftViewportController->initialize();
-		_rightViewportController->initialize();
-		_bottomViewportController->initialize();
-		_topViewportController->initialize();
+		_guiManager->construct();
+		_leftViewportController->construct();
+		_rightViewportController->construct();
+		_bottomViewportController->construct();
+		_topViewportController->construct();
 	}
 }
 

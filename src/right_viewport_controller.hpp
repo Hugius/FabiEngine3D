@@ -28,7 +28,7 @@ public:
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
-	void initialize();
+	void construct();
 	void update();
 
 private:

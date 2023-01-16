@@ -6,13 +6,13 @@
 
 using std::launch;
 
-void NetworkingClient::initialize()
+void NetworkingClient::construct()
 {
 	_tcpSocket = INVALID_SOCKET;
 	_udpSocket = INVALID_SOCKET;
 }
 
-void NetworkingClient::cleanup()
+void NetworkingClient::destruct()
 {
 	if(_isRunning)
 	{

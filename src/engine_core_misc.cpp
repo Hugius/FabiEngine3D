@@ -227,7 +227,7 @@ const vector<string> & EngineCore::getReservedClockIds() const
 	return _reservedClockIds;
 }
 
-void EngineCore::_initialize()
+void EngineCore::_construct()
 {
 	const auto keyingColor = fvec3(0.1f);
 	const auto monitorSize = Tools::getMonitorSize();
@@ -257,7 +257,7 @@ void EngineCore::_initialize()
 	_renderWindow->setVisible(true);
 	_renderWindow->swapBuffer();
 
-	_engineController->initialize();
+	_engineController->construct();
 
 	_renderWindow->setColorKeyingEnabled(false);
 	_renderWindow->setVisible(false);

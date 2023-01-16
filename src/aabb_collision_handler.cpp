@@ -154,7 +154,7 @@ const bool AabbCollisionHandler::_haveAabbsCollided(shared_ptr<Aabb> firstAabb, 
 	return ((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall));
 }
 
-void AabbCollisionHandler::initialize()
+void AabbCollisionHandler::construct()
 {
 	clearCollisionWithAabbs();
 }

@@ -5,7 +5,7 @@ void GuiManager::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void GuiManager::initialize()
+void GuiManager::construct()
 {
 	_overlay = make_shared<GuiOverlay>(_fe3d);
 

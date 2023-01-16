@@ -13,7 +13,7 @@ public:
 	EngineController();
 
 	void inject(shared_ptr<EngineInterface> fe3d);
-	void initialize();
+	void construct();
 	void update();
 
 private:

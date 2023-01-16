@@ -47,7 +47,7 @@ public:
 	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);
 	void inject(shared_ptr<Script> script);
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
-	void initialize();
+	void construct();
 	void update();
 
 	const bool isProjectCorrupted(const string & projectDirectoryPath) const;

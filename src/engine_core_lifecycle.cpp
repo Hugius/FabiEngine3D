@@ -43,22 +43,22 @@ EngineCore::EngineCore()
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
 
-	_renderWindow->initialize(); // Initialize OpenGL first
-	_skyManager->initialize();
-	_quad3dManager->initialize();
-	_quad2dManager->initialize();
-	_text3dManager->initialize();
-	_text2dManager->initialize();
-	_aabbManager->initialize();
-	_camera->initialize();
-	_raycastCalculator->initialize();
-	_raycastIntersector->initialize();
-	_cameraCollisionHandler->initialize();
-	_aabbCollisionHandler->initialize();
-	_masterRenderer->initialize();
-	_networkingHelper->initialize();
-	_networkingServer->initialize();
-	_networkingClient->initialize();
+	_renderWindow->construct(); // Initialize OpenGL first
+	_skyManager->construct();
+	_quad3dManager->construct();
+	_quad2dManager->construct();
+	_text3dManager->construct();
+	_text2dManager->construct();
+	_aabbManager->construct();
+	_camera->construct();
+	_raycastCalculator->construct();
+	_raycastIntersector->construct();
+	_cameraCollisionHandler->construct();
+	_aabbCollisionHandler->construct();
+	_masterRenderer->construct();
+	_networkingHelper->construct();
+	_networkingServer->construct();
+	_networkingClient->construct();
 
 	_skyManager->inject(_renderStorage);
 	_terrainManager->inject(_imageLoader);
@@ -206,9 +206,9 @@ EngineCore::EngineCore()
 
 EngineCore::~EngineCore()
 {
-	_networkingHelper->cleanup();
-	_networkingServer->cleanup();
-	_networkingClient->cleanup();
+	_networkingHelper->destruct();
+	_networkingServer->destruct();
+	_networkingClient->destruct();
 }
 
 void EngineCore::start()
@@ -220,7 +220,7 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-	_initialize();
+	_construct();
 
 	float runtimeLag = 0.0f;
 

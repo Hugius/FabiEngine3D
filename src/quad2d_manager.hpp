@@ -10,7 +10,7 @@ using std::unordered_map;
 class Quad2dManager final
 {
 public:
-	void initialize();
+	void construct();
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
 	void createQuad2d(const string & quad2dId, bool isCentered);

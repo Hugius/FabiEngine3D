@@ -21,7 +21,7 @@ void ModelEditor::_updateMainMenu()
 					skyId = skyId.substr(1);
 				}
 
-				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", CENTER_CHOICE_FORM_POSITION, skyIds);
+				_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", LEFT_CHOICE_FORM_POSITION, skyIds);
 			}
 			else
 			{

@@ -27,7 +27,7 @@ void CaptorEditor::_updateMainMenu()
 				captorId = captorId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editCaptor", "Edit Captor", RIGHT_CHOICE_FORM_POSITION, captorIds);
+			_gui->getOverlay()->openChoiceForm("editCaptor", "Edit Captor", CENTER_CHOICE_FORM_POSITION, captorIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,7 +38,7 @@ void CaptorEditor::_updateMainMenu()
 				captorId = captorId.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteCaptor", "Delete Captor", RIGHT_CHOICE_FORM_POSITION, captorIds);
+			_gui->getOverlay()->openChoiceForm("deleteCaptor", "Delete Captor", CENTER_CHOICE_FORM_POSITION, captorIds);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "save") && _gui->getOverlay()->isAnswerFormConfirmed())

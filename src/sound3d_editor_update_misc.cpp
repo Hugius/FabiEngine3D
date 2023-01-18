@@ -126,7 +126,6 @@ void Sound3dEditor::_updateSound3dCreating()
 		if(_fe3d->sound3d_isExisting(sound3dId))
 		{
 			_fe3d->sound3d_setPosition(sound3dId, SOUND3D_POSITION);
-			_fe3d->sound3d_start(sound3dId, -1, 0);
 
 			_loadedSound3dIds.push_back(sound3dId);
 
@@ -154,8 +153,6 @@ void Sound3dEditor::_updateSound3dChoosing()
 		{
 			if(!_hoveredSound3dId.empty())
 			{
-				_fe3d->sound3d_stop(_hoveredSound3dId, 0);
-
 				_fe3d->model_setVisible(SPEAKER_ID, false);
 
 				_hoveredSound3dId = "";
@@ -166,8 +163,6 @@ void Sound3dEditor::_updateSound3dChoosing()
 			if(_hoveredSound3dId.empty())
 			{
 				_hoveredSound3dId = ("@" + selectedOptionId);
-
-				_fe3d->sound3d_start(_hoveredSound3dId, -1, 0);
 
 				_fe3d->model_setVisible(SPEAKER_ID, true);
 			}
@@ -194,8 +189,6 @@ void Sound3dEditor::_updateSound3dChoosing()
 	{
 		if(!_hoveredSound3dId.empty())
 		{
-			_fe3d->sound3d_stop(_hoveredSound3dId, 0);
-
 			_fe3d->model_setVisible(SPEAKER_ID, false);
 
 			_hoveredSound3dId = "";
@@ -217,8 +210,6 @@ void Sound3dEditor::_updateSound3dDeleting()
 		}
 		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_fe3d->sound3d_stop(_currentSound3dId, 0);
-
 			_fe3d->model_setVisible(SPEAKER_ID, false);
 
 			_currentSound3dId = "";

@@ -90,9 +90,13 @@ void Sound3dEditor::_loadGUI()
 	rightWindow->getScreen("sound3dEditorMenuMain")->createButton("back", fvec2(0.0f, POSITIONS(4)[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("sound3dEditorMenuChoice");
-	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("maxVolume", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Max Volume"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Max Volume", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("maxDistance", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Max Distance"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Max Distance", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("play", fvec2(0.0f, POSITIONS(7)[0]), TEXT_SIZE("Play"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Play", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("pause", fvec2(0.0f, POSITIONS(7)[1]), TEXT_SIZE("Pause"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pause", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("resume", fvec2(0.0f, POSITIONS(7)[2]), TEXT_SIZE("Resume"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Resume", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("stop", fvec2(0.0f, POSITIONS(7)[3]), TEXT_SIZE("Stop"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Stop", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("maxVolume", fvec2(0.0f, POSITIONS(7)[4]), TEXT_SIZE("Max Volume"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Max Volume", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("maxDistance", fvec2(0.0f, POSITIONS(7)[5]), TEXT_SIZE("Max Distance"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Max Distance", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("sound3dEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(7)[6]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->setActiveScreen("empty");
 

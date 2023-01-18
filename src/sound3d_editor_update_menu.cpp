@@ -72,7 +72,11 @@ void Sound3dEditor::_updateChoiceMenu()
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->sound3d_stop(_currentSound3dId, 0);
+			if(_fe3d->sound3d_isStarted(_currentSound3dId, 0))
+			{
+				_fe3d->sound3d_stop(_currentSound3dId, 0);
+			}
+
 			_fe3d->model_setVisible(SPEAKER_ID, false);
 
 			_gui->getOverlay()->getTextField(SOUND3D_TITLE_ID)->setVisible(false);
@@ -81,6 +85,22 @@ void Sound3dEditor::_updateChoiceMenu()
 			_currentSound3dId = "";
 
 			return;
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("play")->isHovered())
+		{
+			_fe3d->sound3d_start(_currentSound3dId, 1, 0);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("pause")->isHovered())
+		{
+			_fe3d->sound3d_pause(_currentSound3dId, 0);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("resume")->isHovered())
+		{
+			_fe3d->sound3d_resume(_currentSound3dId, 0);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("stop")->isHovered())
+		{
+			_fe3d->sound3d_stop(_currentSound3dId, 0);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("maxVolume")->isHovered())
 		{
@@ -105,5 +125,10 @@ void Sound3dEditor::_updateChoiceMenu()
 
 			_fe3d->sound3d_setMaxDistance(_currentSound3dId, (value / DISTANCE_FACTOR));
 		}
+
+		screen->getButton("play")->setHoverable(!_fe3d->sound3d_isStarted(_currentSound3dId, 0), true);
+		screen->getButton("resume")->setHoverable((_fe3d->sound3d_isStarted(_currentSound3dId, 0) && _fe3d->sound3d_isPaused(_currentSound3dId, 0)), true);
+		screen->getButton("pause")->setHoverable((_fe3d->sound3d_isStarted(_currentSound3dId, 0) && !_fe3d->sound3d_isPaused(_currentSound3dId, 0)), true);
+		screen->getButton("stop")->setHoverable(_fe3d->sound3d_isStarted(_currentSound3dId, 0), true);
 	}
 }

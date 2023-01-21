@@ -24,13 +24,13 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * AMBIENT_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * AMBIENT_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * AMBIENT_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * AMBIENT_LIGHTING_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
@@ -38,28 +38,28 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setAmbientLightingColor(fvec3((value / COLOR_FACTOR), color.g, color.b));
+			_fe3d->graphics_setAmbientLightingColor(fvec3((value / AMBIENT_LIGHTING_COLOR_FACTOR), color.g, color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, (value / COLOR_FACTOR), color.b));
+			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, (value / AMBIENT_LIGHTING_COLOR_FACTOR), color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, color.g, (value / COLOR_FACTOR)));
+			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, color.g, (value / AMBIENT_LIGHTING_COLOR_FACTOR)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setAmbientLightingIntensity(value / INTENSITY_FACTOR);
+			_fe3d->graphics_setAmbientLightingIntensity(value / AMBIENT_LIGHTING_INTENSITY_FACTOR);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -95,13 +95,13 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * DIRECTIONAL_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * DIRECTIONAL_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * DIRECTIONAL_LIGHTING_COLOR_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
+			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * DIRECTIONAL_LIGHTING_INTENSITY_FACTOR), VALUE_FORM_POSITION, VALUE_FORM_SIZE, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
@@ -130,28 +130,28 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setDirectionalLightingColor(fvec3((value / COLOR_FACTOR), color.g, color.b));
+			_fe3d->graphics_setDirectionalLightingColor(fvec3((value / DIRECTIONAL_LIGHTING_COLOR_FACTOR), color.g, color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, (value / COLOR_FACTOR), color.b));
+			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, (value / DIRECTIONAL_LIGHTING_COLOR_FACTOR), color.b));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, color.g, (value / COLOR_FACTOR)));
+			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, color.g, (value / DIRECTIONAL_LIGHTING_COLOR_FACTOR)));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setDirectionalLightingIntensity(value / INTENSITY_FACTOR);
+			_fe3d->graphics_setDirectionalLightingIntensity(value / DIRECTIONAL_LIGHTING_INTENSITY_FACTOR);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

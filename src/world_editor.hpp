@@ -217,8 +217,11 @@ private:
 	static inline constexpr float FOG_THICKNESS_FACTOR = 100.0f;
 	static inline constexpr float SKY_EXPOSURE_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float SKY_EXPOSURE_SPEED_FACTOR = 10000.0f;
-	static inline constexpr float COLOR_FACTOR = 255.0f;
-	static inline constexpr float INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float AMBIENT_LIGHTING_COLOR_FACTOR = 255.0f;
+	static inline constexpr float DIRECTIONAL_LIGHTING_COLOR_FACTOR = 255.0f;
+	static inline constexpr float FOG_COLOR_FACTOR = 255.0f;
+	static inline constexpr float AMBIENT_LIGHTING_INTENSITY_FACTOR = 100.0f;
+	static inline constexpr float DIRECTIONAL_LIGHTING_INTENSITY_FACTOR = 100.0f;
 	static inline constexpr float CAMERA_POSITION_SPEED_DIVIDER = 100.0f;
 	static inline constexpr float CAMERA_BOX_HEIGHT = 1.0f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.05f;

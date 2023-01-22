@@ -49,7 +49,7 @@
 - **UV Offset**: the XY offset of the texture coordinates
   - Type: `decimal2`
   - Constraints: between `0.0` and `1.0`
-- **Emission Intenstiy**: the intensity of the emission map
+- **Emission Intensity**: the intensity of the emission map
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Lightness**: the lightness multiplier of the mesh

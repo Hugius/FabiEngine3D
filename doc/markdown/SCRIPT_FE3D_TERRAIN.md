@@ -47,7 +47,7 @@
 - `fe3d:terrain_has_green_normal_map` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_has_blue_normal_map` (`STR` terrain_id) -----> `BOL`
 - `fe3d:terrain_get_selected_id` (`STR` terrain_id) -----> `STR`
-- `fe3d:terrain_get_texel_height` (`STR` terrain_id, `DEC` x, `DEC` z) -----> `DEC`
+- `fe3d:terrain_get_pixel_height` (`STR` terrain_id, `DEC` x, `DEC` z) -----> `DEC`
 - `fe3d:terrain_get_height_map_path` (`STR` terrain_id) -----> `STR`
 - `fe3d:terrain_get_diffuse_map_path` (`STR` terrain_id) -----> `STR`
 - `fe3d:terrain_get_normal_map_path` (`STR` terrain_id) -----> `STR`

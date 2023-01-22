@@ -3,7 +3,7 @@
 ## 1. General
 
 - The captor is a 3D "camera" in 3D space.
-- Everything around the is captured into an internal cube map.
+- Everything around the captor is captured into an internal cube map.
 - The cube map is used for cube reflections/refractions.
 
 ## 2. Properties

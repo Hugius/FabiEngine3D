@@ -171,7 +171,7 @@
 #### 2.1.1 General
 
 - Bloom is an effect that adds a glow to very bright objects.
-- Emission maps can be used to highlight texels to be bloomed.
+- Emission maps highlight the pixels to be bloomed.
 
 #### 2.1.2 Properties
 
@@ -195,7 +195,7 @@
 
 #### 2.2.1 General
 
-- DOF is an effect that blurs all 3D rendering pixels which are not focused on by the camera.
+- DOF is an effect that blurs all 3D rendering pixels that are not focused on by the camera.
 - The effect is either dynamic or static.
 
 #### 2.2.2 Properties

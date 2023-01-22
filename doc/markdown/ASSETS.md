@@ -52,7 +52,7 @@
 
 - Bit depth: **24**
 - Blend maps are used to render and mix multiple textures onto a terrain mesh.
-- Each texel (R,G,B) of the blend map corresponds to a different diffuse/normal map.
+- Each pixel (R,G,B) of the blend map corresponds to a different diffuse/normal map.
 - In total you can use up to 10 different images:
   - 1x height map
   - 1x blend map
@@ -104,7 +104,7 @@
 
 - Recommended bit depth: **24**
 - Flare maps are used in the [lens flare effect](GRAPHICS.md).
-- The texel colors in the flare map are added to the 3D rendering pixels in the post-processing pipeline.
+- The pixel colors in the flare map are added to the 3D rendering pixels in the post-processing pipeline.
 
 ### 4.7 Font Map
 
@@ -121,8 +121,8 @@
 
 - Recommended bit depth: **24**
 - Height maps are used to generate a terrain mesh or to create waves in a water mesh.
-- RGB texel are automatically averaged to calculate their intensity.
-- The intensity of each texel corresponds to a vertex height.
+- RGB pixels are automatically averaged to calculate their intensity.
+- The intensity of each pixel corresponds to a vertex height.
 
 ### 4.9 Normal Map
 

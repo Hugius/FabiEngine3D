@@ -1001,6 +1001,7 @@ public:
 	void raycast_clearTerrainIntersection();
 	void raycast_clearAabbsIntersection();
 
+	const vector<string> raycast_getAabbIds() const;
 	const string & raycast_getClosestAabbId() const;
 	const fvec3 & raycast_getCursorRayPosition() const;
 	const fvec3 & raycast_getCursorRayDirection() const;

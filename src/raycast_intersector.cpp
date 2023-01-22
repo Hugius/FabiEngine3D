@@ -66,6 +66,21 @@ void RaycastIntersector::clearAabbsIntersection()
 	_aabbIntersections.clear();
 }
 
+const vector<string> RaycastIntersector::getAabbIds() const
+{
+	vector<string> aabbIds = {};
+
+	for(const auto & [aabbId, distance] : _aabbIntersections)
+	{
+		if(distance != -1.0f)
+		{
+			aabbIds.push_back(aabbId);
+		}
+	}
+
+	return aabbIds;
+}
+
 RaycastIntersector::RaycastIntersector()
 {
 	clearTerrainIntersection();

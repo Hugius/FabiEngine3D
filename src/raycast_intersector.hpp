@@ -18,6 +18,8 @@ public:
 	void clearTerrainIntersection();
 	void clearAabbsIntersection();
 
+	const vector<string> getAabbIds() const;
+
 	const string & getClosestAabbId() const;
 
 	const fvec3 & getPointOnTerrain() const;

@@ -31,6 +31,11 @@ void EngineInterface::raycast_clearAabbsIntersection()
 	_core->getRaycastIntersector()->clearAabbsIntersection();
 }
 
+const vector<string> EngineInterface::raycast_getAabbIds() const
+{
+	return _core->getRaycastIntersector()->getAabbIds();
+}
+
 const string & EngineInterface::raycast_getClosestAabbId() const
 {
 	return _core->getRaycastIntersector()->getClosestAabbId();

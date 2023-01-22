@@ -175,6 +175,92 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "fe3d:raycast_get_models")
+	{
+		const auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto aabbIds = _fe3d->raycast_getAabbIds();
+
+			for(const auto & aabbId : aabbIds)
+			{
+				if(!aabbId.empty())
+				{
+					if(_fe3d->aabb_hasParent(aabbId))
+					{
+						if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL)
+						{
+							if(args[0]->getString().empty())
+							{
+								const auto result = _fe3d->aabb_getParentId(aabbId);
+
+								returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+							}
+							else
+							{
+								const auto rawAabbId = aabbId.substr(string("model@").size());
+								const auto subAabbId = rawAabbId.substr(rawAabbId.find('@'));
+
+								if(subAabbId == args[1]->getString())
+								{
+									const auto result = _fe3d->aabb_getParentId(aabbId);
+
+									returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_quad3ds")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto aabbIds = _fe3d->raycast_getAabbIds();
+
+			for(const auto & aabbId : aabbIds)
+			{
+				if(!aabbId.empty())
+				{
+					if(_fe3d->aabb_hasParent(aabbId))
+					{
+						if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D)
+						{
+							const auto result = _fe3d->aabb_getParentId(aabbId);
+
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+						}
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_text3ds")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto aabbIds = _fe3d->raycast_getAabbIds();
+
+			for(const auto & aabbId : aabbIds)
+			{
+				if(!aabbId.empty())
+				{
+					if(_fe3d->aabb_hasParent(aabbId))
+					{
+						if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D)
+						{
+							const auto result = _fe3d->aabb_getParentId(aabbId);
+
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+						}
+					}
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:raycast_get_distance_to_model")
 	{
 		const auto types = {SVT::STRING, SVT::STRING};

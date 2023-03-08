@@ -1,4 +1,4 @@
-# General Information
+# General information
 
 ## 1. Features
 
@@ -60,7 +60,7 @@
 - Realtime statistics
 - Realtime logging
 
-## 2. Folder Structure
+## 2. Folder structure
 
 ```text
 ~
@@ -115,7 +115,7 @@
 
 &#8594; You can start the engine by running `~\app\binaries\fe3d.exe` &#8592;
 
-## 4. Engine Interface
+## 4. Engine interface
 
 - **Center Viewport**: 3D display screen
 - **Left Viewport**: editors

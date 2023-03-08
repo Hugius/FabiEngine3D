@@ -1,4 +1,4 @@
-# Captor Editor
+# Captor editor
 
 ## 1. General
 

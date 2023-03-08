@@ -1,4 +1,4 @@
-# Sky Scripting Functions
+# Sky scripting functions
 
 ## Setters
 

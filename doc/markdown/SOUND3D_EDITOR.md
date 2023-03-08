@@ -1,4 +1,4 @@
-# Sound3D Editor
+# Sound3D editor
 
 ## 1. General
 

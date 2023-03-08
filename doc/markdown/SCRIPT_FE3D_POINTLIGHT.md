@@ -1,4 +1,4 @@
-# Pointlight Scripting Functions
+# Pointlight scripting functions
 
 ## Setters
 

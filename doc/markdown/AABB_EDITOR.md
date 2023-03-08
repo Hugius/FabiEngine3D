@@ -1,4 +1,4 @@
-# AABB Editor
+# AABB editor
 
 ## 1. General
 

@@ -1,4 +1,4 @@
-# Quad3D Scripting Functions
+# Quad3D scripting functions
 
 ## Setters
 

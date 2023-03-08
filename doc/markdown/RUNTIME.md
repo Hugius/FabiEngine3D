@@ -1,12 +1,12 @@
 # Runtime
 
-## 1. Application Preview
+## 1. Application preview
 
 - You can play/stop/debug the application preview.
 - All changes made through scripting will be reset if the preview is stopped (unless persisted in a file).
 - You can start a debug frame which logs a performance report about your script execution.
 
-## 2. Application Export
+## 2. Application export
 
 ### 2.1 General
 
@@ -19,7 +19,7 @@
   - A new configuration file (`configuration.fe3d`)
 - The exported directory now contains a standalone application.
 
-### 2.2 Configuration File
+### 2.2 Configuration file
 
 - `window_title`: string value; title of the application window.
 - `window_width`: integer value between 0 and 100; a percentage of the full monitor width.

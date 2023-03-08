@@ -1,4 +1,4 @@
-# Model Scripting Functions
+# Model scripting functions
 
 ## Setters
 

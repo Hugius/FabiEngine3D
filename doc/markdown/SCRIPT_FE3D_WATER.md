@@ -1,4 +1,4 @@
-# Water Scripting Functions
+# Water scripting functions
 
 ## Setters
 

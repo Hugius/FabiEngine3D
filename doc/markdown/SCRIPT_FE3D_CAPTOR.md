@@ -1,4 +1,4 @@
-# captor Scripting Functions
+# captor scripting functions
 
 ## Setters
 

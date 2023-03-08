@@ -1,4 +1,4 @@
-# Pointlight Editor
+# Pointlight editor
 
 ## 1. General
 

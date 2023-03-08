@@ -1,4 +1,4 @@
-# Animation2D Editor
+# Animation2D editor
 
 ## 1. General
 

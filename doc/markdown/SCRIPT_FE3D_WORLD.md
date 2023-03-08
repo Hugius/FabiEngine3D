@@ -1,4 +1,4 @@
-# World Scripting Functions
+# World scripting functions
 
 ## Setters
 

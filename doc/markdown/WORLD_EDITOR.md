@@ -1,4 +1,4 @@
-# World Editor
+# World editor
 
 ## 1. General
 

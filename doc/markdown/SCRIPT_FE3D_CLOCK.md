@@ -1,4 +1,4 @@
-# Water Scripting Functions
+# Clock scripting functions
 
 ## Setters
 

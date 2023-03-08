@@ -1,4 +1,4 @@
-# Text2D Scripting Functions
+# Text2D scripting functions
 
 ## Setters
 

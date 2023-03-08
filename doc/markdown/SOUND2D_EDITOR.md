@@ -1,4 +1,4 @@
-# Sound2D Editor
+# Sound2D editor
 
 ## 1. General
 

@@ -1,4 +1,4 @@
-# Sound2D Scripting Functions
+# Sound2D scripting functions
 
 ## Setters
 

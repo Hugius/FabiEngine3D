@@ -6,7 +6,7 @@
 - Only one animation can be applied to a quad3D/quad2D.
 - Animated textures should consist of multiple smaller animation frames, divided by rows and columns.
 
-## 2. Base Properties
+## 2. Base properties
 
 - **ID**: the unique identifier of the sound
   - Type: `string`
@@ -21,7 +21,7 @@
   - Type: `integer`
   - Constraints: at least `0`
 
-## 3. Started Properties
+## 3. Started properties
 
 - **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`

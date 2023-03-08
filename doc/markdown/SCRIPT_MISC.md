@@ -1,4 +1,4 @@
-# Miscellaneous Scripting functions
+# Miscellaneous scripting functions
 
 - `misc:list_concat`(`STR` name, `STR` name) -----> `LST`
 - `misc:list_size`(`STR` name) -----> `INT`

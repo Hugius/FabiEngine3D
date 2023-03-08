@@ -13,7 +13,7 @@
 - The engine supports collision (detection + response) between the camera and AABBs.
 - The camera has its own custom bounding box.
 
-## 1.3 Camera vs Terrain
+## 1.3 Camera vs terrain
 
 - The engine supports collision (detection + response) between the camera and the terrain.
 - The camera has its own custom bounding box.
@@ -23,19 +23,19 @@
 
 <img src="../image/raycasting.png" width="75%"/>
 
-## 2.1 Cursor Ray
+## 2.1 Cursor ray
 
 - The cursor ray is a normalized ray from the cursor into 3D space.
 - The position of the ray is simply the camera position.
 - The direction of the ray is simply to where the cursor is pointing at.
 
-## 2.1 Terrain Intersection
+## 2.1 Terrain intersection
 
 - The engine supports cursor intersection with the terrain.
 - Used in the mouse picking system of the world editor.
 - Can be used for determining the distance from the camera to the terrain.
 
-## 2.2 AABB Intersection
+## 2.2 AABB intersection
 
 - The engine supports cursor intersection with AABBs.
 - Used in the AABB selection system of the world editor.

@@ -1,4 +1,4 @@
-# Terrain Editor
+# Terrain editor
 
 ## 1. General
 

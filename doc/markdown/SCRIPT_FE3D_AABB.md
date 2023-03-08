@@ -1,4 +1,4 @@
-# AABB Scripting Functions
+# AABB scripting functions
 
 ## Setters
 

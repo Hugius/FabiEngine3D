@@ -1,4 +1,4 @@
-# Graphics Scripting Functions
+# Graphics scripting functions
 
 ## Setters
 

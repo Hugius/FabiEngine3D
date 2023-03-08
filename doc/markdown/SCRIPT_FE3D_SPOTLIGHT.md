@@ -1,4 +1,4 @@
-# Spotlight Scripting Functions
+# Spotlight scripting functions
 
 ## Setters
 

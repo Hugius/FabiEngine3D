@@ -1,4 +1,4 @@
-# Sky Editor
+# Sky editor
 
 ## 1. General
 

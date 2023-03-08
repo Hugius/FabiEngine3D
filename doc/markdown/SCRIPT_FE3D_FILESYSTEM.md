@@ -1,4 +1,4 @@
-# Water Scripting Functions
+# Filesystem scripting functions
 
 ## Setters
 

@@ -46,7 +46,7 @@
 - Every image file must have a resolution of at least 1x1.
 - Every image file must have a bit depth of 24 or 32.
 
-### 4.1 Blend Map
+### 4.1 Blend map
 
 <img src="../image/blend_map.png" width="25%"/>
 
@@ -61,7 +61,7 @@
   - 3x blend diffuse map
   - 3x blend normal map
 
-### 4.2 Cube Map
+### 4.2 Cube map
 
 <img src="../image/skybox_left.png" width="25%"/>
 <img src="../image/skybox_right.png" width="25%"/>
@@ -77,28 +77,28 @@
 - Every image file must have the same resolution.
 - Every image file must have the same bit depth.
 
-### 4.3 Diffuse Map
+### 4.3 Diffuse map
 
 <img src="../image/diffuse_map.png" width="25%"/>
 
 - Recommended bit depth: **24/32**
 - Diffuse maps are used to render a variety of colors to a mesh.
 
-### 4.4 DUDV Map
+### 4.4 DUDV map
 
 <img src="../image/dudv_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
 - DUDV maps are used to create ripples in a water texture.
 
-### 4.5 Emission Map
+### 4.5 Emission map
 
 <img src="../image/emission_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
 - Emission maps are used to make certain parts of a mesh appear brighter.
 
-### 4.6 Flare Map
+### 4.6 Flare map
 
 <img src="../image/flare_map.png" width="25%"/>
 
@@ -106,7 +106,7 @@
 - Flare maps are used in the [lens flare effect](GRAPHICS.md).
 - The pixel colors in the flare map are added to the 3D rendering pixels in the post-processing pipeline.
 
-### 4.7 Font Map
+### 4.7 Font map
 
 <img src="../image/font_map.png" width="50%"/>
 
@@ -115,7 +115,7 @@
 - A [font generator](http://www.codehead.co.uk/cbfg/) must be used to create font maps.
 - Each font map must have 6 rows and 16 columns.
 
-### 4.8 Height Map
+### 4.8 Height map
 
 <img src="../image/height_map.png" width="25%"/>
 
@@ -124,28 +124,28 @@
 - RGB pixels are automatically averaged to calculate their intensity.
 - The intensity of each pixel corresponds to a vertex height.
 
-### 4.9 Normal Map
+### 4.9 Normal map
 
 <img src="../image/normal_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
 - Normal maps are used for more detailed lighting effects on a mesh.
 
-### 4.10 Reflection Map
+### 4.10 Reflection map
 
 <img src="../image/reflection_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
-### 4.11 Refraction Map
+### 4.11 Refraction map
 
 <img src="../image/refraction_map.png" width="25%"/>
 
 - Recommended bit depth: **24**
 - Refraction maps are used to specify which parts of a mesh are refractive.
 
-### 4.12 Specular Map
+### 4.12 Specular map
 
 <img src="../image/specular_map.png" width="25%"/>
 

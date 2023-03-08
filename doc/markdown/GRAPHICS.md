@@ -2,7 +2,7 @@
 
 ## 1. Lighting
 
-### 1.1 Ambient Lighting
+### 1.1 Ambient lighting
 
 #### 1.1.1 General
 
@@ -23,7 +23,7 @@
   - Type: `boolean`
   - Constraints: none
 
-### 1.2 Directional Lighting
+### 1.2 Directional lighting
 
 #### 1.2.1 General
 
@@ -47,41 +47,41 @@
   - Type: `boolean`
   - Constraints: none
 
-### 1.3 Specular Lighting
+### 1.3 Specular lighting
 
 - Specular lighting is light that is mirroring light from another source.
 - Normal vectors are used to render this type of lighting.
 - Applicable to terrain, water and models.
 
-### 1.4 Point Lighting
+### 1.4 Point lighting
 
 - Point lighting is light that comes from a positional light source.
 - The light is cast in every direction by the light source.
 - Normal vectors are used to render this type of lighting.
 - Applicable to terrain, water and models.
 
-### 1.5 Spot Lighting
+### 1.5 Spot lighting
 
 - Spot lighting is light that comes from a rotational light source.
 - The light creates a spotlight effect.
 - Normal vectors are used to render this type of lighting.
 - Applicable to terrain, water and models.
 
-### 1.6 Cube Reflections
+### 1.6 Cube reflections
 
 - Cube reflections are reflections based on pre-captured cube maps.
 - The reflections are static, but very efficient.
 - Normal vectors are used to render this type of reflection.
 - Applicable only to models.
 
-### 1.7 Cube Refractions
+### 1.7 Cube refractions
 
 - Cube refractions are refractions based on pre-captured cube maps.
 - The refractions are static, but very efficient.
 - Normal vectors are used to render this type of refraction.
 - Applicable only to models.
 
-### 1.8 Planar Reflections
+### 1.8 Planar reflections
 
 #### 1.8.1 General
 
@@ -99,7 +99,7 @@
   - Type: `integer`
   - Constraints: between `128` and `1024`
 
-### 1.9 Planar Refractions
+### 1.9 Planar refractions
 
 #### 1.9.1 General
 
@@ -216,7 +216,7 @@
   - Type: `boolean`
   - Constraints: none
 
-### 2.3 Motion Blur
+### 2.3 Motion blur
 
 #### 2.3.1 General
 
@@ -235,16 +235,16 @@
   - Type: `boolean`
   - Constraints: none
 
-### 2.4 Anti Aliasing
+### 2.4 Anti-aliasing
 
 #### 2.4.1 General
 
-- Anti aliasing is an effect that smoothes out jagged edges.
+- Anti-aliasing is an effect that smoothes out jagged edges.
 - FXAA is the technique used for this effect.
 
 #### 2.4.2 Properties
 
-- **Enabled**: the anti aliasing effect is enabled
+- **Enabled**: the anti-aliasing effect is enabled
   - Type: `boolean`
   - Constraints: none
 
@@ -274,7 +274,7 @@
   - Type: `boolean`
   - Constraints: none
 
-### 2.6 Gamma Correction
+### 2.6 Gamma correction
 
 - Gamma correction is the reverse process of monitors displaying colors in a non-linear space.
 - Lighting calculations are done in linear space.
@@ -327,7 +327,7 @@
   - Type: `boolean`
   - Constraints: none
 
-### 3.3 Anisotropic Filtering
+### 3.3 Anisotropic filtering
 
 #### 3.3.1 General
 
@@ -341,7 +341,7 @@
   - Type: `integer`
   - Constraints: between `1` and `16`
 
-### 3.4 Normal Mapping
+### 3.4 Normal mapping
 
 - Normal mapping is the process of increasing the lighting details by distorting normal vectors.
 - A normal map is used to calculate distorted normal vectors.

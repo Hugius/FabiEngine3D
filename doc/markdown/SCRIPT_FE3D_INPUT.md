@@ -1,4 +1,4 @@
-# Input Scripting Functions
+# Input scripting functions
 
 ## Getters
 

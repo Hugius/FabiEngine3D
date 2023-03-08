@@ -1,4 +1,4 @@
-# Quad2D Editor
+# Quad2D editor
 
 ## 1. General
 

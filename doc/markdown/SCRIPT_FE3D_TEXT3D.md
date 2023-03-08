@@ -1,4 +1,4 @@
-# Text3D Scripting Functions
+# Text3D scripting functions
 
 ## Setters
 

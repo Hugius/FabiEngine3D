@@ -1,4 +1,4 @@
-# Water Editor
+# Water editor
 
 ## 1. General
 

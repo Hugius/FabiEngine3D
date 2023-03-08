@@ -24,7 +24,7 @@
 - The engine supports a first person view system.
 - The engine supports a third person view system.
 
-## 3. Camera Vectors
+## 3. Camera vectors
 
 <img src="../image/camera_vectors.png" width="50%"/>
 

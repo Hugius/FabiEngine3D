@@ -19,7 +19,7 @@
 - Refraction map
 - Normal map
 
-## 3. Base Properties
+## 3. Base properties
 
 - **ID**: the unique identifier of the model
   - Type: `string`
@@ -64,7 +64,7 @@
   - Type: `enumeration`
   - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
 
-## 4. Part Properties
+## 4. Part properties
 
 - **Diffuse Map Path**: the path of the diffuse map file
   - Type: `string`

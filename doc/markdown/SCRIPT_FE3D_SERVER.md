@@ -1,4 +1,4 @@
-# Server Scripting Functions
+# Server scripting functions
 
 ## Setters
 

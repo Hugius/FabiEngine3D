@@ -1,4 +1,4 @@
-# Spotlight Editor
+# Spotlight editor
 
 ## 1. General
 

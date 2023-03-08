@@ -1,4 +1,4 @@
-# Terrain Scripting Functions
+# Terrain scripting functions
 
 ## Setters
 

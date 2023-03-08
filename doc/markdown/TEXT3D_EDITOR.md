@@ -1,4 +1,4 @@
-# Text3D Editor
+# Text3D editor
 
 ## 1. General
 

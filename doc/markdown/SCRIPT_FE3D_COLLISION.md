@@ -1,4 +1,4 @@
-# Collision Scripting Functions
+# Collision scripting functions
 
 ## Setters
 

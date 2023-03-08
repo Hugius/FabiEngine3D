@@ -1,4 +1,4 @@
-# Client Scripting Functions
+# Client scripting functions
 
 ## Setters
 

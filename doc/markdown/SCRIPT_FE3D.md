@@ -1,4 +1,4 @@
-# Engine Scripting Functions
+# Engine scripting functions
 
 - [Sky](SCRIPT_FE3D_SKY.md)
 - [Terrain](SCRIPT_FE3D_TERRAIN.md)

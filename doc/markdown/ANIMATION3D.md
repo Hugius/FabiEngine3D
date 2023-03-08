@@ -9,7 +9,7 @@
 - The last keyframe should be the same as the first keyframe.
 - If the model is multiparted, each part can be animated independently.
 
-## 2. Base Properties
+## 2. Base properties
 
 - **ID**: the unique identifier of the animation
   - Type: `string`
@@ -19,7 +19,7 @@
   - Constraints: cannot be empty or contain spaces/capitals/specials
 - **Frames**: the frames of the animation
 
-## 3. Frame Properties
+## 3. Frame properties
 
 - **Transformation**: the target transformation
   - Type: `decimal3`
@@ -37,7 +37,7 @@
   - Type: `enumeration`
   - Constraints: `LINEAR` or `TRIANGULAR` or `INSTANT`
 
-## 4. Started Properties
+## 4. Started properties
 
 - **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`

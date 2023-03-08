@@ -1,4 +1,4 @@
-# Camera Scripting Functions
+# Camera scripting functions
 
 ## Setters
 

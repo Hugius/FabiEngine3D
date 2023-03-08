@@ -1,4 +1,4 @@
-# Text2D Editor
+# Text2D editor
 
 ## 1. General
 

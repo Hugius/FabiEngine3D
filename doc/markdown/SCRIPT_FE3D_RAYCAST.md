@@ -1,4 +1,4 @@
-# Raycast Scripting Functions
+# Raycast scripting functions
 
 ## Setters
 

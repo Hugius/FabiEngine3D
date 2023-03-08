@@ -1,4 +1,4 @@
-# Animation3D Editor
+# Animation3D editor
 
 ## 1. General
 

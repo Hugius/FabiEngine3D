@@ -1,4 +1,4 @@
-# Uncategorized Scripting Functions
+# Uncategorized scripting functions
 
 ## Setters
 

@@ -12,7 +12,7 @@
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.
 - Sounds with a large audio file (5 minutes long for example) can cause a lag spike when started.
 
-## 2. Base Properties
+## 2. Base properties
 
 - **ID**: the unique identifier of the sound
   - Type: `string`
@@ -21,7 +21,7 @@
   - Type: `string`
   - Constraints: cannot be changed
 
-## 3. Started Properties
+## 3. Started properties
 
 - **Paused**: the audio is paused
   - Type: `boolean`

@@ -29,7 +29,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - Entry script: `META script_state_entry`.
 - Waiting script: `META script_state_waiting`.
 
-### 3.2 Example Code
+### 3.2 Example code
 
 ```text
 1. META script_type_initialize
@@ -38,13 +38,13 @@ Line 2 of every script file must specify its state: entry or waiting.
 4. /// This script gets executed first
 ```
 
-## 4. Variables & Values
+## 4. Variables & values
 
-### 4.1 Creation Syntax
+### 4.1 Creation syntax
 
 - You can define a variable using `DEF <scope> <mutability> <type> <name> = <value>`.
 
-### 4.2 Alteration Syntax
+### 4.2 Alteration syntax
 
 - You can alter a variable using `ALT <name> = <value>`.
 
@@ -61,14 +61,14 @@ Line 2 of every script file must specify its state: entry or waiting.
 - A variable can be immutable (`FIN` keyword) or mutable (no extra keyword).
 - If you try to change an immutable variable, you will get an error!
 
-### 4.5 Naming Conventions
+### 4.5 Naming conventions
 
 - A variable name must be unique.
 - A variable name must not conflict with FabScript keywords.
 - A variable name must start with an alphabetic character (abc...).
 - A global variable name must start with `_`
 
-### 4.6 Basic Values
+### 4.6 Basic values
 
 - Types to choose from: `STR` (string), `INT` (integer), `DEC` (decimal), `BOL` (boolean).
 - A string is a concatenation of any characters, as long as they are surrounded with `"` `"`. Example: `"hello world"`.
@@ -76,7 +76,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - An integer is a whole number which can also be negative. Example: `-42`.
 - A boolean can only be true or false. Example: `<true>` or `<false>` (`<` and `>` are not placeholders).
 
-### 4.7 Special Value
+### 4.7 Special value
 
 - A list is a special type of value that holds zero or more individual values. Example: `{42, "test", <false>}`.
 - A list value/variable cannot hold another list value/variable.
@@ -85,7 +85,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You can delete an existing value from the list variable using `PULL <name> <index>`.
 - A list index starts from 0.
 
-### 4.8 Type Casting
+### 4.8 Type casting
 
 - You can cast a variable to a different type using: `CAST <name> <type>`.
 - You can cast from `INT` to `DEC` and vice versa.
@@ -96,7 +96,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You cannot cast a final variable.
 - You cannot cast (an element of) a `LST` variable.
 
-### 4.9 Example Code
+### 4.9 Example code
 
 ```text
 1.  /// String variable
@@ -142,7 +142,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - Actual values that are passed to functions are called "arguments".
 - A list value/variable cannot be used as an argument.
 
-### 5.2 Example Code
+### 5.2 Example code
 
 ```text
 1. fe3d:camera_set_position(1.0, 2.0, 3.0)
@@ -159,7 +159,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - [Mathematicical Functions](SCRIPT_MATH.md)
 - [Miscellaneous Functions](SCRIPT_MISC.md)
 
-## 6. Arithmetic Operations
+## 6. Arithmetic operations
 
 ### 6.1 General
 
@@ -174,7 +174,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - Arithmetic can be applied only on a `INT` variable or a `DEC` variable.
 - Arithmetic can be applied on individual list variable elements, but not on the list variable itself!
 
-### 6.2 Example Code
+### 6.2 Example code
 
 ```text
 1. DEF INT myInteger = 40
@@ -186,7 +186,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 7. /// -8
 ```
 
-## 7. Comparison Operations
+## 7. Comparison operations
 
 ### 7.1 General
 
@@ -198,7 +198,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You cannot use a list value/variable in a comparison operation.
 - You can set the value of a `BOL` variable to the result of a comparison operation using: `... <name> = (<comparison>)`.
 
-### 7.2 Example Code
+### 7.2 Example code
 
 ```text
 1. DEF INT age = 12
@@ -209,7 +209,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 6. /// true
 ```
 
-## 8. Logic Operations
+## 8. Logic operations
 
 ### 8.1 General
 
@@ -217,7 +217,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - To check if any of the comparison operations are true: `<comparison> OR <comparison>`.
 - You cannot use both the `AND` and `OR` keywords in one logic operation.
 
-### 8.2 Example Code
+### 8.2 Example code
 
 ```text
 1. DEF INT age = 999
@@ -228,7 +228,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 6. /// false
 ```
 
-## 9. Condition Operations
+## 9. Condition operations
 
 ### 9.1 General
 
@@ -238,7 +238,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - Condition operations can be nested infinitely.
 - Works the same as in other programming languages.
 
-### 9.2 Example Code
+### 9.2 Example code
 
 ```text
 1.  DEF INT age = 41
@@ -261,7 +261,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You can exit a loop using the `BREAK` statement.
 - You can skip a loop iteration by using the `CONTINUE` statement.
 
-### 10.2 Example Code
+### 10.2 Example code
 
 ```text
 1.  DEF LST myList = {"hello", "beautiful", "world"}
@@ -279,7 +279,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 13. /// world
 ```
 
-## 11. Executing Other Scripts
+## 11. Executing other scripts
 
 ### 11.1 General
 
@@ -293,7 +293,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You can exit the execution of a script file using `EXIT`.
 - You can crash the execution of a script file using `CRASH`.
 
-### 11.2 Example Code
+### 11.2 Example code
 
 ```text
 1.  /// Code in script1.fe3d

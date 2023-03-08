@@ -19,6 +19,9 @@
     <Filter Include="Matrix\Float">
       <UniqueIdentifier>{48abf162-56f1-4b00-b213-807ba39f74ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Matrix\Integer">
+      <UniqueIdentifier>{b25ba8a0-0fc3-4849-ad8d-54714b0e78bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\mathematics.hpp">
@@ -50,6 +53,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\fmat33.hpp">
       <Filter>Matrix\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\imat22.hpp">
+      <Filter>Matrix\Integer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\imat33.hpp">
+      <Filter>Matrix\Integer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\imat44.hpp">
+      <Filter>Matrix\Integer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +103,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\fmat44.cpp">
       <Filter>Matrix\Float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\imat22.cpp">
+      <Filter>Matrix\Integer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\imat33.cpp">
+      <Filter>Matrix\Integer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\imat44.cpp">
+      <Filter>Matrix\Integer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

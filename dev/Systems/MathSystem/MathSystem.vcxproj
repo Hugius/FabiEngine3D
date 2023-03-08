@@ -57,6 +57,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\imat22.hpp" />
+    <ClInclude Include="..\..\..\src\imat33.hpp" />
+    <ClInclude Include="..\..\..\src\imat44.hpp" />
     <ClInclude Include="..\..\..\src\ivec2.hpp" />
     <ClInclude Include="..\..\..\src\ivec3.hpp" />
     <ClInclude Include="..\..\..\src\ivec4.hpp" />
@@ -69,6 +72,9 @@
     <ClInclude Include="..\..\..\src\fvec4.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\imat22.cpp" />
+    <ClCompile Include="..\..\..\src\imat33.cpp" />
+    <ClCompile Include="..\..\..\src\imat44.cpp" />
     <ClCompile Include="..\..\..\src\ivec2.cpp" />
     <ClCompile Include="..\..\..\src\ivec3.cpp" />
     <ClCompile Include="..\..\..\src\ivec4.cpp" />

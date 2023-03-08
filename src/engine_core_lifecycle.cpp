@@ -122,7 +122,7 @@ EngineCore::EngineCore()
 	_timer->createClock("refractionPreRender");
 	_timer->createClock("waterPreRender");
 	_timer->createClock("3dRender");
-	_timer->createClock("antiAliasingPostRender");
+	_timer->createClock("antiAliasingPreRender");
 	_timer->createClock("bloomPreRender");
 	_timer->createClock("dofPreRender");
 	_timer->createClock("lensFlarePreRender");
@@ -150,7 +150,7 @@ EngineCore::EngineCore()
 	_renderDeltaTimes.push_back({"refractionPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"waterPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"3dRender", 0.0f});
-	_renderDeltaTimes.push_back({"antiAliasingPostRender", 0.0f});
+	_renderDeltaTimes.push_back({"antiAliasingPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"bloomPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"dofPreRender", 0.0f});
 	_renderDeltaTimes.push_back({"lensFlarePreRender", 0.0f});
@@ -178,7 +178,7 @@ EngineCore::EngineCore()
 	_reservedClockIds.push_back("refractionPreRender");
 	_reservedClockIds.push_back("waterPreRender");
 	_reservedClockIds.push_back("3dRender");
-	_reservedClockIds.push_back("antiAliasingPostRender");
+	_reservedClockIds.push_back("antiAliasingPreRender");
 	_reservedClockIds.push_back("bloomPreRender");
 	_reservedClockIds.push_back("dofPreRender");
 	_reservedClockIds.push_back("lensFlarePreRender");

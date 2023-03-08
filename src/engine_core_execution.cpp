@@ -109,9 +109,9 @@ void EngineCore::_render()
 	_masterRenderer->render3d();
 	_timer->stopClock("3dRender");
 
-	_timer->startClock("antiAliasingPostRender");
+	_timer->startClock("antiAliasingPreRender");
 	_masterRenderer->captureAntiAliasing();
-	_timer->stopClock("antiAliasingPostRender");
+	_timer->stopClock("antiAliasingPreRender");
 
 	_timer->startClock("bloomPreRender");
 	_masterRenderer->captureBloom();

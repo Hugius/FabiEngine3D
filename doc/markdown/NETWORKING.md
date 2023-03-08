@@ -10,7 +10,7 @@
 - Its only purpose is processing incoming/outgoing messages from/to clients.
 - If you export a server project there will be no window display, only the logging console.
 - A server is hosted on the IPV4 address of your computer (write `ipconfig` in your Windows command prompt to look it up).
-- You can portforward the server in your router settings on port `61205` for both TCP & UDP protocols.
+- You can portforward the server in your router settings on port `61295` for both TCP & UDP protocols.
 - There can be only 1 server running on the same machine at the same time.
 - You can set a maximum amount of clients that can connect to the server.
 - An exported server application runs at the maximum update speed possible (overrides the fixed engine updates speed).

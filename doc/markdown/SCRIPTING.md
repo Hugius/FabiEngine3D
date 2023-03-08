@@ -61,14 +61,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - A variable can be immutable (`FIN` keyword) or mutable (no extra keyword).
 - If you try to change an immutable variable, you will get an error!
 
-### 4.5 Naming conventions
-
-- A variable name must be unique.
-- A variable name must not conflict with FabScript keywords.
-- A variable name must start with an alphabetic character (abc...).
-- A global variable name must start with `_`
-
-### 4.6 Basic values
+### 4.5 Basic types
 
 - Types to choose from: `STR` (string), `INT` (integer), `DEC` (decimal), `BOL` (boolean).
 - A string is a concatenation of any characters, as long as they are surrounded with `"` `"`. Example: `"hello world"`.
@@ -76,7 +69,7 @@ Line 2 of every script file must specify its state: entry or waiting.
 - An integer is a whole number which can also be negative. Example: `-42`.
 - A boolean can only be true or false. Example: `<true>` or `<false>` (`<` and `>` are not placeholders).
 
-### 4.7 Special value
+### 4.6 Special type
 
 - A list is a special type of value that holds zero or more individual values. Example: `{42, "test", <false>}`.
 - A list value/variable cannot hold another list value/variable.
@@ -84,6 +77,13 @@ Line 2 of every script file must specify its state: entry or waiting.
 - You can add a new value to the list variable using `PUSH <name> <value>`.
 - You can delete an existing value from the list variable using `PULL <name> <index>`.
 - A list index starts from 0.
+
+### 4.7 Naming conventions
+
+- A variable name must be unique.
+- A variable name must not conflict with FabScript keywords.
+- A variable name must start with an alphabetic character (abc...).
+- A global variable name must start with `_`
 
 ### 4.8 Type casting
 

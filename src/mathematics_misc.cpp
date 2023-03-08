@@ -121,7 +121,7 @@ const float Mathematics::convertToDegrees(float angle)
 	return (angle * RAD2DEG);
 }
 
-const float Mathematics::getPI()
+const float Mathematics::getPi()
 {
 	return PI;
 }

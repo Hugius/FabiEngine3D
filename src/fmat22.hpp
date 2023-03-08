@@ -1,6 +1,9 @@
 #pragma once
 
 struct fvec2;
+struct imat22;
+struct imat33;
+struct imat44;
 struct fmat22;
 struct fmat33;
 struct fmat44;
@@ -8,6 +11,9 @@ struct fmat44;
 struct fmat22 final
 {
 	fmat22();
+	fmat22(const imat22 & other);
+	fmat22(const imat33 & other);
+	fmat22(const imat44 & other);
 	fmat22(const fmat22 & other);
 	fmat22(const fmat33 & other);
 	fmat22(const fmat44 & other);

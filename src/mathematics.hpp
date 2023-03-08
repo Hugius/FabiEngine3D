@@ -1,8 +1,5 @@
 #pragma once
 
-#include "ivec2.hpp"
-#include "ivec3.hpp"
-#include "ivec4.hpp"
 #include "fvec2.hpp"
 #include "fvec3.hpp"
 #include "fvec4.hpp"
@@ -80,7 +77,7 @@ public:
 	static const float limitAngle(float angle);
 	static const float convertToRadians(float degrees);
 	static const float convertToDegrees(float radians);
-	static const float getPI();
+	static const float getPi();
 	static const float getRandomNumber(float min, float max);
 
 	static const int calculateAverage(const vector<int> & values);

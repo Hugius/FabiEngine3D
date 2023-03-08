@@ -11,7 +11,7 @@
 - Rotational degrees are automatically converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
 - **WARNING**: Rotating objects in every direction (XYZ) at the same time can cause the infamous gimbal lock!
 
-## 2. Tips & tricks
+## 2. Tips
 
 - You can create your own custom subfolders within the subfolders of `~\projects\<your_project>\assets\`.
 - The top viewport has a button called `UNCACHE` which deletes the chosen asset from the cache (if it was cached).

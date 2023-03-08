@@ -18,7 +18,7 @@
 - `soundUpdate`: sound3Ds + sound2Ds
 - `networkUpdate`: server + client
 
-## 3. Dangers
+## 2. Dangers
 
 - Rendering planar reflections
 - Rendering planar refractions
@@ -34,7 +34,7 @@
 - Loading high resolution textures
 - Loading complex meshes
 
-## 4. Tips
+## 3. Tips
 
 - Make use of level of detailed models to improve the performance on high-poly meshes.
 - Lower the graphics quality to improve performance if necessary.

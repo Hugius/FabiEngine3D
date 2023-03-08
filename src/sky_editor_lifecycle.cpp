@@ -6,9 +6,6 @@
 
 void SkyEditor::_load()
 {
-	_fe3d->graphics_setMotionBlurEnabled(true);
-	_fe3d->graphics_setMotionBlurIntensity(MOTION_BLUR_INTENSITY);
-	_fe3d->graphics_setMotionBlurQuality(MOTION_BLUR_QUALITY);
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
 	_gui->getOverlay()->createTextField(SKY_TITLE_ID, SKY_TITLE_POSITION, SKY_TITLE_SIZE, "", fvec3(1.0f), true);
@@ -21,9 +18,6 @@ void SkyEditor::_unload()
 		_fe3d->sky_delete(skyId);
 	}
 
-	_fe3d->graphics_setMotionBlurEnabled(false);
-	_fe3d->graphics_setMotionBlurIntensity(0.0f);
-	_fe3d->graphics_setMotionBlurQuality(0);
 	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField(SKY_TITLE_ID);

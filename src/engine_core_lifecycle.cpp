@@ -220,11 +220,7 @@ void EngineCore::start()
 			const auto millisecondsPerUpdate = (1000.0f / _timer->getUpdateCountPerSecond());
 
 			runtimeLag += _totalDeltaTime;
-
-			if(runtimeLag > MAX_RUNTIME_LAG)
-			{
-				runtimeLag = MAX_RUNTIME_LAG;
-			}
+			runtimeLag = min(MAX_RUNTIME_LAG, runtimeLag);
 
 			while(runtimeLag >= millisecondsPerUpdate)
 			{

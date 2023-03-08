@@ -200,7 +200,7 @@ void ShaderBuffer::_uploadUniform(const int & uniformId, const fmat22 & data)
 	glUniformMatrix2fv(uniformId, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const int & uniformId, const mat33 & data)
+void ShaderBuffer::_uploadUniform(const int & uniformId, const fmat33 & data)
 {
 	glUniformMatrix3fv(uniformId, 1, GL_FALSE, data.f);
 }

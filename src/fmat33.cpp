@@ -1,9 +1,9 @@
 #include "fvec3.hpp"
 #include "fmat22.hpp"
-#include "mat33.hpp"
+#include "fmat33.hpp"
 #include "mat44.hpp"
 
-mat33::mat33(const float m00, const float m01, const float m02, const float m10, const float m11, const float m12, const float m20, const float m21, const float m22)
+fmat33::fmat33(const float m00, const float m01, const float m02, const float m10, const float m11, const float m12, const float m20, const float m21, const float m22)
 {
 	this->m[0][0] = m00;
 	this->m[1][0] = m10;
@@ -16,7 +16,7 @@ mat33::mat33(const float m00, const float m01, const float m02, const float m10,
 	this->m[2][2] = m22;
 }
 
-mat33::mat33()
+fmat33::fmat33()
 {
 	for(int index = 0; index < 9; index++)
 	{
@@ -28,7 +28,7 @@ mat33::mat33()
 	this->m[2][2] = 1.0f;
 }
 
-mat33::mat33(const fmat22 & other)
+fmat33::fmat33(const fmat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -41,7 +41,7 @@ mat33::mat33(const fmat22 & other)
 	this->m[2][2] = 1.0f;
 }
 
-mat33::mat33(const mat33 & other)
+fmat33::fmat33(const fmat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -54,7 +54,7 @@ mat33::mat33(const mat33 & other)
 	this->m[2][2] = other.m[2][2];
 }
 
-mat33::mat33(const mat44 & other)
+fmat33::fmat33(const mat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -67,7 +67,7 @@ mat33::mat33(const mat44 & other)
 	this->m[2][2] = other.m[2][2];
 }
 
-mat33::mat33(const float value)
+fmat33::fmat33(const float value)
 {
 	for(int index = 0; index < 9; index++)
 	{
@@ -79,9 +79,9 @@ mat33::mat33(const float value)
 	this->m[2][2] = value;
 }
 
-const mat33 mat33::operator+(const mat33 & other) const
+const fmat33 fmat33::operator+(const fmat33 & other) const
 {
-	mat33 result = {};
+	fmat33 result = {};
 
 	for(int index = 0; index < 9; index++)
 	{
@@ -91,9 +91,9 @@ const mat33 mat33::operator+(const mat33 & other) const
 	return result;
 }
 
-const mat33 mat33::operator-(const mat33 & other) const
+const fmat33 fmat33::operator-(const fmat33 & other) const
 {
-	mat33 result = {};
+	fmat33 result = {};
 
 	for(int index = 0; index < 9; index++)
 	{
@@ -103,9 +103,9 @@ const mat33 mat33::operator-(const mat33 & other) const
 	return result;
 }
 
-const mat33 mat33::operator*(const mat33 & other) const
+const fmat33 fmat33::operator*(const fmat33 & other) const
 {
-	mat33 result = {};
+	fmat33 result = {};
 
 	for(int column = 0; column < 3; column++)
 	{
@@ -123,7 +123,7 @@ const mat33 mat33::operator*(const mat33 & other) const
 	return result;
 }
 
-const fvec3 mat33::operator*(const fvec3 & other) const
+const fvec3 fmat33::operator*(const fvec3 & other) const
 {
 	fvec3 result = {};
 

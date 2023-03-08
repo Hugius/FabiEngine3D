@@ -3,7 +3,7 @@
 void SkyColorRenderer::bind()
 {
 	_shaderBuffer->bind();
-	_shaderBuffer->uploadUniform("u_cameraView", mat44(mat33(_camera->getView())));
+	_shaderBuffer->uploadUniform("u_cameraView", mat44(fmat33(_camera->getView())));
 	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shaderBuffer->uploadUniform("u_cubeMap", 0);
 }

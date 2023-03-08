@@ -7,7 +7,7 @@
 #include "fvec3.hpp"
 #include "fvec4.hpp"
 #include "fmat22.hpp"
-#include "mat33.hpp"
+#include "fmat33.hpp"
 #include "mat44.hpp"
 #include "direction_order_type.hpp"
 
@@ -43,8 +43,8 @@ public:
 	static const mat44 invertMatrix(const mat44 & matrix);
 	static const mat44 transposeMatrix(const mat44 & matrix);
 
-	static const mat33 invertMatrix(const mat33 & matrix);
-	static const mat33 transposeMatrix(const mat33 & matrix);
+	static const fmat33 invertMatrix(const fmat33 & matrix);
+	static const fmat33 transposeMatrix(const fmat33 & matrix);
 
 	static const fmat22 invertMatrix(const fmat22 & matrix);
 	static const fmat22 transposeMatrix(const fmat22 & matrix);
@@ -63,7 +63,7 @@ public:
 	static const fvec2 normalize(const fvec2 & vector);
 
 	static const float calculateDeterminant(const fmat22 & matrix);
-	static const float calculateDeterminant(const mat33 & matrix);
+	static const float calculateDeterminant(const fmat33 & matrix);
 	static const float calculateDeterminant(const mat44 & matrix);
 	static const float calculateDistance(const fvec2 & firstPosition, const fvec2 & secondPosition);
 	static const float calculateDistance(const fvec3 & firstPosition, const fvec3 & secondPosition);

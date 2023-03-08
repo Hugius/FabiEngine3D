@@ -2,14 +2,14 @@
 
 struct fvec2;
 struct fmat22;
-struct mat33;
+struct fmat33;
 struct mat44;
 
 struct fmat22 final
 {
 	fmat22();
 	fmat22(const fmat22 & other);
-	fmat22(const mat33 & other);
+	fmat22(const fmat33 & other);
 	fmat22(const mat44 & other);
 	fmat22(const float value);
 	fmat22(const float m00, const float m01, const float m10, const float m11);

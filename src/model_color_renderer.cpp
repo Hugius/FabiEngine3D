@@ -224,7 +224,7 @@ void ModelColorRenderer::render(shared_ptr<Model> model, const unordered_map<str
 		_shaderBuffer->uploadUniform("u_hasRefractionMap", (model->getRefractionTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_hasNormalMap", (model->getNormalTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_transformation", model->getTransformation(partId));
-		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(model->getTransformation(partId)))));
+		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(fmat33(model->getTransformation(partId)))));
 		_shaderBuffer->uploadUniform("u_reflectionType", static_cast<int>(model->getReflectionType(partId)));
 		_shaderBuffer->uploadUniform("u_refractionType", static_cast<int>(model->getRefractionType(partId)));
 		_shaderBuffer->uploadUniform("u_isWireframed", model->isWireframed(partId));

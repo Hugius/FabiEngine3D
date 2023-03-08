@@ -123,7 +123,7 @@ const array<string, 6> & Sky::getCubeMapPaths() const
 	return _cubeMapPaths;
 }
 
-const mat44 & Sky::getTransformation() const
+const fmat44 & Sky::getTransformation() const
 {
 	return _transformation;
 }

@@ -75,12 +75,12 @@ void RenderStorage::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneTextureBuffer = value;
 }
 
-void RenderStorage::setShadowView(const mat44 & value)
+void RenderStorage::setShadowView(const fmat44 & value)
 {
 	_shadowView = value;
 }
 
-void RenderStorage::setShadowProjection(const mat44 & value)
+void RenderStorage::setShadowProjection(const fmat44 & value)
 {
 	_shadowProjection = value;
 }
@@ -498,12 +498,12 @@ const shared_ptr<TextureBuffer> RenderStorage::getFinalSceneTextureBuffer() cons
 	return _finalSceneTextureBuffer;
 }
 
-const mat44 & RenderStorage::getShadowView() const
+const fmat44 & RenderStorage::getShadowView() const
 {
 	return _shadowView;
 }
 
-const mat44 & RenderStorage::getShadowProjection() const
+const fmat44 & RenderStorage::getShadowProjection() const
 {
 	return _shadowProjection;
 }

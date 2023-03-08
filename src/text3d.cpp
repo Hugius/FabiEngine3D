@@ -473,7 +473,7 @@ const shared_ptr<TextureBuffer> Text3d::getFontTextureBuffer() const
 	return _fontTextureBuffer;
 }
 
-const mat44 & Text3d::getTransformation() const
+const fmat44 & Text3d::getTransformation() const
 {
 	return _transformation;
 }

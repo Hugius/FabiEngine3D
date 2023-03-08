@@ -93,7 +93,7 @@ void Quad3d::updateTarget()
 
 void Quad3d::updateTransformation()
 {
-	_transformation = mat44(1.0f);
+	_transformation = fmat44(1.0f);
 
 	auto translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, _position.z);
 	_transformation = (_transformation * translationMatrix);
@@ -318,7 +318,7 @@ const shared_ptr<VertexBuffer> Quad3d::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const mat44 & Quad3d::getTransformation() const
+const fmat44 & Quad3d::getTransformation() const
 {
 	return _transformation;
 }

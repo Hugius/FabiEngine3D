@@ -17,8 +17,8 @@ void Camera::inject(shared_ptr<RenderWindow> renderWindow)
 
 void Camera::reset()
 {
-	_view = mat44(1.0f);
-	_projection = mat44(1.0f);
+	_view = fmat44(1.0f);
+	_projection = fmat44(1.0f);
 	_up = fvec3(0.0f);
 	_front = fvec3(0.0f);
 	_right = fvec3(0.0f);

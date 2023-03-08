@@ -36,7 +36,7 @@ public:
 
 	const string & getId() const;
 
-	const mat44 & getTransformation() const;
+	const fmat44 & getTransformation() const;
 
 	const fvec3 & getRotation() const;
 	const fvec3 & getWireframeColor() const;
@@ -56,7 +56,7 @@ private:
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 
-	mat44 _transformation = mat44(1.0f);
+	fmat44 _transformation = fmat44(1.0f);
 
 	fvec3 _rotation = fvec3(0.0f);
 	fvec3 _rotationTarget = fvec3(0.0f);

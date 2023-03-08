@@ -51,7 +51,7 @@ public:
 	const string & getId() const;
 	const string & getParentId() const;
 
-	const mat44 & getTransformation() const;
+	const fmat44 & getTransformation() const;
 
 	const fvec3 & getLocalPosition() const;
 	const fvec3 & getLocalSize() const;
@@ -77,7 +77,7 @@ private:
 
 	string _parentId = "";
 
-	mat44 _transformation = mat44(1.0f);
+	fmat44 _transformation = fmat44(1.0f);
 
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseSize = fvec3(1.0f);

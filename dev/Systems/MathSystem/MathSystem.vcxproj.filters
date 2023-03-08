@@ -42,7 +42,7 @@
     <ClInclude Include="..\..\..\src\ivec3.hpp">
       <Filter>Vector\Integer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mat44.hpp">
+    <ClInclude Include="..\..\..\src\fmat44.hpp">
       <Filter>Matrix\Float</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\fmat22.hpp">
@@ -89,7 +89,7 @@
     <ClCompile Include="..\..\..\src\fmat33.cpp">
       <Filter>Matrix\Float</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mat44.cpp">
+    <ClCompile Include="..\..\..\src\fmat44.cpp">
       <Filter>Matrix\Float</Filter>
     </ClCompile>
   </ItemGroup>

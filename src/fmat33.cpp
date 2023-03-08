@@ -1,7 +1,7 @@
 #include "fvec3.hpp"
 #include "fmat22.hpp"
 #include "fmat33.hpp"
-#include "mat44.hpp"
+#include "fmat44.hpp"
 
 fmat33::fmat33(const float m00, const float m01, const float m02, const float m10, const float m11, const float m12, const float m20, const float m21, const float m22)
 {
@@ -54,7 +54,7 @@ fmat33::fmat33(const fmat33 & other)
 	this->m[2][2] = other.m[2][2];
 }
 
-fmat33::fmat33(const mat44 & other)
+fmat33::fmat33(const fmat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];

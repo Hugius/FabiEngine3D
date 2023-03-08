@@ -260,7 +260,7 @@ const bool Quad2d::isVerticallyFlipped() const
 	return _isVerticallyFlipped;
 }
 
-const mat44 & Quad2d::getTransformation() const
+const fmat44 & Quad2d::getTransformation() const
 {
 	return _transformation;
 }

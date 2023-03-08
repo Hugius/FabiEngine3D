@@ -253,7 +253,7 @@ const shared_ptr<VertexBuffer> Aabb::getVertexBuffer()const
 	return _vertexBuffer;
 }
 
-const mat44 & Aabb::getTransformation() const
+const fmat44 & Aabb::getTransformation() const
 {
 	return _transformation;
 }
@@ -420,7 +420,7 @@ void Aabb::followModelParentTransformation(const fvec3 & parentPosition, const f
 			localPosition = ((_localPosition + offset) * parentSize);
 		}
 
-		mat44 rotationMatrix;
+		fmat44 rotationMatrix;
 		fvec3 rotationOffset;
 
 		if(rotationDirection == DirectionType::X)

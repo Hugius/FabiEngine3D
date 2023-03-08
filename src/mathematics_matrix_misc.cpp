@@ -68,16 +68,16 @@ const fmat33 Mathematics::invertMatrix(const fmat33 & matrix)
 	return result;
 }
 
-const mat44 Mathematics::invertMatrix(const mat44 & matrix)
+const fmat44 Mathematics::invertMatrix(const fmat44 & matrix)
 {
 	const auto determinant = calculateDeterminant(matrix);
 
 	if(determinant == 0.0f)
 	{
-		return mat44(0.0f);
+		return fmat44(0.0f);
 	}
 
-	mat44 tempMatrix;
+	fmat44 tempMatrix;
 	tempMatrix.f[0] =
 		matrix.f[5] * matrix.f[10] * matrix.f[15] -
 		matrix.f[5] * matrix.f[11] * matrix.f[14] -
@@ -191,7 +191,7 @@ const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 		matrix.f[8] * matrix.f[1] * matrix.f[6] -
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
-	mat44 result;
+	fmat44 result;
 	for(int index = 0; index < 16; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
@@ -215,9 +215,9 @@ const fmat33 Mathematics::transposeMatrix(const fmat33 & matrix)
 	return result;
 }
 
-const mat44 Mathematics::transposeMatrix(const mat44 & matrix)
+const fmat44 Mathematics::transposeMatrix(const fmat44 & matrix)
 {
-	mat44 result = {};
+	fmat44 result = {};
 
 	for(int rowIndex = 0; rowIndex < 4; rowIndex++)
 	{
@@ -251,7 +251,7 @@ const float Mathematics::calculateDeterminant(const fmat33 & matrix)
 	return (values[0] - values[1] + values[2]);
 }
 
-const float Mathematics::calculateDeterminant(const mat44 & matrix)
+const float Mathematics::calculateDeterminant(const fmat44 & matrix)
 {
 	float values[4] = {};
 

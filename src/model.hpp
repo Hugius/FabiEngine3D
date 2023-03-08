@@ -109,7 +109,7 @@ public:
 	const string & getRefractionMapPath(const string & partId) const;
 	const string & getNormalMapPath(const string & partId) const;
 
-	const mat44 & getTransformation(const string & partId) const;
+	const fmat44 & getTransformation(const string & partId) const;
 
 	const fvec3 & getColor(const string & partId) const;
 	const fvec3 & getWireframeColor(const string & partId) const;

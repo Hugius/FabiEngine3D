@@ -28,8 +28,8 @@ public:
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorId(const string & value);
 	void setLensFlareMapPath(const string & value);
-	void setShadowView(const mat44 & value);
-	void setShadowProjection(const mat44 & value);
+	void setShadowView(const fmat44 & value);
+	void setShadowProjection(const fmat44 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
 	void setAmbientLightingEnabled(bool value);
@@ -115,8 +115,8 @@ public:
 	const string & getCursorId() const;
 	const string & getLensFlareMapPath() const;
 
-	const mat44 & getShadowView() const;
-	const mat44 & getShadowProjection() const;
+	const fmat44 & getShadowView() const;
+	const fmat44 & getShadowProjection() const;
 
 	const fvec3 & getMinClipPosition() const;
 	const fvec3 & getMaxClipPosition() const;
@@ -208,8 +208,8 @@ private:
 	string _cursorId = "";
 	string _lensFlareMapPath = "";
 
-	mat44 _shadowView = mat44(1.0f);
-	mat44 _shadowProjection = mat44(1.0f);
+	fmat44 _shadowView = fmat44(1.0f);
+	fmat44 _shadowProjection = fmat44(1.0f);
 
 	fvec3 _minClipPosition = fvec3(-FLT_MAX);
 	fvec3 _maxClipPosition = fvec3(FLT_MAX);

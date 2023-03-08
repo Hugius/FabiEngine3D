@@ -50,7 +50,7 @@ public:
 	const string & getId() const;
 	const string & getDiffuseMapPath() const;
 
-	const mat44 & getTransformation() const;
+	const fmat44 & getTransformation() const;
 
 	const fvec3 & getWireframeColor() const;
 	const fvec3 & getColor() const;
@@ -83,7 +83,7 @@ private:
 
 	string _diffuseMapPath = "";
 
-	mat44 _transformation = mat44(1.0f);
+	fmat44 _transformation = fmat44(1.0f);
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);

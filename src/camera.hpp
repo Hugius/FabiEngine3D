@@ -43,8 +43,8 @@ public:
 	void setAccelerationResistence(float value);
 	void invertUp();
 
-	const mat44 & getView() const;
-	const mat44 & getProjection() const;
+	const fmat44 & getView() const;
+	const fmat44 & getProjection() const;
 
 	const fvec3 & getRight() const;
 	const fvec3 & getUp() const;
@@ -88,8 +88,8 @@ private:
 
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 
-	mat44 _view = mat44(1.0f);
-	mat44 _projection = mat44(1.0f);
+	fmat44 _view = fmat44(1.0f);
+	fmat44 _projection = fmat44(1.0f);
 
 	fvec3 _right = fvec3(0.0f);
 	fvec3 _up = fvec3(0.0f);

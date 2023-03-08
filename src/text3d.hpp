@@ -57,7 +57,7 @@ public:
 	const string & getContent() const;
 	const string & getFontMapPath() const;
 
-	const mat44 & getTransformation() const;
+	const fmat44 & getTransformation() const;
 
 	const fvec3 & getPosition() const;
 	const fvec3 & getRotation() const;
@@ -201,7 +201,7 @@ private:
 	string _content = "";
 	string _fontMapPath = "";
 
-	mat44 _transformation = mat44(1.0f);
+	fmat44 _transformation = fmat44(1.0f);
 
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _rotation = fvec3(0.0f);

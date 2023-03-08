@@ -1,9 +1,9 @@
 #include "fvec4.hpp"
 #include "fmat22.hpp"
 #include "fmat33.hpp"
-#include "mat44.hpp"
+#include "fmat44.hpp"
 
-mat44::mat44(const float m00, const float m01, const float m02, const float m03, const float m10, const float m11, const float m12, const float m13, const float m20, const float m21, const float m22, const float m23, const float m30, const float m31, const float m32, const float m33)
+fmat44::fmat44(const float m00, const float m01, const float m02, const float m03, const float m10, const float m11, const float m12, const float m13, const float m20, const float m21, const float m22, const float m23, const float m30, const float m31, const float m32, const float m33)
 {
 	this->m[0][0] = m00;
 	this->m[1][0] = m10;
@@ -23,7 +23,7 @@ mat44::mat44(const float m00, const float m01, const float m02, const float m03,
 	this->m[3][3] = m33;
 }
 
-mat44::mat44()
+fmat44::fmat44()
 {
 	for(int index = 0; index < 16; index++)
 	{
@@ -36,7 +36,7 @@ mat44::mat44()
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const fmat22 & other)
+fmat44::fmat44(const fmat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -56,7 +56,7 @@ mat44::mat44(const fmat22 & other)
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const float value)
+fmat44::fmat44(const float value)
 {
 	for(int index = 0; index < 16; index++)
 	{
@@ -69,7 +69,7 @@ mat44::mat44(const float value)
 	this->m[3][3] = value;
 }
 
-mat44::mat44(const fmat33 & other)
+fmat44::fmat44(const fmat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -89,7 +89,7 @@ mat44::mat44(const fmat33 & other)
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const mat44 & other)
+fmat44::fmat44(const fmat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -109,7 +109,7 @@ mat44::mat44(const mat44 & other)
 	this->m[3][3] = other.m[3][3];
 }
 
-const fvec4 mat44::operator*(const fvec4 & other) const
+const fvec4 fmat44::operator*(const fvec4 & other) const
 {
 	fvec4 result = {};
 
@@ -121,9 +121,9 @@ const fvec4 mat44::operator*(const fvec4 & other) const
 	return result;
 }
 
-const mat44 mat44::operator+(const mat44 & other) const
+const fmat44 fmat44::operator+(const fmat44 & other) const
 {
-	mat44 result = {};
+	fmat44 result = {};
 
 	for(int index = 0; index < 16; index++)
 	{
@@ -133,9 +133,9 @@ const mat44 mat44::operator+(const mat44 & other) const
 	return result;
 }
 
-const mat44 mat44::operator-(const mat44 & other) const
+const fmat44 fmat44::operator-(const fmat44 & other) const
 {
-	mat44 result = {};
+	fmat44 result = {};
 
 	for(int index = 0; index < 16; index++)
 	{
@@ -145,9 +145,9 @@ const mat44 mat44::operator-(const mat44 & other) const
 	return result;
 }
 
-const mat44 mat44::operator*(const mat44 & other) const
+const fmat44 fmat44::operator*(const fmat44 & other) const
 {
-	mat44 result = {};
+	fmat44 result = {};
 
 	for(int column = 0; column < 4; column++)
 	{

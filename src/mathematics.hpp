@@ -8,7 +8,7 @@
 #include "fvec4.hpp"
 #include "fmat22.hpp"
 #include "fmat33.hpp"
-#include "mat44.hpp"
+#include "fmat44.hpp"
 #include "direction_order_type.hpp"
 
 #include <vector>
@@ -25,23 +25,23 @@ public:
 
 	static const vector<float> calculateDistributedPositions(int count, float size, bool isAscending);
 
-	static const mat44 createTranslationMatrix(float x, float y, float z);
-	static const mat44 createTranslationMatrixX(float value);
-	static const mat44 createTranslationMatrixY(float value);
-	static const mat44 createTranslationMatrixZ(float value);
-	static const mat44 createRotationMatrix(float x, float y, float z, DirectionOrderType order);
-	static const mat44 createRotationMatrixX(float angle);
-	static const mat44 createRotationMatrixY(float angle);
-	static const mat44 createRotationMatrixZ(float angle);
-	static const mat44 createScalingMatrix(float x, float y, float z);
-	static const mat44 createScalingMatrixX(float value);
-	static const mat44 createScalingMatrixY(float value);
-	static const mat44 createScalingMatrixZ(float value);
-	static const mat44 createViewMatrix(const fvec3 & eye, const fvec3 & center, const fvec3 & up);
-	static const mat44 createOrthographicProjectionMatrix(float leftZ, float rightZ, float bottomZ, float topZ, float nearZ, float farZ);
-	static const mat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
-	static const mat44 invertMatrix(const mat44 & matrix);
-	static const mat44 transposeMatrix(const mat44 & matrix);
+	static const fmat44 createTranslationMatrix(float x, float y, float z);
+	static const fmat44 createTranslationMatrixX(float value);
+	static const fmat44 createTranslationMatrixY(float value);
+	static const fmat44 createTranslationMatrixZ(float value);
+	static const fmat44 createRotationMatrix(float x, float y, float z, DirectionOrderType order);
+	static const fmat44 createRotationMatrixX(float angle);
+	static const fmat44 createRotationMatrixY(float angle);
+	static const fmat44 createRotationMatrixZ(float angle);
+	static const fmat44 createScalingMatrix(float x, float y, float z);
+	static const fmat44 createScalingMatrixX(float value);
+	static const fmat44 createScalingMatrixY(float value);
+	static const fmat44 createScalingMatrixZ(float value);
+	static const fmat44 createViewMatrix(const fvec3 & eye, const fvec3 & center, const fvec3 & up);
+	static const fmat44 createOrthographicProjectionMatrix(float leftZ, float rightZ, float bottomZ, float topZ, float nearZ, float farZ);
+	static const fmat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
+	static const fmat44 invertMatrix(const fmat44 & matrix);
+	static const fmat44 transposeMatrix(const fmat44 & matrix);
 
 	static const fmat33 invertMatrix(const fmat33 & matrix);
 	static const fmat33 transposeMatrix(const fmat33 & matrix);
@@ -64,7 +64,7 @@ public:
 
 	static const float calculateDeterminant(const fmat22 & matrix);
 	static const float calculateDeterminant(const fmat33 & matrix);
-	static const float calculateDeterminant(const mat44 & matrix);
+	static const float calculateDeterminant(const fmat44 & matrix);
 	static const float calculateDistance(const fvec2 & firstPosition, const fvec2 & secondPosition);
 	static const float calculateDistance(const fvec3 & firstPosition, const fvec3 & secondPosition);
 	static const float calculateDistance(const fvec4 & firstPosition, const fvec4 & secondPosition);

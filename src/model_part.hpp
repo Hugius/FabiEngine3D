@@ -26,7 +26,7 @@ class ModelPart final
 	string refractionMapPath = "";
 	string normalMapPath = "";
 
-	mat44 transformation = mat44(1.0f);
+	fmat44 transformation = fmat44(1.0f);
 
 	fvec3 position = fvec3(0.0f);
 	fvec3 rotation = fvec3(0.0f);

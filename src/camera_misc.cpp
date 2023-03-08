@@ -275,12 +275,12 @@ void Camera::invertUp()
 	_isUpInverted = !_isUpInverted;
 }
 
-const mat44 & Camera::getView() const
+const fmat44 & Camera::getView() const
 {
 	return _view;
 }
 
-const mat44 & Camera::getProjection() const
+const fmat44 & Camera::getProjection() const
 {
 	return _projection;
 }

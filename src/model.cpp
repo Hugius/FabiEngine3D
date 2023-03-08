@@ -110,7 +110,7 @@ void Model::updateTransformation()
 {
 	for(auto & [partId, part] : _parts)
 	{
-		part->transformation = mat44(1.0f);
+		part->transformation = fmat44(1.0f);
 
 		const auto baseRotationRadians = fvec3(Mathematics::convertToRadians(_baseRotation.x), Mathematics::convertToRadians(_baseRotation.y), Mathematics::convertToRadians(_baseRotation.z));
 		const auto partRotationRadians = fvec3(Mathematics::convertToRadians(part->rotation.x), Mathematics::convertToRadians(part->rotation.y), Mathematics::convertToRadians(part->rotation.z));
@@ -563,7 +563,7 @@ const shared_ptr<VertexBuffer> Model::getVertexBuffer(const string & partId) con
 	return _parts.at(partId)->vertexBuffer;
 }
 
-const mat44 & Model::getTransformation(const string & partId) const
+const fmat44 & Model::getTransformation(const string & partId) const
 {
 	return _parts.at(partId)->transformation;
 }

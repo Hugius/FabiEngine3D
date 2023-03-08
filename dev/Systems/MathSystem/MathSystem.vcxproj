@@ -63,7 +63,7 @@
     <ClInclude Include="..\..\..\src\fmat22.hpp" />
     <ClInclude Include="..\..\..\src\mathematics.hpp" />
     <ClInclude Include="..\..\..\src\fmat33.hpp" />
-    <ClInclude Include="..\..\..\src\mat44.hpp" />
+    <ClInclude Include="..\..\..\src\fmat44.hpp" />
     <ClInclude Include="..\..\..\src\fvec2.hpp" />
     <ClInclude Include="..\..\..\src\fvec3.hpp" />
     <ClInclude Include="..\..\..\src\fvec4.hpp" />
@@ -78,7 +78,7 @@
     <ClCompile Include="..\..\..\src\mathematics_misc.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_vector.cpp" />
     <ClCompile Include="..\..\..\src\fmat33.cpp" />
-    <ClCompile Include="..\..\..\src\mat44.cpp" />
+    <ClCompile Include="..\..\..\src\fmat44.cpp" />
     <ClCompile Include="..\..\..\src\fvec2.cpp" />
     <ClCompile Include="..\..\..\src\fvec3.cpp" />
     <ClCompile Include="..\..\..\src\fvec4.cpp" />

@@ -1,14 +1,14 @@
 #pragma once
 
 struct fvec3;
-struct mat22;
+struct fmat22;
 struct mat33;
 struct mat44;
 
 struct mat33 final
 {
 	mat33();
-	mat33(const mat22 & other);
+	mat33(const fmat22 & other);
 	mat33(const mat33 & other);
 	mat33(const mat44 & other);
 	mat33(const float value);

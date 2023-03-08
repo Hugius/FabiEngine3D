@@ -35,7 +35,7 @@ private:
 	void _uploadUniform(const int & uniformId, const fvec2 & data);
 	void _uploadUniform(const int & uniformId, const fvec3 & data);
 	void _uploadUniform(const int & uniformId, const fvec4 & data);
-	void _uploadUniform(const int & uniformId, const mat22 & data);
+	void _uploadUniform(const int & uniformId, const fmat22 & data);
 	void _uploadUniform(const int & uniformId, const mat33 & data);
 	void _uploadUniform(const int & uniformId, const mat44 & data);
 

@@ -45,7 +45,7 @@
     <ClInclude Include="..\..\..\src\mat44.hpp">
       <Filter>Matrix\Float</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mat22.hpp">
+    <ClInclude Include="..\..\..\src\fmat22.hpp">
       <Filter>Matrix\Float</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\mat33.hpp">
@@ -83,7 +83,7 @@
     <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp">
       <Filter>Mathematics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mat22.cpp">
+    <ClCompile Include="..\..\..\src\fmat22.cpp">
       <Filter>Matrix\Float</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mat33.cpp">

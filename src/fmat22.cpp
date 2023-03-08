@@ -1,9 +1,9 @@
 #include "fvec2.hpp"
-#include "mat22.hpp"
+#include "fmat22.hpp"
 #include "mat33.hpp"
 #include "mat44.hpp"
 
-mat22::mat22(const float m00, const float m01, const float m10, const float m11)
+fmat22::fmat22(const float m00, const float m01, const float m10, const float m11)
 {
 	this->m[0][0] = m00;
 	this->m[1][0] = m10;
@@ -11,7 +11,7 @@ mat22::mat22(const float m00, const float m01, const float m10, const float m11)
 	this->m[1][1] = m11;
 }
 
-mat22::mat22()
+fmat22::fmat22()
 {
 	for(int index = 0; index < 4; index++)
 	{
@@ -22,7 +22,7 @@ mat22::mat22()
 	this->m[1][1] = 1.0f;
 }
 
-mat22::mat22(const mat22 & other)
+fmat22::fmat22(const fmat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -30,7 +30,7 @@ mat22::mat22(const mat22 & other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const mat33 & other)
+fmat22::fmat22(const mat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -38,7 +38,7 @@ mat22::mat22(const mat33 & other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const mat44 & other)
+fmat22::fmat22(const mat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -46,7 +46,7 @@ mat22::mat22(const mat44 & other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const float value)
+fmat22::fmat22(const float value)
 {
 	for(int index = 0; index < 4; index++)
 	{
@@ -57,9 +57,9 @@ mat22::mat22(const float value)
 	this->m[1][1] = value;
 }
 
-const mat22 mat22::operator+(const mat22 & other) const
+const fmat22 fmat22::operator+(const fmat22 & other) const
 {
-	mat22 result = {};
+	fmat22 result = {};
 
 	for(int index = 0; index < 4; index++)
 	{
@@ -69,9 +69,9 @@ const mat22 mat22::operator+(const mat22 & other) const
 	return result;
 }
 
-const mat22 mat22::operator-(const mat22 & other) const
+const fmat22 fmat22::operator-(const fmat22 & other) const
 {
-	mat22 result = {};
+	fmat22 result = {};
 
 	for(int index = 0; index < 4; index++)
 	{
@@ -81,9 +81,9 @@ const mat22 mat22::operator-(const mat22 & other) const
 	return result;
 }
 
-const mat22 mat22::operator*(const mat22 & other) const
+const fmat22 fmat22::operator*(const fmat22 & other) const
 {
-	mat22 result = {};
+	fmat22 result = {};
 
 	for(int column = 0; column < 2; column++)
 	{
@@ -101,7 +101,7 @@ const mat22 mat22::operator*(const mat22 & other) const
 	return result;
 }
 
-const fvec2 mat22::operator*(const fvec2 & other) const
+const fvec2 fmat22::operator*(const fvec2 & other) const
 {
 	fvec2 result = {};
 

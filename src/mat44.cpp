@@ -1,5 +1,5 @@
 #include "fvec4.hpp"
-#include "mat22.hpp"
+#include "fmat22.hpp"
 #include "mat33.hpp"
 #include "mat44.hpp"
 
@@ -36,7 +36,7 @@ mat44::mat44()
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const mat22 & other)
+mat44::mat44(const fmat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];

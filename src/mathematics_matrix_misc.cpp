@@ -1,21 +1,21 @@
 #include "mathematics.hpp"
 
-const mat22 Mathematics::invertMatrix(const mat22 & matrix)
+const fmat22 Mathematics::invertMatrix(const fmat22 & matrix)
 {
 	const auto determinant = calculateDeterminant(matrix);
 
 	if(determinant == 0.0f)
 	{
-		return mat22(0.0f);
+		return fmat22(0.0f);
 	}
 
-	mat22 tempMatrix;
+	fmat22 tempMatrix;
 	tempMatrix.f[0] = matrix.f[3];
 	tempMatrix.f[1] = -matrix.f[1];
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
-	mat22 result;
+	fmat22 result;
 	for(int index = 0; index < 4; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
@@ -24,9 +24,9 @@ const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 	return result;
 }
 
-const mat22 Mathematics::transposeMatrix(const mat22 & matrix)
+const fmat22 Mathematics::transposeMatrix(const fmat22 & matrix)
 {
-	mat22 result = {};
+	fmat22 result = {};
 
 	for(int rowIndex = 0; rowIndex < 2; rowIndex++)
 	{
@@ -230,7 +230,7 @@ const mat44 Mathematics::transposeMatrix(const mat44 & matrix)
 	return result;
 }
 
-const float Mathematics::calculateDeterminant(const mat22 & matrix)
+const float Mathematics::calculateDeterminant(const fmat22 & matrix)
 {
 	float values[2] = {};
 

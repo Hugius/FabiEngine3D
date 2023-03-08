@@ -60,7 +60,7 @@
     <ClInclude Include="..\..\..\src\ivec2.hpp" />
     <ClInclude Include="..\..\..\src\ivec3.hpp" />
     <ClInclude Include="..\..\..\src\ivec4.hpp" />
-    <ClInclude Include="..\..\..\src\mat22.hpp" />
+    <ClInclude Include="..\..\..\src\fmat22.hpp" />
     <ClInclude Include="..\..\..\src\mathematics.hpp" />
     <ClInclude Include="..\..\..\src\mat33.hpp" />
     <ClInclude Include="..\..\..\src\mat44.hpp" />
@@ -72,7 +72,7 @@
     <ClCompile Include="..\..\..\src\ivec2.cpp" />
     <ClCompile Include="..\..\..\src\ivec3.cpp" />
     <ClCompile Include="..\..\..\src\ivec4.cpp" />
-    <ClCompile Include="..\..\..\src\mat22.cpp" />
+    <ClCompile Include="..\..\..\src\fmat22.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_matrix_creation.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_misc.cpp" />

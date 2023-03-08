@@ -2,6 +2,9 @@
 #include "imat22.hpp"
 #include "imat33.hpp"
 #include "imat44.hpp"
+#include "fmat22.hpp"
+#include "fmat33.hpp"
+#include "fmat44.hpp"
 
 imat22::imat22(const int m00, const int m01, const int m10, const int m11)
 {
@@ -20,6 +23,30 @@ imat22::imat22()
 
 	this->m[0][0] = 1;
 	this->m[1][1] = 1;
+}
+
+imat22::imat22(const fmat22 & other)
+{
+	this->m[0][0] = static_cast<int>(other.m[0][0]);
+	this->m[1][0] = static_cast<int>(other.m[1][0]);
+	this->m[0][1] = static_cast<int>(other.m[0][1]);
+	this->m[1][1] = static_cast<int>(other.m[1][1]);
+}
+
+imat22::imat22(const fmat33 & other)
+{
+	this->m[0][0] = static_cast<int>(other.m[0][0]);
+	this->m[1][0] = static_cast<int>(other.m[1][0]);
+	this->m[0][1] = static_cast<int>(other.m[0][1]);
+	this->m[1][1] = static_cast<int>(other.m[1][1]);
+}
+
+imat22::imat22(const fmat44 & other)
+{
+	this->m[0][0] = static_cast<int>(other.m[0][0]);
+	this->m[1][0] = static_cast<int>(other.m[1][0]);
+	this->m[0][1] = static_cast<int>(other.m[0][1]);
+	this->m[1][1] = static_cast<int>(other.m[1][1]);
 }
 
 imat22::imat22(const imat22 & other)

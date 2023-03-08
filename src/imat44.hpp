@@ -4,6 +4,9 @@ struct ivec4;
 struct imat22;
 struct imat33;
 struct imat44;
+struct fmat22;
+struct fmat33;
+struct fmat44;
 
 struct imat44 final
 {
@@ -11,6 +14,9 @@ struct imat44 final
 	imat44(const imat22 & other);
 	imat44(const imat33 & other);
 	imat44(const imat44 & other);
+	imat44(const fmat22 & other);
+	imat44(const fmat33 & other);
+	imat44(const fmat44 & other);
 	imat44(const int value);
 	imat44(const int m00, const int m01, const int m02, const int m03, const int m10, const int m11, const int m12, const int m13, const int m20, const int m21, const int m22, const int m23, const int m30, const int m31, const int m32, const int m33);
 

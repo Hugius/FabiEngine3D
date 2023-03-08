@@ -1,21 +1,21 @@
 #pragma once
 
-struct fvec2;
-struct fvec3;
-struct fvec4;
 struct ivec2;
 struct ivec3;
 struct ivec4;
+struct fvec2;
+struct fvec3;
+struct fvec4;
 
 struct fvec2 final
 {
 	fvec2();
-	fvec2(const fvec2 & other);
-	fvec2(const fvec3 & other);
-	fvec2(const fvec4 & other);
 	fvec2(const ivec2 & other);
 	fvec2(const ivec3 & other);
 	fvec2(const ivec4 & other);
+	fvec2(const fvec2 & other);
+	fvec2(const fvec3 & other);
+	fvec2(const fvec4 & other);
 	fvec2(const float & value);
 	fvec2(const float & x, const float & y);
 

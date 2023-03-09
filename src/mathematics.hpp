@@ -1,8 +1,14 @@
 #pragma once
 
+#include "ivec2.hpp"
+#include "ivec3.hpp"
+#include "ivec4.hpp"
 #include "fvec2.hpp"
 #include "fvec3.hpp"
 #include "fvec4.hpp"
+#include "imat22.hpp"
+#include "imat33.hpp"
+#include "imat44.hpp"
 #include "fmat22.hpp"
 #include "fmat33.hpp"
 #include "fmat44.hpp"

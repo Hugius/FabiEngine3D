@@ -2,6 +2,9 @@
 #include "fmat22.hpp"
 #include "fmat33.hpp"
 #include "fmat44.hpp"
+#include "imat22.hpp"
+#include "imat33.hpp"
+#include "imat44.hpp"
 
 fmat22::fmat22(const float m00, const float m01, const float m10, const float m11)
 {
@@ -44,6 +47,30 @@ fmat22::fmat22(const fmat44 & other)
 	this->m[1][0] = other.m[1][0];
 	this->m[0][1] = other.m[0][1];
 	this->m[1][1] = other.m[1][1];
+}
+
+fmat22::fmat22(const imat22 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+}
+
+fmat22::fmat22(const imat33 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+}
+
+fmat22::fmat22(const imat44 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
 }
 
 fmat22::fmat22(const float value)

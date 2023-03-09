@@ -2,6 +2,9 @@
 #include "fmat22.hpp"
 #include "fmat33.hpp"
 #include "fmat44.hpp"
+#include "imat22.hpp"
+#include "imat33.hpp"
+#include "imat44.hpp"
 
 fmat33::fmat33(const float m00, const float m01, const float m02, const float m10, const float m11, const float m12, const float m20, const float m21, const float m22)
 {
@@ -65,6 +68,45 @@ fmat33::fmat33(const fmat44 & other)
 	this->m[0][2] = other.m[0][2];
 	this->m[1][2] = other.m[1][2];
 	this->m[2][2] = other.m[2][2];
+}
+
+fmat33::fmat33(const imat22 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[2][0] = 0.0f;
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+	this->m[2][1] = 0.0f;
+	this->m[0][2] = 0.0f;
+	this->m[1][2] = 0.0f;
+	this->m[2][2] = 1.0f;
+}
+
+fmat33::fmat33(const imat33 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[2][0] = static_cast<float>(other.m[2][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+	this->m[2][1] = static_cast<float>(other.m[2][1]);
+	this->m[0][2] = static_cast<float>(other.m[0][2]);
+	this->m[1][2] = static_cast<float>(other.m[1][2]);
+	this->m[2][2] = static_cast<float>(other.m[2][2]);
+}
+
+fmat33::fmat33(const imat44 & other)
+{
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[2][0] = static_cast<float>(other.m[2][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+	this->m[2][1] = static_cast<float>(other.m[2][1]);
+	this->m[0][2] = static_cast<float>(other.m[0][2]);
+	this->m[1][2] = static_cast<float>(other.m[1][2]);
+	this->m[2][2] = static_cast<float>(other.m[2][2]);
 }
 
 fmat33::fmat33(const float value)

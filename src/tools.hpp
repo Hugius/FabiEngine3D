@@ -6,10 +6,10 @@
 
 #include <string>
 
+using std::make_unique;
 using std::string;
 using std::pair;
 using std::unique_ptr;
-using std::make_unique;
 
 class Tools final
 {

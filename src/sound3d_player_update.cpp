@@ -1,10 +1,10 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
+using std::clamp;
 using std::launch;
 using std::future_status;
 using std::chrono::seconds;
-using std::clamp;
 
 void Sound3dPlayer::update()
 {

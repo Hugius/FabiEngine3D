@@ -6,10 +6,10 @@
 
 #include <ws2tcpip.h>
 
+using std::get;
 using std::future_status;
 using std::launch;
 using std::chrono::seconds;
-using std::get;
 
 void NetworkingClient::update()
 {

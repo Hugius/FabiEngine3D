@@ -10,11 +10,12 @@
 #include <sstream>
 
 using std::endl;
+using std::make_shared;
 using std::vector;
 using std::string;
-using std::cout;
 using std::ostringstream;
 using std::shared_ptr;
+using std::cout;
 
 class Logger final
 {

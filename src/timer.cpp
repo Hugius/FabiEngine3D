@@ -2,10 +2,10 @@
 
 #include <chrono>
 
+using std::make_unique;
+using std::chrono::duration_cast;
 using std::chrono::high_resolution_clock;
 using std::chrono::nanoseconds;
-using std::chrono::duration_cast;
-using std::make_unique;
 
 void Timer::createClock(const string & clockId)
 {

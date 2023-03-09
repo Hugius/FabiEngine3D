@@ -2,8 +2,8 @@
 #include "tools.hpp"
 #include "logger.hpp"
 
-using std::ofstream;
 using std::endl;
+using std::ofstream;
 
 void CustomWorldBuilder::saveWorldToFile(const string & fileName)
 {

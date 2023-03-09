@@ -275,6 +275,8 @@ void WorldEditor::_updateWorldCreating()
 			return;
 		}
 
+		_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
+
 		_gui->getRightViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 
 		_currentWorldId = worldId;

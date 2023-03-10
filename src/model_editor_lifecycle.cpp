@@ -122,15 +122,20 @@ void ModelEditor::_loadGUI()
 	leftWindow->getScreen("modelEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("modelEditorMenuTexturing");
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("diffuseMap", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Diffuse Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("emissionMap", fvec2(0.0f, POSITIONS(9)[1]), TEXT_SIZE("Emission Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Emission Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("specularMap", fvec2(0.0f, POSITIONS(9)[2]), TEXT_SIZE("Specular Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("reflectionMap", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("Reflection Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflection Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("refractionMap", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Refraction Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refraction Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("normalMap", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Normal Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Normal Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearMaps", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("diffuseMap", fvec2(0.0f, POSITIONS(14)[0]), TEXT_SIZE("Diffuse Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearDiffuseMap", fvec2(0.0f, POSITIONS(14)[1]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("emissionMap", fvec2(0.0f, POSITIONS(14)[2]), TEXT_SIZE("Emission Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Emission Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearEmissionMap", fvec2(0.0f, POSITIONS(14)[3]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("specularMap", fvec2(0.0f, POSITIONS(14)[4]), TEXT_SIZE("Specular Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Specular Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearSpecularMap", fvec2(0.0f, POSITIONS(14)[5]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("reflectionMap", fvec2(0.0f, POSITIONS(14)[6]), TEXT_SIZE("Reflection Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflection Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearReflectionMap", fvec2(0.0f, POSITIONS(14)[7]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("refractionMap", fvec2(0.0f, POSITIONS(14)[8]), TEXT_SIZE("Refraction Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Refraction Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearRefractionMap", fvec2(0.0f, POSITIONS(14)[9]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("normalMap", fvec2(0.0f, POSITIONS(14)[10]), TEXT_SIZE("Normal Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Normal Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearNormalMap", fvec2(0.0f, POSITIONS(14)[11]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("textureRepeat", fvec2(0.0f, POSITIONS(14)[12]), TEXT_SIZE("Texture Repeat"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texture Repeat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("back", fvec2(0.0f, POSITIONS(14)[13]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("modelEditorMenuGraphics");
 	leftWindow->getScreen("modelEditorMenuGraphics")->createButton("color", fvec2(0.0f, POSITIONS(17)[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);

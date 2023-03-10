@@ -162,11 +162,20 @@ void TerrainEditor::_updateNormalTexturingMenu()
 
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearNormalMap")->isHovered())
 		{
 			_fe3d->terrain_setNormalMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearRedNormalMap")->isHovered())
+		{
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearGreenNormalMap")->isHovered())
+		{
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearBlueNormalMap")->isHovered())
+		{
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, "");
 		}
 	}

@@ -51,7 +51,7 @@ void TerrainEditor::_updateBlendTexturingMenu()
 
 			_fe3d->terrain_setBlendMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearBlendMap")->isHovered())
 		{
 			_fe3d->terrain_setBlendMap(_currentTerrainId, "");
 		}

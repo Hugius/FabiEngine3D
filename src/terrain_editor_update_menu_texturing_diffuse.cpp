@@ -162,11 +162,20 @@ void TerrainEditor::_updateDiffuseTexturingMenu()
 
 			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearDiffuseMap")->isHovered())
 		{
 			_fe3d->terrain_setDiffuseMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearRedDiffuseMap")->isHovered())
+		{
 			_fe3d->terrain_setRedDiffuseMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearGreenDiffuseMap")->isHovered())
+		{
 			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearBlueDiffuseMap")->isHovered())
+		{
 			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, "");
 		}
 	}

@@ -91,24 +91,30 @@ void TerrainEditor::_loadGUI()
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("terrainEditorMenuDiffuseTexturing");
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("diffuseMap", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Diffuse Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("redDiffuseMap", fvec2(0.0f, POSITIONS(6)[1]), TEXT_SIZE("Red Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Red Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("greenDiffuseMap", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Green Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Green Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("blueDiffuseMap", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Blue Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Blue Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("clearMaps", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("diffuseMap", fvec2(0.0f, POSITIONS(9)[0]), TEXT_SIZE("Diffuse Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("clearDiffuseMap", fvec2(0.0f, POSITIONS(9)[1]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("redDiffuseMap", fvec2(0.0f, POSITIONS(9)[2]), TEXT_SIZE("Red Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Red Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("clearRedDiffuseMap", fvec2(0.0f, POSITIONS(9)[3]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("greenDiffuseMap", fvec2(0.0f, POSITIONS(9)[4]), TEXT_SIZE("Green Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Green Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("clearGreenDiffuseMap", fvec2(0.0f, POSITIONS(9)[5]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("blueDiffuseMap", fvec2(0.0f, POSITIONS(9)[6]), TEXT_SIZE("Blue Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Blue Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("clearBlueDiffuseMap", fvec2(0.0f, POSITIONS(9)[7]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuDiffuseTexturing")->createButton("back", fvec2(0.0f, POSITIONS(9)[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("terrainEditorMenuNormalTexturing");
 	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("normalMap", fvec2(0.0f, POSITIONS(6)[0]), TEXT_SIZE("Normal Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Normal Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("clearNormalMap", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("redNormalMap", fvec2(0.0f, POSITIONS(6)[1]), TEXT_SIZE("Red Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Red Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("clearRedNormalMap", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("greenNormalMap", fvec2(0.0f, POSITIONS(6)[2]), TEXT_SIZE("Green Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Green Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("clearGreenNormalMap", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("blueNormalMap", fvec2(0.0f, POSITIONS(6)[3]), TEXT_SIZE("Blue Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Blue Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("clearMaps", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("clearBlueNormalMap", fvec2(0.0f, POSITIONS(6)[4]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuNormalTexturing")->createButton("back", fvec2(0.0f, POSITIONS(6)[5]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("terrainEditorMenuBlendTexturing");
 	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("blendMap", fvec2(0.0f, POSITIONS(3)[0]), TEXT_SIZE("Blend Map"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Blend Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("clearMaps", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Clear Maps"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("clearBlendMap", fvec2(0.0f, POSITIONS(3)[1]), TEXT_SIZE("Clear"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("terrainEditorMenuBlendTexturing")->createButton("back", fvec2(0.0f, POSITIONS(3)[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("terrainEditorMenuGraphics");

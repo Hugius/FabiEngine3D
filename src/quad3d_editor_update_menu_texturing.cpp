@@ -90,9 +90,12 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			_fe3d->quad3d_setEmissionMap(_currentQuad3dId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearDiffuseMap")->isHovered())
 		{
 			_fe3d->quad3d_setDiffuseMap(_currentQuad3dId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearEmissionMap")->isHovered())
+		{
 			_fe3d->quad3d_setEmissionMap(_currentQuad3dId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())

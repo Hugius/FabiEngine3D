@@ -127,10 +127,16 @@ void WaterEditor::_updateTexturingMenu()
 
 			_fe3d->water_setHeightMap(_currentWaterId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearDudvMap")->isHovered())
 		{
 			_fe3d->water_setDudvMap(_currentWaterId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearNormalMap")->isHovered())
+		{
 			_fe3d->water_setNormalMap(_currentWaterId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearHeightMap")->isHovered())
+		{
 			_fe3d->water_setHeightMap(_currentWaterId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())

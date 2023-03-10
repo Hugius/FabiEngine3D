@@ -247,13 +247,28 @@ void ModelEditor::_updateTexturingMenu()
 
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearDiffuseMap")->isHovered())
 		{
 			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearEmissionMap")->isHovered())
+		{
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearSpecularMap")->isHovered())
+		{
 			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearReflectionMap")->isHovered())
+		{
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearRefractionMap")->isHovered())
+		{
 			_fe3d->model_setRefractionMap(_currentModelId, _currentPartId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearNormalMap")->isHovered())
+		{
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
@@ -275,7 +290,12 @@ void ModelEditor::_updateTexturingMenu()
 		screen->getButton("reflectionMap")->setHoverable(isPartSelected, true);
 		screen->getButton("refractionMap")->setHoverable(isPartSelected, true);
 		screen->getButton("normalMap")->setHoverable(isPartSelected, true);
-		screen->getButton("clearMaps")->setHoverable(isPartSelected, true);
 		screen->getButton("textureRepeat")->setHoverable(isPartSelected, true);
+		screen->getButton("clearDiffuseMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearEmissionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearSpecularMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearReflectionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearRefractionMap")->setHoverable(isPartSelected, true);
+		screen->getButton("clearNormalMap")->setHoverable(isPartSelected, true);
 	}
 }

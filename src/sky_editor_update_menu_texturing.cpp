@@ -236,9 +236,29 @@ void SkyEditor::_updateTexturingMenu()
 
 			_fe3d->sky_setFrontCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearLeftMap")->isHovered())
 		{
-			_fe3d->sky_setCubeMaps(_currentSkyId, {"", "", "", "", "", ""});
+			_fe3d->sky_setLeftCubeMap(_currentSkyId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearRightMap")->isHovered())
+		{
+			_fe3d->sky_setRightCubeMap(_currentSkyId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearBottomMap")->isHovered())
+		{
+			_fe3d->sky_setBottomCubeMap(_currentSkyId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearTopMap")->isHovered())
+		{
+			_fe3d->sky_setTopCubeMap(_currentSkyId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearBackMap")->isHovered())
+		{
+			_fe3d->sky_setBackCubeMap(_currentSkyId, "");
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearFrontMap")->isHovered())
+		{
+			_fe3d->sky_setFrontCubeMap(_currentSkyId, "");
 		}
 	}
 }

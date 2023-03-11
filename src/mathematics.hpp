@@ -94,9 +94,9 @@ public:
 	static const bool isNormalized(const fvec4 & vector);
 
 private:
-	static inline constexpr float PI = 3.1415926f;
-	static inline constexpr float DEG2RAD = 0.0174532f;
-	static inline constexpr float RAD2DEG = 57.2957795f;
+	static inline constexpr float PI = 3.141592653f;
+	static inline constexpr float DEG2RAD = 0.017453292f;
+	static inline constexpr float RAD2DEG = 57.295779513f;
 
 	static inline mt19937 _generator = mt19937(static_cast<unsigned int>(time(nullptr)));
 };

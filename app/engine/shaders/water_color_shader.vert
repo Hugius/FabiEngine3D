@@ -25,9 +25,9 @@ uniform int u_textureRepeat;
 
 uniform bool u_hasHeightMap;
 
-out vec4 f_shadowSpacePos;
-out vec3 f_worldSpacePos;
-out vec4 f_clipSpacePos;
+out vec4 f_shadowSpacePosition;
+out vec3 f_worldSpacePosition;
+out vec4 f_clipSpacePosition;
 out vec2 f_uv;
 
 void main()
@@ -45,9 +45,9 @@ void main()
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
-	f_shadowSpacePos = (u_shadowProjection * u_shadowView * worldSpacePosition);
-	f_worldSpacePos = worldSpacePosition.xyz;
-	f_clipSpacePos = clipSpacePosition;
+	f_shadowSpacePosition = (u_shadowProjection * u_shadowView * worldSpacePosition);
+	f_worldSpacePosition = worldSpacePosition.xyz;
+	f_clipSpacePosition = clipSpacePosition;
 	f_uv = (v_uv * float(u_textureRepeat));
 
 	gl_Position = clipSpacePosition;

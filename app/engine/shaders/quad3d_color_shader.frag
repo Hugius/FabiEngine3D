@@ -2,7 +2,7 @@
 
 #define GAMMA_VALUE 2.2f
 
-in vec3 f_worldSpacePos;
+in vec3 f_worldSpacePosition;
 in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;
@@ -74,7 +74,7 @@ vec3 calculateFog(vec3 color)
 {
 	if(u_isFogEnabled)
 	{
-        float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
+        float fragmentDistance = distance(f_worldSpacePosition.xyz, u_cameraPosition);
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float mixValue = (distancePart * u_fogThickness);

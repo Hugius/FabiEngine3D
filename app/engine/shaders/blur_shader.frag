@@ -2,7 +2,7 @@
 
 #define KERNEL_SIZE 5
 
-in vec2 f_worldSpacePos;
+in vec2 f_worldSpacePosition;
 in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;

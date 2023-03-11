@@ -22,7 +22,7 @@ uniform int u_textureRepeat;
 uniform bool u_isHorizontallyFlipped;
 uniform bool u_isVerticallyFlipped;
 
-out vec3 f_worldSpacePos;
+out vec3 f_worldSpacePosition;
 out vec2 f_uv;
 
 void main()
@@ -31,7 +31,7 @@ void main()
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
-    f_worldSpacePos = worldSpacePosition.xyz;
+    f_worldSpacePosition = worldSpacePosition.xyz;
 	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
 	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
 	f_uv.x = ((u_uvOffset.x + (f_uv.x * u_uvMultiplier.x)) * float(u_textureRepeat));

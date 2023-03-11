@@ -270,21 +270,21 @@ void WorldEditor::_updateShadowsSettingsMenu()
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(value, position.y, position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(value, lookat.y, lookat.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "lookatY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, value, position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(lookat.x, value, lookat.z));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "lookatZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = _gui->getOverlay()->getValueFormContent();
 			const auto value = (Tools::isInteger(content) ? static_cast<float>(Tools::parseInteger(content)) : 0.0f);
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, value));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(lookat.x, lookat.y, value));
 		}
 		else if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{

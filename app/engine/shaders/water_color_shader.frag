@@ -253,6 +253,11 @@ float calculateShadows()
 				{
 					return 0.0f;
 				}
+
+				if(fragmentDistance < (halfSize * 0.01f))
+				{
+					return 0.0f;
+				}
 			}
 
 			return mix(1.0f, shadow, opacity);

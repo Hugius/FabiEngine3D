@@ -59,7 +59,7 @@ void EngineInterface::model_setDiffuseMap(const string & modelId, const string &
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -90,7 +90,7 @@ void EngineInterface::model_setEmissionMap(const string & modelId, const string 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -121,7 +121,7 @@ void EngineInterface::model_setSpecularMap(const string & modelId, const string 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -152,7 +152,7 @@ void EngineInterface::model_setNormalMap(const string & modelId, const string & 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -183,7 +183,7 @@ void EngineInterface::model_setReflectionMap(const string & modelId, const strin
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -214,7 +214,7 @@ void EngineInterface::model_setRefractionMap(const string & modelId, const strin
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

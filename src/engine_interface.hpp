@@ -1018,13 +1018,13 @@ public:
 	void collision_clearCameraWithAabbs();
 	void collision_clearAabbWithAabbs();
 
-	const vector<string> collision_checkCameraWithAabbs() const;
-	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;
-	const vector<string> collision_checkAabbWithAabbs(const string & aabbId) const;
-	const bool collision_checkCameraWithTerrain() const;
-	const bool collision_checkCameraWithAabb(const string & aabbId) const;
-	const bool collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const;
-	const bool collision_checkAabbWithAabb(const string & firstAabbId, const string & secondAabbId) const;
+	const vector<string> collision_getAabbIdsThatCollidedWithCamera() const;
+	const vector<string> collision_getAabbIdsThatCollidedWithCamera(DirectionType direction) const;
+	const vector<string> collision_getAabbIdsThatCollidedWithAabb(const string & aabbId) const;
+	const bool collision_hasCameraCollidedWithTerrain() const;
+	const bool collision_hasCameraCollidedWithAabb(const string & aabbId) const;
+	const bool collision_hasCameraCollidedWithAabb(const string & aabbId, DirectionType direction) const;
+	const bool collision_hasAabbCollidedWithAabb(const string & firstAabbId, const string & secondAabbId) const;
 
 	void server_start(int maxClientCount);
 	void server_sendTcpMessageToClient(const string & username, const string & content);

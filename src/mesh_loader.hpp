@@ -15,10 +15,10 @@ public:
 	void clearMeshCache(const string & filePath);
 	void clearMeshesCache();
 
-	const shared_ptr<Mesh> loadMesh(const string & filePath);
+	const shared_ptr<Mesh> getMesh(const string & filePath);
 
 private:
-	shared_ptr<Mesh> _loadMesh(const string & filePath) const;
+	shared_ptr<Mesh> _getMesh(const string & filePath) const;
 
 	unordered_map<string, shared_ptr<Mesh>> _cache = {};
 };

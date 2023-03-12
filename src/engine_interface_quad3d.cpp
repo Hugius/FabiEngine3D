@@ -168,7 +168,7 @@ void EngineInterface::quad3d_setDiffuseMap(const string & quad3dId, const string
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -199,7 +199,7 @@ void EngineInterface::quad3d_setEmissionMap(const string & quad3dId, const strin
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

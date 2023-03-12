@@ -34,7 +34,7 @@ void Sound2dManager::createSound2d(const string & sound2dId, const string & audi
 		abort();
 	}
 
-	const auto audio = _audioLoader->loadAudio(audioPath);
+	const auto audio = _audioLoader->getAudio(audioPath);
 
 	if(audio == nullptr)
 	{
@@ -47,7 +47,7 @@ void Sound2dManager::createSound2d(const string & sound2dId, const string & audi
 
 	if(waveBuffer == nullptr)
 	{
-		const auto audio = _audioLoader->loadAudio(audioPath);
+		const auto audio = _audioLoader->getAudio(audioPath);
 
 		if(audio == nullptr)
 		{

@@ -38,7 +38,7 @@ void Text2dManager::createText2d(const string & text2dId, const string & fontMap
 
 	if(texture == nullptr)
 	{
-		const auto image = _imageLoader->loadImage(fontMapPath);
+		const auto image = _imageLoader->getImage(fontMapPath);
 
 		if(image == nullptr)
 		{

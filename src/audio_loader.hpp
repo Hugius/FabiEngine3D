@@ -20,10 +20,10 @@ public:
 	void clearAudioCache(const string & filePath);
 	void clearAudiosCache();
 
-	const shared_ptr<Audio> loadAudio(const string & filePath);
+	const shared_ptr<Audio> getAudio(const string & filePath);
 
 private:
-	shared_ptr<Audio> _loadAudio(const string & filePath) const;
+	shared_ptr<Audio> _getAudio(const string & filePath) const;
 
 	unordered_map<string, shared_ptr<Audio>> _cache = {};
 };

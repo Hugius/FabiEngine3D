@@ -126,7 +126,7 @@ void EngineInterface::water_setDudvMap(const string & waterId, const string & va
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -157,7 +157,7 @@ void EngineInterface::water_setNormalMap(const string & waterId, const string & 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -188,7 +188,7 @@ void EngineInterface::water_setHeightMap(const string & waterId, const string & 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

@@ -37,7 +37,7 @@ void TerrainManager::createTerrain(const string & terrainId, const string & heig
 		abort();
 	}
 
-	const auto image = _imageLoader->loadImage(heightMapPath);
+	const auto image = _imageLoader->getImage(heightMapPath);
 
 	if(image == nullptr)
 	{

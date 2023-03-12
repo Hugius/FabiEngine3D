@@ -42,7 +42,7 @@ void Sound3dManager::createSound3d(const string & sound3dId, const string & audi
 		abort();
 	}
 
-	const auto audio = _audioLoader->loadAudio(audioPath);
+	const auto audio = _audioLoader->getAudio(audioPath);
 
 	if(audio == nullptr)
 	{
@@ -55,7 +55,7 @@ void Sound3dManager::createSound3d(const string & sound3dId, const string & audi
 
 	if(waveBuffer == nullptr)
 	{
-		const auto audio = _audioLoader->loadAudio(audioPath);
+		const auto audio = _audioLoader->getAudio(audioPath);
 
 		if(audio == nullptr)
 		{

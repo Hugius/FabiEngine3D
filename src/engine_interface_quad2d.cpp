@@ -42,7 +42,7 @@ void EngineInterface::quad2d_setDiffuseMap(const string & quad2dId, const string
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

@@ -82,7 +82,7 @@ void Text3dManager::createText3d(const string & text3dId, const string & fontMap
 
 	if(texture == nullptr)
 	{
-		const auto image = _imageLoader->loadImage(fontMapPath);
+		const auto image = _imageLoader->getImage(fontMapPath);
 
 		if(image == nullptr)
 		{

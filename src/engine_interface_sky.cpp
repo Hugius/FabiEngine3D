@@ -22,7 +22,7 @@ void EngineInterface::sky_setCubeMaps(const string & skyId, const array<string, 
 			}
 			else
 			{
-				images[index] = _core->getImageLoader()->loadImage(value[index]);
+				images[index] = _core->getImageLoader()->getImage(value[index]);
 			}
 		}
 

@@ -36,7 +36,7 @@ void EngineInterface::collision_clearAabbWithAabbs()
 	_core->getAabbCollisionHandler()->clearCollisionWithAabbs();
 }
 
-const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
+const vector<string> EngineInterface::collision_getAabbIdsThatCollidedWithCamera() const
 {
 	vector<string> result = {};
 
@@ -48,7 +48,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 	return result;
 }
 
-const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionType direction) const
+const vector<string> EngineInterface::collision_getAabbIdsThatCollidedWithCamera(DirectionType direction) const
 {
 	vector<string> result = {};
 
@@ -63,17 +63,17 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionTy
 	return result;
 }
 
-const vector<string> EngineInterface::collision_checkAabbWithAabbs(const string & aabbId) const
+const vector<string> EngineInterface::collision_getAabbIdsThatCollidedWithAabb(const string & aabbId) const
 {
 	return _core->getAabbCollisionHandler()->getAabbCollisions(aabbId);
 }
 
-const bool EngineInterface::collision_checkCameraWithTerrain() const
+const bool EngineInterface::collision_hasCameraCollidedWithTerrain() const
 {
 	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId) const
+const bool EngineInterface::collision_hasCameraCollidedWithAabb(const string & aabbId) const
 {
 	for(const auto & [collidedAabbId, direction] : _core->getCameraCollisionHandler()->getAabbCollisions())
 	{
@@ -86,7 +86,7 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId)
 	return false;
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const
+const bool EngineInterface::collision_hasCameraCollidedWithAabb(const string & aabbId, DirectionType direction) const
 {
 	for(const auto & [collidedAabbId, collidedDirection] : _core->getCameraCollisionHandler()->getAabbCollisions())
 	{
@@ -99,7 +99,7 @@ const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId,
 	return false;
 }
 
-const bool EngineInterface::collision_checkAabbWithAabb(const string & firstAabbId, const string & secondAabbId) const
+const bool EngineInterface::collision_hasAabbCollidedWithAabb(const string & firstAabbId, const string & secondAabbId) const
 {
 	for(const auto & collidedAabbId : _core->getAabbCollisionHandler()->getAabbCollisions(firstAabbId))
 	{

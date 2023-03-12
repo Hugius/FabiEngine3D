@@ -59,7 +59,7 @@ void ModelManager::createModel(const string & modelId, const string & meshPath)
 		abort();
 	}
 
-	const auto mesh = _meshLoader->loadMesh(meshPath);
+	const auto mesh = _meshLoader->getMesh(meshPath);
 
 	if(mesh == nullptr)
 	{

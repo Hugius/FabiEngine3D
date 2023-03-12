@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::seconds;
 
-const shared_ptr<Image> ImageLoader::loadImage(const string & filePath)
+const shared_ptr<Image> ImageLoader::getImage(const string & filePath)
 {
 	const auto iterator = _cache.find(filePath);
 
@@ -19,7 +19,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string & filePath)
 		return iterator->second;
 	}
 
-	auto loadedImage = _loadImage(filePath);
+	auto loadedImage = _getImage(filePath);
 
 	if(loadedImage == nullptr)
 	{
@@ -44,7 +44,7 @@ void ImageLoader::cacheImage(const string & filePath, bool isCrucial)
 		return;
 	}
 
-	auto loadedImage = _loadImage(filePath);
+	auto loadedImage = _getImage(filePath);
 
 	if(loadedImage == nullptr)
 	{
@@ -79,7 +79,7 @@ void ImageLoader::cacheImages(const vector<string> & filePaths, bool isCrucial)
 	{
 		if(_cache.find(filePath) == _cache.end())
 		{
-			threads.push_back(async(launch::async, &ImageLoader::_loadImage, this, filePath));
+			threads.push_back(async(launch::async, &ImageLoader::_getImage, this, filePath));
 			threadFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}

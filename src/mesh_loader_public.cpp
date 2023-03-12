@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::seconds;
 
-const shared_ptr<Mesh> MeshLoader::loadMesh(const string & filePath)
+const shared_ptr<Mesh> MeshLoader::getMesh(const string & filePath)
 {
 	const auto iterator = _cache.find(filePath);
 
@@ -19,7 +19,7 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string & filePath)
 		return iterator->second;
 	}
 
-	auto loadedMesh = _loadMesh(filePath);
+	auto loadedMesh = _getMesh(filePath);
 
 	if(loadedMesh == nullptr)
 	{
@@ -44,7 +44,7 @@ void MeshLoader::cacheMesh(const string & filePath, bool isCrucial)
 		return;
 	}
 
-	auto loadedMesh = _loadMesh(filePath);
+	auto loadedMesh = _getMesh(filePath);
 
 	if(loadedMesh == nullptr)
 	{
@@ -79,7 +79,7 @@ void MeshLoader::cacheMeshes(const vector<string> & filePaths, bool isCrucial)
 	{
 		if(_cache.find(filePath) == _cache.end())
 		{
-			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
+			threads.push_back(async(launch::async, &MeshLoader::_getMesh, this, filePath));
 			threadFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}

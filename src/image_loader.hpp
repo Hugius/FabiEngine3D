@@ -20,10 +20,10 @@ public:
 	void clearImageCache(const string & filePath);
 	void clearImagesCache();
 
-	const shared_ptr<Image> loadImage(const string & filePath);
+	const shared_ptr<Image> getImage(const string & filePath);
 
 private:
-	shared_ptr<Image> _loadImage(const string & filePath) const;
+	shared_ptr<Image> _getImage(const string & filePath) const;
 
 	unordered_map<string, shared_ptr<Image>> _cache = {};
 };

@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::seconds;
 
-const shared_ptr<Audio> AudioLoader::loadAudio(const string & filePath)
+const shared_ptr<Audio> AudioLoader::getAudio(const string & filePath)
 {
 	const auto iterator = _cache.find(filePath);
 
@@ -19,7 +19,7 @@ const shared_ptr<Audio> AudioLoader::loadAudio(const string & filePath)
 		return iterator->second;
 	}
 
-	auto loadedAudio = _loadAudio(filePath);
+	auto loadedAudio = _getAudio(filePath);
 
 	if(loadedAudio == nullptr)
 	{
@@ -44,7 +44,7 @@ void AudioLoader::cacheAudio(const string & filePath, bool isCrucial)
 		return;
 	}
 
-	auto loadedAudio = _loadAudio(filePath);
+	auto loadedAudio = _getAudio(filePath);
 
 	if(loadedAudio == nullptr)
 	{
@@ -79,7 +79,7 @@ void AudioLoader::cacheAudios(const vector<string> & filePaths, bool isCrucial)
 	{
 		if(_cache.find(filePath) == _cache.end())
 		{
-			threads.push_back(async(launch::async, &AudioLoader::_loadAudio, this, filePath));
+			threads.push_back(async(launch::async, &AudioLoader::_getAudio, this, filePath));
 			threadFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}

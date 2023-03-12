@@ -40,7 +40,7 @@ void EngineInterface::terrain_setDiffuseMap(const string & terrainId, const stri
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -71,7 +71,7 @@ void EngineInterface::terrain_setNormalMap(const string & terrainId, const strin
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -102,7 +102,7 @@ void EngineInterface::terrain_setBlendMap(const string & terrainId, const string
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -133,7 +133,7 @@ void EngineInterface::terrain_setRedDiffuseMap(const string & terrainId, const s
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -164,7 +164,7 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string & terrainId, const
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -195,7 +195,7 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string & terrainId, const 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -226,7 +226,7 @@ void EngineInterface::terrain_setRedNormalMap(const string & terrainId, const st
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -257,7 +257,7 @@ void EngineInterface::terrain_setGreenNormalMap(const string & terrainId, const 
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{
@@ -288,7 +288,7 @@ void EngineInterface::terrain_setBlueNormalMap(const string & terrainId, const s
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

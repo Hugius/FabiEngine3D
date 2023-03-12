@@ -284,7 +284,7 @@ void EngineInterface::graphics_setLensFlareMap(const string & value)
 
 		if(texture == nullptr)
 		{
-			auto image = _core->getImageLoader()->loadImage(value);
+			auto image = _core->getImageLoader()->getImage(value);
 
 			if(image != nullptr)
 			{

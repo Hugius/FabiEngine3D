@@ -14,7 +14,7 @@ public:
 	void bind();
 	void unbind();
 
-	const shared_ptr<TextureBuffer> blurTexture(shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction);
+	const shared_ptr<TextureBuffer> getBlurredTexture(shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction);
 
 private:
 	void _render(shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture);

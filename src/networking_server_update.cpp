@@ -45,8 +45,8 @@ void NetworkingServer::update()
 			abort();
 		}
 
-		const auto clientIp = NetworkingHelper::_getPeerIp(clientSocket);
-		const auto clientPort = NetworkingHelper::_getPeerPort(clientSocket);
+		const auto clientIp = NetworkingHelper::_extractPeerIp(clientSocket);
+		const auto clientPort = NetworkingHelper::_extractPeerPort(clientSocket);
 
 		_clientSockets.push_back(clientSocket);
 		_clientIps.push_back(clientIp);

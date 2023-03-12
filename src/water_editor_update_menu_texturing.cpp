@@ -33,7 +33,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "TGA");
 
 			if(filePath.empty())
 			{
@@ -70,7 +70,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "TGA");
 
 			if(filePath.empty())
 			{
@@ -107,7 +107,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "TGA");
 
 			if(filePath.empty())
 			{

@@ -20,7 +20,7 @@ public:
 	void clearCollisionWithTerrain();
 	void clearCollisionWithAabbs();
 
-	const vector<pair<string, DirectionType>> & getAabbCollisions() const;
+	const vector<pair<string, DirectionType>> & getAabbIdsThatCollided() const;
 
 	const bool hasCollidedWithTerrain() const;
 
@@ -42,7 +42,7 @@ private:
 
 	fvec3 _lastCameraPosition = fvec3(0.0f);
 
-	bool _isCameraUnderTerrain = false;
+	bool _hasCollidedWithTerrain = false;
 
 	DirectionOrderType _aabbResponseDirectionOrder = DirectionOrderType::XYZ;
 };

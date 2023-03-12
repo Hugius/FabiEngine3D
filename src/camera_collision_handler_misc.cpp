@@ -32,12 +32,12 @@ void CameraCollisionHandler::setCameraBox(shared_ptr<Box> value)
 
 const bool CameraCollisionHandler::hasCollidedWithTerrain() const
 {
-	return _isCameraUnderTerrain;
+	return _hasCollidedWithTerrain;
 }
 
 void CameraCollisionHandler::clearCollisionWithTerrain()
 {
-	_isCameraUnderTerrain = false;
+	_hasCollidedWithTerrain = false;
 }
 
 void CameraCollisionHandler::clearCollisionWithAabbs()
@@ -45,7 +45,7 @@ void CameraCollisionHandler::clearCollisionWithAabbs()
 	_aabbCollisions.clear();
 }
 
-const vector<pair<string, DirectionType>> & CameraCollisionHandler::getAabbCollisions() const
+const vector<pair<string, DirectionType>> & CameraCollisionHandler::getAabbIdsThatCollided() const
 {
 	return _aabbCollisions;
 }

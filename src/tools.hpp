@@ -28,8 +28,8 @@ public:
 
 	static const string & getWindowTitle();
 	static const string getRootDirectoryPath();
-	static const string chooseExplorerFile(const string & startingDirectory, const string & fileType);
-	static const string chooseExplorerDirectory(const string & startingDirectory);
+	static const string chooseWindowsExplorerFile(const string & startingDirectory, const string & fileType);
+	static const string chooseWindowsExplorerDirectory(const string & startingDirectory);
 	static const string mergeStrings(const string & firstString, const string & secondString, char delimiter);
 	static const string mergeStrings(const vector<string> & stringList, char delimiter);
 

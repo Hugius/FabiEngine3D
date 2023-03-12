@@ -38,7 +38,7 @@ void NetworkingClient::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				if(!_sendTcpMessageToServer(("REQUEST" + NetworkingHelper::_getSocketPort(_udpSocket) + _username), true, false))
+				if(!_sendTcpMessageToServer(("REQUEST" + NetworkingHelper::_extractSocketPort(_udpSocket) + _username), true, false))
 				{
 					return;
 				}

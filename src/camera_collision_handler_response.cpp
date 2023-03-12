@@ -137,11 +137,11 @@ void CameraCollisionHandler::_calculateCollisionWithTerrain(bool mustRespondY, f
 			}
 		}
 
-		_isCameraUnderTerrain = true;
+		_hasCollidedWithTerrain = true;
 	}
 	else
 	{
-		_isCameraUnderTerrain = false;
+		_hasCollidedWithTerrain = false;
 	}
 }
 
@@ -188,7 +188,7 @@ const bool CameraCollisionHandler::_hasCollidedWithAabbs(DirectionType direction
 
 					if(mustRespondY)
 					{
-						if(!_isCameraUnderTerrain)
+						if(!_hasCollidedWithTerrain)
 						{
 							_camera->setPosition(fvec3(middle.x, _lastCameraPosition.y, middle.z));
 

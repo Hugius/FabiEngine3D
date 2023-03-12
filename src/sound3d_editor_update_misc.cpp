@@ -103,7 +103,7 @@ void Sound3dEditor::_updateSound3dCreating()
 			return;
 		}
 
-		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
+		const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "WAV");
 
 		if(filePath.empty())
 		{

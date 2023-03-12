@@ -88,7 +88,7 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 		abort();
 	}
 
-	auto socketAddress = NetworkingHelper::_getSocketAddress(_serverIp, NetworkingHelper::SERVER_PORT);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(_serverIp, NetworkingHelper::SERVER_PORT);
 
 	const auto message = (_username + ';' + content);
 	const auto sendStatusCode = sendto(_udpSocket, message.c_str(), static_cast<int>(message.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
@@ -112,7 +112,7 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 
 const int NetworkingClient::_connectToServer(SOCKET socket, const string & ip) const
 {
-	auto socketAddress = NetworkingHelper::_getSocketAddress(ip, NetworkingHelper::SERVER_PORT);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(ip, NetworkingHelper::SERVER_PORT);
 
 	const auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
@@ -238,8 +238,8 @@ tuple<int, int, string, string, string> NetworkingClient::_getUdpMessage(SOCKET 
 	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
 	const auto receiveResult = recvfrom(socket, buffer, NetworkingHelper::MAX_UDP_BUFFER_SIZE, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
-	const auto ip = NetworkingHelper::_getAddressIp(sourceAddress);
-	const auto port = NetworkingHelper::_getAddressPort(sourceAddress);
+	const auto ip = NetworkingHelper::_extractAddressIp(sourceAddress);
+	const auto port = NetworkingHelper::_extractAddressPort(sourceAddress);
 
 	if(receiveResult > 0)
 	{

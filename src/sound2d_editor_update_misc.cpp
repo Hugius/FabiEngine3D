@@ -85,7 +85,7 @@ void Sound2dEditor::_updateSound2dCreating()
 			return;
 		}
 
-		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
+		const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "WAV");
 
 		if(filePath.empty())
 		{

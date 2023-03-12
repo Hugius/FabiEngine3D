@@ -20,7 +20,7 @@ void BlurRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction)
+const shared_ptr<TextureBuffer> BlurRenderer::getBlurredTexture(shared_ptr<Quad2d> quad2d, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction)
 {
 	_shaderBuffer->uploadUniform("u_intensity", intensity);
 

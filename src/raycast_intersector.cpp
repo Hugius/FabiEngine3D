@@ -10,8 +10,8 @@ void RaycastIntersector::calculateTerrainIntersection(float maxDistance, float p
 	}
 	else
 	{
-		_pointOnTerrain = _calculatePointOnTerrain(maxDistance, precision);
-		_distanceToTerrain = _calculateDistanceToTerrain();
+		_pointOnTerrain = _getPointOnTerrain(maxDistance, precision);
+		_distanceToTerrain = _getDistanceToTerrain();
 	}
 }
 
@@ -28,7 +28,7 @@ void RaycastIntersector::calculateAabbsIntersection()
 			continue;
 		}
 
-		auto distanceToAabb = _calculateDistanceToAabb(aabb);
+		auto distanceToAabb = _getDistanceToAabb(aabb);
 
 		if(_distanceToTerrain != -1.0f)
 		{
@@ -122,7 +122,7 @@ const fvec3 & RaycastIntersector::getPointOnTerrain() const
 	return _pointOnTerrain;
 }
 
-const float RaycastIntersector::_calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, shared_ptr<Box> box) const
+const float RaycastIntersector::_getDistanceBetweenRayAndBox(shared_ptr<Ray> ray, shared_ptr<Box> box) const
 {
 	/*
 		https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
@@ -166,7 +166,7 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(shared_ptr<
 	return minIntersectionDistance;
 }
 
-const bool RaycastIntersector::_isUnderTerrain(float distance) const
+const bool RaycastIntersector::_isInsideTerrain(float distance) const
 {
 	const auto pointOnRay = RaycastCalculator::calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 	const auto selectedTerrain = _terrainManager->getSelectedTerrain();
@@ -175,13 +175,13 @@ const bool RaycastIntersector::_isUnderTerrain(float distance) const
 	return (pointOnRay.y < terrainHeight);
 }
 
-const fvec3 RaycastIntersector::_calculatePointOnTerrain(float maxDistance, float precision) const
+const fvec3 RaycastIntersector::_getPointOnTerrain(float maxDistance, float precision) const
 {
 	float distance = 0.0f;
 
 	while(distance < maxDistance)
 	{
-		if(_isUnderTerrain(distance))
+		if(_isInsideTerrain(distance))
 		{
 			distance -= (precision * 0.5f);
 
@@ -206,7 +206,7 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain(float maxDistance, floa
 	return fvec3(-1.0f);
 }
 
-const float RaycastIntersector::_calculateDistanceToTerrain() const
+const float RaycastIntersector::_getDistanceToTerrain() const
 {
 	if(_pointOnTerrain == fvec3(-1.0f))
 	{
@@ -216,7 +216,7 @@ const float RaycastIntersector::_calculateDistanceToTerrain() const
 	return Mathematics::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 
-const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<Aabb> aabb) const
+const float RaycastIntersector::_getDistanceToAabb(shared_ptr<Aabb> aabb) const
 {
 	if(aabb->isCentered())
 	{
@@ -229,7 +229,7 @@ const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<Aabb> aabb) 
 		const auto front = (aabb->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
-		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);
+		return _getDistanceBetweenRayAndBox(_raycastCalculator->getCursorRay(), box);
 	}
 	else
 	{
@@ -242,6 +242,6 @@ const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<Aabb> aabb) 
 		const auto front = (aabb->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
-		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);
+		return _getDistanceBetweenRayAndBox(_raycastCalculator->getCursorRay(), box);
 	}
 }

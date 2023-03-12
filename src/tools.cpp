@@ -233,7 +233,7 @@ const int Tools::parseInteger(const string & valueString)
 	return stoi(valueString);
 }
 
-const string Tools::chooseExplorerFile(const string & startingDirectory, const string & fileType)
+const string Tools::chooseWindowsExplorerFile(const string & startingDirectory, const string & fileType)
 {
 	const auto wasCursorVisible = isCursorVisible();
 
@@ -270,7 +270,7 @@ const string Tools::chooseExplorerFile(const string & startingDirectory, const s
 	return ofn.lpstrFile;
 }
 
-const string Tools::chooseExplorerDirectory(const string & startingDirectory)
+const string Tools::chooseWindowsExplorerDirectory(const string & startingDirectory)
 {
 	const auto wasCursorVisible = isCursorVisible();
 
@@ -607,8 +607,8 @@ const ivec2 Tools::getCursorPosition()
 	GetCursorPos(&point);
 
 	const auto monitorSize = getMonitorSize();
-	const auto windowsize = getWindowSize();
-	const auto cursorOffset = ((monitorSize - windowsize) / 2);
+	const auto windowSize = getWindowSize();
+	const auto cursorOffset = ((monitorSize - windowSize) / 2);
 	const auto cursorPosition = ivec2(point.x, (monitorSize.y - point.y));
 
 	return (cursorPosition - cursorOffset);

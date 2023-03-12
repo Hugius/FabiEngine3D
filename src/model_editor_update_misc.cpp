@@ -144,7 +144,7 @@ void ModelEditor::_updateModelCreating()
 			return;
 		}
 
-		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
+		const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "OBJ");
 
 		if(filePath.empty())
 		{

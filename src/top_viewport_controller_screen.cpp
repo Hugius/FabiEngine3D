@@ -143,7 +143,7 @@ void TopViewportController::_updateExtraScreenManagement()
 			}
 			else
 			{
-				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
+				const auto filePath = Tools::chooseWindowsExplorerFile((rootPath + targetDirectoryPath), "");
 
 				if(!filePath.empty())
 				{
@@ -164,7 +164,7 @@ void TopViewportController::_updateExtraScreenManagement()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && topScreen->getButton("export")->isHovered())
 		{
-			const auto chosenDirectoryPath = Tools::chooseExplorerDirectory("");
+			const auto chosenDirectoryPath = Tools::chooseWindowsExplorerDirectory("");
 
 			if(!chosenDirectoryPath.empty())
 			{

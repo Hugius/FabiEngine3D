@@ -28,13 +28,13 @@ public:
 	const float getDistanceToAabb(const string & aabbId) const;
 
 private:
-	const fvec3 _calculatePointOnTerrain(float distance, float precision) const;
+	const fvec3 _getPointOnTerrain(float distance, float precision) const;
 
-	const float _calculateDistanceToTerrain() const;
-	const float _calculateDistanceToAabb(shared_ptr<Aabb> aabb) const;
-	const float _calculateRayBoxIntersectionDistance(shared_ptr<Ray> ray, shared_ptr<Box> box) const;
+	const float _getDistanceToTerrain() const;
+	const float _getDistanceToAabb(shared_ptr<Aabb> aabb) const;
+	const float _getDistanceBetweenRayAndBox(shared_ptr<Ray> ray, shared_ptr<Box> box) const;
 
-	const bool _isUnderTerrain(float distance) const;
+	const bool _isInsideTerrain(float distance) const;
 
 	unordered_map<string, float> _aabbIntersections = {};
 

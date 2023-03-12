@@ -51,7 +51,7 @@ void PointlightManager::deletePointlights()
 	_pointlights.clear();
 }
 
-const int PointlightManager::getMaxCount() const
+const int PointlightManager::getMaxPointlightCount() const
 {
 	return MAX_COUNT;
 }

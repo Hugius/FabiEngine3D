@@ -45,10 +45,10 @@ public:
 	const bool isAcceptedByServer() const;
 
 private:
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	tuple<int, int, long long, string> _getTcpMessage(SOCKET socket) const;
+	tuple<int, int, string, string, string> _getUdpMessage(SOCKET socket) const;
 
-	const int _waitForServerConnection(SOCKET socket, const string & ip) const;
+	const int _connectToServer(SOCKET socket, const string & ip) const;
 
 	const bool _setupTcp();
 	const bool _setupUdp();

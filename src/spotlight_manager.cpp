@@ -59,7 +59,7 @@ void SpotlightManager::deleteSpotlights()
 	_spotlights.clear();
 }
 
-const int SpotlightManager::getMaxCount() const
+const int SpotlightManager::getMaxSpotlightCount() const
 {
 	return MAX_COUNT;
 }

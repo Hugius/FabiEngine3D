@@ -23,17 +23,17 @@ public:
 	const bool isMessageReserved(const string & message) const;
 
 private:
-	static const string _extractAddressIp(sockaddr_in address);
-	static const string _extractAddressPort(sockaddr_in address);
-	static const string _extractSocketIp(SOCKET socket);
-	static const string _extractSocketPort(SOCKET socket);
-	static const string _extractPeerIp(SOCKET socket);
-	static const string _extractPeerPort(SOCKET socket);
+	static const string _getAddressIp(sockaddr_in address);
+	static const string _getAddressPort(sockaddr_in address);
+	static const string _getSocketIp(SOCKET socket);
+	static const string _getSocketPort(SOCKET socket);
+	static const string _getPeerIp(SOCKET socket);
+	static const string _getPeerPort(SOCKET socket);
 
 	static const bool _isUdpMessageReady(SOCKET socket);
 	static const bool _isMessageReserved(const string & message);
 
-	static const sockaddr_in _composeSocketAddress(const string & ip, const string & port);
+	static const sockaddr_in _getSocketAddress(const string & ip, const string & port);
 
 	static inline const string SERVER_PORT = "61295";
 

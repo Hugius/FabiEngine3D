@@ -40,47 +40,47 @@ const bool NetworkingHelper::isMessageReserved(const string & message) const
 	return _isMessageReserved(message);
 }
 
-const string NetworkingHelper::_extractSocketIp(SOCKET socket)
+const string NetworkingHelper::_getSocketIp(SOCKET socket)
 {
 	sockaddr_in socketAddress = {};
 
 	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
-	return _extractAddressIp(socketAddress);
+	return _getAddressIp(socketAddress);
 }
 
-const string NetworkingHelper::_extractSocketPort(SOCKET socket)
+const string NetworkingHelper::_getSocketPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = {};
 
 	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
-	return _extractAddressPort(socketAddress);
+	return _getAddressPort(socketAddress);
 }
 
-const string NetworkingHelper::_extractPeerIp(SOCKET socket)
+const string NetworkingHelper::_getPeerIp(SOCKET socket)
 {
 	sockaddr_in socketAddress = {};
 
 	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
-	return _extractAddressIp(socketAddress);
+	return _getAddressIp(socketAddress);
 }
 
-const string NetworkingHelper::_extractPeerPort(SOCKET socket)
+const string NetworkingHelper::_getPeerPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = {};
 
 	auto socketAddressLength = static_cast<int>(sizeof(socketAddress));
 	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
-	return _extractAddressPort(socketAddress);
+	return _getAddressPort(socketAddress);
 }
 
-const sockaddr_in NetworkingHelper::_composeSocketAddress(const string & ip, const string & port)
+const sockaddr_in NetworkingHelper::_getSocketAddress(const string & ip, const string & port)
 {
 	sockaddr_in socketAddress = {};
 
@@ -91,7 +91,7 @@ const sockaddr_in NetworkingHelper::_composeSocketAddress(const string & ip, con
 	return socketAddress;
 }
 
-const string NetworkingHelper::_extractAddressIp(sockaddr_in address)
+const string NetworkingHelper::_getAddressIp(sockaddr_in address)
 {
 	char ip[IP_ADDRESS_SIZE];
 
@@ -100,7 +100,7 @@ const string NetworkingHelper::_extractAddressIp(sockaddr_in address)
 	return (ip);
 }
 
-const string NetworkingHelper::_extractAddressPort(sockaddr_in address)
+const string NetworkingHelper::_getAddressPort(sockaddr_in address)
 {
 	return to_string(ntohs(address.sin_port));
 }

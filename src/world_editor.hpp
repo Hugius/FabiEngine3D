@@ -151,6 +151,7 @@ private:
 	void _deactivateSound3d();
 
 	const vector<string> _getWorldIds() const;
+
 	bool _handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta, float multiplier, float minimum, float maximum);
 
 	static inline const string GRID_ID = "@@grid";

@@ -83,7 +83,7 @@ void NetworkingClient::connectToServer(const string & ip)
 		return;
 	}
 
-	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, ip);
+	_connectionThread = async(launch::async, &NetworkingClient::_connectToServer, this, _tcpSocket, ip);
 
 	_serverIp = ip;
 	_isConnectingToServer = true;

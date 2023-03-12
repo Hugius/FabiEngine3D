@@ -38,12 +38,12 @@ void NetworkingClient::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				if(!_sendTcpMessageToServer(("REQUEST" + NetworkingHelper::_extractSocketPort(_udpSocket) + _username), true, false))
+				if(!_sendTcpMessageToServer(("REQUEST" + NetworkingHelper::_getSocketPort(_udpSocket) + _username), true, false))
 				{
 					return;
 				}
 
-				_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
+				_tcpMessageThread = async(launch::async, &NetworkingClient::_getTcpMessage, this, _tcpSocket);
 			}
 			else if((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT))
 			{
@@ -154,7 +154,7 @@ void NetworkingClient::update()
 				}
 			}
 
-			_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
+			_tcpMessageThread = async(launch::async, &NetworkingClient::_getTcpMessage, this, _tcpSocket);
 		}
 		else if(messageStatusCode == 0)
 		{
@@ -181,7 +181,7 @@ void NetworkingClient::update()
 
 	while(NetworkingHelper::_isUdpMessageReady(_udpSocket))
 	{
-		const auto messageResult = _receiveUdpMessage(_udpSocket);
+		const auto messageResult = _getUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);
 		const auto messageErrorCode = get<1>(messageResult);
 		const auto messageContent = get<2>(messageResult);

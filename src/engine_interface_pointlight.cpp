@@ -88,7 +88,7 @@ const float EngineInterface::pointlight_getIntensity(const string & pointlightId
 
 const int EngineInterface::pointlight_getMaxCount() const
 {
-	return _core->getPointlightManager()->getMaxCount();
+	return _core->getPointlightManager()->getMaxPointlightCount();
 }
 
 const vector<string> EngineInterface::pointlight_getIds() const

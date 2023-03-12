@@ -20,7 +20,7 @@ public:
 
 	const shared_ptr<Pointlight> getPointlight(const string & pointlightId) const;
 
-	const int getMaxCount() const;
+	const int getMaxPointlightCount() const;
 
 	const bool isPointlightExisting(const string & pointlightId) const;
 	const bool isPointlightsExisting() const;

@@ -209,12 +209,12 @@ float calculateShadows()
 
 		if(fragmentDistance <= halfSize)
 		{
-			vec3 uvCoords = (((f_shadowSpacePosition.xyz / f_shadowSpacePosition.w) * 0.5f) + 0.5f);
+			vec3 uvCoordinates = (((f_shadowSpacePosition.xyz / f_shadowSpacePosition.w) * 0.5f) + 0.5f);
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
 			float shadow = 0.0f;
 
-			if(uvCoords.z > 1.0f)
+			if(uvCoordinates.z > 1.0f)
 			{
 				return 1.0f;
 			}
@@ -225,8 +225,8 @@ float calculateShadows()
 				{
 					vec2 uvOffset = (vec2(x, y) * texelSize);
 
-					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
-					float lightness = (((uvCoords.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
+					float depth = texture(u_shadowMap, (uvCoordinates.xy + uvOffset)).r;
+					float lightness = (((uvCoordinates.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
 
 					shadow += lightness;         
 				}    

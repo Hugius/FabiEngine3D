@@ -43,7 +43,7 @@ void NetworkingServer::start(int maxClientCount)
 		return;
 	}
 
-	_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
+	_connectionThread = async(launch::async, &NetworkingServer::_getClientConnection, this, _tcpSocket);
 	_maxClientCount = maxClientCount;
 	_isRunning = true;
 

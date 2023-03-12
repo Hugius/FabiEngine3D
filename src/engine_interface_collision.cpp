@@ -70,7 +70,7 @@ const vector<string> EngineInterface::collision_getAabbIdsThatCollidedWithAabb(c
 
 const bool EngineInterface::collision_hasCameraCollidedWithTerrain() const
 {
-	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
+	return _core->getCameraCollisionHandler()->hasCollidedWithTerrain();
 }
 
 const bool EngineInterface::collision_hasCameraCollidedWithAabb(const string & aabbId) const

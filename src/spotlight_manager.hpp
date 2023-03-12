@@ -20,7 +20,7 @@ public:
 
 	const shared_ptr<Spotlight> getSpotlight(const string & spotlightId) const;
 
-	const int getMaxCount() const;
+	const int getMaxSpotlightCount() const;
 
 	const bool isSpotlightExisting(const string & spotlightId) const;
 	const bool isSpotlightsExisting() const;

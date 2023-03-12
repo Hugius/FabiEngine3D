@@ -46,15 +46,15 @@ public:
 private:
 	void _disconnectClient(SOCKET socket);
 
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	tuple<int, int, long long, string> _getTcpMessage(SOCKET socket) const;
+	tuple<int, int, string, string, string> _getUdpMessage(SOCKET socket) const;
 
 	const bool _setupTcp();
 	const bool _setupUdp();
 	const bool _sendTcpMessageToClient(SOCKET socket, const string & content, bool isReserved);
 	const bool _sendUdpMessageToClient(const string & clientIp, const string & clientPort, const string & content, bool isReserved) const;
 
-	const SOCKET _waitForClientConnection(SOCKET socket) const;
+	const SOCKET _getClientConnection(SOCKET socket) const;
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads = {};
 	vector<string> _tcpMessageBuilds = {};

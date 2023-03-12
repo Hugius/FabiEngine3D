@@ -23,12 +23,12 @@ void RaycastCalculator::calculateCursorRay()
 {
 	_camera->calculateMatrices();
 
-	const auto ndcCoords = Tools::convertPositionRelativeFromDisplay(Tools::convertToNdc(Tools::getCursorPosition()));
-	const auto clipSpaceCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
-	const auto viewSpaceCoords = _convertToViewSpace(clipSpaceCoords);
-	const auto worldSpaceCoords = _convertToWorldSpace(viewSpaceCoords);
+	const auto ndcCoordinates = Tools::convertPositionRelativeFromDisplay(Tools::convertToNdc(Tools::getCursorPosition()));
+	const auto clipSpaceCoordinates = fvec4(ndcCoordinates.x, ndcCoordinates.y, -1.0f, 1.0f);
+	const auto viewSpaceCoordinates = _getCoordinatesInViewSpace(clipSpaceCoordinates);
+	const auto worldSpaceCoordinates = _getCoordinatesInWorldSpace(viewSpaceCoordinates);
 
-	_cursorRay = make_shared<Ray>(_camera->getPosition(), Mathematics::normalize(worldSpaceCoords));
+	_cursorRay = make_shared<Ray>(_camera->getPosition(), Mathematics::normalize(worldSpaceCoordinates));
 }
 
 void RaycastCalculator::clearCursorRay()
@@ -36,23 +36,23 @@ void RaycastCalculator::clearCursorRay()
 	_cursorRay = make_shared<Ray>(fvec3(0.0f), fvec3(0.0f));
 }
 
-const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4 & clipCoords) const
+const fvec4 RaycastCalculator::_getCoordinatesInViewSpace(const fvec4 & clipCoordinates) const
 {
 	const auto invertedProjection = Mathematics::invertMatrix(_camera->getProjection());
-	const auto viewCoords = (invertedProjection * clipCoords);
+	const auto viewCoordinates = (invertedProjection * clipCoordinates);
 
-	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
+	return fvec4(viewCoordinates.x, viewCoordinates.y, -1.0f, 0.0f);
 }
 
-const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4 & viewCoords) const
+const fvec3 RaycastCalculator::_getCoordinatesInWorldSpace(const fvec4 & viewCoordinates) const
 {
 	const auto invertedView = Mathematics::invertMatrix(_camera->getView());
-	const auto worldCoords = (invertedView * viewCoords);
+	const auto worldCoordinates = (invertedView * viewCoordinates);
 
-	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
+	return fvec3(worldCoordinates.x, worldCoordinates.y, worldCoordinates.z);
 }
 
-const fvec3 RaycastCalculator::calculatePointOnRay(shared_ptr<Ray> ray, float distance) const
+const fvec3 RaycastCalculator::calculatePointOnRay(shared_ptr<Ray> ray, float distance)
 {
 	return (ray->getPosition() + (ray->getDirection() * distance));
 }

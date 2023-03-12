@@ -30,7 +30,7 @@ void CameraCollisionHandler::setCameraBox(shared_ptr<Box> value)
 	_cameraBox = value;
 }
 
-const bool CameraCollisionHandler::isCameraUnderTerrain() const
+const bool CameraCollisionHandler::hasCollidedWithTerrain() const
 {
 	return _isCameraUnderTerrain;
 }

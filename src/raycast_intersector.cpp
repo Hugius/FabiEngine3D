@@ -168,7 +168,7 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(shared_ptr<
 
 const bool RaycastIntersector::_isUnderTerrain(float distance) const
 {
-	const auto pointOnRay = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
+	const auto pointOnRay = RaycastCalculator::calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 	const auto selectedTerrain = _terrainManager->getSelectedTerrain();
 	const auto terrainHeight = _terrainManager->getTerrainPixelHeight(selectedTerrain->getId(), pointOnRay.x + (selectedTerrain->getSize() * 0.5f), pointOnRay.z + (selectedTerrain->getSize() * 0.5f));
 
@@ -185,7 +185,7 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain(float maxDistance, floa
 		{
 			distance -= (precision * 0.5f);
 
-			const auto endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
+			const auto endPoint = RaycastCalculator::calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 			const auto selectedTerrain = _terrainManager->getSelectedTerrain();
 
 			if(_terrainManager->isInside(selectedTerrain->getId(), (endPoint.x + (selectedTerrain->getSize() * 0.5f)), (endPoint.z + (selectedTerrain->getSize() * 0.5f))))

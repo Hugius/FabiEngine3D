@@ -78,7 +78,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 		abort();
 	}
 
-	auto socketAddress = NetworkingHelper::_composeSocketAddress(clientIp, clientPort);
+	auto socketAddress = NetworkingHelper::_getSocketAddress(clientIp, clientPort);
 
 	const auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
@@ -261,12 +261,12 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 	}
 }
 
-const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
+const SOCKET NetworkingServer::_getClientConnection(SOCKET socket) const
 {
 	return accept(socket, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
+tuple<int, int, long long, string> NetworkingServer::_getTcpMessage(SOCKET socket) const
 {
 	char buffer[NetworkingHelper::MAX_TCP_BUFFER_SIZE] = {};
 
@@ -282,7 +282,7 @@ tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
+tuple<int, int, string, string, string> NetworkingServer::_getUdpMessage(SOCKET socket) const
 {
 	sockaddr_in sourceAddress = {};
 	char buffer[NetworkingHelper::MAX_UDP_BUFFER_SIZE] = {};
@@ -290,8 +290,8 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
 	const auto receiveResult = recvfrom(socket, buffer, NetworkingHelper::MAX_UDP_BUFFER_SIZE, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
-	const auto ip = NetworkingHelper::_extractAddressIp(sourceAddress);
-	const auto port = NetworkingHelper::_extractAddressPort(sourceAddress);
+	const auto ip = NetworkingHelper::_getAddressIp(sourceAddress);
+	const auto port = NetworkingHelper::_getAddressPort(sourceAddress);
 
 	if(receiveResult > 0)
 	{

@@ -2,27 +2,27 @@
 
 void GuiScreen::createScrollingList(const string & scrollingListId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered)
 {
-	_scrollingLists.insert({scrollingListId, make_shared<GuiScrollingList>(_fe3d, scrollingListId, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), color, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, characterSize, scrollingSpeed, isCentered)});
+	_scrollingLists.insert({scrollingListId, make_shared<GuiScrollingList>(_fe3d, scrollingListId, (_parentId + "_" + _id), _getConvertedPosition(position), _getConvertedSize(size), color, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, characterSize, scrollingSpeed, isCentered)});
 }
 
 void GuiScreen::createInputBox(const string & inputBoxId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
 {
-	_inputBoxes.insert({inputBoxId, make_shared<GuiInputBox>(_fe3d, (_parentId + "_" + _id), inputBoxId, _convertPosition(position), _convertSize(size), color, hoverColor, textColor, textHoverColor, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, isCentered)});
+	_inputBoxes.insert({inputBoxId, make_shared<GuiInputBox>(_fe3d, (_parentId + "_" + _id), inputBoxId, _getConvertedPosition(position), _getConvertedSize(size), color, hoverColor, textColor, textHoverColor, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, isCentered)});
 }
 
 void GuiScreen::createButton(const string & buttonId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 {
-	_buttons.insert({buttonId, make_shared<GuiButton>(_fe3d, buttonId, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), diffuseMapPath, defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
+	_buttons.insert({buttonId, make_shared<GuiButton>(_fe3d, buttonId, (_parentId + "_" + _id), _getConvertedPosition(position), _getConvertedSize(size), diffuseMapPath, defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
 }
 
 void GuiScreen::createQuadField(const string & quadFieldId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)
 {
-	_quadFields.insert({quadFieldId, make_shared<GuiQuadField>(_fe3d, quadFieldId, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), diffuseMapPath, color, isCentered)});
+	_quadFields.insert({quadFieldId, make_shared<GuiQuadField>(_fe3d, quadFieldId, (_parentId + "_" + _id), _getConvertedPosition(position), _getConvertedSize(size), diffuseMapPath, color, isCentered)});
 }
 
 void GuiScreen::createTextField(const string & textFieldId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered)
 {
-	_textFields.insert({textFieldId, make_shared<GuiTextField>(_fe3d, textFieldId, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), textContent, textColor, isCentered)});
+	_textFields.insert({textFieldId, make_shared<GuiTextField>(_fe3d, textFieldId, (_parentId + "_" + _id), _getConvertedPosition(position), _getConvertedSize(size), textContent, textColor, isCentered)});
 }
 
 void GuiScreen::deleteScrollingList(const string & scrollingListId)

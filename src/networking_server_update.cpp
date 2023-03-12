@@ -45,8 +45,8 @@ void NetworkingServer::update()
 			abort();
 		}
 
-		const auto clientIp = NetworkingHelper::_extractPeerIp(clientSocket);
-		const auto clientPort = NetworkingHelper::_extractPeerPort(clientSocket);
+		const auto clientIp = NetworkingHelper::_getPeerIp(clientSocket);
+		const auto clientPort = NetworkingHelper::_getPeerPort(clientSocket);
 
 		_clientSockets.push_back(clientSocket);
 		_clientIps.push_back(clientIp);
@@ -55,9 +55,9 @@ void NetworkingServer::update()
 		_clientUsernames.push_back("");
 		_tcpMessageBuilds.push_back("");
 
-		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocket));
+		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_getTcpMessage, this, clientSocket));
 
-		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
+		_connectionThread = async(launch::async, &NetworkingServer::_getClientConnection, this, _tcpSocket);
 	}
 
 	for(int index = 0; index < static_cast<int>(_clientSockets.size()); index++)
@@ -144,7 +144,7 @@ void NetworkingServer::update()
 					}
 				}
 
-				_tcpMessageThreads[index] = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, _clientSockets[index]);
+				_tcpMessageThreads[index] = async(launch::async, &NetworkingServer::_getTcpMessage, this, _clientSockets[index]);
 			}
 			else if(messageStatusCode == 0)
 			{
@@ -172,7 +172,7 @@ void NetworkingServer::update()
 
 	while(NetworkingHelper::_isUdpMessageReady(_udpSocket))
 	{
-		const auto messageResult = _receiveUdpMessage(_udpSocket);
+		const auto messageResult = _getUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);
 		const auto messageErrorCode = get<1>(messageResult);
 		const auto messageContent = get<2>(messageResult);

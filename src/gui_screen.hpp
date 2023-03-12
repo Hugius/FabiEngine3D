@@ -52,8 +52,8 @@ public:
 	const bool hasTextField(const string & textFieldId) const;
 
 private:
-	const fvec2 _convertPosition(const fvec2 & position) const;
-	const fvec2 _convertSize(const fvec2 & size) const;
+	const fvec2 _getConvertedPosition(const fvec2 & position) const;
+	const fvec2 _getConvertedSize(const fvec2 & size) const;
 
 	const string _id;
 	const string _parentId;

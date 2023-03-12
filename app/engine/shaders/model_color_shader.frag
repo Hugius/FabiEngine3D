@@ -238,12 +238,12 @@ float calculateShadows()
 
 		if(fragmentDistance <= halfSize)
 		{
-			vec3 uvCoords = (((f_shadowSpacePosition.xyz / f_shadowSpacePosition.w) * 0.5f) + 0.5f);
+			vec3 uvCoordinates = (((f_shadowSpacePosition.xyz / f_shadowSpacePosition.w) * 0.5f) + 0.5f);
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
 			float shadow = 0.0f;
 
-			if(uvCoords.z > 1.0f)
+			if(uvCoordinates.z > 1.0f)
 			{
 				return 1.0f;
 			}
@@ -254,8 +254,8 @@ float calculateShadows()
 				{
 					vec2 uvOffset = (vec2(x, y) * texelSize);
 
-					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
-					float lightness = (((uvCoords.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
+					float depth = texture(u_shadowMap, (uvCoordinates.xy + uvOffset)).r;
+					float lightness = (((uvCoordinates.z - u_shadowBias) > depth) ? u_shadowLightness : 1.0f);
 
 					shadow += lightness;         
 				}    
@@ -468,8 +468,8 @@ vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 	{
 		if(reflectionMapColor != vec3(0.0f))
 		{
-			vec2 uvCoords = (((f_clipSpacePosition.xy / f_clipSpacePosition.w) * 0.5f) + 0.5f);
-			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(uvCoords.x, -uvCoords.y)).rgb;
+			vec2 uvCoordinates = (((f_clipSpacePosition.xy / f_clipSpacePosition.w) * 0.5f) + 0.5f);
+			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(uvCoordinates.x, -uvCoordinates.y)).rgb;
 			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
         
 			return mixedColor;
@@ -489,8 +489,8 @@ vec3 calculatePlanarRefraction(vec3 refractionMapColor, vec3 color)
 	{
 		if(refractionMapColor != vec3(0.0f))
 		{
-			vec2 uvCoords = (((f_clipSpacePosition.xy / f_clipSpacePosition.w) * 0.5f) + 0.5f);
-			vec3 refractionColor = texture(u_planarRefractionMap, uvCoords).rgb;
+			vec2 uvCoordinates = (((f_clipSpacePosition.xy / f_clipSpacePosition.w) * 0.5f) + 0.5f);
+			vec3 refractionColor = texture(u_planarRefractionMap, uvCoordinates).rgb;
 			vec3 mixedColor = mix(color, refractionColor, u_refractivity);
         
 			return mixedColor;

@@ -246,8 +246,8 @@ void GuiScrollingList::_updateScrolling()
 		{
 			const auto listPosition = getPosition();
 			const auto listSize = getSize();
-			const auto buttonPosition = _convertPosition(fvec2(0.0f, (1.0f - yOffset - _scrollingOffset)));
-			const auto buttonSize = _convertSize(fvec2((_characterSize.x * static_cast<float>(button->getTextContent().size())), _characterSize.y));
+			const auto buttonPosition = _getConvertedPosition(fvec2(0.0f, (1.0f - yOffset - _scrollingOffset)));
+			const auto buttonSize = _getConvertedSize(fvec2((_characterSize.x * static_cast<float>(button->getTextContent().size())), _characterSize.y));
 
 			button->setPosition(buttonPosition);
 			button->setSize(buttonSize);
@@ -271,7 +271,7 @@ void GuiScrollingList::_updateMiscellaneous()
 	}
 }
 
-const fvec2 GuiScrollingList::_convertPosition(const fvec2 & position) const
+const fvec2 GuiScrollingList::_getConvertedPosition(const fvec2 & position) const
 {
 	const auto listPosition = getPosition();
 	const auto listSize = getSize();
@@ -280,7 +280,7 @@ const fvec2 GuiScrollingList::_convertPosition(const fvec2 & position) const
 	return buttonPosition;
 }
 
-const fvec2 GuiScrollingList::_convertSize(const fvec2 & size) const
+const fvec2 GuiScrollingList::_getConvertedSize(const fvec2 & size) const
 {
 	const auto listPosition = getPosition();
 	const auto listSize = getSize();

@@ -37,39 +37,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:camera_follow_right_xz")
-	{
-		const auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->camera_followRightXZ(args[0]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:camera_follow_front_xz")
-	{
-		const auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->camera_followFrontXZ(args[0]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:camera_follow_front_xyz")
-	{
-		const auto types = {SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			_fe3d->camera_followFrontXYZ(args[0]->getDecimal());
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:camera_set_near")
 	{
 		const auto types = {SVT::DECIMAL};

@@ -33,9 +33,6 @@ public:
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
 	void setMaxThirdPersonPitch(float value);
-	void followRightXZ(float speed);
-	void followFrontXYZ(float speed);
-	void followFrontXZ(float speed);
 	void setFirstPersonEnabled(bool value);
 	void setThirdPersonEnabled(bool value);
 	void setNear(float value);
@@ -49,6 +46,7 @@ public:
 	const fvec3 & getRight() const;
 	const fvec3 & getUp() const;
 	const fvec3 & getFront() const;
+	const fvec3 & getFrontWithoutPitch() const;
 	const fvec3 & getPosition() const;
 	const fvec3 & getThirdPersonLookat() const;
 
@@ -94,6 +92,7 @@ private:
 	fvec3 _right = fvec3(0.0f);
 	fvec3 _up = fvec3(0.0f);
 	fvec3 _front = fvec3(0.0f);
+	fvec3 _frontWithoutPitch = fvec3(0.0f);
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _thirdPersonLookat = fvec3(0.0f);

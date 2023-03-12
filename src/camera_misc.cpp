@@ -5,30 +5,6 @@
 
 using std::clamp;
 
-void Camera::followRightXZ(float speed)
-{
-	_position.x += (_right.x * speed);
-	_position.z += (_right.z * speed);
-}
-
-void Camera::followFrontXZ(float speed)
-{
-	auto tempFront = _front;
-
-	tempFront.x = cos(Mathematics::convertToRadians(_yaw));
-	tempFront.z = sin(Mathematics::convertToRadians(_yaw));
-
-	_position.x += (tempFront.x * speed);
-	_position.z += (tempFront.z * speed);
-}
-
-void Camera::followFrontXYZ(float speed)
-{
-	_position.x += (_front.x * speed);
-	_position.y += (_front.y * speed);
-	_position.z += (_front.z * speed);
-}
-
 void Camera::setFirstPersonEnabled(bool value)
 {
 	if(!_mustCenterCursor)
@@ -142,6 +118,11 @@ const fvec3 & Camera::getPosition() const
 const fvec3 & Camera::getFront() const
 {
 	return _front;
+}
+
+const fvec3 & Camera::getFrontWithoutPitch() const
+{
+	return _frontWithoutPitch;
 }
 
 const fvec3 & Camera::getRight() const
@@ -301,9 +282,13 @@ void Camera::calculateMatrices()
 		_up = POSITIVE_UP;
 	}
 
-	_front.x = (cos(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
-	_front.y = sin(Mathematics::convertToRadians(_pitch));
-	_front.z = (sin(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
+	_frontWithoutPitch.x = cos(Mathematics::convertToRadians(_yaw));
+	_frontWithoutPitch.y = sin(Mathematics::convertToRadians(_pitch));
+	_frontWithoutPitch.z = sin(Mathematics::convertToRadians(_yaw));
+	_frontWithoutPitch = Mathematics::normalize(_frontWithoutPitch);
+	_front.x = (_frontWithoutPitch.x * cos(Mathematics::convertToRadians(_pitch)));
+	_front.y = _frontWithoutPitch.y;
+	_front.z = (_frontWithoutPitch.z * cos(Mathematics::convertToRadians(_pitch)));
 	_front = Mathematics::normalize(_front);
 	_right = Mathematics::calculateCrossProduct(_front, _up);
 	_right = Mathematics::normalize(_right);

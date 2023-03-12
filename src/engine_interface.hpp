@@ -946,9 +946,6 @@ public:
 	void camera_reset();
 	void camera_setFirstPersonEnabled(bool value);
 	void camera_setThirdPersonEnabled(bool value);
-	void camera_followRightXZ(float speed);
-	void camera_followFrontXZ(float speed);
-	void camera_followFrontXYZ(float speed);
 	void camera_move(const fvec3 & speed);
 	void camera_moveTo(const fvec3 & target, float speed);
 	void camera_setPosition(const fvec3 & value);
@@ -974,6 +971,7 @@ public:
 	const fvec3 & camera_getRight() const;
 	const fvec3 & camera_getUp() const;
 	const fvec3 & camera_getFront() const;
+	const fvec3 & camera_getFrontWithoutPitch() const;
 	const fvec3 & camera_getThirdPersonLookat() const;
 	const float camera_getNear() const;
 	const float camera_getFar() const;

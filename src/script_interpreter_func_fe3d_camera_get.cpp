@@ -112,6 +112,33 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:camera_get_front_without_pitch_x")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->camera_getFrontWithoutPitch().x;
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:camera_get_front_without_pitch_y")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->camera_getFrontWithoutPitch().y;
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:camera_get_front_without_pitch_z")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->camera_getFrontWithoutPitch().z;
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+		}
+	}
 	else if(functionName == "fe3d:camera_get_yaw")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

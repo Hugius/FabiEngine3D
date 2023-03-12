@@ -30,34 +30,38 @@ void WorldEditor::_updateCamera()
 
 		if(!_gui->getOverlay()->isFocused())
 		{
-			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_A))
-			{
-				_fe3d->camera_followRightXZ(-_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER);
-			}
-
-			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_D))
-			{
-				_fe3d->camera_followRightXZ(_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER);
-			}
-
-			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR))
-			{
-				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / CAMERA_POSITION_SPEED_DIVIDER, 0.0f));
-			}
-
-			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
-			{
-				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER), 0.0f));
-			}
+			const auto speed = (_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER);
+			const auto front = _fe3d->camera_getFrontWithoutPitch();
+			const auto right = _fe3d->camera_getRight();
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_W))
 			{
-				_fe3d->camera_followFrontXZ(_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER);
+				_fe3d->camera_move(fvec3((front.x * speed), 0.0, (front.z * speed)));
+			}
+
+			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_A))
+			{
+				_fe3d->camera_move(fvec3((right.x * -speed), 0.0, (right.z * -speed)));
 			}
 
 			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_S))
 			{
-				_fe3d->camera_followFrontXZ(-_editorSpeed / CAMERA_POSITION_SPEED_DIVIDER);
+				_fe3d->camera_move(fvec3((front.x * -speed), 0.0, (front.z * -speed)));
+			}
+
+			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_D))
+			{
+				_fe3d->camera_move(fvec3((right.x * speed), 0.0, (right.z * speed)));
+			}
+
+			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR))
+			{
+				_fe3d->camera_move(fvec3(0.0f, speed, 0.0f));
+			}
+
+			if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
+			{
+				_fe3d->camera_move(fvec3(0.0f, -speed, 0.0f));
 			}
 		}
 	}

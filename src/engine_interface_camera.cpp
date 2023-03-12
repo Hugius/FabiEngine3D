@@ -16,21 +16,6 @@ void EngineInterface::camera_setThirdPersonEnabled(bool value)
 	_core->getCamera()->setThirdPersonEnabled(value);
 }
 
-void EngineInterface::camera_followRightXZ(float speed)
-{
-	_core->getCamera()->followRightXZ(speed);
-}
-
-void EngineInterface::camera_followFrontXZ(float speed)
-{
-	_core->getCamera()->followFrontXZ(speed);
-}
-
-void EngineInterface::camera_followFrontXYZ(float speed)
-{
-	_core->getCamera()->followFrontXYZ(speed);
-}
-
 void EngineInterface::camera_move(const fvec3 & speed)
 {
 	_core->getCamera()->move(speed);
@@ -224,6 +209,11 @@ const fvec3 & EngineInterface::camera_getUp() const
 const fvec3 & EngineInterface::camera_getFront() const
 {
 	return _core->getCamera()->getFront();
+}
+
+const fvec3 & EngineInterface::camera_getFrontWithoutPitch() const
+{
+	return _core->getCamera()->getFrontWithoutPitch();
 }
 
 const fvec3 & EngineInterface::camera_getRight() const

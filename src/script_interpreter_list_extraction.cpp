@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListString(const string & listString)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_getValuesFromListString(const string & listString)
 {
 	vector<shared_ptr<ScriptValue>> valueList = {};
 
@@ -138,7 +138,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 							return {};
 						}
 
-						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
+						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedDecimalString(currentValueString))));
 
 						isBuildingNumber = false;
 						isBuildingDecimal = false;
@@ -150,7 +150,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					}
 					else
 					{
-						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
+						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(currentValueString))));
 
 						isBuildingNumber = false;
 

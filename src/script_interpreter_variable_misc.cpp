@@ -101,7 +101,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 			return;
 		}
 
-		variable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(variable->getValue(0)->getString()))), 0);
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(variable->getValue(0)->getString()))), 0);
 	}
 	else if((variable->getValue(0)->getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
 	{
@@ -112,7 +112,7 @@ void ScriptInterpreter::_processVariableCasting(const string & scriptLine)
 			return;
 		}
 
-		variable->setValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(variable->getValue(0)->getString()))), 0);
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedDecimalString(variable->getValue(0)->getString()))), 0);
 	}
 	else
 	{

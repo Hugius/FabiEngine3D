@@ -11,7 +11,7 @@ public:
 	void replaceKeyword(const string & oldKeyword, const string & newKeyword);
 	void clear();
 
-	const map<string, vector<int>> searchKeyword(const string & keyword) const;
+	const map<string, vector<int>> getSearchResult(const string & keyword) const;
 
 	const vector<string> getScriptFileIds() const;
 

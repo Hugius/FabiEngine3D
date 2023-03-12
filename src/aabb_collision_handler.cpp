@@ -164,7 +164,7 @@ void AabbCollisionHandler::inject(shared_ptr<AabbManager> aabbManager)
 	_aabbManager = aabbManager;
 }
 
-const vector<string> AabbCollisionHandler::getAabbIdsThatCollided(const string & aabbId) const
+const vector<string> AabbCollisionHandler::getCollisions(const string & aabbId) const
 {
 	if(_aabbCollisions.find(aabbId) == _aabbCollisions.end())
 	{

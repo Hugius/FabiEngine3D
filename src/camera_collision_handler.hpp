@@ -20,7 +20,7 @@ public:
 	void clearCollisionWithTerrain();
 	void clearCollisionWithAabbs();
 
-	const vector<pair<string, DirectionType>> & getAabbIdsThatCollided() const;
+	const vector<pair<string, DirectionType>> & getCollisions() const;
 
 	const bool hasCollidedWithTerrain() const;
 

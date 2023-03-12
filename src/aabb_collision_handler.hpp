@@ -11,7 +11,7 @@ public:
 	void calculateCollisionWithAabbs(const string & aabbId);
 	void clearCollisionWithAabbs();
 
-	const vector<string> getAabbIdsThatCollided(const string & aabbId) const;
+	const vector<string> getCollisions(const string & aabbId) const;
 
 private:
 	void _clearCollisionWithAabbs(const string & aabbId);

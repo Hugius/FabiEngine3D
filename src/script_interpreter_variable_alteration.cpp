@@ -111,7 +111,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		leftVariable->setValues(_extractValuesFromListString(valueString));
+		leftVariable->setValues(_getValuesFromListString(valueString));
 	}
 	else if(isStringVariable && _isStringValue(valueString))
 	{
@@ -122,11 +122,11 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	}
 	else if(isDecimalVariable && _isDecimalValue(valueString))
 	{
-		leftVariable->getValue(leftValueIndex)->setDecimal(stof(_limitDecimalString(valueString)));
+		leftVariable->getValue(leftValueIndex)->setDecimal(stof(_getLimitedDecimalString(valueString)));
 	}
 	else if(isIntegerVariable && _isIntegerValue(valueString))
 	{
-		leftVariable->getValue(leftValueIndex)->setInteger(stoi(_limitIntegerString(valueString)));
+		leftVariable->getValue(leftValueIndex)->setInteger(stoi(_getLimitedIntegerString(valueString)));
 	}
 	else if(isBooleanVariable && _isBooleanValue(valueString))
 	{

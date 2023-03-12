@@ -202,7 +202,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isFinal, _extractValuesFromListString(valueString))});
+		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isFinal, _getValuesFromListString(valueString))});
 	}
 	else if((typeString == STRING_KEYWORD) && _isStringValue(valueString))
 	{
@@ -215,13 +215,13 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 	}
 	else if((typeString == DECIMAL_KEYWORD) && _isDecimalValue(valueString))
 	{
-		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedDecimalString(valueString)));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, initializer_list{value})});
 	}
 	else if((typeString == INTEGER_KEYWORD) && _isIntegerValue(valueString))
 	{
-		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(valueString)));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, initializer_list{value})});
 	}

@@ -71,7 +71,7 @@ private:
 	void _checkEngineWarnings(int lastLoggerMessageCount);
 	void _performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string & operatorString, shared_ptr<ScriptValue> rightValue);
 
-	const vector<shared_ptr<ScriptValue>> _extractValuesFromListString(const string & listString);
+	const vector<shared_ptr<ScriptValue>> _getValuesFromListString(const string & listString);
 	const vector<shared_ptr<ScriptValue>> _processFe3dFunctionCall(const string & scriptLine);
 	const vector<shared_ptr<ScriptValue>> _processMathFunctionCall(const string & scriptLine);
 	const vector<shared_ptr<ScriptValue>> _processMiscFunctionCall(const string & scriptLine);
@@ -79,10 +79,10 @@ private:
 	const shared_ptr<ScriptVariable> _getLocalVariable(const string & variableId);
 	const shared_ptr<ScriptVariable> _getGlobalVariable(const string & variableId) const;
 
-	const string _limitIntegerString(const string & valueString) const;
-	const string _limitDecimalString(const string & valueString) const;
+	const string _getLimitedIntegerString(const string & valueString) const;
+	const string _getLimitedDecimalString(const string & valueString) const;
 
-	const int _countLeadingSpaces(const string & scriptLineText);
+	const int _getLeadingSpaces(const string & scriptLineText);
 	const int _extractListIndexFromString(const string & valueString, bool & isAccessingList);
 	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, int scopeDepth) const;
 

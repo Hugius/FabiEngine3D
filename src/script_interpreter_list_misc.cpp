@@ -126,11 +126,11 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedDecimalString(valueString))));
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(valueString))));
 	}
 	else if(_isBooleanValue(valueString))
 	{
@@ -271,7 +271,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 	int index;
 	if(_isIntegerValue(indexString))
 	{
-		index = stoi(_limitIntegerString(indexString));
+		index = stoi(_getLimitedIntegerString(indexString));
 	}
 	else
 	{

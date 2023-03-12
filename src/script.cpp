@@ -130,7 +130,7 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const map<string, vector<int>> Script::searchKeyword(const string & keyword) const
+const map<string, vector<int>> Script::getSearchResult(const string & keyword) const
 {
 	map<string, vector<int>> result = {};
 

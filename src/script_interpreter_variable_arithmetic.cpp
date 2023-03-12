@@ -159,13 +159,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedIntegerString(valueString)));
 
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(valueString)));
 
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}

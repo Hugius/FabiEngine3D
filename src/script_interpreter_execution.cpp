@@ -104,7 +104,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		const auto countedSpaces = _countLeadingSpaces(scriptLine);
+		const auto countedSpaces = _getLeadingSpaces(scriptLine);
 
 		if(_hasThrownError)
 		{

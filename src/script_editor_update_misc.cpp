@@ -204,7 +204,7 @@ void ScriptEditor::_updateScriptSearching()
 	{
 		_searchKeyword = _gui->getOverlay()->getValueFormContent();
 
-		const auto searchResult = _script->searchKeyword(_searchKeyword);
+		const auto searchResult = _script->getSearchResult(_searchKeyword);
 
 		bool isFound = false;
 

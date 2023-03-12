@@ -19,7 +19,7 @@ const bool ScriptInterpreter::mustStopApplication() const
 	return _mustStopApplication;
 }
 
-const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
+const int ScriptInterpreter::_getLeadingSpaces(const string & scriptLineText)
 {
 	int countedSpaces = 0;
 

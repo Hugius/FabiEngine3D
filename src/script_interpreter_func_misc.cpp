@@ -25,7 +25,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	const auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
 	const auto functionName = scriptLine.substr(0, parenthesisIndex);
 	const auto argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1), (scriptLine.size() - static_cast<size_t>(parenthesisIndex + 1) - 1));
-	const auto args = _extractValuesFromListString(argumentString);
+	const auto args = _getValuesFromListString(argumentString);
 
 	vector<shared_ptr<ScriptValue>> returnValues = {};
 
@@ -656,7 +656,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			valueString.erase(valueString.begin());
 			valueString.pop_back();
 
-			for(auto value : _extractValuesFromListString(valueString))
+			for(auto value : _getValuesFromListString(valueString))
 			{
 				returnValues.push_back(value);
 			}

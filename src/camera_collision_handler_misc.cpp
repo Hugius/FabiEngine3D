@@ -45,7 +45,7 @@ void CameraCollisionHandler::clearCollisionWithAabbs()
 	_aabbCollisions.clear();
 }
 
-const vector<pair<string, DirectionType>> & CameraCollisionHandler::getAabbIdsThatCollided() const
+const vector<pair<string, DirectionType>> & CameraCollisionHandler::getCollisions() const
 {
 	return _aabbCollisions;
 }

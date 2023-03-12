@@ -4,9 +4,6 @@
 
 - `fe3d:camera_move` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:camera_move_to` (`DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
-- `fe3d:camera_follow_right_xz` (`DEC` speed) -----> `NONE`
-- `fe3d:camera_follow_front_xz` (`DEC` speed) -----> `NONE`
-- `fe3d:camera_follow_front_xyz` (`DEC` speed) -----> `NONE`
 - `fe3d:camera_set_position` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:camera_set_near` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_far` (`DEC` value) -----> `NONE`
@@ -44,6 +41,9 @@
 - `fe3d:camera_get_front_x` () -----> `DEC`
 - `fe3d:camera_get_front_y` () -----> `DEC`
 - `fe3d:camera_get_front_z` () -----> `DEC`
+- `fe3d:camera_get_front_without_pitch_x` () -----> `DEC`
+- `fe3d:camera_get_front_without_pitch_y` () -----> `DEC`
+- `fe3d:camera_get_front_without_pitch_z` () -----> `DEC`
 - `fe3d:camera_get_yaw` () -----> `DEC`
 - `fe3d:camera_get_pitch` () -----> `DEC`
 - `fe3d:camera_get_fov` () -----> `DEC`

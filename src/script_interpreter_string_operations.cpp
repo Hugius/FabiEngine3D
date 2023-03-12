@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_isBooleanValue(const string & valueString) const
 	return (valueString == "<true>") || (valueString == "<false>");
 }
 
-const int ScriptInterpreter::_extractListIndexFromString(const string & valueString, bool & isAccessingList)
+const int ScriptInterpreter::_getListIndexFromString(const string & valueString, bool & isAccessingList)
 {
 	const auto openingBracketIterator = find(valueString.begin(), valueString.end(), '[');
 	const auto closingBracketIterator = find(valueString.begin(), valueString.end(), ']');
@@ -92,7 +92,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 	{
 		isAccessingList = true;
 
-		return stoi(_limitIntegerString(indexString));
+		return stoi(_getLimitedIntegerString(indexString));
 	}
 	else
 	{
@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_validateMouseInputString(const string & inputStri
 	return true;
 }
 
-const string ScriptInterpreter::_limitIntegerString(const string & valueString) const
+const string ScriptInterpreter::_getLimitedIntegerString(const string & valueString) const
 {
 	if(valueString[0] == '-')
 	{
@@ -162,7 +162,7 @@ const string ScriptInterpreter::_limitIntegerString(const string & valueString) 
 	return valueString;
 }
 
-const string ScriptInterpreter::_limitDecimalString(const string & valueString) const
+const string ScriptInterpreter::_getLimitedDecimalString(const string & valueString) const
 {
 	const auto dotIndex = static_cast<int>(valueString.find('.'));
 	const auto intString = valueString.substr(0, dotIndex);

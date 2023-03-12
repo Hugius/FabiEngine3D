@@ -140,7 +140,7 @@ void ScriptInterpreter::_processListPush(const string & scriptLine)
 	{
 		bool isAccessingList = false;
 
-		const auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
+		const auto listIndex = _getListIndexFromString(valueString, isAccessingList);
 
 		if(_hasThrownError)
 		{

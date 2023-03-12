@@ -1,11 +1,11 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_checkConditionString(const string & conditionString)
+const bool ScriptInterpreter::_getConditionResult(const string & conditionString)
 {
 	vector<shared_ptr<ScriptValue>> comparisonValues = {};
 	vector<string> elements = {};
 	vector<string> logicOperators = {};
-	vector<bool> conditions = {};
+	vector<bool> comparisonResults = {};
 
 	string elementBuild = "";
 	string comparisonOperator = "";
@@ -84,11 +84,11 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			}
 			else if(_isDecimalValue(elementString))
 			{
-				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_getLimitedDecimalString(elementString))));
 			}
 			else if(_isIntegerValue(elementString))
 			{
-				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_getLimitedIntegerString(elementString))));
 			}
 			else if(_isBooleanValue(elementString))
 			{
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 			{
 				bool isAccessingList = false;
 
-				const auto listIndex = _extractListIndexFromString(elementString, isAccessingList);
+				const auto listIndex = _getListIndexFromString(elementString, isAccessingList);
 
 				if(_hasThrownError)
 				{
@@ -146,9 +146,9 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 			if(comparisonValues.size() == 2)
 			{
-				if(_validateCondition(comparisonValues.front(), comparisonOperator, comparisonValues.back()))
+				if(_validateComparison(comparisonValues.front(), comparisonOperator, comparisonValues.back()))
 				{
-					conditions.push_back(_compareValues(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
+					comparisonResults.push_back(_getComparisonResult(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
 
 					comparisonValues.clear();
 
@@ -206,15 +206,15 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 		return false;
 	}
 
-	if(conditions.size() == 1)
+	if(comparisonResults.size() == 1)
 	{
-		return conditions[0];
+		return comparisonResults[0];
 	}
 
 	string currentLogicOperator = "";
-	bool finalCondition = conditions[0];
+	bool conditionResult = comparisonResults[0];
 
-	for(int index = 1; index < static_cast<int>(conditions.size()); index++)
+	for(int index = 1; index < static_cast<int>(comparisonResults.size()); index++)
 	{
 		const auto previousIndex = (index - 1);
 
@@ -231,18 +231,18 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 		if(logicOperators[previousIndex] == AND_KEYWORD)
 		{
-			finalCondition = finalCondition && conditions[index];
+			conditionResult = conditionResult && comparisonResults[index];
 		}
 		else if(logicOperators[previousIndex] == OR_KEYWORD)
 		{
-			finalCondition = finalCondition || conditions[index];
+			conditionResult = conditionResult || comparisonResults[index];
 		}
 	}
 
-	return finalCondition;
+	return conditionResult;
 }
 
-const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue)
+const bool ScriptInterpreter::_validateComparison(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue)
 {
 	if(firstValue->getType() != secondValue->getType())
 	{
@@ -268,7 +268,7 @@ const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstVa
 	return true;
 }
 
-const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const
+const bool ScriptInterpreter::_getComparisonResult(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{

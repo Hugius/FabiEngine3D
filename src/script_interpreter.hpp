@@ -83,7 +83,7 @@ private:
 	const string _getLimitedDecimalString(const string & valueString) const;
 
 	const int _getLeadingSpaces(const string & scriptLineText);
-	const int _extractListIndexFromString(const string & valueString, bool & isAccessingList);
+	const int _getListIndexFromString(const string & valueString, bool & isAccessingList);
 	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, int scopeDepth) const;
 
 	const bool _isListValue(const string & valueString) const;
@@ -93,12 +93,35 @@ private:
 	const bool _isBooleanValue(const string & valueString) const;
 	const bool _isLocalVariableExisting(const string & variableId);
 	const bool _isGlobalVariableExisting(const string & variableId) const;
-	const bool _checkConditionString(const string & conditionString);
-	const bool _validateCondition(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue);
-	const bool _compareValues(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const;
+	const bool _getComparisonResult(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const;
+	const bool _getConditionResult(const string & conditionString);
+	const bool _validateComparison(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue);
 	const bool _validateListIndex(shared_ptr<ScriptVariable> list, int index);
 	const bool _validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, int count);
 	const bool _validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types);
+	const bool _validateScopeDepth(int currentScopeDepth, int & targetScopeDepth);
+	const bool _validateKeyInputString(const string & inputString);
+	const bool _validateMouseInputString(const string & inputString);
+	const bool _validateSavesDirectory();
+	const bool _validateFe3dSky(const string & skyId, bool isEditor);
+	const bool _validateFe3dTerrain(const string & terrainId, bool isEditor);
+	const bool _validateFe3dWater(const string & waterId, bool isEditor);
+	const bool _validateFe3dModel(const string & modelId, bool isEditor);
+	const bool _validateFe3dModelPart(const string & modelId, const string & partId);
+	const bool _validateFe3dModelAabb(const string & modelId, const string & aabbId);
+	const bool _validateFe3dQuad3d(const string & quad3dId, bool isEditor);
+	const bool _validateFe3dQuad2d(const string & quad2dId, bool isEditor);
+	const bool _validateFe3dText3d(const string & text3dId, bool isEditor);
+	const bool _validateFe3dText2d(const string & text2dId, bool isEditor);
+	const bool _validateFe3dAnimation3d(const string & animation3dId);
+	const bool _validateFe3dAnimation2d(const string & animation2dId);
+	const bool _validateFe3dAabb(const string & aabbId, bool isEditor);
+	const bool _validateFe3dPointlight(const string & pointlightId, bool isEditor);
+	const bool _validateFe3dSpotlight(const string & spotlightId, bool isEditor);
+	const bool _validateFe3dCaptor(const string & captorId, bool isEditor);
+	const bool _validateFe3dSound3d(const string & sound3dId, bool isEditor);
+	const bool _validateFe3dSound2d(const string & sound2dId, bool isEditor);
+	const bool _validateFe3dId(const string & id);
 	const bool _executeFe3dSkySetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSkyGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dTerrainSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
@@ -148,29 +171,6 @@ private:
 	const bool _executeFe3dClockGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dUncategorizedSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dUncategorizedGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
-	const bool _validateFe3dSky(const string & skyId, bool isEditor);
-	const bool _validateFe3dTerrain(const string & terrainId, bool isEditor);
-	const bool _validateFe3dWater(const string & waterId, bool isEditor);
-	const bool _validateFe3dModel(const string & modelId, bool isEditor);
-	const bool _validateFe3dModelPart(const string & modelId, const string & partId);
-	const bool _validateFe3dModelAabb(const string & modelId, const string & aabbId);
-	const bool _validateFe3dQuad3d(const string & quad3dId, bool isEditor);
-	const bool _validateFe3dQuad2d(const string & quad2dId, bool isEditor);
-	const bool _validateFe3dText3d(const string & text3dId, bool isEditor);
-	const bool _validateFe3dText2d(const string & text2dId, bool isEditor);
-	const bool _validateFe3dAnimation3d(const string & animation3dId);
-	const bool _validateFe3dAnimation2d(const string & animation2dId);
-	const bool _validateFe3dAabb(const string & aabbId, bool isEditor);
-	const bool _validateFe3dPointlight(const string & pointlightId, bool isEditor);
-	const bool _validateFe3dSpotlight(const string & spotlightId, bool isEditor);
-	const bool _validateFe3dCaptor(const string & captorId, bool isEditor);
-	const bool _validateFe3dSound3d(const string & sound3dId, bool isEditor);
-	const bool _validateFe3dSound2d(const string & sound2dId, bool isEditor);
-	const bool _validateFe3dId(const string & id);
-	const bool _validateScopeDepth(int currentScopeDepth, int & targetScopeDepth);
-	const bool _validateKeyInputString(const string & inputString);
-	const bool _validateMouseInputString(const string & inputString);
-	const bool _validateSavesDirectory();
 
 	static inline const unordered_map<string, MouseWheelType> mouse_wheel_types =
 	{

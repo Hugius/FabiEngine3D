@@ -197,7 +197,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_getValuesFromListStrin
 				{
 					bool isAccessingList = false;
 
-					const auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
+					const auto listIndex = _getListIndexFromString(currentValueString, isAccessingList);
 
 					if(_hasThrownError)
 					{

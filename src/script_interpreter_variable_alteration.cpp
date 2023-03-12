@@ -55,7 +55,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 	bool isAccessingLeftList = false;
 
-	const auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
+	const auto leftListIndex = _getListIndexFromString(nameString, isAccessingLeftList);
 
 	if(_hasThrownError)
 	{
@@ -137,7 +137,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		leftVariable->getValue(leftValueIndex)->setBoolean(_checkConditionString(valueString));
+		leftVariable->getValue(leftValueIndex)->setBoolean(_getConditionResult(valueString));
 	}
 	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 	{
@@ -213,7 +213,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	{
 		bool isAccessingRightList = false;
 
-		const auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
+		const auto rightListIndex = _getListIndexFromString(valueString, isAccessingRightList);
 
 		if(_hasThrownError)
 		{

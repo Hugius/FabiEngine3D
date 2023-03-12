@@ -236,7 +236,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		const auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, _checkConditionString(valueString));
+		const auto value = make_shared<ScriptValue>(ScriptValueType::BOOLEAN, _getConditionResult(valueString));
 
 		variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isFinal, initializer_list{value})});
 	}
@@ -314,7 +314,7 @@ void ScriptInterpreter::_processVariableDefinition(const string & scriptLine)
 	{
 		bool isAccessingList = false;
 
-		const auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
+		const auto listIndex = _getListIndexFromString(valueString, isAccessingList);
 
 		if(_hasThrownError)
 		{

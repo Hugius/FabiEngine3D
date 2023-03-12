@@ -48,7 +48,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	bool isAccessingLeftList = false;
 
-	const auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
+	const auto leftListIndex = _getListIndexFromString(nameString, isAccessingLeftList);
 
 	if(_hasThrownError)
 	{
@@ -179,7 +179,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	{
 		bool isAccessingRightList = false;
 
-		const auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
+		const auto rightListIndex = _getListIndexFromString(valueString, isAccessingRightList);
 
 		if(_hasThrownError)
 		{

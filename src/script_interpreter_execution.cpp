@@ -313,7 +313,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 			const auto conditionString = scriptLine.substr(IF_KEYWORD.size() + 1);
 
-			if(_checkConditionString(conditionString))
+			if(_getConditionResult(conditionString))
 			{
 				_hasPassedIfStatement = true;
 
@@ -346,7 +346,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 				conditionStatements[lastIndex].setType(ScriptConditionType::ELIF);
 
-				if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
+				if(conditionStatements[lastIndex].isFalse() && _getConditionResult(conditionString))
 				{
 					conditionStatements[lastIndex].setTrue();
 					targetScopeDepth++;

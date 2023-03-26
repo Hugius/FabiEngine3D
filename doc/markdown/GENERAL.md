@@ -1,66 +1,6 @@
-# General information
+# General
 
-## 1. Features
-
-### 1.1 Assets
-
-- Multithreaded OBJ file loading
-- Multithreaded TGA file loading
-- Multithreaded WAV file loading
-- Efficient cache management
-
-### 1.2 Rendering
-
-- **Drawables**: sky, terrain, water, model, quad3D, text3D, AABB, quad2D, text2D
-- **Textures**: blend, cube, diffuse, dudv, emission, flare, font, height, normal, reflection, refraction, specular
-- **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, cube reflections, cube refractions, planar reflections, planar refractions, shadows
-- **Post-processing**: bloom, DOF, motion blur, anti-aliasing, lens flare, gamma correction
-- **Miscellaneous**: fog, sky exposure, anisotropic filtering, normal mapping, water effects
-
-### 1.3 Physics
-
-- 3D camera system
-- 3D AABB system
-- 3D collision detection system
-- 3D collision response system
-- 3D raycast detection system
-- 3D raycast response system
-
-### 1.4 Animations
-
-- 3D mesh animations
-- 2D texture animations
-
-### 1.5 Audio
-
-- 3D sounds
-- 2D sounds
-
-### 1.6 Scripting
-
-- Custom scripting language
-- Engine API
-- Math API
-- Miscellaneous API
-
-### 1.7 Networking
-
-- Server
-- Clients
-- TCP messaging
-- UDP messaging
-- Multithreading
-
-### 1.8 Miscellaneous
-
-- Mouse input
-- Keyboard input
-- Engine GUI
-- Editors
-- Realtime statistics
-- Realtime logging
-
-## 2. Folder structure
+## 1. Folder structure
 
 ```text
 ~
@@ -111,11 +51,11 @@
 └── src (do NOT change)
 ```
 
-## 3. Executable
+## 2. Executable
 
 &#8594; You can start the engine by running `~\app\binaries\fe3d.exe` &#8592;
 
-## 4. Engine interface
+## 3. Engine interface
 
 - **Center Viewport**: 3D display screen
 - **Left Viewport**: editors

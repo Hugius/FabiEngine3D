@@ -114,12 +114,12 @@ fmat44::fmat44(const fmat44 & other)
 
 fmat44::fmat44(const imat22 & other)
 {
-	static_cast<float>(this->m[0][0] = other.m[0][0]);
-	static_cast<float>(this->m[1][0] = other.m[1][0]);
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
 	this->m[2][0] = 0.0f;
 	this->m[3][0] = 0.0f;
-	static_cast<float>(this->m[0][1] = other.m[0][1]);
-	static_cast<float>(this->m[1][1] = other.m[1][1]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
 	this->m[2][1] = 0.0f;
 	this->m[3][1] = 0.0f;
 	this->m[0][2] = 0.0f;
@@ -134,17 +134,17 @@ fmat44::fmat44(const imat22 & other)
 
 fmat44::fmat44(const imat33 & other)
 {
-	static_cast<float>(this->m[0][0] = other.m[0][0]);
-	static_cast<float>(this->m[1][0] = other.m[1][0]);
-	static_cast<float>(this->m[2][0] = other.m[2][0]);
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[2][0] = static_cast<float>(other.m[2][0]);
 	this->m[3][0] = 0.0f;
-	static_cast<float>(this->m[0][1] = other.m[0][1]);
-	static_cast<float>(this->m[1][1] = other.m[1][1]);
-	static_cast<float>(this->m[2][1] = other.m[2][1]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+	this->m[2][1] = static_cast<float>(other.m[2][1]);
 	this->m[3][1] = 0.0f;
-	static_cast<float>(this->m[0][2] = other.m[0][2]);
-	static_cast<float>(this->m[1][2] = other.m[1][2]);
-	static_cast<float>(this->m[2][2] = other.m[2][2]);
+	this->m[0][2] = static_cast<float>(other.m[0][2]);
+	this->m[1][2] = static_cast<float>(other.m[1][2]);
+	this->m[2][2] = static_cast<float>(other.m[2][2]);
 	this->m[3][2] = 0.0f;
 	this->m[0][3] = 0.0f;
 	this->m[1][3] = 0.0f;
@@ -154,22 +154,22 @@ fmat44::fmat44(const imat33 & other)
 
 fmat44::fmat44(const imat44 & other)
 {
-	static_cast<float>(this->m[0][0] = other.m[0][0]);
-	static_cast<float>(this->m[1][0] = other.m[1][0]);
-	static_cast<float>(this->m[2][0] = other.m[2][0]);
-	static_cast<float>(this->m[3][0] = other.m[3][0]);
-	static_cast<float>(this->m[0][1] = other.m[0][1]);
-	static_cast<float>(this->m[1][1] = other.m[1][1]);
-	static_cast<float>(this->m[2][1] = other.m[2][1]);
-	static_cast<float>(this->m[3][1] = other.m[3][1]);
-	static_cast<float>(this->m[0][2] = other.m[0][2]);
-	static_cast<float>(this->m[1][2] = other.m[1][2]);
-	static_cast<float>(this->m[2][2] = other.m[2][2]);
-	static_cast<float>(this->m[3][2] = other.m[3][2]);
-	static_cast<float>(this->m[0][3] = other.m[0][3]);
-	static_cast<float>(this->m[1][3] = other.m[1][3]);
-	static_cast<float>(this->m[2][3] = other.m[2][3]);
-	static_cast<float>(this->m[3][3] = other.m[3][3]);
+	this->m[0][0] = static_cast<float>(other.m[0][0]);
+	this->m[1][0] = static_cast<float>(other.m[1][0]);
+	this->m[2][0] = static_cast<float>(other.m[2][0]);
+	this->m[3][0] = static_cast<float>(other.m[3][0]);
+	this->m[0][1] = static_cast<float>(other.m[0][1]);
+	this->m[1][1] = static_cast<float>(other.m[1][1]);
+	this->m[2][1] = static_cast<float>(other.m[2][1]);
+	this->m[3][1] = static_cast<float>(other.m[3][1]);
+	this->m[0][2] = static_cast<float>(other.m[0][2]);
+	this->m[1][2] = static_cast<float>(other.m[1][2]);
+	this->m[2][2] = static_cast<float>(other.m[2][2]);
+	this->m[3][2] = static_cast<float>(other.m[3][2]);
+	this->m[0][3] = static_cast<float>(other.m[0][3]);
+	this->m[1][3] = static_cast<float>(other.m[1][3]);
+	this->m[2][3] = static_cast<float>(other.m[2][3]);
+	this->m[3][3] = static_cast<float>(other.m[3][3]);
 }
 
 const fvec4 fmat44::operator*(const fvec4 & other) const
